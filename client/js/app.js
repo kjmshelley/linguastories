@@ -423,7 +423,7 @@ async function authRequest(path, data) {
   }
   state = await response.json();
   selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
-  history.pushState({}, "", appPath("dashboard"));
+  history.pushState({}, "", appPath("shortStories"));
   render();
 }
 
@@ -1447,18 +1447,24 @@ document.querySelector("#notifyButton").addEventListener("click", () => {
 });
 
 async function init() {
-  const configResponse = await fetch("/api/config");
-  appConfig = await configResponse.json().catch(() => ({ supportedLanguages: [] }));
-  const response = await fetch("/api/auth/me");
-  const auth = await response.json().catch(() => ({ authenticated: false }));
-  if (!auth.authenticated) {
-    if (window.location.pathname.startsWith("/app")) history.replaceState({}, "", "/login");
+  try {
+    setPublicShell();
+    const configResponse = await fetch("/api/config");
+    appConfig = await configResponse.json().catch(() => ({ supportedLanguages: [] }));
+    const response = await fetch("/api/auth/me");
+    const auth = await response.json().catch(() => ({ authenticated: false }));
+    if (!auth.authenticated) {
+      if (window.location.pathname.startsWith("/app")) history.replaceState({}, "", "/login");
+      renderPublicPage();
+      return;
+    }
+    if (["/", "/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("shortStories"));
+    normalizeAppUrl();
+    await api("/api/state");
+  } catch (_error) {
+    state = null;
     renderPublicPage();
-    return;
   }
-  if (["/", "/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("dashboard"));
-  normalizeAppUrl();
-  await api("/api/state");
 }
 
 init();

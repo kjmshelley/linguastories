@@ -43,7 +43,7 @@
   <body class="min-h-screen bg-brand-cream font-sans text-brand-ink antialiased">
     <div class="hidden bg-brand-red bg-brand-redDark bg-brand-snow bg-brand-mist bg-brand-cream bg-brand-line bg-brand-panel bg-brand-sidebar bg-brand-slate bg-brand-teal bg-brand-blue from-brand-blue from-brand-red from-brand-sidebar via-brand-amber via-brand-snow via-brand-slate to-brand-snow to-brand-panel text-brand-charcoal text-brand-graphite text-brand-muted border-brand-line hover:bg-brand-redDark hover:bg-brand-snow hover:border-brand-orange/60"></div>
     <div id="appShell" class="min-h-screen">
-      <aside id="sidebar" class="hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white lg:sticky lg:top-0 lg:block">
+      <aside id="sidebar" class="hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white">
         <div class="mb-4 flex items-center justify-between lg:hidden">
           <span class="text-xs font-bold uppercase tracking-[.16em] text-white/45">Menu</span>
           <button class="grid h-9 w-9 place-items-center rounded-lg bg-white/10 text-white transition hover:bg-white/15" data-action="closeMobileMenu" aria-label="Close menu">
@@ -123,7 +123,14 @@
           </div>
         </header>
 
-        <section id="view" class="min-h-screen"></section>
+        <section id="view" class="min-h-screen">
+          <div class="grid min-h-screen place-items-center bg-brand-cream px-4 text-center">
+            <div>
+              <img class="mx-auto h-16 w-16 object-contain" src="/assets/img/linguastories.png" alt="" />
+              <p class="mt-4 text-sm font-bold text-brand-graphite">Loading LinguaStories...</p>
+            </div>
+          </div>
+        </section>
       </main>
       <div id="chatDrawer"></div>
     </div>
@@ -136,6 +143,6 @@
       </div>
     </template>
 
-    <script type="module" src="/js/app.js?v=modular-20260603"></script>
+    <script type="module" src="/js/app.js?v=modular-20260607-short-stories"></script>
   </body>
 </html>
