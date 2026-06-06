@@ -1,0 +1,659 @@
+
+Build a modern language-learning platform that combines:
+
+- Glossika-style sentence learning
+- Anki-style spaced repetition
+- Story-based learning
+- Coin-based progression
+- Social/community features
+- Goal tracking and accountability
+
+Tech Stack:
+Nodejs, Express, postgres, HTML, CSS, pure javascript
+
+
+The platform should help users achieve real fluency through repeated exposure to useful sentences while maintaining long-term motivation through stories, progression systems, goals, and community interaction.
+
+The platform should feel like a combination of:
+
+- Glossika
+- LingQ
+- Anki
+- Duolingo progression systems
+- Instagram-style community features
+
+This is NOT a vocabulary memorization app.
+
+This is NOT a grammar-first app.
+
+This is a fluency-first platform built around meaningful exposure to useful language.
+
+==================================================
+CORE PRODUCT PHILOSOPHY
+==================================================
+
+Most language learners quit because:
+
+1. They lose motivation.
+2. Learning becomes repetitive.
+3. They don't see progress.
+4. They study alone.
+
+This platform solves those problems by creating the following learning loop:
+
+Learn Sentences
+→ Earn Coins
+→ Unlock Stories
+→ Read Stories
+→ Save Useful Sentences
+→ Review Sentences
+→ Share Progress
+→ Earn More Coins
+→ Unlock More Content
+
+The platform should constantly make users feel:
+
+"I am making progress."
+
+==================================================
+PILLAR #1: SENTENCE-BASED LEARNING
+==================================================
+
+The foundation of the platform is sentence acquisition.
+
+Users learn through useful real-world sentences rather than isolated vocabulary.
+
+Every sentence should contain:
+
+- Target language sentence
+- Native language translation
+- Optional romanization
+- Audio
+- Level
+- Topic
+- Difficulty
+- Notes
+- Example variations
+
+Examples:
+
+- Where is the train station?
+- I need help.
+- My flight is delayed.
+- What time does it start?
+
+Sentence topics:
+
+- Greetings
+- Daily Life
+- Travel
+- Food
+- Shopping
+- Transportation
+- Hotel
+- Work
+- School
+- Family
+- Health
+- Emotions
+- Opinions
+- Friendship
+- Technology
+
+Sentence levels:
+
+- A1
+- A2
+- B1
+- B2
+- C1
+
+==================================================
+PILLAR #2: COIN-BASED PROGRESSION
+==================================================
+
+Coins are one of the primary progression systems.
+
+Users earn coins through learning activities.
+
+Users spend coins to unlock additional content.
+
+The platform should follow:
+
+Learn → Earn → Unlock → Learn More
+
+Coins should never feel pay-to-win.
+
+Coins should never prevent users from learning.
+
+Users should always have free content available.
+
+==================================================
+COIN WALLET
+==================================================
+
+Every user has a wallet.
+
+Track:
+
+- Current balance
+- Lifetime earned
+- Lifetime spent
+- Daily earned
+- Weekly earned
+- Transaction history
+
+Example transactions:
+
++5 Daily Review
+
++10 Sentence Pack Completed
+
++15 Story Completed
+
++25 Goal Completed
+
++2 Learning Post Created
+
+-20 Story Unlock
+
+-50 Story Collection Unlock
+
+==================================================
+WAYS TO EARN COINS
+==================================================
+
+Learning Activities:
+
+Daily Review
++5
+
+Complete Sentence Pack
++10
+
+Complete Story
++15
+
+Complete Story Quiz
++5
+
+Shadowing Session
++5
+
+Listening Practice
++3
+
+Sentence Mining
++2
+
+Review Saved Sentences
++5
+
+Consistency:
+
+3-Day Streak
++10
+
+7-Day Streak
++20
+
+14-Day Streak
++50
+
+30-Day Streak
++100
+
+Goals:
+
+Create Goal
++2
+
+Complete Goal
++25
+
+Weekly Goal Completion
++50
+
+Community:
+
+Create Post
++2
+
+Receive Like
++1
+
+Helpful Comment
++1
+
+Answer Question
++2
+
+==================================================
+WAYS TO SPEND COINS
+==================================================
+
+Unlock Story
+20
+
+Unlock Story Collection
+50
+
+Unlock Premium Sentence Pack
+30
+
+Unlock Listening Challenge
+25
+
+Unlock Special Topic Collection
+40
+
+Unlock Profile Theme
+10
+
+Unlock Community Badge
+15
+
+==================================================
+PILLAR #3: STORY-BASED LEARNING
+==================================================
+
+Sentences should lead to stories.
+
+The platform should not feel like endless sentence drilling.
+
+Stories provide context and make language memorable.
+
+The learning flow should be:
+
+Learn Sentences
+→ Unlock Story
+→ Read Story
+→ Save Story Sentences
+→ Review Sentences
+
+Stories should intentionally reuse previously learned sentence patterns.
+
+The learner should feel:
+
+"I already understand many of these sentences."
+
+instead of:
+
+"I have no idea what I'm reading."
+
+==================================================
+STORY FEATURES
+==================================================
+
+Each story contains:
+
+- Title
+- Topic
+- Difficulty
+- Estimated reading time
+- Story text
+- Translation
+- Audio
+- Vocabulary highlights
+- Key sentences
+- Save sentence button
+- Comprehension quiz
+- Coin rewards
+
+Story categories:
+
+- Travel
+- Daily Life
+- Family
+- Friendship
+- Workplace
+- School
+- Adventure
+- Mystery
+- Romance
+- Humor
+- Culture
+
+Story lengths:
+
+A1: 100-150 words
+
+A2: 150-250 words
+
+B1: 250-400 words
+
+B2+: 400-700 words
+
+==================================================
+SPACED REPETITION SYSTEM
+==================================================
+
+Every sentence has a review state:
+
+- New
+- Learning
+- Review
+- Mastered
+
+User ratings:
+
+- Again
+- Hard
+- Good
+- Easy
+
+Review scheduling:
+
+Again:
+Review today
+
+Hard:
+Review tomorrow
+
+Good:
+Review in 3 days
+
+Easy:
+Review in 7 days
+
+Dashboard should always show:
+
+- Reviews due
+- New sentences available
+- Stories available
+- Coins available to earn
+
+==================================================
+SHADOWING SYSTEM
+==================================================
+
+Users can practice shadowing.
+
+Flow:
+
+1. Listen
+2. Repeat
+3. Listen Again
+4. Repeat Again
+5. Self Rate
+
+Options:
+
+- Normal Speed
+- Slow Speed
+- Auto Replay
+- Loop Sentence
+
+==================================================
+SENTENCE MINING
+==================================================
+
+Users can save their own sentences.
+
+Custom sentence fields:
+
+- Sentence
+- Translation
+- Topic
+- Level
+- Notes
+- Source
+- Audio
+
+Users can add custom sentences into their review deck.
+
+==================================================
+COMMUNITY FEATURES
+==================================================
+
+Language learning is social.
+
+Users should be able to interact with one another.
+
+==================================================
+USER PROFILES
+==================================================
+
+Profile includes:
+
+- Avatar
+- Display Name
+- Bio
+- Native Language
+- Target Languages
+- Current Level
+- Current Streak
+- Coins Earned
+- Stories Completed
+- Sentences Learned
+- Goals
+- Recent Activity
+
+==================================================
+SOCIAL FEED
+==================================================
+
+Users can create posts.
+
+Post types:
+
+Learning Update
+
+Example:
+"Today I learned 20 new Japanese sentences."
+
+Goal Update
+
+Example:
+"My goal is to finish 3 Spanish stories this week."
+
+Sentence Post
+
+Example:
+"This sentence finally clicked for me."
+
+Story Completion
+
+Example:
+"I just finished The Lost Passport."
+
+Question Post
+
+Example:
+"Can someone explain this grammar pattern?"
+
+==================================================
+POST FEATURES
+==================================================
+
+- Like
+- Comment
+- Follow User
+- Save Post
+- Share Post
+
+==================================================
+GOALS SYSTEM
+==================================================
+
+Users can create goals.
+
+Examples:
+
+- Learn 50 sentences
+- Learn 100 sentences
+- Complete 5 stories
+- Reach 14-day streak
+- Practice shadowing daily
+- Finish Travel Path
+- Reach B1
+
+Goals can be:
+
+- Public
+- Private
+
+Users can share goal progress.
+
+Completing goals rewards coins.
+
+==================================================
+LEARNING PATHS
+==================================================
+
+Users should not feel lost.
+
+Create learning paths.
+
+Example:
+
+Travel Path
+
+Contains:
+
+- Airport Pack
+- Hotel Pack
+- Restaurant Pack
+- Transportation Pack
+- Travel Stories
+
+Work Path
+
+Contains:
+
+- Workplace Vocabulary
+- Meetings
+- Email Communication
+- Office Stories
+
+Daily Conversation Path
+
+Contains:
+
+- Small Talk
+- Friends
+- Family
+- Daily Life Stories
+
+Completing paths should unlock advanced content.
+
+==================================================
+PROGRESS TRACKING
+==================================================
+
+Track:
+
+- Total Sentences Learned
+- Sentences Mastered
+- Stories Completed
+- Stories Read
+- Coins Earned
+- Coins Spent
+- Current Streak
+- Longest Streak
+- Listening Time
+- Shadowing Time
+- Goal Completion Rate
+
+==================================================
+ADMIN FEATURES
+==================================================
+
+Admin should manage:
+
+- Sentence Packs
+- Stories
+- Story Collections
+- Learning Paths
+- Coin Rewards
+- Coin Costs
+- Community Moderation
+- Goals Templates
+- Topics
+- Levels
+
+==================================================
+MVP PAGES
+==================================================
+
+Landing Page
+
+Sign Up
+
+Login
+
+Onboarding
+
+Dashboard
+
+Sentence Library
+
+Sentence Pack Detail
+
+Sentence Learning Screen
+
+Review Screen
+
+Shadowing Screen
+
+Story Library
+
+Story Reader
+
+Story Quiz
+
+My Sentence Deck
+
+Add Custom Sentence
+
+Coin Wallet
+
+Unlockables
+
+Goals
+
+Create Goal
+
+Community Feed
+
+Profile
+
+Edit Profile
+
+User Profile
+
+Create Post
+
+Post Detail
+
+Notifications
+
+Progress Dashboard
+
+Admin Dashboard
+
+==================================================
+MVP SUCCESS CRITERIA
+==================================================
+
+A user should be able to:
+
+1. Create an account.
+2. Choose a target language.
+3. Learn sentences.
+4. Review sentences using SRS.
+5. Practice shadowing.
+6. Earn coins.
+7. Unlock stories.
+8. Read stories.
+9. Save story sentences.
+10. Create goals.
+11. Track progress.
+12. Create posts.
+13. Follow users.
+14. Like and comment on posts.
+15. Stay motivated through progression and community.
+
+Focus on creating a polished MVP that demonstrates the complete learning loop:
+
+Learn → Earn → Unlock → Read → Review → Share → Progress

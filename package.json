@@ -1,0 +1,25 @@
+{
+  "name": "lingua-stories",
+  "version": "1.0.0",
+  "description": "Fluency-first language learning MVP with sentence learning, stories, SRS, coins, goals, and community.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env.production server.js",
+    "dev": "node --env-file=.env.development server.js",
+    "start:prod": "node --env-file=.env.production server.js",
+    "start:dev": "node --env-file=.env.development server.js",
+    "db:schema": "node --env-file=.env.development scripts/run-sql.js db/schema.sql",
+    "db:seed": "node --env-file=.env.development scripts/run-sql.js db/seed.sql",
+    "db:truncate": "node --env-file=.env.development scripts/run-sql.js db/truncate.sql",
+    "db:schema:prod": "node --env-file=.env.production scripts/run-sql.js db/schema.sql",
+    "db:seed:prod": "node --env-file=.env.production scripts/run-sql.js db/seed.sql",
+    "db:truncate:prod": "node --env-file=.env.production scripts/run-sql.js db/truncate.sql"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}
