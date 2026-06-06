@@ -130,9 +130,15 @@ function linkedContext(post) {
 function momentImage(post, detail = false) {
   if (!post.imageUrl) return "";
   const previewUrl = post.imageThumbUrl || post.imageUrl;
+  const frameClass = detail
+    ? "mt-4 block w-full"
+    : "mt-4 block h-24 w-24 sm:h-28 sm:w-28";
+  const imageClass = detail
+    ? "max-h-[420px] w-full object-cover"
+    : "h-full w-full object-cover";
   return `
-    <button class="mt-4 block w-full overflow-hidden rounded-lg border border-brand-line/80 bg-white/55 text-left transition hover:border-brand-orange/50" data-action="expandMomentImage:${escapeHtml(post.id)}" aria-label="Expand moment picture">
-      <img class="${detail ? "max-h-[420px]" : "max-h-72"} w-full object-cover" src="${escapeHtml(previewUrl)}" alt="${escapeHtml(post.author)}'s moment picture">
+    <button class="${frameClass} overflow-hidden rounded-lg border border-brand-line/80 bg-white/55 text-left transition hover:border-brand-orange/50" data-action="expandMomentImage:${escapeHtml(post.id)}" aria-label="Expand moment picture">
+      <img class="${imageClass}" src="${escapeHtml(previewUrl)}" alt="${escapeHtml(post.author)}'s moment picture">
     </button>
   `;
 }

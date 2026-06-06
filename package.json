@@ -4,9 +4,9 @@
   "description": "Fluency-first language learning MVP with sentence learning, stories, SRS, coins, goals, and community.",
   "main": "server.js",
   "scripts": {
-    "start": "node --env-file=.env.production server.js",
+    "start": "node server.js",
     "dev": "node --env-file=.env.development server.js",
-    "start:prod": "node --env-file=.env.production server.js",
+    "start:prod": "node server.js",
     "start:dev": "node --env-file=.env.development server.js",
     "db:schema": "node --env-file=.env.development scripts/run-sql.js db/schema.sql",
     "db:seed": "node --env-file=.env.development scripts/run-sql.js db/seed.sql",

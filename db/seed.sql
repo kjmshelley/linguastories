@@ -1,3 +1,5 @@
+-- Seeded account password: Juy90n1!
+
 begin;
 
 truncate table
@@ -265,7 +267,7 @@ join lateral (
 
 do $$
 declare
-  password_hash constant text := 'pbkdf2_sha256$310000$linguastories-demo-salt$fcc831d0ad9edff6eea39710b5ebb9a2578acfdbbdb968bc69534451e9189b2f';
+  password_hash constant text := 'pbkdf2_sha256$310000$linguastories-demo-salt$4dcf782c48e2ddcfca5e2fc7babb9ecaf14ed4318768aea46ee4be4b0992b75d';
   user_specs text[][] := array[
     array['Mika Tan','demo@linguastories.local','MT','English','Japanese','A2','Building fluency through useful sentences and short stories.'],
     array['Noah Reed','noah@linguastories.local','NR','English','Japanese','A2','Travel-story learner who likes mining practical airport and train sentences.'],
