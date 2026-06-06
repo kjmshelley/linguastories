@@ -1363,7 +1363,7 @@ function render() {
             ? learnerForTitle.displayName
             : storyForTitle?.title || match[1];
   pageTitle.textContent = titleText;
-  if (mobilePageTitle) mobilePageTitle.textContent = titleText;
+  if (mobilePageTitle) mobilePageTitle.textContent = titleText.replace(/\s+\([^)]*\)$/, "");
   coinBalance.textContent = state.wallet.balance;
   if (mobileCoinBalance) mobileCoinBalance.textContent = state.wallet.balance;
   if (topbarLanguage) topbarLanguage.textContent = state.user.targetLanguage;

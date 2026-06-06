@@ -8,7 +8,7 @@ export function dashboardView({ state }) {
         <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,250,244,.98),rgba(248,246,242,.9)_55%,rgba(44,122,123,.12))]"></div>
         <div class="relative z-10">
           <span class="${ui.tagGold}">${escapeHtml(due.source)}</span>
-          <h2 class="mt-4 text-5xl font-bold leading-tight tracking-tight">${escapeHtml(due.target)}</h2>
+          <h2 class="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-5xl">${escapeHtml(due.target)}</h2>
           <p class="mt-3 text-xl text-brand-charcoal">${escapeHtml(due.translation)}</p>
           <p class="mt-4 max-w-2xl text-sm leading-6 text-brand-graphite">${escapeHtml(due.notes)}</p>
           <p class="mt-6 text-xs font-semibold text-brand-graphite">Completing this review gives 5 coins.</p>

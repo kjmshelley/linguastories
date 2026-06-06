@@ -357,7 +357,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
                 </div>
                 ${button(`Unlock ${story.cost}`, `unlockStory:${story.id}`)}
               </div>
-              <h2 class="mt-5 max-w-3xl text-5xl font-bold leading-tight tracking-tight text-brand-ink">${escapeHtml(content.title)}</h2>
+              <h2 class="mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">${escapeHtml(content.title)}</h2>
               <p class="mt-4 max-w-2xl leading-7 text-brand-charcoal">${escapeHtml(content.translation)}</p>
               <div class="mt-6">${button("Change Reading Level", `openStoryLevelModal:${story.id}`, ui.secondary)}</div>
             </div>

@@ -164,13 +164,13 @@ export function browseButton(label, action, tone = "primary") {
 
 export function browsePage({ eyebrow, title, description, hero, rails }) {
   return `
-    <div class="-m-4 min-h-[calc(100vh-80px)] bg-brand-cream px-4 py-5 text-brand-ink sm:-m-6 sm:px-6 lg:-m-7 lg:px-7">
+    <div class="-m-4 min-h-[calc(100vh-80px)] overflow-hidden bg-brand-cream px-4 py-5 text-brand-ink sm:-m-6 sm:px-6 lg:-m-7 lg:px-7">
       <section class="relative overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
         <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,250,244,.98)_0%,rgba(248,246,242,.94)_58%,rgba(224,114,88,.13)_100%)]"></div>
         <div class="relative grid min-h-[360px] items-end gap-6 p-5 sm:p-7 xl:grid-cols-[minmax(0,1fr)_360px] xl:items-center">
           <div class="max-w-3xl">
             <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-semibold uppercase text-brand-redDark ring-1 ring-brand-red/15">${escapeHtml(eyebrow)}</span>
-            <h2 class="mt-4 text-4xl font-bold leading-none tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${escapeHtml(title)}</h2>
+            <h2 class="mt-4 text-3xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${escapeHtml(title)}</h2>
             <p class="mt-4 max-w-2xl text-sm leading-6 text-brand-charcoal sm:text-base">${escapeHtml(description)}</p>
             <div class="mt-5 flex flex-wrap gap-2">${hero.actions}</div>
           </div>
@@ -185,12 +185,12 @@ export function browsePage({ eyebrow, title, description, hero, rails }) {
 export function browseRail(title, items, renderItem) {
   if (!items.length) return "";
   return `
-    <section>
-      <div class="mb-3 flex items-end justify-between gap-3">
-        <h3 class="text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(title)}</h3>
-        <span class="text-xs font-semibold uppercase text-brand-graphite">${items.length} items</span>
+    <section class="min-w-0">
+      <div class="mb-3 flex min-w-0 items-end justify-between gap-3">
+        <h3 class="min-w-0 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(title)}</h3>
+        <span class="shrink-0 text-xs font-semibold uppercase text-brand-graphite">${items.length} items</span>
       </div>
-      <div class="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none]">
+      <div class="-mx-4 flex max-w-[calc(100%+2rem)] snap-x gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none]">
         ${items.map(renderItem).join("")}
       </div>
     </section>

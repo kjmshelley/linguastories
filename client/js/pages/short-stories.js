@@ -174,7 +174,7 @@ function featuredStorySlide(story, currentIndex, total) {
   return `
     <section class="relative overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
       <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,250,244,.98)_0%,rgba(248,246,242,.94)_58%,rgba(224,114,88,.13)_100%)]"></div>
-      <div class="relative grid min-h-[360px] gap-6 px-6 py-5 sm:px-8 sm:py-7 lg:grid-cols-[minmax(0,1fr)_390px] lg:px-12 lg:py-8 xl:grid-cols-[minmax(0,1fr)_460px]">
+      <div class="relative grid min-h-[320px] gap-6 px-5 py-5 sm:min-h-[360px] sm:px-8 sm:py-7 lg:grid-cols-[minmax(0,1fr)_390px] lg:px-12 lg:py-8 xl:grid-cols-[minmax(0,1fr)_460px]">
         <div class="max-w-4xl self-center">
           <div class="${ui.row}">
             <span class="${ui.tagGold}">${escapeHtml(story.categoryName || story.topic)}</span>
@@ -182,7 +182,7 @@ function featuredStorySlide(story, currentIndex, total) {
             <span class="${locked ? ui.tag : ui.tagDark}">${locked ? "Locked" : story.completed ? "Completed" : "Unlocked"}</span>
             ${Number(story.likeCount || 0) ? `<span class="${ui.tag}">${Number(story.likeCount || 0)} likes</span>` : ""}
           </div>
-          <h2 class="mt-5 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${escapeHtml(story.title)}</h2>
+          <h2 class="mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${escapeHtml(story.title)}</h2>
           <p class="mt-4 max-w-2xl text-sm leading-6 text-brand-charcoal sm:text-base">${escapeHtml(story.translation)}</p>
           <div class="mt-5 flex flex-wrap gap-2">
             <span class="${ui.tagRed}">${escapeHtml(story.readingTime || `${getReadingMinutes(story)} min`)}</span>
@@ -268,8 +268,8 @@ export function shortStoriesView({ state, selectedFeaturedStoryIndex = 0 }) {
           ${
             featured.length > 1
               ? `
-                <button class="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-lg border border-brand-line/80 bg-white/80 text-brand-ink shadow-lg backdrop-blur transition hover:-translate-x-0.5 hover:border-brand-orange/50 hover:bg-white" data-action="featuredStory:prev" aria-label="Previous featured story">${icon("chevronLeft", "h-5 w-5")}</button>
-                <button class="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-lg bg-brand-ink text-white shadow-lg transition hover:translate-x-0.5 hover:bg-brand-redDark" data-action="featuredStory:next" aria-label="Next featured story">${icon("chevronRight", "h-5 w-5")}</button>
+                <button class="absolute left-2 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-lg border border-brand-line/80 bg-white/80 text-brand-ink shadow-lg backdrop-blur transition hover:-translate-x-0.5 hover:border-brand-orange/50 hover:bg-white sm:left-3 sm:h-11 sm:w-11" data-action="featuredStory:prev" aria-label="Previous featured story">${icon("chevronLeft", "h-5 w-5")}</button>
+                <button class="absolute right-2 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-lg bg-brand-ink text-white shadow-lg transition hover:translate-x-0.5 hover:bg-brand-redDark sm:right-3 sm:h-11 sm:w-11" data-action="featuredStory:next" aria-label="Next featured story">${icon("chevronRight", "h-5 w-5")}</button>
               `
               : ""
           }

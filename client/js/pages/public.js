@@ -48,7 +48,7 @@ export function landingView({ appConfig }) {
         <section class="bg-brand-cream">
           <div class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-10 px-4 py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-20">
             <div>
-              <h1 class="max-w-4xl text-5xl font-black leading-[1.04] tracking-tight text-brand-charcoal sm:text-6xl">Learn a new language through captivating stories at your exact level</h1>
+              <h1 class="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-brand-charcoal sm:text-6xl">Learn a new language through captivating stories at your exact level</h1>
               <p class="mt-5 max-w-2xl text-lg leading-8 text-brand-graphite">Read the same story at A1, A2, B1, B2, C1, or C2. Vocabulary, grammar, sentence length, and style adapt as your language skills grow.</p>
               <div class="mt-7 grid max-w-xl gap-3">
                 <input class="${ui.input} bg-white" type="email" placeholder="Your email address" aria-label="Your email address" />
@@ -60,7 +60,7 @@ export function landingView({ appConfig }) {
                 <span>No credit card required</span>
               </div>
             </div>
-            <div class="relative min-h-[420px]">
+            <div class="relative min-h-[280px] sm:min-h-[420px]">
               <img class="absolute inset-0 m-auto h-full w-full object-contain" src="/assets/img/linguastories.png" alt="" />
             </div>
           </div>
@@ -114,7 +114,7 @@ export function landingView({ appConfig }) {
               ${["Share progress", "Practice reading", "Ask teachers"].map((item) => `<div class="flex items-center gap-2 rounded-lg border border-brand-line bg-white px-4 py-3 text-sm font-black text-brand-charcoal shadow-sm">${icon("check", "h-4 w-4 text-brand-redDark")}<span>${item}</span></div>`).join("")}
               </div>
             </div>
-            <div class="relative min-h-[360px] overflow-hidden">
+            <div class="relative min-h-[260px] overflow-hidden sm:min-h-[360px]">
               <img class="absolute inset-0 h-full w-full object-contain" src="/assets/img/community.png" alt="LinguaStories learners using phones together" />
             </div>
           </div>
@@ -179,7 +179,7 @@ function authPage(mode, { appConfig }) {
       <main class="mx-auto grid w-[min(1080px,calc(100%_-_32px))] items-center gap-10 px-4 py-12 lg:grid-cols-[1fr_430px] lg:py-20">
         <section>
           <span class="${isLogin ? ui.tagGold : ui.tagRed}">${isLogin ? "Welcome back" : "Start free"}</span>
-          <h1 class="mt-5 max-w-3xl text-5xl font-black leading-[0.98] tracking-tight text-brand-ink lg:text-6xl">${isLogin ? "Pick up right where your stories left off." : "Create your story-learning loop in a few seconds."}</h1>
+          <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${isLogin ? "Pick up right where your stories left off." : "Create your story-learning loop in a few seconds."}</h1>
           <p class="mt-5 max-w-xl text-lg leading-8 text-brand-charcoal">${isLogin ? "Review what is due, unlock your next story, and keep the practice rhythm going." : "Choose your first learning language, collect a welcome coin bonus, and begin with level-matched stories."}</p>
         </section>
         <section class="${ui.card} p-6 shadow-2xl">

@@ -5,7 +5,7 @@ export function shadowingView({ state }) {
   return `
     <section class="relative overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel p-6 text-brand-ink shadow-[0_18px_42px_rgba(29,41,63,.09)]">
       <span class="${ui.tagGold}">Shadowing</span>
-      <h2 class="mt-4 text-5xl font-bold leading-tight">${escapeHtml(sentence.target)}</h2>
+      <h2 class="mt-4 text-3xl font-bold leading-tight sm:text-5xl">${escapeHtml(sentence.target)}</h2>
       <p class="mt-3 text-xl text-brand-charcoal">${escapeHtml(sentence.romanization)}</p>
       <p class="mt-4 text-sm leading-6 text-brand-graphite">Listen, repeat, listen again, repeat again, then self-rate.</p>
       <div class="mt-6 flex flex-wrap gap-2">
