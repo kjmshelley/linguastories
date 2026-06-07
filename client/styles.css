@@ -4,10 +4,16 @@
 
 html {
   min-height: 100%;
+  overflow-x: hidden;
+  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 button,
@@ -15,4 +21,80 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+button:not([aria-label^="Show "]),
+a[data-app-link],
+a[data-link] {
+  min-height: 44px;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+  font-size: 16px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+strong,
+small,
+a,
+button,
+td,
+th {
+  overflow-wrap: anywhere;
+}
+
+table {
+  width: 100%;
+}
+
+[data-modal-body] {
+  min-width: 0;
+}
+
+[data-avatar-crop-frame] {
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 767px) {
+  button:not([aria-label^="Show "]),
+  a[data-app-link],
+  a[data-link] {
+    min-width: 44px;
+  }
+
+  form button:not([aria-label^="Show "]),
+  form a[data-app-link],
+  form a[data-link] {
+    width: 100%;
+  }
 }

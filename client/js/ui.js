@@ -4,9 +4,9 @@ export const ui = {
   card: "rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]",
   cardHover: "rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:border-brand-orange/40 hover:shadow-[0_14px_28px_rgba(29,41,63,.08)]",
   stat: "rounded-lg border border-brand-line/70 bg-brand-panel/85 p-5 shadow-[0_1px_2px_rgba(29,41,63,.04)] transition hover:border-brand-orange/35",
-  primary: "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-semibold text-white no-underline shadow-[0_8px_18px_rgba(29,41,63,.16)] transition hover:bg-brand-redDark",
-  secondary: "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/55 px-4 py-2 text-sm font-semibold text-brand-charcoal no-underline transition hover:border-brand-orange/50 hover:bg-white",
-  danger: "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-brand-red/20 bg-brand-red/10 px-4 py-2 text-sm font-semibold text-brand-redDark transition hover:border-brand-red/35 hover:bg-brand-red/15",
+  primary: "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-semibold text-white no-underline shadow-[0_8px_18px_rgba(29,41,63,.16)] transition hover:bg-brand-redDark",
+  secondary: "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/55 px-4 py-2 text-sm font-semibold text-brand-charcoal no-underline transition hover:border-brand-orange/50 hover:bg-white",
+  danger: "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-red/20 bg-brand-red/10 px-4 py-2 text-sm font-semibold text-brand-redDark transition hover:border-brand-red/35 hover:bg-brand-red/15",
   row: "flex flex-wrap items-center gap-2",
   muted: "text-sm leading-6 text-brand-graphite",
   tag: "inline-flex min-h-6 items-center gap-1.5 rounded-full bg-white/65 px-2.5 py-1 text-xs font-semibold text-brand-graphite ring-1 ring-brand-line/70",
@@ -73,6 +73,7 @@ const iconPaths = {
   goal: `<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle>`,
   login: `<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path>`,
   logout: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path>`,
+  menu: `<path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path>`,
   message: `<path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"></path>`,
   play: `<path d="m8 5 11 7-11 7Z"></path>`,
   save: `<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path>`,
@@ -157,8 +158,8 @@ export function getReadingMinutes(story) {
 export function browseButton(label, action, tone = "primary") {
   const className =
     tone === "primary"
-      ? "inline-flex min-h-9 items-center justify-center gap-2 rounded-lg bg-brand-ink px-3 py-2 text-xs font-semibold text-white shadow-[0_6px_14px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark"
-      : "inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/60 px-3 py-2 text-xs font-semibold text-brand-charcoal transition hover:border-brand-orange hover:bg-white";
+      ? "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-3 py-2 text-sm font-semibold text-white shadow-[0_6px_14px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark"
+      : "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/60 px-3 py-2 text-sm font-semibold text-brand-charcoal transition hover:border-brand-orange hover:bg-white";
   return `<button class="${className}" data-action="${action}">${icon(iconForLabel(label))}<span>${label}</span></button>`;
 }
 
@@ -190,7 +191,7 @@ export function browseRail(title, items, renderItem) {
         <h3 class="min-w-0 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(title)}</h3>
         <span class="shrink-0 text-xs font-semibold uppercase text-brand-graphite">${items.length} items</span>
       </div>
-      <div class="-mx-4 flex max-w-[calc(100%+2rem)] snap-x gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none]">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         ${items.map(renderItem).join("")}
       </div>
     </section>
@@ -200,7 +201,7 @@ export function browseRail(title, items, renderItem) {
 export function sentencePoster(sentence, index = 0) {
   const palette = posterPalettes[index % posterPalettes.length];
   return `
-    <article class="group w-[250px] shrink-0 snap-start overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-[0_16px_30px_rgba(29,41,63,.1)]">
+    <article class="group w-full overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-[0_16px_30px_rgba(29,41,63,.1)]">
       <div class="flex aspect-[3/4] flex-col justify-between bg-gradient-to-br ${palette} p-4">
         <div class="flex items-center justify-between gap-2">
           <span class="rounded-full bg-black/30 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">${escapeHtml(sentence.level)}</span>
@@ -229,7 +230,7 @@ export function storyPoster(story, index = 0) {
   const palette = posterPalettes[index % posterPalettes.length];
   const action = locked ? browseButton(`Unlock ${story.cost}`, `unlockStory:${story.id}`) : browseButton(story.completed ? "Read Again" : "Read Story", `readStory:${story.id}`);
   return `
-    <article class="group w-[270px] shrink-0 snap-start overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:-translate-y-1 hover:border-brand-red/45 hover:shadow-[0_16px_30px_rgba(29,41,63,.1)]">
+    <article class="group w-full overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:-translate-y-1 hover:border-brand-red/45 hover:shadow-[0_16px_30px_rgba(29,41,63,.1)]">
       <div class="relative flex aspect-[3/4] flex-col justify-between bg-gradient-to-br ${palette} p-4">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,.22),transparent_24%)]"></div>
         <div class="relative flex items-center justify-between gap-2">

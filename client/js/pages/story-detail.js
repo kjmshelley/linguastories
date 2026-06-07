@@ -152,7 +152,7 @@ function readerLanguageSelector({ story, languages, selectedLanguage }) {
         ${languages
           .map(
             (language) => `
-              <button class="min-h-9 rounded-lg px-3 py-1.5 text-left text-sm font-semibold transition ${
+              <button class="min-h-11 rounded-lg px-3 py-2 text-left text-sm font-semibold transition ${
                 language === selectedLanguage ? "bg-white text-brand-ink ring-1 ring-brand-orange/45" : "text-brand-charcoal hover:bg-white/80"
               }" data-action="setStoryLanguage:${story.id}:${language}">
                 ${escapeHtml(language)}

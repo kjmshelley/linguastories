@@ -85,7 +85,28 @@ export function walletView({ state }) {
     </section>
     <section class="${ui.card} mt-4">
       <h2 class="text-xl font-black">Transaction History</h2>
-      <table class="mt-3 w-full border-collapse text-sm">
+      <div class="mt-3 grid gap-3 md:hidden">
+        ${
+          state.wallet.transactions.length
+            ? state.wallet.transactions
+                .map(
+                  (item) => `
+                    <article class="rounded-lg border border-brand-line/80 bg-white/60 p-4">
+                      <div class="flex items-start justify-between gap-3">
+                        <div class="min-w-0">
+                          <h3 class="text-sm font-bold leading-6 text-brand-ink">${escapeHtml(item.label)}</h3>
+                          <p class="mt-1 text-sm font-semibold text-brand-graphite">${escapeHtml(formatDate(item.date))}</p>
+                        </div>
+                        <div class="shrink-0 text-right">${transactionAmount(item.amount)}</div>
+                      </div>
+                    </article>
+                  `
+                )
+                .join("")
+            : `<p class="${ui.muted}">No wallet activity yet.</p>`
+        }
+      </div>
+      <table class="mt-3 hidden w-full border-collapse text-sm md:table">
         <tbody>${state.wallet.transactions.map((item) => `<tr class="border-b border-zinc-100"><td class="py-3">${escapeHtml(item.label)}</td><td class="py-3 text-brand-graphite">${escapeHtml(formatDate(item.date))}</td><td class="py-3 text-right">${transactionAmount(item.amount)}</td></tr>`).join("")}</tbody>
       </table>
     </section>

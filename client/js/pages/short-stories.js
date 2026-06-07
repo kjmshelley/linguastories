@@ -89,7 +89,7 @@ function filterToolbar({ filters, total, visible }) {
           <span>Search</span>
           <div class="flex h-11 items-center gap-2 rounded-lg border border-brand-line/90 bg-white/75 px-3 transition focus-within:border-brand-orange focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-orange/15">
             ${icon("search", "h-4 w-4 text-brand-graphite")}
-            <input class="min-w-0 flex-1 bg-transparent text-sm font-semibold normal-case text-brand-ink outline-none placeholder:text-brand-muted" data-short-story-filter="query" value="${escapeHtml(filters.query || "")}" placeholder="Title, topic, level">
+            <input class="min-h-11 min-w-0 flex-1 bg-transparent text-sm font-semibold normal-case text-brand-ink outline-none placeholder:text-brand-muted" data-short-story-filter="query" value="${escapeHtml(filters.query || "")}" placeholder="Title, topic, level">
           </div>
         </label>
       </div>
@@ -206,7 +206,7 @@ function storyListCard(story) {
   const action = locked ? browseButton(`Unlock ${story.cost}`, `unlockStory:${story.id}`) : browseButton(story.completed ? "Read Again" : "Read Story", `readStory:${story.id}`);
 
   return `
-    <section class="w-[270px] shrink-0 snap-start overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:border-brand-orange/35 hover:shadow-[0_14px_28px_rgba(29,41,63,.08)]">
+    <section class="w-full overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:border-brand-orange/35 hover:shadow-[0_14px_28px_rgba(29,41,63,.08)]">
       <div class="relative">
         ${storyImage(story, "aspect-[4/3] w-full object-cover", "aspect-[4/3] w-full")}
         <div class="absolute left-3 top-3 flex flex-wrap gap-2">
@@ -237,7 +237,7 @@ function categoryRail(category, stories) {
         <h3 class="text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(category.name)}</h3>
         <span class="text-xs font-semibold uppercase text-brand-graphite">${stories.length} stories</span>
       </div>
-      <div class="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none]">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         ${stories.map(storyListCard).join("")}
       </div>
     </section>

@@ -265,14 +265,14 @@ function syncShortStorySearchButtons(route = activeRoute()) {
   const buttons = [shortStorySearchButton, mobileShortStorySearchButton].filter(Boolean);
   buttons.forEach((button) => {
     const isDesktop = button === shortStorySearchButton;
-    button.className = `${show ? "flex" : "hidden"} h-10 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-semibold shadow-sm transition ${
+    button.className = `${show ? "flex" : "hidden"} h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-semibold shadow-sm transition ${
       route === "shortStorySearch"
         ? "border-brand-orange/60 bg-brand-orange text-white hover:bg-brand-redDark"
         : active
           ? "border-brand-orange/60 bg-brand-mist text-brand-redDark hover:-translate-y-0.5 hover:bg-white"
           : "border-brand-line bg-white/70 text-brand-charcoal hover:-translate-y-0.5 hover:border-brand-orange/60 hover:bg-white"
     }`;
-    if (!isDesktop) button.className = button.className.replace("px-3 text-sm", "w-10 px-0 text-sm");
+    if (!isDesktop) button.className = button.className.replace("px-3 text-sm", "w-11 px-0 text-sm");
     const iconElement = button.querySelector("svg");
     const labelElement = button.querySelector("span");
     if (iconElement) iconElement.classList.toggle("text-white", route === "shortStorySearch");
@@ -325,7 +325,7 @@ function notificationsModal() {
 function syncMobileMenu() {
   if (!sidebar) return;
   sidebar.className = mobileMenuOpen
-    ? "fixed inset-y-0 left-0 z-50 block w-[286px] overflow-y-auto border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white shadow-[18px_0_50px_rgba(29,41,63,.26)] lg:sticky lg:top-0 lg:block lg:min-h-screen lg:shadow-none"
+    ? "fixed inset-y-0 left-0 z-50 block w-[min(286px,calc(100vw-24px))] overflow-y-auto border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white shadow-[18px_0_50px_rgba(29,41,63,.26)] lg:sticky lg:top-0 lg:block lg:min-h-screen lg:w-[286px] lg:shadow-none"
     : "hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white lg:sticky lg:top-0 lg:block";
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = mobileMenuOpen ? "fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" : "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
 }
@@ -585,14 +585,14 @@ function renderChatDrawer() {
   const recipient = chatRecipientMeta(selected, pendingLearner);
   const messages = selected?.messages || [];
   const balance = state.wallet?.balance || 0;
-  const drawerWidth = chatContactsHidden ? "w-[min(560px,calc(100vw-24px))]" : "w-[min(760px,calc(100vw-24px))]";
+  const drawerWidth = chatContactsHidden ? "w-full sm:w-[min(560px,calc(100vw-24px))]" : "w-full sm:w-[min(760px,calc(100vw-24px))]";
   const gridClass = chatContactsHidden ? "" : "md:grid-cols-[250px_minmax(0,1fr)]";
   const contactsClass = chatMobileScreen === "contacts" ? "block" : "hidden md:block";
   const contactPanelClass = chatContactsHidden ? `${chatMobileScreen === "contacts" ? "block" : "hidden"} md:hidden` : contactsClass;
   const messagesClass = chatMobileScreen === "messages" || pendingLearner ? "grid" : "hidden md:grid";
 
   chatDrawer.innerHTML = `
-    <aside class="fixed bottom-0 right-3 z-40 ${drawerWidth} overflow-hidden rounded-t-lg border border-brand-line bg-brand-panel shadow-[0_24px_70px_rgba(29,41,63,.28)] sm:right-4">
+    <aside class="fixed inset-x-0 bottom-0 z-40 ${drawerWidth} overflow-hidden rounded-t-lg border border-brand-line bg-brand-panel shadow-[0_24px_70px_rgba(29,41,63,.28)] sm:inset-x-auto sm:right-4">
       <header class="flex min-h-14 items-center justify-between gap-3 border-b border-brand-line bg-brand-sidebar px-4 text-white">
         <div class="flex items-center gap-2">
           ${icon("message", "h-4 w-4")}
@@ -602,14 +602,14 @@ function renderChatDrawer() {
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button class="hidden min-h-8 items-center gap-2 rounded-lg bg-white/10 px-2.5 text-xs font-bold text-white transition hover:bg-white/15 md:inline-flex" data-action="toggleChatContacts" aria-label="${chatContactsHidden ? "Show Contacts" : "Hide Contacts"}">
+          <button class="hidden min-h-11 items-center gap-2 rounded-lg bg-white/10 px-2.5 text-xs font-bold text-white transition hover:bg-white/15 md:inline-flex" data-action="toggleChatContacts" aria-label="${chatContactsHidden ? "Show Contacts" : "Hide Contacts"}">
             ${icon(chatContactsHidden ? "users" : "chevronLeft", "h-3.5 w-3.5")}
             <span>${chatContactsHidden ? "Show Contacts" : "Hide Contacts"}</span>
           </button>
-          <button class="grid h-8 w-8 place-items-center rounded-lg bg-white/10 text-white transition hover:bg-white/15" data-action="closeChatPanel" aria-label="Close messages">x</button>
+          <button class="grid h-11 w-11 place-items-center rounded-lg bg-white/10 text-white transition hover:bg-white/15" data-action="closeChatPanel" aria-label="Close messages">x</button>
         </div>
       </header>
-      <div class="grid h-[min(620px,calc(100vh-112px))] bg-brand-panel ${gridClass}">
+      <div class="grid h-[min(620px,calc(100dvh-112px))] bg-brand-panel ${gridClass}">
         <section class="${contactPanelClass} grid min-h-0 grid-rows-[auto_minmax(0,1fr)] border-b border-brand-line bg-brand-mist/35 md:border-b-0 md:border-r">
           <div class="border-b border-brand-line px-3 py-3">
             <div class="flex items-center justify-between gap-2">
@@ -648,11 +648,11 @@ function renderChatDrawer() {
               ? `
                 <div class="flex items-center justify-between gap-3 border-b border-brand-line bg-brand-panel px-4 py-3">
                   <div class="flex items-center gap-3">
-                    <button class="grid h-9 w-9 place-items-center rounded-lg border border-brand-line bg-white/70 text-brand-ink md:hidden" data-action="showChatContacts" aria-label="Back to contacts">
+                    <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white/70 text-brand-ink md:hidden" data-action="showChatContacts" aria-label="Back to contacts">
                       ${icon("arrowLeft", "h-4 w-4")}
                     </button>
                     ${chatAvatar(recipient, "h-10 w-10")}
-                    <div>
+                    <div class="min-w-0">
                       <h3 class="text-sm font-bold text-brand-ink">${escapeHtml(recipient.name)}</h3>
                       <p class="text-xs font-semibold text-brand-graphite">Direct message · recipient earns 1 coin</p>
                     </div>
@@ -667,7 +667,7 @@ function renderChatDrawer() {
                             .map(
                               (message) => `
                                 <article class="flex ${message.mine ? "justify-end" : "justify-start"}">
-                                  <div class="max-w-[82%] rounded-lg px-4 py-3 shadow-sm ${
+                    <div class="max-w-[min(82%,34rem)] rounded-lg px-4 py-3 shadow-sm ${
                                     message.mine ? "bg-brand-sidebar text-white" : "border border-brand-line bg-brand-panel text-brand-charcoal"
                                   }">
                                     <p class="text-sm leading-6">${escapeHtml(message.body)}</p>
@@ -688,7 +688,7 @@ function renderChatDrawer() {
                   <input type="hidden" name="recipientId" value="${escapeHtml(recipient.id)}">
                   <div class="grid gap-2">
                     <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="${balance > 0 ? `Message ${escapeHtml(recipient.name)}...` : "You need coins to send a direct message."}" ${balance > 0 ? "" : "disabled"}></textarea>
-                    <div class="flex items-center justify-between gap-3">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
                       <span class="text-xs font-semibold text-brand-graphite">Cost: 1 coin per message</span>
                       <button class="${balance > 0 ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}" ${balance > 0 ? "" : "disabled"}>${icon("message")}<span>Send Message</span></button>
                     </div>
@@ -733,7 +733,7 @@ async function cropAvatarImage(file) {
       </div>
       <div class="mt-5 grid gap-5">
         <div class="mx-auto grid gap-3">
-          <div class="relative h-72 w-72 touch-none overflow-hidden rounded-full bg-brand-mist ring-4 ring-white shadow-[0_18px_40px_rgba(29,41,63,.16)]" data-avatar-crop-frame>
+          <div class="relative h-auto w-[min(18rem,calc(100vw-4rem))] touch-none overflow-hidden rounded-full bg-brand-mist ring-4 ring-white shadow-[0_18px_40px_rgba(29,41,63,.16)]" data-avatar-crop-frame>
             <img class="absolute max-w-none select-none" src="${escapeHtml(dataUrl)}" alt="" data-avatar-crop-image draggable="false">
           </div>
           <p class="text-center text-xs font-semibold text-brand-graphite">Drag to reposition</p>
