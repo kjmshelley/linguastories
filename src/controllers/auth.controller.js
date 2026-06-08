@@ -1,18 +1,29 @@
 const authService = require("../services/auth.service");
 const learningService = require("../services/learning.service");
+const { securityLog } = require("../utils/security-log");
 
 async function me(req, res) {
   res.json({ authenticated: Boolean(req.user), user: req.user || null });
 }
 
 async function register(req, res) {
-  const user = await authService.registerUser(req.body, res);
-  res.status(201).json(await learningService.getState(user));
+  try {
+    const user = await authService.registerUser(req.body, res);
+    res.status(201).json(await learningService.getState(user));
+  } catch (error) {
+    if (error.status === 409) securityLog("register_duplicate_email", req);
+    throw error;
+  }
 }
 
 async function login(req, res) {
-  const user = await authService.loginUser(req.body, res);
-  res.json(await learningService.getState(user));
+  try {
+    const user = await authService.loginUser(req.body, res);
+    res.json(await learningService.getState(user));
+  } catch (error) {
+    if (error.status === 401) securityLog("login_failed", req);
+    throw error;
+  }
 }
 
 async function logout(req, res) {

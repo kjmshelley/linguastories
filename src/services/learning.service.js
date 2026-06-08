@@ -156,7 +156,6 @@ async function getStories(userId) {
             s.source_language as "sourceLanguage",
             s.topic,
             case when s.image_path_file_id is not null then '/api/stories/' || s.id || '/image' else '' end as "imageUrl",
-            coalesce(s.image_path_file_id, '') as "imagePathFileId",
             s.unlock_cost as cost,
             s.reward_coins as reward,
             coalesce(us.unlocked, false) as unlocked,
@@ -407,8 +406,6 @@ async function getPosts(userId) {
             p.target_language as "targetLanguage",
             case when p.image_path_file_id is not null then '/api/posts/' || p.id || '/image' else '' end as "imageUrl",
             case when p.image_thumb_path_file_id is not null then '/api/posts/' || p.id || '/thumbnail' else '' end as "imageThumbUrl",
-            coalesce(p.image_path_file_id, '') as "imagePathFileId",
-            coalesce(p.image_thumb_path_file_id, '') as "imageThumbPathFileId",
             p.sentence_id as "sentenceId",
             p.story_id as "storyId",
             p.goal_id as "goalId",
@@ -534,7 +531,12 @@ async function getLearnerActivities(userId) {
           and usr.state in ('Learning', 'Review', 'Mastered')
      ),
      ranked as (
-       select *,
+       select learner_id,
+              type,
+              label,
+              detail,
+              target_language,
+              created_at,
               row_number() over (partition by learner_id order by created_at desc) as rank
          from activity
      )
@@ -1464,6 +1466,18 @@ async function createPost(user, body) {
   const client = await pool.connect();
   try {
     await client.query("begin");
+    if (linkedFields.sentenceId) {
+      const sentence = await client.query("select id from sentences where id = $1", [linkedFields.sentenceId]);
+      if (!sentence.rows[0]) throw notFound("Sentence not found");
+    }
+    if (linkedFields.storyId) {
+      const story = await client.query("select id from stories where id = $1", [linkedFields.storyId]);
+      if (!story.rows[0]) throw notFound("Story not found");
+    }
+    if (linkedFields.goalId) {
+      const goal = await client.query("select id from goals where id = $1 and user_id = $2", [linkedFields.goalId, user.id]);
+      if (!goal.rows[0]) throw notFound("Goal not found");
+    }
     if (body.imageDataUrl) {
       const image = await storageService.uploadMomentImage({
         userId: user.id,
@@ -1488,14 +1502,14 @@ async function createPost(user, body) {
       try {
         await storageService.deleteStoredFile(uploadedImageKey);
       } catch (deleteError) {
-        console.warn(`Could not delete failed post image ${uploadedImageKey}: ${deleteError.message}`);
+        console.warn("Could not delete failed post image");
       }
     }
     if (uploadedThumbnailKey) {
       try {
         await storageService.deleteStoredFile(uploadedThumbnailKey);
       } catch (deleteError) {
-        console.warn(`Could not delete failed post thumbnail ${uploadedThumbnailKey}: ${deleteError.message}`);
+        console.warn("Could not delete failed post thumbnail");
       }
     }
     throw error;
@@ -1602,6 +1616,8 @@ async function toggleFollow(user, learnerId) {
   const client = await pool.connect();
   try {
     await client.query("begin");
+    const learner = await client.query("select id from users where id = $1", [learnerId]);
+    if (!learner.rows[0]) throw notFound("Learner not found");
     const existing = await client.query("select 1 from user_follows where follower_id = $1 and following_id = $2", [user.id, learnerId]);
     if (existing.rowCount) {
       await client.query("delete from user_follows where follower_id = $1 and following_id = $2", [user.id, learnerId]);
@@ -1620,6 +1636,11 @@ async function toggleFollow(user, learnerId) {
 }
 
 async function encourageLearner(user, learnerId) {
+  if (learnerId === user.id) {
+    const error = new Error("You cannot encourage yourself");
+    error.status = 400;
+    throw error;
+  }
   const learner = await query("select display_name from users where id = $1", [learnerId]);
   if (!learner.rows[0]) throw notFound("Learner not found");
   await query(
@@ -1765,6 +1786,13 @@ async function createStoryComment(user, storyId, body) {
     error.status = 400;
     throw error;
   }
+  if (comment.length > 1000) {
+    const error = new Error("Comments must be 1000 characters or fewer");
+    error.status = 400;
+    throw error;
+  }
+  const story = await query("select id from stories where id = $1", [storyId]);
+  if (!story.rows[0]) throw notFound("Story not found");
   if (parentCommentId) {
     const parent = await query("select parent_comment_id from story_comments where id = $1 and story_id = $2", [parentCommentId, storyId]);
     if (!parent.rows[0]) throw notFound("Comment not found");

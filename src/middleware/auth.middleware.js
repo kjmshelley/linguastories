@@ -1,4 +1,5 @@
 const authService = require("../services/auth.service");
+const { securityLog } = require("../utils/security-log");
 
 async function attachUser(req, _res, next) {
   try {
@@ -11,6 +12,7 @@ async function attachUser(req, _res, next) {
 
 function requireAuth(req, res, next) {
   if (!req.user) {
+    securityLog("authentication_required", req);
     return res.status(401).json({ error: "Authentication required" });
   }
   next();

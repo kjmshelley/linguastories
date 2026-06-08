@@ -7,9 +7,13 @@ const SESSION_COOKIE = "lingua_session";
 const SESSION_DAYS = Number(process.env.SESSION_DAYS);
 const PASSWORD_ITERATIONS = Number(process.env.PASSWORD_ITERATIONS);
 const SIGNUP_BONUS_TRIGGER_EVENT = "user_signup";
+const MIN_PASSWORD_ITERATIONS = 210000;
 
 if (!SESSION_DAYS || !PASSWORD_ITERATIONS) {
   throw new Error("SESSION_DAYS and PASSWORD_ITERATIONS are required.");
+}
+if (PASSWORD_ITERATIONS < MIN_PASSWORD_ITERATIONS) {
+  throw new Error(`PASSWORD_ITERATIONS must be at least ${MIN_PASSWORD_ITERATIONS}.`);
 }
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
@@ -26,16 +30,20 @@ function verifyPassword(password, storedHash) {
 }
 
 function parseCookies(req) {
-  return Object.fromEntries(
-    String(req.headers.cookie || "")
+  const cookies = {};
+  for (const cookie of String(req.headers.cookie || "")
       .split(";")
       .map((cookie) => cookie.trim())
-      .filter(Boolean)
-      .map((cookie) => {
-        const index = cookie.indexOf("=");
-        return [decodeURIComponent(cookie.slice(0, index)), decodeURIComponent(cookie.slice(index + 1))];
-      })
-  );
+      .filter(Boolean)) {
+    const index = cookie.indexOf("=");
+    if (index <= 0) continue;
+    try {
+      cookies[decodeURIComponent(cookie.slice(0, index))] = decodeURIComponent(cookie.slice(index + 1));
+    } catch (_error) {
+      continue;
+    }
+  }
+  return cookies;
 }
 
 function hashToken(token) {
@@ -50,7 +58,7 @@ function sessionCookie(value, maxAgeSeconds) {
     "SameSite=Lax",
     `Max-Age=${maxAgeSeconds}`
   ];
-  if (process.env.NODE_ENV === "production") parts.push("Secure");
+  if (process.env.NODE_ENV === "production" || process.env.APP_ENV === "PROD") parts.push("Secure");
   return parts.join("; ");
 }
 
@@ -60,7 +68,6 @@ function publicUserSql(whereClause) {
                  display_name as "displayName",
                  avatar,
                  case when avatar_box_file_id is not null then '/api/auth/avatar' else avatar_url end as "avatarUrl",
-                 avatar_box_file_id as "avatarBoxFileId",
                  bio,
                  native_language as "nativeLanguage",
                  target_language as "targetLanguage",
@@ -105,7 +112,6 @@ async function getUserByEmail(email) {
             password_hash as "passwordHash",
             avatar,
             case when avatar_box_file_id is not null then '/api/auth/avatar' else avatar_url end as "avatarUrl",
-            avatar_box_file_id as "avatarBoxFileId",
             bio,
             native_language as "nativeLanguage",
             target_language as "targetLanguage",
@@ -291,7 +297,8 @@ async function updateUserProfile(user, input) {
 }
 
 async function uploadUserAvatar(user, input) {
-  const previousAvatarKey = user.avatarBoxFileId;
+  const previousAvatar = await query("select avatar_box_file_id from users where id = $1", [user.id]);
+  const previousAvatarKey = previousAvatar.rows[0]?.avatar_box_file_id || "";
   const result = await storageService.uploadUserAvatar({
     userId: user.id,
     fileName: input.fileName,
@@ -310,7 +317,7 @@ async function uploadUserAvatar(user, input) {
     try {
       await storageService.deleteStoredFile(previousAvatarKey);
     } catch (error) {
-      console.warn(`Could not delete previous avatar ${previousAvatarKey}: ${error.message}`);
+      console.warn("Could not delete previous avatar file");
     }
   }
 
@@ -318,12 +325,14 @@ async function uploadUserAvatar(user, input) {
 }
 
 async function getUserAvatar(user) {
-  if (!user.avatarBoxFileId) {
+  const result = await query("select avatar_box_file_id from users where id = $1", [user.id]);
+  const avatarBoxFileId = result.rows[0]?.avatar_box_file_id || "";
+  if (!avatarBoxFileId) {
     const error = new Error("Profile picture not found");
     error.status = 404;
     throw error;
   }
-  return storageService.downloadBoxFile(user.avatarBoxFileId);
+  return storageService.downloadBoxFile(avatarBoxFileId);
 }
 
 async function deleteUserProfile(user) {

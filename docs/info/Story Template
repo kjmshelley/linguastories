@@ -1,0 +1,36 @@
+Create a short story for language learners.
+
+Topic: [TOPIC]
+Situation: [SITUATION]
+Plot: [PLOT]
+Tone: [TONE]
+Genre: [GENRE]
+
+Main Character: [CHARACTER TYPE]
+Supporting Character(s): [OPTIONAL CHARACTER TYPES]
+
+CEFR Level: [A1 | A2 | B1 | B2 | C1 | C2]
+Target Length: [100-150 words]
+
+Requirements:
+- Write a complete story with a clear beginning, middle, and ending.
+- The story should naturally reflect the specified topic, situation, plot, tone, and genre.
+- The main character's actions and decisions should be consistent with their character type.
+- Include realistic dialogue when appropriate.
+- Use vocabulary, grammar, and sentence structures appropriate for the target CEFR level.
+- Keep the story engaging and easy to follow.
+- Show events through actions and conversations rather than explanations whenever possible.
+- Avoid clichés and repetitive phrases.
+- Ensure the story feels natural and believable within the chosen genre.
+- The story should end naturally based on the chosen plot.
+- Output only the story.
+
+CEFR Guidelines:
+- A1: Very simple vocabulary, short sentences, mostly present tense, everyday situations.
+- A2: Common vocabulary, simple past and future expressions, basic dialogue.
+- B1: More detailed descriptions, varied sentence structures, everyday and social topics.
+- B2: More nuanced language, opinions, emotions, and complex situations.
+- C1: Natural fluent language with sophisticated vocabulary and varied sentence structures.
+- C2: Near-native level language, subtle meaning, rich vocabulary, and advanced stylistic choices.
+
+

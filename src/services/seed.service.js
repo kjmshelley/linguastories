@@ -3,7 +3,8 @@ const path = require("path");
 const { query } = require("../db/pool");
 
 const APP_USER_EMAIL = process.env.APP_USER_EMAIL;
-const AUTO_SEED = process.env.AUTO_SEED !== "false";
+const IS_PRODUCTION = process.env.NODE_ENV === "production" || process.env.APP_ENV === "PROD";
+const AUTO_SEED = IS_PRODUCTION ? process.env.AUTO_SEED === "true" : process.env.AUTO_SEED !== "false";
 
 async function seedIfNeeded() {
   if (!AUTO_SEED) return;
