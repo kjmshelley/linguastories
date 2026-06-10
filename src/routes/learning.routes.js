@@ -23,7 +23,15 @@ const knownLearningRoutes = [
   ["POST", /^\/stories\/[^/]+\/save-sentences\/?$/],
   ["POST", /^\/stories\/[^/]+\/comments\/?$/],
   ["POST", /^\/sentences\/[^/]+\/save\/?$/],
+  ["POST", /^\/sentences\/[^/]+\/?$/],
+  ["DELETE", /^\/sentences\/[^/]+\/?$/],
   ["POST", /^\/sentences\/custom\/?$/],
+  ["POST", /^\/sentence-decks\/?$/],
+  ["POST", /^\/sentence-decks\/[^/]+\/topics\/?$/],
+  ["POST", /^\/sentence-decks\/topics\/[^/]+\/?$/],
+  ["DELETE", /^\/sentence-decks\/topics\/[^/]+\/?$/],
+  ["POST", /^\/sentence-decks\/[^/]+\/sentences\/?$/],
+  ["POST", /^\/sentence-decks\/[^/]+\/reviews\/?$/],
   ["POST", /^\/goals\/?$/],
   ["POST", /^\/goals\/[^/]+\/?$/],
   ["POST", /^\/goals\/[^/]+\/progress\/?$/],
@@ -75,13 +83,66 @@ router.post("/sentences/:id/save", asyncHandler(controller.saveSentence));
 router.post("/sentences/custom", validateBody({
   target: { type: "string", required: true, max: 500, label: "Target sentence" },
   translation: { type: "string", required: true, max: 500, label: "Translation" },
+  sourceLanguage: { type: "string", max: 80, label: "Source language" },
+  targetLanguage: { type: "string", max: 80, label: "Target language" },
   romanization: { type: "string", max: 500, label: "Romanization" },
+  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
+  imageUrl: { type: "string", max: 1000, label: "Image URL" },
   topic: { type: "string", max: 80, label: "Topic" },
   level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
   difficulty: { type: "integer", min: 1, max: 5, label: "Difficulty" },
   notes: { type: "string", max: 1000, label: "Notes" },
   source: { type: "string", max: 120, label: "Source" }
 }), asyncHandler(controller.addCustomSentence));
+router.post("/sentences/:id", validateBody({
+  id: { type: "uuid", label: "Sentence" },
+  target: { type: "string", required: true, max: 500, label: "Target sentence" },
+  translation: { type: "string", required: true, max: 500, label: "Translation" },
+  sourceLanguage: { type: "string", max: 80, label: "Source language" },
+  targetLanguage: { type: "string", max: 80, label: "Target language" },
+  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
+  imageUrl: { type: "string", max: 1000, label: "Image URL" },
+  level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
+  notes: { type: "string", max: 1000, label: "Notes" }
+}), asyncHandler(controller.updateCustomSentence));
+router.delete("/sentences/:id", asyncHandler(controller.deleteSavedSentence));
+router.post("/sentence-decks", validateBody({
+  name: { type: "string", required: true, max: 120, label: "Deck name" },
+  description: { type: "string", max: 1000, label: "Description" },
+  coins: { type: "integer", min: 0, max: 100000, label: "Coins" },
+  level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
+  visibility: { type: "enum", options: ["Private", "Public", "private", "public"], fallback: "Private", label: "Visibility" },
+  sourceLanguage: { type: "string", max: 80, label: "Source language" },
+  targetLanguage: { type: "string", max: 80, label: "Target language" },
+  imageUrl: { type: "string", max: 1000, label: "Image URL" }
+}), asyncHandler(controller.createSentenceDeck));
+router.post("/sentence-decks/:id/topics", validateBody({
+  name: { type: "string", required: true, max: 120, label: "Topic name" },
+  description: { type: "string", max: 1000, label: "Topic description" },
+  sortOrder: { type: "integer", min: 0, max: 100000, label: "Sort order" }
+}), asyncHandler(controller.createSentenceDeckTopic));
+router.post("/sentence-decks/topics/:id", validateBody({
+  name: { type: "string", required: true, max: 120, label: "Topic name" },
+  description: { type: "string", max: 1000, label: "Topic description" },
+  sortOrder: { type: "integer", min: 0, max: 100000, label: "Sort order" }
+}), asyncHandler(controller.updateSentenceDeckTopic));
+router.delete("/sentence-decks/topics/:id", asyncHandler(controller.deleteSentenceDeckTopic));
+router.post("/sentence-decks/:id/sentences", validateBody({
+  target: { type: "string", required: true, max: 500, label: "Sentence" },
+  translation: { type: "string", required: true, max: 500, label: "Translation" },
+  notes: { type: "string", max: 1000, label: "Notes" },
+  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
+  imageUrl: { type: "string", max: 1000, label: "Image URL" },
+  sourceLanguage: { type: "string", max: 80, label: "Source language" },
+  targetLanguage: { type: "string", max: 80, label: "Target language" },
+  topicId: { type: "uuid", label: "Topic" },
+  level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
+  sortOrder: { type: "integer", min: 0, max: 100000, label: "Sort order" }
+}), asyncHandler(controller.addSentenceDeckSentence));
+router.post("/sentence-decks/:id/reviews", validateBody({
+  sentenceId: { type: "uuid", required: true, label: "Sentence" },
+  response: { type: "enum", options: ["show_again", "hard", "easy", "known"], required: true, label: "Response" }
+}), asyncHandler(controller.recordDeckReview));
 router.post("/goals", validateBody({
   goalScope: { type: "enum", options: ["Global", "Language"], fallback: "Language", label: "Goal scope" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },

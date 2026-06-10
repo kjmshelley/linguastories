@@ -6,6 +6,7 @@ const storageService = require("./storage.service");
 const reviewDelay = { Again: 0, Hard: 1, Good: 3, Easy: 7 };
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
 const PROFILE_VISIBILITIES = new Set(["Public", "Private"]);
+const DECK_VISIBILITIES = new Set(["Public", "Private"]);
 
 function normalizeLevel(level = "A1") {
   const value = String(level || "A1").trim().toUpperCase();
@@ -25,6 +26,24 @@ function normalizeProfileVisibility(visibility = "Private") {
     throw error;
   }
   return value;
+}
+
+function normalizeDeckVisibility(visibility = "Private") {
+  const value = String(visibility || "Private").trim().toLowerCase() === "public" ? "Public" : "Private";
+  if (!DECK_VISIBILITIES.has(value)) {
+    const error = new Error("Choose a valid deck visibility");
+    error.status = 400;
+    throw error;
+  }
+  return value;
+}
+
+function slug(value) {
+  return String(value || "deck")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80) || "deck";
 }
 
 async function awardCoins(client, userId, amount, label) {
@@ -106,7 +125,10 @@ async function getSentences(userId) {
             s.target,
             s.translation,
             coalesce(s.romanization, '') as romanization,
+            s.source_language as "sourceLanguage",
             s.target_language as "targetLanguage",
+            coalesce(s.audio_url, '') as "audioUrl",
+            coalesce(s.image_url, '') as "imageUrl",
             s.topic,
             s.level,
             s.difficulty,
@@ -114,14 +136,158 @@ async function getSentences(userId) {
             s.variations,
             coalesce(r.state, 'New') as state,
             coalesce(r.due_date, current_date)::text as "dueDate",
-            coalesce(p.title, s.source, 'Sentence Library') as source
+            coalesce(r.last_rating, '') as "lastRating",
+            coalesce(s.source, 'Sentence Library') as source
        from sentences s
-       left join sentence_packs p on p.id = s.pack_id
        left join user_sentence_reviews r on r.sentence_id = s.id and r.user_id = $1
       order by s.created_at desc`,
     [userId]
   );
   return result.rows;
+}
+
+function reviewStateForSentences(sentences) {
+  if (!sentences.length) return "New";
+  if (sentences.every((sentence) => sentence.state === "Mastered")) return "Mastered";
+  if (sentences.some((sentence) => sentence.dueDate <= today() && sentence.state !== "Mastered")) return "Review Due";
+  if (sentences.some((sentence) => sentence.state === "Review" || sentence.state === "Learning")) return "In Progress";
+  return "New";
+}
+
+function deckActionForStatus(status) {
+  if (status === "Mastered") return "Mastered";
+  if (status === "Review Due") return "Practice Review";
+  if (status === "In Progress") return "Continue";
+  return "Start";
+}
+
+function buildDeckProgress(sentences) {
+  if (!sentences.length) return 0;
+  const points = sentences.reduce((sum, sentence) => {
+    if (sentence.state === "Mastered") return sum + 1;
+    if (sentence.state === "Review") return sum + 0.65;
+    if (sentence.state === "Learning") return sum + 0.3;
+    return sum;
+  }, 0);
+  return Math.round((points / sentences.length) * 100);
+}
+
+async function getSentenceDecks(user, sentences) {
+  const decks = await query(
+    `select d.id,
+            d.user_id as "creatorId",
+            d.user_id as "ownerId",
+            case when d.deck_kind = 'System' then 'LinguaStories' else u.display_name end as creator,
+            case when d.deck_kind = 'System' then 'LinguaStories' else u.display_name end as "ownerName",
+            d.deck_kind as "deckKind",
+            d.name,
+            coalesce(d.description, '') as description,
+            d.coins,
+            d.level,
+            d.visibility,
+            d.source_language as "sourceLanguage",
+            d.target_language as "targetLanguage",
+            coalesce(d.image_url, '') as "imageUrl",
+            d.created_at
+       from sentence_decks d
+       left join users u on u.id = d.user_id
+      where d.deck_kind = 'System'
+         or d.user_id = $1
+         or d.visibility = 'Public'
+      order by d.created_at desc`,
+    [user.id]
+  );
+  const deckIds = decks.rows.map((deck) => deck.id);
+  if (!deckIds.length) return [];
+
+  const topics = await query(
+    `select id,
+            deck_id as "deckId",
+            name,
+            coalesce(description, '') as description,
+            sort_order as "sortOrder"
+       from sentence_deck_topics
+      where deck_id = any($1::uuid[])
+      order by sort_order asc, created_at asc`,
+    [deckIds]
+  );
+  const items = await query(
+    `select i.id as "itemId",
+            i.deck_id as "deckId",
+            i.topic_id as "topicId",
+            i.sort_order as "sortOrder",
+            s.id,
+            s.target,
+            s.translation,
+            coalesce(s.notes, '') as notes,
+            s.source_language as "sourceLanguage",
+            s.target_language as "targetLanguage",
+            coalesce(s.audio_url, '') as "audioUrl",
+            coalesce(s.image_url, '') as "imageUrl",
+            s.level,
+            s.topic,
+            coalesce(r.state, 'New') as state,
+            coalesce(r.due_date, current_date)::text as "dueDate",
+            coalesce(r.last_rating, '') as "lastRating"
+       from sentence_deck_items i
+       join sentences s on s.id = i.sentence_id
+       left join user_sentence_reviews r on r.sentence_id = s.id and r.user_id = $2
+      where i.deck_id = any($1::uuid[])
+      order by i.sort_order asc, i.created_at asc`,
+    [deckIds, user.id]
+  );
+
+  const topicsByDeck = topics.rows.reduce((groups, topic) => {
+    groups[topic.deckId] = groups[topic.deckId] || [];
+    groups[topic.deckId].push({ ...topic, sentences: [] });
+    return groups;
+  }, {});
+  const directSentencesByDeck = {};
+  for (const item of items.rows) {
+    const deckTopics = topicsByDeck[item.deckId] || [];
+    if (!item.topicId) {
+      directSentencesByDeck[item.deckId] = directSentencesByDeck[item.deckId] || [];
+      directSentencesByDeck[item.deckId].push(item);
+      continue;
+    }
+    let topic = deckTopics.find((candidate) => candidate.id === item.topicId);
+    if (!topic) {
+      topic = { id: item.topicId, name: "General", description: "", sortOrder: 0, sentences: [] };
+      if (!deckTopics.includes(topic)) deckTopics.push(topic);
+      topicsByDeck[item.deckId] = deckTopics;
+    }
+    topic.sentences.push(item);
+  }
+
+  const customDecks = decks.rows.map((deck) => {
+    const deckTopics = topicsByDeck[deck.id] || [];
+    const directSentences = directSentencesByDeck[deck.id] || [];
+    const deckSentences = [...directSentences, ...deckTopics.flatMap((topic) => topic.sentences)];
+    const status = reviewStateForSentences(deckSentences);
+    const normalizedTopics = deckTopics.map((topic) => ({
+      ...topic,
+      progress: buildDeckProgress(topic.sentences),
+      sentenceCount: topic.sentences.length
+    }));
+    return {
+      ...deck,
+      category: deck.deckKind === "System" ? "System Decks" : deck.creatorId === user.id ? "My Decks" : "Public Decks",
+      custom: deck.deckKind !== "System",
+      system: deck.deckKind === "System",
+      owner: deck.creatorId === user.id,
+      ownerId: deck.ownerId || "",
+      layout: normalizedTopics.length ? "Topic Deck" : "Sentence Deck",
+      sentences: normalizedTopics.length ? [] : directSentences,
+      sentenceCount: deckSentences.length,
+      progress: buildDeckProgress(deckSentences),
+      reviewStatus: status,
+      nextReviewDate: deckSentences.map((sentence) => sentence.dueDate).sort()[0] || "",
+      action: deckActionForStatus(status),
+      topics: normalizedTopics
+    };
+  });
+
+  return customDecks;
 }
 
 async function getStories(userId) {
@@ -793,6 +959,7 @@ async function getState(user) {
     return groups;
   }, {});
   const postsWithComments = posts.map((post) => ({ ...post, commentItems: commentsByPost[post.id] || [] }));
+  const sentenceDecks = await getSentenceDecks(user, sentences);
   const storyDiscussions = stories
     .map((story) => ({
       storyId: story.id,
@@ -813,6 +980,7 @@ async function getState(user) {
     wallet,
     coinRules,
     sentences,
+    sentenceDecks,
     stories,
     storyCategories,
     goals,
@@ -828,7 +996,7 @@ async function getState(user) {
     notifications: getNotifications({ wallet, sentences, goals, directChat }),
     dashboard: await getDashboard(user, wallet, sentences, stories, goals),
     admin: {
-      sentencePacks: Number((await query("select count(*) from sentence_packs")).rows[0].count),
+      sentenceDecks: Number((await query("select count(*) from sentence_decks")).rows[0].count),
       stories: stories.length,
       coinRules: Number((await query("select count(*) from coin_rules")).rows[0].count),
       moderationQueue: 0,
@@ -848,7 +1016,7 @@ async function learnSentence(user, sentenceId) {
        do update set state = 'Learning', due_date = current_date`,
       [user.id, sentenceId]
     );
-    await awardCoins(client, user.id, 10, "Sentence Pack Completed");
+    await awardCoins(client, user.id, 10, "Sentence Deck Completed");
     await client.query("commit");
     return getState(user);
   } catch (error) {
@@ -1073,19 +1241,22 @@ async function addCustomSentence(user, body) {
     await client.query("begin");
     const sentence = await client.query(
       `insert into sentences
-        (target_language, target, translation, romanization, topic, level, difficulty, notes, source)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        (source_language, target_language, target, translation, romanization, audio_url, image_url, topic, level, difficulty, notes, source)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
        returning id`,
       [
-        user.targetLanguage,
+        body.sourceLanguage || "English",
+        body.targetLanguage || user.targetLanguage,
         body.target,
         body.translation,
         body.romanization || "",
-        body.topic || "Daily Life",
+        body.audioUrl || "",
+        body.imageUrl || "",
+        body.topic || "Mined Sentences",
         body.level || "A1",
         Number(body.difficulty || 2),
         body.notes || "",
-        body.source || "Sentence Mining"
+        "Sentence Mining"
       ]
     );
     await client.query(
@@ -1094,6 +1265,287 @@ async function addCustomSentence(user, body) {
       [user.id, sentence.rows[0].id]
     );
     await awardCoins(client, user.id, 2, "Sentence Mining");
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function updateCustomSentence(user, sentenceId, body) {
+  const result = await query(
+    `update sentences s
+        set source_language = $3,
+            target_language = $4,
+            target = $5,
+            translation = $6,
+            level = $7,
+            notes = $8,
+            audio_url = $9,
+            image_url = $10,
+            topic = 'Mined Sentences',
+            source = 'Sentence Mining',
+            updated_at = now()
+       from user_sentence_reviews usr
+      where usr.sentence_id = s.id
+        and usr.user_id = $1
+        and usr.saved = true
+        and s.id = $2
+        and coalesce(s.source, '') = 'Sentence Mining'
+      returning s.id`,
+    [user.id, sentenceId, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, body.target, body.translation, body.level || "A1", body.notes || "", body.audioUrl || "", body.imageUrl || ""]
+  );
+  if (!result.rows[0]) throw notFound("Mined sentence not found");
+  return getState(user);
+}
+
+async function deleteSavedSentence(user, sentenceId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const result = await client.query(
+      `delete from user_sentence_reviews usr
+        using sentences s
+        where usr.sentence_id = s.id
+          and usr.user_id = $1
+          and usr.sentence_id = $2
+          and (usr.saved = true or coalesce(s.source, '') = 'Sentence Mining')
+        returning usr.sentence_id`,
+      [user.id, sentenceId]
+    );
+    if (!result.rows[0]) throw notFound("Saved sentence not found");
+    await client.query(
+      `delete from sentences s
+        where s.id = $1
+          and coalesce(s.source, '') = 'Sentence Mining'
+          and not exists (
+            select 1
+              from user_sentence_reviews usr
+             where usr.sentence_id = s.id
+          )`,
+      [sentenceId]
+    );
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function createSentenceDeck(user, body) {
+  const name = String(body.name || "").trim();
+  if (!name) {
+    const error = new Error("Deck name is required");
+    error.status = 400;
+    throw error;
+  }
+  const coins = Number(body.coins || 0);
+  if (!Number.isInteger(coins) || coins < 0) {
+    const error = new Error("Coins must be a non-negative integer");
+    error.status = 400;
+    throw error;
+  }
+  const level = normalizeLevel(body.level || user.currentLevel || "A1");
+  const visibility = normalizeDeckVisibility(body.visibility);
+  const description = String(body.description || "").trim();
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const deck = await client.query(
+      `insert into sentence_decks (deck_kind, user_id, name, description, coins, level, visibility, source_language, target_language)
+       values ('User', $1, $2, $3, $4, $5, $6, $7, $8)
+       returning id`,
+      [user.id, name, description, coins, level, visibility, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage]
+    );
+    if (visibility === "Public") {
+      const deckPath = `/app/sentence-mining/decks/${deck.rows[0].id}`;
+      const bodyText = [
+        `${user.displayName} created a public sentence deck: ${name}.`,
+        description,
+        `Level: ${level}. Coins: ${coins}.`,
+        `Open deck: ${deckPath}`
+      ].filter(Boolean).join("\n");
+      await client.query(
+        `insert into posts (user_id, type, body, target_language)
+         values ($1, 'Sentence Deck', $2, $3)`,
+        [user.id, bodyText, user.targetLanguage]
+      );
+    }
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function getOwnedDeck(client, user, deckId) {
+  const deck = await client.query("select id from sentence_decks where id = $1 and user_id = $2 and deck_kind = 'User'", [deckId, user.id]);
+  if (!deck.rows[0]) throw notFound("Deck not found");
+  return deck.rows[0];
+}
+
+async function createSentenceDeckTopic(user, deckId, body) {
+  const name = String(body.name || "").trim();
+  if (!name) {
+    const error = new Error("Topic name is required");
+    error.status = 400;
+    throw error;
+  }
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    await getOwnedDeck(client, user, deckId);
+    await client.query(
+      `insert into sentence_deck_topics (deck_id, name, description, sort_order)
+       values ($1, $2, $3, $4)`,
+      [deckId, name, String(body.description || "").trim(), Number(body.sortOrder || 0)]
+    );
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function updateSentenceDeckTopic(user, topicId, body) {
+  const name = String(body.name || "").trim();
+  if (!name) {
+    const error = new Error("Topic name is required");
+    error.status = 400;
+    throw error;
+  }
+  const result = await query(
+    `update sentence_deck_topics t
+        set name = $3,
+            description = $4,
+            sort_order = $5,
+            updated_at = now()
+       from sentence_decks d
+      where d.id = t.deck_id
+        and d.user_id = $1
+        and t.id = $2
+      returning t.id`,
+    [user.id, topicId, name, String(body.description || "").trim(), Number(body.sortOrder || 0)]
+  );
+  if (!result.rows[0]) throw notFound("Topic not found");
+  return getState(user);
+}
+
+async function deleteSentenceDeckTopic(user, topicId) {
+  const result = await query(
+    `delete from sentence_deck_topics t
+      using sentence_decks d
+      where d.id = t.deck_id
+        and d.user_id = $1
+        and t.id = $2
+      returning t.id`,
+    [user.id, topicId]
+  );
+  if (!result.rows[0]) throw notFound("Topic not found");
+  return getState(user);
+}
+
+async function addSentenceDeckSentence(user, deckId, body) {
+  const target = String(body.target || "").trim();
+  const translation = String(body.translation || "").trim();
+  if (!target || !translation) {
+    const error = new Error("Sentence and translation are required");
+    error.status = 400;
+    throw error;
+  }
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    await getOwnedDeck(client, user, deckId);
+    const topic = await client.query(
+      `select id, name
+         from sentence_deck_topics
+        where deck_id = $1
+          and ($2::uuid is null or id = $2)
+        order by sort_order asc, created_at asc
+        limit 1`,
+      [deckId, body.topicId || null]
+    );
+    if (body.topicId && !topic.rows[0]) throw notFound("Topic not found");
+    const topicId = topic.rows[0]?.id || null;
+    const topicName = topic.rows[0]?.name || String(body.topic || "General").trim();
+    const sentence = await client.query(
+      `insert into sentences (source_language, target_language, target, translation, audio_url, image_url, topic, level, difficulty, notes, source)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, 2, $9, 'Sentence Mining')
+       returning id`,
+      [body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, target, translation, body.audioUrl || "", body.imageUrl || "", topicName, normalizeLevel(body.level || user.currentLevel || "A1"), body.notes || ""]
+    );
+    await client.query(
+      `insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)
+       values ($1, $2, $3, $4)`,
+      [deckId, topicId, sentence.rows[0].id, Number(body.sortOrder || 0)]
+    );
+    await client.query(
+      `insert into user_sentence_reviews (user_id, sentence_id, state, due_date, saved)
+       values ($1, $2, 'New', current_date, true)
+       on conflict (user_id, sentence_id) do update set saved = true`,
+      [user.id, sentence.rows[0].id]
+    );
+    await awardCoins(client, user.id, 2, "Sentence Mining");
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function recordDeckReview(user, deckId, body) {
+  const responseMap = { show_again: "Again", hard: "Hard", easy: "Good", known: "Easy" };
+  const response = String(body.response || "").trim();
+  const rating = responseMap[response];
+  if (!rating) {
+    const error = new Error("Choose a valid review response");
+    error.status = 400;
+    throw error;
+  }
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const item = await client.query(
+      `select i.id, i.topic_id, i.sentence_id
+         from sentence_deck_items i
+         join sentence_decks d on d.id = i.deck_id
+        where i.deck_id = $1
+          and i.sentence_id = $2
+          and (d.user_id = $3 or d.visibility = 'Public')`,
+      [deckId, body.sentenceId, user.id]
+    );
+    if (!item.rows[0]) throw notFound("Sentence not found in deck");
+    const dueDate = addDays(reviewDelay[rating] ?? 3);
+    const state = rating === "Easy" ? "Mastered" : "Review";
+    await client.query(
+      `insert into user_sentence_reviews (user_id, sentence_id, state, due_date, last_rating, saved)
+       values ($1, $2, $3, $4, $5, true)
+       on conflict (user_id, sentence_id)
+       do update set state = $3, due_date = $4, last_rating = $5, saved = true, updated_at = now()`,
+      [user.id, item.rows[0].sentence_id, state, dueDate, rating]
+    );
+    await client.query(
+      `insert into user_sentence_review_results (user_id, deck_id, topic_id, sentence_item_id, sentence_id, response)
+       values ($1, $2, $3, $4, $5, $6)`,
+      [user.id, deckId, item.rows[0].topic_id, item.rows[0].id, item.rows[0].sentence_id, response]
+    );
+    await awardCoins(client, user.id, 5, "Daily Review");
     await client.query("commit");
     return getState(user);
   } catch (error) {
@@ -1868,6 +2320,14 @@ module.exports = {
   saveStorySentences,
   saveSentence,
   addCustomSentence,
+  updateCustomSentence,
+  deleteSavedSentence,
+  createSentenceDeck,
+  createSentenceDeckTopic,
+  updateSentenceDeckTopic,
+  deleteSentenceDeckTopic,
+  addSentenceDeckSentence,
+  recordDeckReview,
   createGoal,
   updateGoal,
   addLearningLanguage,

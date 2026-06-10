@@ -14,6 +14,8 @@ const indexPath = path.join(clientPath, "index.html");
 const frontendAppRoutes = [
   /^\/app\/?$/,
   /^\/app\/dashboard\/?$/,
+  /^\/app\/sentence-mining\/?$/,
+  /^\/app\/sentence-mining\/decks\/[a-z0-9-]+\/?$/i,
   /^\/app\/sentence-library\/?$/,
   /^\/app\/short-stories\/?$/,
   /^\/app\/short-stories\/search\/?$/,
@@ -58,7 +60,7 @@ if (process.env.NODE_ENV !== "production" && process.env.APP_ENV !== "PROD") {
 }
 
 app.get("/", (_req, res) => res.sendFile(indexPath));
-app.get(["/login", "/signup"], (_req, res) => res.sendFile(indexPath));
+app.get(["/login", "/signup", "/sentence-mining"], (_req, res) => res.sendFile(indexPath));
 app.get(/^\/app(\/.*)?$/, (req, res, next) => {
   if (frontendAppRoutes.some((route) => route.test(req.path))) {
     return res.sendFile(indexPath);

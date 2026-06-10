@@ -12,6 +12,10 @@ truncate table
   posts,
   story_comments,
   goal_supports,
+  user_sentence_review_results,
+  sentence_deck_items,
+  sentence_deck_topics,
+  sentence_decks,
   user_follows,
   user_learning_path_progress,
   learning_path_items,
@@ -24,7 +28,6 @@ truncate table
   stories,
   story_categories,
   sentences,
-  sentence_packs,
   coin_transactions,
   coin_rules,
   user_sessions,
@@ -69,7 +72,7 @@ values
 insert into coin_rules (rule_key, label, amount, rule_type, trigger_event)
 values
   ('daily_review', 'Daily Review', 5, 'earn', 'daily_review_completed'),
-  ('sentence_pack_completed', 'Sentence Pack Completed', 10, 'earn', 'sentence_pack_completed'),
+  ('sentence_deck_completed', 'Sentence Deck Completed', 10, 'earn', 'sentence_deck_completed'),
   ('story_unlock', 'Story Unlock', -20, 'spend', 'story_unlocked'),
   ('story_completed', 'Story Completed', 15, 'earn', 'story_completed'),
   ('goal_completed', 'Goal Completed', 25, 'earn', 'goal_completed'),
@@ -103,31 +106,68 @@ values
   ('Read 20 minutes this week', 'Stories', 20),
   ('Master 30 saved sentences', 'Sentences', 30);
 
-insert into sentence_packs (title, target_language, topic, level, premium_cost)
-values
-  ('Japanese Travel Essentials', 'Japanese', 'Travel', 'A1', 0),
-  ('Japanese Workplace Basics', 'Japanese', 'Workplace', 'A2', 0),
-  ('Japanese Daily Requests', 'Japanese', 'Daily Life', 'A1', 0),
-  ('Spanish Cafe Conversations', 'Spanish', 'Food', 'A1', 0),
-  ('Spanish Travel Moments', 'Spanish', 'Travel', 'A2', 0),
-  ('French Weekend Plans', 'French', 'Daily Life', 'A1', 0),
-  ('Korean Study Group', 'Korean', 'Study', 'A2', 0);
+create temporary table seed_system_deck_payload (
+  deck_name text,
+  target_language text,
+  topic text,
+  level text,
+  target text,
+  translation text,
+  romanization text,
+  difficulty integer,
+  notes text,
+  variations jsonb
+) on commit drop;
 
-insert into sentences (pack_id, target_language, target, translation, romanization, level, topic, difficulty, notes, source, variations)
+insert into seed_system_deck_payload (deck_name, target_language, topic, level, target, translation, romanization, difficulty, notes, variations)
 values
-  ((select id from sentence_packs where title = 'Japanese Travel Essentials'), 'Japanese', '駅はどこですか。', 'Where is the train station?', 'Eki wa doko desu ka.', 'A1', 'Travel', 1, 'Use this pattern for asking where places are.', 'Japanese Travel Essentials', '["ホテルはどこですか。", "出口はどこですか。"]'::jsonb),
-  ((select id from sentence_packs where title = 'Japanese Travel Essentials'), 'Japanese', '飛行機が遅れています。', 'My flight is delayed.', 'Hikoki ga okurete imasu.', 'A2', 'Travel', 3, 'Present-progressive form for travel problems.', 'Japanese Travel Essentials', '["電車が遅れています。", "バスが遅れています。"]'::jsonb),
-  ((select id from sentence_packs where title = 'Japanese Daily Requests'), 'Japanese', '手伝ってください。', 'Please help me.', 'Tetsudatte kudasai.', 'A1', 'Daily Life', 2, 'Polite request form with kudasai.', 'Japanese Daily Requests', '["待ってください。", "見てください。"]'::jsonb),
-  ((select id from sentence_packs where title = 'Japanese Workplace Basics'), 'Japanese', '何時に始まりますか。', 'What time does it start?', 'Nanji ni hajimarimasu ka.', 'A2', 'Workplace', 2, 'Time question pattern for meetings.', 'Japanese Workplace Basics', '["何時に終わりますか。", "何時に開きますか。"]'::jsonb),
-  ((select id from sentence_packs where title = 'Japanese Workplace Basics'), 'Japanese', '確認してもいいですか。', 'May I confirm?', 'Kakunin shite mo ii desu ka.', 'B1', 'Workplace', 3, 'Useful for polite clarification.', 'Japanese Workplace Basics', '["質問してもいいですか。", "共有してもいいですか。"]'::jsonb),
-  ((select id from sentence_packs where title = 'Spanish Cafe Conversations'), 'Spanish', 'Quisiera un cafe, por favor.', 'I would like a coffee, please.', '', 'A1', 'Food', 1, 'Polite cafe ordering.', 'Spanish Cafe Conversations', '["Quisiera un te, por favor.", "Quisiera agua, por favor."]'::jsonb),
-  ((select id from sentence_packs where title = 'Spanish Cafe Conversations'), 'Spanish', 'La cuenta, por favor.', 'The bill, please.', '', 'A1', 'Food', 1, 'Short restaurant request.', 'Spanish Cafe Conversations', '["El menu, por favor.", "Una mesa, por favor."]'::jsonb),
-  ((select id from sentence_packs where title = 'Spanish Travel Moments'), 'Spanish', 'Mi tren sale a las ocho.', 'My train leaves at eight.', '', 'A2', 'Travel', 2, 'Travel time sentence.', 'Spanish Travel Moments', '["Mi autobus sale a las nueve.", "Mi vuelo sale a las seis."]'::jsonb),
-  ((select id from sentence_packs where title = 'Spanish Travel Moments'), 'Spanish', 'Estoy buscando la estacion.', 'I am looking for the station.', '', 'A2', 'Travel', 2, 'Useful city navigation phrase.', 'Spanish Travel Moments', '["Estoy buscando el hotel.", "Estoy buscando la salida."]'::jsonb),
-  ((select id from sentence_packs where title = 'French Weekend Plans'), 'French', 'Je vais au marche samedi.', 'I am going to the market on Saturday.', '', 'A1', 'Daily Life', 1, 'Weekend plan sentence.', 'French Weekend Plans', '["Je vais au parc samedi.", "Je vais au musee dimanche."]'::jsonb),
-  ((select id from sentence_packs where title = 'French Weekend Plans'), 'French', 'Tu veux venir avec moi ?', 'Do you want to come with me?', '', 'A2', 'Friendship', 2, 'Friendly invitation.', 'French Weekend Plans', '["Tu veux etudier avec moi ?", "Tu veux manger avec moi ?"]'::jsonb),
-  ((select id from sentence_packs where title = 'Korean Study Group'), 'Korean', '오늘 같이 공부해요.', 'Let us study together today.', 'Oneul gachi gongbuhaeyo.', 'A1', 'Study', 1, 'Friendly study invitation.', 'Korean Study Group', '["내일 같이 공부해요.", "도서관에서 공부해요."]'::jsonb),
-  ((select id from sentence_packs where title = 'Korean Study Group'), 'Korean', '이 문장을 다시 읽어요.', 'Read this sentence again.', 'I munjangeul dasi ilgeoyo.', 'A2', 'Study', 2, 'Reading practice phrase.', 'Korean Study Group', '["이 단어를 다시 읽어요.", "이 이야기를 다시 읽어요."]'::jsonb);
+  ('Japanese Travel Essentials', 'Japanese', 'Travel', 'A1', '駅はどこですか。', 'Where is the train station?', 'Eki wa doko desu ka.', 1, 'Use this pattern for asking where places are.', '["ホテルはどこですか。", "出口はどこですか。"]'::jsonb),
+  ('Japanese Travel Essentials', 'Japanese', 'Travel', 'A2', '飛行機が遅れています。', 'My flight is delayed.', 'Hikoki ga okurete imasu.', 3, 'Present-progressive form for travel problems.', '["電車が遅れています。", "バスが遅れています。"]'::jsonb),
+  ('Japanese Daily Requests', 'Japanese', 'Daily Life', 'A1', '手伝ってください。', 'Please help me.', 'Tetsudatte kudasai.', 2, 'Polite request form with kudasai.', '["待ってください。", "見てください。"]'::jsonb),
+  ('Japanese Workplace Basics', 'Japanese', 'Workplace', 'A2', '何時に始まりますか。', 'What time does it start?', 'Nanji ni hajimarimasu ka.', 2, 'Time question pattern for meetings.', '["何時に終わりますか。", "何時に開きますか。"]'::jsonb),
+  ('Japanese Workplace Basics', 'Japanese', 'Workplace', 'B1', '確認してもいいですか。', 'May I confirm?', 'Kakunin shite mo ii desu ka.', 3, 'Useful for polite clarification.', '["質問してもいいですか。", "共有してもいいですか。"]'::jsonb),
+  ('Spanish Cafe Conversations', 'Spanish', 'Food', 'A1', 'Quisiera un cafe, por favor.', 'I would like a coffee, please.', '', 1, 'Polite cafe ordering.', '["Quisiera un te, por favor.", "Quisiera agua, por favor."]'::jsonb),
+  ('Spanish Cafe Conversations', 'Spanish', 'Food', 'A1', 'La cuenta, por favor.', 'The bill, please.', '', 1, 'Short restaurant request.', '["El menu, por favor.", "Una mesa, por favor."]'::jsonb),
+  ('Spanish Travel Moments', 'Spanish', 'Travel', 'A2', 'Mi tren sale a las ocho.', 'My train leaves at eight.', '', 2, 'Travel time sentence.', '["Mi autobus sale a las nueve.", "Mi vuelo sale a las seis."]'::jsonb),
+  ('Spanish Travel Moments', 'Spanish', 'Travel', 'A2', 'Estoy buscando la estacion.', 'I am looking for the station.', '', 2, 'Useful city navigation phrase.', '["Estoy buscando el hotel.", "Estoy buscando la salida."]'::jsonb),
+  ('French Weekend Plans', 'French', 'Daily Life', 'A1', 'Je vais au marche samedi.', 'I am going to the market on Saturday.', '', 1, 'Weekend plan sentence.', '["Je vais au parc samedi.", "Je vais au musee dimanche."]'::jsonb),
+  ('French Weekend Plans', 'French', 'Friendship', 'A2', 'Tu veux venir avec moi ?', 'Do you want to come with me?', '', 2, 'Friendly invitation.', '["Tu veux etudier avec moi ?", "Tu veux manger avec moi ?"]'::jsonb),
+  ('Korean Study Group', 'Korean', 'Study', 'A1', '오늘 같이 공부해요.', 'Let us study together today.', 'Oneul gachi gongbuhaeyo.', 1, 'Friendly study invitation.', '["내일 같이 공부해요.", "도서관에서 공부해요."]'::jsonb),
+  ('Korean Study Group', 'Korean', 'Study', 'A2', '이 문장을 다시 읽어요.', 'Read this sentence again.', 'I munjangeul dasi ilgeoyo.', 2, 'Reading practice phrase.', '["이 단어를 다시 읽어요.", "이 이야기를 다시 읽어요."]'::jsonb);
+
+insert into sentence_decks (deck_kind, name, description, coins, level, visibility, source_language, target_language)
+select 'System',
+       deck_name,
+       'Official LinguaStories learning material.',
+       count(*)::int * 10,
+       min(level),
+       'Public',
+       'English',
+       target_language
+  from seed_system_deck_payload
+ group by deck_name, target_language;
+
+insert into sentences (source_language, target_language, target, translation, romanization, level, topic, difficulty, notes, source, variations)
+select 'English',
+       target_language,
+       target,
+       translation,
+       romanization,
+       level,
+       topic,
+       difficulty,
+       notes,
+       deck_name,
+       variations
+  from seed_system_deck_payload;
+
+insert into sentence_deck_items (deck_id, sentence_id, sort_order)
+select d.id,
+       s.id,
+       row_number() over (partition by d.id order by s.created_at, s.id)::int
+  from sentence_decks d
+  join sentences s on s.source = d.name and s.target_language = d.target_language
+ where d.deck_kind = 'System';
 
 create temporary table seed_story_payload (
   title text,
@@ -295,6 +335,10 @@ declare
   target_story_id uuid;
   target_sentence_id uuid;
   target_goal_id uuid;
+  deck_id uuid;
+  topic_one_id uuid;
+  topic_two_id uuid;
+  deck_sentence_id uuid;
   post_id uuid;
   comment_user_id uuid;
 begin
@@ -338,7 +382,7 @@ begin
     values
       (new_user_id, (select id from coin_rules where rule_key = 'welcome_bonus'), 25, 'Welcome Bonus', now() - (idx || ' days')::interval),
       (new_user_id, (select id from coin_rules where rule_key = 'daily_review'), 5, 'Daily Review', now() - ((idx % 6) || ' days')::interval),
-      (new_user_id, (select id from coin_rules where rule_key = 'sentence_pack_completed'), 10, 'Sentence Pack Completed', now() - ((idx % 8) || ' days')::interval),
+      (new_user_id, (select id from coin_rules where rule_key = 'sentence_deck_completed'), 10, 'Sentence Deck Completed', now() - ((idx % 8) || ' days')::interval),
       (new_user_id, (select id from coin_rules where rule_key = 'story_unlock'), -20, 'Story Unlock', now() - ((idx % 10) || ' days')::interval),
       (new_user_id, (select id from coin_rules where rule_key = 'story_completed'), 15, 'Story Completed', now() - ((idx % 4) || ' days')::interval),
       (new_user_id, (select id from coin_rules where rule_key = 'learning_post_created'), 2, 'Learning Post Created', now() - ((idx % 5) || ' days')::interval);
@@ -365,6 +409,195 @@ begin
   join sentences s on s.target_language = u.target_language
   where exists (select 1 from user_languages ul where ul.user_id = u.id and ul.language = s.target_language)
   on conflict do nothing;
+
+  for idx in 1..8 loop
+    select id into new_user_id
+      from users
+     order by case email
+                when 'demo@linguastories.local' then 0
+                when 'noah@linguastories.local' then 1
+                when 'ari@linguastories.local' then 2
+                else 3
+              end,
+              display_name
+     offset idx - 1
+     limit 1;
+
+    insert into sentence_decks (user_id, name, description, coins, level, visibility, target_language, created_at, updated_at)
+    values (
+      new_user_id,
+      case (select target_language from users where id = new_user_id)
+        when 'Japanese' then 'Airport Survival Sentences'
+        when 'Spanish' then 'Cafe Counter Confidence'
+        when 'French' then 'Weekend Errand Phrases'
+        when 'Korean' then 'Study Group Starters'
+        else 'Useful Daily Sentences'
+      end,
+      case (select target_language from users where id = new_user_id)
+        when 'Japanese' then 'Mined lines for airport delays, station questions, and polite help requests.'
+        when 'Spanish' then 'Short cafe and travel phrases for ordering, paying, and finding places.'
+        when 'French' then 'Weekend plans, invitations, and practical market phrases.'
+        when 'Korean' then 'Friendly sentences for study groups, rereading, and making plans.'
+        else 'A starter deck of high-utility mined sentences.'
+      end,
+      6 + idx,
+      (select current_level from users where id = new_user_id),
+      case when idx % 3 = 0 then 'Private' else 'Public' end,
+      (select target_language from users where id = new_user_id),
+      now() - ((idx * 5) || ' hours')::interval,
+      now() - ((idx * 4) || ' hours')::interval
+    )
+    returning id into deck_id;
+
+    insert into sentence_deck_topics (deck_id, name, description, sort_order)
+    values
+      (
+        deck_id,
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Getting Oriented'
+          when 'Spanish' then 'Ordering Clearly'
+          when 'French' then 'Making Plans'
+          when 'Korean' then 'Starting Study'
+          else 'Daily Basics'
+        end,
+        'First-response sentences that are easy to reuse in real conversations.',
+        1
+      )
+    returning id into topic_one_id;
+
+    insert into sentence_deck_topics (deck_id, name, description, sort_order)
+    values
+      (
+        deck_id,
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Solving Problems'
+          when 'Spanish' then 'Travel Follow-ups'
+          when 'French' then 'Weekend Details'
+          when 'Korean' then 'Review Routine'
+          else 'Follow-up Lines'
+        end,
+        'Follow-up sentences for keeping the exchange moving.',
+        2
+      )
+    returning id into topic_two_id;
+
+    insert into sentences (target_language, target, translation, romanization, level, topic, difficulty, notes, source)
+    values
+      (
+        (select target_language from users where id = new_user_id),
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then '案内所はどこですか。'
+          when 'Spanish' then 'Quisiera pedir algo pequeno.'
+          when 'French' then 'Je voudrais faire quelques courses.'
+          when 'Korean' then '오늘 같이 복습할까요?'
+          else 'Can you say that again?'
+        end,
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Where is the information desk?'
+          when 'Spanish' then 'I would like to order something small.'
+          when 'French' then 'I would like to run a few errands.'
+          when 'Korean' then 'Shall we review together today?'
+          else 'Can you say that again?'
+        end,
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Annai-jo wa doko desu ka.'
+          when 'Korean' then 'Oneul gachi bokseup halkkayo?'
+          else ''
+        end,
+        (select current_level from users where id = new_user_id),
+        (select name from sentence_deck_topics where id = topic_one_id),
+        2,
+        'Mined from a scenario where the learner needed a compact, reusable first question.',
+        'Sentence Mining'
+      )
+    returning id into deck_sentence_id;
+
+    insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)
+    values (deck_id, topic_one_id, deck_sentence_id, 1);
+
+    insert into user_sentence_reviews (user_id, sentence_id, state, due_date, last_rating, saved)
+    values (new_user_id, deck_sentence_id, 'Review', current_date, 'Good', true)
+    on conflict do nothing;
+
+    insert into sentences (target_language, target, translation, romanization, level, topic, difficulty, notes, source)
+    values
+      (
+        (select target_language from users where id = new_user_id),
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'もう一度ゆっくり言ってください。'
+          when 'Spanish' then 'Puede hablar mas despacio, por favor?'
+          when 'French' then 'Vous pouvez repeter plus lentement ?'
+          when 'Korean' then '조금 천천히 말해 주세요.'
+          else 'Please speak a little more slowly.'
+        end,
+        'Please say it a little more slowly.',
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Mo ichido yukkuri itte kudasai.'
+          when 'Korean' then 'Jogeum cheoncheonhi malhae juseyo.'
+          else ''
+        end,
+        (select current_level from users where id = new_user_id),
+        (select name from sentence_deck_topics where id = topic_two_id),
+        2,
+        'Useful repair phrase for keeping a conversation from collapsing.',
+        'Sentence Mining'
+      )
+    returning id into deck_sentence_id;
+
+    insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)
+    values (deck_id, topic_two_id, deck_sentence_id, 1);
+
+    insert into user_sentence_reviews (user_id, sentence_id, state, due_date, last_rating, saved)
+    values (new_user_id, deck_sentence_id, 'Learning', current_date + 1, 'Hard', true)
+    on conflict do nothing;
+
+    insert into sentences (target_language, target, translation, romanization, level, topic, difficulty, notes, source)
+    values
+      (
+        (select target_language from users where id = new_user_id),
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'この表現を覚えておきたいです。'
+          when 'Spanish' then 'Quiero recordar esta expresion.'
+          when 'French' then 'Je veux retenir cette expression.'
+          when 'Korean' then '이 표현을 기억하고 싶어요.'
+          else 'I want to remember this expression.'
+        end,
+        'I want to remember this expression.',
+        case (select target_language from users where id = new_user_id)
+          when 'Japanese' then 'Kono hyogen o oboete okitai desu.'
+          when 'Korean' then 'I pyohyeoneul gieokhago sipeoyo.'
+          else ''
+        end,
+        (select current_level from users where id = new_user_id),
+        (select name from sentence_deck_topics where id = topic_two_id),
+        1,
+        'Meta-learning sentence for explaining why a phrase is worth saving.',
+        'Sentence Mining'
+      )
+    returning id into deck_sentence_id;
+
+    insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)
+    values (deck_id, topic_two_id, deck_sentence_id, 2);
+
+    insert into user_sentence_reviews (user_id, sentence_id, state, due_date, last_rating, saved)
+    values (new_user_id, deck_sentence_id, 'New', current_date + 3, null, true)
+    on conflict do nothing;
+
+    if exists (select 1 from sentence_decks where id = deck_id and visibility = 'Public') then
+      insert into posts (user_id, type, body, target_language, created_at)
+      values (
+        new_user_id,
+        'Sentence Deck',
+        (select display_name from users where id = new_user_id) || ' created a public sentence deck: ' ||
+          (select name from sentence_decks where id = deck_id) || E'.\n' ||
+          (select description from sentence_decks where id = deck_id) || E'\nLevel: ' ||
+          (select level from sentence_decks where id = deck_id) || '. Coins: ' ||
+          (select coins from sentence_decks where id = deck_id) || E'.\nOpen deck: /app/sentence-mining/decks/' || deck_id::text,
+        (select target_language from users where id = new_user_id),
+        now() - ((idx * 5 - 1) || ' hours')::interval
+      );
+    end if;
+  end loop;
 
   insert into user_story_states (user_id, story_id, unlocked, completed)
   select u.id,

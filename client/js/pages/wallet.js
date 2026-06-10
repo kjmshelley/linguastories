@@ -13,7 +13,7 @@ function transactionAmount(amount) {
 function ruleDescription(rule) {
   const labels = {
     daily_review: "Complete a due review session.",
-    sentence_pack_completed: "Finish all sentences in a sentence pack.",
+    sentence_deck_completed: "Finish all sentences in a sentence deck.",
     story_completed: "Complete a story after reading it.",
     goal_completed: "Finish one of your learning goals.",
     learning_post_created: "Share a learning post with the community.",

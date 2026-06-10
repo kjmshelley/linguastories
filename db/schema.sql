@@ -134,31 +134,23 @@ exception
   when duplicate_object then null;
 end $$;
 
-create table if not exists sentence_packs (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  target_language text not null default 'Japanese',
-  topic text not null,
-  level text not null,
-  premium_cost integer default 0 check (premium_cost >= 0),
-  created_at timestamptz default now()
-);
-
 create table if not exists sentences (
   id uuid primary key default gen_random_uuid(),
-  pack_id uuid references sentence_packs(id) on delete set null,
+  source_language text not null default 'English',
   target_language text not null default 'Japanese',
   target text not null,
   translation text not null,
   romanization text,
   audio_url text,
+  image_url text,
   level text not null,
   topic text not null,
   difficulty integer default 1 check (difficulty between 1 and 5),
   notes text,
   source text,
   variations jsonb default '[]'::jsonb,
-  created_at timestamptz default now()
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
 );
 
 create table if not exists user_sentence_reviews (
@@ -171,6 +163,54 @@ create table if not exists user_sentence_reviews (
   created_at timestamptz default now(),
   updated_at timestamptz default now(),
   primary key (user_id, sentence_id)
+);
+
+create table if not exists sentence_decks (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references users(id) on delete cascade,
+  deck_kind text not null default 'User' check (deck_kind in ('System', 'User')),
+  name text not null,
+  description text,
+  coins integer not null default 0 check (coins >= 0),
+  level text not null default 'A1' check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
+  visibility text not null default 'Private' check (visibility in ('Private', 'Public')),
+  source_language text not null default 'English',
+  target_language text not null default 'Japanese',
+  image_url text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  check ((deck_kind = 'System' and user_id is null and visibility = 'Public') or (deck_kind = 'User' and user_id is not null))
+);
+
+create table if not exists sentence_deck_topics (
+  id uuid primary key default gen_random_uuid(),
+  deck_id uuid not null references sentence_decks(id) on delete cascade,
+  name text not null,
+  description text,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists sentence_deck_items (
+  id uuid primary key default gen_random_uuid(),
+  deck_id uuid not null references sentence_decks(id) on delete cascade,
+  topic_id uuid references sentence_deck_topics(id) on delete cascade,
+  sentence_id uuid not null references sentences(id) on delete cascade,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default now(),
+  unique (deck_id, sentence_id)
+);
+
+create table if not exists user_sentence_review_results (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  deck_id uuid references sentence_decks(id) on delete cascade,
+  topic_id uuid references sentence_deck_topics(id) on delete set null,
+  sentence_item_id uuid references sentence_deck_items(id) on delete cascade,
+  sentence_id uuid references sentences(id) on delete cascade,
+  response text not null check (response in ('show_again', 'hard', 'easy', 'known')),
+  reviewed_at timestamptz not null default now()
 );
 
 create table if not exists story_categories (
@@ -451,11 +491,113 @@ create table if not exists user_learning_path_progress (
   primary key (user_id, path_id)
 );
 
-alter table if exists sentence_packs
-  add column if not exists target_language text not null default 'Japanese';
+alter table if exists sentences
+  add column if not exists source_language text not null default 'English';
 
 alter table if exists sentences
   add column if not exists target_language text not null default 'Japanese';
+
+alter table if exists sentences
+  add column if not exists image_url text;
+
+alter table if exists sentences
+  add column if not exists updated_at timestamptz default now();
+
+alter table if exists sentence_decks
+  add column if not exists deck_kind text not null default 'User';
+
+alter table if exists sentence_decks
+  add column if not exists source_language text not null default 'English';
+
+alter table if exists sentence_decks
+  add column if not exists target_language text not null default 'Japanese';
+
+alter table if exists sentence_decks
+  add column if not exists image_url text;
+
+alter table if exists sentence_decks
+  drop constraint if exists sentence_decks_deck_kind_check;
+
+update sentence_decks
+   set deck_kind = 'User'
+ where deck_kind is null
+    or deck_kind not in ('System', 'User');
+
+alter table if exists sentence_decks
+  add constraint sentence_decks_deck_kind_check check (deck_kind in ('System', 'User'));
+
+alter table if exists sentence_decks
+  drop constraint if exists sentence_decks_kind_owner_check;
+
+alter table if exists sentence_decks
+  add constraint sentence_decks_kind_owner_check check (
+    (deck_kind = 'System' and user_id is null and visibility = 'Public')
+    or (deck_kind = 'User' and user_id is not null)
+  );
+
+do $$
+begin
+  if to_regclass('public.sentence_packs') is not null then
+    execute $migrate_sentence_packs$
+      insert into sentence_decks (
+        deck_kind,
+        name,
+        description,
+        coins,
+        level,
+        visibility,
+        source_language,
+        target_language,
+        created_at,
+        updated_at
+      )
+      select
+        'System',
+        p.title,
+        'Official LinguaStories learning material.',
+        greatest(count(s.id)::int * 10, 0),
+        coalesce(min(p.level), 'A1'),
+        'Public',
+        'English',
+        p.target_language,
+        min(p.created_at),
+        now()
+      from sentence_packs p
+      left join sentences s on s.pack_id = p.id
+      where not exists (
+        select 1
+          from sentence_decks d
+         where d.deck_kind = 'System'
+           and d.name = p.title
+           and d.target_language = p.target_language
+      )
+      group by p.id, p.title, p.target_language
+    $migrate_sentence_packs$;
+
+    execute $migrate_sentence_pack_items$
+      insert into sentence_deck_items (deck_id, sentence_id, sort_order)
+      select d.id,
+             s.id,
+             row_number() over (partition by d.id order by s.created_at, s.id)::int
+        from sentence_packs p
+        join sentence_decks d
+          on d.deck_kind = 'System'
+         and d.name = p.title
+         and d.target_language = p.target_language
+        join sentences s on s.pack_id = p.id
+       where not exists (
+         select 1
+           from sentence_deck_items i
+          where i.deck_id = d.id
+            and i.sentence_id = s.id
+       )
+    $migrate_sentence_pack_items$;
+
+    alter table sentences drop constraint if exists sentences_pack_id_fkey;
+    alter table sentences drop column if exists pack_id;
+    drop table if exists sentence_packs cascade;
+  end if;
+end $$;
 
 alter table if exists stories
   add column if not exists source_language text;
@@ -666,6 +808,7 @@ set label = excluded.label,
     active = true;
 insert into coin_rules (rule_key, label, amount, rule_type, trigger_event)
 values
+  ('sentence_deck_completed', 'Sentence Deck Completed', 10, 'earn', 'sentence_deck_completed'),
   ('receive_like', 'Receive Like', 1, 'earn', 'moment_liked'),
   ('receive_comment', 'Receive Comment', 1, 'earn', 'moment_commented'),
   ('moment_appreciation_sent', 'Moment Appreciation Sent', -1, 'spend', 'moment_appreciation_sent'),
@@ -676,9 +819,13 @@ set label = excluded.label,
     rule_type = excluded.rule_type,
     trigger_event = excluded.trigger_event,
     active = true;
+
+update coin_rules
+   set active = false
+ where rule_key = 'sentence_pack_completed';
 create index if not exists idx_user_sessions_hash on user_sessions (token_hash);
 create index if not exists idx_user_sessions_expires on user_sessions (expires_at);
-create index if not exists idx_sentences_pack on sentences (pack_id);
+drop index if exists idx_sentences_pack;
 create index if not exists idx_sentences_language on sentences (target_language);
 create index if not exists idx_reviews_user_due on user_sentence_reviews (user_id, due_date);
 create index if not exists idx_stories_category on stories (category_id);

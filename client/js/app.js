@@ -7,6 +7,7 @@ import { landingView, loginView, signupView } from "./pages/public.js";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, languageProfilesView, profileInfoView, profileView } from "./pages/profile.js";
 import { progressView } from "./pages/progress.js";
 import { reviewView } from "./pages/review.js";
+import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
 import { sentencesView } from "./pages/sentence-library.js";
 import { shadowingView } from "./pages/shadowing.js";
 import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
@@ -20,7 +21,9 @@ const routeGroups = [
   {
     title: "Menu",
     routes: [
-      ["shortStories", "Short Stories"]
+      ["dashboard", "Dashboard"],
+      ["shortStories", "Short Stories"],
+      ["sentenceMining", "Sentence Mining"]
     ]
   },
   {
@@ -44,14 +47,13 @@ const routeGroups = [
 
 const hiddenRoutes = [
   ["storyDetail", "Story"],
+  ["sentenceDeckDetail", "Sentence Deck"],
   ["shortStorySearch", "Search Short Stories"],
   ["communityLearner", "Learner Profile"],
   ["communityMoment", "Moment Detail"],
-  ["sentences", "Sentence Library"],
   ["stories", "Stories"],
   ["review", "SRS Review"],
   ["shadowing", "Shadowing"],
-  ["deck", "My Sentence Deck"],
   ["wallet", "Coin Wallet"],
   ["goals", "Goals"],
   ["progress", "Progress Dashboard"],
@@ -62,6 +64,7 @@ const hiddenRoutes = [
 const routes = [...routeGroups.flatMap((group) => group.routes), ...hiddenRoutes];
 const routeSlugs = {
   dashboard: "dashboard",
+  sentenceMining: "sentence-mining",
   sentences: "sentence-library",
   shortStories: "short-stories",
   shortStorySearch: "short-stories/search",
@@ -74,7 +77,7 @@ const routeSlugs = {
   profileMoments: "profile/moments",
   profileWallet: "profile/wallet"
 };
-const browseRoutes = new Set(["sentences", "shortStories", "shortStorySearch", "stories"]);
+const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentences", "shortStories", "shortStorySearch", "stories"]);
 const communityRoutes = new Set(["communityConnect", "communityMoments", "communityLearner", "communityMoment"]);
 
 let appConfig = { supportedLanguages: [] };
@@ -137,9 +140,11 @@ function hasActiveShortStoryFilters() {
 function activeRoute() {
   const hashRoute = location.hash.replace("#", "");
   if (hashRoute) return routes.some(([id]) => id === hashRoute) ? hashRoute : "dashboard";
+  if (location.pathname === "/sentence-mining") return "sentenceMining";
   if (!location.pathname.startsWith("/app")) return "dashboard";
   const slug = location.pathname.replace(/^\/app\/?/, "").replace(/\/$/, "") || "dashboard";
   if (slug === "community") return "communityMoments";
+  if (slug.startsWith("sentence-mining/decks/")) return "sentenceDeckDetail";
   if (slug.startsWith("stories/")) return "storyDetail";
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/moments/")) return "communityMoment";
@@ -149,12 +154,19 @@ function activeRoute() {
 
 function activeNavRoute() {
   const route = activeRoute();
+  if (route === "sentences" || route === "deck") return "sentenceMining";
+  if (route === "sentenceDeckDetail") return "sentenceMining";
   if (route === "shortStorySearch") return "shortStories";
   return route === "storyDetail" ? "stories" : route;
 }
 
 function activeStoryId() {
   const match = location.pathname.match(/^\/app\/stories\/([^/]+)\/?$/);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+function activeDeckId() {
+  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/([^/]+)\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
@@ -175,6 +187,7 @@ function momentIdFromPath(path) {
 
 function appPath(id, params = {}) {
   if (id === "storyDetail") return `/app/stories/${encodeURIComponent(params.storyId || "")}`;
+  if (id === "sentenceDeckDetail") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}`;
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
   if (id === "communityMoment") return `/app/community/moments/${encodeURIComponent(params.postId || "")}`;
   return `/app/${routeSlugs[id] || id}`;
@@ -183,7 +196,8 @@ function appPath(id, params = {}) {
 function routeIcon(id) {
   const icons = {
     dashboard: "dashboard",
-    shortStories: "book",
+    shortStories: "reading",
+    sentenceMining: "scanText",
     communityConnect: "search",
     communityMoments: "message",
     profileInfo: "user",
@@ -201,6 +215,8 @@ function normalizeAppUrl() {
   const cleanPath =
     route === "storyDetail"
       ? appPath(route, { storyId: activeStoryId() })
+      : route === "sentenceDeckDetail"
+        ? appPath(route, { deckId: activeDeckId() })
       : route === "communityLearner"
         ? appPath(route, { learnerId: activeLearnerId() })
         : route === "communityMoment"
@@ -465,6 +481,21 @@ function sentenceDetail(id) {
     <h3 class="mt-5 font-black">Variations</h3>
     <p class="mt-2 leading-7 text-brand-charcoal">${sentence.variations.map(escapeHtml).join("<br>") || "No variations yet."}</p>
   `);
+}
+
+function advanceReviewCardUrl() {
+  if (activeRoute() !== "review") return;
+  const params = new URLSearchParams(location.search);
+  const reviewCard = document.querySelector("[data-review-card]");
+  const currentIndex = Number(reviewCard?.dataset.cardIndex ?? params.get("card") ?? 0) || 0;
+  const cardCount = Number(reviewCard?.dataset.cardCount || 0) || 0;
+  if (cardCount && currentIndex >= cardCount - 1) {
+    params.set("card", String(cardCount - 1));
+    history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
+    return;
+  }
+  params.set("card", String(currentIndex + 1));
+  history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
 }
 
 function closeModal() {
@@ -908,9 +939,61 @@ async function processMomentImage(file) {
 }
 
 function bindActions(root = document) {
+  if (root === document && !document.documentElement.dataset.boundAppNavigationDelegates) {
+    document.documentElement.dataset.boundAppNavigationDelegates = "true";
+    document.addEventListener(
+      "click",
+      async (event) => {
+        const deckLink = event.target.closest("a[data-deck-link]");
+        if (deckLink) {
+          const href = deckLink.getAttribute("href");
+          if (!href || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || deckLink.target === "_blank") return;
+          event.preventDefault();
+          event.stopPropagation();
+          mobileMenuOpen = false;
+          history.pushState({}, "", href);
+          render();
+          return;
+        }
+
+        const appLink = event.target.closest("a[data-app-link]");
+        if (appLink) {
+          event.preventDefault();
+          event.stopPropagation();
+          mobileMenuOpen = false;
+          const href = appLink.getAttribute("href");
+          const momentId = momentIdFromPath(href);
+          if (momentId) {
+            await fetch(`/api/posts/${encodeURIComponent(momentId)}/view`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" }
+            }).catch(() => null);
+          }
+          history.pushState({}, "", href);
+          render();
+          return;
+        }
+
+        const row = event.target.closest("[data-row-link]");
+        if (!row || event.target.closest("a, button, input, textarea, select, label")) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (row.dataset.momentViewId) {
+          await fetch(`/api/posts/${encodeURIComponent(row.dataset.momentViewId)}/view`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          }).catch(() => null);
+        }
+        history.pushState({}, "", row.dataset.rowLink);
+        render();
+      },
+      true
+    );
+  }
+
   root.querySelectorAll("a[data-link]").forEach((link) => {
-    if (link.dataset.boundAction) return;
-    link.dataset.boundAction = "true";
+    if (link.dataset.boundPublicLink) return;
+    link.dataset.boundPublicLink = "true";
     link.addEventListener("click", (event) => {
       event.preventDefault();
       navigatePublic(link.getAttribute("href"));
@@ -918,8 +1001,8 @@ function bindActions(root = document) {
   });
 
   root.querySelectorAll("a[data-app-link]").forEach((link) => {
-    if (link.dataset.boundAction) return;
-    link.dataset.boundAction = "true";
+    if (link.dataset.boundAppLink) return;
+    link.dataset.boundAppLink = "true";
     link.addEventListener("click", async (event) => {
       event.preventDefault();
       mobileMenuOpen = false;
@@ -937,8 +1020,8 @@ function bindActions(root = document) {
   });
 
   root.querySelectorAll("[data-row-link]").forEach((row) => {
-    if (row.dataset.boundAction) return;
-    row.dataset.boundAction = "true";
+    if (row.dataset.boundRowLink) return;
+    row.dataset.boundRowLink = "true";
     row.addEventListener("click", async (event) => {
       if (event.target.closest("a, button, input, textarea, select, label")) return;
       if (row.dataset.momentViewId) {
@@ -949,6 +1032,34 @@ function bindActions(root = document) {
       }
       history.pushState({}, "", row.dataset.rowLink);
       render();
+    });
+  });
+
+  root.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    if (carousel.dataset.boundDrag) return;
+    carousel.dataset.boundDrag = "true";
+    let dragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    carousel.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      dragging = true;
+      startX = event.clientX;
+      scrollLeft = carousel.scrollLeft;
+      carousel.setPointerCapture?.(event.pointerId);
+      carousel.classList.add("cursor-grabbing");
+    });
+    carousel.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      carousel.scrollLeft = scrollLeft - (event.clientX - startX);
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach((type) => {
+      carousel.addEventListener(type, (event) => {
+        if (!dragging) return;
+        dragging = false;
+        carousel.releasePointerCapture?.(event.pointerId);
+        carousel.classList.remove("cursor-grabbing");
+      });
     });
   });
 
@@ -977,11 +1088,34 @@ function bindActions(root = document) {
   root.querySelectorAll("[data-action]").forEach((element) => {
     if (element.dataset.boundAction) return;
     element.dataset.boundAction = "true";
-    element.addEventListener("click", async () => {
+    if (element.getAttribute("role") === "button" && !["BUTTON", "A"].includes(element.tagName)) {
+      element.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          element.click();
+        }
+      });
+    }
+    element.addEventListener("click", async (event) => {
+      if (event.target.closest("a, button, input, textarea, select, label") && event.target !== element) return;
+      event.stopPropagation();
       captureCoinAnimationOrigin(element);
       const [action, id, value] = element.dataset.action.split(":");
       if (action === "learn") await api(`/api/sentences/${id}/learn`, { method: "POST" });
-      if (action === "review") await api(`/api/reviews/${id}/rate`, { method: "POST", body: JSON.stringify({ rating: value }) });
+      if (action === "review") {
+        advanceReviewCardUrl();
+        await api(`/api/reviews/${id}/rate`, { method: "POST", body: JSON.stringify({ rating: value }) });
+      }
+      if (action === "deckReview") {
+        const [, deckId, sentenceId, response] = element.dataset.action.split(":");
+        advanceReviewCardUrl();
+        await api(`/api/sentence-decks/${deckId}/reviews`, { method: "POST", body: JSON.stringify({ sentenceId, response }) });
+      }
+      if (action === "flipReviewCard") {
+        const answer = document.querySelector("[data-review-answer]");
+        if (answer) answer.classList.toggle("hidden");
+        return;
+      }
       if (action === "unlockStory") await api(`/api/stories/${id}/unlock`, { method: "POST" });
       if (action === "readStory") {
         history.pushState({}, "", appPath("storyDetail", { storyId: id }));
@@ -992,6 +1126,22 @@ function bindActions(root = document) {
       if (action === "toggleStoryFavorite") await api(`/api/stories/${id}/favorite`, { method: "POST" });
       if (action === "saveStory") await api(`/api/stories/${id}/save-sentences`, { method: "POST" });
       if (action === "saveSentence") await api(`/api/sentences/${id}/save`, { method: "POST" });
+      if (action === "openCreateDeckModal") showModal(createDeckModal(context()));
+      if (action === "openAddTopicModal") showModal(topicModal(context(), id));
+      if (action === "openEditTopicModal") showModal(editTopicModal(context(), id));
+      if (action === "openDeleteTopicModal") showModal(deleteTopicConfirmModal(context(), id));
+      if (action === "deleteTopic") {
+        await api(`/api/sentence-decks/topics/${id}`, { method: "DELETE" });
+        closeModal();
+      }
+      if (action === "openAddDeckSentenceModal") showModal(addDeckSentenceModal(context(), id));
+      if (action === "openEditSentenceModal") showModal(editMinedSentenceModal(context(), id));
+      if (action === "openDeleteSentenceModal") showModal(deleteMinedSentenceModal(context(), id));
+      if (action === "deleteSentence") {
+        await api(`/api/sentences/${id}`, { method: "DELETE" });
+        closeModal();
+      }
+      if (action === "closeModal") closeModal();
       if (action === "completeShadowing") await api("/api/shadowing", { method: "POST" });
       if (action === "like") await api(`/api/posts/${id}/like`, { method: "POST" });
       if (action === "followLearner") await api(`/api/learners/${id}/follow`, { method: "POST" });
@@ -1045,6 +1195,20 @@ function bindActions(root = document) {
         renderChatDrawer();
       }
       if (action === "sentence") sentenceDetail(id);
+      if (action === "openDeck") {
+        history.pushState({}, "", appPath("sentenceDeckDetail", { deckId: id }));
+        render();
+      }
+      if (action === "practiceDeck") {
+        history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}`);
+        render();
+      }
+      if (action === "toggleDeckTopic") {
+        const topic = document.querySelector(`[data-topic-body="${CSS.escape(id)}"]`);
+        const icon = document.querySelector(`[data-topic-toggle="${CSS.escape(id)}"]`);
+        if (topic) topic.classList.toggle("hidden");
+        if (icon) icon.classList.toggle("rotate-180");
+      }
       if (action === "scrollCarousel") {
         const carousel = document.querySelector(`#${id}`);
         if (carousel) carousel.scrollBy({ left: (value === "prev" ? -1 : 1) * Math.max(carousel.clientWidth * 0.86, 280), behavior: "smooth" });
@@ -1070,6 +1234,10 @@ function bindActions(root = document) {
       }
       if (action === "openShortStorySearch") {
         history.pushState({}, "", appPath("shortStorySearch"));
+        render();
+      }
+      if (action === "openReview") {
+        history.pushState({}, "", id ? `${appPath("review")}?deckId=${encodeURIComponent(id)}` : appPath("review"));
         render();
       }
       if (action === "openStoryLevelModal") {
@@ -1227,7 +1395,30 @@ function bindActions(root = document) {
         closeModal();
         render();
       }
-      if (form.dataset.form === "customSentence") await api("/api/sentences/custom", { method: "POST", body: JSON.stringify(data) });
+      if (form.dataset.form === "customSentence") {
+        await api("/api/sentences/custom", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
+      if (form.dataset.form === "sentenceDeck") {
+        await api("/api/sentence-decks", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
+      if (form.dataset.form === "sentenceDeckTopic") {
+        await api(`/api/sentence-decks/${data.deckId}/topics`, { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
+      if (form.dataset.form === "editSentenceDeckTopic") {
+        await api(`/api/sentence-decks/topics/${data.id}`, { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
+      if (form.dataset.form === "deckSentence") {
+        await api(`/api/sentence-decks/${data.deckId}/sentences`, { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
+      if (form.dataset.form === "editSentence") {
+        await api(`/api/sentences/${data.id}`, { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+      }
       if (form.dataset.form === "goal") {
         data.goalScope = form.elements.isGlobal?.checked ? "Global" : "Language";
         delete data.isGlobal;
@@ -1286,6 +1477,18 @@ function bindActions(root = document) {
       form.reset();
     });
   });
+
+  const reviewCard = root.querySelector("[data-review-card]");
+  if (reviewCard && !reviewCard.dataset.timerBound) {
+    reviewCard.dataset.timerBound = "true";
+    const audioUrl = reviewCard.dataset.audioUrl;
+    if (audioUrl) new Audio(audioUrl).play().catch(() => null);
+    window.setTimeout(() => {
+      if (!document.body.contains(reviewCard)) return;
+      advanceReviewCardUrl();
+      render();
+    }, 5000);
+  }
 }
 
 function setPublicShell() {
@@ -1347,12 +1550,17 @@ function render() {
   syncShortStorySearchButtons(route);
   const match = routes.find(([id]) => id === route) || routes[0];
   const storyForTitle = route === "storyDetail" ? state.stories.find((story) => story.id === activeStoryId()) : null;
+  const deckForTitle = route === "sentenceDeckDetail" ? state.sentenceDecks?.find((deck) => deck.id === activeDeckId()) : null;
   const storyLanguageForTitle = storyForTitle ? selectedStoryLanguages[storyForTitle.id] || storyForTitle.targetLanguage || state.user.targetLanguage : "";
   const learnerForTitle = route === "communityLearner" ? state.learners.find((learner) => learner.id === activeLearnerId()) : null;
   const goalsLanguage = new URLSearchParams(window.location.search).get("language") || state.user.targetLanguage;
   const titleText =
     route === "profileGoals" || route === "goals"
       ? `My ${goalsLanguage} Goals`
+      : route === "sentenceDeckDetail" && deckForTitle
+        ? deckForTitle.name
+      : route === "sentenceMining"
+        ? "Sentence Mining"
       : route === "shortStories"
         ? `Short Stories (${state.user.targetLanguage})`
         : route === "shortStorySearch"
@@ -1386,6 +1594,8 @@ function render() {
 
   const views = {
     dashboard: dashboardView,
+    sentenceMining: sentenceMiningView,
+    sentenceDeckDetail: (ctx) => sentenceDeckDetailView({ ...ctx, activeDeckId: activeDeckId() }),
     sentences: sentencesView,
     shortStories: shortStoriesView,
     shortStorySearch: shortStorySearchView,
@@ -1454,11 +1664,12 @@ async function init() {
     const response = await fetch("/api/auth/me");
     const auth = await response.json().catch(() => ({ authenticated: false }));
     if (!auth.authenticated) {
-      if (window.location.pathname.startsWith("/app")) history.replaceState({}, "", "/login");
+      if (window.location.pathname.startsWith("/app") || window.location.pathname === "/sentence-mining") history.replaceState({}, "", "/login");
       renderPublicPage();
       return;
     }
     if (["/", "/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("shortStories"));
+    if (window.location.pathname === "/sentence-mining") history.replaceState({}, "", appPath("sentenceMining"));
     normalizeAppUrl();
     await api("/api/state");
   } catch (_error) {

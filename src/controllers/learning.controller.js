@@ -72,6 +72,38 @@ async function addCustomSentence(req, res) {
   res.json(await learningService.addCustomSentence(req.user, req.body));
 }
 
+async function updateCustomSentence(req, res) {
+  res.json(await learningService.updateCustomSentence(req.user, req.params.id, req.body));
+}
+
+async function deleteSavedSentence(req, res) {
+  res.json(await learningService.deleteSavedSentence(req.user, req.params.id));
+}
+
+async function createSentenceDeck(req, res) {
+  res.status(201).json(await learningService.createSentenceDeck(req.user, req.body));
+}
+
+async function createSentenceDeckTopic(req, res) {
+  res.status(201).json(await learningService.createSentenceDeckTopic(req.user, req.params.id, req.body));
+}
+
+async function updateSentenceDeckTopic(req, res) {
+  res.json(await learningService.updateSentenceDeckTopic(req.user, req.params.id, req.body));
+}
+
+async function deleteSentenceDeckTopic(req, res) {
+  res.json(await learningService.deleteSentenceDeckTopic(req.user, req.params.id));
+}
+
+async function addSentenceDeckSentence(req, res) {
+  res.status(201).json(await learningService.addSentenceDeckSentence(req.user, req.params.id, req.body));
+}
+
+async function recordDeckReview(req, res) {
+  res.json(await learningService.recordDeckReview(req.user, req.params.id, req.body));
+}
+
 async function createGoal(req, res) {
   res.json(await learningService.createGoal(req.user, req.body));
 }
@@ -160,6 +192,14 @@ module.exports = {
   saveStorySentences,
   saveSentence,
   addCustomSentence,
+  updateCustomSentence,
+  deleteSavedSentence,
+  createSentenceDeck,
+  createSentenceDeckTopic,
+  updateSentenceDeckTopic,
+  deleteSentenceDeckTopic,
+  addSentenceDeckSentence,
+  recordDeckReview,
   createGoal,
   updateGoal,
   addLearningLanguage,

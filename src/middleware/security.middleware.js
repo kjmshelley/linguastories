@@ -69,6 +69,10 @@ function cors(req, res, next) {
 }
 
 function rejectInvalidContentType(req, res, next) {
+  if (!req.path.startsWith("/api")) {
+    return next();
+  }
+
   if (["POST", "PUT", "PATCH", "DELETE"].includes(req.method) && req.is("application/json") === false && req.headers["content-length"]) {
     return res.status(415).json({ error: "Content-Type must be application/json" });
   }
