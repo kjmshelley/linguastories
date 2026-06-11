@@ -17,16 +17,33 @@ function allowedOrigins() {
   return new Set(isProduction() ? configured : [...configured, ...TRUSTED_DEV_ORIGINS]);
 }
 
+function storageOrigins() {
+  return [
+    process.env.STORY_IMAGE_BASE_URL,
+    process.env.CLOUDFLARE_R2_PUBLIC_BASE_URL
+  ]
+    .map((value) => {
+      try {
+        return value ? new URL(value).origin : "";
+      } catch (_error) {
+        return "";
+      }
+    })
+    .filter(Boolean);
+}
+
 function securityHeaders(req, res, next) {
   const scriptSrc = ["'self'", "https://cdn.tailwindcss.com", "'unsafe-inline'"];
   const styleSrc = ["'self'", "'unsafe-inline'"];
-  const imgSrc = ["'self'", "data:", "blob:"];
+  const mediaSrc = ["'self'", ...storageOrigins()];
+  const imgSrc = ["'self'", "data:", "blob:", ...storageOrigins()];
   const connectSrc = ["'self'", ...allowedOrigins()];
   const csp = [
     "default-src 'self'",
     `script-src ${scriptSrc.join(" ")}`,
     `style-src ${styleSrc.join(" ")}`,
     `img-src ${imgSrc.join(" ")}`,
+    `media-src ${mediaSrc.join(" ")}`,
     `connect-src ${connectSrc.join(" ")}`,
     "font-src 'self' data:",
     "object-src 'none'",

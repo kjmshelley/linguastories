@@ -12,6 +12,9 @@ export function deckView({ state }) {
           <label class="${ui.label}">Translation<input class="${ui.input}" name="translation" required placeholder="I am studying Japanese."></label>
           <label class="${ui.label}">Topic<input class="${ui.input}" name="topic" value="Daily Life"></label>
           <label class="${ui.label}">Level<select class="${ui.input}" name="level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select></label>
+          <label class="${ui.label}">Audio MP3<input class="${ui.input}" name="sentenceAudio" type="file" accept="audio/mpeg,audio/mp3,.mp3"></label>
+          <label class="${ui.label}">Image<input class="${ui.input}" name="sentenceImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
+          <label class="${ui.label}">Video<input class="${ui.input}" name="sentenceVideo" type="file" accept="video/mp4,video/webm,video/quicktime"></label>
           <label class="${ui.label}">Notes<textarea class="${ui.input} min-h-24" name="notes" placeholder="Why this sentence matters"></textarea></label>
           <p class="text-xs font-semibold text-brand-graphite">Adding a custom sentence gives 2 coins.</p>
           <button class="${ui.primary}">Add</button>

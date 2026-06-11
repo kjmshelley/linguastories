@@ -16,6 +16,7 @@ const frontendAppRoutes = [
   /^\/app\/dashboard\/?$/,
   /^\/app\/sentence-mining\/?$/,
   /^\/app\/sentence-mining\/decks\/[a-z0-9-]+\/?$/i,
+  /^\/app\/sentence-mining\/decks\/[a-z0-9-]+\/topics\/[a-z0-9-]+\/?$/i,
   /^\/app\/sentence-library\/?$/,
   /^\/app\/short-stories\/?$/,
   /^\/app\/short-stories\/search\/?$/,
@@ -44,7 +45,7 @@ const frontendAppRoutes = [
 app.disable("x-powered-by");
 app.use(securityHeaders);
 app.use(cors);
-app.use(express.json({ limit: "8mb" }));
+app.use(express.json({ limit: "12mb" }));
 app.use(rejectPrototypePollution);
 app.use(rejectInvalidContentType);
 app.use(express.static(clientPath));

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --env-file=.env.development server.js",
-    "start:prod": "node server.js",
+    "start:prod": "node --env-file=.env.production server.js",
     "start:dev": "node --env-file=.env.development server.js",
     "db:schema": "node --env-file=.env.development scripts/run-sql.js db/schema.sql",
     "db:seed": "node --env-file=.env.development scripts/run-sql.js db/seed.sql",

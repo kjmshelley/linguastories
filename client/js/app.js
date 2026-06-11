@@ -7,7 +7,7 @@ import { landingView, loginView, signupView } from "./pages/public.js";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, languageProfilesView, profileInfoView, profileView } from "./pages/profile.js";
 import { progressView } from "./pages/progress.js";
 import { reviewView } from "./pages/review.js";
-import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
+import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
 import { sentencesView } from "./pages/sentence-library.js";
 import { shadowingView } from "./pages/shadowing.js";
 import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
@@ -48,6 +48,7 @@ const routeGroups = [
 const hiddenRoutes = [
   ["storyDetail", "Story"],
   ["sentenceDeckDetail", "Sentence Deck"],
+  ["sentenceDeckTopicSentences", "Topic Sentences"],
   ["shortStorySearch", "Search Short Stories"],
   ["communityLearner", "Learner Profile"],
   ["communityMoment", "Moment Detail"],
@@ -77,7 +78,7 @@ const routeSlugs = {
   profileMoments: "profile/moments",
   profileWallet: "profile/wallet"
 };
-const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentences", "shortStories", "shortStorySearch", "stories"]);
+const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
 const communityRoutes = new Set(["communityConnect", "communityMoments", "communityLearner", "communityMoment"]);
 
 let appConfig = { supportedLanguages: [] };
@@ -105,6 +106,16 @@ let chatMobileScreen = "contacts";
 let mobileMenuOpen = false;
 let selectedConversationId = "";
 let pendingChatRecipientId = "";
+let topicAudioPlayback = { active: false, stopRequested: false, audio: null, resolve: null, runId: 0 };
+let activeReviewResults = { key: "", total: 0, responses: [] };
+
+const defaultReviewSettings = {
+  playAudioAutomatically: true,
+  showSourceLanguage: false,
+  showRomanization: false,
+  goToNextCardAutomatically: true
+};
+let reviewSettings = loadReviewSettings();
 
 const appShell = document.querySelector("#appShell");
 const sidebar = document.querySelector("#sidebar");
@@ -144,6 +155,7 @@ function activeRoute() {
   if (!location.pathname.startsWith("/app")) return "dashboard";
   const slug = location.pathname.replace(/^\/app\/?/, "").replace(/\/$/, "") || "dashboard";
   if (slug === "community") return "communityMoments";
+  if (/^sentence-mining\/decks\/[^/]+\/topics\/[^/]+$/.test(slug)) return "sentenceDeckTopicSentences";
   if (slug.startsWith("sentence-mining/decks/")) return "sentenceDeckDetail";
   if (slug.startsWith("stories/")) return "storyDetail";
   if (slug.startsWith("community/connect/")) return "communityLearner";
@@ -155,7 +167,7 @@ function activeRoute() {
 function activeNavRoute() {
   const route = activeRoute();
   if (route === "sentences" || route === "deck") return "sentenceMining";
-  if (route === "sentenceDeckDetail") return "sentenceMining";
+  if (route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences") return "sentenceMining";
   if (route === "shortStorySearch") return "shortStories";
   return route === "storyDetail" ? "stories" : route;
 }
@@ -166,7 +178,12 @@ function activeStoryId() {
 }
 
 function activeDeckId() {
-  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/([^/]+)\/?$/);
+  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/([^/]+)(?:\/topics\/[^/]+)?\/?$/);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+function activeTopicId() {
+  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/[^/]+\/topics\/([^/]+)\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
@@ -188,6 +205,7 @@ function momentIdFromPath(path) {
 function appPath(id, params = {}) {
   if (id === "storyDetail") return `/app/stories/${encodeURIComponent(params.storyId || "")}`;
   if (id === "sentenceDeckDetail") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}`;
+  if (id === "sentenceDeckTopicSentences") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}/topics/${encodeURIComponent(params.topicId || "")}`;
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
   if (id === "communityMoment") return `/app/community/moments/${encodeURIComponent(params.postId || "")}`;
   return `/app/${routeSlugs[id] || id}`;
@@ -217,6 +235,8 @@ function normalizeAppUrl() {
       ? appPath(route, { storyId: activeStoryId() })
       : route === "sentenceDeckDetail"
         ? appPath(route, { deckId: activeDeckId() })
+      : route === "sentenceDeckTopicSentences"
+        ? appPath(route, { deckId: activeDeckId(), topicId: activeTopicId() })
       : route === "communityLearner"
         ? appPath(route, { learnerId: activeLearnerId() })
         : route === "communityMoment"
@@ -471,6 +491,42 @@ function showModal(html, options = {}) {
   bindActions(modal);
 }
 
+function loadReviewSettings() {
+  try {
+    return { ...defaultReviewSettings, ...JSON.parse(localStorage.getItem("linguaStoriesReviewSettings") || "{}") };
+  } catch {
+    return { ...defaultReviewSettings };
+  }
+}
+
+function saveReviewSettings() {
+  localStorage.setItem("linguaStoriesReviewSettings", JSON.stringify(reviewSettings));
+}
+
+function reviewSettingControl(key, label) {
+  return `
+    <label class="flex items-center justify-between gap-4 rounded-lg border border-brand-line/80 bg-white/70 px-4 py-3 text-sm font-bold text-brand-ink">
+      <span>${escapeHtml(label)}</span>
+      <input class="h-5 w-5 accent-brand-red" type="checkbox" data-review-setting="${key}" ${reviewSettings[key] ? "checked" : ""}>
+    </label>
+  `;
+}
+
+function reviewSettingsModal() {
+  return `
+    <div>
+      <span class="${ui.tagGold}">Review Settings</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Sentence Review</h2>
+      <div class="mt-5 grid gap-3">
+        ${reviewSettingControl("playAudioAutomatically", "Play audio automatically")}
+        ${reviewSettingControl("showSourceLanguage", "Show Source Language")}
+        ${reviewSettingControl("showRomanization", "Show romanization")}
+        ${reviewSettingControl("goToNextCardAutomatically", "Go to next card automatically")}
+      </div>
+    </div>
+  `;
+}
+
 function sentenceDetail(id) {
   const sentence = state.sentences.find((item) => item.id === id);
   showModal(`
@@ -496,6 +552,68 @@ function advanceReviewCardUrl() {
   }
   params.set("card", String(currentIndex + 1));
   history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
+}
+
+function currentReviewSession() {
+  const params = new URLSearchParams(location.search);
+  const deckId = params.get("deckId") || "";
+  const topicId = params.get("topicId") || "";
+  return {
+    key: `${deckId}:${topicId}`,
+    deckId,
+    topicId,
+    card: Number(params.get("card") || 0) || 0
+  };
+}
+
+function ensureReviewResultsSession(total = 0) {
+  const session = currentReviewSession();
+  if (activeReviewResults.key !== session.key || session.card === 0) {
+    activeReviewResults = { key: session.key, total, responses: [] };
+  }
+  if (total) activeReviewResults.total = total;
+  return session;
+}
+
+function recordReviewResult(response) {
+  const reviewCard = document.querySelector("[data-review-card]");
+  ensureReviewResultsSession(Number(reviewCard?.dataset.cardCount || 0) || 0);
+  const normalized = { Again: "show_again", Hard: "hard", Good: "easy", Easy: "known" }[response] || response;
+  activeReviewResults.responses.push(normalized);
+}
+
+function reviewResultsModal() {
+  const session = currentReviewSession();
+  const deck = state?.sentenceDecks?.find((item) => item.id === session.deckId);
+  const topic = deck?.topics?.find((item) => item.id === session.topicId);
+  const total = activeReviewResults.total || activeReviewResults.responses.length;
+  const counts = activeReviewResults.responses.reduce((items, response) => {
+    items[response] = (items[response] || 0) + 1;
+    return items;
+  }, {});
+  const stat = (label, key) => `
+    <div class="rounded-lg bg-brand-mist/60 px-3 py-2">
+      <span class="block text-xs font-semibold uppercase text-brand-graphite">${label}</span>
+      <strong class="mt-1 block text-lg text-brand-ink">${counts[key] || 0}</strong>
+    </div>
+  `;
+  return `
+    <div>
+      <span class="${ui.tagGold}">Review Complete</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(topic?.name || deck?.name || "Sentence Review")}</h2>
+      <p class="mt-2 ${ui.muted}">You reviewed ${activeReviewResults.responses.length || total} of ${total} sentences.</p>
+      <div class="mt-5 grid gap-2 sm:grid-cols-4">
+        ${stat("Show again", "show_again")}
+        ${stat("Hard", "hard")}
+        ${stat("Easy", "easy")}
+        ${stat("I know this", "known")}
+      </div>
+    </div>
+    <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
+      <button class="${ui.secondary}" data-action="reviewAgain">${icon("book")}<span>Review again</span></button>
+      <button class="${ui.primary}" data-action="goBackToReviewDeck:${escapeHtml(session.deckId)}">${icon("arrowLeft")}<span>Go back to deck</span></button>
+    </div>
+  `;
 }
 
 function closeModal() {
@@ -525,7 +643,7 @@ function languageSwitcherModal({ state }) {
     <div class="pr-10">
       <span class="${ui.tagGold}">Language Profile</span>
       <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("globe", "h-5 w-5 text-brand-redDark")}<span>Choose Current Language</span></h2>
-      <p class="mt-2 ${ui.muted}">Switch the app to one of your active language profiles.</p>
+      <p class="mt-2 ${ui.muted}">Choose the default language profile for the app.</p>
     </div>
     <div class="mt-6 grid gap-3">
       ${languages
@@ -539,13 +657,13 @@ function languageSwitcherModal({ state }) {
               <div class="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div class="${ui.row}">
-                    <span class="${isCurrent ? ui.tagDark : ui.tagGold}">${icon(isCurrent ? "check" : "globe", "h-3.5 w-3.5")}<span>${isCurrent ? "Current" : "Switch"}</span></span>
+                    ${isCurrent ? `<span class="${ui.tagDark}">${icon("check", "h-3.5 w-3.5")}<span>Default</span></span>` : ""}
                     <span class="${ui.tag}">${icon("target", "h-3.5 w-3.5")}<span>${escapeHtml(profile.currentLevel || "A1")}</span></span>
                     <span class="${ui.tag}">${icon("eye", "h-3.5 w-3.5")}<span>${escapeHtml(profile.profileVisibility || "Private")}</span></span>
                   </div>
                   <h3 class="mt-3 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(language)}</h3>
                 </div>
-                <span class="mt-1 text-sm font-bold text-brand-red ${isCurrent ? "opacity-0" : "opacity-100"}">Make default</span>
+                <span class="mt-1 text-sm font-bold text-brand-red">${isCurrent ? "Default" : "Make default"}</span>
               </div>
               <div class="mt-4 grid gap-2 sm:grid-cols-3">
                 <div class="rounded-lg bg-brand-snow px-3 py-2">
@@ -938,24 +1056,135 @@ async function processMomentImage(file) {
   }
 }
 
+async function processDeckImage(file) {
+  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+  if (!allowedTypes.has(file.type)) throw new Error("Deck image must be a JPG, PNG, or WebP image.");
+  if (file.size > 10 * 1024 * 1024) throw new Error("Deck image must be 10 MB or smaller.");
+
+  const image = new Image();
+  const objectUrl = URL.createObjectURL(file);
+  image.src = objectUrl;
+  await waitForImageLoad(image);
+
+  try {
+    let imageBlob = await resizeImageToWebP(image, 900, 0.8);
+    const sizeSteps = [820, 760, 700, 640, 560];
+    const qualitySteps = [0.76, 0.72, 0.68, 0.64];
+    for (const quality of qualitySteps) {
+      if (imageBlob.size <= 350 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, 900, quality);
+    }
+    for (const maxSize of sizeSteps) {
+      if (imageBlob.size <= 350 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, maxSize, 0.68);
+    }
+    return {
+      imageDataUrl: await blobToDataUrl(imageBlob),
+      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "deck"}.webp`
+    };
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
+async function processSentenceImage(file) {
+  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+  if (!allowedTypes.has(file.type)) throw new Error("Sentence image must be a JPG, PNG, or WebP image.");
+  if (file.size > 10 * 1024 * 1024) throw new Error("Sentence image must be 10 MB or smaller.");
+
+  const image = new Image();
+  const objectUrl = URL.createObjectURL(file);
+  image.src = objectUrl;
+  await waitForImageLoad(image);
+
+  try {
+    let imageBlob = await resizeImageToWebP(image, 900, 0.8);
+    const sizeSteps = [820, 760, 700, 640, 560];
+    const qualitySteps = [0.76, 0.72, 0.68, 0.64];
+    for (const quality of qualitySteps) {
+      if (imageBlob.size <= 350 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, 900, quality);
+    }
+    for (const maxSize of sizeSteps) {
+      if (imageBlob.size <= 350 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, maxSize, 0.68);
+    }
+    return {
+      imageDataUrl: await blobToDataUrl(imageBlob),
+      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "sentence-image"}.webp`
+    };
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
+async function processSentenceAudio(file) {
+  const allowedTypes = new Set(["audio/mpeg", "audio/mp3"]);
+  const hasMp3Extension = /\.mp3$/i.test(file.name || "");
+  if (!allowedTypes.has(file.type) && !hasMp3Extension) throw new Error("Sentence audio must be an MP3 file.");
+  if (file.size > 6 * 1024 * 1024) throw new Error("Sentence audio must be 6 MB or smaller.");
+  return {
+    audioDataUrl: await fileToDataUrl(file),
+    audioFileName: file.name || "sentence-audio.mp3"
+  };
+}
+
+async function processSentenceVideo(file) {
+  const allowedTypes = new Set(["video/mp4", "video/webm", "video/quicktime"]);
+  if (!allowedTypes.has(file.type)) throw new Error("Sentence video must be an MP4, WebM, or MOV file.");
+  if (file.size > 8 * 1024 * 1024) throw new Error("Sentence video must be 8 MB or smaller.");
+  return {
+    videoDataUrl: await fileToDataUrl(file),
+    videoFileName: file.name || "sentence-video.mp4"
+  };
+}
+
+async function appendSentenceAssets(data, form) {
+  const audioFile = form.elements.sentenceAudio?.files?.[0];
+  const imageFile = form.elements.sentenceImage?.files?.[0];
+  const videoFile = form.elements.sentenceVideo?.files?.[0];
+  delete data.sentenceAudio;
+  delete data.sentenceImage;
+  delete data.sentenceVideo;
+  if (audioFile) Object.assign(data, await processSentenceAudio(audioFile));
+  if (imageFile) Object.assign(data, await processSentenceImage(imageFile));
+  if (videoFile) Object.assign(data, await processSentenceVideo(videoFile));
+}
+
+function clearTopicAudioHighlights() {
+  document.querySelectorAll("[data-topic-audio-row]").forEach((row) => {
+    row.classList.remove("bg-brand-mist", "ring-2", "ring-brand-orange/40");
+  });
+}
+
+function setPlayAllTopicAudioState(button, playing) {
+  if (!button) return;
+  button.dataset.playing = playing ? "true" : "false";
+  const label = button.querySelector("span");
+  if (label) label.textContent = playing ? "Stop" : "Play All";
+}
+
+function stopTopicAudioPlayback(button = document.querySelector("[data-action='playAllTopicAudio']")) {
+  topicAudioPlayback.stopRequested = true;
+  topicAudioPlayback.active = false;
+  if (topicAudioPlayback.audio) {
+    topicAudioPlayback.audio.pause();
+    topicAudioPlayback.audio.currentTime = 0;
+  }
+  if (topicAudioPlayback.resolve) topicAudioPlayback.resolve();
+  topicAudioPlayback.audio = null;
+  topicAudioPlayback.resolve = null;
+  setPlayAllTopicAudioState(button, false);
+  clearTopicAudioHighlights();
+}
+
 function bindActions(root = document) {
   if (root === document && !document.documentElement.dataset.boundAppNavigationDelegates) {
     document.documentElement.dataset.boundAppNavigationDelegates = "true";
     document.addEventListener(
       "click",
       async (event) => {
-        const deckLink = event.target.closest("a[data-deck-link]");
-        if (deckLink) {
-          const href = deckLink.getAttribute("href");
-          if (!href || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || deckLink.target === "_blank") return;
-          event.preventDefault();
-          event.stopPropagation();
-          mobileMenuOpen = false;
-          history.pushState({}, "", href);
-          render();
-          return;
-        }
-
+        if (event.target.closest("[data-action]")) return;
         const appLink = event.target.closest("a[data-app-link]");
         if (appLink) {
           event.preventDefault();
@@ -1043,6 +1272,7 @@ function bindActions(root = document) {
     let scrollLeft = 0;
     carousel.addEventListener("pointerdown", (event) => {
       if (event.pointerType === "mouse" && event.button !== 0) return;
+      if (event.target.closest("a, button, input, textarea, select, label, [data-action]")) return;
       dragging = true;
       startX = event.clientX;
       scrollLeft = carousel.scrollLeft;
@@ -1085,6 +1315,17 @@ function bindActions(root = document) {
     control.addEventListener(control.tagName === "SELECT" ? "change" : "input", updateFilter);
   });
 
+  root.querySelectorAll("[data-review-setting]").forEach((control) => {
+    if (control.dataset.boundAction) return;
+    control.dataset.boundAction = "true";
+    control.addEventListener("change", () => {
+      const key = control.dataset.reviewSetting;
+      reviewSettings = { ...reviewSettings, [key]: control.checked };
+      saveReviewSettings();
+      if (activeRoute() === "review") render();
+    });
+  });
+
   root.querySelectorAll("[data-action]").forEach((element) => {
     if (element.dataset.boundAction) return;
     element.dataset.boundAction = "true";
@@ -1097,19 +1338,28 @@ function bindActions(root = document) {
       });
     }
     element.addEventListener("click", async (event) => {
-      if (event.target.closest("a, button, input, textarea, select, label") && event.target !== element) return;
+      const nestedControl = event.target.closest("a, button, input, textarea, select, label");
+      if (nestedControl && nestedControl !== element) return;
       event.stopPropagation();
       captureCoinAnimationOrigin(element);
       const [action, id, value] = element.dataset.action.split(":");
       if (action === "learn") await api(`/api/sentences/${id}/learn`, { method: "POST" });
       if (action === "review") {
+        const reviewCard = document.querySelector("[data-review-card]");
+        const isLastCard = Number(reviewCard?.dataset.cardIndex || 0) >= Number(reviewCard?.dataset.cardCount || 0) - 1;
+        recordReviewResult(value);
         advanceReviewCardUrl();
         await api(`/api/reviews/${id}/rate`, { method: "POST", body: JSON.stringify({ rating: value }) });
+        if (isLastCard) showModal(reviewResultsModal(), { closeButton: false });
       }
       if (action === "deckReview") {
         const [, deckId, sentenceId, response] = element.dataset.action.split(":");
+        const reviewCard = document.querySelector("[data-review-card]");
+        const isLastCard = Number(reviewCard?.dataset.cardIndex || 0) >= Number(reviewCard?.dataset.cardCount || 0) - 1;
+        recordReviewResult(response);
         advanceReviewCardUrl();
         await api(`/api/sentence-decks/${deckId}/reviews`, { method: "POST", body: JSON.stringify({ sentenceId, response }) });
+        if (isLastCard) showModal(reviewResultsModal(), { closeButton: false });
       }
       if (action === "flipReviewCard") {
         const answer = document.querySelector("[data-review-answer]");
@@ -1127,6 +1377,7 @@ function bindActions(root = document) {
       if (action === "saveStory") await api(`/api/stories/${id}/save-sentences`, { method: "POST" });
       if (action === "saveSentence") await api(`/api/sentences/${id}/save`, { method: "POST" });
       if (action === "openCreateDeckModal") showModal(createDeckModal(context()));
+      if (action === "openReviewSettingsModal") showModal(reviewSettingsModal());
       if (action === "openAddTopicModal") showModal(topicModal(context(), id));
       if (action === "openEditTopicModal") showModal(editTopicModal(context(), id));
       if (action === "openDeleteTopicModal") showModal(deleteTopicConfirmModal(context(), id));
@@ -1200,7 +1451,20 @@ function bindActions(root = document) {
         render();
       }
       if (action === "practiceDeck") {
+        activeReviewResults = { key: `${id}:`, total: 0, responses: [] };
         history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}`);
+        render();
+      }
+      if (action === "reviewTopic") {
+        activeReviewResults = { key: `${id}:${value}`, total: 0, responses: [] };
+        history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}&topicId=${encodeURIComponent(value)}`);
+        render();
+      }
+      if (action === "showTopicSentences") {
+        const [, deckId, topicId] = element.dataset.action.split(":");
+        const targetDeckId = element.dataset.deckId || deckId || "";
+        const targetTopicId = element.dataset.topicId || topicId || "";
+        history.pushState({}, "", `/app/sentence-mining/decks/${encodeURIComponent(targetDeckId)}/topics/${encodeURIComponent(targetTopicId)}`);
         render();
       }
       if (action === "toggleDeckTopic") {
@@ -1279,6 +1543,45 @@ function bindActions(root = document) {
           window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
         }
       }
+      if (action === "playSentenceAudio") {
+        stopTopicAudioPlayback();
+        const audioUrl = element.dataset.audioUrl || "";
+        if (audioUrl) new Audio(audioUrl).play().catch(() => null);
+      }
+      if (action === "playAllTopicAudio") {
+        if (topicAudioPlayback.active) {
+          stopTopicAudioPlayback(element);
+          return;
+        }
+        const audioButtons = [...document.querySelectorAll("[data-action='playSentenceAudio'][data-audio-url]")]
+          .filter((button) => button.dataset.audioUrl && !button.disabled);
+        const runId = topicAudioPlayback.runId + 1;
+        topicAudioPlayback = { active: true, stopRequested: false, audio: null, resolve: null, runId };
+        setPlayAllTopicAudioState(element, true);
+        clearTopicAudioHighlights();
+        try {
+          for (const button of audioButtons) {
+            if (topicAudioPlayback.stopRequested || topicAudioPlayback.runId !== runId) break;
+            const row = button.closest("[data-topic-audio-row]");
+            clearTopicAudioHighlights();
+            row?.classList.add("bg-brand-mist", "ring-2", "ring-brand-orange/40");
+            const audio = new Audio(button.dataset.audioUrl);
+            topicAudioPlayback.audio = audio;
+            await new Promise((resolve) => {
+              topicAudioPlayback.resolve = resolve;
+              audio.addEventListener("ended", resolve, { once: true });
+              audio.addEventListener("error", resolve, { once: true });
+              audio.play().catch(resolve);
+            });
+          }
+        } finally {
+          if (topicAudioPlayback.runId === runId) {
+            topicAudioPlayback = { active: false, stopRequested: false, audio: null, resolve: null, runId };
+            setPlayAllTopicAudioState(element, false);
+            clearTopicAudioHighlights();
+          }
+        }
+      }
       if (action === "shareStory") {
         const story = state.stories.find((item) => item.id === id);
         const url = `${location.origin}${appPath("storyDetail", { storyId: id })}`;
@@ -1294,6 +1597,20 @@ function bindActions(root = document) {
         render();
       }
       if (action === "openLanguageSwitcher") showModal(languageSwitcherModal(context()));
+      if (action === "reviewAgain") {
+        const params = new URLSearchParams(location.search);
+        const session = currentReviewSession();
+        activeReviewResults = { key: session.key, total: activeReviewResults.total, responses: [] };
+        params.set("card", "0");
+        closeModal();
+        history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
+        render();
+      }
+      if (action === "goBackToReviewDeck") {
+        closeModal();
+        history.pushState({}, "", appPath("sentenceDeckDetail", { deckId: id }));
+        render();
+      }
       if (action === "goToLanguageProfiles") {
         closeModal();
         history.pushState({}, "", appPath("profileLanguages"));
@@ -1396,10 +1713,26 @@ function bindActions(root = document) {
         render();
       }
       if (form.dataset.form === "customSentence") {
+        try {
+          await appendSentenceAssets(data, form);
+        } catch (error) {
+          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+          return;
+        }
         await api("/api/sentences/custom", { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
       if (form.dataset.form === "sentenceDeck") {
+        const imageFile = form.elements.deckImage?.files?.[0];
+        delete data.deckImage;
+        if (imageFile) {
+          try {
+            Object.assign(data, await processDeckImage(imageFile));
+          } catch (error) {
+            showModal(`<h2 class="text-xl font-black">Deck image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+            return;
+          }
+        }
         await api("/api/sentence-decks", { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
@@ -1412,10 +1745,22 @@ function bindActions(root = document) {
         closeModal();
       }
       if (form.dataset.form === "deckSentence") {
+        try {
+          await appendSentenceAssets(data, form);
+        } catch (error) {
+          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+          return;
+        }
         await api(`/api/sentence-decks/${data.deckId}/sentences`, { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
       if (form.dataset.form === "editSentence") {
+        try {
+          await appendSentenceAssets(data, form);
+        } catch (error) {
+          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+          return;
+        }
         await api(`/api/sentences/${data.id}`, { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
@@ -1481,13 +1826,16 @@ function bindActions(root = document) {
   const reviewCard = root.querySelector("[data-review-card]");
   if (reviewCard && !reviewCard.dataset.timerBound) {
     reviewCard.dataset.timerBound = "true";
+    ensureReviewResultsSession(Number(reviewCard.dataset.cardCount || 0) || 0);
     const audioUrl = reviewCard.dataset.audioUrl;
-    if (audioUrl) new Audio(audioUrl).play().catch(() => null);
-    window.setTimeout(() => {
-      if (!document.body.contains(reviewCard)) return;
-      advanceReviewCardUrl();
-      render();
-    }, 5000);
+    if (audioUrl && reviewCard.dataset.autoPlayAudio === "true") new Audio(audioUrl).play().catch(() => null);
+    if (reviewCard.dataset.autoNextCard === "true") {
+      window.setTimeout(() => {
+        if (!document.body.contains(reviewCard)) return;
+        advanceReviewCardUrl();
+        render();
+      }, 5000);
+    }
   }
 }
 
@@ -1550,13 +1898,16 @@ function render() {
   syncShortStorySearchButtons(route);
   const match = routes.find(([id]) => id === route) || routes[0];
   const storyForTitle = route === "storyDetail" ? state.stories.find((story) => story.id === activeStoryId()) : null;
-  const deckForTitle = route === "sentenceDeckDetail" ? state.sentenceDecks?.find((deck) => deck.id === activeDeckId()) : null;
+  const deckForTitle = route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences" ? state.sentenceDecks?.find((deck) => deck.id === activeDeckId()) : null;
+  const topicForTitle = route === "sentenceDeckTopicSentences" ? deckForTitle?.topics?.find((topic) => topic.id === activeTopicId()) : null;
   const storyLanguageForTitle = storyForTitle ? selectedStoryLanguages[storyForTitle.id] || storyForTitle.targetLanguage || state.user.targetLanguage : "";
   const learnerForTitle = route === "communityLearner" ? state.learners.find((learner) => learner.id === activeLearnerId()) : null;
   const goalsLanguage = new URLSearchParams(window.location.search).get("language") || state.user.targetLanguage;
   const titleText =
     route === "profileGoals" || route === "goals"
       ? `My ${goalsLanguage} Goals`
+      : route === "sentenceDeckTopicSentences" && deckForTitle
+        ? topicForTitle ? `${deckForTitle.name}: ${topicForTitle.name}` : deckForTitle.name
       : route === "sentenceDeckDetail" && deckForTitle
         ? deckForTitle.name
       : route === "sentenceMining"
@@ -1596,12 +1947,13 @@ function render() {
     dashboard: dashboardView,
     sentenceMining: sentenceMiningView,
     sentenceDeckDetail: (ctx) => sentenceDeckDetailView({ ...ctx, activeDeckId: activeDeckId() }),
+    sentenceDeckTopicSentences: (ctx) => sentenceDeckTopicSentencesView({ ...ctx, activeDeckId: activeDeckId(), activeTopicId: activeTopicId() }),
     sentences: sentencesView,
     shortStories: shortStoriesView,
     shortStorySearch: shortStorySearchView,
     storyDetail: storyDetailView,
     stories: storiesView,
-    review: reviewView,
+    review: (ctx) => reviewView({ ...ctx, reviewSettings }),
     shadowing: shadowingView,
     deck: deckView,
     wallet: walletView,

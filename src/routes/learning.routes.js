@@ -9,6 +9,7 @@ const router = express.Router();
 
 const knownLearningRoutes = [
   ["GET", /^\/state\/?$/],
+  ["GET", /^\/assets\/.+$/],
   ["GET", /^\/stories\/[^/]+\/image\/?$/],
   ["GET", /^\/posts\/[^/]+\/image\/?$/],
   ["GET", /^\/posts\/[^/]+\/thumbnail\/?$/],
@@ -62,6 +63,7 @@ router.use(requireAuth);
 router.param("id", validateUuidParam);
 
 router.get("/state", asyncHandler(controller.state));
+router.get("/assets/*", asyncHandler(controller.asset));
 router.get("/stories/:id/image", asyncHandler(controller.storyImage));
 router.get("/posts/:id/image", asyncHandler(controller.postImage));
 router.get("/posts/:id/thumbnail", asyncHandler(controller.postThumbnail));
@@ -80,33 +82,41 @@ router.post("/stories/:id/comments", validateBody({
   body: { type: "string", required: true, max: 1000, label: "Comment" }
 }), asyncHandler(controller.createStoryComment));
 router.post("/sentences/:id/save", asyncHandler(controller.saveSentence));
-router.post("/sentences/custom", validateBody({
+router.post("/sentences/custom", uploadRateLimit, validateBody({
   target: { type: "string", required: true, max: 500, label: "Target sentence" },
   translation: { type: "string", required: true, max: 500, label: "Translation" },
   sourceLanguage: { type: "string", max: 80, label: "Source language" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },
   romanization: { type: "string", max: 500, label: "Romanization" },
-  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
-  imageUrl: { type: "string", max: 1000, label: "Image URL" },
+  audioDataUrl: { type: "dataUrl", max: 9_000_000, label: "Sentence audio" },
+  audioFileName: { type: "string", max: 180, label: "Sentence audio file name" },
+  imageDataUrl: { type: "dataUrl", max: 800000, label: "Sentence image" },
+  imageFileName: { type: "string", max: 180, label: "Sentence image file name" },
+  videoDataUrl: { type: "dataUrl", max: 11_500_000, label: "Sentence video" },
+  videoFileName: { type: "string", max: 180, label: "Sentence video file name" },
   topic: { type: "string", max: 80, label: "Topic" },
   level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
   difficulty: { type: "integer", min: 1, max: 5, label: "Difficulty" },
   notes: { type: "string", max: 1000, label: "Notes" },
   source: { type: "string", max: 120, label: "Source" }
 }), asyncHandler(controller.addCustomSentence));
-router.post("/sentences/:id", validateBody({
+router.post("/sentences/:id", uploadRateLimit, validateBody({
   id: { type: "uuid", label: "Sentence" },
   target: { type: "string", required: true, max: 500, label: "Target sentence" },
   translation: { type: "string", required: true, max: 500, label: "Translation" },
   sourceLanguage: { type: "string", max: 80, label: "Source language" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },
-  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
-  imageUrl: { type: "string", max: 1000, label: "Image URL" },
+  audioDataUrl: { type: "dataUrl", max: 9_000_000, label: "Sentence audio" },
+  audioFileName: { type: "string", max: 180, label: "Sentence audio file name" },
+  imageDataUrl: { type: "dataUrl", max: 800000, label: "Sentence image" },
+  imageFileName: { type: "string", max: 180, label: "Sentence image file name" },
+  videoDataUrl: { type: "dataUrl", max: 11_500_000, label: "Sentence video" },
+  videoFileName: { type: "string", max: 180, label: "Sentence video file name" },
   level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
   notes: { type: "string", max: 1000, label: "Notes" }
 }), asyncHandler(controller.updateCustomSentence));
 router.delete("/sentences/:id", asyncHandler(controller.deleteSavedSentence));
-router.post("/sentence-decks", validateBody({
+router.post("/sentence-decks", uploadRateLimit, validateBody({
   name: { type: "string", required: true, max: 120, label: "Deck name" },
   description: { type: "string", max: 1000, label: "Description" },
   coins: { type: "integer", min: 0, max: 100000, label: "Coins" },
@@ -114,7 +124,8 @@ router.post("/sentence-decks", validateBody({
   visibility: { type: "enum", options: ["Private", "Public", "private", "public"], fallback: "Private", label: "Visibility" },
   sourceLanguage: { type: "string", max: 80, label: "Source language" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },
-  imageUrl: { type: "string", max: 1000, label: "Image URL" }
+  imageDataUrl: { type: "string", max: 800000, label: "Deck image" },
+  imageFileName: { type: "string", max: 180, label: "Deck image file name" }
 }), asyncHandler(controller.createSentenceDeck));
 router.post("/sentence-decks/:id/topics", validateBody({
   name: { type: "string", required: true, max: 120, label: "Topic name" },
@@ -127,12 +138,16 @@ router.post("/sentence-decks/topics/:id", validateBody({
   sortOrder: { type: "integer", min: 0, max: 100000, label: "Sort order" }
 }), asyncHandler(controller.updateSentenceDeckTopic));
 router.delete("/sentence-decks/topics/:id", asyncHandler(controller.deleteSentenceDeckTopic));
-router.post("/sentence-decks/:id/sentences", validateBody({
+router.post("/sentence-decks/:id/sentences", uploadRateLimit, validateBody({
   target: { type: "string", required: true, max: 500, label: "Sentence" },
   translation: { type: "string", required: true, max: 500, label: "Translation" },
   notes: { type: "string", max: 1000, label: "Notes" },
-  audioUrl: { type: "string", max: 1000, label: "Audio URL" },
-  imageUrl: { type: "string", max: 1000, label: "Image URL" },
+  audioDataUrl: { type: "dataUrl", max: 9_000_000, label: "Sentence audio" },
+  audioFileName: { type: "string", max: 180, label: "Sentence audio file name" },
+  imageDataUrl: { type: "dataUrl", max: 800000, label: "Sentence image" },
+  imageFileName: { type: "string", max: 180, label: "Sentence image file name" },
+  videoDataUrl: { type: "dataUrl", max: 11_500_000, label: "Sentence video" },
+  videoFileName: { type: "string", max: 180, label: "Sentence video file name" },
   sourceLanguage: { type: "string", max: 80, label: "Source language" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },
   topicId: { type: "uuid", label: "Topic" },

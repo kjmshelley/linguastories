@@ -129,6 +129,7 @@ async function getSentences(userId) {
             s.target_language as "targetLanguage",
             coalesce(s.audio_url, '') as "audioUrl",
             coalesce(s.image_url, '') as "imageUrl",
+            coalesce(s.video_url, '') as "videoUrl",
             s.topic,
             s.level,
             s.difficulty,
@@ -219,11 +220,13 @@ async function getSentenceDecks(user, sentences) {
             s.id,
             s.target,
             s.translation,
+            coalesce(s.romanization, '') as romanization,
             coalesce(s.notes, '') as notes,
             s.source_language as "sourceLanguage",
             s.target_language as "targetLanguage",
             coalesce(s.audio_url, '') as "audioUrl",
             coalesce(s.image_url, '') as "imageUrl",
+            coalesce(s.video_url, '') as "videoUrl",
             s.level,
             s.topic,
             coalesce(r.state, 'New') as state,
@@ -322,6 +325,7 @@ async function getStories(userId) {
             s.source_language as "sourceLanguage",
             s.topic,
             case when s.image_path_file_id is not null then '/api/stories/' || s.id || '/image' else '' end as "imageUrl",
+            coalesce(s.video_url, '') as "videoUrl",
             s.unlock_cost as cost,
             s.reward_coins as reward,
             coalesce(us.unlocked, false) as unlocked,
@@ -441,6 +445,12 @@ async function getStoryImage(storyId) {
   if (!result.rows[0]) throw notFound("Story not found");
   if (!result.rows[0].imagePathFileId) throw notFound("Story image not found");
   return storageService.downloadBoxFile(result.rows[0].imagePathFileId);
+}
+
+async function getStoredAsset(objectKey) {
+  const key = String(objectKey || "").trim();
+  if (!key.startsWith("linguastories-assets/")) throw notFound("Asset not found");
+  return storageService.downloadBoxFile(key);
 }
 
 async function getPostImage(postId) {
@@ -1235,14 +1245,72 @@ async function saveSentence(user, sentenceId) {
   return getState(user);
 }
 
+async function uploadUserSentenceAssets(user, body) {
+  const result = { audioUrl: "", imageUrl: "", videoUrl: "", uploadedAudioKey: "", uploadedImageKey: "", uploadedVideoKey: "" };
+  if (body.audioDataUrl) {
+    const audio = await storageService.uploadUserSentenceAudio({
+      userId: user.id,
+      fileName: body.audioFileName || "sentence-audio.mp3",
+      dataUrl: body.audioDataUrl
+    });
+    result.uploadedAudioKey = audio?.boxFileId || "";
+    result.audioUrl = audio?.url || "";
+  }
+  if (body.imageDataUrl) {
+    const image = await storageService.uploadUserSentenceImage({
+      userId: user.id,
+      fileName: body.imageFileName || "sentence-image.webp",
+      dataUrl: body.imageDataUrl
+    });
+    result.uploadedImageKey = image?.boxFileId || "";
+    result.imageUrl = image?.url || "";
+  }
+  if (body.videoDataUrl) {
+    const video = await storageService.uploadUserSentenceVideo({
+      userId: user.id,
+      fileName: body.videoFileName || "sentence-video.mp4",
+      dataUrl: body.videoDataUrl
+    });
+    result.uploadedVideoKey = video?.boxFileId || "";
+    result.videoUrl = video?.url || "";
+  }
+  return result;
+}
+
+async function cleanupUploadedSentenceAssets({ uploadedAudioKey = "", uploadedImageKey = "", uploadedVideoKey = "" }) {
+  if (uploadedAudioKey) {
+    try {
+      await storageService.deleteStoredFile(uploadedAudioKey);
+    } catch (deleteError) {
+      console.warn("Could not delete failed sentence audio");
+    }
+  }
+  if (uploadedImageKey) {
+    try {
+      await storageService.deleteStoredFile(uploadedImageKey);
+    } catch (deleteError) {
+      console.warn("Could not delete failed sentence image");
+    }
+  }
+  if (uploadedVideoKey) {
+    try {
+      await storageService.deleteStoredFile(uploadedVideoKey);
+    } catch (deleteError) {
+      console.warn("Could not delete failed sentence video");
+    }
+  }
+}
+
 async function addCustomSentence(user, body) {
+  let uploadedAssets = { uploadedAudioKey: "", uploadedImageKey: "", uploadedVideoKey: "" };
   const client = await pool.connect();
   try {
     await client.query("begin");
+    uploadedAssets = await uploadUserSentenceAssets(user, body);
     const sentence = await client.query(
       `insert into sentences
-        (source_language, target_language, target, translation, romanization, audio_url, image_url, topic, level, difficulty, notes, source)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        (source_language, target_language, target, translation, romanization, audio_url, image_url, video_url, topic, level, difficulty, notes, source)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        returning id`,
       [
         body.sourceLanguage || "English",
@@ -1250,8 +1318,9 @@ async function addCustomSentence(user, body) {
         body.target,
         body.translation,
         body.romanization || "",
-        body.audioUrl || "",
-        body.imageUrl || "",
+        uploadedAssets.audioUrl || "",
+        uploadedAssets.imageUrl || "",
+        uploadedAssets.videoUrl || "",
         body.topic || "Mined Sentences",
         body.level || "A1",
         Number(body.difficulty || 2),
@@ -1269,6 +1338,7 @@ async function addCustomSentence(user, body) {
     return getState(user);
   } catch (error) {
     await client.query("rollback");
+    await cleanupUploadedSentenceAssets(uploadedAssets);
     throw error;
   } finally {
     client.release();
@@ -1276,30 +1346,53 @@ async function addCustomSentence(user, body) {
 }
 
 async function updateCustomSentence(user, sentenceId, body) {
-  const result = await query(
-    `update sentences s
-        set source_language = $3,
-            target_language = $4,
-            target = $5,
-            translation = $6,
-            level = $7,
-            notes = $8,
-            audio_url = $9,
-            image_url = $10,
-            topic = 'Mined Sentences',
-            source = 'Sentence Mining',
-            updated_at = now()
-       from user_sentence_reviews usr
-      where usr.sentence_id = s.id
-        and usr.user_id = $1
-        and usr.saved = true
-        and s.id = $2
-        and coalesce(s.source, '') = 'Sentence Mining'
-      returning s.id`,
-    [user.id, sentenceId, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, body.target, body.translation, body.level || "A1", body.notes || "", body.audioUrl || "", body.imageUrl || ""]
-  );
-  if (!result.rows[0]) throw notFound("Mined sentence not found");
-  return getState(user);
+  let uploadedAssets = { uploadedAudioKey: "", uploadedImageKey: "", uploadedVideoKey: "" };
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const existing = await client.query(
+      `select s.audio_url as "audioUrl",
+              s.image_url as "imageUrl",
+              s.video_url as "videoUrl"
+         from sentences s
+         join user_sentence_reviews usr on usr.sentence_id = s.id
+        where usr.user_id = $1
+          and usr.saved = true
+          and s.id = $2
+          and coalesce(s.source, '') = 'Sentence Mining'`,
+      [user.id, sentenceId]
+    );
+    if (!existing.rows[0]) throw notFound("Mined sentence not found");
+    uploadedAssets = await uploadUserSentenceAssets(user, body);
+    const audioUrl = uploadedAssets.audioUrl || existing.rows[0].audioUrl || "";
+    const imageUrl = uploadedAssets.imageUrl || existing.rows[0].imageUrl || "";
+    const videoUrl = uploadedAssets.videoUrl || existing.rows[0].videoUrl || "";
+    await client.query(
+      `update sentences
+          set source_language = $2,
+              target_language = $3,
+              target = $4,
+              translation = $5,
+              level = $6,
+              notes = $7,
+              audio_url = $8,
+              image_url = $9,
+              video_url = $10,
+              topic = 'Mined Sentences',
+              source = 'Sentence Mining',
+              updated_at = now()
+        where id = $1`,
+      [sentenceId, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, body.target, body.translation, body.level || "A1", body.notes || "", audioUrl, imageUrl, videoUrl]
+    );
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    await cleanupUploadedSentenceAssets(uploadedAssets);
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 async function deleteSavedSentence(user, sentenceId) {
@@ -1354,14 +1447,25 @@ async function createSentenceDeck(user, body) {
   const level = normalizeLevel(body.level || user.currentLevel || "A1");
   const visibility = normalizeDeckVisibility(body.visibility);
   const description = String(body.description || "").trim();
+  let uploadedImageKey = "";
+  let imageUrl = "";
   const client = await pool.connect();
   try {
     await client.query("begin");
+    if (body.imageDataUrl) {
+      const image = await storageService.uploadSentenceDeckImage({
+        userId: user.id,
+        fileName: body.imageFileName || "deck.webp",
+        dataUrl: body.imageDataUrl
+      });
+      uploadedImageKey = image?.boxFileId || "";
+      imageUrl = image?.url || "";
+    }
     const deck = await client.query(
-      `insert into sentence_decks (deck_kind, user_id, name, description, coins, level, visibility, source_language, target_language)
-       values ('User', $1, $2, $3, $4, $5, $6, $7, $8)
+      `insert into sentence_decks (deck_kind, user_id, name, description, coins, level, visibility, source_language, target_language, image_url)
+       values ('User', $1, $2, $3, $4, $5, $6, $7, $8, $9)
        returning id`,
-      [user.id, name, description, coins, level, visibility, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage]
+      [user.id, name, description, coins, level, visibility, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, imageUrl]
     );
     if (visibility === "Public") {
       const deckPath = `/app/sentence-mining/decks/${deck.rows[0].id}`;
@@ -1381,6 +1485,13 @@ async function createSentenceDeck(user, body) {
     return getState(user);
   } catch (error) {
     await client.query("rollback");
+    if (uploadedImageKey) {
+      try {
+        await storageService.deleteStoredFile(uploadedImageKey);
+      } catch (deleteError) {
+        console.warn("Could not delete failed deck image");
+      }
+    }
     throw error;
   } finally {
     client.release();
@@ -1465,6 +1576,9 @@ async function addSentenceDeckSentence(user, deckId, body) {
     error.status = 400;
     throw error;
   }
+  let uploadedAudioKey = "";
+  let uploadedImageKey = "";
+  let uploadedVideoKey = "";
   const client = await pool.connect();
   try {
     await client.query("begin");
@@ -1481,11 +1595,41 @@ async function addSentenceDeckSentence(user, deckId, body) {
     if (body.topicId && !topic.rows[0]) throw notFound("Topic not found");
     const topicId = topic.rows[0]?.id || null;
     const topicName = topic.rows[0]?.name || String(body.topic || "General").trim();
+    let audioUrl = "";
+    let imageUrl = "";
+    let videoUrl = "";
+    if (body.audioDataUrl) {
+      const audio = await storageService.uploadUserSentenceAudio({
+        userId: user.id,
+        fileName: body.audioFileName || "sentence-audio.mp3",
+        dataUrl: body.audioDataUrl
+      });
+      uploadedAudioKey = audio?.boxFileId || "";
+      audioUrl = audio?.url || "";
+    }
+    if (body.imageDataUrl) {
+      const image = await storageService.uploadUserSentenceImage({
+        userId: user.id,
+        fileName: body.imageFileName || "sentence-image.webp",
+        dataUrl: body.imageDataUrl
+      });
+      uploadedImageKey = image?.boxFileId || "";
+      imageUrl = image?.url || "";
+    }
+    if (body.videoDataUrl) {
+      const video = await storageService.uploadUserSentenceVideo({
+        userId: user.id,
+        fileName: body.videoFileName || "sentence-video.mp4",
+        dataUrl: body.videoDataUrl
+      });
+      uploadedVideoKey = video?.boxFileId || "";
+      videoUrl = video?.url || "";
+    }
     const sentence = await client.query(
-      `insert into sentences (source_language, target_language, target, translation, audio_url, image_url, topic, level, difficulty, notes, source)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, 2, $9, 'Sentence Mining')
+      `insert into sentences (source_language, target_language, target, translation, audio_url, image_url, video_url, topic, level, difficulty, notes, source)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, 2, $10, 'Sentence Mining')
        returning id`,
-      [body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, target, translation, body.audioUrl || "", body.imageUrl || "", topicName, normalizeLevel(body.level || user.currentLevel || "A1"), body.notes || ""]
+      [body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, target, translation, audioUrl, imageUrl, videoUrl, topicName, normalizeLevel(body.level || user.currentLevel || "A1"), body.notes || ""]
     );
     await client.query(
       `insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)
@@ -1503,6 +1647,27 @@ async function addSentenceDeckSentence(user, deckId, body) {
     return getState(user);
   } catch (error) {
     await client.query("rollback");
+    if (uploadedAudioKey) {
+      try {
+        await storageService.deleteStoredFile(uploadedAudioKey);
+      } catch (deleteError) {
+        console.warn("Could not delete failed sentence audio");
+      }
+    }
+    if (uploadedImageKey) {
+      try {
+        await storageService.deleteStoredFile(uploadedImageKey);
+      } catch (deleteError) {
+        console.warn("Could not delete failed sentence image");
+      }
+    }
+    if (uploadedVideoKey) {
+      try {
+        await storageService.deleteStoredFile(uploadedVideoKey);
+      } catch (deleteError) {
+        console.warn("Could not delete failed sentence video");
+      }
+    }
     throw error;
   } finally {
     client.release();
@@ -2308,6 +2473,7 @@ async function togglePostLike(user, postId) {
 module.exports = {
   getState,
   getStoryImage,
+  getStoredAsset,
   getPostImage,
   getPostThumbnail,
   getLearnerAvatar,

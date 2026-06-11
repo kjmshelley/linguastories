@@ -143,6 +143,7 @@ create table if not exists sentences (
   romanization text,
   audio_url text,
   image_url text,
+  video_url text,
   level text not null,
   topic text not null,
   difficulty integer default 1 check (difficulty between 1 and 5),
@@ -236,6 +237,7 @@ create table if not exists stories (
   topic text not null,
   image_path_file_id text,
   audio_url text,
+  video_url text,
   unlock_cost integer default 20 check (unlock_cost >= 0),
   reward_coins integer default 15 check (reward_coins >= 0),
   created_at timestamptz default now()
@@ -274,6 +276,9 @@ alter table if exists stories
 
 alter table if exists stories
   add column if not exists image_path_file_id text;
+
+alter table if exists stories
+  add column if not exists video_url text;
 
 update stories
    set category_id = story_categories.id
@@ -499,6 +504,9 @@ alter table if exists sentences
 
 alter table if exists sentences
   add column if not exists image_url text;
+
+alter table if exists sentences
+  add column if not exists video_url text;
 
 alter table if exists sentences
   add column if not exists updated_at timestamptz default now();

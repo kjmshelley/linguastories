@@ -11,6 +11,13 @@ async function storyImage(req, res) {
   res.send(image.buffer);
 }
 
+async function asset(req, res) {
+  const file = await learningService.getStoredAsset(req.params[0]);
+  res.setHeader("Content-Type", file.contentType);
+  res.setHeader("Cache-Control", "private, max-age=300");
+  res.send(file.buffer);
+}
+
 async function postImage(req, res) {
   const image = await learningService.getPostImage(req.params.id);
   res.setHeader("Content-Type", image.contentType);
@@ -179,6 +186,7 @@ async function createStoryComment(req, res) {
 module.exports = {
   state,
   storyImage,
+  asset,
   postImage,
   postThumbnail,
   learnerAvatar,

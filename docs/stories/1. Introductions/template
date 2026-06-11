@@ -1,0 +1,292 @@
+Act as a storyboard artist.
+
+Break the following CEFR story into video scenes.
+
+For each scene provide:
+
+1. Scene number
+2. Duration
+3. Narration text
+4. Subtitle text
+5. Detailed image generation prompt
+6. Camera movement
+7. Transition
+
+Requirements:
+- Maintain character consistency
+- Modern educational illustration with storybook warmth
+- Adult-friendly language learning style
+- 16:9 landscape
+- No text in image
+- Visually engaging
+- Suitable for AI image generation
+- Output as JSON
+
+Story:
+Ethan had been looking for a job for three months. To reduce stress, he joined a free wellness group at the local community center. There, he met Leo, a quiet man whom most people avoided. Rumors said Leo was rude and difficult.
+One evening, Ethan found his backpack open after a yoga session. His notebook, which contained interview notes, was missing.
+“I saw Leo near your bag,” someone whispered.
+The next day, Ethan confronted him.
+“Did you take my notebook?” Ethan asked.
+Leo looked surprised. “No. Why would I do that?”
+“You were the last person near my backpack.”
+Leo’s face hardened. “People always blame me.”
+The conversation ended badly.
+Two days later, Ethan received a call for an important interview. When he arrived at the company, the receptionist handed him a notebook.
+“A man left this for you yesterday,” she said.
+It was his.
+Inside was a note: *You dropped this outside the center. Good luck. — Leo*
+Embarrassed, Ethan went to find him.
+“I’m sorry,” Ethan said.
+Leo smiled slightly. “It’s okay. I’m used to surprises. But this time, I guess you were the surprised one.”
+The two men laughed, and their conflict finally ended.
+
+
+
+
+
+
+
+## Scene 1 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan sitting alone at a small desk in a modest apartment, looking at job applications on a laptop. Several resumes and notes are neatly arranged nearby. Soft morning sunlight comes through a window. Ethan looks tired but determined after three months of searching for work.
+
+---
+
+## Scene 2 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan entering a welcoming local community center for a free wellness group. Several adults are preparing yoga mats in a calm, warm room. Ethan looks hopeful and slightly nervous as he steps inside.
+
+---
+
+## Scene 3 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Inside the wellness room, show Ethan noticing Leo standing quietly near a wall. Small groups of people chat together while keeping distance from Leo. Leo looks reserved and alone, while Ethan looks curious.
+
+---
+
+## Scene 4 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show several wellness group members whispering together while glancing toward Leo in the background. Leo stands alone, unaware of the gossip. The scene should feel tense but realistic, showing misunderstanding rather than cruelty.
+
+---
+
+## Scene 5 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan kneeling beside his open backpack after a yoga session. Yoga mats are scattered around the community center room. Ethan looks concerned as he searches inside the backpack. Evening light comes through large windows.
+
+---
+
+## Scene 6 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan searching through his open backpack with growing worry. Papers are visible inside, but his notebook is missing. His face shows panic and frustration. The yoga studio background is softly blurred.
+
+---
+
+## Scene 7 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show a wellness group member quietly leaning toward Ethan and whispering. Ethan listens with concern. In the background, Leo walks away carrying nothing, unaware of the accusation. The mood is suspenseful.
+
+---
+
+## Scene 8 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Ethan confronting Leo outside the community center the next day. Ethan looks serious and suspicious. Leo looks surprised and confused. Trees and the community center entrance are visible behind them.
+
+---
+
+## Scene 9 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show a tense medium close-up of Ethan asking Leo if he took the notebook. Ethan looks frustrated and suspicious. Leo looks shocked by the accusation. Focus on their facial expressions and body language.
+
+---
+
+## Scene 10 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Ethan pointing slightly while explaining why he suspects Leo. Leo’s expression changes from surprise to hurt disappointment. The community center entrance is in the background. The scene should show a misunderstanding getting worse.
+
+---
+
+## Scene 11 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show a close-up of Leo’s face. He looks hurt, frustrated, and tired of being blamed unfairly. The background is softly blurred. The emotional focus should be on Leo’s sadness and disappointment.
+
+---
+
+## Scene 12 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Ethan and Leo walking away from each other in opposite directions outside the community center. Long evening shadows create emotional distance. The mood is quiet, tense, and unresolved.
+
+---
+
+## Scene 13 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan standing on a city sidewalk answering his phone. His expression changes to surprise and excitement after receiving an important interview call. Modern office buildings rise in the background. The mood is hopeful and bright.
+
+---
+
+## Scene 14 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan inside a modern company reception area. A professional receptionist hands him a familiar notebook across the front desk. Ethan looks shocked and confused. The office is bright, clean, and professional.
+
+---
+
+## Scene 15 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan opening the recovered notebook and discovering a handwritten note inside. The writing should not be readable. Ethan’s expression changes from surprise to embarrassment as he realizes Leo returned the notebook. Soft office lighting emphasizes the emotional moment.
+
+---
+
+## Scene 16 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Show Ethan walking purposefully toward the community center while carrying the notebook. His expression shows regret and determination to apologize. Warm afternoon sunlight creates a sincere, reflective mood.
+
+---
+
+## Scene 17 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Ethan sincerely apologizing to Leo outside the community center. Ethan’s posture is humble and regretful. Leo listens calmly. Warm natural light creates a feeling of reconciliation.
+
+---
+
+## Scene 18 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Leo smiling gently for the first time while Ethan laughs awkwardly with relief. The tension between them has disappeared. Warm golden-hour lighting creates a hopeful atmosphere.
+
+---
+
+## Scene 19 Prompt
+
+Create a 16:9 landscape still image.
+
+Modern educational illustration with storybook warmth. Adult-friendly language-learning style. Clean outlines, expressive facial features, readable body language, bright but natural colors, simple uncluttered background, high visual clarity, professional digital illustration, cinematic composition. No text, no captions, no watermarks.
+
+Ethan is a man in his early 30s with short brown hair, light stubble, and an average build. He wears a blue casual jacket over a light gray shirt and dark jeans.
+
+Leo is a man in his mid-30s with short black hair, an average build, and a serious but kind expression. He wears a dark green hoodie and black pants.
+
+Show Ethan and Leo standing outside the community center laughing together. Their body language is relaxed and friendly, suggesting a new friendship. Golden sunset lighting creates a peaceful, uplifting ending.

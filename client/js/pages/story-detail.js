@@ -76,6 +76,11 @@ function storyDetailImage(story, title, className = "aspect-[4/3] w-full object-
   `;
 }
 
+function storyDetailVideo(story) {
+  if (!story.videoUrl) return "";
+  return `<video class="mt-4 max-h-96 w-full rounded-lg bg-black object-contain" controls src="${escapeHtml(story.videoUrl)}"></video>`;
+}
+
 function keySentenceCard(sentence, fallbackText, savedSentences) {
   const saved = sentence && savedSentences.includes(sentence.id);
 
@@ -360,6 +365,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
               <h2 class="mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">${escapeHtml(content.title)}</h2>
               <p class="mt-4 max-w-2xl leading-7 text-brand-charcoal">${escapeHtml(content.translation)}</p>
               <div class="mt-6">${button("Change Reading Level", `openStoryLevelModal:${story.id}`, ui.secondary)}</div>
+              ${storyDetailVideo(story)}
             </div>
             <div class="border-t border-brand-line/70 bg-white/45 lg:border-l lg:border-t-0">
               ${storyDetailImage(story, content.title, "aspect-[4/3] h-full min-h-72 w-full object-cover")}
@@ -377,8 +383,9 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
       <section class="overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_14px_34px_rgba(29,41,63,.07)]">
         <div class="grid lg:grid-cols-[340px_minmax(0,1fr)]">
           <div class="border-b border-brand-line/70 bg-white/45 lg:border-b-0 lg:border-r">
-            ${storyDetailImage(story, content.title, "aspect-[4/3] h-full min-h-64 w-full object-cover")}
-          </div>
+              ${storyDetailImage(story, content.title, "aspect-[4/3] h-full min-h-64 w-full object-cover")}
+              ${storyDetailVideo(story)}
+            </div>
           <div class="flex flex-wrap items-start justify-between gap-4 p-5">
             <div class="min-w-0">
               <div class="${ui.row}">
