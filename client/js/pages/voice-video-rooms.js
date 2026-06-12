@@ -1,0 +1,176 @@
+import { escapeHtml, icon, ui } from "../ui.js";
+
+const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+
+function optionList(items, selected = "") {
+  return items.map((item) => `<option value="${escapeHtml(item)}" ${item === selected ? "selected" : ""}>${escapeHtml(item)}</option>`).join("");
+}
+
+function languageOptions(appConfig, selected = "") {
+  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Korean", "Spanish", "French", "German"];
+  return optionList(languages, selected);
+}
+
+function roomImage(room) {
+  if (room.imageUrl) {
+    return `<img class="h-16 w-20 rounded-lg object-cover" src="${escapeHtml(room.imageUrl)}" alt="${escapeHtml(room.title)} room picture">`;
+  }
+  return `
+    <div class="grid h-16 w-20 place-items-center rounded-lg bg-brand-mist text-brand-redDark ring-1 ring-brand-line/80">
+      ${icon(room.roomType === "video" ? "video" : "mic", "h-6 w-6")}
+    </div>
+  `;
+}
+
+function roomRows({ rooms, activeSession, wallet }) {
+  if (!rooms.length) {
+    return `
+      <tr>
+        <td colspan="7" class="px-4 py-10 text-center text-sm font-semibold text-brand-graphite">No focused practice rooms match these filters.</td>
+      </tr>
+    `;
+  }
+  return rooms.map((room) => {
+    const canJoin = Number(wallet?.balance || 0) >= 1000 && room.participantCount < room.maxParticipants;
+    const active = activeSession?.roomId === room.id;
+    return `
+      <tr class="border-b border-brand-line/70 align-middle last:border-0">
+        <td class="px-4 py-3">${roomImage(room)}</td>
+        <td class="min-w-[220px] px-4 py-3">
+          <div class="font-bold text-brand-ink">${escapeHtml(room.title)}</div>
+          <p class="mt-1 line-clamp-2 text-xs leading-5 text-brand-graphite">${escapeHtml(room.description || "Focused speaking practice for language learners.")}</p>
+        </td>
+        <td class="px-4 py-3"><span class="${ui.tagGold}">${escapeHtml(room.roomType)}</span></td>
+        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</td>
+        <td class="px-4 py-3"><span class="${ui.tag}">${escapeHtml(room.cefrLevel)}</span></td>
+        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${room.participantCount}/${room.maxParticipants}</td>
+        <td class="px-4 py-3 text-right">
+          <button class="${active ? ui.danger : ui.primary}" data-action="${active ? "leaveVoiceVideoRoom" : "joinVoiceVideoRoom"}:${escapeHtml(room.id)}" ${!active && !canJoin ? "disabled" : ""}>
+            ${icon(active ? "logout" : "login", "h-4 w-4")}<span>${active ? "Leave" : canJoin ? "Join" : "Unavailable"}</span>
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function activeRoomPanel({ activeRoom, activeSession }) {
+  if (!activeRoom || !activeSession) return "";
+  const elapsed = Number(activeSession.elapsedSeconds || 0);
+  const minutes = Math.min(6, Math.max(1, Math.ceil(Math.max(1, elapsed) / 60)));
+  return `
+    <section class="${ui.card}">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <span class="${ui.tagRed}">Live session</span>
+          <h3 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(activeRoom.title)}</h3>
+          <p class="mt-2 ${ui.muted}">Use the time for sentence practice, pronunciation checks, or a focused language exchange prompt.</p>
+        </div>
+        <button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(activeRoom.id)}">${icon("logout", "h-4 w-4")}<span>Leave Room</span></button>
+      </div>
+      <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
+        <div class="min-h-[280px] rounded-lg border border-brand-line bg-brand-ink p-3 text-white">
+          <div class="flex min-h-[252px] flex-col gap-3" data-livekit-stage>
+            <div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-center">
+              <div>
+                ${icon(activeRoom.roomType === "video" ? "video" : "mic", "mx-auto h-9 w-9 text-white/72")}
+                <p class="mt-3 text-sm font-semibold text-white/78">Connecting to LiveKit Cloud...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="rounded-lg border border-brand-line/80 bg-white/60 p-4">
+          <div class="text-xs font-semibold uppercase tracking-[.16em] text-brand-graphite">Countdown</div>
+          <strong class="mt-2 block text-4xl font-bold tabular-nums text-brand-ink" data-room-countdown>06:00</strong>
+          <p class="mt-3 text-sm font-semibold text-brand-charcoal">Estimated charge: <span data-room-estimated-charge>${minutes * 1000}</span> coins</p>
+          <div class="mt-4 grid gap-2 text-xs font-semibold text-brand-graphite">
+            <span>Warnings show at 3 minutes, 1 minute, and 10 seconds remaining.</span>
+            <span>At 6 minutes, you are disconnected automatically.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  `;
+}
+
+export function createVoiceVideoRoomModal({ appConfig, state }) {
+  return `
+    <div>
+      <span class="${ui.tagGold}">Focused practice</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Create Voice/Video Room</h2>
+      <p class="mt-2 ${ui.muted}">Create a short practice room with a clear language goal. Rooms are limited to 6 minutes.</p>
+      <form class="mt-5 grid gap-3" data-form="voiceVideoRoom">
+        <label class="${ui.label}">Title<input class="${ui.input}" name="title" required maxlength="120" placeholder="Pronunciation practice: travel phrases"></label>
+        <label class="${ui.label}">Description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000" placeholder="Practice 5 useful phrases and give quick feedback."></textarea></label>
+        <div class="grid gap-3 md:grid-cols-2">
+          <label class="${ui.label}">Room type<select class="${ui.input}" name="roomType"><option value="voice">Voice</option><option value="video">Video</option></select></label>
+          <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${optionList(levels, state.user.currentLevel || "A1")}</select></label>
+          <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage">${languageOptions(appConfig, state.user.targetLanguage)}</select></label>
+          <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "English")}</select></label>
+          <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="8" value="4"></label>
+          <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate"><option value="false">Public</option><option value="true">Private</option></select></label>
+        </div>
+        <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-brand-line pt-4">
+          <p class="text-xs font-semibold text-brand-graphite">Cost is paid only by participants when they join and leave.</p>
+          <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], voiceVideoRoomFilters = {}, activeVoiceVideoRoom = null, activeVoiceVideoSession = null }) {
+  return `
+    <div class="grid gap-5">
+      <section class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-3xl">
+            <span class="${ui.tagGold}">Language exchange</span>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Voice/Video Rooms</h2>
+            <p class="mt-3 ${ui.muted}">These rooms are for focused language practice, not casual chatting.</p>
+          </div>
+          <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+        </div>
+        <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6 minutes</strong><span class="text-sm text-brand-graphite">Voice/video rooms are limited to 6 minutes.</span></div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">1000 coins</strong><span class="text-sm text-brand-graphite">Cost: 1000 coins per minute.</span></div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6000 coins</strong><span class="text-sm text-brand-graphite">Maximum cost: 6000 coins.</span></div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">Earn more</strong><span class="text-sm text-brand-graphite">Read stories, mine sentences, review decks, and engage thoughtfully with the community.</span></div>
+        </div>
+      </section>
+
+      ${activeRoomPanel({ activeRoom: activeVoiceVideoRoom, activeSession: activeVoiceVideoSession })}
+
+      <section class="${ui.card}">
+        <form class="grid gap-3 lg:grid-cols-[minmax(180px,1fr)_repeat(4,minmax(140px,180px))_auto]" data-form="voiceVideoRoomFilters">
+          <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
+          <label class="${ui.label}">Target<select class="${ui.input}" name="targetLanguage"><option value="">Any</option>${languageOptions(appConfig, voiceVideoRoomFilters.targetLanguage)}</select></label>
+          <label class="${ui.label}">Source<select class="${ui.input}" name="sourceLanguage"><option value="">Any</option>${languageOptions(appConfig, voiceVideoRoomFilters.sourceLanguage)}</select></label>
+          <label class="${ui.label}">Level<select class="${ui.input}" name="cefrLevel"><option value="">Any</option>${optionList(levels, voiceVideoRoomFilters.cefrLevel)}</select></label>
+          <label class="${ui.label}">Type<select class="${ui.input}" name="roomType"><option value="">Any</option><option value="voice" ${voiceVideoRoomFilters.roomType === "voice" ? "selected" : ""}>Voice</option><option value="video" ${voiceVideoRoomFilters.roomType === "video" ? "selected" : ""}>Video</option></select></label>
+          <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
+        </form>
+      </section>
+
+      <section class="overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[860px] border-collapse text-left">
+            <thead class="bg-white/65 text-xs font-semibold uppercase tracking-[.12em] text-brand-graphite">
+              <tr>
+                <th class="px-4 py-3">Picture</th>
+                <th class="px-4 py-3">Room</th>
+                <th class="px-4 py-3">Type</th>
+                <th class="px-4 py-3">Languages</th>
+                <th class="px-4 py-3">Level</th>
+                <th class="px-4 py-3">Seats</th>
+                <th class="px-4 py-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>${roomRows({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, wallet: state.wallet })}</tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  `;
+}

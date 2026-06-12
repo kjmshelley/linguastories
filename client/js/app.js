@@ -13,6 +13,7 @@ import { shadowingView } from "./pages/shadowing.js";
 import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
 import { storiesView } from "./pages/stories.js";
 import { storyDetailView, storyLevelModal } from "./pages/story-detail.js";
+import { createVoiceVideoRoomModal, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
 import { coinRulesModal, walletView } from "./pages/wallet.js";
 import { escapeHtml, icon, ui } from "./ui.js";
 import { gsap } from "../vendor/gsap/gsap.esm.js";
@@ -30,7 +31,8 @@ const routeGroups = [
     title: "Community",
     routes: [
       ["communityConnect", "Connect"],
-      ["communityMoments", "Moments"]
+      ["communityMoments", "Moments"],
+      ["voiceVideoRooms", "Voice/Video Rooms"]
     ]
   },
   {
@@ -72,6 +74,7 @@ const routeSlugs = {
   stories: "stories",
   communityConnect: "community/connect",
   communityMoments: "community/moments",
+  voiceVideoRooms: "community/voice-video-rooms",
   profileInfo: "profile/my-info",
   profileLanguages: "profile/language-profiles",
   profileGoals: "profile/goals",
@@ -79,7 +82,7 @@ const routeSlugs = {
   profileWallet: "profile/wallet"
 };
 const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
-const communityRoutes = new Set(["communityConnect", "communityMoments", "communityLearner", "communityMoment"]);
+const communityRoutes = new Set(["communityConnect", "communityMoments", "communityLearner", "communityMoment", "voiceVideoRooms"]);
 
 let appConfig = { supportedLanguages: [] };
 let state = null;
@@ -100,6 +103,15 @@ let selectedStoryReaderOptions = {};
 let selectedLearnerProfileTabs = {};
 let communityListLimits = { communityConnect: 10, communityMoments: 10 };
 let connectMyCommunityOnly = true;
+let voiceVideoRooms = [];
+let voiceVideoRoomFilters = { q: "", targetLanguage: "", sourceLanguage: "", cefrLevel: "", roomType: "" };
+let voiceVideoRoomsLoaded = false;
+let activeVoiceVideoRoom = null;
+let activeVoiceVideoSession = null;
+let livekitRoomConnection = null;
+let livekitRoomTimer = null;
+let endingVoiceVideoRoom = false;
+let livekitWarningFlags = { three: false, one: false, ten: false };
 let chatOpen = false;
 let chatContactsHidden = false;
 let chatMobileScreen = "contacts";
@@ -218,6 +230,7 @@ function routeIcon(id) {
     sentenceMining: "scanText",
     communityConnect: "search",
     communityMoments: "message",
+    voiceVideoRooms: "video",
     profileInfo: "user",
     profileLanguages: "globe",
     profileGoals: "goal",
@@ -262,7 +275,11 @@ function context() {
     selectedStoryReaderOptions,
     selectedLearnerProfileTabs,
     communityListLimits,
-    connectMyCommunityOnly
+    connectMyCommunityOnly,
+    voiceVideoRooms,
+    voiceVideoRoomFilters,
+    activeVoiceVideoRoom,
+    activeVoiceVideoSession
   };
 }
 
@@ -461,6 +478,175 @@ async function authRequest(path, data) {
   selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
   history.pushState({}, "", appPath("shortStories"));
   render();
+}
+
+async function livekitApi(path, options = {}) {
+  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
+  if (response.status === 401) {
+    state = null;
+    navigatePublic("/login");
+    return null;
+  }
+  const body = await response.json().catch(() => ({ error: "Request failed" }));
+  if (!response.ok) {
+    showModal(`<h2 class="text-xl font-black">Room unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
+    return null;
+  }
+  return body;
+}
+
+function voiceVideoRoomQuery() {
+  const params = new URLSearchParams();
+  Object.entries(voiceVideoRoomFilters).forEach(([key, value]) => {
+    if (value) params.set(key, value);
+  });
+  const queryString = params.toString();
+  return queryString ? `?${queryString}` : "";
+}
+
+async function loadVoiceVideoRooms({ force = false } = {}) {
+  if (voiceVideoRoomsLoaded && !force) return;
+  const body = await livekitApi(`/api/livekit/rooms${voiceVideoRoomQuery()}`);
+  if (!body) return;
+  voiceVideoRooms = body.rooms || [];
+  voiceVideoRoomsLoaded = true;
+  if (activeRoute() === "voiceVideoRooms") render();
+}
+
+function updateVoiceVideoCountdown() {
+  if (!activeVoiceVideoSession) return;
+  const startedAt = new Date(activeVoiceVideoSession.startedAt).getTime();
+  const elapsed = Math.min(360, Math.max(0, Math.ceil((Date.now() - startedAt) / 1000)));
+  const remaining = Math.max(0, 360 - elapsed);
+  activeVoiceVideoSession = { ...activeVoiceVideoSession, elapsedSeconds: elapsed, secondsRemaining: remaining };
+  const countdown = document.querySelector("[data-room-countdown]");
+  const charge = document.querySelector("[data-room-estimated-charge]");
+  if (countdown) {
+    const minutes = Math.floor(remaining / 60);
+    const seconds = remaining % 60;
+    countdown.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+  if (charge) charge.textContent = Math.min(6000, Math.max(1000, Math.ceil(Math.max(1, elapsed) / 60) * 1000));
+  if (remaining <= 180 && !livekitWarningFlags.three) {
+    livekitWarningFlags.three = true;
+    showModal(`<h2 class="text-xl font-black">3 minutes remaining</h2><p class="${ui.muted}">Keep the practice focused: one sentence, one correction, one retry.</p>`);
+  }
+  if (remaining <= 60 && !livekitWarningFlags.one) {
+    livekitWarningFlags.one = true;
+    showModal(`<h2 class="text-xl font-black">1 minute remaining</h2><p class="${ui.muted}">Wrap up your speaking turn and final correction.</p>`);
+  }
+  if (remaining <= 10 && !livekitWarningFlags.ten) {
+    livekitWarningFlags.ten = true;
+    showModal(`<h2 class="text-xl font-black">10 seconds remaining</h2><p class="${ui.muted}">The room will disconnect automatically.</p>`);
+  }
+  if (remaining <= 0) leaveVoiceVideoRoom({ timedOut: true });
+}
+
+function stopVoiceVideoTimer() {
+  if (livekitRoomTimer) window.clearInterval(livekitRoomTimer);
+  livekitRoomTimer = null;
+}
+
+function startVoiceVideoTimer() {
+  stopVoiceVideoTimer();
+  livekitWarningFlags = { three: false, one: false, ten: false };
+  updateVoiceVideoCountdown();
+  livekitRoomTimer = window.setInterval(updateVoiceVideoCountdown, 1000);
+}
+
+function renderTrack(track, participantName = "Participant") {
+  const stage = document.querySelector("[data-livekit-stage]");
+  if (!stage || !track?.attach) return;
+  const element = track.attach();
+  element.className = track.kind === "video"
+    ? "min-h-[190px] w-full rounded-lg bg-black object-cover"
+    : "w-full rounded-lg";
+  const wrapper = document.createElement("div");
+  wrapper.className = "rounded-lg border border-white/10 bg-white/[.04] p-2";
+  wrapper.innerHTML = `<div class="mb-2 text-xs font-semibold text-white/66">${escapeHtml(participantName)}</div>`;
+  wrapper.append(element);
+  stage.append(wrapper);
+}
+
+async function connectLiveKitRoom(payload) {
+  const stage = document.querySelector("[data-livekit-stage]");
+  if (stage) stage.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[.04] p-4 text-sm font-semibold text-white/72">Connecting media...</div>`;
+  try {
+    const { Room, RoomEvent, createLocalTracks } = await import("/vendor/livekit/livekit-client.esm.mjs");
+    const room = new Room({ adaptiveStream: true, dynacast: true });
+    livekitRoomConnection = room;
+    room.on(RoomEvent.TrackSubscribed, (track, _publication, participant) => renderTrack(track, participant.name || "Participant"));
+    room.on(RoomEvent.Disconnected, () => {
+      if (activeVoiceVideoSession && !endingVoiceVideoRoom) leaveVoiceVideoRoom({ silent: true });
+    });
+    await room.connect(payload.livekitUrl, payload.token);
+    if (stage) stage.innerHTML = "";
+    const tracks = await createLocalTracks({ audio: true, video: payload.room.roomType === "video" });
+    for (const track of tracks) {
+      await room.localParticipant.publishTrack(track);
+      renderTrack(track, "You");
+    }
+    if (stage && !stage.children.length) {
+      stage.innerHTML = `<div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-sm font-semibold text-white/72">Connected. Audio is active.</div>`;
+    }
+  } catch (error) {
+    showModal(`<h2 class="text-xl font-black">LiveKit connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to the room.")}</p>`);
+  }
+}
+
+async function joinVoiceVideoRoom(roomId) {
+  const payload = await livekitApi(`/api/livekit/rooms/${roomId}/join`, { method: "POST" });
+  if (!payload) return;
+  activeVoiceVideoRoom = payload.room;
+  activeVoiceVideoSession = payload.session;
+  voiceVideoRoomsLoaded = false;
+  render();
+  startVoiceVideoTimer();
+  await connectLiveKitRoom(payload);
+}
+
+async function disconnectLiveKitTracks() {
+  const room = livekitRoomConnection;
+  livekitRoomConnection = null;
+  if (!room) return;
+  try {
+    room.localParticipant?.trackPublications?.forEach((publication) => {
+      publication.track?.stop?.();
+      publication.track?.detach?.().forEach((element) => element.remove());
+    });
+    room.disconnect();
+  } catch (_error) {
+    // The server-side end call is the billing source of truth.
+  }
+}
+
+async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
+  if (!activeVoiceVideoRoom || !activeVoiceVideoSession) return;
+  if (endingVoiceVideoRoom) return;
+  endingVoiceVideoRoom = true;
+  try {
+    const roomId = activeVoiceVideoRoom.id;
+    const sessionId = activeVoiceVideoSession.id;
+    const wasTimedOut = timedOut || activeVoiceVideoSession.secondsRemaining <= 0;
+    stopVoiceVideoTimer();
+    await disconnectLiveKitTracks();
+    const payload = await livekitApi(wasTimedOut ? `/api/livekit/sessions/${sessionId}/end` : `/api/livekit/rooms/${roomId}/leave`, {
+      method: "POST",
+      body: JSON.stringify(wasTimedOut ? { status: "timed_out" } : {})
+    });
+    if (payload?.wallet && state?.wallet) state.wallet = { ...state.wallet, ...payload.wallet };
+    const charged = payload?.session?.coinsCharged;
+    activeVoiceVideoRoom = null;
+    activeVoiceVideoSession = null;
+    voiceVideoRoomsLoaded = false;
+    await loadVoiceVideoRooms({ force: true });
+    render();
+    if (!silent && charged) {
+      showModal(`<h2 class="text-xl font-black">Session ended</h2><p class="${ui.muted}">You were charged ${charged} coins for ${payload.session.billedMinutes} minute${payload.session.billedMinutes === 1 ? "" : "s"} of focused practice.</p>`);
+    }
+  } finally {
+    endingVoiceVideoRoom = false;
+  }
 }
 
 function showModal(html, options = {}) {
@@ -1496,6 +1682,9 @@ function bindActions(root = document) {
         communityListLimits = { ...communityListLimits, communityConnect: 10 };
         render();
       }
+      if (action === "openCreateVoiceVideoRoomModal") showModal(createVoiceVideoRoomModal(context()));
+      if (action === "joinVoiceVideoRoom") await joinVoiceVideoRoom(id);
+      if (action === "leaveVoiceVideoRoom") await leaveVoiceVideoRoom();
       if (action === "openShortStorySearch") {
         history.pushState({}, "", appPath("shortStorySearch"));
         render();
@@ -1802,6 +1991,33 @@ function bindActions(root = document) {
         await api("/api/posts", { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
+      if (form.dataset.form === "voiceVideoRoom") {
+        const imageFile = form.elements.roomImage?.files?.[0];
+        delete data.roomImage;
+        if (imageFile) {
+          try {
+            Object.assign(data, await processDeckImage(imageFile));
+          } catch (error) {
+            showModal(`<h2 class="text-xl font-black">Room image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+            return;
+          }
+        }
+        await livekitApi("/api/livekit/rooms", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+        voiceVideoRoomsLoaded = false;
+        await loadVoiceVideoRooms({ force: true });
+      }
+      if (form.dataset.form === "voiceVideoRoomFilters") {
+        voiceVideoRoomFilters = {
+          q: data.q || "",
+          targetLanguage: data.targetLanguage || "",
+          sourceLanguage: data.sourceLanguage || "",
+          cefrLevel: data.cefrLevel || "",
+          roomType: data.roomType || ""
+        };
+        voiceVideoRoomsLoaded = false;
+        await loadVoiceVideoRooms({ force: true });
+      }
       if (form.dataset.form === "comment") {
         await api(`/api/posts/${data.postId}/comments`, { method: "POST", body: JSON.stringify(data) });
       }
@@ -1960,6 +2176,7 @@ function render() {
     goals: goalsView,
     communityConnect: communityConnectView,
     communityMoments: communityMomentsView,
+    voiceVideoRooms: voiceVideoRoomsView,
     communityLearner: (ctx) => communityLearnerView({ ...ctx, activeLearnerId: activeLearnerId() }),
     communityMoment: (ctx) => communityMomentView({ ...ctx, activePostId: activePostId() }),
     progress: progressView,
@@ -1975,6 +2192,10 @@ function render() {
   view.innerHTML = (views[route] || dashboardView)(context());
   bindActions();
   renderChatDrawer();
+  if (route === "voiceVideoRooms") {
+    loadVoiceVideoRooms();
+    if (activeVoiceVideoSession) startVoiceVideoTimer();
+  }
 }
 
 function loadMoreCommunityListIfNeeded() {
@@ -1999,6 +2220,13 @@ function loadMoreCommunityListIfNeeded() {
 window.addEventListener("popstate", () => {
   if (state && window.location.pathname.startsWith("/app")) return render();
   renderPublicPage();
+});
+
+window.addEventListener("beforeunload", () => {
+  if (!activeVoiceVideoSession?.id) return;
+  const body = JSON.stringify({ status: "disconnected" });
+  const blob = new Blob([body], { type: "application/json" });
+  navigator.sendBeacon?.(`/api/livekit/sessions/${activeVoiceVideoSession.id}/end`, blob);
 });
 
 window.addEventListener("scroll", loadMoreCommunityListIfNeeded, { passive: true });

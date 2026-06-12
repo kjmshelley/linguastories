@@ -32,12 +32,27 @@ function storageOrigins() {
     .filter(Boolean);
 }
 
+function livekitConnectOrigins() {
+  const origins = ["https://*.livekit.cloud", "wss://*.livekit.cloud"];
+  try {
+    if (process.env.LIVEKIT_URL) {
+      const url = new URL(process.env.LIVEKIT_URL);
+      const httpProtocol = url.protocol.startsWith("ws") ? url.protocol.replace("ws", "http") : url.protocol;
+      const wsProtocol = url.protocol.startsWith("http") ? url.protocol.replace("http", "ws") : url.protocol;
+      origins.push(`${httpProtocol}//${url.host}`, `${wsProtocol}//${url.host}`);
+    }
+  } catch (_error) {
+    // Ignore malformed optional LiveKit URLs here; route-level config validation handles them.
+  }
+  return origins;
+}
+
 function securityHeaders(req, res, next) {
   const scriptSrc = ["'self'", "https://cdn.tailwindcss.com", "'unsafe-inline'"];
   const styleSrc = ["'self'", "'unsafe-inline'"];
   const mediaSrc = ["'self'", ...storageOrigins()];
   const imgSrc = ["'self'", "data:", "blob:", ...storageOrigins()];
-  const connectSrc = ["'self'", ...allowedOrigins()];
+  const connectSrc = ["'self'", ...allowedOrigins(), ...livekitConnectOrigins()];
   const csp = [
     "default-src 'self'",
     `script-src ${scriptSrc.join(" ")}`,
@@ -56,7 +71,7 @@ function securityHeaders(req, res, next) {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()");
+  res.setHeader("Permissions-Policy", "camera=(self), microphone=(self), geolocation=(), payment=()");
   res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
   if (isProduction()) {
     res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");

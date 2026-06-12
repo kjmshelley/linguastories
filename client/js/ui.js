@@ -75,6 +75,7 @@ const iconPaths = {
   logout: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path>`,
   menu: `<path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path>`,
   message: `<path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"></path>`,
+  mic: `<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path>`,
   play: `<path d="m8 5 11 7-11 7Z"></path>`,
   reading: `<path d="M12 6.5A6 6 0 0 0 6 4H3v15h3a6 6 0 0 1 6 2Z"></path><path d="M12 6.5A6 6 0 0 1 18 4h3v15h-3a6 6 0 0 0-6 2Z"></path><path d="M12 6.5V21"></path>`,
   save: `<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path>`,
@@ -88,6 +89,7 @@ const iconPaths = {
   upload: `<path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M5 21h14"></path>`,
   user: `<circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path>`,
   users: `<path d="M16 21a6 6 0 0 0-12 0"></path><circle cx="10" cy="8" r="4"></circle><path d="M22 21a5 5 0 0 0-5-5"></path><path d="M17 4a4 4 0 0 1 0 8"></path>`,
+  video: `<path d="M15 10.5 21 7v10l-6-3.5"></path><rect x="3" y="6" width="12" height="12" rx="2"></rect>`,
   wallet: `<path d="M3 7a2 2 0 0 1 2-2h14v14H5a2 2 0 0 1-2-2Z"></path><path d="M16 12h.01"></path><path d="M19 9h-5a3 3 0 0 0 0 6h5"></path>`
 };
 

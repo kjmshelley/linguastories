@@ -11,6 +11,7 @@ const { rejectPrototypePollution } = require("./middleware/validation.middleware
 const app = express();
 const clientPath = path.join(__dirname, "..", "client");
 const indexPath = path.join(clientPath, "index.html");
+const livekitClientPath = path.join(__dirname, "..", "node_modules", "livekit-client", "dist");
 const frontendAppRoutes = [
   /^\/app\/?$/,
   /^\/app\/dashboard\/?$/,
@@ -27,6 +28,7 @@ const frontendAppRoutes = [
   /^\/app\/community\/connect\/[0-9a-f-]+\/?$/i,
   /^\/app\/community\/moments\/?$/,
   /^\/app\/community\/moments\/[0-9a-f-]+\/?$/i,
+  /^\/app\/community\/voice-video-rooms\/?$/,
   /^\/app\/profile\/?$/,
   /^\/app\/profile\/my-info\/?$/,
   /^\/app\/profile\/language-profiles\/?$/,
@@ -48,6 +50,7 @@ app.use(cors);
 app.use(express.json({ limit: "12mb" }));
 app.use(rejectPrototypePollution);
 app.use(rejectInvalidContentType);
+app.use("/vendor/livekit", express.static(livekitClientPath));
 app.use(express.static(clientPath));
 app.use(attachUser);
 
