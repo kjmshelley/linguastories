@@ -32,7 +32,7 @@ router.post("/rooms", livekitCreateRateLimit, validateBody({
   targetLanguage: { type: "string", required: true, max: 80, label: "Target language" },
   sourceLanguage: { type: "string", required: true, max: 80, label: "Source language" },
   cefrLevel: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "CEFR level" },
-  maxParticipants: { type: "integer", min: 2, max: 8, label: "Max participants" },
+  maxParticipants: { type: "integer", min: 2, max: 4, label: "Max participants" },
   isPrivate: { type: "enum", options: ["true", "false", true, false], fallback: false, label: "Privacy" },
   imageDataUrl: { type: "dataUrl", max: 800000, label: "Room image" },
   imageFileName: { type: "string", max: 180, label: "Room image file name" }

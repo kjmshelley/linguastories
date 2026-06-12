@@ -8,6 +8,7 @@ const MIN_JOIN_COINS = 1000;
 const TOKEN_TTL_SECONDS = 7 * 60;
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
 const ROOM_TYPES = new Set(["voice", "video"]);
+const MAX_ROOM_PARTICIPANTS = 4;
 
 function badRequest(message, status = 400) {
   const error = new Error(message);
@@ -64,6 +65,7 @@ function mapRoom(row) {
     status: row.status,
     imageUrl: row.imageUrl || "",
     participantCount: Number(row.participantCount || 0),
+    hostActive: Boolean(row.hostActive),
     createdAt: row.createdAt,
     costPerMinute: COINS_PER_MINUTE,
     maxMinutes: 6,
@@ -101,6 +103,11 @@ async function uploadRoomImage(userId, payload) {
 }
 
 async function createRoom(user, payload) {
+  const wallet = await query(`select balance from wallets where user_id = $1`, [user.id]);
+  if (Number(wallet.rows[0]?.balance || 0) < MIN_JOIN_COINS) {
+    throw badRequest("You need at least 1000 coins to create a voice/video room.", 402);
+  }
+
   const activeRooms = await query(
     `select count(*)::int as count
        from voice_video_rooms
@@ -120,7 +127,7 @@ async function createRoom(user, payload) {
   const targetLanguage = cleanText(payload.targetLanguage || user.targetLanguage || "Japanese", { max: 80 });
   const sourceLanguage = cleanText(payload.sourceLanguage || "English", { max: 80 });
   const cefrLevel = normalizeLevel(payload.cefrLevel);
-  const maxParticipants = Math.min(8, Math.max(2, Number(payload.maxParticipants || 4)));
+  const maxParticipants = Math.min(MAX_ROOM_PARTICIPANTS, Math.max(2, Number(payload.maxParticipants || MAX_ROOM_PARTICIPANTS)));
   const image = await uploadRoomImage(user.id, payload);
   const livekitRoomName = `linguastories-${crypto.randomUUID()}`;
 
@@ -144,7 +151,8 @@ async function createRoom(user, payload) {
                status,
                image_url as "imageUrl",
                created_at as "createdAt",
-               0::int as "participantCount"`,
+               0::int as "participantCount",
+               false as "hostActive"`,
     [user.id, title, description, roomType, targetLanguage, sourceLanguage, cefrLevel, maxParticipants, normalizeBoolean(payload.isPrivate), livekitRoomName, image?.url || null, image?.boxFileId || null, user.displayName || "Learner"]
   );
 
@@ -185,7 +193,8 @@ async function listRooms(user, filters = {}) {
             r.status,
             r.image_url as "imageUrl",
             r.created_at as "createdAt",
-            count(p.id) filter (where p.status = 'joined')::int as "participantCount"
+            count(p.id) filter (where p.status = 'joined')::int as "participantCount",
+            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive"
        from voice_video_rooms r
        left join users u on u.id = r.owner_user_id
        left join voice_video_room_participants p on p.room_id = r.id
@@ -214,7 +223,8 @@ async function getRoom(user, roomId) {
             r.status,
             r.image_url as "imageUrl",
             r.created_at as "createdAt",
-            count(p.id) filter (where p.status = 'joined')::int as "participantCount"
+            count(p.id) filter (where p.status = 'joined')::int as "participantCount",
+            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive"
        from voice_video_rooms r
        left join users u on u.id = r.owner_user_id
        left join voice_video_room_participants p on p.room_id = r.id
@@ -278,6 +288,19 @@ function buildToken({ room, user, session }) {
   return token.toJwt();
 }
 
+async function deleteLiveKitCloudRoom(roomName) {
+  if (!roomName) return;
+  try {
+    requireLiveKitConfig();
+    const { RoomServiceClient } = livekitSdk();
+    const livekitUrl = process.env.LIVEKIT_URL.replace(/^ws/, "http");
+    const client = new RoomServiceClient(livekitUrl, process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_API_SECRET);
+    await client.deleteRoom(roomName);
+  } catch (_error) {
+    // Database closure is authoritative; LiveKit room cleanup is best-effort.
+  }
+}
+
 async function joinRoom(user, roomId) {
   requireLiveKitConfig();
   livekitSdk();
@@ -291,6 +314,13 @@ async function joinRoom(user, roomId) {
               r.room_type as "roomType",
               r.max_participants as "maxParticipants",
               r.livekit_room_name as "livekitRoomName",
+              exists (
+                select 1
+                  from voice_video_room_participants host_participant
+                 where host_participant.room_id = r.id
+                   and host_participant.role = 'host'
+                   and host_participant.status = 'joined'
+              ) as "hostActive",
               r.status
          from voice_video_rooms r
         where r.id = $2
@@ -300,6 +330,9 @@ async function joinRoom(user, roomId) {
     );
     const room = roomResult.rows[0];
     if (!room || room.status !== "active") throw badRequest("Room is not available", 404);
+    if (room.ownerUserId !== user.id && !room.hostActive) {
+      throw badRequest("The host has not started this room yet.");
+    }
 
     const wallet = await client.query(`select balance from wallets where user_id = $1 for update`, [user.id]);
     const balance = Number(wallet.rows[0]?.balance || 0);
@@ -406,6 +439,11 @@ async function endSessionWithClient(client, userId, sessionId, status = "complet
     `select id,
             room_id as "roomId",
             participant_id as "participantId",
+            (
+              select owner_user_id
+                from voice_video_rooms
+               where id = voice_video_room_sessions.room_id
+            ) as "ownerUserId",
             started_at as "startedAt",
             status
        from voice_video_room_sessions
@@ -480,7 +518,58 @@ async function endSessionWithClient(client, userId, sessionId, status = "complet
                 status`,
     [sessionId, status, durationSeconds, billedMinutes, coinsCharged]
   );
+
+  if (session.ownerUserId === userId) {
+    await closeRoomAfterHostLeaves(client, session.roomId, userId);
+  }
   return updated.rows[0];
+}
+
+async function closeRoomAfterHostLeaves(client, roomId, hostUserId) {
+  const closedRoom = await client.query(
+    `update voice_video_rooms
+        set status = 'ended',
+            ended_at = coalesce(ended_at, now())
+      where id = $1
+        and owner_user_id = $2
+        and status = 'active'
+      returning livekit_room_name as "livekitRoomName"`,
+    [roomId, hostUserId]
+  );
+  const activeSessions = await client.query(
+    `select id,
+            user_id as "userId"
+       from voice_video_room_sessions
+      where room_id = $1
+        and user_id <> $2
+        and status = 'active'
+      for update`,
+    [roomId, hostUserId]
+  );
+  for (const row of activeSessions.rows) {
+    try {
+      await endSessionWithClient(client, row.userId, row.id, "disconnected");
+    } catch (_error) {
+      await client.query(
+        `update voice_video_room_sessions
+            set status = 'failed',
+                ended_at = now(),
+                duration_seconds = least(360, greatest(1, ceil(extract(epoch from (now() - started_at)))::int))
+          where id = $1
+            and status = 'active'`,
+        [row.id]
+      );
+    }
+  }
+  await client.query(
+    `update voice_video_room_participants
+        set status = 'left',
+            left_at = coalesce(left_at, now())
+      where room_id = $1
+        and status = 'joined'`,
+    [roomId]
+  );
+  await deleteLiveKitCloudRoom(closedRoom.rows[0]?.livekitRoomName);
 }
 
 async function endSession(user, sessionId, status = "completed") {

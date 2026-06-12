@@ -7,7 +7,7 @@ create table if not exists voice_video_rooms (
   target_language text not null default 'Japanese',
   source_language text not null default 'English',
   cefr_level text not null default 'A1' check (cefr_level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
-  max_participants integer not null default 4 check (max_participants between 2 and 8),
+  max_participants integer not null default 4 check (max_participants between 2 and 4),
   is_private boolean not null default false,
   status text not null default 'active' check (status in ('active', 'ended', 'cancelled')),
   livekit_room_name text unique not null,
@@ -74,3 +74,19 @@ create index if not exists idx_voice_video_room_sessions_user_created
 
 create index if not exists idx_voice_video_room_coin_transactions_user_created
   on voice_video_room_coin_transactions (user_id, created_at desc);
+
+alter table if exists voice_video_rooms
+  alter column max_participants set default 4;
+
+update voice_video_rooms
+   set max_participants = 4
+ where max_participants > 4;
+
+do $$
+begin
+  alter table voice_video_rooms
+    drop constraint if exists voice_video_rooms_max_participants_check;
+  alter table voice_video_rooms
+    add constraint voice_video_rooms_max_participants_check
+    check (max_participants between 2 and 4);
+end $$;

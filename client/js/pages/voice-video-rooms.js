@@ -22,7 +22,35 @@ function roomImage(room) {
   `;
 }
 
-function roomRows({ rooms, activeSession, wallet }) {
+function disabledButtonClass() {
+  return "inline-flex min-h-11 cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-brand-line bg-brand-line/60 px-4 py-2 text-sm font-semibold text-brand-graphite no-underline opacity-70";
+}
+
+function roomAction({ room, activeSession, state }) {
+  const balance = Number(state.wallet?.balance || 0);
+  const hasCoins = balance >= 1000;
+  const active = activeSession?.roomId === room.id;
+  const isOwner = room.ownerUserId === state.user.id;
+  const full = room.participantCount >= room.maxParticipants;
+  if (active) {
+    return `<button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(room.id)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>`;
+  }
+  if (!hasCoins) {
+    return `<button class="${disabledButtonClass()}" disabled>${icon("coins", "h-4 w-4")}<span>Need coins</span></button>`;
+  }
+  if (isOwner) {
+    return `<button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("play", "h-4 w-4")}<span>Start</span></button>`;
+  }
+  if (!room.hostActive) {
+    return `<button class="${disabledButtonClass()}" disabled>${icon("play", "h-4 w-4")}<span>Waiting</span></button>`;
+  }
+  if (full) {
+    return `<button class="${disabledButtonClass()}" disabled>${icon("users", "h-4 w-4")}<span>Full</span></button>`;
+  }
+  return `<button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("login", "h-4 w-4")}<span>Join</span></button>`;
+}
+
+function roomRows({ rooms, activeSession, state }) {
   if (!rooms.length) {
     return `
       <tr>
@@ -31,8 +59,7 @@ function roomRows({ rooms, activeSession, wallet }) {
     `;
   }
   return rooms.map((room) => {
-    const canJoin = Number(wallet?.balance || 0) >= 1000 && room.participantCount < room.maxParticipants;
-    const active = activeSession?.roomId === room.id;
+    const hostStatus = room.hostActive ? "Started" : room.ownerUserId === state.user.id ? "Ready to start" : "Waiting for host";
     return `
       <tr class="border-b border-brand-line/70 align-middle last:border-0">
         <td class="px-4 py-3">${roomImage(room)}</td>
@@ -43,11 +70,9 @@ function roomRows({ rooms, activeSession, wallet }) {
         <td class="px-4 py-3"><span class="${ui.tagGold}">${escapeHtml(room.roomType)}</span></td>
         <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</td>
         <td class="px-4 py-3"><span class="${ui.tag}">${escapeHtml(room.cefrLevel)}</span></td>
-        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${room.participantCount}/${room.maxParticipants}</td>
+        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${room.participantCount}/${room.maxParticipants}<span class="mt-1 block text-xs text-brand-graphite">${hostStatus}</span></td>
         <td class="px-4 py-3 text-right">
-          <button class="${active ? ui.danger : ui.primary}" data-action="${active ? "leaveVoiceVideoRoom" : "joinVoiceVideoRoom"}:${escapeHtml(room.id)}" ${!active && !canJoin ? "disabled" : ""}>
-            ${icon(active ? "logout" : "login", "h-4 w-4")}<span>${active ? "Leave" : canJoin ? "Join" : "Unavailable"}</span>
-          </button>
+          ${roomAction({ room, activeSession, state })}
         </td>
       </tr>
     `;
@@ -107,7 +132,7 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
           <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${optionList(levels, state.user.currentLevel || "A1")}</select></label>
           <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage">${languageOptions(appConfig, state.user.targetLanguage)}</select></label>
           <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "English")}</select></label>
-          <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="8" value="4"></label>
+          <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="4" value="4"></label>
           <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate"><option value="false">Public</option><option value="true">Private</option></select></label>
         </div>
         <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
@@ -121,6 +146,8 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
 }
 
 export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], voiceVideoRoomFilters = {}, activeVoiceVideoRoom = null, activeVoiceVideoSession = null }) {
+  const balance = Number(state.wallet?.balance || 0);
+  const hasEnoughCoins = balance >= 1000;
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
@@ -130,7 +157,10 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
             <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Voice/Video Rooms</h2>
             <p class="mt-3 ${ui.muted}">These rooms are for focused language practice, not casual chatting.</p>
           </div>
-          <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="${hasEnoughCoins ? ui.tagDark : ui.tagRed}">${icon("coins", "h-4 w-4")}<span>${balance} coins</span></span>
+            <button class="${hasEnoughCoins ? ui.primary : disabledButtonClass()}" data-action="openCreateVoiceVideoRoomModal" ${hasEnoughCoins ? "" : "disabled"}>${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+          </div>
         </div>
         <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6 minutes</strong><span class="text-sm text-brand-graphite">Voice/video rooms are limited to 6 minutes.</span></div>
@@ -167,7 +197,7 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
                 <th class="px-4 py-3 text-right">Action</th>
               </tr>
             </thead>
-            <tbody>${roomRows({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, wallet: state.wallet })}</tbody>
+            <tbody>${roomRows({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state })}</tbody>
           </table>
         </div>
       </section>

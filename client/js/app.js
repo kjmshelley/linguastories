@@ -112,6 +112,8 @@ let livekitRoomConnection = null;
 let livekitRoomTimer = null;
 let endingVoiceVideoRoom = false;
 let livekitWarningFlags = { three: false, one: false, ten: false };
+let livekitParticipantTiles = new Map();
+let livekitHiddenAudioLayer = null;
 let chatOpen = false;
 let chatContactsHidden = false;
 let chatMobileScreen = "contacts";
@@ -554,18 +556,74 @@ function startVoiceVideoTimer() {
   livekitRoomTimer = window.setInterval(updateVoiceVideoCountdown, 1000);
 }
 
-function renderTrack(track, participantName = "Participant") {
+function tileClassFor(index, count) {
+  const base = "relative min-h-0 overflow-hidden rounded-lg border border-white/10 bg-white/[.05] p-3";
+  if (count === 1) return `${base} col-span-2 row-span-2`;
+  if (count === 2) return `${base} row-span-2`;
+  if (count === 3 && index === 0) return `${base} row-span-2`;
+  return base;
+}
+
+function applyLiveKitTileLayout() {
   const stage = document.querySelector("[data-livekit-stage]");
-  if (!stage || !track?.attach) return;
+  if (!stage) return;
+  const tiles = [...livekitParticipantTiles.values()].slice(0, 4);
+  stage.className = "grid h-full min-h-[360px] grid-cols-2 grid-rows-2 gap-3";
+  tiles.forEach((tile, index) => {
+    tile.className = tileClassFor(index, tiles.length);
+  });
+}
+
+function ensureParticipantTile(identity, participantName = "Participant") {
+  const stage = document.querySelector("[data-livekit-stage]");
+  if (!stage) return null;
+  if (livekitParticipantTiles.size === 0) stage.innerHTML = "";
+  if (!livekitHiddenAudioLayer) {
+    livekitHiddenAudioLayer = document.createElement("div");
+    livekitHiddenAudioLayer.className = "hidden";
+    stage.append(livekitHiddenAudioLayer);
+  }
+  const key = identity || participantName;
+  let tile = livekitParticipantTiles.get(key);
+  if (!tile) {
+    tile = document.createElement("div");
+    tile.dataset.livekitTile = key;
+    tile.innerHTML = `
+      <div class="absolute inset-0 grid place-items-center text-center">
+        <div>
+          ${icon("mic", "mx-auto h-8 w-8 text-white/66")}
+          <p class="mt-2 text-sm font-semibold text-white/76">${escapeHtml(participantName)}</p>
+        </div>
+      </div>
+      <div class="absolute bottom-2 left-2 rounded bg-black/45 px-2 py-1 text-xs font-semibold text-white">${escapeHtml(participantName)}</div>
+    `;
+    livekitParticipantTiles.set(key, tile);
+    stage.append(tile);
+    applyLiveKitTileLayout();
+  }
+  return tile;
+}
+
+function renderTrack(track, participantName = "Participant", identity = "", isLocal = false) {
+  if (!track?.attach) return;
+  if (isLocal && track.kind === "audio") return;
   const element = track.attach();
-  element.className = track.kind === "video"
-    ? "min-h-[190px] w-full rounded-lg bg-black object-cover"
-    : "w-full rounded-lg";
-  const wrapper = document.createElement("div");
-  wrapper.className = "rounded-lg border border-white/10 bg-white/[.04] p-2";
-  wrapper.innerHTML = `<div class="mb-2 text-xs font-semibold text-white/66">${escapeHtml(participantName)}</div>`;
-  wrapper.append(element);
-  stage.append(wrapper);
+  if (track.kind === "audio") {
+    ensureParticipantTile(identity, participantName);
+    element.autoplay = true;
+    element.dataset.remoteAudio = identity || participantName;
+    livekitHiddenAudioLayer?.append(element);
+    return;
+  }
+  const tile = ensureParticipantTile(identity, participantName);
+  if (!tile) return;
+  tile.innerHTML = `<div class="absolute bottom-2 left-2 z-10 rounded bg-black/45 px-2 py-1 text-xs font-semibold text-white">${escapeHtml(participantName)}</div>`;
+  element.className = "absolute inset-0 h-full w-full bg-black object-cover";
+  element.autoplay = true;
+  element.playsInline = true;
+  if (isLocal) element.muted = true;
+  tile.append(element);
+  applyLiveKitTileLayout();
 }
 
 async function connectLiveKitRoom(payload) {
@@ -575,16 +633,26 @@ async function connectLiveKitRoom(payload) {
     const { Room, RoomEvent, createLocalTracks } = await import("/vendor/livekit/livekit-client.esm.mjs");
     const room = new Room({ adaptiveStream: true, dynacast: true });
     livekitRoomConnection = room;
-    room.on(RoomEvent.TrackSubscribed, (track, _publication, participant) => renderTrack(track, participant.name || "Participant"));
+    livekitParticipantTiles = new Map();
+    livekitHiddenAudioLayer = null;
+    room.on(RoomEvent.ParticipantConnected, (participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
+    room.on(RoomEvent.ParticipantDisconnected, (participant) => {
+      livekitParticipantTiles.get(participant.identity)?.remove();
+      livekitParticipantTiles.delete(participant.identity);
+      applyLiveKitTileLayout();
+    });
+    room.on(RoomEvent.TrackSubscribed, (track, _publication, participant) => renderTrack(track, participant.name || "Participant", participant.identity, false));
     room.on(RoomEvent.Disconnected, () => {
       if (activeVoiceVideoSession && !endingVoiceVideoRoom) leaveVoiceVideoRoom({ silent: true });
     });
     await room.connect(payload.livekitUrl, payload.token);
     if (stage) stage.innerHTML = "";
+    ensureParticipantTile(room.localParticipant.identity || "local", "You");
+    room.remoteParticipants?.forEach((participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
     const tracks = await createLocalTracks({ audio: true, video: payload.room.roomType === "video" });
     for (const track of tracks) {
       await room.localParticipant.publishTrack(track);
-      renderTrack(track, "You");
+      renderTrack(track, "You", room.localParticipant.identity || "local", true);
     }
     if (stage && !stage.children.length) {
       stage.innerHTML = `<div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-sm font-semibold text-white/72">Connected. Audio is active.</div>`;
@@ -615,6 +683,8 @@ async function disconnectLiveKitTracks() {
       publication.track?.detach?.().forEach((element) => element.remove());
     });
     room.disconnect();
+    livekitParticipantTiles = new Map();
+    livekitHiddenAudioLayer = null;
   } catch (_error) {
     // The server-side end call is the billing source of truth.
   }
