@@ -91,8 +91,16 @@ async function createSentenceDeck(req, res) {
   res.status(201).json(await learningService.createSentenceDeck(req.user, req.body));
 }
 
+async function deleteSentenceDeck(req, res) {
+  res.json(await learningService.deleteSentenceDeck(req.user, req.params.id));
+}
+
 async function savePublicSentenceDeck(req, res) {
   res.json(await learningService.savePublicSentenceDeck(req.user, req.params.id));
+}
+
+async function unsavePublicSentenceDeck(req, res) {
+  res.json(await learningService.unsavePublicSentenceDeck(req.user, req.params.id));
 }
 
 async function createSentenceDeckTopic(req, res) {
@@ -109,6 +117,10 @@ async function deleteSentenceDeckTopic(req, res) {
 
 async function addSentenceDeckSentence(req, res) {
   res.status(201).json(await learningService.addSentenceDeckSentence(req.user, req.params.id, req.body));
+}
+
+async function deleteSentenceDeckItem(req, res) {
+  res.json(await learningService.deleteSentenceDeckItem(req.user, req.params.id));
 }
 
 async function recordDeckReview(req, res) {
@@ -207,11 +219,14 @@ module.exports = {
   updateCustomSentence,
   deleteSavedSentence,
   createSentenceDeck,
+  deleteSentenceDeck,
   savePublicSentenceDeck,
+  unsavePublicSentenceDeck,
   createSentenceDeckTopic,
   updateSentenceDeckTopic,
   deleteSentenceDeckTopic,
   addSentenceDeckSentence,
+  deleteSentenceDeckItem,
   recordDeckReview,
   createGoal,
   updateGoal,

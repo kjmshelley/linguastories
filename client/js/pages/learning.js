@@ -2,6 +2,7 @@ import { escapeHtml, icon, ui } from "../ui.js";
 
 const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const fallbackTimezones = ["UTC", "America/Los_Angeles", "America/Denver", "America/Chicago", "America/New_York", "Europe/London", "Europe/Paris", "Asia/Taipei", "Asia/Tokyo", "Australia/Sydney"];
 
 function money(value) {
   return `$${Number(value || 0).toFixed(2)}`;
@@ -17,8 +18,25 @@ function languageOptions(appConfig, selected = "") {
   return languages.map((language) => `<option value="${escapeHtml(language)}" ${language === selected ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
 }
 
+function languageMultiOptions(appConfig, selected = []) {
+  const selectedLanguages = new Set(selected);
+  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Korean", "Spanish", "French", "German"];
+  return languages.map((language) => `<option value="${escapeHtml(language)}" ${selectedLanguages.has(language) ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
+}
+
 function levelOptions(selected = "A1") {
   return levels.map((level) => `<option value="${level}" ${level === selected ? "selected" : ""}>${level}</option>`).join("");
+}
+
+function timezoneOptions(selected = "UTC") {
+  const current = selected || Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  const supported = typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimezones;
+  const timezones = supported.includes(current) ? supported : [current, ...supported];
+  return timezones.map((timezone) => `<option value="${escapeHtml(timezone)}" ${timezone === current ? "selected" : ""}>${escapeHtml(timezone)}</option>`).join("");
+}
+
+function timezoneSelect(selected) {
+  return `<select class="${ui.input}" name="timezone" required>${timezoneOptions(selected)}</select>`;
 }
 
 function profileImage(profile, size = "h-20 w-20") {
@@ -135,6 +153,8 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appPath, teac
 }
 
 function teacherProfileForm({ appConfig, state, profile = null }) {
+  const teachesLanguages = (profile?.languages || []).filter((item) => item.role === "teaches").map((item) => item.language);
+  const speaksLanguages = (profile?.languages || []).filter((item) => item.role === "speaks").map((item) => item.language);
   return `
     <form class="grid gap-3" data-form="${profile ? "teacherProfileEdit" : "teacherProfile"}">
       ${profile ? `<input type="hidden" name="id" value="${escapeHtml(profile.id)}">` : ""}
@@ -142,13 +162,13 @@ function teacherProfileForm({ appConfig, state, profile = null }) {
         <label class="${ui.label}">Display name<input class="${ui.input}" name="displayName" required value="${escapeHtml(profile?.displayName || state.user.displayName || "")}"></label>
         <label class="${ui.label}">Headline<input class="${ui.input}" name="headline" required maxlength="160" value="${escapeHtml(profile?.headline || "")}" placeholder="Friendly Japanese conversation coach"></label>
         <label class="${ui.label}">Native language<select class="${ui.input}" name="nativeLanguage">${languageOptions(appConfig, profile?.nativeLanguage || state.user.nativeLanguage || "English")}</select></label>
-        <label class="${ui.label}">Timezone<input class="${ui.input}" name="timezone" required value="${escapeHtml(profile?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC")}"></label>
+        <label class="${ui.label}">Timezone${timezoneSelect(profile?.timezone)}</label>
         <label class="${ui.label}">Hourly rate USD<input class="${ui.input}" name="hourlyRateUsd" required type="number" min="1" step="0.01" value="${escapeHtml(profile?.hourlyRateUsd || "20")}"></label>
         <label class="${ui.label}">Trial rate USD<input class="${ui.input}" name="trialRateUsd" type="number" min="0" step="0.01" value="${escapeHtml(profile?.trialRateUsd ?? "")}"></label>
         <label class="${ui.label}">Min lesson minutes<input class="${ui.input}" name="minLessonMinutes" type="number" min="15" max="90" step="15" value="${escapeHtml(profile?.minLessonMinutes || "30")}"></label>
         <label class="${ui.label}">Max lesson minutes<input class="${ui.input}" name="maxLessonMinutes" type="number" min="15" max="90" step="15" value="${escapeHtml(profile?.maxLessonMinutes || "60")}"></label>
-        <label class="${ui.label}">Teaches languages<input class="${ui.input}" name="teachesLanguages" required value="${escapeHtml((profile?.languages || []).filter((item) => item.role === "teaches").map((item) => item.language).join(", "))}" placeholder="Japanese, English"></label>
-        <label class="${ui.label}">Speaks languages<input class="${ui.input}" name="speaksLanguages" value="${escapeHtml((profile?.languages || []).filter((item) => item.role === "speaks").map((item) => item.language).join(", "))}" placeholder="English, Spanish"></label>
+        <label class="${ui.label}">Teaches<select class="${ui.input} min-h-28" name="teachesLanguages" multiple required>${languageMultiOptions(appConfig, teachesLanguages.length ? teachesLanguages : [state.user.targetLanguage].filter(Boolean))}</select></label>
+        <label class="${ui.label}">Speaks<select class="${ui.input} min-h-28" name="speaksLanguages" multiple>${languageMultiOptions(appConfig, speaksLanguages.length ? speaksLanguages : [state.user.nativeLanguage].filter(Boolean))}</select></label>
         <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${levelOptions((profile?.languages || []).find((item) => item.role === "teaches")?.cefrLevel || state.user.currentLevel || "A1")}</select></label>
         <label class="${ui.label}">Status<select class="${ui.input}" name="status"><option value="draft" ${profile?.status === "draft" ? "selected" : ""}>Draft</option><option value="published" ${profile?.status === "published" ? "selected" : ""}>Published</option><option value="paused" ${profile?.status === "paused" ? "selected" : ""}>Paused</option></select></label>
         <label class="${ui.label}">Group lessons<select class="${ui.input}" name="groupLessonEnabled"><option value="false">Off</option><option value="true" ${profile?.groupLessonEnabled ? "selected" : ""}>On</option></select></label>
@@ -171,16 +191,6 @@ function teacherProfileForm({ appConfig, state, profile = null }) {
   `;
 }
 
-export function teacherProfileModal({ appConfig, state, profile = null }) {
-  return `
-    <div>
-      <span class="${ui.tagGold}">${profile ? "Edit teacher profile" : "Teacher profile"}</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">${profile ? "Update Teacher Profile" : "Create Teacher Profile"}</h2>
-      <div class="mt-5">${teacherProfileForm({ appConfig, state, profile })}</div>
-    </div>
-  `;
-}
-
 export function teacherProfileCreateView(ctx) {
   return `
     <div class="grid gap-5">
@@ -193,6 +203,24 @@ export function teacherProfileCreateView(ctx) {
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${teacherProfileForm(ctx)}
+      </section>
+    </div>
+  `;
+}
+
+export function teacherProfileEditView(ctx) {
+  const profile = (ctx.teacherStudentData.profiles || []).find((item) => item.id === ctx.activeTeacherProfileId);
+  return `
+    <div class="grid gap-5">
+      <section class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="${ui.tagGold}">Teacher profile</span>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Edit Teacher Profile</h2>
+        </div>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileProfiles"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to My Profiles</span></a>
+      </section>
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        ${profile ? teacherProfileForm({ ...ctx, profile }) : emptyState("Profile not found", "This teacher profile could not be loaded.")}
       </section>
     </div>
   `;
@@ -540,7 +568,7 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
           <a class="${ui.primary}" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Create Profile</span></a>
         </div>
         <div class="mt-5 grid gap-4 md:grid-cols-2">
-          ${profiles.length ? profiles.map((profile) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><div class="flex gap-4">${profileImage(profile, "h-16 w-16")}<div><span class="${ui.tag}">${escapeHtml(profile.status)}</span><h3 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h3><p class="text-sm text-brand-graphite">${escapeHtml(profile.headline)}</p></div></div><div class="mt-4 flex justify-end gap-2"><button class="${ui.secondary}" data-action="openTeacherProfileEdit:${escapeHtml(profile.id)}">${icon("edit", "h-4 w-4")}<span>Edit</span></button><button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button></div></article>`).join("") : emptyState("No profiles yet", "Create your first teacher profile to appear in search.")}
+          ${profiles.length ? profiles.map((profile) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><div class="flex gap-4">${profileImage(profile, "h-16 w-16")}<div><span class="${ui.tag}">${escapeHtml(profile.status)}</span><h3 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h3><p class="text-sm text-brand-graphite">${escapeHtml(profile.headline)}</p></div></div><div class="mt-4 flex justify-end gap-2"><a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a><button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button></div></article>`).join("") : emptyState("No profiles yet", "Create your first teacher profile to appear in search.")}
         </div>
       </section>
     </div>
@@ -563,7 +591,7 @@ export function teacherAvailabilityView({ teacherStudentData = {} }) {
           <select class="${ui.input}" name="weekday">${weekdays.map((day, index) => `<option value="${index}">${day}</option>`).join("")}</select>
           <input class="${ui.input}" name="startTime" type="time" required value="09:00">
           <input class="${ui.input}" name="endTime" type="time" required value="10:00">
-          <input class="${ui.input}" name="timezone" value="${escapeHtml(Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC")}">
+          ${timezoneSelect()}
           <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add</span></button>
         </form>
         <div class="mt-5 grid gap-2">${availability.length ? availability.map((slot) => `<div class="rounded-lg border border-brand-line/70 bg-white/60 p-3 text-sm font-semibold text-brand-charcoal">${weekdays[slot.weekday]} · ${escapeHtml(slot.startTime)}-${escapeHtml(slot.endTime)} · ${escapeHtml(slot.timezone)}</div>`).join("") : emptyState("No availability", "Add weekly availability for bookings.")}</div>
@@ -720,7 +748,7 @@ export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFi
             <input class="${ui.input}" name="title" placeholder="Vacation, lunch, appointment">
             <input class="${ui.input}" name="startsAt" type="datetime-local" required>
             <input class="${ui.input}" name="endsAt" type="datetime-local" required>
-            <input class="${ui.input}" name="timezone" value="${escapeHtml(firstProfile?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC")}">
+            ${timezoneSelect(firstProfile?.timezone)}
             <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Block time</span></button>
           </form>
           <div class="mt-4 grid gap-2">

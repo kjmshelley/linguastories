@@ -28,11 +28,14 @@ const knownLearningRoutes = [
   ["DELETE", /^\/sentences\/[^/]+\/?$/],
   ["POST", /^\/sentences\/custom\/?$/],
   ["POST", /^\/sentence-decks\/?$/],
+  ["DELETE", /^\/sentence-decks\/[^/]+\/?$/],
   ["POST", /^\/sentence-decks\/[^/]+\/save\/?$/],
+  ["DELETE", /^\/sentence-decks\/[^/]+\/save\/?$/],
   ["POST", /^\/sentence-decks\/[^/]+\/topics\/?$/],
   ["POST", /^\/sentence-decks\/topics\/[^/]+\/?$/],
   ["DELETE", /^\/sentence-decks\/topics\/[^/]+\/?$/],
   ["POST", /^\/sentence-decks\/[^/]+\/sentences\/?$/],
+  ["DELETE", /^\/sentence-decks\/items\/[^/]+\/?$/],
   ["POST", /^\/sentence-decks\/[^/]+\/reviews\/?$/],
   ["POST", /^\/goals\/?$/],
   ["POST", /^\/goals\/[^/]+\/?$/],
@@ -128,7 +131,9 @@ router.post("/sentence-decks", uploadRateLimit, validateBody({
   imageDataUrl: { type: "string", max: 800000, label: "Deck image" },
   imageFileName: { type: "string", max: 180, label: "Deck image file name" }
 }), asyncHandler(controller.createSentenceDeck));
+router.delete("/sentence-decks/:id", asyncHandler(controller.deleteSentenceDeck));
 router.post("/sentence-decks/:id/save", asyncHandler(controller.savePublicSentenceDeck));
+router.delete("/sentence-decks/:id/save", asyncHandler(controller.unsavePublicSentenceDeck));
 router.post("/sentence-decks/:id/topics", validateBody({
   name: { type: "string", required: true, max: 120, label: "Topic name" },
   description: { type: "string", max: 1000, label: "Topic description" },
@@ -156,6 +161,7 @@ router.post("/sentence-decks/:id/sentences", uploadRateLimit, validateBody({
   level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
   sortOrder: { type: "integer", min: 0, max: 100000, label: "Sort order" }
 }), asyncHandler(controller.addSentenceDeckSentence));
+router.delete("/sentence-decks/items/:id", asyncHandler(controller.deleteSentenceDeckItem));
 router.post("/sentence-decks/:id/reviews", validateBody({
   sentenceId: { type: "uuid", required: true, label: "Sentence" },
   response: { type: "enum", options: ["show_again", "hard", "easy", "known"], required: true, label: "Response" }

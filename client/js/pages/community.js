@@ -457,7 +457,6 @@ export function communityConnectView({ state, appPath, communityListLimits, conn
   const newLearners = matchedLearners.filter((learner) => !learner.following);
   const learners = connectMyCommunityOnly ? communityLearners : newLearners;
   const page = pagedItems(learners, "communityConnect", communityListLimits);
-  const languageList = activeLanguages(state).join(", ");
   const tabButton = ({ id, label, count, active }) => `
     <button class="flex min-h-10 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition ${
       active ? "bg-brand-sidebar text-white shadow-[0_8px_16px_rgba(29,41,63,.12)]" : "text-brand-graphite hover:bg-white hover:text-brand-ink"
@@ -477,9 +476,7 @@ export function communityConnectView({ state, appPath, communityListLimits, conn
   return communityShell({
     title: "Connect with followers",
     eyebrow: "",
-    subtitle: connectMyCommunityOnly
-      ? `Learners you follow with activity from the last 7 days: ${languageList || state.user.targetLanguage}.`
-      : `Learners you are not following yet with activity from the last 7 days: ${languageList || state.user.targetLanguage}.`,
+    subtitle: "See what your followers are doing and connect with new people",
     children: `${tabs}${
       page.items.length
         ? `${page.items.map((learner) => learnerRow(learner, { appPath })).join("")}${loadMoreMessage({ route: "communityConnect", visible: page.visible, total: page.total, noun: "learners" })}`

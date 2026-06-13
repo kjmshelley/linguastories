@@ -1,13 +1,20 @@
--- Destroys all rows in all application tables, including seeded/reference data.
--- This leaves the schema itself intact so it can be repopulated with db:seed.
+-- Drops database objects created for this project.
+-- This intentionally targets only the named LinguaStories objects below. It does
+-- not sweep the whole public schema and does not drop shared/system objects such
+-- as extensions.
+--
+-- Run db:schema afterward to recreate the schema, then db:seed if you want to
+-- repopulate seed data.
 --
 -- Run with:
+--   npm run db:destroy-all-objects
 --   npm run db:destroy-all-data
+--   npm run db:destroy-all-objects:prod
 --   npm run db:destroy-all-data:prod
 
 begin;
 
-truncate table
+drop table if exists
   lesson_coin_reward_suggestions,
   teacher_payouts,
   teacher_reviews,
@@ -69,6 +76,6 @@ truncate table
   user_languages,
   users,
   supported_languages
-restart identity cascade;
+cascade;
 
 commit;

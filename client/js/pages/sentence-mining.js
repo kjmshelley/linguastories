@@ -93,6 +93,8 @@ function deckCard(deck, index = 0) {
   const openLabel = hasTopics ? "Open Deck" : "View Sentences";
   const openAction = browseButton(openLabel, `openDeck:${deck.id}`);
   const saveAction = deck.marketplace ? `<button class="${ui.primary}" data-action="savePublicDeck:${escapeHtml(deck.id)}">${icon("bookmark", "h-4 w-4")}<span>Save</span></button>` : "";
+  const unsaveAction = deck.savedByUser && !deck.owner ? `<button class="${ui.danger}" data-action="unsavePublicDeck:${escapeHtml(deck.id)}">${icon("trash", "h-4 w-4")}<span>Remove</span></button>` : "";
+  const deleteDeckAction = deck.owner && !deck.system ? `<button class="${ui.danger} !px-3" data-action="openDeleteDeckModal:${escapeHtml(deck.id)}" aria-label="Delete deck">${icon("trash", "h-4 w-4")}</button>` : "";
   const mediaStyle = deck.imageUrl
     ? `<img class="absolute inset-0 h-full w-full object-cover" src="${escapeHtml(deck.imageUrl)}" alt="">`
     : "";
@@ -126,6 +128,8 @@ function deckCard(deck, index = 0) {
         <div class="grid grid-cols-[1fr_auto_auto] gap-2">
           ${openAction}
           ${saveAction}
+          ${unsaveAction}
+          ${deleteDeckAction}
           ${deck.mine ? `<button class="${ui.secondary} !px-3" data-action="openEditSentenceModal:${firstSentence?.id}" aria-label="Edit sentence">${icon("edit", "h-4 w-4")}</button>` : ""}
           ${deck.mine ? `<button class="${ui.danger} !px-3" data-action="openDeleteSentenceModal:${firstSentence?.id}" aria-label="Delete sentence">${icon("trash", "h-4 w-4")}</button>` : ""}
         </div>
@@ -152,6 +156,22 @@ function deckRow(title, decks, startIndex = 0) {
       <div id="${carouselId}" data-carousel class="-mx-4 flex cursor-grab snap-x gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-7 lg:px-7 [&::-webkit-scrollbar]:hidden">
         ${decks.map((deck, index) => deckCard(deck, index + startIndex)).join("")}
       </div>
+    </section>
+  `;
+}
+
+function deckGrid(decks, startIndex = 0) {
+  if (!decks.length) {
+    return `
+      <section class="rounded-lg border border-dashed border-brand-line bg-white/70 p-8 text-center">
+        <h3 class="text-xl font-bold text-brand-ink">No public decks yet</h3>
+        <p class="mt-2 text-sm leading-6 text-brand-charcoal">When learners publish decks for this language, they will appear here.</p>
+      </section>
+    `;
+  }
+  return `
+    <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      ${decks.map((deck, index) => `<div class="min-w-0 [&>article]:w-full">${deckCard(deck, index + startIndex)}</div>`).join("")}
     </section>
   `;
 }
@@ -265,6 +285,40 @@ export function deleteTopicConfirmModal({ state }, topicId) {
   `;
 }
 
+export function deleteDeckConfirmModal({ state }, deckId) {
+  const deck = state.sentenceDecks?.find((item) => item.id === deckId);
+  return `
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Delete Deck?</h2>
+      <p class="mt-2 ${ui.muted}">This removes the deck from My Decks.</p>
+      <blockquote class="mt-4 rounded-lg border border-brand-line/80 bg-white/70 p-4 text-lg font-bold leading-7 text-brand-ink">${escapeHtml(deck?.name || "Deck unavailable")}</blockquote>
+      <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
+        <button type="button" class="${ui.danger}" data-action="deleteDeck:${deckId}">${icon("trash")}<span>Delete</span></button>
+      </div>
+    </div>
+  `;
+}
+
+export function deleteDeckSentenceConfirmModal({ state }, itemId) {
+  const sentence = state.sentenceDecks
+    ?.filter((deck) => deck.owner && !deck.system)
+    .flatMap((deck) => [
+      ...(deck.sentences || []),
+      ...(deck.topics || []).flatMap((topic) => topic.sentences || [])
+    ])
+    .find((item) => item.itemId === itemId);
+  return `
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Remove Sentence?</h2>
+      <p class="mt-2 ${ui.muted}">This removes the sentence from this deck.</p>
+      <blockquote class="mt-4 rounded-lg border border-brand-line/80 bg-white/70 p-4 text-lg font-bold leading-7 text-brand-ink">${escapeHtml(sentence?.target || "Sentence unavailable")}</blockquote>
+      <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
+        <button type="button" class="${ui.danger}" data-action="deleteDeckSentence:${itemId}">${icon("trash")}<span>Remove</span></button>
+      </div>
+    </div>
+  `;
+}
+
 export function addDeckSentenceModal({ state }, deckId) {
   const deck = state.sentenceDecks?.find((item) => item.id === deckId);
   if (!deck?.owner) return `<h2 class="text-xl font-bold text-brand-ink">Deck unavailable</h2>`;
@@ -363,36 +417,70 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
   return `
     <div class="-m-4 min-h-[calc(100vh-80px)] overflow-hidden bg-brand-cream text-brand-ink sm:-m-6 lg:-m-7">
       <section class="relative overflow-hidden border-b border-brand-line/80 bg-brand-panel px-4 py-6 sm:px-6 lg:px-7">
-        <div class="absolute inset-0 bg-[linear-gradient(125deg,rgba(255,250,244,.98)_0%,rgba(248,246,242,.95)_52%,rgba(43,165,154,.14)_100%)]"></div>
-        <div class="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
-          <div class="max-w-3xl py-4">
-            <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-bold uppercase text-brand-redDark ring-1 ring-brand-red/15">Sentence Mining</span>
-            <h2 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">Build fluency from sentences worth keeping.</h2>
-            <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse decks, mine useful lines, and keep due reviews close without turning practice into an admin screen.</p>
-            <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              ${canCreateDeck ? `<button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white shadow-[0_10px_20px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark" data-action="openCreateDeckModal">${icon("add")}<span>Create Deck</span></button>` : ""}
-              <button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-bold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white" data-action="openReview">${icon("book")}<span>Practice Reviews</span></button>
+        <img class="absolute inset-0 h-full w-full object-cover object-center opacity-80" src="/assets/img/sentence-mining-hero.png" alt="">
+        <div class="absolute inset-0 bg-[linear-gradient(100deg,rgba(255,250,244,.96)_0%,rgba(255,250,244,.9)_42%,rgba(255,250,244,.6)_67%,rgba(255,250,244,.28)_100%)]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,244,.18)_0%,rgba(255,250,244,.72)_100%)]"></div>
+        <div class="relative grid gap-6">
+          <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+            <div class="max-w-3xl py-4">
+              <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-bold uppercase text-brand-redDark ring-1 ring-brand-red/15">Sentence Mining</span>
+              <h2 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">Build fluency from sentences worth keeping.</h2>
+              <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse decks, mine useful lines, and keep due reviews close without turning practice into an admin screen.</p>
+              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                ${canCreateDeck ? `<button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white shadow-[0_10px_20px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark" data-action="openCreateDeckModal">${icon("add")}<span>Create Deck</span></button>` : ""}
+                <button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-bold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white" data-action="openReview">${icon("book")}<span>Practice Reviews</span></button>
+                <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-bold text-brand-charcoal no-underline transition hover:border-brand-orange/50 hover:bg-white" href="/app/sentence-mining/deck-library" data-app-link>${icon("book", "h-4 w-4")}<span>View Sentence Deck Library</span></a>
+              </div>
             </div>
-          </div>
-          <div class="grid grid-cols-2 gap-3 pb-4">
-            ${statPill("Decks started", myDecks.length + savedDecks.length, "book")}
-            ${statPill("Decks completed", completedDecks, "check")}
-            ${statPill("Mined sentences", totalMined, "bookmark")}
-            ${statPill("Coins earned", sentencePoints, "coins")}
-            ${statPill("Reviews due", dueToday, "bell")}
-            ${statPill("Daily streak", `${state.dashboard?.streak || 0} days`, "star")}
+            <div class="grid grid-cols-2 gap-3">
+              ${statPill("Decks started", myDecks.length + savedDecks.length, "book")}
+              ${statPill("Decks completed", completedDecks, "check")}
+              ${statPill("Mined sentences", totalMined, "bookmark")}
+              ${statPill("Coins earned", sentencePoints, "coins")}
+              ${statPill("Reviews due", dueToday, "bell")}
+              ${statPill("Daily streak", `${state.dashboard?.streak || 0} days`, "star")}
+            </div>
           </div>
         </div>
       </section>
       <div class="grid gap-8 px-4 py-7 sm:px-6 lg:px-7">
         ${deckRow("My Decks", myDecks, 0)}
-        ${deckRow("Saved Public Decks", savedDecks, 2)}
-        ${deckRow("Sentence Deck Library", publicDecks, 4)}
+        ${deckRow("Sentence Deck Library", savedDecks, 2)}
         ${Object.entries(byCategory)
           .map(([category, decks], index) => deckRow(category, decks, index + 5))
           .join("")}
       </div>
+    </div>
+  `;
+}
+
+export function sentenceDeckLibraryView({ state, selectedProfileLanguage }) {
+  const activeLanguage = selectedProfileLanguage || state.user.targetLanguage;
+  const publicDecks = (state.publicSentenceDecks || []).filter((deck) => !deck.targetLanguage || deck.targetLanguage === activeLanguage);
+
+  return `
+    <div class="-m-4 min-h-[calc(100vh-80px)] bg-brand-cream px-4 py-5 text-brand-ink sm:-m-6 sm:px-6 lg:-m-7 lg:px-7">
+      <div class="mb-4">
+        <a class="${ui.secondary} no-underline" href="/app/sentence-mining" data-app-link>${icon("arrowLeft")}<span>Back to Sentence Mining</span></a>
+      </div>
+      <section class="mb-6 overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.08)]">
+        <div class="relative p-5 sm:p-7">
+          <div class="absolute inset-0 bg-[linear-gradient(125deg,rgba(255,250,244,.98)_0%,rgba(248,246,242,.95)_58%,rgba(43,165,154,.14)_100%)]"></div>
+          <div class="relative flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div class="max-w-3xl">
+              <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-bold uppercase text-brand-redDark ring-1 ring-brand-red/15">Public Decks</span>
+              <h2 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">Sentence Deck Library</h2>
+              <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse public decks created by other learners and save useful ones to your profile.</p>
+              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
+            </div>
+            <div class="rounded-lg border border-brand-line/80 bg-white/75 p-4 text-sm font-bold text-brand-charcoal">
+              ${publicDecks.length} public ${publicDecks.length === 1 ? "deck" : "decks"}
+            </div>
+          </div>
+        </div>
+      </section>
+      ${deckGrid(publicDecks)}
     </div>
   `;
 }
@@ -422,7 +510,8 @@ function topicSection(topic, deck) {
   `;
 }
 
-function topicSentenceRows(topic) {
+function topicSentenceRows(topic, deck) {
+  const canManage = deck.owner && !deck.system;
   return (topic.sentences || []).map((sentence, index) => `
     <tr class="border-t border-brand-line/70 transition-colors" data-topic-audio-row>
       <td class="whitespace-nowrap px-4 py-3 text-sm font-bold text-brand-ink">${index + 1}</td>
@@ -432,6 +521,7 @@ function topicSentenceRows(topic) {
       <td class="whitespace-nowrap px-4 py-3">
         <button class="${sentence.audioUrl ? ui.secondary : `${ui.secondary} opacity-50`} !min-h-8 !px-2.5 !py-1" data-action="playSentenceAudio" data-audio-url="${escapeHtml(sentence.audioUrl || "")}" aria-label="Play sentence audio" ${sentence.audioUrl ? "" : "disabled"}>${icon("play", "h-3.5 w-3.5")}</button>
       </td>
+      ${canManage ? `<td class="whitespace-nowrap px-4 py-3"><button class="${ui.danger} !min-h-8 !px-2.5 !py-1 text-xs" data-action="openDeleteDeckSentenceModal:${escapeHtml(sentence.itemId || "")}">${icon("trash", "h-3.5 w-3.5")}<span>Remove</span></button></td>` : ""}
     </tr>
   `).join("");
 }
@@ -442,8 +532,9 @@ export function sentenceDeckTopicSentencesView({ state, activeDeckId, activeTopi
   if (!deck || !topic) {
     return `<section class="${ui.card}"><h2 class="text-2xl font-bold text-brand-ink">Topic not found</h2><p class="mt-2 ${ui.muted}">This topic may be private or unavailable.</p></section>`;
   }
-  const rows = topicSentenceRows(topic);
+  const rows = topicSentenceRows(topic, deck);
   const hasAudio = (topic.sentences || []).some((sentence) => sentence.audioUrl);
+  const canManage = deck.owner && !deck.system;
   return `
     <div class="-m-4 min-h-[calc(100vh-80px)] bg-brand-cream px-4 py-5 text-brand-ink sm:-m-6 sm:px-6 lg:-m-7 lg:px-7">
       <div class="mb-4">
@@ -471,9 +562,10 @@ export function sentenceDeckTopicSentencesView({ state, activeDeckId, activeTopi
                 <th class="px-4 py-3">Target Language</th>
                 <th class="px-4 py-3">Romanization</th>
                 <th class="px-4 py-3">Audio</th>
+                ${canManage ? `<th class="px-4 py-3">Actions</th>` : ""}
               </tr>
             </thead>
-            <tbody>${rows || `<tr><td class="px-4 py-6 text-sm text-brand-graphite" colspan="5">No sentences yet.</td></tr>`}</tbody>
+            <tbody>${rows || `<tr><td class="px-4 py-6 text-sm text-brand-graphite" colspan="${canManage ? 6 : 5}">No sentences yet.</td></tr>`}</tbody>
           </table>
         </div>
       </section>
@@ -489,6 +581,7 @@ function reviewStatus(sentence) {
 }
 
 function sentenceDeckTable(deck) {
+  const canManage = deck.owner && !deck.system;
   const rows = (deck.sentences || []).map((sentence) => `
     <tr class="border-t border-brand-line/70">
       <td class="px-4 py-3 text-sm font-semibold text-brand-ink">${escapeHtml(sentence.sourceLanguage || deck.sourceLanguage || "English")}</td>
@@ -501,6 +594,7 @@ function sentenceDeckTable(deck) {
       </td>
       <td class="px-4 py-3 text-sm text-brand-graphite">${sentence.dueDate ? formatDate(sentence.dueDate) : "Not reviewed"}</td>
       <td class="px-4 py-3"><span class="${ui.tagDark}">${escapeHtml(reviewStatus(sentence))}</span></td>
+      ${canManage ? `<td class="whitespace-nowrap px-4 py-3"><button class="${ui.danger} !min-h-8 !px-2.5 !py-1 text-xs" data-action="openDeleteDeckSentenceModal:${escapeHtml(sentence.itemId || "")}">${icon("trash", "h-3.5 w-3.5")}<span>Remove</span></button></td>` : ""}
     </tr>
   `).join("");
 
@@ -521,9 +615,10 @@ function sentenceDeckTable(deck) {
               <th class="px-4 py-3">Target Language</th>
               <th class="px-4 py-3">Last Reviewed</th>
               <th class="px-4 py-3">Review Status</th>
+              ${canManage ? `<th class="px-4 py-3">Actions</th>` : ""}
             </tr>
           </thead>
-          <tbody>${rows || `<tr><td class="px-4 py-6 text-sm text-brand-graphite" colspan="4">No sentences yet.</td></tr>`}</tbody>
+          <tbody>${rows || `<tr><td class="px-4 py-6 text-sm text-brand-graphite" colspan="${canManage ? 5 : 4}">No sentences yet.</td></tr>`}</tbody>
         </table>
       </div>
     </section>
@@ -558,7 +653,7 @@ export function sentenceDeckDetailView({ state, activeDeckId }) {
           <div class="grid gap-2">
             <button class="${ui.primary}" data-action="practiceDeck:${deck.id}">${icon("book")}<span>Review</span></button>
             <button class="${ui.secondary}" data-action="openReviewSettingsModal">${icon("bell")}<span>Settings</span></button>
-            ${deck.owner && !deck.system ? `<button class="${ui.secondary}" data-action="openAddTopicModal:${deck.id}">${icon("add")}<span>Add Topic</span></button><button class="${ui.secondary}" data-action="openAddDeckSentenceModal:${deck.id}">${icon("add")}<span>Add Sentence</span></button>` : ""}
+            ${deck.owner && !deck.system ? `<button class="${ui.secondary}" data-action="openAddTopicModal:${deck.id}">${icon("add")}<span>Add Topic</span></button><button class="${ui.secondary}" data-action="openAddDeckSentenceModal:${deck.id}">${icon("add")}<span>Add Sentence</span></button><button class="${ui.danger}" data-action="openDeleteDeckModal:${deck.id}">${icon("trash")}<span>Delete Deck</span></button>` : ""}
           </div>
           </div>
         </div>

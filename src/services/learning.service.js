@@ -1617,6 +1617,93 @@ async function savePublicSentenceDeck(user, deckId) {
   }
 }
 
+async function deleteSentenceDeck(user, deckId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const deckItems = await client.query(
+      `select i.sentence_id
+         from sentence_deck_items i
+         join sentence_decks d on d.id = i.deck_id
+        where d.id = $1
+          and d.user_id = $2
+          and d.deck_kind = 'User'`,
+      [deckId, user.id]
+    );
+    const deletedDeck = await client.query(
+      `delete from sentence_decks
+        where id = $1
+          and user_id = $2
+          and deck_kind = 'User'
+        returning id`,
+      [deckId, user.id]
+    );
+    if (!deletedDeck.rows[0]) throw notFound("Deck not found");
+    const sentenceIds = deckItems.rows.map((item) => item.sentence_id);
+    if (sentenceIds.length) {
+      await client.query(
+        `delete from user_sentence_reviews usr
+          using sentences s
+         where usr.sentence_id = s.id
+           and usr.user_id = $1
+           and usr.sentence_id = any($2::uuid[])
+           and coalesce(s.source, '') = 'Sentence Mining'
+           and not exists (
+             select 1
+               from sentence_deck_items i
+              where i.sentence_id = usr.sentence_id
+           )`,
+        [user.id, sentenceIds]
+      );
+      await client.query(
+        `delete from sentences s
+         where s.id = any($1::uuid[])
+           and coalesce(s.source, '') = 'Sentence Mining'
+           and not exists (
+             select 1
+               from sentence_deck_items i
+              where i.sentence_id = s.id
+           )
+           and not exists (
+             select 1
+               from user_sentence_reviews usr
+              where usr.sentence_id = s.id
+           )`,
+        [sentenceIds]
+      );
+    }
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function unsavePublicSentenceDeck(user, deckId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const savedDeck = await client.query(
+      `delete from user_saved_sentence_decks
+        where user_id = $1
+          and deck_id = $2
+        returning deck_id`,
+      [user.id, deckId]
+    );
+    if (!savedDeck.rows[0]) throw notFound("Saved deck not found");
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 async function getOwnedDeck(client, user, deckId) {
   const deck = await client.query("select id from sentence_decks where id = $1 and user_id = $2 and deck_kind = 'User'", [deckId, user.id]);
   if (!deck.rows[0]) throw notFound("Deck not found");
@@ -1787,6 +1874,62 @@ async function addSentenceDeckSentence(user, deckId, body) {
         console.warn("Could not delete failed sentence video");
       }
     }
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function deleteSentenceDeckItem(user, itemId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const deletedItem = await client.query(
+      `delete from sentence_deck_items i
+        using sentence_decks d
+       where d.id = i.deck_id
+         and d.user_id = $1
+         and d.deck_kind = 'User'
+         and i.id = $2
+       returning i.sentence_id`,
+      [user.id, itemId]
+    );
+    if (!deletedItem.rows[0]) throw notFound("Deck sentence not found");
+    const sentenceId = deletedItem.rows[0].sentence_id;
+    await client.query(
+      `delete from user_sentence_reviews usr
+        using sentences s
+       where usr.sentence_id = s.id
+         and usr.user_id = $1
+         and usr.sentence_id = $2
+         and coalesce(s.source, '') = 'Sentence Mining'
+         and not exists (
+           select 1
+             from sentence_deck_items i
+            where i.sentence_id = usr.sentence_id
+         )`,
+      [user.id, sentenceId]
+    );
+    await client.query(
+      `delete from sentences s
+       where s.id = $1
+         and coalesce(s.source, '') = 'Sentence Mining'
+         and not exists (
+           select 1
+             from sentence_deck_items i
+            where i.sentence_id = s.id
+         )
+         and not exists (
+           select 1
+             from user_sentence_reviews usr
+            where usr.sentence_id = s.id
+         )`,
+      [sentenceId]
+    );
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
     throw error;
   } finally {
     client.release();
@@ -2619,11 +2762,14 @@ module.exports = {
   updateCustomSentence,
   deleteSavedSentence,
   createSentenceDeck,
+  deleteSentenceDeck,
   savePublicSentenceDeck,
+  unsavePublicSentenceDeck,
   createSentenceDeckTopic,
   updateSentenceDeckTopic,
   deleteSentenceDeckTopic,
   addSentenceDeckSentence,
+  deleteSentenceDeckItem,
   recordDeckReview,
   createGoal,
   updateGoal,

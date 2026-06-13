@@ -69,39 +69,6 @@ function formatRemaining(seconds = 360) {
   return `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
 }
 
-function roomRows({ rooms, activeSession, state, showHistory }) {
-  if (!rooms.length) {
-    return `
-      <tr>
-        <td colspan="7" class="px-4 py-10 text-center text-sm font-semibold text-brand-graphite">No focused practice rooms match these filters.</td>
-      </tr>
-    `;
-  }
-  return rooms.map((room) => {
-    const hostStatus = room.hostActive ? "Started" : room.ownerUserId === state.user.id ? "Ready to start" : "Waiting for host";
-    const historyMeta = showHistory ? `<p class="mt-1 text-xs text-brand-graphite">Joined: ${escapeHtml(room.joinedSummary || "No participants")}</p>` : "";
-    const seatLimit = Math.min(4, Number(room.maxParticipants || 4));
-    const seatCount = Math.min(Number(room.participantCount || 0), seatLimit);
-    return `
-      <tr class="border-b border-brand-line/70 align-middle last:border-0">
-        <td class="px-4 py-3">${roomImage(room)}</td>
-        <td class="min-w-[220px] px-4 py-3">
-          <div class="font-bold text-brand-ink">${escapeHtml(room.title)}</div>
-          <p class="mt-1 line-clamp-2 text-xs leading-5 text-brand-graphite">${escapeHtml(room.description || "Focused speaking practice for language learners.")}</p>
-          ${historyMeta}
-        </td>
-        <td class="px-4 py-3">${roomTypeIcon(room)}</td>
-        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</td>
-        <td class="px-4 py-3"><span class="${ui.tag}">${escapeHtml(room.cefrLevel)}</span></td>
-        <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${seatCount}/${seatLimit}<span class="mt-1 block text-xs text-brand-graphite">${showHistory ? escapeHtml(room.status) : `${hostStatus} ${room.startedAt ? `· ${formatRemaining(room.secondsRemaining)} left` : ""}`}</span></td>
-        <td class="px-4 py-3 text-right">
-          ${roomAction({ room, activeSession, state })}
-        </td>
-      </tr>
-    `;
-  }).join("");
-}
-
 function roomCards({ rooms, activeSession, state, showHistory }) {
   if (!rooms.length) {
     return `
@@ -325,27 +292,8 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
         <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing rooms for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
       </section>
 
-      <section class="grid gap-3 lg:hidden">
+      <section class="grid gap-3 lg:grid-cols-2">
         ${roomCards({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}
-      </section>
-
-      <section class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] lg:block">
-        <div class="overflow-x-auto">
-          <table class="w-full min-w-[860px] border-collapse text-left">
-            <thead class="bg-white/65 text-xs font-semibold uppercase tracking-[.12em] text-brand-graphite">
-              <tr>
-                <th class="px-4 py-3">Picture</th>
-                <th class="px-4 py-3">Room</th>
-                <th class="px-4 py-3" aria-label="Room type"></th>
-                <th class="px-4 py-3">Languages</th>
-                <th class="px-4 py-3">Level</th>
-                <th class="px-4 py-3">Seats</th>
-                <th class="px-4 py-3 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody>${roomRows({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}</tbody>
-          </table>
-        </div>
       </section>
     </div>
   `;

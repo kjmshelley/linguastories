@@ -7,7 +7,7 @@ import { landingView, loginView, signupView } from "./pages/public.js";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
 import { progressView } from "./pages/progress.js";
 import { reviewView } from "./pages/review.js";
-import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
+import { addDeckSentenceModal, createDeckModal, deleteDeckConfirmModal, deleteDeckSentenceConfirmModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckLibraryView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
 import { sentencesView } from "./pages/sentence-library.js";
 import { shadowingView } from "./pages/shadowing.js";
 import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
@@ -25,7 +25,7 @@ import {
   teacherLessonNotesView,
   teacherProfileCreateView,
   teacherProfileDetailView,
-  teacherProfileModal,
+  teacherProfileEditView,
   teacherProfilesPanel,
   teacherResourcesView,
   teacherStudentsView,
@@ -81,6 +81,7 @@ const myLearningTabTitles = {
 
 const hiddenRoutes = [
   ["storyDetail", "Story"],
+  ["sentenceDeckLibrary", "Sentence Deck Library"],
   ["sentenceDeckDetail", "Sentence Deck"],
   ["sentenceDeckTopicSentences", "Topic Sentences"],
   ["shortStorySearch", "Search Short Stories"],
@@ -89,6 +90,7 @@ const hiddenRoutes = [
   ["voiceVideoRoom", "Voice/Video Room"],
   ["teacherProfileDetail", "Teacher Profile"],
   ["teacherProfileCreate", "Create Teacher Profile"],
+  ["teacherProfileEdit", "Edit Teacher Profile"],
   ["bookLesson", "Book Lesson"],
   ["myLessons", "My Booked lessons"],
   ["myTeachers", "My Booked Teachers"],
@@ -115,6 +117,7 @@ const routes = [...routeGroups.flatMap((group) => group.routes), ...hiddenRoutes
 const routeSlugs = {
   dashboard: "dashboard",
   sentenceMining: "sentence-mining",
+  sentenceDeckLibrary: "sentence-mining/deck-library",
   sentences: "sentence-library",
   shortStories: "short-stories",
   shortStorySearch: "short-stories/search",
@@ -127,6 +130,7 @@ const routeSlugs = {
   myLearning: "learning/my-learning",
   teacherProfileDetail: "learning/teacher-profile",
   teacherProfileCreate: "profile/my-profiles/teacher/new",
+  teacherProfileEdit: "profile/my-profiles/teacher",
   bookLesson: "learning/teacher-profile",
   myLessons: "learning/my-lessons",
   myTeachers: "learning/my-teachers",
@@ -147,9 +151,9 @@ const routeSlugs = {
   profileMoments: "profile/moments",
   profileWallet: "profile/wallet"
 };
-const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
+const browseRoutes = new Set(["sentenceMining", "sentenceDeckLibrary", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
 const communityRoutes = new Set(["communityLearner", "communityMoment"]);
-const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
+const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [] };
 let state = null;
@@ -262,12 +266,14 @@ function activeRoute() {
   if (!location.pathname.startsWith("/app")) return "dashboard";
   const slug = location.pathname.replace(/^\/app\/?/, "").replace(/\/$/, "") || "dashboard";
   if (slug === "community") return "communityMoments";
+  if (slug === "sentence-mining/deck-library") return "sentenceDeckLibrary";
   if (/^sentence-mining\/decks\/[^/]+\/topics\/[^/]+$/.test(slug)) return "sentenceDeckTopicSentences";
   if (slug.startsWith("sentence-mining/decks/")) return "sentenceDeckDetail";
   if (slug.startsWith("stories/")) return "storyDetail";
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/moments/")) return "communityMoment";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
+  if (/^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) return "teacherProfileEdit";
   if (/^learning\/teacher-profile\/[^/]+\/book$/.test(slug)) return "bookLesson";
   if (slug.startsWith("learning/teacher-profile/")) return "teacherProfileDetail";
   const match = routes.find(([id]) => (routeSlugs[id] || id) === slug);
@@ -277,13 +283,13 @@ function activeRoute() {
 function activeNavRoute() {
   const route = activeRoute();
   if (route === "sentences" || route === "deck") return "sentenceMining";
-  if (route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences") return "sentenceMining";
+  if (route === "sentenceDeckLibrary" || route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences") return "sentenceMining";
   if (route === "shortStorySearch") return "shortStories";
   if (route === "voiceVideoRoom") return "voiceVideoRooms";
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
   if (["myLessons", "myTeachers", "learningNotes"].includes(route)) return "myLearning";
   if (route === "profileSubscriptions") return "profileInfo";
-  if (["profileLanguages", "teacherProfiles", "teacherProfileCreate"].includes(route)) return "profileProfiles";
+  if (["profileLanguages", "teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "profileProfiles";
   if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route === "storyDetail" ? "stories" : route;
 }
@@ -338,7 +344,8 @@ function activeVoiceVideoRoomId() {
 }
 
 function activeTeacherProfileId() {
-  const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/);
+  const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/)
+    || location.pathname.match(/^\/app\/profile\/my-profiles\/teacher\/([^/]+)\/edit\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
@@ -355,6 +362,7 @@ function appPath(id, params = {}) {
   if (id === "communityMoment") return `/app/community/moments/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
+  if (id === "teacherProfileEdit") return `/app/profile/my-profiles/teacher/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
   return `/app/${routeSlugs[id] || id}`;
 }
@@ -401,6 +409,8 @@ function normalizeAppUrl() {
           : route === "voiceVideoRoom"
             ? appPath(route, { roomId: activeVoiceVideoRoomId() || activeVoiceVideoRoom?.id })
           : route === "teacherProfileDetail"
+            ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
+          : route === "teacherProfileEdit"
             ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
           : route === "bookLesson"
             ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
@@ -698,7 +708,7 @@ async function authRequest(path, data) {
   }
   state = await response.json();
   selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
-  history.pushState({}, "", appPath("shortStories"));
+  history.pushState({}, "", appPath("dashboard"));
   render();
 }
 
@@ -777,7 +787,7 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "findTeacher") requests.push(["teachers", `/api/teacher-student/teachers${teacherStudentQuery()}`]);
   if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
   if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
-  if (["profileProfiles", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
+  if (["profileProfiles", "teacherProfileCreate", "teacherProfileEdit", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
   if (["myLearning", "myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
   if (route === "myLearning" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
@@ -2210,6 +2220,7 @@ function bindActions(root = document) {
       if (action === "saveStory") await api(`/api/stories/${id}/save-sentences`, { method: "POST" });
       if (action === "saveSentence") await api(`/api/sentences/${id}/save`, { method: "POST" });
       if (action === "openCreateDeckModal") showModal(createDeckModal(context()));
+      if (action === "openDeleteDeckModal") showModal(deleteDeckConfirmModal(context(), id));
       if (action === "openReviewSettingsModal") showModal(reviewSettingsModal());
       if (action === "openAddTopicModal") showModal(topicModal(context(), id));
       if (action === "openEditTopicModal") showModal(editTopicModal(context(), id));
@@ -2219,8 +2230,19 @@ function bindActions(root = document) {
         closeModal();
       }
       if (action === "openAddDeckSentenceModal") showModal(addDeckSentenceModal(context(), id));
+      if (action === "openDeleteDeckSentenceModal") showModal(deleteDeckSentenceConfirmModal(context(), id));
       if (action === "openEditSentenceModal") showModal(editMinedSentenceModal(context(), id));
       if (action === "openDeleteSentenceModal") showModal(deleteMinedSentenceModal(context(), id));
+      if (action === "deleteDeck") {
+        await api(`/api/sentence-decks/${id}`, { method: "DELETE" });
+        closeModal();
+        history.pushState({}, "", appPath("sentenceMining"));
+        render();
+      }
+      if (action === "deleteDeckSentence") {
+        await api(`/api/sentence-decks/items/${id}`, { method: "DELETE" });
+        closeModal();
+      }
       if (action === "deleteSentence") {
         await api(`/api/sentences/${id}`, { method: "DELETE" });
         closeModal();
@@ -2291,6 +2313,9 @@ function bindActions(root = document) {
       if (action === "savePublicDeck") {
         await api(`/api/sentence-decks/${id}/save`, { method: "POST" });
       }
+      if (action === "unsavePublicDeck") {
+        await api(`/api/sentence-decks/${id}/save`, { method: "DELETE" });
+      }
       if (action === "reviewTopic") {
         activeReviewResults = { key: `${id}:${value}`, total: 0, responses: [] };
         history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}&topicId=${encodeURIComponent(value)}`);
@@ -2351,10 +2376,6 @@ function bindActions(root = document) {
       if (action === "openTeacherProfileModal") {
         history.pushState({}, "", appPath("teacherProfileCreate"));
         render();
-      }
-      if (action === "openTeacherProfileEdit") {
-        const profile = (teacherStudentData.profiles || []).find((item) => item.id === id);
-        if (profile) showModal(teacherProfileModal({ ...context(), profile }));
       }
       if (action === "deleteTeacherProfile") {
         await teacherStudentApi(`/api/teacher-student/teacher-profiles/${id}`, { method: "DELETE" });
@@ -2717,11 +2738,13 @@ function bindActions(root = document) {
         closeModal();
       }
       if (form.dataset.form === "sentenceDeckTopic") {
-        await api(`/api/sentence-decks/${data.deckId}/topics`, { method: "POST", body: JSON.stringify(data) });
+        const { deckId, ...topicData } = data;
+        await api(`/api/sentence-decks/${deckId}/topics`, { method: "POST", body: JSON.stringify(topicData) });
         closeModal();
       }
       if (form.dataset.form === "editSentenceDeckTopic") {
-        await api(`/api/sentence-decks/topics/${data.id}`, { method: "POST", body: JSON.stringify(data) });
+        const { id, ...topicData } = data;
+        await api(`/api/sentence-decks/topics/${id}`, { method: "POST", body: JSON.stringify(topicData) });
         closeModal();
       }
       if (form.dataset.form === "deckSentence") {
@@ -2731,7 +2754,8 @@ function bindActions(root = document) {
           showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
           return;
         }
-        await api(`/api/sentence-decks/${data.deckId}/sentences`, { method: "POST", body: JSON.stringify(data) });
+        const { deckId, ...sentenceData } = data;
+        await api(`/api/sentence-decks/${deckId}/sentences`, { method: "POST", body: JSON.stringify(sentenceData) });
         closeModal();
       }
       if (form.dataset.form === "editSentence") {
@@ -2814,6 +2838,8 @@ function bindActions(root = document) {
       }
       if (form.dataset.form === "teacherProfile" || form.dataset.form === "teacherProfileEdit") {
         const imageFile = form.elements.teacherImage?.files?.[0];
+        data.teachesLanguages = Array.from(form.elements.teachesLanguages?.selectedOptions || []).map((option) => option.value).join(", ");
+        data.speaksLanguages = Array.from(form.elements.speaksLanguages?.selectedOptions || []).map((option) => option.value).join(", ");
         delete data.teacherImage;
         const profileId = data.id;
         delete data.id;
@@ -2828,7 +2854,7 @@ function bindActions(root = document) {
         const path = form.dataset.form === "teacherProfileEdit" ? `/api/teacher-student/teacher-profiles/${profileId}` : "/api/teacher-student/teacher-profiles";
         await teacherStudentApi(path, { method: "POST", body: JSON.stringify(data) });
         teacherStudentLoadedKeys = new Set();
-        if (form.dataset.form === "teacherProfile" && activeRoute() === "teacherProfileCreate") {
+        if (activeRoute() === "teacherProfileCreate" || activeRoute() === "teacherProfileEdit") {
           myProfilesTab = "teachers";
           history.pushState({}, "", appPath("profileProfiles"));
           await loadTeacherStudentData("profileProfiles", { force: true });
@@ -3038,6 +3064,8 @@ function render() {
         ? deckForTitle.name
       : route === "sentenceMining"
         ? "Sentence Mining"
+      : route === "sentenceDeckLibrary"
+        ? "Sentence Deck Library"
       : route === "shortStories"
         ? `Short Stories (${state.user.targetLanguage})`
         : route === "shortStorySearch"
@@ -3047,9 +3075,9 @@ function render() {
       : route === "communityLearner" && learnerForTitle
             ? learnerForTitle.displayName
         : route === "communityConnect"
-          ? "Connect with followers"
+          ? "Connect"
         : route === "communityMoments"
-          ? "Followers Moments"
+          ? "Moments"
         : route === "voiceVideoRooms"
           ? "Community Voice/Video Rooms"
         : route === "findTeacher"
@@ -3064,6 +3092,8 @@ function render() {
           ? "My Profiles"
         : route === "teacherProfileCreate"
           ? "Create Teacher Profile"
+          : route === "teacherProfileEdit"
+            ? "Edit Teacher Profile"
             : (route === "teacherProfileDetail" || route === "bookLesson") && teacherProfileForTitle
               ? teacherProfileForTitle.displayName
             : storyForTitle?.title || match[1];
@@ -3092,6 +3122,7 @@ function render() {
   const views = {
     dashboard: dashboardView,
     sentenceMining: sentenceMiningView,
+    sentenceDeckLibrary: sentenceDeckLibraryView,
     sentenceDeckDetail: (ctx) => sentenceDeckDetailView({ ...ctx, activeDeckId: activeDeckId() }),
     sentenceDeckTopicSentences: (ctx) => sentenceDeckTopicSentencesView({ ...ctx, activeDeckId: activeDeckId(), activeTopicId: activeTopicId() }),
     sentences: sentencesView,
@@ -3113,6 +3144,7 @@ function render() {
     findTeacher: findTeacherView,
     teacherProfileDetail: (ctx) => teacherProfileDetailView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
     teacherProfileCreate: teacherProfileCreateView,
+    teacherProfileEdit: (ctx) => teacherProfileEditView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
     bookLesson: bookLessonView,
     myLearning: myLearningView,
     myLessons: (ctx) => myLearningView({ ...ctx, myLearningTab: "lessons" }),
@@ -3211,7 +3243,11 @@ async function init() {
       renderPublicPage();
       return;
     }
-    if (["/", "/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("shortStories"));
+    if (window.location.pathname === "/") {
+      renderPublicPage();
+      return;
+    }
+    if (["/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("dashboard"));
     if (window.location.pathname === "/sentence-mining") history.replaceState({}, "", appPath("sentenceMining"));
     normalizeAppUrl();
     await api("/api/state");
