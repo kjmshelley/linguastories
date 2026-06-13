@@ -7,6 +7,8 @@ const { apiNotFound, frontendNotFound } = require("./middleware/not-found.middle
 const { globalApiRateLimit } = require("./middleware/rate-limit.middleware");
 const { cors, rejectInvalidContentType, securityHeaders } = require("./middleware/security.middleware");
 const { rejectPrototypePollution } = require("./middleware/validation.middleware");
+const teacherStudentController = require("./controllers/teacher-student.controller");
+const asyncHandler = require("./middleware/async-handler");
 
 const app = express();
 const clientPath = path.join(__dirname, "..", "client");
@@ -29,8 +31,30 @@ const frontendAppRoutes = [
   /^\/app\/community\/moments\/?$/,
   /^\/app\/community\/moments\/[0-9a-f-]+\/?$/i,
   /^\/app\/community\/voice-video-rooms\/?$/,
+  /^\/app\/community\/voice-video-rooms\/[0-9a-f-]+\/?$/i,
+  /^\/app\/learning\/?$/,
+  /^\/app\/learning\/find-teacher\/?$/,
+  /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/?$/i,
+  /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/book\/?$/i,
+  /^\/app\/learning\/my-learning\/?$/,
+  /^\/app\/learning\/my-lessons\/?$/,
+  /^\/app\/learning\/my-teachers\/?$/,
+  /^\/app\/learning\/learning-notes\/?$/,
+  /^\/app\/learning\/teacher-dashboard\/?$/,
+  /^\/app\/learning\/teacher-profiles\/?$/,
+  /^\/app\/learning\/availability\/?$/,
+  /^\/app\/learning\/bookings\/?$/,
+  /^\/app\/learning\/students\/?$/,
+  /^\/app\/learning\/classroom\/?$/,
+  /^\/app\/learning\/lesson-notes\/?$/,
+  /^\/app\/learning\/resources\/?$/,
+  /^\/app\/learning\/templates\/?$/,
+  /^\/app\/learning\/earnings\/?$/,
+  /^\/app\/learning\/subscription\/?$/,
   /^\/app\/profile\/?$/,
   /^\/app\/profile\/my-info\/?$/,
+  /^\/app\/profile\/my-profiles\/?$/,
+  /^\/app\/profile\/my-profiles\/teacher\/new\/?$/,
   /^\/app\/profile\/language-profiles\/?$/,
   /^\/app\/profile\/goals\/?$/,
   /^\/app\/profile\/moments\/?$/,
@@ -47,6 +71,7 @@ const frontendAppRoutes = [
 app.disable("x-powered-by");
 app.use(securityHeaders);
 app.use(cors);
+app.post("/api/teacher-student/stripe/webhook", express.raw({ type: "application/json" }), asyncHandler(teacherStudentController.stripeWebhook));
 app.use(express.json({ limit: "12mb" }));
 app.use(rejectPrototypePollution);
 app.use(rejectInvalidContentType);

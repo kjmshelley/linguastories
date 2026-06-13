@@ -60,6 +60,7 @@ const iconPaths = {
   bell: `<path d="M10 21h4"></path><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>`,
   book: `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4v15.5"></path><path d="M20 22V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5"></path>`,
   bookmark: `<path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"></path>`,
+  calendar: `<path d="M8 2v4"></path><path d="M16 2v4"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 10h18"></path>`,
   check: `<path d="m20 6-11 11-5-5"></path>`,
   chevronLeft: `<path d="m15 18-6-6 6-6"></path>`,
   chevronRight: `<path d="m9 18 6-6-6-6"></path>`,

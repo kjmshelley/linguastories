@@ -71,7 +71,7 @@ export function reviewView({ state, reviewSettings = {} }) {
         </div>
         <div class="mt-4">${progressBar(progress)}</div>
       </div>
-      <article class="group min-h-[320px] rounded-lg border border-brand-line/80 bg-brand-panel p-6 shadow-[0_18px_42px_rgba(29,41,63,.08)]" data-review-card data-card-index="${currentIndex}" data-card-count="${list.length}" data-audio-url="${escapeHtml(current.audioUrl || "")}" data-auto-play-audio="${reviewSettings.playAudioAutomatically ? "true" : "false"}" data-auto-next-card="${reviewSettings.goToNextCardAutomatically ? "true" : "false"}">
+      <article class="group min-h-[320px] rounded-lg border border-brand-line/80 bg-brand-panel p-6 shadow-[0_18px_42px_rgba(29,41,63,.08)]" data-review-card data-card-index="${currentIndex}" data-card-count="${list.length}" data-audio-url="${escapeHtml(current.audioUrl || "")}" data-auto-play-audio="${reviewSettings.playAudioAutomatically ? "true" : "false"}" data-auto-next-card="${reviewSettings.goToNextCardAutomatically ? "true" : "false"}" data-auto-next-delay-ms="${Math.min(60, Math.max(1, Number(reviewSettings.autoNextDelaySeconds || 5) || 5)) * 1000}">
         <div class="flex flex-wrap items-center gap-2">
           <span class="${ui.tagDark}">${escapeHtml(current.state || "New")}</span>
           <span class="${ui.tag}">${escapeHtml(current.level || deck?.level || "A1")}</span>

@@ -203,6 +203,13 @@ create table if not exists sentence_deck_items (
   unique (deck_id, sentence_id)
 );
 
+create table if not exists user_saved_sentence_decks (
+  user_id uuid not null references users(id) on delete cascade,
+  deck_id uuid not null references sentence_decks(id) on delete cascade,
+  saved_at timestamptz not null default now(),
+  primary key (user_id, deck_id)
+);
+
 create table if not exists user_sentence_review_results (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id) on delete cascade,
@@ -235,6 +242,7 @@ create table if not exists stories (
   category_id uuid references story_categories(id) on delete set null,
   source_language text not null,
   topic text not null,
+  image_url text,
   image_path_file_id text,
   audio_url text,
   video_url text,
@@ -273,6 +281,9 @@ update stories
 
 alter table if exists stories
   alter column source_language set not null;
+
+alter table if exists stories
+  add column if not exists image_url text;
 
 alter table if exists stories
   add column if not exists image_path_file_id text;
@@ -836,6 +847,8 @@ create index if not exists idx_user_sessions_expires on user_sessions (expires_a
 drop index if exists idx_sentences_pack;
 create index if not exists idx_sentences_language on sentences (target_language);
 create index if not exists idx_reviews_user_due on user_sentence_reviews (user_id, due_date);
+create index if not exists idx_user_saved_sentence_decks_user on user_saved_sentence_decks (user_id, saved_at desc);
+create index if not exists idx_user_saved_sentence_decks_deck on user_saved_sentence_decks (deck_id);
 create index if not exists idx_stories_category on stories (category_id);
 create index if not exists idx_story_translations_story_language on story_translations (story_id, target_language);
 create index if not exists idx_story_translations_language_level on story_translations (target_language, level);

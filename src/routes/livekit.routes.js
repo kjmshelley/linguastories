@@ -23,6 +23,7 @@ const livekitCreateRateLimit = rateLimit({
 
 router.use(requireAuth);
 router.param("id", validateUuidParam);
+router.param("participantId", validateUuidParam);
 
 router.get("/rooms", livekitActionRateLimit, asyncHandler(controller.listRooms));
 router.post("/rooms", livekitCreateRateLimit, validateBody({
@@ -40,6 +41,10 @@ router.post("/rooms", livekitCreateRateLimit, validateBody({
 router.get("/rooms/:id", livekitActionRateLimit, asyncHandler(controller.getRoom));
 router.post("/rooms/:id/join", livekitActionRateLimit, asyncHandler(controller.joinRoom));
 router.post("/rooms/:id/leave", livekitActionRateLimit, asyncHandler(controller.leaveRoom));
+router.delete("/rooms/:id", livekitActionRateLimit, asyncHandler(controller.deleteRoom));
+router.post("/rooms/:id/participants/:participantId/moderate", livekitActionRateLimit, validateBody({
+  action: { type: "enum", options: ["mute", "camera_off", "kick"], required: true, label: "Action" }
+}), asyncHandler(controller.moderateParticipant));
 router.post("/sessions/:id/end", livekitActionRateLimit, asyncHandler(controller.endSession));
 
 module.exports = router;

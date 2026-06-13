@@ -9,6 +9,7 @@ const TOKEN_TTL_SECONDS = 7 * 60;
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
 const ROOM_TYPES = new Set(["voice", "video"]);
 const MAX_ROOM_PARTICIPANTS = 4;
+const ROOM_LIMIT_MS = SESSION_LIMIT_SECONDS * 1000;
 
 function badRequest(message, status = 400) {
   const error = new Error(message);
@@ -66,6 +67,12 @@ function mapRoom(row) {
     imageUrl: row.imageUrl || "",
     participantCount: Number(row.participantCount || 0),
     hostActive: Boolean(row.hostActive),
+    startedAt: row.startedAt || null,
+    endedAt: row.endedAt || null,
+    secondsRemaining: row.startedAt && row.status === "active"
+      ? Math.max(0, SESSION_LIMIT_SECONDS - Math.ceil((Date.now() - new Date(row.startedAt).getTime()) / 1000))
+      : SESSION_LIMIT_SECONDS,
+    joinedSummary: row.joinedSummary || "",
     createdAt: row.createdAt,
     costPerMinute: COINS_PER_MINUTE,
     maxMinutes: 6,
@@ -91,6 +98,18 @@ function mapSession(row) {
     billedMinutes: Number(row.billedMinutes || Math.ceil(Math.max(1, elapsedSeconds) / 60)),
     coinsCharged: Number(row.coinsCharged || 0)
   };
+}
+
+function roomElapsedSeconds(room) {
+  if (!room?.startedAt) return 0;
+  return Math.min(SESSION_LIMIT_SECONDS, Math.max(0, Math.ceil((Date.now() - new Date(room.startedAt).getTime()) / 1000)));
+}
+
+async function expireRoomIfNeeded(client, room) {
+  if (!room?.startedAt) return false;
+  if (Date.now() - new Date(room.startedAt).getTime() < ROOM_LIMIT_MS) return false;
+  await closeRoom(client, room.id, "ended");
+  return true;
 }
 
 async function uploadRoomImage(userId, payload) {
@@ -161,7 +180,8 @@ async function createRoom(user, payload) {
 
 async function listRooms(user, filters = {}) {
   const values = [user.id];
-  const where = ["r.status = 'active'", publicRoomSql()];
+  const includeHistory = String(filters.history || "").toLowerCase() === "true";
+  const where = [includeHistory ? "r.owner_user_id = $1" : "r.status = 'active'", publicRoomSql()];
   const addFilter = (sql, value) => {
     if (!value) return;
     values.push(value);
@@ -192,15 +212,20 @@ async function listRooms(user, filters = {}) {
             r.is_private as "isPrivate",
             r.status,
             r.image_url as "imageUrl",
+            r.started_at as "startedAt",
+            r.ended_at as "endedAt",
             r.created_at as "createdAt",
             count(p.id) filter (where p.status = 'joined')::int as "participantCount",
-            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive"
+            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive",
+            coalesce(string_agg(distinct joined_user.display_name, ', ') filter (where joined_user.id is not null), '') as "joinedSummary"
        from voice_video_rooms r
        left join users u on u.id = r.owner_user_id
        left join voice_video_room_participants p on p.room_id = r.id
+       left join voice_video_room_participants joined_p on joined_p.room_id = r.id
+       left join users joined_user on joined_user.id = joined_p.user_id
       where ${where.join(" and ")}
       group by r.id, u.display_name
-      order by r.created_at desc
+      order by ${includeHistory ? "r.created_at desc" : "r.created_at desc"}
       limit 80`,
     values
   );
@@ -222,9 +247,12 @@ async function getRoom(user, roomId) {
             r.is_private as "isPrivate",
             r.status,
             r.image_url as "imageUrl",
+            r.started_at as "startedAt",
+            r.ended_at as "endedAt",
             r.created_at as "createdAt",
             count(p.id) filter (where p.status = 'joined')::int as "participantCount",
-            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive"
+            bool_or(p.role = 'host' and p.status = 'joined') as "hostActive",
+            '' as "joinedSummary"
        from voice_video_rooms r
        left join users u on u.id = r.owner_user_id
        left join voice_video_room_participants p on p.room_id = r.id
@@ -240,9 +268,11 @@ async function getRoom(user, roomId) {
             coalesce(u.display_name, 'Learner') as "displayName",
             p.role,
             p.joined_at as "joinedAt",
-            p.status
+            p.status,
+            s.livekit_identity as "livekitIdentity"
        from voice_video_room_participants p
        left join users u on u.id = p.user_id
+       left join voice_video_room_sessions s on s.participant_id = p.id and s.status = 'active'
       where p.room_id = $1
         and p.status = 'joined'
       order by p.joined_at asc`,
@@ -314,6 +344,7 @@ async function joinRoom(user, roomId) {
               r.room_type as "roomType",
               r.max_participants as "maxParticipants",
               r.livekit_room_name as "livekitRoomName",
+              r.started_at as "startedAt",
               exists (
                 select 1
                   from voice_video_room_participants host_participant
@@ -330,6 +361,7 @@ async function joinRoom(user, roomId) {
     );
     const room = roomResult.rows[0];
     if (!room || room.status !== "active") throw badRequest("Room is not available", 404);
+    if (await expireRoomIfNeeded(client, room)) throw badRequest("This room has ended.", 410);
     if (room.ownerUserId !== user.id && !room.hostActive) {
       throw badRequest("The host has not started this room yet.");
     }
@@ -397,6 +429,18 @@ async function joinRoom(user, roomId) {
        returning id`,
       [roomId, user.id, room.ownerUserId === user.id ? "host" : "participant"]
     )).rows[0];
+
+    if (room.ownerUserId === user.id && !room.startedAt) {
+      const started = await client.query(
+        `update voice_video_rooms
+            set started_at = now()
+          where id = $1
+            and started_at is null
+          returning started_at as "startedAt"`,
+        [roomId]
+      );
+      room.startedAt = started.rows[0]?.startedAt || room.startedAt;
+    }
 
     let session = activeSession.rows[0];
     if (!session) {
@@ -572,6 +616,133 @@ async function closeRoomAfterHostLeaves(client, roomId, hostUserId) {
   await deleteLiveKitCloudRoom(closedRoom.rows[0]?.livekitRoomName);
 }
 
+async function closeRoom(client, roomId, status = "ended") {
+  const closedRoom = await client.query(
+    `update voice_video_rooms
+        set status = $2,
+            ended_at = coalesce(ended_at, now())
+      where id = $1
+        and status = 'active'
+      returning livekit_room_name as "livekitRoomName"`,
+    [roomId, status]
+  );
+  await client.query(
+    `update voice_video_room_participants
+        set status = 'left',
+            left_at = coalesce(left_at, now())
+      where room_id = $1
+        and status = 'joined'`,
+    [roomId]
+  );
+  await client.query(
+    `update voice_video_room_sessions
+        set status = 'disconnected',
+            ended_at = coalesce(ended_at, now()),
+            duration_seconds = least(360, greatest(1, ceil(extract(epoch from (now() - started_at)))::int))
+      where room_id = $1
+        and status = 'active'`,
+    [roomId]
+  );
+  await deleteLiveKitCloudRoom(closedRoom.rows[0]?.livekitRoomName);
+}
+
+async function deleteRoom(user, roomId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const room = await client.query(
+      `select id, owner_user_id as "ownerUserId", status
+         from voice_video_rooms
+        where id = $1
+        for update`,
+      [roomId]
+    );
+    if (!room.rows[0] || room.rows[0].ownerUserId !== user.id) throw badRequest("Room not found", 404);
+    if (room.rows[0].status !== "active") throw badRequest("Only active rooms can be deleted.");
+    await closeRoom(client, roomId, "cancelled");
+    await client.query("commit");
+    return { ok: true };
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+function livekitRoomServiceClient() {
+  requireLiveKitConfig();
+  const { RoomServiceClient } = livekitSdk();
+  const livekitUrl = process.env.LIVEKIT_URL.replace(/^ws/, "http");
+  return new RoomServiceClient(livekitUrl, process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_API_SECRET);
+}
+
+async function assertHostRoom(user, roomId) {
+  const result = await query(
+    `select id,
+            owner_user_id as "ownerUserId",
+            livekit_room_name as "livekitRoomName"
+       from voice_video_rooms
+      where id = $1
+        and status = 'active'`,
+    [roomId]
+  );
+  const room = result.rows[0];
+  if (!room || room.ownerUserId !== user.id) throw badRequest("Only the host can manage participants.", 403);
+  return room;
+}
+
+async function livekitIdentityForUser(roomId, userId) {
+  const result = await query(
+    `select livekit_identity as "livekitIdentity"
+       from voice_video_room_sessions
+      where room_id = $1
+        and user_id = $2
+        and status = 'active'
+      order by started_at desc
+      limit 1`,
+    [roomId, userId]
+  );
+  if (!result.rows[0]) throw badRequest("Participant is not active in this room.", 404);
+  return result.rows[0].livekitIdentity;
+}
+
+async function moderateParticipant(user, roomId, participantUserId, action) {
+  const room = await assertHostRoom(user, roomId);
+  if (participantUserId === user.id) throw badRequest("Use your own room controls for yourself.");
+  const identity = await livekitIdentityForUser(roomId, participantUserId);
+  const client = livekitRoomServiceClient();
+  if (action === "kick") {
+    await client.removeParticipant(room.livekitRoomName, identity);
+    await query(
+      `update voice_video_room_participants
+          set status = 'kicked',
+              left_at = now()
+        where room_id = $1
+          and user_id = $2
+          and status = 'joined'`,
+      [roomId, participantUserId]
+    );
+    await query(
+      `update voice_video_room_sessions
+          set status = 'disconnected',
+              ended_at = now()
+        where room_id = $1
+          and user_id = $2
+          and status = 'active'`,
+      [roomId, participantUserId]
+    );
+    return { ok: true };
+  }
+  const participant = await client.getParticipant(room.livekitRoomName, identity);
+  const { TrackSource } = livekitSdk();
+  const source = action === "camera_off" ? TrackSource.CAMERA : TrackSource.MICROPHONE;
+  const track = participant.tracks?.find((item) => item.source === source || String(item.source).toLowerCase().includes(action === "camera_off" ? "camera" : "microphone"));
+  if (!track?.sid) throw badRequest("That participant has not published the requested track.", 404);
+  await client.mutePublishedTrack(room.livekitRoomName, identity, track.sid, true);
+  return { ok: true };
+}
+
 async function endSession(user, sessionId, status = "completed") {
   const client = await pool.connect();
   try {
@@ -620,6 +791,8 @@ module.exports = {
   endSession,
   getRoom,
   joinRoom,
+  deleteRoom,
   leaveRoom,
-  listRooms
+  listRooms,
+  moderateParticipant
 };

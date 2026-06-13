@@ -14,6 +14,7 @@ create table if not exists voice_video_rooms (
   image_url text,
   image_file_id text,
   created_at timestamptz not null default now(),
+  started_at timestamptz,
   ended_at timestamptz
 );
 
@@ -77,6 +78,9 @@ create index if not exists idx_voice_video_room_coin_transactions_user_created
 
 alter table if exists voice_video_rooms
   alter column max_participants set default 4;
+
+alter table if exists voice_video_rooms
+  add column if not exists started_at timestamptz;
 
 update voice_video_rooms
    set max_participants = 4

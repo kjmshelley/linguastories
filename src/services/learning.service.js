@@ -97,8 +97,9 @@ async function getWallet(userId) {
     `select id, amount, label, created_at::date::text as date
        from coin_transactions
       where user_id = $1
+        and created_at >= current_date - interval '90 days'
       order by created_at desc
-      limit 20`,
+      limit 250`,
     [userId]
   );
 
@@ -189,15 +190,56 @@ async function getSentenceDecks(user, sentences) {
             d.source_language as "sourceLanguage",
             d.target_language as "targetLanguage",
             coalesce(d.image_url, '') as "imageUrl",
+            usd.saved_at as "savedAt",
+            (usd.user_id is not null) as "savedByUser",
             d.created_at
        from sentence_decks d
        left join users u on u.id = d.user_id
+       left join user_saved_sentence_decks usd on usd.deck_id = d.id and usd.user_id = $1
       where d.deck_kind = 'System'
          or d.user_id = $1
-         or d.visibility = 'Public'
+         or (d.visibility = 'Public' and usd.user_id is not null)
       order by d.created_at desc`,
     [user.id]
   );
+  return buildSentenceDeckPayload(user, decks.rows);
+}
+
+async function getPublicSentenceDeckLibrary(user) {
+  const decks = await query(
+    `select d.id,
+            d.user_id as "creatorId",
+            d.user_id as "ownerId",
+            u.display_name as creator,
+            u.display_name as "ownerName",
+            d.deck_kind as "deckKind",
+            d.name,
+            coalesce(d.description, '') as description,
+            d.coins,
+            d.level,
+            d.visibility,
+            d.source_language as "sourceLanguage",
+            d.target_language as "targetLanguage",
+            coalesce(d.image_url, '') as "imageUrl",
+            usd.saved_at as "savedAt",
+            false as "savedByUser",
+            d.created_at
+       from sentence_decks d
+       join users u on u.id = d.user_id
+       left join user_saved_sentence_decks usd on usd.deck_id = d.id and usd.user_id = $1
+      where d.deck_kind = 'User'
+        and d.visibility = 'Public'
+        and d.user_id <> $1
+        and usd.user_id is null
+      order by d.created_at desc
+      limit 80`,
+    [user.id]
+  );
+  return buildSentenceDeckPayload(user, decks.rows, { marketplace: true });
+}
+
+async function buildSentenceDeckPayload(user, deckRows, { marketplace = false } = {}) {
+  const decks = { rows: deckRows };
   const deckIds = decks.rows.map((deck) => deck.id);
   if (!deckIds.length) return [];
 
@@ -278,6 +320,8 @@ async function getSentenceDecks(user, sentences) {
       custom: deck.deckKind !== "System",
       system: deck.deckKind === "System",
       owner: deck.creatorId === user.id,
+      marketplace,
+      savedByUser: Boolean(deck.savedByUser),
       ownerId: deck.ownerId || "",
       layout: normalizedTopics.length ? "Topic Deck" : "Sentence Deck",
       sentences: normalizedTopics.length ? [] : directSentences,
@@ -324,7 +368,10 @@ async function getStories(userId) {
             coalesce(sc.slug, lower(regexp_replace(s.topic, '[^a-zA-Z0-9]+', '-', 'g'))) as "categorySlug",
             s.source_language as "sourceLanguage",
             s.topic,
-            case when s.image_path_file_id is not null then '/api/stories/' || s.id || '/image' else '' end as "imageUrl",
+            case
+              when s.image_path_file_id is not null then '/api/stories/' || s.id || '/image'
+              else coalesce(s.image_url, '')
+            end as "imageUrl",
             coalesce(s.video_url, '') as "videoUrl",
             s.unlock_cost as cost,
             s.reward_coins as reward,
@@ -743,6 +790,9 @@ async function getDirectChat(userId) {
             coalesce(other_user.avatar, left(other_user.display_name, 1)) as "otherAvatar",
             case when other_user.avatar_box_file_id is not null then '' else coalesce(other_user.avatar_url, '') end as "otherAvatarUrl",
             dc.updated_at as "updatedAt",
+            dc.conversation_type as "conversationType",
+            dc.teacher_profile_id as "teacherProfileId",
+            dc.lesson_booking_id as "lessonBookingId",
             last_message.body as "lastMessage",
             last_message.created_at as "lastMessageAt",
             last_message.sender_id = $1 as "lastMessageMine",
@@ -774,6 +824,7 @@ async function getDirectChat(userId) {
             dm.recipient_id as "recipientId",
             dm.body,
             dm.coin_amount as "coinAmount",
+            dm.message_context as "messageContext",
             dm.read_at as "readAt",
             dm.created_at as "createdAt",
             dm.created_at::date::text as date,
@@ -970,6 +1021,7 @@ async function getState(user) {
   }, {});
   const postsWithComments = posts.map((post) => ({ ...post, commentItems: commentsByPost[post.id] || [] }));
   const sentenceDecks = await getSentenceDecks(user, sentences);
+  const publicSentenceDecks = await getPublicSentenceDeckLibrary(user);
   const storyDiscussions = stories
     .map((story) => ({
       storyId: story.id,
@@ -991,6 +1043,7 @@ async function getState(user) {
     coinRules,
     sentences,
     sentenceDecks,
+    publicSentenceDecks,
     stories,
     storyCategories,
     goals,
@@ -1492,6 +1545,50 @@ async function createSentenceDeck(user, body) {
         console.warn("Could not delete failed deck image");
       }
     }
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function savePublicSentenceDeck(user, deckId) {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const deck = await client.query(
+      `select id, user_id
+         from sentence_decks
+        where id = $1
+          and deck_kind = 'User'
+          and visibility = 'Public'
+        for share`,
+      [deckId]
+    );
+    if (!deck.rows[0]) throw notFound("Public deck not found");
+    if (deck.rows[0].user_id === user.id) {
+      const error = new Error("This deck is already yours");
+      error.status = 400;
+      throw error;
+    }
+    await client.query(
+      `insert into user_saved_sentence_decks (user_id, deck_id)
+       values ($1, $2)
+       on conflict do nothing`,
+      [user.id, deckId]
+    );
+    await client.query(
+      `insert into user_sentence_reviews (user_id, sentence_id, state, due_date, saved)
+       select $1, i.sentence_id, 'New', current_date, true
+         from sentence_deck_items i
+        where i.deck_id = $2
+       on conflict (user_id, sentence_id)
+       do update set saved = true, updated_at = now()`,
+      [user.id, deckId]
+    );
+    await client.query("commit");
+    return getState(user);
+  } catch (error) {
+    await client.query("rollback");
     throw error;
   } finally {
     client.release();
@@ -2489,6 +2586,7 @@ module.exports = {
   updateCustomSentence,
   deleteSavedSentence,
   createSentenceDeck,
+  savePublicSentenceDeck,
   createSentenceDeckTopic,
   updateSentenceDeckTopic,
   deleteSentenceDeckTopic,

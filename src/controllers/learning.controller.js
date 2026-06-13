@@ -91,6 +91,10 @@ async function createSentenceDeck(req, res) {
   res.status(201).json(await learningService.createSentenceDeck(req.user, req.body));
 }
 
+async function savePublicSentenceDeck(req, res) {
+  res.json(await learningService.savePublicSentenceDeck(req.user, req.params.id));
+}
+
 async function createSentenceDeckTopic(req, res) {
   res.status(201).json(await learningService.createSentenceDeckTopic(req.user, req.params.id, req.body));
 }
@@ -203,6 +207,7 @@ module.exports = {
   updateCustomSentence,
   deleteSavedSentence,
   createSentenceDeck,
+  savePublicSentenceDeck,
   createSentenceDeckTopic,
   updateSentenceDeckTopic,
   deleteSentenceDeckTopic,

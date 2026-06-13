@@ -69,7 +69,7 @@ export function walletView({ state }) {
       <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div class="max-w-3xl">
           <h2 class="text-2xl font-black tracking-tight text-brand-ink">Coin Activity</h2>
-          <p class="mt-2 ${ui.muted}">Review your coin balance, earnings, and spending history across lessons, stories, goals, and community activity.</p>
+          <p class="mt-2 ${ui.muted}">Review your coin balance, earnings, and spending history from the last 90 days.</p>
         </div>
         <button class="inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-lg bg-brand-orange px-4 py-2 text-sm font-bold text-white shadow-[0_8px_18px_rgba(224,114,88,.22)] transition hover:bg-brand-redDark" data-action="openCoinRulesModal">
           ${icon("coins", "h-4 w-4")}
@@ -85,6 +85,7 @@ export function walletView({ state }) {
     </section>
     <section class="${ui.card} mt-4">
       <h2 class="text-xl font-black">Transaction History</h2>
+      <p class="mt-1 text-sm font-semibold text-brand-graphite">Showing coin activity from the last 90 days.</p>
       <div class="mt-3 grid gap-3 md:hidden">
         ${
           state.wallet.transactions.length

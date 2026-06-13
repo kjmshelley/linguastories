@@ -51,7 +51,7 @@ function securityHeaders(req, res, next) {
   const scriptSrc = ["'self'", "https://cdn.tailwindcss.com", "'unsafe-inline'"];
   const styleSrc = ["'self'", "'unsafe-inline'"];
   const mediaSrc = ["'self'", ...storageOrigins()];
-  const imgSrc = ["'self'", "data:", "blob:", ...storageOrigins()];
+  const imgSrc = ["'self'", "data:", "blob:", "https://images.unsplash.com", ...storageOrigins()];
   const connectSrc = ["'self'", ...allowedOrigins(), ...livekitConnectOrigins()];
   const csp = [
     "default-src 'self'",

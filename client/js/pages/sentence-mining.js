@@ -92,6 +92,7 @@ function deckCard(deck, index = 0) {
   const hasTopics = (deck.topics || []).length > 0;
   const openLabel = hasTopics ? "Open Deck" : "View Sentences";
   const openAction = browseButton(openLabel, `openDeck:${deck.id}`);
+  const saveAction = deck.marketplace ? `<button class="${ui.primary}" data-action="savePublicDeck:${escapeHtml(deck.id)}">${icon("bookmark", "h-4 w-4")}<span>Save</span></button>` : "";
   const mediaStyle = deck.imageUrl
     ? `<img class="absolute inset-0 h-full w-full object-cover" src="${escapeHtml(deck.imageUrl)}" alt="">`
     : "";
@@ -124,6 +125,7 @@ function deckCard(deck, index = 0) {
         <p class="line-clamp-2 min-h-10 text-sm leading-5 text-brand-charcoal">${escapeHtml(cardDescription)}</p>
         <div class="grid grid-cols-[1fr_auto_auto] gap-2">
           ${openAction}
+          ${saveAction}
           ${deck.mine ? `<button class="${ui.secondary} !px-3" data-action="openEditSentenceModal:${firstSentence?.id}" aria-label="Edit sentence">${icon("edit", "h-4 w-4")}</button>` : ""}
           ${deck.mine ? `<button class="${ui.danger} !px-3" data-action="openDeleteSentenceModal:${firstSentence?.id}" aria-label="Delete sentence">${icon("trash", "h-4 w-4")}</button>` : ""}
         </div>
@@ -182,7 +184,6 @@ export function addMinedSentenceModal({ state, appConfig }) {
         <label class="${ui.label}">Video<input class="${ui.input}" name="sentenceVideo" type="file" accept="video/mp4,video/webm,video/quicktime"></label>
         <label class="${ui.label}">Notes<textarea class="${ui.input} min-h-24" name="notes" placeholder="Why this sentence matters"></textarea></label>
         <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
           <button class="${ui.primary}" type="submit">${icon("save")}<span>Save</span></button>
         </div>
       </form>
@@ -224,7 +225,6 @@ export function topicModal(_ctx, deckId) {
         <label class="${ui.label}">Topic name<input class="${ui.input}" name="name" required maxlength="120" placeholder="Airport problems"></label>
         <label class="${ui.label}">Topic description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000" placeholder="Optional notes about this topic"></textarea></label>
         <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
           <button class="${ui.primary}" type="submit">${icon("add")}<span>Add Topic</span></button>
         </div>
       </form>
@@ -244,7 +244,6 @@ export function editTopicModal({ state }, topicId) {
         <label class="${ui.label}">Topic description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000">${escapeHtml(topic.description || "")}</textarea></label>
         <input type="hidden" name="sortOrder" value="${escapeHtml(topic.sortOrder || 0)}">
         <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
           <button class="${ui.primary}" type="submit">${icon("save")}<span>Save</span></button>
         </div>
       </form>
@@ -260,7 +259,6 @@ export function deleteTopicConfirmModal({ state }, topicId) {
       <p class="mt-2 ${ui.muted}">This deletes the topic and its deck sentence links.</p>
       <blockquote class="mt-4 rounded-lg border border-brand-line/80 bg-white/70 p-4 text-lg font-bold leading-7 text-brand-ink">${escapeHtml(topic?.name || "Topic unavailable")}</blockquote>
       <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
-        <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
         <button type="button" class="${ui.danger}" data-action="deleteTopic:${topicId}">${icon("trash")}<span>Delete</span></button>
       </div>
     </div>
@@ -292,7 +290,6 @@ export function addDeckSentenceModal({ state }, deckId) {
           <label class="${ui.label}">Level<select class="${ui.input}" name="level">${levelOptions(deck.level || state.user.currentLevel || "A1")}</select></label>
         </div>
         <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
           <button class="${ui.primary}" type="submit">${icon("add")}<span>Add Sentence</span></button>
         </div>
       </form>
@@ -322,7 +319,6 @@ export function editMinedSentenceModal({ state, appConfig }, sentenceId) {
         <label class="${ui.label}">Video<input class="${ui.input}" name="sentenceVideo" type="file" accept="video/mp4,video/webm,video/quicktime">${sentence.videoUrl ? `<span class="text-xs font-semibold text-brand-graphite">Current video saved</span>` : ""}</label>
         <label class="${ui.label}">Notes<textarea class="${ui.input} min-h-24" name="notes">${escapeHtml(sentence.notes || "")}</textarea></label>
         <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
           <button class="${ui.primary}" type="submit">${icon("save")}<span>Save</span></button>
         </div>
       </form>
@@ -338,7 +334,6 @@ export function deleteMinedSentenceModal({ state }, sentenceId) {
       <p class="mt-2 ${ui.muted}">This removes the sentence from your mined deck.</p>
       <blockquote class="mt-4 rounded-lg border border-brand-line/80 bg-white/70 p-4 text-lg font-bold leading-7 text-brand-ink">${escapeHtml(sentence?.target || "Sentence unavailable")}</blockquote>
       <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
-        <button type="button" class="${ui.secondary}" data-action="closeModal">Cancel</button>
         <button type="button" class="${ui.danger}" data-action="deleteSentence:${sentenceId}">${icon("trash")}<span>Delete</span></button>
       </div>
     </div>
@@ -349,7 +344,8 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
   const activeLanguage = selectedProfileLanguage || state.user.targetLanguage;
   const decks = (state.sentenceDecks || []).filter((deck) => !deck.targetLanguage || deck.targetLanguage === activeLanguage);
   const myDecks = decks.filter((deck) => deck.owner || deck.category === "My Decks");
-  const publicDecks = decks.filter((deck) => deck.custom && !deck.owner);
+  const savedDecks = decks.filter((deck) => deck.custom && !deck.owner && deck.savedByUser);
+  const publicDecks = (state.publicSentenceDecks || []).filter((deck) => !deck.targetLanguage || deck.targetLanguage === activeLanguage);
   const systemDecks = decks.filter((deck) => !deck.custom);
   const byCategory = systemDecks.reduce((groups, deck) => {
     groups[deck.category] = groups[deck.category] || [];
@@ -377,7 +373,7 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
             </div>
           </div>
           <div class="grid grid-cols-2 gap-3 pb-4">
-            ${statPill("Decks started", myDecks.length, "book")}
+            ${statPill("Decks started", myDecks.length + savedDecks.length, "book")}
             ${statPill("Decks completed", completedDecks, "check")}
             ${statPill("Mined sentences", totalMined, "bookmark")}
             ${statPill("Coins earned", sentencePoints, "coins")}
@@ -388,9 +384,10 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
       </section>
       <div class="grid gap-8 px-4 py-7 sm:px-6 lg:px-7">
         ${deckRow("My Decks", myDecks, 0)}
-        ${deckRow("Public Decks", publicDecks, 2)}
+        ${deckRow("Saved Public Decks", savedDecks, 2)}
+        ${deckRow("Sentence Deck Library", publicDecks, 4)}
         ${Object.entries(byCategory)
-          .map(([category, decks], index) => deckRow(category, decks, index + 3))
+          .map(([category, decks], index) => deckRow(category, decks, index + 5))
           .join("")}
       </div>
     </div>

@@ -6,6 +6,7 @@ const MAX_MOMENT_IMAGE_BYTES = 800 * 1024;
 const MAX_MOMENT_THUMB_BYTES = 180 * 1024;
 const MAX_DECK_IMAGE_BYTES = 500 * 1024;
 const MAX_VOICE_VIDEO_ROOM_IMAGE_BYTES = 500 * 1024;
+const MAX_TEACHER_PROFILE_IMAGE_BYTES = 800 * 1024;
 const MAX_SENTENCE_IMAGE_BYTES = 500 * 1024;
 const MAX_SENTENCE_AUDIO_BYTES = 8 * 1024 * 1024;
 const MAX_SENTENCE_VIDEO_BYTES = 8 * 1024 * 1024;
@@ -13,7 +14,8 @@ const MAX_STORY_ASSET_BYTES = 50 * 1024 * 1024;
 const ALLOWED_AVATAR_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const ALLOWED_MOMENT_TYPES = new Set(["image/webp"]);
 const ALLOWED_DECK_IMAGE_TYPES = new Set(["image/webp"]);
-const ALLOWED_VOICE_VIDEO_ROOM_IMAGE_TYPES = new Set(["image/webp"]);
+const ALLOWED_VOICE_VIDEO_ROOM_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const ALLOWED_TEACHER_PROFILE_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const ALLOWED_SENTENCE_IMAGE_TYPES = new Set(["image/webp"]);
 const ALLOWED_SENTENCE_AUDIO_TYPES = new Set(["audio/mpeg", "audio/mp3"]);
 const ALLOWED_SENTENCE_VIDEO_TYPES = new Set(["video/mp4", "video/webm", "video/quicktime"]);
@@ -126,6 +128,11 @@ function sentenceDeckObjectKey(userId, originalName, mimeType) {
 function voiceVideoRoomObjectKey(userId, originalName, mimeType) {
   const extension = extensionForMimeType(mimeType) || ".webp";
   return `${assetPath("users", userId, "voice-video-rooms")}/${cleanObjectName(originalName, "voice-video-room", extension.toLowerCase())}`;
+}
+
+function teacherProfileObjectKey(userId, originalName, mimeType) {
+  const extension = extensionForMimeType(mimeType) || ".webp";
+  return `${assetPath("users", userId, "teacher-profiles")}/${cleanObjectName(originalName, "teacher-profile", extension.toLowerCase())}`;
 }
 
 function sentenceAudioObjectKey(originalName, objectPrefix = "") {
@@ -351,9 +358,26 @@ async function uploadVoiceVideoRoomImage({ userId, fileName, dataUrl }) {
     allowedTypes: ALLOWED_VOICE_VIDEO_ROOM_IMAGE_TYPES,
     maxBytes: MAX_VOICE_VIDEO_ROOM_IMAGE_BYTES,
     label: "Room image",
-    typeDescription: "WebP"
+    typeDescription: "JPG, PNG, or WebP"
   });
   const objectKey = voiceVideoRoomObjectKey(userId, fileName || "voice-video-room.webp", mimeType);
+  await uploadObject({ objectKey, buffer, contentType: mimeType });
+
+  return {
+    boxFileId: objectKey,
+    url: publicUrlForKey(objectKey)
+  };
+}
+
+async function uploadTeacherProfileImage({ userId, fileName, dataUrl }) {
+  if (!dataUrl) return null;
+  const { buffer, mimeType } = parseDataUrl(dataUrl, {
+    allowedTypes: ALLOWED_TEACHER_PROFILE_IMAGE_TYPES,
+    maxBytes: MAX_TEACHER_PROFILE_IMAGE_BYTES,
+    label: "Teacher profile image",
+    typeDescription: "JPG, PNG, or WebP"
+  });
+  const objectKey = teacherProfileObjectKey(userId, fileName || "teacher-profile.webp", mimeType);
   await uploadObject({ objectKey, buffer, contentType: mimeType });
 
   return {
@@ -490,4 +514,4 @@ async function deleteStoredFile(objectKey) {
   return deleteObject(objectKey);
 }
 
-module.exports = { assetPath, uploadAssetBuffer, uploadUserAvatar, uploadMomentImage, uploadSentenceDeckImage, uploadVoiceVideoRoomImage, uploadUserSentenceImage, uploadUserSentenceAudio, uploadUserSentenceVideo, uploadSentenceAudio, uploadSentenceImage, uploadSentenceVideo, downloadBoxFile, deleteStoredFile };
+module.exports = { assetPath, uploadAssetBuffer, uploadUserAvatar, uploadMomentImage, uploadSentenceDeckImage, uploadVoiceVideoRoomImage, uploadTeacherProfileImage, uploadUserSentenceImage, uploadUserSentenceAudio, uploadUserSentenceVideo, uploadSentenceAudio, uploadSentenceImage, uploadSentenceVideo, downloadBoxFile, deleteStoredFile };

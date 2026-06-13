@@ -52,7 +52,6 @@ export function profileInfoView({ state, appConfig }) {
             <p class="mt-2 ${ui.muted}">Keep your account identity and native language current.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            ${button("Delete Profile", "openDeleteProfileModal", ui.danger)}
             ${button("Log Out", "logout", ui.secondary)}
           </div>
         </div>
@@ -66,7 +65,7 @@ export function profileInfoView({ state, appConfig }) {
           <label class="${ui.label}">Bio<textarea class="${ui.input} min-h-32 resize-y" name="bio" placeholder="Tell the community what you are practicing.">${escapeHtml(user.bio || "")}</textarea></label>
           <div class="flex flex-wrap gap-2">
             <button class="${ui.primary}">${icon("edit")}<span>Save Info</span></button>
-            <a class="${ui.secondary}" href="/app/profile/language-profiles" data-app-link>Language Profiles</a>
+            <a class="${ui.secondary}" href="/app/profile/my-profiles" data-app-link>My Profiles</a>
           </div>
         </form>
         <form class="mt-6 border-t border-brand-line pt-5" data-form="avatarUpload">
@@ -88,6 +87,9 @@ export function profileInfoView({ state, appConfig }) {
           ${infoRow("Current app language", user.targetLanguage)}
           ${infoRow("Current level", user.currentLevel)}
         </div>
+        <div class="mt-4 border-t border-brand-line pt-4">
+          ${button("Delete Account", "openDeleteProfileModal", `${ui.danger} w-full justify-center`)}
+        </div>
       </aside>
     </div>
   `;
@@ -96,14 +98,14 @@ export function profileInfoView({ state, appConfig }) {
 export function deleteProfileConfirmModal({ state }) {
   return `
     <div>
-      <span class="${ui.tagRed}">Delete Profile</span>
-      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Delete your profile?</span></h2>
+      <span class="${ui.tagRed}">Delete Account</span>
+      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Delete your account?</span></h2>
       <p class="mt-2 ${ui.muted}">This permanently deletes ${escapeHtml(state.user.displayName)}'s account, profile picture, language profiles, wallet records, story progress, goals, community posts, comments, messages, and saved learning activity. This cannot be undone.</p>
       <div class="mt-5 rounded-lg border border-brand-red/20 bg-brand-red/10 p-4">
         <p class="text-sm font-semibold leading-6 text-brand-redDark">Only continue if you are sure you no longer need this LinguaStories profile.</p>
       </div>
       <div class="mt-6 flex justify-end border-t border-brand-line pt-4">
-        <button class="${ui.danger}" data-action="confirmDeleteProfile">${icon("trash", "h-4 w-4")}<span>Delete Profile</span></button>
+        <button class="${ui.danger}" data-action="confirmDeleteProfile">${icon("trash", "h-4 w-4")}<span>Delete Account</span></button>
       </div>
     </div>
   `;
@@ -130,6 +132,30 @@ export function languageProfilesView({ state, appConfig, selectedProfileLanguage
       <section class="grid gap-4 xl:grid-cols-2">
         ${learningLanguages.map((languageProfile) => languageProfileCard({ state, user, languageProfile, selectedLanguage })).join("")}
       </section>
+    </div>
+  `;
+}
+
+export function myProfilesView({ state, appConfig, selectedProfileLanguage, myProfilesTab = "languages", teacherProfilesContent = "" }) {
+  const activeTab = ["languages", "teachers"].includes(myProfilesTab) ? myProfilesTab : "languages";
+  const tabs = [
+    ["languages", "My Language Profiles", "globe"],
+    ["teachers", "My Teacher Profiles", "user"]
+  ];
+  return `
+    <div class="grid gap-5">
+      <section class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <span class="${ui.tagGold}">Profiles</span>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">My Profiles</h2>
+        </div>
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="My profile views">
+          ${tabs.map(([id, label, iconName]) => `
+            <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyProfilesTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(iconName, "h-4 w-4")}<span>${label}</span></button>
+          `).join("")}
+        </div>
+      </section>
+      ${activeTab === "teachers" ? teacherProfilesContent : languageProfilesView({ state, appConfig, selectedProfileLanguage })}
     </div>
   `;
 }

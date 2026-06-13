@@ -4,7 +4,7 @@ import { appreciateMomentModal, communityConnectView, communityLearnerView, comm
 import { deckView } from "./pages/deck.js";
 import { createGoalModal, editGoalModal, goalSupportersModal, goalsView } from "./pages/goals.js";
 import { landingView, loginView, signupView } from "./pages/public.js";
-import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, languageProfilesView, profileInfoView, profileView } from "./pages/profile.js";
+import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView } from "./pages/profile.js";
 import { progressView } from "./pages/progress.js";
 import { reviewView } from "./pages/review.js";
 import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
@@ -13,7 +13,27 @@ import { shadowingView } from "./pages/shadowing.js";
 import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
 import { storiesView } from "./pages/stories.js";
 import { storyDetailView, storyLevelModal } from "./pages/story-detail.js";
-import { createVoiceVideoRoomModal, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
+import {
+  bookLessonView,
+  findTeacherView,
+  learningNotesView,
+  myLearningView,
+  teacherAvailabilityView,
+  teacherBookingsView,
+  teacherClassroomView,
+  teacherDashboardView,
+  teacherEarningsView,
+  teacherLessonNotesView,
+  teacherProfileCreateView,
+  teacherProfileDetailView,
+  teacherProfileModal,
+  teacherProfilesPanel,
+  teacherResourcesView,
+  teacherSubscriptionView,
+  teacherStudentsView,
+  teacherTemplatesView
+} from "./pages/learning.js";
+import { createVoiceVideoRoomModal, voiceVideoRoomView, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
 import { coinRulesModal, walletView } from "./pages/wallet.js";
 import { escapeHtml, icon, ui } from "./ui.js";
 import { gsap } from "../vendor/gsap/gsap.esm.js";
@@ -36,16 +56,34 @@ const routeGroups = [
     ]
   },
   {
+    title: "Learning",
+    routes: [
+      ["findTeacher", "Find a Teacher"],
+      ["myLearning", "My Schedule"],
+      ["teacherDashboard", "Teacher Dashboard"],
+      ["teacherBookings", "Bookings"],
+      ["teacherClassroom", "Classroom"],
+      ["teacherEarnings", "Earnings"],
+      ["teacherSubscription", "Teacher Subscription"]
+    ]
+  },
+  {
     title: "Profile",
     routes: [
       ["profileInfo", "My Account"],
-      ["profileLanguages", "My Language Profiles"],
+      ["profileProfiles", "My Profiles"],
       ["profileGoals", "My Goals"],
       ["profileMoments", "My Moments"],
       ["profileWallet", "My Wallet"]
     ]
   }
 ];
+
+const myLearningTabTitles = {
+  lessons: "My Booked lessons",
+  teachers: "My Booked Teachers",
+  calendar: "My Scheduled Classes"
+};
 
 const hiddenRoutes = [
   ["storyDetail", "Story"],
@@ -54,6 +92,19 @@ const hiddenRoutes = [
   ["shortStorySearch", "Search Short Stories"],
   ["communityLearner", "Learner Profile"],
   ["communityMoment", "Moment Detail"],
+  ["voiceVideoRoom", "Voice/Video Room"],
+  ["teacherProfileDetail", "Teacher Profile"],
+  ["teacherProfileCreate", "Create Teacher Profile"],
+  ["bookLesson", "Book Lesson"],
+  ["myLessons", "My Booked lessons"],
+  ["myTeachers", "My Booked Teachers"],
+  ["learningNotes", "Learning Notes"],
+  ["teacherAvailability", "Availability"],
+  ["teacherStudents", "My Students"],
+  ["teacherLessonNotes", "Lesson Notes"],
+  ["teacherResources", "Resources"],
+  ["teacherTemplates", "Lesson Templates"],
+  ["profileLanguages", "My Language Profiles"],
   ["stories", "Stories"],
   ["review", "SRS Review"],
   ["shadowing", "Shadowing"],
@@ -75,14 +126,36 @@ const routeSlugs = {
   communityConnect: "community/connect",
   communityMoments: "community/moments",
   voiceVideoRooms: "community/voice-video-rooms",
+  voiceVideoRoom: "community/voice-video-rooms",
+  findTeacher: "learning/find-teacher",
+  myLearning: "learning/my-learning",
+  teacherProfileDetail: "learning/teacher-profile",
+  teacherProfileCreate: "profile/my-profiles/teacher/new",
+  bookLesson: "learning/teacher-profile",
+  myLessons: "learning/my-lessons",
+  myTeachers: "learning/my-teachers",
+  learningNotes: "learning/learning-notes",
+  teacherDashboard: "learning/teacher-dashboard",
+  teacherProfiles: "learning/teacher-profiles",
+  teacherAvailability: "learning/availability",
+  teacherBookings: "learning/bookings",
+  teacherStudents: "learning/students",
+  teacherClassroom: "learning/classroom",
+  teacherLessonNotes: "learning/lesson-notes",
+  teacherResources: "learning/resources",
+  teacherTemplates: "learning/templates",
+  teacherEarnings: "learning/earnings",
+  teacherSubscription: "learning/subscription",
   profileInfo: "profile/my-info",
+  profileProfiles: "profile/my-profiles",
   profileLanguages: "profile/language-profiles",
   profileGoals: "profile/goals",
   profileMoments: "profile/moments",
   profileWallet: "profile/wallet"
 };
 const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
-const communityRoutes = new Set(["communityConnect", "communityMoments", "communityLearner", "communityMoment", "voiceVideoRooms"]);
+const communityRoutes = new Set(["communityLearner", "communityMoment"]);
+const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherClassroom", "teacherLessonNotes", "teacherResources", "teacherTemplates", "teacherEarnings", "teacherSubscription"]);
 
 let appConfig = { supportedLanguages: [] };
 let state = null;
@@ -104,16 +177,31 @@ let selectedLearnerProfileTabs = {};
 let communityListLimits = { communityConnect: 10, communityMoments: 10 };
 let connectMyCommunityOnly = true;
 let voiceVideoRooms = [];
-let voiceVideoRoomFilters = { q: "", targetLanguage: "", sourceLanguage: "", cefrLevel: "", roomType: "" };
+let voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
 let voiceVideoRoomsLoaded = false;
+let voiceVideoShowHistory = false;
+let voiceVideoPollTimer = null;
+let teacherStudentData = {};
+let teacherStudentFilters = { q: "", maxRate: "" };
+let teacherStudentLoadedKeys = new Set();
+let syncedStripeReturnBookings = new Set();
+let bookingSelection = { teacherProfileId: "", lessonType: "one_on_one", durationMinutes: "", date: "", startsAt: "" };
+let myLearningTab = "lessons";
+let myLearningWeekStart = "";
+let myProfilesTab = "languages";
+let teacherCalendarFilters = { view: "month", teacherProfileId: "", status: "" };
 let activeVoiceVideoRoom = null;
 let activeVoiceVideoSession = null;
+let activeVoiceVideoParticipants = [];
 let livekitRoomConnection = null;
 let livekitRoomTimer = null;
 let endingVoiceVideoRoom = false;
 let livekitWarningFlags = { three: false, one: false, ten: false };
 let livekitParticipantTiles = new Map();
 let livekitHiddenAudioLayer = null;
+let livekitLocalTracks = [];
+let livekitLocalAudioMuted = false;
+let livekitLocalVideoMuted = false;
 let chatOpen = false;
 let chatContactsHidden = false;
 let chatMobileScreen = "contacts";
@@ -122,12 +210,14 @@ let selectedConversationId = "";
 let pendingChatRecipientId = "";
 let topicAudioPlayback = { active: false, stopRequested: false, audio: null, resolve: null, runId: 0 };
 let activeReviewResults = { key: "", total: 0, responses: [] };
+let seenNotificationKeys = loadSeenNotificationKeys();
 
 const defaultReviewSettings = {
   playAudioAutomatically: true,
   showSourceLanguage: false,
   showRomanization: false,
-  goToNextCardAutomatically: true
+  goToNextCardAutomatically: true,
+  autoNextDelaySeconds: 5
 };
 let reviewSettings = loadReviewSettings();
 
@@ -150,6 +240,14 @@ const shortStorySearchButton = document.querySelector("#shortStorySearchButton")
 const mobileShortStorySearchButton = document.querySelector("#mobileShortStorySearchButton");
 const mobileMenuBackdrop = document.querySelector("#mobileMenuBackdrop");
 let lastCoinAnimationOrigin = null;
+let lastRenderedPageKey = "";
+
+function scrollToPageTopOnRouteChange() {
+  const pageKey = `${location.pathname}${location.search}${location.hash}`;
+  if (pageKey === lastRenderedPageKey) return;
+  lastRenderedPageKey = pageKey;
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
 
 function hasActiveShortStoryFilters() {
   return Boolean(
@@ -174,6 +272,9 @@ function activeRoute() {
   if (slug.startsWith("stories/")) return "storyDetail";
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/moments/")) return "communityMoment";
+  if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
+  if (/^learning\/teacher-profile\/[^/]+\/book$/.test(slug)) return "bookLesson";
+  if (slug.startsWith("learning/teacher-profile/")) return "teacherProfileDetail";
   const match = routes.find(([id]) => (routeSlugs[id] || id) === slug);
   return match?.[0] || "dashboard";
 }
@@ -183,6 +284,11 @@ function activeNavRoute() {
   if (route === "sentences" || route === "deck") return "sentenceMining";
   if (route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences") return "sentenceMining";
   if (route === "shortStorySearch") return "shortStories";
+  if (route === "voiceVideoRoom") return "voiceVideoRooms";
+  if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
+  if (["myLessons", "myTeachers", "learningNotes"].includes(route)) return "myLearning";
+  if (["profileLanguages", "teacherProfiles", "teacherProfileCreate"].includes(route)) return "profileProfiles";
+  if (["teacherAvailability", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route === "storyDetail" ? "stories" : route;
 }
 
@@ -211,6 +317,35 @@ function activePostId() {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
+function resetLanguageScopedViews() {
+  shortStoryFilters = {
+    query: "",
+    status: "all",
+    maxMinutes: "",
+    reward: "all",
+    engagement: "all",
+    sort: "recommended"
+  };
+  selectedFeaturedStoryIndex = 0;
+  selectedStoryLanguages = {};
+  selectedStoryLevels = {};
+  selectedStoryTabs = {};
+  selectedStoryReaderOptions = {};
+  activeReviewResults = { key: "", total: 0, responses: [] };
+  voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
+  voiceVideoRoomsLoaded = false;
+}
+
+function activeVoiceVideoRoomId() {
+  const match = location.pathname.match(/^\/app\/community\/voice-video-rooms\/([^/]+)\/?$/);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+function activeTeacherProfileId() {
+  const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
 function momentIdFromPath(path) {
   const match = String(path || "").match(/^\/app\/community\/moments\/([^/]+)\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
@@ -222,6 +357,9 @@ function appPath(id, params = {}) {
   if (id === "sentenceDeckTopicSentences") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}/topics/${encodeURIComponent(params.topicId || "")}`;
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
   if (id === "communityMoment") return `/app/community/moments/${encodeURIComponent(params.postId || "")}`;
+  if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
+  if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
+  if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
   return `/app/${routeSlugs[id] || id}`;
 }
 
@@ -233,7 +371,18 @@ function routeIcon(id) {
     communityConnect: "search",
     communityMoments: "message",
     voiceVideoRooms: "video",
+    findTeacher: "search",
+    myLearning: "calendar",
+    myLessons: "book",
+    myTeachers: "users",
+    teacherDashboard: "dashboard",
+    teacherProfiles: "user",
+    teacherBookings: "book",
+    teacherClassroom: "video",
+    teacherEarnings: "wallet",
+    teacherSubscription: "wallet",
     profileInfo: "user",
+    profileProfiles: "users",
     profileLanguages: "globe",
     profileGoals: "goal",
     profileMoments: "message",
@@ -256,6 +405,12 @@ function normalizeAppUrl() {
         ? appPath(route, { learnerId: activeLearnerId() })
         : route === "communityMoment"
           ? appPath(route, { postId: activePostId() })
+          : route === "voiceVideoRoom"
+            ? appPath(route, { roomId: activeVoiceVideoRoomId() || activeVoiceVideoRoom?.id })
+          : route === "teacherProfileDetail"
+            ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
+          : route === "bookLesson"
+            ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
           : appPath(route);
   if (location.pathname !== cleanPath || location.hash) history.replaceState({}, "", cleanPath);
 }
@@ -268,6 +423,8 @@ function context() {
     activeStoryId,
     activeLearnerId,
     activePostId,
+    activeVoiceVideoRoomId,
+    activeTeacherProfileId,
     selectedProfileLanguage,
     selectedFeaturedStoryIndex,
     shortStoryFilters,
@@ -280,8 +437,18 @@ function context() {
     connectMyCommunityOnly,
     voiceVideoRooms,
     voiceVideoRoomFilters,
+    voiceVideoShowHistory,
     activeVoiceVideoRoom,
-    activeVoiceVideoSession
+    activeVoiceVideoSession,
+    activeVoiceVideoParticipants,
+    teacherStudentData,
+    teacherStudentFilters,
+    bookingSelection,
+    myLearningTab,
+    myLearningWeekStart,
+    myProfilesTab,
+    teacherCalendarFilters,
+    activeTeacherProfileId: activeTeacherProfileId()
   };
 }
 
@@ -341,9 +508,31 @@ function notificationItems() {
   return Array.isArray(state?.notifications) ? state.notifications : [];
 }
 
+function notificationKey(item) {
+  return [item.type || "notification", item.title || "", item.body || ""].join("::");
+}
+
+function loadSeenNotificationKeys() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem("linguaStoriesSeenNotifications") || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveSeenNotificationKeys() {
+  localStorage.setItem("linguaStoriesSeenNotifications", JSON.stringify([...seenNotificationKeys].slice(-80)));
+}
+
+function markNotificationsSeen() {
+  notificationItems().forEach((item) => seenNotificationKeys.add(notificationKey(item)));
+  saveSeenNotificationKeys();
+  syncNotificationBadge();
+}
+
 function syncNotificationBadge() {
   if (!notificationBadge) return;
-  const count = notificationItems().length;
+  const count = notificationItems().filter((item) => !seenNotificationKeys.has(notificationKey(item))).length;
   notificationBadge.textContent = count;
   notificationBadge.className = `absolute -right-1 -top-1 ${count ? "inline-flex" : "hidden"} min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white`;
 }
@@ -444,6 +633,7 @@ async function api(path, options = {}) {
   const hadWalletState = Boolean(state?.wallet);
   const requestMethod = String(options.method || "GET").toUpperCase();
   const previousBalance = Number(state?.wallet?.balance || 0);
+  const previousTargetLanguage = state?.user?.targetLanguage || "";
   const animationOrigin = lastCoinAnimationOrigin;
   const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
   if (response.status === 401) {
@@ -460,6 +650,10 @@ async function api(path, options = {}) {
   const nextBalance = Number(state?.wallet?.balance || 0);
   const languageExists = state.learningLanguages?.some((item) => item.language === selectedProfileLanguage);
   if (!selectedProfileLanguage || !languageExists) selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
+  if (previousTargetLanguage && previousTargetLanguage !== state.user.targetLanguage) {
+    voiceVideoRoomsLoaded = false;
+    teacherStudentLoadedKeys = new Set();
+  }
   render();
   if (hadWalletState && requestMethod !== "GET" && nextBalance > previousBalance) animateCoinsToWallet(nextBalance - previousBalance, animationOrigin);
   return state;
@@ -497,27 +691,147 @@ async function livekitApi(path, options = {}) {
   return body;
 }
 
-function voiceVideoRoomQuery() {
+async function teacherStudentApi(path, options = {}) {
+  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
+  if (response.status === 401) {
+    state = null;
+    navigatePublic("/login");
+    return null;
+  }
+  const body = await response.json().catch(() => ({ error: "Request failed" }));
+  if (!response.ok) {
+    showModal(`<h2 class="text-xl font-black">Learning action unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
+    return null;
+  }
+  return body;
+}
+
+function teacherStudentQuery() {
   const params = new URLSearchParams();
-  Object.entries(voiceVideoRoomFilters).forEach(([key, value]) => {
+  if (activeRoute() === "findTeacher" && state?.user?.targetLanguage) params.set("language", state.user.targetLanguage);
+  Object.entries(teacherStudentFilters).forEach(([key, value]) => {
     if (value) params.set(key, value);
   });
   const queryString = params.toString();
   return queryString ? `?${queryString}` : "";
 }
 
-async function loadVoiceVideoRooms({ force = false } = {}) {
+function localDateKey(date = new Date()) {
+  const local = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const year = local.getFullYear();
+  const month = String(local.getMonth() + 1).padStart(2, "0");
+  const day = String(local.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function weekStartKey(date = new Date()) {
+  const local = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  local.setDate(local.getDate() - local.getDay());
+  return localDateKey(local);
+}
+
+function shiftDateKey(dateKey, days) {
+  const [year, month, day] = String(dateKey || localDateKey()).split("-").map(Number);
+  const date = new Date(year, month - 1, day);
+  date.setDate(date.getDate() + days);
+  return localDateKey(date);
+}
+
+async function loadTeacherStudentData(route = activeRoute(), { force = false } = {}) {
+  const profileId = activeTeacherProfileId();
+  const bookingQuery = new URLSearchParams({
+    lessonType: bookingSelection.lessonType || "one_on_one",
+    durationMinutes: bookingSelection.durationMinutes || "",
+    studentTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Local"
+  }).toString();
+  const calendarQuery = new URLSearchParams(teacherCalendarFilters);
+  const key = `${route}:${profileId}:${teacherStudentQuery()}:${bookingQuery}:${calendarQuery}`;
+  if (!force && teacherStudentLoadedKeys.has(key)) return;
+  const requests = [];
+  if (route === "findTeacher") requests.push(["teachers", `/api/teacher-student/teachers${teacherStudentQuery()}`]);
+  if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
+  if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
+  if (["profileProfiles", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
+  if (["myLearning", "myLessons", "teacherClassroom", "teacherDashboard", "teacherEarnings"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
+  if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
+  if (route === "myLearning" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
+  if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
+  if (route === "teacherAvailability") requests.push(["availability", "/api/teacher-student/availability"]);
+  if (route === "teacherDashboard") requests.push(["dashboard", "/api/teacher-student/dashboard"]);
+  if (route === "teacherResources") requests.push(["resources", "/api/teacher-student/resources"]);
+  if (route === "teacherTemplates") requests.push(["templates", "/api/teacher-student/templates"]);
+  if (route === "teacherSubscription") requests.push(["subscription", "/api/teacher-student/subscription"]);
+  if (!requests.length) return;
+  const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path)]));
+  loaded.forEach(([name, body]) => {
+    if (!body) return;
+    if (name === "teachers") teacherStudentData.teachers = body.teachers || [];
+    if (name === "profileDetail") teacherStudentData = { ...teacherStudentData, profile: body.profile, reviews: body.reviews || [] };
+    if (name === "bookingPage") {
+      teacherStudentData = { ...teacherStudentData, bookingPage: body };
+      if (body.profile?.id && bookingSelection.teacherProfileId !== body.profile.id) {
+        bookingSelection = {
+          teacherProfileId: body.profile.id,
+          lessonType: body.calendar?.lessonType || "one_on_one",
+          durationMinutes: String(body.calendar?.durationMinutes || body.calendar?.durations?.[0] || ""),
+          date: body.calendar?.days?.find((day) => day.availableCount > 0)?.date || body.calendar?.days?.[0]?.date || "",
+          startsAt: ""
+        };
+      }
+    }
+    if (name === "profiles") teacherStudentData = { ...teacherStudentData, profiles: body.profiles || [], subscription: body.subscription || teacherStudentData.subscription };
+    if (name === "lessons") teacherStudentData.lessons = body.lessons || [];
+    if (name === "myTeachers") teacherStudentData.myTeachers = body.teachers || [];
+    if (name === "notes") teacherStudentData.notes = body.notes || [];
+    if (name === "availability") teacherStudentData.availability = body.availability || [];
+    if (name === "dashboard") teacherStudentData.dashboard = body;
+    if (name === "calendar") teacherStudentData.calendar = body;
+    if (name === "resources") teacherStudentData.resources = body.resources || [];
+    if (name === "templates") teacherStudentData.templates = body.templates || [];
+    if (name === "subscription") teacherStudentData.subscription = body.subscription || {};
+  });
+  teacherStudentLoadedKeys.add(key);
+  if (teacherStudentRoutes.has(activeRoute())) render();
+}
+
+async function syncStripeReturnPayment(route = activeRoute()) {
+  if (route !== "myLearning" && route !== "myLessons") return;
+  const params = new URLSearchParams(window.location.search);
+  const bookingId = params.get("booking") || "";
+  if (params.get("payment") !== "success" || !bookingId || syncedStripeReturnBookings.has(bookingId)) return;
+  syncedStripeReturnBookings.add(bookingId);
+  const payload = await teacherStudentApi(`/api/teacher-student/bookings/${encodeURIComponent(bookingId)}/sync-payment`, { method: "POST" });
+  if (!payload) return;
+  teacherStudentLoadedKeys = new Set();
+  params.delete("payment");
+  const queryString = params.toString();
+  history.replaceState({}, "", `${location.pathname}${queryString ? `?${queryString}` : ""}`);
+  await loadTeacherStudentData(route === "myLessons" ? "myLessons" : "myLearning", { force: true });
+}
+
+function voiceVideoRoomQuery() {
+  const params = new URLSearchParams();
+  if (state?.user?.targetLanguage) params.set("targetLanguage", state.user.targetLanguage);
+  Object.entries(voiceVideoRoomFilters).forEach(([key, value]) => {
+    if (value) params.set(key, value);
+  });
+  if (voiceVideoShowHistory) params.set("history", "true");
+  const queryString = params.toString();
+  return queryString ? `?${queryString}` : "";
+}
+
+async function loadVoiceVideoRooms({ force = false, quiet = false } = {}) {
   if (voiceVideoRoomsLoaded && !force) return;
   const body = await livekitApi(`/api/livekit/rooms${voiceVideoRoomQuery()}`);
   if (!body) return;
   voiceVideoRooms = body.rooms || [];
   voiceVideoRoomsLoaded = true;
-  if (activeRoute() === "voiceVideoRooms") render();
+  if (activeRoute() === "voiceVideoRooms" && (!quiet || !activeVoiceVideoSession)) render();
 }
 
 function updateVoiceVideoCountdown() {
   if (!activeVoiceVideoSession) return;
-  const startedAt = new Date(activeVoiceVideoSession.startedAt).getTime();
+  const startedAt = new Date(activeVoiceVideoRoom?.startedAt || activeVoiceVideoSession.startedAt).getTime();
   const elapsed = Math.min(360, Math.max(0, Math.ceil((Date.now() - startedAt) / 1000)));
   const remaining = Math.max(0, 360 - elapsed);
   activeVoiceVideoSession = { ...activeVoiceVideoSession, elapsedSeconds: elapsed, secondsRemaining: remaining };
@@ -542,6 +856,16 @@ function updateVoiceVideoCountdown() {
     showModal(`<h2 class="text-xl font-black">10 seconds remaining</h2><p class="${ui.muted}">The room will disconnect automatically.</p>`);
   }
   if (remaining <= 0) leaveVoiceVideoRoom({ timedOut: true });
+}
+
+function syncVoiceVideoPolling(route = activeRoute()) {
+  if (route === "voiceVideoRooms" && !voiceVideoPollTimer) {
+    voiceVideoPollTimer = window.setInterval(() => loadVoiceVideoRooms({ force: true, quiet: true }), 8000);
+  }
+  if (route !== "voiceVideoRooms" && voiceVideoPollTimer) {
+    window.clearInterval(voiceVideoPollTimer);
+    voiceVideoPollTimer = null;
+  }
 }
 
 function stopVoiceVideoTimer() {
@@ -626,11 +950,104 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
   applyLiveKitTileLayout();
 }
 
-async function connectLiveKitRoom(payload) {
+function stopLocalTracks(tracks = []) {
+  tracks.forEach((track) => {
+    try {
+      track.stop?.();
+      track.detach?.().forEach((element) => element.remove());
+    } catch (_error) {
+      // Best-effort cleanup for denied or partially-created media tracks.
+    }
+  });
+}
+
+function mediaPermissionName({ audio = false, video = false } = {}) {
+  if (audio && video) return "microphone and camera";
+  if (video) return "camera";
+  return "microphone";
+}
+
+async function requestMediaPermission(constraints = { audio: true, video: false }) {
+  const mediaName = mediaPermissionName(constraints);
+  if (!navigator.mediaDevices?.getUserMedia) {
+    showModal(`
+      <h2 class="text-xl font-black">Browser permission unavailable</h2>
+      <p class="${ui.muted}">Your browser will only ask for ${mediaName} access on localhost or a secure HTTPS site. Open LinguaStories with HTTPS, or use localhost on this device.</p>
+    `);
+    throw new Error("Media permissions require a secure browser context.");
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    stream.getTracks().forEach((track) => track.stop());
+  } catch (error) {
+    const denied = error?.name === "NotAllowedError" || error?.name === "PermissionDeniedError";
+    const missing = error?.name === "NotFoundError" || error?.name === "DevicesNotFoundError";
+    showModal(`
+      <h2 class="text-xl font-black">Allow ${mediaName} access</h2>
+      <p class="${ui.muted}">${
+        denied
+          ? `Your browser blocked ${mediaName} access. Use the browser permission icon near the address bar to allow access for this site, then try again.`
+          : missing
+            ? `No ${mediaName} device was found. Connect a device or check your browser device settings, then try again.`
+            : `LinguaStories could not request ${mediaName} access. Make sure this page is opened with HTTPS or localhost, then try again.`
+      }</p>
+    `);
+    throw error;
+  }
+}
+
+function setLocalTrackMuted(kind, muted) {
+  livekitLocalTracks
+    .filter((track) => track.kind === kind)
+    .forEach((track) => {
+      try {
+        if (muted) track.mute?.();
+        else track.unmute?.();
+        if (track.mediaStreamTrack) track.mediaStreamTrack.enabled = !muted;
+      } catch (_error) {
+        // Track state can already be closed after a disconnect.
+      }
+    });
+}
+
+function toggleVoiceVideoAudio() {
+  livekitLocalAudioMuted = !livekitLocalAudioMuted;
+  setLocalTrackMuted("audio", livekitLocalAudioMuted);
+}
+
+function toggleVoiceVideoCamera() {
+  livekitLocalVideoMuted = !livekitLocalVideoMuted;
+  setLocalTrackMuted("video", livekitLocalVideoMuted);
+}
+
+async function createVoiceVideoLocalTracks(room) {
+  const constraints = { audio: true, video: room?.roomType === "video" };
+  await requestMediaPermission(constraints);
+  try {
+    const { createLocalTracks } = await import("/vendor/livekit/livekit-client.esm.mjs");
+    return await createLocalTracks(constraints);
+  } catch (error) {
+    const mediaName = mediaPermissionName(constraints);
+    showModal(`
+      <h2 class="text-xl font-black">Allow ${mediaName} access</h2>
+      <p class="${ui.muted}">Your browser denied ${mediaName} permission, so LinguaStories did not start a paid room session. Allow access for this site, then try again.</p>
+    `);
+    throw error;
+  }
+}
+
+async function createTeacherClassroomLocalTracks() {
+  const constraints = { audio: true, video: true };
+  await requestMediaPermission(constraints);
+  const { createLocalTracks } = await import("/vendor/livekit/livekit-client.esm.mjs");
+  return createLocalTracks(constraints);
+}
+
+async function connectLiveKitRoom(payload, localTracks = []) {
   const stage = document.querySelector("[data-livekit-stage]");
   if (stage) stage.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[.04] p-4 text-sm font-semibold text-white/72">Connecting media...</div>`;
   try {
-    const { Room, RoomEvent, createLocalTracks } = await import("/vendor/livekit/livekit-client.esm.mjs");
+    const { Room, RoomEvent } = await import("/vendor/livekit/livekit-client.esm.mjs");
     const room = new Room({ adaptiveStream: true, dynacast: true });
     livekitRoomConnection = room;
     livekitParticipantTiles = new Map();
@@ -649,8 +1066,10 @@ async function connectLiveKitRoom(payload) {
     if (stage) stage.innerHTML = "";
     ensureParticipantTile(room.localParticipant.identity || "local", "You");
     room.remoteParticipants?.forEach((participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
-    const tracks = await createLocalTracks({ audio: true, video: payload.room.roomType === "video" });
-    for (const track of tracks) {
+    livekitLocalTracks = localTracks;
+    livekitLocalAudioMuted = false;
+    livekitLocalVideoMuted = false;
+    for (const track of localTracks) {
       await room.localParticipant.publishTrack(track);
       renderTrack(track, "You", room.localParticipant.identity || "local", true);
     }
@@ -658,19 +1077,33 @@ async function connectLiveKitRoom(payload) {
       stage.innerHTML = `<div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-sm font-semibold text-white/72">Connected. Audio is active.</div>`;
     }
   } catch (error) {
+    stopLocalTracks(localTracks);
+    livekitLocalTracks = [];
     showModal(`<h2 class="text-xl font-black">LiveKit connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to the room.")}</p>`);
   }
 }
 
 async function joinVoiceVideoRoom(roomId) {
+  const room = voiceVideoRooms.find((item) => item.id === roomId) || activeVoiceVideoRoom;
+  let localTracks = [];
+  try {
+    localTracks = await createVoiceVideoLocalTracks(room);
+  } catch (_error) {
+    return;
+  }
   const payload = await livekitApi(`/api/livekit/rooms/${roomId}/join`, { method: "POST" });
-  if (!payload) return;
+  if (!payload) {
+    stopLocalTracks(localTracks);
+    return;
+  }
   activeVoiceVideoRoom = payload.room;
   activeVoiceVideoSession = payload.session;
+  activeVoiceVideoParticipants = payload.participants || [];
   voiceVideoRoomsLoaded = false;
+  history.pushState({}, "", appPath("voiceVideoRoom", { roomId }));
   render();
   startVoiceVideoTimer();
-  await connectLiveKitRoom(payload);
+  await connectLiveKitRoom(payload, localTracks);
 }
 
 async function disconnectLiveKitTracks() {
@@ -685,6 +1118,7 @@ async function disconnectLiveKitTracks() {
     room.disconnect();
     livekitParticipantTiles = new Map();
     livekitHiddenAudioLayer = null;
+    livekitLocalTracks = [];
   } catch (_error) {
     // The server-side end call is the billing source of truth.
   }
@@ -708,7 +1142,9 @@ async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
     const charged = payload?.session?.coinsCharged;
     activeVoiceVideoRoom = null;
     activeVoiceVideoSession = null;
+    activeVoiceVideoParticipants = [];
     voiceVideoRoomsLoaded = false;
+    if (activeRoute() === "voiceVideoRoom") history.pushState({}, "", appPath("voiceVideoRooms"));
     await loadVoiceVideoRooms({ force: true });
     render();
     if (!silent && charged) {
@@ -719,6 +1155,75 @@ async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
   }
 }
 
+async function deleteVoiceVideoRoom(roomId) {
+  const payload = await livekitApi(`/api/livekit/rooms/${roomId}`, { method: "DELETE" });
+  if (!payload) return;
+  voiceVideoRoomsLoaded = false;
+  await loadVoiceVideoRooms({ force: true });
+}
+
+async function moderateVoiceVideoParticipant(roomId, value = "") {
+  const [participantId, action] = String(value).split("~");
+  if (!participantId || !action) return;
+  const payload = await livekitApi(`/api/livekit/rooms/${roomId}/participants/${participantId}/moderate`, {
+    method: "POST",
+    body: JSON.stringify({ action })
+  });
+  if (!payload) return;
+  const detail = await livekitApi(`/api/livekit/rooms/${roomId}`);
+  if (detail) {
+    activeVoiceVideoRoom = detail.room;
+    activeVoiceVideoParticipants = detail.participants || [];
+    render();
+  }
+}
+
+async function joinTeacherClassroom(bookingId) {
+  let localTracks = [];
+  try {
+    localTracks = await createTeacherClassroomLocalTracks();
+  } catch (_error) {
+    return;
+  }
+  const payload = await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/classroom-token`, { method: "POST" });
+  if (!payload) {
+    stopLocalTracks(localTracks);
+    return;
+  }
+  try {
+    const { Room } = await import("/vendor/livekit/livekit-client.esm.mjs");
+    const room = new Room({ adaptiveStream: true, dynacast: true });
+    await room.connect(payload.livekitUrl, payload.token);
+    for (const track of localTracks) await room.localParticipant.publishTrack(track);
+    showModal(`
+      <h2 class="text-xl font-black">Classroom connected</h2>
+      <p class="${ui.muted}">Your microphone and camera are connected to the LiveKit classroom. Keep this page open during the lesson.</p>
+      <div class="mt-5 flex justify-end border-t border-brand-line pt-4">
+        <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave Classroom</span></button>
+      </div>
+    `, { closeButton: false });
+    window.activeTeacherClassroomConnection = room;
+    window.activeTeacherClassroomTracks = localTracks;
+  } catch (error) {
+    stopLocalTracks(localTracks);
+    showModal(`<h2 class="text-xl font-black">Classroom connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to LiveKit.")}</p>`);
+  }
+}
+
+async function leaveTeacherClassroom(bookingId) {
+  try {
+    window.activeTeacherClassroomTracks?.forEach((track) => track.stop?.());
+    window.activeTeacherClassroomConnection?.disconnect?.();
+  } finally {
+    window.activeTeacherClassroomTracks = [];
+    window.activeTeacherClassroomConnection = null;
+  }
+  await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/leave-classroom`, { method: "POST" });
+  closeModal();
+  teacherStudentLoadedKeys = new Set();
+  await loadTeacherStudentData(activeRoute(), { force: true });
+}
+
 function showModal(html, options = {}) {
   const { closeButton: includeCloseButton = true } = options;
   const template = document.querySelector("#modalTemplate").content.cloneNode(true);
@@ -726,16 +1231,31 @@ function showModal(html, options = {}) {
   modalBody.innerHTML = html;
   const modal = template.querySelector(".fixed.inset-0.z-50");
   if (includeCloseButton) {
+    const removedCloseRows = [...modalBody.querySelectorAll('[data-action="closeModal"]')]
+      .map((button) => {
+        const row = button.parentElement;
+        button.remove();
+        return row;
+      })
+      .filter(Boolean);
     const closeButton = document.createElement("button");
     closeButton.type = "button";
     closeButton.className = ui.secondary;
     closeButton.textContent = "Close";
     closeButton.addEventListener("click", () => modal.remove());
 
-    const actionRow = modalBody.querySelector("form div[class*='border-t']") || modalBody.querySelector("div[class*='border-t']");
+    const actionRow =
+      removedCloseRows.find((row) => row.isConnected) ||
+      modalBody.querySelector("form div[class*='border-t']") ||
+      modalBody.querySelector("div[class*='border-t']") ||
+      [...modalBody.querySelectorAll("form div, div")]
+        .reverse()
+        .find((row) => row.querySelector("button, a"));
     if (actionRow) {
-      actionRow.classList.add("gap-2");
-      actionRow.prepend(closeButton);
+      actionRow.classList.add("flex", "flex-wrap", "justify-end", "gap-2");
+      const firstAction = actionRow.querySelector("button, a");
+      if (firstAction) actionRow.insertBefore(closeButton, firstAction);
+      else actionRow.append(closeButton);
     } else {
       const fallbackRow = document.createElement("div");
       fallbackRow.className = "mt-6 flex justify-end border-t border-brand-line pt-4";
@@ -759,6 +1279,15 @@ function saveReviewSettings() {
   localStorage.setItem("linguaStoriesReviewSettings", JSON.stringify(reviewSettings));
 }
 
+function reviewDelayControl() {
+  return `
+    <label class="grid gap-2 rounded-lg border border-brand-line/80 bg-white/70 px-4 py-3 text-sm font-bold text-brand-ink sm:grid-cols-[minmax(0,1fr)_120px] sm:items-center">
+      <span>Seconds before next card</span>
+      <input class="${ui.input}" type="number" min="1" max="60" step="1" value="${escapeHtml(reviewSettings.autoNextDelaySeconds || 5)}" data-review-setting-number="autoNextDelaySeconds">
+    </label>
+  `;
+}
+
 function reviewSettingControl(key, label) {
   return `
     <label class="flex items-center justify-between gap-4 rounded-lg border border-brand-line/80 bg-white/70 px-4 py-3 text-sm font-bold text-brand-ink">
@@ -778,6 +1307,7 @@ function reviewSettingsModal() {
         ${reviewSettingControl("showSourceLanguage", "Show Source Language")}
         ${reviewSettingControl("showRomanization", "Show romanization")}
         ${reviewSettingControl("goToNextCardAutomatically", "Go to next card automatically")}
+        ${reviewDelayControl()}
       </div>
     </div>
   `;
@@ -979,6 +1509,12 @@ function chatRecipientMeta(conversation, pendingLearner) {
   return null;
 }
 
+function chatContextLabel(conversation) {
+  if (conversation?.conversationType === "teacher_student") return "Teacher/Student";
+  if (conversation?.conversationType === "community_follower") return "Community Follower";
+  return "Community";
+}
+
 function renderChatDrawer() {
   if (!chatDrawer) return;
   if (!state || !chatOpen) {
@@ -989,6 +1525,8 @@ function renderChatDrawer() {
   const { conversations, selected, pendingLearner } = selectedChatContext();
   const recipient = chatRecipientMeta(selected, pendingLearner);
   const messages = selected?.messages || [];
+  const selectedContextLabel = chatContextLabel(selected);
+  const teacherStudentConversation = selected?.conversationType === "teacher_student";
   const balance = state.wallet?.balance || 0;
   const drawerWidth = chatContactsHidden ? "w-full sm:w-[min(560px,calc(100vw-24px))]" : "w-full sm:w-[min(760px,calc(100vw-24px))]";
   const gridClass = chatContactsHidden ? "" : "md:grid-cols-[250px_minmax(0,1fr)]";
@@ -1003,7 +1541,7 @@ function renderChatDrawer() {
           ${icon("message", "h-4 w-4")}
           <div>
             <h2 class="text-sm font-bold">Messages</h2>
-            <p class="text-xs font-semibold text-white/55">1 coin per message, paid to the recipient</p>
+            <p class="text-xs font-semibold text-white/55">Community messages use coins. Lesson messages stay contextual.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -1038,6 +1576,7 @@ function renderChatDrawer() {
                               ${conversation.unreadCount ? `<span class="rounded-full bg-brand-red px-2 py-0.5 text-[11px] font-bold text-white">${conversation.unreadCount}</span>` : ""}
                             </span>
                             <span class="mt-1 block truncate text-xs font-semibold text-brand-graphite">${conversation.lastMessageMine ? "You: " : ""}${escapeHtml(conversation.lastMessage || "No messages yet")}</span>
+                            <span class="mt-2 inline-flex rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-graphite">${escapeHtml(chatContextLabel(conversation))}</span>
                           </span>
                         </button>
                       `
@@ -1059,7 +1598,7 @@ function renderChatDrawer() {
                     ${chatAvatar(recipient, "h-10 w-10")}
                     <div class="min-w-0">
                       <h3 class="text-sm font-bold text-brand-ink">${escapeHtml(recipient.name)}</h3>
-                      <p class="text-xs font-semibold text-brand-graphite">Direct message · recipient earns 1 coin</p>
+                      <p class="text-xs font-semibold text-brand-graphite">${escapeHtml(selectedContextLabel)} message${teacherStudentConversation ? "" : " · recipient earns 1 coin"}</p>
                     </div>
                   </div>
                   <span class="${balance > 0 ? ui.tagGold : ui.tagRed}">${icon("coins", "h-3.5 w-3.5")}<span>${balance} coins</span></span>
@@ -1077,25 +1616,24 @@ function renderChatDrawer() {
                                   }">
                                     <p class="text-sm leading-6">${escapeHtml(message.body)}</p>
                                     <div class="mt-2 flex items-center justify-end gap-1.5 text-[11px] font-semibold ${message.mine ? "text-white/55" : "text-brand-graphite"}">
-                                      ${icon("coins", "h-3 w-3")}
-                                      <span>${message.mine ? "-1" : "+1"} coin</span>
+                                      ${Number(message.coinAmount || 0) > 0 ? `${icon("coins", "h-3 w-3")}<span>${message.mine ? "-1" : "+1"} coin</span>` : `<span>${escapeHtml(chatContextLabel({ conversationType: message.messageContext }))}</span>`}
                                     </div>
                                   </div>
                                 </article>
                               `
                             )
                             .join("")
-                        : `<div class="rounded-lg border border-dashed border-brand-line bg-brand-panel/65 p-5 text-center"><p class="${ui.muted}">Start the conversation. Your first message costs 1 coin and gives it to ${escapeHtml(recipient.name)}.</p></div>`
+                        : `<div class="rounded-lg border border-dashed border-brand-line bg-brand-panel/65 p-5 text-center"><p class="${ui.muted}">${teacherStudentConversation ? "Start the lesson conversation." : `Start the conversation. Your first message costs 1 coin and gives it to ${escapeHtml(recipient.name)}.`}</p></div>`
                     }
                   </div>
                 </div>
                 <form class="border-t border-brand-line bg-brand-panel p-3" data-form="directMessage">
                   <input type="hidden" name="recipientId" value="${escapeHtml(recipient.id)}">
                   <div class="grid gap-2">
-                    <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="${balance > 0 ? `Message ${escapeHtml(recipient.name)}...` : "You need coins to send a direct message."}" ${balance > 0 ? "" : "disabled"}></textarea>
+                    <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="${teacherStudentConversation || balance > 0 ? `Message ${escapeHtml(recipient.name)}...` : "You need coins to send a direct message."}" ${teacherStudentConversation || balance > 0 ? "" : "disabled"}></textarea>
                     <div class="flex flex-wrap items-center justify-between gap-3">
-                      <span class="text-xs font-semibold text-brand-graphite">Cost: 1 coin per message</span>
-                      <button class="${balance > 0 ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}" ${balance > 0 ? "" : "disabled"}>${icon("message")}<span>Send Message</span></button>
+                      <span class="text-xs font-semibold text-brand-graphite">${teacherStudentConversation ? "Teacher/Student context" : "Cost: 1 coin per message"}</span>
+                      <button class="${teacherStudentConversation || balance > 0 ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}" ${teacherStudentConversation || balance > 0 ? "" : "disabled"}>${icon("message")}<span>Send Message</span></button>
                     </div>
                   </div>
                 </form>
@@ -1582,6 +2120,19 @@ function bindActions(root = document) {
     });
   });
 
+  root.querySelectorAll("[data-review-setting-number]").forEach((control) => {
+    if (control.dataset.boundAction) return;
+    control.dataset.boundAction = "true";
+    control.addEventListener("change", () => {
+      const key = control.dataset.reviewSettingNumber;
+      const value = Math.min(60, Math.max(1, Number(control.value || 5) || 5));
+      control.value = String(value);
+      reviewSettings = { ...reviewSettings, [key]: value };
+      saveReviewSettings();
+      if (activeRoute() === "review") render();
+    });
+  });
+
   root.querySelectorAll("[data-action]").forEach((element) => {
     if (element.dataset.boundAction) return;
     element.dataset.boundAction = "true";
@@ -1711,6 +2262,9 @@ function bindActions(root = document) {
         history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}`);
         render();
       }
+      if (action === "savePublicDeck") {
+        await api(`/api/sentence-decks/${id}/save`, { method: "POST" });
+      }
       if (action === "reviewTopic") {
         activeReviewResults = { key: `${id}:${value}`, total: 0, responses: [] };
         history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}&topicId=${encodeURIComponent(value)}`);
@@ -1755,6 +2309,118 @@ function bindActions(root = document) {
       if (action === "openCreateVoiceVideoRoomModal") showModal(createVoiceVideoRoomModal(context()));
       if (action === "joinVoiceVideoRoom") await joinVoiceVideoRoom(id);
       if (action === "leaveVoiceVideoRoom") await leaveVoiceVideoRoom();
+      if (action === "deleteVoiceVideoRoom") await deleteVoiceVideoRoom(id);
+      if (action === "toggleVoiceVideoHistory") {
+        voiceVideoShowHistory = !voiceVideoShowHistory;
+        voiceVideoRoomsLoaded = false;
+        await loadVoiceVideoRooms({ force: true });
+      }
+      if (action === "toggleVoiceVideoAudio") {
+        toggleVoiceVideoAudio();
+      }
+      if (action === "toggleVoiceVideoCamera") {
+        toggleVoiceVideoCamera();
+      }
+      if (action === "moderateVoiceVideoParticipant") await moderateVoiceVideoParticipant(id, value);
+      if (action === "openTeacherProfileModal") {
+        history.pushState({}, "", appPath("teacherProfileCreate"));
+        render();
+      }
+      if (action === "openTeacherProfileEdit") {
+        const profile = (teacherStudentData.profiles || []).find((item) => item.id === id);
+        if (profile) showModal(teacherProfileModal({ ...context(), profile }));
+      }
+      if (action === "deleteTeacherProfile") {
+        await teacherStudentApi(`/api/teacher-student/teacher-profiles/${id}`, { method: "DELETE" });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+      }
+      if (action === "setMyLearningTab") {
+        myLearningTab = ["lessons", "teachers", "calendar"].includes(id) ? id : "lessons";
+        if (activeRoute() !== "myLearning") history.pushState({}, "", appPath("myLearning"));
+        render();
+      }
+      if (action === "shiftMyLearningWeek") {
+        const currentStart = myLearningWeekStart || weekStartKey();
+        if (id === "today") myLearningWeekStart = weekStartKey();
+        else myLearningWeekStart = shiftDateKey(currentStart, id === "next" ? 7 : -7);
+        myLearningTab = "calendar";
+        if (activeRoute() !== "myLearning") history.pushState({}, "", appPath("myLearning"));
+        render();
+      }
+      if (action === "setMyProfilesTab") {
+        myProfilesTab = ["languages", "teachers"].includes(id) ? id : "languages";
+        if (activeRoute() !== "profileProfiles") history.pushState({}, "", appPath("profileProfiles"));
+        render();
+      }
+      if (action === "selectBookingSlot") {
+        bookingSelection = { ...bookingSelection, startsAt: element.dataset.value || id };
+        render();
+      }
+      if (action === "checkoutLesson") {
+        const profile = teacherStudentData.bookingPage?.profile;
+        if (!profile || !bookingSelection.startsAt) return;
+        const payload = await teacherStudentApi("/api/teacher-student/bookings", {
+          method: "POST",
+          body: JSON.stringify({
+            teacherProfileId: profile.id,
+            lessonType: bookingSelection.lessonType || "one_on_one",
+            durationMinutes: Number(bookingSelection.durationMinutes || teacherStudentData.bookingPage?.calendar?.durationMinutes || profile.minLessonMinutes),
+            startsAt: bookingSelection.startsAt,
+            maxStudents: bookingSelection.lessonType === "group" ? profile.groupMaxStudents : 1,
+            title: `${profile.displayName} lesson`
+          })
+        });
+        if (payload?.checkoutUrl) {
+          window.location.href = payload.checkoutUrl;
+          return;
+        }
+        teacherStudentLoadedKeys = new Set();
+        showModal(`<h2 class="text-xl font-black">Booking created</h2><p class="${ui.muted}">Stripe checkout is not configured yet, so this lesson is holding as pending payment for 15 minutes.</p>`);
+      }
+      if (action === "syncLessonPayment") {
+        const payload = await teacherStudentApi(`/api/teacher-student/bookings/${id}/sync-payment`, { method: "POST" });
+        if (!payload) return;
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+        if (payload.paymentStatus === "paid") {
+          showModal(`<h2 class="text-xl font-black">Payment synced</h2><p class="${ui.muted}">Stripe confirmed this lesson payment, so the lesson is now confirmed.</p>`);
+        } else {
+          showModal(`<h2 class="text-xl font-black">Payment still pending</h2><p class="${ui.muted}">Stripe has not marked this Checkout Session as paid yet.</p>`);
+        }
+      }
+      if (action === "messageTeacher") {
+        pendingChatRecipientId = id;
+        chatOpen = true;
+        chatMobileScreen = "messages";
+        showModal(`
+          <h2 class="text-xl font-black">Message teacher</h2>
+          <form class="mt-5 grid gap-3" data-form="teacherMessage">
+            <input type="hidden" name="recipientId" value="${escapeHtml(id)}">
+            <input type="hidden" name="teacherProfileId" value="${escapeHtml(value || "")}">
+            <textarea class="${ui.input} min-h-24" name="body" required maxlength="1000" placeholder="Ask about lesson fit, availability, or goals."></textarea>
+            <div class="flex justify-end border-t border-brand-line pt-4"><button class="${ui.primary}">${icon("message", "h-4 w-4")}<span>Send Message</span></button></div>
+          </form>
+        `);
+      }
+      if (action === "joinClassroom") await joinTeacherClassroom(id);
+      if (action === "leaveTeacherClassroom") await leaveTeacherClassroom(id);
+      if (action === "cancelLesson") {
+        const reason = window.prompt("Cancellation reason") || "";
+        await teacherStudentApi(`/api/teacher-student/bookings/${id}/cancel`, { method: "POST", body: JSON.stringify({ reason }) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+      }
+      if (action === "deleteUnavailableBlock") {
+        await teacherStudentApi(`/api/teacher-student/calendar/blocks/${id}`, { method: "DELETE" });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherBookings", { force: true });
+      }
+      if (action === "respondReschedule") {
+        await teacherStudentApi(`/api/teacher-student/reschedule-requests/${id}/respond`, { method: "POST", body: JSON.stringify({ action: value }) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+      }
       if (action === "openShortStorySearch") {
         history.pushState({}, "", appPath("shortStorySearch"));
         render();
@@ -1878,7 +2544,12 @@ function bindActions(root = document) {
       if (action === "makeCurrentLanguage") {
         selectedProfileLanguage = id;
         closeModal();
-        await api("/api/languages/current", { method: "POST", body: JSON.stringify({ language: id }) });
+        const updatedState = await api("/api/languages/current", { method: "POST", body: JSON.stringify({ language: id }) });
+        if (updatedState?.user?.targetLanguage === id) {
+          resetLanguageScopedViews();
+          history.pushState({}, "", appPath("shortStories"));
+          render();
+        }
       }
       if (action === "openAddLanguageModal") showModal(addLanguageModal(context()));
       if (action === "openEditLanguageModal") showModal(editLanguageModal(context(), id));
@@ -1930,6 +2601,25 @@ function bindActions(root = document) {
   root.querySelectorAll("form[data-form]").forEach((form) => {
     if (form.dataset.boundAction) return;
     form.dataset.boundAction = "true";
+    if (form.dataset.form === "bookingScheduler") {
+      form.addEventListener("change", async (event) => {
+        const data = Object.fromEntries(new FormData(form).entries());
+        bookingSelection = {
+          ...bookingSelection,
+          teacherProfileId: activeTeacherProfileId(),
+          lessonType: data.lessonType || "one_on_one",
+          durationMinutes: data.durationMinutes || "",
+          date: data.date || "",
+          startsAt: ""
+        };
+        if (event.target?.name === "date") {
+          render();
+          return;
+        }
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("bookLesson", { force: true });
+      });
+    }
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       captureCoinAnimationOrigin(event.submitter || form.querySelector("button"));
@@ -2080,13 +2770,107 @@ function bindActions(root = document) {
       if (form.dataset.form === "voiceVideoRoomFilters") {
         voiceVideoRoomFilters = {
           q: data.q || "",
-          targetLanguage: data.targetLanguage || "",
-          sourceLanguage: data.sourceLanguage || "",
           cefrLevel: data.cefrLevel || "",
           roomType: data.roomType || ""
         };
         voiceVideoRoomsLoaded = false;
         await loadVoiceVideoRooms({ force: true });
+      }
+      if (form.dataset.form === "teacherSearch") {
+        teacherStudentFilters = { q: data.q || "", maxRate: data.maxRate || "" };
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("findTeacher", { force: true });
+      }
+      if (form.dataset.form === "teacherProfile" || form.dataset.form === "teacherProfileEdit") {
+        const imageFile = form.elements.teacherImage?.files?.[0];
+        delete data.teacherImage;
+        const profileId = data.id;
+        delete data.id;
+        if (imageFile) {
+          try {
+            Object.assign(data, await processDeckImage(imageFile));
+          } catch (error) {
+            showModal(`<h2 class="text-xl font-black">Profile image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+            return;
+          }
+        }
+        const path = form.dataset.form === "teacherProfileEdit" ? `/api/teacher-student/teacher-profiles/${profileId}` : "/api/teacher-student/teacher-profiles";
+        await teacherStudentApi(path, { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        if (form.dataset.form === "teacherProfile" && activeRoute() === "teacherProfileCreate") {
+          myProfilesTab = "teachers";
+          history.pushState({}, "", appPath("profileProfiles"));
+          await loadTeacherStudentData("profileProfiles", { force: true });
+          return;
+        }
+        closeModal();
+        await loadTeacherStudentData(activeRoute() === "profileProfiles" ? "profileProfiles" : "teacherProfiles", { force: true });
+      }
+      if (form.dataset.form === "teacherAvailability") {
+        await teacherStudentApi("/api/teacher-student/availability", { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherAvailability", { force: true });
+      }
+      if (form.dataset.form === "bookingScheduler") {
+        bookingSelection = {
+          ...bookingSelection,
+          teacherProfileId: activeTeacherProfileId(),
+          lessonType: data.lessonType || "one_on_one",
+          durationMinutes: data.durationMinutes || "",
+          date: data.date || "",
+          startsAt: ""
+        };
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("bookLesson", { force: true });
+      }
+      if (form.dataset.form === "teacherBooking") {
+        const payload = await teacherStudentApi("/api/teacher-student/bookings", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+        if (payload?.checkoutUrl) {
+          window.location.href = payload.checkoutUrl;
+          return;
+        }
+        showModal(`<h2 class="text-xl font-black">Booking created</h2><p class="${ui.muted}">Stripe checkout is not configured yet, so the lesson remains pending payment.</p>`);
+        teacherStudentLoadedKeys = new Set();
+      }
+      if (form.dataset.form === "teacherCalendarFilters") {
+        teacherCalendarFilters = { view: data.view || "month", teacherProfileId: data.teacherProfileId || "", status: data.status || "" };
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherBookings", { force: true });
+      }
+      if (form.dataset.form === "teacherUnavailableBlock") {
+        await teacherStudentApi("/api/teacher-student/calendar/blocks", { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherBookings", { force: true });
+      }
+      if (form.dataset.form === "teacherBookingRules") {
+        await teacherStudentApi("/api/teacher-student/booking-rules", { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherBookings", { force: true });
+      }
+      if (form.dataset.form === "teacherReschedule") {
+        const bookingId = data.bookingId;
+        delete data.bookingId;
+        await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/reschedule-requests`, { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+      }
+      if (form.dataset.form === "teacherResource") {
+        await teacherStudentApi("/api/teacher-student/resources", { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherResources", { force: true });
+      }
+      if (form.dataset.form === "teacherTemplate") {
+        await teacherStudentApi("/api/teacher-student/templates", { method: "POST", body: JSON.stringify(data) });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherTemplates", { force: true });
+      }
+      if (form.dataset.form === "teacherMessage") {
+        await teacherStudentApi("/api/teacher-student/messages", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
+        chatOpen = true;
+        pendingChatRecipientId = "";
+        await api("/api/state");
       }
       if (form.dataset.form === "comment") {
         await api(`/api/posts/${data.postId}/comments`, { method: "POST", body: JSON.stringify(data) });
@@ -2097,9 +2881,23 @@ function bindActions(root = document) {
       }
       if (form.dataset.form === "directMessage") {
         const recipientId = data.recipientId;
-        await api("/api/messages", { method: "POST", body: JSON.stringify(data) });
-        const conversation = state.directChat?.conversations?.find((item) => item.otherUserId === recipientId);
-        selectedConversationId = conversation?.id || selectedConversationId;
+        const conversation = state.directChat?.conversations?.find((item) => item.id === selectedConversationId);
+        if (conversation?.conversationType === "teacher_student") {
+          await teacherStudentApi("/api/teacher-student/messages", {
+            method: "POST",
+            body: JSON.stringify({
+              recipientId,
+              body: data.body,
+              teacherProfileId: conversation.teacherProfileId || "",
+              lessonBookingId: conversation.lessonBookingId || ""
+            })
+          });
+          await api("/api/state");
+        } else {
+          await api("/api/messages", { method: "POST", body: JSON.stringify(data) });
+        }
+        const nextConversation = state.directChat?.conversations?.find((item) => item.otherUserId === recipientId);
+        selectedConversationId = nextConversation?.id || selectedConversationId;
         pendingChatRecipientId = "";
         chatOpen = true;
         renderChatDrawer();
@@ -2113,14 +2911,21 @@ function bindActions(root = document) {
   if (reviewCard && !reviewCard.dataset.timerBound) {
     reviewCard.dataset.timerBound = "true";
     ensureReviewResultsSession(Number(reviewCard.dataset.cardCount || 0) || 0);
-    const audioUrl = reviewCard.dataset.audioUrl;
-    if (audioUrl && reviewCard.dataset.autoPlayAudio === "true") new Audio(audioUrl).play().catch(() => null);
+    const audioElement = reviewCard.querySelector("audio");
+    if (audioElement && reviewCard.dataset.autoPlayAudio === "true") {
+      window.setTimeout(() => {
+        if (!document.body.contains(reviewCard)) return;
+        audioElement.currentTime = 0;
+        audioElement.play().catch(() => null);
+      }, 120);
+    }
     if (reviewCard.dataset.autoNextCard === "true") {
+      const delayMs = Math.min(60000, Math.max(1000, Number(reviewCard.dataset.autoNextDelayMs || 5000) || 5000));
       window.setTimeout(() => {
         if (!document.body.contains(reviewCard)) return;
         advanceReviewCardUrl();
         render();
-      }, 5000);
+      }, delayMs);
     }
   }
 }
@@ -2173,6 +2978,7 @@ function renderPublicPage() {
   const publicViews = { "/": landingView, "/login": loginView, "/signup": signupView };
   view.innerHTML = (publicViews[window.location.pathname] || landingView)(context());
   bindActions();
+  scrollToPageTopOnRouteChange();
 }
 
 function render() {
@@ -2180,7 +2986,8 @@ function render() {
   normalizeAppUrl();
   setAppShell();
   const route = activeRoute();
-  if (communityRoutes.has(route)) topbar.className = "hidden";
+  if (communityRoutes.has(route) || route === "voiceVideoRoom") topbar.className = "hidden";
+  if (route === "voiceVideoRoom" && mobileTopbar) mobileTopbar.className = "hidden";
   syncShortStorySearchButtons(route);
   const match = routes.find(([id]) => id === route) || routes[0];
   const storyForTitle = route === "storyDetail" ? state.stories.find((story) => story.id === activeStoryId()) : null;
@@ -2188,6 +2995,7 @@ function render() {
   const topicForTitle = route === "sentenceDeckTopicSentences" ? deckForTitle?.topics?.find((topic) => topic.id === activeTopicId()) : null;
   const storyLanguageForTitle = storyForTitle ? selectedStoryLanguages[storyForTitle.id] || storyForTitle.targetLanguage || state.user.targetLanguage : "";
   const learnerForTitle = route === "communityLearner" ? state.learners.find((learner) => learner.id === activeLearnerId()) : null;
+  const teacherProfileForTitle = route === "teacherProfileDetail" ? teacherStudentData.profile : route === "bookLesson" ? teacherStudentData.bookingPage?.profile : null;
   const goalsLanguage = new URLSearchParams(window.location.search).get("language") || state.user.targetLanguage;
   const titleText =
     route === "profileGoals" || route === "goals"
@@ -2204,8 +3012,28 @@ function render() {
           ? `Search Short Stories (${state.user.targetLanguage})`
         : route === "storyDetail" && storyForTitle
           ? `${storyForTitle.title} (${storyLanguageForTitle})`
-          : route === "communityLearner" && learnerForTitle
+      : route === "communityLearner" && learnerForTitle
             ? learnerForTitle.displayName
+        : route === "communityConnect"
+          ? "Community Connection"
+        : route === "communityMoments"
+          ? "Community Moments"
+        : route === "voiceVideoRooms"
+          ? "Community Voice/Video Rooms"
+        : route === "findTeacher"
+          ? "Learning - Find a Teacher"
+        : route === "myLearning"
+          ? myLearningTabTitles[myLearningTab] || myLearningTabTitles.lessons
+        : route === "myLessons"
+          ? myLearningTabTitles.lessons
+        : route === "myTeachers"
+          ? myLearningTabTitles.teachers
+        : route === "profileProfiles" || route === "profileLanguages" || route === "teacherProfiles"
+          ? "My Profiles"
+        : route === "teacherProfileCreate"
+          ? "Create Teacher Profile"
+            : (route === "teacherProfileDetail" || route === "bookLesson") && teacherProfileForTitle
+              ? teacherProfileForTitle.displayName
             : storyForTitle?.title || match[1];
   pageTitle.textContent = titleText;
   if (mobilePageTitle) mobilePageTitle.textContent = titleText.replace(/\s+\([^)]*\)$/, "");
@@ -2247,25 +3075,57 @@ function render() {
     communityConnect: communityConnectView,
     communityMoments: communityMomentsView,
     voiceVideoRooms: voiceVideoRoomsView,
+    voiceVideoRoom: voiceVideoRoomView,
     communityLearner: (ctx) => communityLearnerView({ ...ctx, activeLearnerId: activeLearnerId() }),
     communityMoment: (ctx) => communityMomentView({ ...ctx, activePostId: activePostId() }),
+    findTeacher: findTeacherView,
+    teacherProfileDetail: (ctx) => teacherProfileDetailView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
+    teacherProfileCreate: teacherProfileCreateView,
+    bookLesson: bookLessonView,
+    myLearning: myLearningView,
+    myLessons: (ctx) => myLearningView({ ...ctx, myLearningTab: "lessons" }),
+    myTeachers: (ctx) => myLearningView({ ...ctx, myLearningTab: "teachers" }),
+    learningNotes: learningNotesView,
+    teacherDashboard: teacherDashboardView,
+    teacherProfiles: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "teachers", teacherProfilesContent: teacherProfilesPanel(ctx) }),
+    teacherAvailability: teacherAvailabilityView,
+    teacherBookings: teacherBookingsView,
+    teacherStudents: teacherStudentsView,
+    teacherClassroom: teacherClassroomView,
+    teacherLessonNotes: teacherLessonNotesView,
+    teacherResources: teacherResourcesView,
+    teacherTemplates: teacherTemplatesView,
+    teacherEarnings: teacherEarningsView,
+    teacherSubscription: teacherSubscriptionView,
     progress: progressView,
     profile: profileView,
     profileInfo: profileInfoView,
-    profileLanguages: languageProfilesView,
+    profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) }),
+    profileLanguages: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "languages", teacherProfilesContent: teacherProfilesPanel(ctx) }),
     profileGoals: goalsView,
     profileMoments: profileMomentsView,
     profileWallet: walletView,
     admin: adminView
   };
   if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
+  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";
   view.innerHTML = (views[route] || dashboardView)(context());
   bindActions();
   renderChatDrawer();
   if (route === "voiceVideoRooms") {
     loadVoiceVideoRooms();
+    syncVoiceVideoPolling(route);
+  } else if (route === "voiceVideoRoom") {
+    syncVoiceVideoPolling(route);
     if (activeVoiceVideoSession) startVoiceVideoTimer();
+  } else {
+    syncVoiceVideoPolling(route);
   }
+  if (teacherStudentRoutes.has(route)) {
+    loadTeacherStudentData(route);
+    syncStripeReturnPayment(route);
+  }
+  scrollToPageTopOnRouteChange();
 }
 
 function loadMoreCommunityListIfNeeded() {
@@ -2303,6 +3163,7 @@ window.addEventListener("scroll", loadMoreCommunityListIfNeeded, { passive: true
 
 document.querySelector("#notifyButton").addEventListener("click", () => {
   if (!state) return;
+  markNotificationsSeen();
   showModal(notificationsModal());
 });
 

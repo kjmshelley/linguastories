@@ -28,6 +28,7 @@ const knownLearningRoutes = [
   ["DELETE", /^\/sentences\/[^/]+\/?$/],
   ["POST", /^\/sentences\/custom\/?$/],
   ["POST", /^\/sentence-decks\/?$/],
+  ["POST", /^\/sentence-decks\/[^/]+\/save\/?$/],
   ["POST", /^\/sentence-decks\/[^/]+\/topics\/?$/],
   ["POST", /^\/sentence-decks\/topics\/[^/]+\/?$/],
   ["DELETE", /^\/sentence-decks\/topics\/[^/]+\/?$/],
@@ -127,6 +128,7 @@ router.post("/sentence-decks", uploadRateLimit, validateBody({
   imageDataUrl: { type: "string", max: 800000, label: "Deck image" },
   imageFileName: { type: "string", max: 180, label: "Deck image file name" }
 }), asyncHandler(controller.createSentenceDeck));
+router.post("/sentence-decks/:id/save", asyncHandler(controller.savePublicSentenceDeck));
 router.post("/sentence-decks/:id/topics", validateBody({
   name: { type: "string", required: true, max: 120, label: "Topic name" },
   description: { type: "string", max: 1000, label: "Topic description" },

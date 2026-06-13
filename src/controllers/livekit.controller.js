@@ -20,6 +20,14 @@ async function leaveRoom(req, res) {
   res.json(await livekitService.leaveRoom(req.user, req.params.id));
 }
 
+async function deleteRoom(req, res) {
+  res.json(await livekitService.deleteRoom(req.user, req.params.id));
+}
+
+async function moderateParticipant(req, res) {
+  res.json(await livekitService.moderateParticipant(req.user, req.params.id, req.params.participantId, req.body.action));
+}
+
 async function endSession(req, res) {
   res.json(await livekitService.endSession(req.user, req.params.id, req.body?.status === "timed_out" ? "timed_out" : "completed"));
 }
@@ -30,5 +38,7 @@ module.exports = {
   getRoom,
   joinRoom,
   leaveRoom,
+  deleteRoom,
+  moderateParticipant,
   endSession
 };
