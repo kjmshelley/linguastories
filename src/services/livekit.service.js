@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const { pool, query } = require("../db/pool");
 const storageService = require("./storage.service");
+const subscriptionPolicy = require("./subscription-policy.service");
 
 const SESSION_LIMIT_SECONDS = 6 * 60;
 const COINS_PER_MINUTE = 1000;
@@ -122,6 +123,7 @@ async function uploadRoomImage(userId, payload) {
 }
 
 async function createRoom(user, payload) {
+  subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
   const wallet = await query(`select balance from wallets where user_id = $1`, [user.id]);
   if (Number(wallet.rows[0]?.balance || 0) < MIN_JOIN_COINS) {
     throw badRequest("You need at least 1000 coins to create a voice/video room.", 402);
@@ -179,6 +181,7 @@ async function createRoom(user, payload) {
 }
 
 async function listRooms(user, filters = {}) {
+  subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
   const values = [user.id];
   const includeHistory = String(filters.history || "").toLowerCase() === "true";
   const where = [includeHistory ? "r.owner_user_id = $1" : "r.status = 'active'", publicRoomSql()];
@@ -233,6 +236,7 @@ async function listRooms(user, filters = {}) {
 }
 
 async function getRoom(user, roomId) {
+  subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
   const result = await query(
     `select r.id,
             r.owner_user_id as "ownerUserId",
@@ -332,6 +336,7 @@ async function deleteLiveKitCloudRoom(roomName) {
 }
 
 async function joinRoom(user, roomId) {
+  subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
   requireLiveKitConfig();
   livekitSdk();
   const client = await pool.connect();

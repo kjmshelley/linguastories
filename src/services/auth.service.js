@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const { query, pool } = require("../db/pool");
 const configService = require("./config.service");
 const storageService = require("./storage.service");
+const subscriptionPolicy = require("./subscription-policy.service");
 
 const SESSION_COOKIE = "lingua_session";
 const SESSION_DAYS = Number(process.env.SESSION_DAYS);
@@ -72,12 +73,14 @@ function publicUserSql(whereClause) {
                  native_language as "nativeLanguage",
                  target_language as "targetLanguage",
                  current_level as "currentLevel",
-                 current_streak as "currentStreak",
-                 longest_streak as "longestStreak",
-                 listening_time as "listeningTime",
-                 shadowing_time as "shadowingTime"
-            from users
-           ${whereClause}`;
+	                 current_streak as "currentStreak",
+	                 longest_streak as "longestStreak",
+	                 listening_time as "listeningTime",
+	                 shadowing_time as "shadowingTime",
+	                 coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
+	                 coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus"
+	            from users
+	           ${whereClause}`;
 }
 
 async function attachLearningLanguages(user) {
@@ -99,9 +102,26 @@ async function attachLearningLanguages(user) {
   return { ...user, learningLanguages: languages.rows };
 }
 
+async function attachSubscription(user) {
+  if (!user) return user;
+  const teacher = await query(
+    `select plan_key as "teacherSubscriptionTier",
+            status as "teacherSubscriptionStatus"
+       from teacher_subscriptions
+      where user_id = $1
+        and status in ('active', 'past_due', 'incomplete')
+      order by updated_at desc
+      limit 1`,
+    [user.id]
+  );
+  const withTeacher = teacher.rows[0] ? { ...user, ...teacher.rows[0] } : user;
+  return { ...withTeacher, subscription: subscriptionPolicy.subscriptionForUser(withTeacher) };
+}
+
 async function getUserById(userId) {
   const result = await query(publicUserSql("where id = $1"), [userId]);
-  return attachLearningLanguages(result.rows[0]);
+  const user = await attachLearningLanguages(result.rows[0]);
+  return attachSubscription(user);
 }
 
 async function getUserByEmail(email) {
@@ -119,13 +139,15 @@ async function getUserByEmail(email) {
             current_streak as "currentStreak",
             longest_streak as "longestStreak",
             listening_time as "listeningTime",
-            shadowing_time as "shadowingTime"
+            shadowing_time as "shadowingTime",
+            coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
+            coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus"
        from users
       where lower(email) = lower($1)`,
     [email]
   );
   const user = result.rows[0];
-  return user ? { ...(await attachLearningLanguages(user)), passwordHash: user.passwordHash } : user;
+  return user ? { ...(await attachSubscription(await attachLearningLanguages(user))), passwordHash: user.passwordHash } : user;
 }
 
 async function getAuthenticatedUser(req) {

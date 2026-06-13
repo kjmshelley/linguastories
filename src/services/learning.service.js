@@ -2,6 +2,7 @@ const { pool, query } = require("../db/pool");
 const { today, addDays } = require("../utils/date");
 const configService = require("./config.service");
 const storageService = require("./storage.service");
+const subscriptionPolicy = require("./subscription-policy.service");
 
 const reviewDelay = { Again: 0, Hard: 1, Good: 3, Easy: 7 };
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
@@ -36,6 +37,12 @@ function normalizeDeckVisibility(visibility = "Private") {
     throw error;
   }
   return value;
+}
+
+function subscriptionError(message) {
+  const error = new Error(message);
+  error.status = 402;
+  return error;
 }
 
 function slug(value) {
@@ -997,6 +1004,7 @@ function getNotifications({ wallet, sentences, goals, directChat }) {
 
 async function getState(user) {
   const userId = user.id;
+  const subscription = subscriptionPolicy.subscriptionForUser(user);
   const [wallet, coinRules, sentences, stories, goals, communityGoals, posts, postComments, storyComments, learners, learnerActivities, directChat, savedSentences, paths, storyCategories] = await Promise.all([
     getWallet(userId),
     getCoinRules(),
@@ -1037,7 +1045,8 @@ async function getState(user) {
   }, {});
 
   return {
-    user,
+    user: { ...user, subscription },
+    subscription,
     learningLanguages: user.learningLanguages || [],
     wallet,
     coinRules,
@@ -1505,6 +1514,19 @@ async function createSentenceDeck(user, body) {
   const client = await pool.connect();
   try {
     await client.query("begin");
+    const personalDeckLimit = subscriptionPolicy.planLimit(user, "personalDeckLimit");
+    if (Number.isInteger(personalDeckLimit)) {
+      const ownedDecks = await client.query(
+        `select count(*)::int as count
+           from sentence_decks
+          where user_id = $1
+            and deck_kind = 'User'`,
+        [user.id]
+      );
+      if (Number(ownedDecks.rows[0]?.count || 0) >= personalDeckLimit) {
+        throw subscriptionError("Free tier users can create one personal deck.");
+      }
+    }
     if (body.imageDataUrl) {
       const image = await storageService.uploadSentenceDeckImage({
         userId: user.id,
@@ -1908,6 +1930,7 @@ async function updateGoal(user, goalId, body) {
 }
 
 async function addLearningLanguage(user, body) {
+  const maxProfiles = subscriptionPolicy.planLimit(user, "maxLanguageProfiles");
   const language = String(body.language || "").trim();
   const currentLevel = normalizeLevel(body.currentLevel);
   const profileVisibility = normalizeProfileVisibility(body.profileVisibility);
@@ -1920,6 +1943,13 @@ async function addLearningLanguage(user, body) {
     const error = new Error("Please choose a supported language");
     error.status = 400;
     throw error;
+  }
+
+  if (Number.isInteger(maxProfiles)) {
+    const activeProfiles = await query("select count(*)::int as count from user_languages where user_id = $1 and active = true", [user.id]);
+    if (Number(activeProfiles.rows[0]?.count || 0) >= maxProfiles) {
+      throw subscriptionError("Free tier users can create one language profile.");
+    }
   }
 
   await query(
@@ -1938,6 +1968,7 @@ async function addLearningLanguage(user, body) {
 }
 
 async function updateLearningLanguage(user, body) {
+  subscriptionPolicy.requireCapability(user, "canEditLanguageProfiles");
   const language = String(body.language || "").trim();
   const currentLevel = normalizeLevel(body.currentLevel);
   const profileVisibility = normalizeProfileVisibility(body.profileVisibility);
@@ -1960,6 +1991,7 @@ async function updateLearningLanguage(user, body) {
 }
 
 async function removeLearningLanguage(user, body) {
+  subscriptionPolicy.requireCapability(user, "canDeleteLanguageProfiles");
   const language = String(body.language || "").trim();
   if (language === user.targetLanguage) {
     const error = new Error("Make another language current before removing this profile");
@@ -2030,6 +2062,7 @@ async function removeLearningLanguage(user, body) {
 }
 
 async function setCurrentLanguage(user, body) {
+  subscriptionPolicy.requireCapability(user, "canEditLanguageProfiles");
   const language = String(body.language || "").trim();
   const existing = await query(
     `select language,

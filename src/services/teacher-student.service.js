@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const { AccessToken, TrackSource } = require("livekit-server-sdk");
 const { pool, query } = require("../db/pool");
 const storageService = require("./storage.service");
+const subscriptionPolicy = require("./subscription-policy.service");
 
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
 const LESSON_TYPES = new Set(["trial", "one_on_one", "group"]);
@@ -101,7 +102,7 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
            coalesce(tags.tags, '[]'::json) as tags,
            coalesce(reviews.review_count, 0)::int as "reviewCount",
            coalesce(reviews.average_rating, 0)::float as "averageRating",
-           coalesce(ts.plan_key, 'starter') as "subscriptionTier",
+           coalesce(ts.plan_key, '') as "subscriptionTier",
            coalesce(tsp.can_create_group_lessons, false) as "canCreateGroupLessons",
            tp.created_at as "createdAt",
            tp.updated_at as "updatedAt"
@@ -142,6 +143,17 @@ function mapProfile(row) {
     languages: Array.isArray(row.languages) ? row.languages : [],
     tags: Array.isArray(row.tags) ? row.tags : []
   };
+}
+
+function userWithTeacherSubscription(user, subscription) {
+  const activeTeacherStatus = ["active", "past_due", "incomplete"].includes(subscription?.status);
+  return activeTeacherStatus ? { ...user, teacherSubscriptionTier: subscription.planKey, teacherSubscriptionStatus: subscription.status } : user;
+}
+
+async function requireTeacherWorkspace(user) {
+  const subscription = await teacherSubscriptionForUser(user.id);
+  subscriptionPolicy.requireCapability(userWithTeacherSubscription(user, subscription), "teacherWorkspace");
+  return subscription;
 }
 
 function mapBooking(row) {
@@ -290,20 +302,20 @@ async function profileImage(userId, payload) {
 
 async function teacherSubscriptionForUser(userId) {
   const result = await query(
-    `select coalesce(ts.plan_key, 'starter') as "planKey",
-            coalesce(tsp.name, 'Starter') as name,
-            coalesce(tsp.monthly_price_usd, 2.99)::float as "monthlyPriceUsd",
+    `select coalesce(ts.plan_key, '') as "planKey",
+            coalesce(tsp.name, 'No teacher subscription') as name,
+            coalesce(tsp.monthly_price_usd, 0)::float as "monthlyPriceUsd",
             coalesce(tsp.can_create_group_lessons, false) as "canCreateGroupLessons",
             coalesce(ts.status, 'inactive') as status,
             ts.current_period_end as "currentPeriodEnd"
        from users u
        left join teacher_subscriptions ts on ts.user_id = u.id and ts.status in ('active', 'past_due', 'incomplete')
-       left join teacher_subscription_plans tsp on tsp.plan_key = coalesce(ts.plan_key, 'starter')
+       left join teacher_subscription_plans tsp on tsp.plan_key = ts.plan_key
       where u.id = $1
       limit 1`,
     [userId]
   );
-  return result.rows[0] || { planKey: "starter", name: "Starter", monthlyPriceUsd: 2.99, canCreateGroupLessons: false, status: "inactive" };
+  return result.rows[0] || { planKey: "", name: "No teacher subscription", monthlyPriceUsd: 0, canCreateGroupLessons: false, status: "inactive" };
 }
 
 async function myProfiles(user) {
@@ -360,7 +372,9 @@ async function saveProfile(user, payload, profileId = "") {
   const maxLessonMinutes = integer(payload.maxLessonMinutes, { min: minLessonMinutes, max: 90, fallback: 60 });
   const subscription = await teacherSubscriptionForUser(user.id);
   const groupEnabled = payload.groupLessonEnabled === true || String(payload.groupLessonEnabled) === "true";
-  if (groupEnabled && !subscription.canCreateGroupLessons) throw serviceError("Group lessons require the Pro teacher subscription.", 402);
+  const entitlementUser = userWithTeacherSubscription(user, subscription);
+  subscriptionPolicy.requireCapability(entitlementUser, "teacherWorkspace");
+  if (groupEnabled && !subscription.canCreateGroupLessons) subscriptionPolicy.requireCapability(entitlementUser, "groupLessons");
 
   const client = await pool.connect();
   try {
@@ -474,12 +488,14 @@ async function saveProfile(user, payload, profileId = "") {
 }
 
 async function deleteProfile(user, profileId) {
+  await requireTeacherWorkspace(user);
   const result = await query("update teacher_profiles set status = 'archived', updated_at = now() where id = $1 and user_id = $2 returning id", [profileId, user.id]);
   if (!result.rows[0]) throw serviceError("Teacher profile not found", 404);
   return myProfiles(user);
 }
 
 async function getAvailability(user) {
+  await requireTeacherWorkspace(user);
   const result = await query(
     `select tar.id, tar.teacher_profile_id as "teacherProfileId", tar.weekday, tar.start_time::text as "startTime",
             tar.end_time::text as "endTime", tar.timezone, tar.active
@@ -715,6 +731,7 @@ async function validateBookingSlot(client, profile, payload) {
 }
 
 async function saveAvailability(user, payload) {
+  await requireTeacherWorkspace(user);
   const profileId = text(payload.teacherProfileId, { required: true, max: 64 });
   const owner = await query("select id from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
   if (!owner.rows[0]) throw serviceError("Teacher profile not found", 404);
@@ -1001,6 +1018,7 @@ async function listMyTeachers(user) {
 }
 
 async function teacherDashboard(user) {
+  await requireTeacherWorkspace(user);
   const [profiles, lessons, subscription] = await Promise.all([myProfiles(user), listLessons(user), teacherSubscriptionForUser(user.id)]);
   const teacherLessons = lessons.lessons.filter((lesson) => lesson.teacherUserId === user.id);
   const earnings = teacherLessons
@@ -1027,6 +1045,7 @@ function calendarRange(queryParams = {}) {
 }
 
 async function teacherCalendar(user, filters = {}) {
+  await requireTeacherWorkspace(user);
   const { start, end } = calendarRange(filters);
   await expirePendingPaymentBookings();
   const params = [user.id, start, end];
@@ -1158,6 +1177,7 @@ async function cancelBooking(user, bookingId, payload = {}) {
 }
 
 async function saveBookingRules(user, payload) {
+  await requireTeacherWorkspace(user);
   const profileId = text(payload.teacherProfileId, { required: true, max: 64 });
   const profile = await query("select id, user_id from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
   if (!profile.rows[0]) throw serviceError("Teacher profile not found", 404);
@@ -1197,6 +1217,7 @@ async function saveBookingRules(user, payload) {
 }
 
 async function createUnavailableBlock(user, payload) {
+  await requireTeacherWorkspace(user);
   const profileId = text(payload.teacherProfileId, { required: true, max: 64 });
   const owner = await query("select id, timezone from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
   if (!owner.rows[0]) throw serviceError("Teacher profile not found", 404);
@@ -1221,6 +1242,7 @@ async function createUnavailableBlock(user, payload) {
 }
 
 async function deleteUnavailableBlock(user, blockId) {
+  await requireTeacherWorkspace(user);
   const result = await query(
     `delete from teacher_unavailable_blocks tub
       using teacher_profiles tp
@@ -1463,6 +1485,7 @@ async function listNotes(user) {
 }
 
 async function createResource(user, payload) {
+  await requireTeacherWorkspace(user);
   await query(
     `insert into teacher_resources (teacher_user_id, teacher_profile_id, title, resource_type, url, body, visibility)
      values ($1, nullif($2, '')::uuid, $3, $4, $5, $6, $7)`,
@@ -1480,6 +1503,7 @@ async function createResource(user, payload) {
 }
 
 async function listResources(user) {
+  await requireTeacherWorkspace(user);
   const result = await query(
     `select id, teacher_profile_id as "teacherProfileId", title, resource_type as "resourceType", url, body, visibility, created_at as "createdAt"
        from teacher_resources
@@ -1492,6 +1516,7 @@ async function listResources(user) {
 }
 
 async function createTemplate(user, payload) {
+  await requireTeacherWorkspace(user);
   await query(
     `insert into lesson_templates (teacher_user_id, teacher_profile_id, title, target_language, level, lesson_type, body)
      values ($1, nullif($2, '')::uuid, $3, $4, $5, $6, $7)`,
@@ -1509,6 +1534,7 @@ async function createTemplate(user, payload) {
 }
 
 async function listTemplates(user) {
+  await requireTeacherWorkspace(user);
   const result = await query(
     `select id, teacher_profile_id as "teacherProfileId", title, target_language as "targetLanguage", level, lesson_type as "lessonType", body, created_at as "createdAt"
        from lesson_templates

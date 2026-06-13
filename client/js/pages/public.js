@@ -152,11 +152,12 @@ export function landingView({ appConfig }) {
               <h2 class="mt-4 text-3xl font-black text-brand-charcoal sm:text-4xl">Jump start your language learning with structured stories</h2>
               <p class="mt-3 leading-7 text-brand-graphite">Start with the story library, then expand into level changes, saved sentences, listening tracks, and review tools.</p>
             </div>
-            <div class="mt-8 grid gap-4 lg:grid-cols-3">
+            <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               ${[
-                ["Free Tier", "$0", ["Over 100 stories to read", "Listening Track with 2 accents", "Access our Community", "Limited Access to LinguaStories Teacher", "Accent/Reading Practice"]],
-                ["Basic Tier", "$4.99", ["All Stories in Our Database", "Listening Track with all accents", "Access our Community", "Access to Story Activities/Games", "Limited Access to LinguaStories Teacher"]],
-                ["Premium Tier", "$10.99", ["All Stories in Our Database", "Listening Track with all accents", "Access our Community", "Access to Story Activities/Games", "Access to LinguaStories Teacher", "Accent/Reading Practice"]]
+                ["Free Tier", "$0", ["100 coins/month", "Short Stories", "Sentence Mining", "Connect and Moments", "Find a Teacher and My Schedule"]],
+                ["Basic Tier", "$2.99", ["500 coins/month", "Full learner access", "Voice/Video Rooms", "Public and system decks", "No teacher workspace"]],
+                ["Teacher Tier", "$2.99", ["1000 coins/month", "Full learner access", "Teacher Dashboard", "Teacher Profile", "No group lessons"]],
+                ["Teacher Pro Tier", "$6.99", ["5000 coins/month", "Full learner access", "Teacher workspace", "Group lessons", "Teacher profile tools"]]
               ]
                 .map(([tier, price, features]) => `<article class="${ui.card}"><h3 class="text-xl font-black text-brand-charcoal">${tier}</h3><p class="mt-4 text-4xl font-black text-brand-ink">${price}</p><ul class="mt-4 grid min-h-48 gap-2 text-sm leading-6 text-brand-graphite">${features.map((feature) => `<li class="flex gap-2">${icon("check", "mt-1 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(feature)}</span></li>`).join("")}</ul><a class="${ui.secondary} mt-5 w-full" href="/signup" data-link>${icon("arrowRight")}<span>Get Started</span></a></article>`)
                 .join("")}

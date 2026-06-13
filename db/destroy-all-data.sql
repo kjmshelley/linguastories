@@ -1,3 +1,12 @@
+-- Destroys all rows in all application tables, including seeded/reference data.
+-- This leaves the schema itself intact so it can be repopulated with db:seed.
+--
+-- Run with:
+--   npm run db:destroy-all-data
+--   npm run db:destroy-all-data:prod
+
+begin;
+
 truncate table
   lesson_coin_reward_suggestions,
   teacher_payouts,
@@ -61,3 +70,5 @@ truncate table
   users,
   supported_languages
 restart identity cascade;
+
+commit;

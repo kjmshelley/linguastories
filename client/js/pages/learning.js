@@ -53,7 +53,7 @@ export function findTeacherView({ appPath, state, teacherStudentData = {}, teach
           <input class="${ui.input}" name="maxRate" type="number" min="1" step="1" value="${escapeHtml(teacherStudentFilters.maxRate || "")}" placeholder="Max $/hr">
           <button class="${ui.primary}">${icon("search", "h-4 w-4")}<span>Search</span></button>
         </form>
-        <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing teachers for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
+        <p class="mt-3 inline-flex rounded-full bg-brand-red/10 px-3 py-1.5 text-xs font-bold text-brand-redDark ring-1 ring-brand-red/15">Showing teachers for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
       </section>
       <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         ${
@@ -403,7 +403,6 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
     <div class="grid gap-4">
       <div class="flex flex-col gap-3 border-b border-brand-line pb-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h3 class="text-xl font-bold text-brand-ink">My Scheduled Classes</h3>
           <p class="${ui.muted}">${visibleCount} scheduled class${visibleCount === 1 ? "" : "es"} this week.</p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
@@ -499,15 +498,32 @@ function noteRows(notes = []) {
 
 export function teacherDashboardView({ teacherStudentData = {} }) {
   const stats = teacherStudentData.dashboard?.stats || {};
+  const lessons = teacherWorkspaceBookings(teacherStudentData);
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-        <span class="${ui.tagGold}">Teacher workspace</span>
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Teacher Dashboard</h2>
+        <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Teacher Workspace</h2>
         <div class="mt-5 grid gap-3 md:grid-cols-3">
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><span class="text-xs font-bold uppercase text-brand-graphite">Profiles</span><strong class="mt-2 block text-3xl text-brand-ink">${stats.profileCount || 0}</strong></div>
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><span class="text-xs font-bold uppercase text-brand-graphite">Upcoming</span><strong class="mt-2 block text-3xl text-brand-ink">${stats.upcomingLessons || 0}</strong></div>
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><span class="text-xs font-bold uppercase text-brand-graphite">Earnings</span><strong class="mt-2 block text-3xl text-brand-ink">${money(stats.totalEarningsUsd)}</strong></div>
+        </div>
+      </section>
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h3 class="text-2xl font-bold text-brand-ink">Bookings</h3>
+            <p class="mt-1 ${ui.muted}">${teacherStudentData.teacherWorkspaceShowCompletedPaid ? "Showing active bookings plus completed paid bookings." : "Showing active bookings only."}</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button class="${teacherStudentData.teacherWorkspaceShowCompletedPaid ? ui.primary : ui.secondary}" data-action="toggleTeacherCompletedPaid">${icon("flag", "h-4 w-4")}<span>Completed and paid</span></button>
+            <button class="${ui.secondary}" data-action="openTeacherBookingRulesModal">${icon("save", "h-4 w-4")}<span>Book Rules</span></button>
+            <a class="${ui.secondary}" href="${escapeHtml(teacherStudentData.unavailableBlocksHref || "/app/learning/unavailable-blocks")}" data-app-link>${icon("calendar", "h-4 w-4")}<span>Unavailable Blocks</span></a>
+          </div>
+        </div>
+        <div class="mt-5">
+          ${teacherBookingsTable(lessons)}
+          ${teacherBookingsCards(lessons)}
         </div>
       </section>
     </div>
@@ -556,22 +572,127 @@ export function teacherAvailabilityView({ teacherStudentData = {} }) {
   `;
 }
 
-function datetimeLocal(value) {
-  if (!value) return "";
-  const date = new Date(value);
-  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
-}
-
 function statusTone(status) {
   if (String(status).includes("cancel")) return ui.tagRed;
   if (status === "confirmed" || status === "rescheduled" || status === "completed") return ui.tagGold;
   return ui.tag;
 }
 
+const ACTIVE_TEACHER_BOOKING_STATUSES = new Set(["pending_payment", "confirmed", "pending_teacher_approval", "reschedule_requested", "rescheduled", "active"]);
+
+function isActiveTeacherBooking(lesson) {
+  return ACTIVE_TEACHER_BOOKING_STATUSES.has(lesson.status);
+}
+
+function isCompletedPaidBooking(lesson) {
+  return lesson.status === "completed" && lesson.paymentStatus === "paid";
+}
+
+function teacherWorkspaceBookings(teacherStudentData = {}) {
+  const userId = teacherStudentData.currentUserId || "";
+  const source = teacherStudentData.dashboard?.lessons || teacherStudentData.lessons || [];
+  return source
+    .filter((lesson) => !userId || lesson.teacherUserId === userId)
+    .filter((lesson) => isActiveTeacherBooking(lesson) || (teacherStudentData.teacherWorkspaceShowCompletedPaid && isCompletedPaidBooking(lesson)))
+    .sort((a, b) => new Date(a.startsAt) - new Date(b.startsAt));
+}
+
+function bookingPaymentBadge(lesson) {
+  return `<span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus || "unpaid")} · ${money(lesson.totalStudentChargeUsd)}</span>`;
+}
+
+function bookingActions(lesson) {
+  return `
+    <div class="flex flex-wrap justify-end gap-2">
+      <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>Join</span></button>
+      ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
+    </div>
+  `;
+}
+
+function teacherBookingsTable(lessons = []) {
+  return `
+    <div class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-white/60 lg:block">
+      <table class="w-full border-collapse text-left">
+        <thead class="bg-brand-mist/60 text-xs font-semibold uppercase tracking-[.12em] text-brand-graphite">
+          <tr>
+            <th class="px-4 py-3">Class</th>
+            <th class="px-4 py-3">Student</th>
+            <th class="px-4 py-3">When</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Payment</th>
+            <th class="px-4 py-3 text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${lessons.length ? lessons.map((lesson) => `
+            <tr class="border-t border-brand-line/70 align-middle">
+              <td class="px-4 py-3"><strong class="text-sm text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong><span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(lesson.targetLanguage || "")} · ${lesson.durationMinutes || 30} min</span></td>
+              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(lesson.studentName || "Student")}</td>
+              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${dateTime(lesson.startsAt)}</td>
+              <td class="px-4 py-3"><span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span></td>
+              <td class="px-4 py-3">${bookingPaymentBadge(lesson)}</td>
+              <td class="px-4 py-3 text-right">${bookingActions(lesson)}</td>
+            </tr>
+          `).join("") : `<tr><td colspan="6" class="px-4 py-10 text-center text-sm font-semibold text-brand-graphite">No bookings match this view.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function teacherBookingsCards(lessons = []) {
+  return `
+    <div class="grid gap-3 lg:hidden">
+      ${lessons.length ? lessons.map((lesson) => `
+        <article class="rounded-lg border border-brand-line/80 bg-white/65 p-4">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span>
+              <h4 class="mt-3 text-base font-bold text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</h4>
+              <p class="mt-1 text-sm font-semibold text-brand-graphite">${dateTime(lesson.startsAt)}</p>
+            </div>
+            ${bookingPaymentBadge(lesson)}
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Student</span><strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(lesson.studentName || "Student")}</strong></div>
+            <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Duration</span><strong class="mt-1 block text-sm text-brand-ink">${lesson.durationMinutes || 30} min</strong></div>
+          </div>
+          <div class="mt-4">${bookingActions(lesson)}</div>
+        </article>
+      `).join("") : emptyState("No bookings match this view", "Active bookings will appear here.")}
+    </div>
+  `;
+}
+
+export function teacherBookingRulesModal({ teacherStudentData = {} }) {
+  const profiles = teacherStudentData.profiles || teacherStudentData.dashboard?.profiles || [];
+  return `
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Book Rules</h2>
+      <p class="mt-2 ${ui.muted}">Set the limits students see when booking your lessons.</p>
+      <form class="mt-5 grid gap-3" data-form="teacherBookingRules">
+        <label class="${ui.label}">Teacher profile<select class="${ui.input}" name="teacherProfileId" required>${profiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.displayName)}</option>`).join("")}</select></label>
+        <div class="grid gap-3 md:grid-cols-2">
+          <label class="${ui.label}">Minimum notice before booking (minutes)<input class="${ui.input}" name="minBookingNoticeMinutes" type="number" min="0" value="720"></label>
+          <label class="${ui.label}">Maximum advance booking window (days)<input class="${ui.input}" name="maxAdvanceBookingDays" type="number" min="1" value="30"></label>
+          <label class="${ui.label}">Buffer before each lesson (minutes)<input class="${ui.input}" name="bufferBeforeMinutes" type="number" min="0" value="10"></label>
+          <label class="${ui.label}">Buffer after each lesson (minutes)<input class="${ui.input}" name="bufferAfterMinutes" type="number" min="0" value="10"></label>
+          <label class="${ui.label}">Cancellation cutoff (minutes before class)<input class="${ui.input}" name="cancellationCutoffMinutes" type="number" min="0" value="720"></label>
+          <label class="${ui.label}">Reschedule cutoff (minutes before class)<input class="${ui.input}" name="rescheduleCutoffMinutes" type="number" min="0" value="720"></label>
+        </div>
+        <label class="${ui.label}">Supported lesson durations (comma separated minutes)<input class="${ui.input}" name="supportedDurations" value="30,60" placeholder="15,30,45,60,90"></label>
+        <div class="mt-3 flex justify-end border-t border-brand-line pt-4">
+          <button class="${ui.primary}">${icon("save", "h-4 w-4")}<span>Save Rules</span></button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
 export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFilters = {}, state }) {
   const calendar = teacherStudentData.calendar || {};
   const profiles = calendar.profiles || teacherStudentData.profiles || [];
-  const lessons = calendar.lessons || [];
   const blocks = calendar.unavailableBlocks || [];
   const requests = calendar.rescheduleRequests || [];
   const firstProfile = profiles[0];
@@ -580,40 +701,15 @@ export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFi
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <span class="${ui.tagGold}">Teacher calendar</span>
-            <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Bookings</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Unavailable Blocks</h2>
+            <p class="mt-2 ${ui.muted}">Block dates and times when students should not book you.</p>
           </div>
-          <form class="grid gap-3 sm:grid-cols-[130px_220px_190px_auto]" data-form="teacherCalendarFilters">
-            <select class="${ui.input}" name="view">${["month", "week", "day", "list"].map((view) => `<option value="${view}" ${teacherCalendarFilters.view === view ? "selected" : ""}>${view[0].toUpperCase()}${view.slice(1)}</option>`).join("")}</select>
+          <form class="grid gap-3 sm:grid-cols-[220px_190px_auto]" data-form="teacherCalendarFilters">
+            <input type="hidden" name="view" value="${escapeHtml(teacherCalendarFilters.view || "list")}">
             <select class="${ui.input}" name="teacherProfileId"><option value="">All profiles</option>${profiles.map((profile) => `<option value="${escapeHtml(profile.id)}" ${teacherCalendarFilters.teacherProfileId === profile.id ? "selected" : ""}>${escapeHtml(profile.displayName)}</option>`).join("")}</select>
-            <select class="${ui.input}" name="status"><option value="">Any status</option>${["pending_payment", "confirmed", "reschedule_requested", "rescheduled", "cancelled_by_teacher", "cancelled_by_student", "completed"].map((status) => `<option value="${status}" ${teacherCalendarFilters.status === status ? "selected" : ""}>${status}</option>`).join("")}</select>
+            <select class="${ui.input}" name="status"><option value="">Any booking status</option>${["pending_payment", "confirmed", "reschedule_requested", "rescheduled", "cancelled_by_teacher", "cancelled_by_student", "completed"].map((status) => `<option value="${status}" ${teacherCalendarFilters.status === status ? "selected" : ""}>${status}</option>`).join("")}</select>
             <button class="${ui.primary}">${icon("search", "h-4 w-4")}<span>Filter</span></button>
           </form>
-        </div>
-        <div class="mt-5 grid gap-3 lg:grid-cols-2">
-          ${lessons.length ? lessons.map((lesson) => `
-            <article class="rounded-lg border border-brand-line/70 bg-white/70 p-4">
-              <div class="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span>
-                  <h3 class="mt-3 font-bold text-brand-ink">${escapeHtml(lesson.title)}</h3>
-                  <p class="mt-1 text-sm font-semibold text-brand-graphite">${dateTime(lesson.startsAt)} · ${escapeHtml(lesson.studentName || "Student")}</p>
-                </div>
-                <span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus)} · ${money(lesson.totalStudentChargeUsd)}</span>
-              </div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>Join</span></button>
-                ${["pending_payment", "confirmed", "reschedule_requested", "rescheduled"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
-              </div>
-              <form class="mt-4 grid gap-2 border-t border-brand-line pt-4 sm:grid-cols-[1fr_110px_1fr_auto]" data-form="teacherReschedule">
-                <input type="hidden" name="bookingId" value="${escapeHtml(lesson.id)}">
-                <input class="${ui.input}" name="startsAt" type="datetime-local" value="${datetimeLocal(lesson.startsAt)}" required>
-                <input class="${ui.input}" name="durationMinutes" type="number" min="15" max="90" step="15" value="${lesson.durationMinutes || 30}" required>
-                <input class="${ui.input}" name="reason" placeholder="Reason">
-                <button class="${ui.secondary}">${icon("calendar", "h-4 w-4")}<span>Propose</span></button>
-              </form>
-            </article>
-          `).join("") : emptyState("No bookings in this range", "Confirmed and pending lessons will appear here.")}
         </div>
       </section>
       <section class="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
@@ -632,16 +728,7 @@ export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFi
           </div>
         </div>
         <aside class="rounded-lg border border-brand-line bg-brand-panel p-5">
-          <h3 class="text-xl font-bold text-brand-ink">Booking Rules</h3>
-          <form class="mt-4 grid gap-3" data-form="teacherBookingRules">
-            <select class="${ui.input}" name="teacherProfileId" required>${profiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.displayName)}</option>`).join("")}</select>
-            <input class="${ui.input}" name="minBookingNoticeMinutes" type="number" min="0" value="720" placeholder="Minimum notice minutes">
-            <input class="${ui.input}" name="maxAdvanceBookingDays" type="number" min="1" value="30" placeholder="Advance booking days">
-            <input class="${ui.input}" name="bufferBeforeMinutes" type="number" min="0" value="10" placeholder="Buffer before">
-            <input class="${ui.input}" name="bufferAfterMinutes" type="number" min="0" value="10" placeholder="Buffer after">
-            <input class="${ui.input}" name="supportedDurations" value="30,60" placeholder="Supported durations">
-            <button class="${ui.primary}">${icon("save", "h-4 w-4")}<span>Save Rules</span></button>
-          </form>
+          <h3 class="text-xl font-bold text-brand-ink">Reschedule Requests</h3>
           <div class="mt-5 grid gap-2">
             ${requests.length ? requests.map((request) => `<div class="rounded-lg border border-brand-line/70 bg-white/70 p-3 text-sm"><strong class="text-brand-ink">${dateTime(request.proposedStartTime)}</strong><p class="mt-1 text-brand-graphite">${escapeHtml(request.reason || "Reschedule request")} · ${escapeHtml(request.status)}</p>${request.status === "pending" && request.requestedByUserId !== state.user.id ? `<div class="mt-3 flex gap-2"><button class="${ui.primary}" data-action="respondReschedule:${escapeHtml(request.id)}" data-value="accept">Accept</button><button class="${ui.secondary}" data-action="respondReschedule:${escapeHtml(request.id)}" data-value="reject">Reject</button></div>` : ""}</div>`).join("") : `<p class="${ui.muted}">No pending reschedule requests.</p>`}
           </div>
@@ -678,16 +765,4 @@ export function teacherResourcesView({ teacherStudentData = {} }) {
 export function teacherTemplatesView({ teacherStudentData = {} }) {
   const templates = teacherStudentData.templates || [];
   return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">Lesson Templates</h2><div class="mt-5 grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">${simpleCreateForm("template", teacherStudentData.profiles || [])}<div class="grid gap-3">${templates.length ? templates.map((item) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="text-brand-ink">${escapeHtml(item.title)}</strong><p class="mt-2 whitespace-pre-line text-sm text-brand-graphite">${escapeHtml(item.body)}</p></article>`).join("") : emptyState("No templates", "Create reusable lesson structures.")}</div></div></section></div>`;
-}
-
-export function teacherEarningsView({ teacherStudentData = {} }) {
-  const lessons = teacherStudentData.lessons || [];
-  const paid = lessons.filter((lesson) => lesson.paymentStatus === "paid");
-  const total = paid.reduce((sum, lesson) => sum + Number(lesson.teacherPayoutUsd || 0), 0);
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">Earnings</h2><div class="mt-5 rounded-lg border border-brand-line/70 bg-white/60 p-5"><span class="text-xs font-bold uppercase text-brand-graphite">Teacher payout</span><strong class="mt-2 block text-4xl text-brand-ink">${money(total)}</strong><p class="mt-2 ${ui.muted}">Teacher keeps 100% of the listed lesson price. The $0.50 platform fee is separate.</p></div></section></div>`;
-}
-
-export function teacherSubscriptionView({ teacherStudentData = {} }) {
-  const subscription = teacherStudentData.subscription || teacherStudentData.dashboard?.subscription || {};
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">Teacher Subscription</h2><div class="mt-5 grid gap-4 md:grid-cols-2"><div class="rounded-lg border border-brand-line/70 bg-white/60 p-5"><span class="${ui.tagGold}">Starter</span><h3 class="mt-3 text-2xl font-bold text-brand-ink">$2.99/month</h3><p class="mt-2 ${ui.muted}">Teacher profile and 1:1 lessons.</p></div><div class="rounded-lg border border-brand-line/70 bg-white/60 p-5"><span class="${ui.tagDark}">Pro</span><h3 class="mt-3 text-2xl font-bold text-brand-ink">$6.99/month</h3><p class="mt-2 ${ui.muted}">Unlock group lessons.</p></div></div><p class="mt-4 text-sm font-semibold text-brand-graphite">Current tier: ${escapeHtml(subscription.name || subscription.planKey || "Starter")}</p></section></div>`;
 }

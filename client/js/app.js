@@ -4,7 +4,7 @@ import { appreciateMomentModal, communityConnectView, communityLearnerView, comm
 import { deckView } from "./pages/deck.js";
 import { createGoalModal, editGoalModal, goalSupportersModal, goalsView } from "./pages/goals.js";
 import { landingView, loginView, signupView } from "./pages/public.js";
-import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView } from "./pages/profile.js";
+import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
 import { progressView } from "./pages/progress.js";
 import { reviewView } from "./pages/review.js";
 import { addDeckSentenceModal, createDeckModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
@@ -18,18 +18,16 @@ import {
   findTeacherView,
   learningNotesView,
   myLearningView,
+  teacherBookingRulesModal,
   teacherAvailabilityView,
   teacherBookingsView,
-  teacherClassroomView,
   teacherDashboardView,
-  teacherEarningsView,
   teacherLessonNotesView,
   teacherProfileCreateView,
   teacherProfileDetailView,
   teacherProfileModal,
   teacherProfilesPanel,
   teacherResourcesView,
-  teacherSubscriptionView,
   teacherStudentsView,
   teacherTemplatesView
 } from "./pages/learning.js";
@@ -60,11 +58,7 @@ const routeGroups = [
     routes: [
       ["findTeacher", "Find a Teacher"],
       ["myLearning", "My Schedule"],
-      ["teacherDashboard", "Teacher Dashboard"],
-      ["teacherBookings", "Bookings"],
-      ["teacherClassroom", "Classroom"],
-      ["teacherEarnings", "Earnings"],
-      ["teacherSubscription", "Teacher Subscription"]
+      ["teacherDashboard", "Teacher Dashboard"]
     ]
   },
   {
@@ -100,10 +94,12 @@ const hiddenRoutes = [
   ["myTeachers", "My Booked Teachers"],
   ["learningNotes", "Learning Notes"],
   ["teacherAvailability", "Availability"],
+  ["teacherBookings", "Unavailable Blocks"],
   ["teacherStudents", "My Students"],
   ["teacherLessonNotes", "Lesson Notes"],
   ["teacherResources", "Resources"],
   ["teacherTemplates", "Lesson Templates"],
+  ["profileSubscriptions", "Subscriptions"],
   ["profileLanguages", "My Language Profiles"],
   ["stories", "Stories"],
   ["review", "SRS Review"],
@@ -138,15 +134,13 @@ const routeSlugs = {
   teacherDashboard: "learning/teacher-dashboard",
   teacherProfiles: "learning/teacher-profiles",
   teacherAvailability: "learning/availability",
-  teacherBookings: "learning/bookings",
+  teacherBookings: "learning/unavailable-blocks",
   teacherStudents: "learning/students",
-  teacherClassroom: "learning/classroom",
   teacherLessonNotes: "learning/lesson-notes",
   teacherResources: "learning/resources",
   teacherTemplates: "learning/templates",
-  teacherEarnings: "learning/earnings",
-  teacherSubscription: "learning/subscription",
   profileInfo: "profile/my-info",
+  profileSubscriptions: "profile/subscriptions",
   profileProfiles: "profile/my-profiles",
   profileLanguages: "profile/language-profiles",
   profileGoals: "profile/goals",
@@ -155,7 +149,7 @@ const routeSlugs = {
 };
 const browseRoutes = new Set(["sentenceMining", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
 const communityRoutes = new Set(["communityLearner", "communityMoment"]);
-const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherClassroom", "teacherLessonNotes", "teacherResources", "teacherTemplates", "teacherEarnings", "teacherSubscription"]);
+const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [] };
 let state = null;
@@ -190,6 +184,7 @@ let myLearningTab = "lessons";
 let myLearningWeekStart = "";
 let myProfilesTab = "languages";
 let teacherCalendarFilters = { view: "month", teacherProfileId: "", status: "" };
+let teacherWorkspaceShowCompletedPaid = false;
 let activeVoiceVideoRoom = null;
 let activeVoiceVideoSession = null;
 let activeVoiceVideoParticipants = [];
@@ -287,8 +282,9 @@ function activeNavRoute() {
   if (route === "voiceVideoRoom") return "voiceVideoRooms";
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
   if (["myLessons", "myTeachers", "learningNotes"].includes(route)) return "myLearning";
+  if (route === "profileSubscriptions") return "profileInfo";
   if (["profileLanguages", "teacherProfiles", "teacherProfileCreate"].includes(route)) return "profileProfiles";
-  if (["teacherAvailability", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
+  if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route === "storyDetail" ? "stories" : route;
 }
 
@@ -378,9 +374,6 @@ function routeIcon(id) {
     teacherDashboard: "dashboard",
     teacherProfiles: "user",
     teacherBookings: "book",
-    teacherClassroom: "video",
-    teacherEarnings: "wallet",
-    teacherSubscription: "wallet",
     profileInfo: "user",
     profileProfiles: "users",
     profileLanguages: "globe",
@@ -441,7 +434,12 @@ function context() {
     activeVoiceVideoRoom,
     activeVoiceVideoSession,
     activeVoiceVideoParticipants,
-    teacherStudentData,
+    teacherStudentData: {
+      ...teacherStudentData,
+      teacherWorkspaceShowCompletedPaid,
+      unavailableBlocksHref: appPath("teacherBookings"),
+      currentUserId: state?.user?.id || ""
+    },
     teacherStudentFilters,
     bookingSelection,
     myLearningTab,
@@ -452,6 +450,33 @@ function context() {
   };
 }
 
+function subscriptionCapabilities() {
+  return state?.subscription?.capabilities || state?.user?.subscription?.capabilities || {};
+}
+
+function canAccessRoute(id) {
+  const capabilities = subscriptionCapabilities();
+  if (["voiceVideoRooms", "voiceVideoRoom"].includes(id)) return Boolean(capabilities.voiceVideoRooms);
+  if (["teacherDashboard", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
+    return Boolean(capabilities.teacherWorkspace);
+  }
+  return true;
+}
+
+function subscriptionLockedView(route) {
+  const message = ["voiceVideoRooms", "voiceVideoRoom"].includes(route)
+    ? "Voice/Video Rooms require the Basic tier or higher."
+    : "Teacher workspace access requires the Teacher tier or Teacher Pro tier.";
+  return `
+    <section class="${ui.card}">
+      <span class="${ui.tagGold}">Subscription</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Upgrade required</h2>
+      <p class="mt-2 ${ui.muted}">${escapeHtml(message)}</p>
+      <a class="${ui.primary} mt-5" href="${appPath("profileSubscriptions")}" data-app-link>${icon("wallet", "h-4 w-4")}<span>View Subscriptions</span></a>
+    </section>
+  `;
+}
+
 function renderNav() {
   const activeNav = activeNavRoute();
   nav.innerHTML = routeGroups
@@ -460,6 +485,7 @@ function renderNav() {
         <section class="grid gap-1.5">
           <div class="px-2 text-[11px] font-semibold uppercase text-white/38">${group.title}</div>
           ${group.routes
+            .filter(([id]) => canAccessRoute(id))
             .map(([id, label]) => {
               const active =
                 activeNav === id ||
@@ -752,7 +778,7 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
   if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
   if (["profileProfiles", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
-  if (["myLearning", "myLessons", "teacherClassroom", "teacherDashboard", "teacherEarnings"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
+  if (["myLearning", "myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
   if (route === "myLearning" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
   if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
@@ -760,7 +786,7 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "teacherDashboard") requests.push(["dashboard", "/api/teacher-student/dashboard"]);
   if (route === "teacherResources") requests.push(["resources", "/api/teacher-student/resources"]);
   if (route === "teacherTemplates") requests.push(["templates", "/api/teacher-student/templates"]);
-  if (route === "teacherSubscription") requests.push(["subscription", "/api/teacher-student/subscription"]);
+  if (route === "profileInfo" || route === "profileSubscriptions") requests.push(["subscription", "/api/teacher-student/subscription"]);
   if (!requests.length) return;
   const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path)]));
   loaded.forEach(([name, body]) => {
@@ -2335,6 +2361,11 @@ function bindActions(root = document) {
         teacherStudentLoadedKeys = new Set();
         await loadTeacherStudentData(activeRoute(), { force: true });
       }
+      if (action === "toggleTeacherCompletedPaid") {
+        teacherWorkspaceShowCompletedPaid = !teacherWorkspaceShowCompletedPaid;
+        render();
+      }
+      if (action === "openTeacherBookingRulesModal") showModal(teacherBookingRulesModal(context()));
       if (action === "setMyLearningTab") {
         myLearningTab = ["lessons", "teachers", "calendar"].includes(id) ? id : "lessons";
         if (activeRoute() !== "myLearning") history.pushState({}, "", appPath("myLearning"));
@@ -2845,8 +2876,9 @@ function bindActions(root = document) {
       }
       if (form.dataset.form === "teacherBookingRules") {
         await teacherStudentApi("/api/teacher-student/booking-rules", { method: "POST", body: JSON.stringify(data) });
+        closeModal();
         teacherStudentLoadedKeys = new Set();
-        await loadTeacherStudentData("teacherBookings", { force: true });
+        await loadTeacherStudentData(activeRoute(), { force: true });
       }
       if (form.dataset.form === "teacherReschedule") {
         const bookingId = data.bookingId;
@@ -3015,15 +3047,15 @@ function render() {
       : route === "communityLearner" && learnerForTitle
             ? learnerForTitle.displayName
         : route === "communityConnect"
-          ? "Community Connection"
+          ? "Connect with followers"
         : route === "communityMoments"
-          ? "Community Moments"
+          ? "Followers Moments"
         : route === "voiceVideoRooms"
           ? "Community Voice/Video Rooms"
         : route === "findTeacher"
           ? "Learning - Find a Teacher"
         : route === "myLearning"
-          ? myLearningTabTitles[myLearningTab] || myLearningTabTitles.lessons
+          ? "My Schedule"
         : route === "myLessons"
           ? myLearningTabTitles.lessons
         : route === "myTeachers"
@@ -3091,15 +3123,13 @@ function render() {
     teacherAvailability: teacherAvailabilityView,
     teacherBookings: teacherBookingsView,
     teacherStudents: teacherStudentsView,
-    teacherClassroom: teacherClassroomView,
     teacherLessonNotes: teacherLessonNotesView,
     teacherResources: teacherResourcesView,
     teacherTemplates: teacherTemplatesView,
-    teacherEarnings: teacherEarningsView,
-    teacherSubscription: teacherSubscriptionView,
     progress: progressView,
     profile: profileView,
     profileInfo: profileInfoView,
+    profileSubscriptions: subscriptionsView,
     profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) }),
     profileLanguages: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "languages", teacherProfilesContent: teacherProfilesPanel(ctx) }),
     profileGoals: goalsView,
@@ -3107,23 +3137,25 @@ function render() {
     profileWallet: walletView,
     admin: adminView
   };
-  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
-  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";
-  view.innerHTML = (views[route] || dashboardView)(context());
-  bindActions();
-  renderChatDrawer();
-  if (route === "voiceVideoRooms") {
-    loadVoiceVideoRooms();
-    syncVoiceVideoPolling(route);
+	  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
+	  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";
+	  view.innerHTML = canAccessRoute(route) ? (views[route] || dashboardView)(context()) : subscriptionLockedView(route);
+	  bindActions();
+	  renderChatDrawer();
+	  if (!canAccessRoute(route)) {
+	    syncVoiceVideoPolling(route);
+	  } else if (route === "voiceVideoRooms") {
+	    loadVoiceVideoRooms();
+	    syncVoiceVideoPolling(route);
   } else if (route === "voiceVideoRoom") {
     syncVoiceVideoPolling(route);
     if (activeVoiceVideoSession) startVoiceVideoTimer();
   } else {
     syncVoiceVideoPolling(route);
   }
-  if (teacherStudentRoutes.has(route)) {
-    loadTeacherStudentData(route);
-    syncStripeReturnPayment(route);
+	  if (canAccessRoute(route) && teacherStudentRoutes.has(route)) {
+	    loadTeacherStudentData(route);
+	    syncStripeReturnPayment(route);
   }
   scrollToPageTopOnRouteChange();
 }

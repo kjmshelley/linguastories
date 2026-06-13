@@ -951,8 +951,8 @@ begin
 
   insert into teacher_subscription_plans (plan_key, name, monthly_price_usd, can_create_group_lessons)
   values
-    ('starter', 'Starter', 2.99, false),
-    ('pro', 'Pro', 6.99, true)
+    ('teacher', 'Teacher Tier', 2.99, false),
+    ('teacher_pro', 'Teacher Pro Tier', 6.99, true)
   on conflict (plan_key) do update
   set name = excluded.name,
       monthly_price_usd = excluded.monthly_price_usd,
@@ -1082,7 +1082,7 @@ begin
     )
     values (
       teacher_user_id,
-      case when idx % 2 = 0 then 'pro' else 'starter' end,
+      case when idx % 2 = 0 then 'teacher_pro' else 'teacher' end,
       'active',
       'cus_seed_' || replace(teacher_user_id::text, '-', ''),
       'sub_seed_' || replace(teacher_user_id::text, '-', ''),

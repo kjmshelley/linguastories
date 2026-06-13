@@ -65,14 +65,14 @@ function loadMoreMessage({ route, visible, total, noun }) {
   `;
 }
 
-function communityShell({ title, subtitle, action = "", children }) {
+function communityShell({ title, subtitle, action = "", eyebrow = "Community", children }) {
   return `
     <div class="-m-4 min-h-[calc(100vh-80px)] bg-[linear-gradient(135deg,#fff7ef_0%,#f0f7f5_45%,#f8ebe7_100%)] px-4 py-5 sm:-m-6 sm:px-6 lg:-m-7 lg:px-7">
       <section class="overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel/92 shadow-[0_18px_44px_rgba(29,41,63,.08)]">
         <div class="border-b border-brand-line/80 bg-[linear-gradient(115deg,rgba(29,41,63,.96)_0%,rgba(88,112,115,.92)_58%,rgba(224,114,88,.34)_100%)] px-5 py-6 text-white sm:px-7">
           <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div class="max-w-3xl">
-              <p class="text-xs font-semibold uppercase tracking-[.16em] text-white/58">Community</p>
+              ${eyebrow ? `<p class="text-xs font-semibold uppercase tracking-[.16em] text-white/58">${escapeHtml(eyebrow)}</p>` : ""}
               <h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">${escapeHtml(title)}</h2>
               <p class="mt-3 max-w-2xl text-sm leading-6 text-white/72">${escapeHtml(subtitle)}</p>
             </div>
@@ -475,7 +475,8 @@ export function communityConnectView({ state, appPath, communityListLimits, conn
     </section>
   `;
   return communityShell({
-    title: "Connect",
+    title: "Connect with followers",
+    eyebrow: "",
     subtitle: connectMyCommunityOnly
       ? `Learners you follow with activity from the last 7 days: ${languageList || state.user.targetLanguage}.`
       : `Learners you are not following yet with activity from the last 7 days: ${languageList || state.user.targetLanguage}.`,
@@ -533,7 +534,8 @@ export function communityMomentsView({ state, appPath, communityListLimits }) {
   const moments = state.posts.filter((post) => post.userId === state.user.id || isLikeMinded(state, post));
   const page = pagedItems(moments, "communityMoments", communityListLimits);
   return communityShell({
-    title: "Moments",
+    title: "Followers Moments",
+    eyebrow: "",
     subtitle: "See how followed learners and new like-minded learners are progressing in their language journey.",
     action: postMomentButton(),
     children: page.items.length

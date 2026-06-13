@@ -356,6 +356,9 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
   const completedDecks = decks.filter((deck) => deck.reviewStatus === "Mastered").length;
   const sentencePoints = (state.wallet.transactions || []).filter((item) => /sentence/i.test(item.label)).reduce((sum, item) => sum + Math.max(0, Number(item.amount) || 0), 0);
   const dueToday = decks.reduce((sum, deck) => sum + (deck.reviewStatus === "Review Due" ? 1 : 0), 0);
+  const capabilities = state.subscription?.capabilities || state.user?.subscription?.capabilities || {};
+  const personalDeckLimit = capabilities.personalDeckLimit;
+  const canCreateDeck = !Number.isInteger(personalDeckLimit) || myDecks.length < personalDeckLimit;
 
   return `
     <div class="-m-4 min-h-[calc(100vh-80px)] overflow-hidden bg-brand-cream text-brand-ink sm:-m-6 lg:-m-7">
@@ -368,7 +371,7 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
             <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse decks, mine useful lines, and keep due reviews close without turning practice into an admin screen.</p>
             <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
             <div class="mt-5 flex flex-wrap gap-2">
-              <button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white shadow-[0_10px_20px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark" data-action="openCreateDeckModal">${icon("add")}<span>Create Deck</span></button>
+              ${canCreateDeck ? `<button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white shadow-[0_10px_20px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark" data-action="openCreateDeckModal">${icon("add")}<span>Create Deck</span></button>` : ""}
               <button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-bold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white" data-action="openReview">${icon("book")}<span>Practice Reviews</span></button>
             </div>
           </div>

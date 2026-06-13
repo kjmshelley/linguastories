@@ -52,6 +52,7 @@ export function profileInfoView({ state, appConfig }) {
             <p class="mt-2 ${ui.muted}">Keep your account identity and native language current.</p>
           </div>
           <div class="flex flex-wrap gap-2">
+            <a class="${ui.secondary}" href="/app/profile/subscriptions" data-app-link>${icon("wallet")}<span>Subscriptions</span></a>
             ${button("Log Out", "logout", ui.secondary)}
           </div>
         </div>
@@ -95,6 +96,70 @@ export function profileInfoView({ state, appConfig }) {
   `;
 }
 
+export function subscriptionsView({ state, teacherStudentData = {} }) {
+  const user = state.user || {};
+  const subscription = state.subscription || user.subscription || {};
+  const teacherSubscription = teacherStudentData.subscription || teacherStudentData.dashboard?.subscription || {};
+  const userPlan = subscription.learner?.name || user.subscriptionName || user.subscriptionTier || user.planName || "Free Tier";
+  const userStatus = subscription.learner?.status || user.subscriptionStatus || "active";
+  const userPlans = [
+    ["Free Tier", "$0/month", "Core learner tools, Connect, Moments, Find a Teacher, My Schedule, one language profile, one personal deck, and 100 coins/month."],
+    ["Basic Tier", "$2.99/month", "Full learner access except Teacher Dashboard and Teacher Profile, plus 500 coins/month."]
+  ];
+  const teacherPlans = [
+    ["Teacher Tier", "$2.99/month", "Full access except group lessons, plus 1000 coins/month."],
+    ["Teacher Pro Tier", "$6.99/month", "Full access including group lessons, plus 5000 coins/month."]
+  ];
+  return `
+    <div class="grid gap-5">
+      <section class="${ui.card}">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Subscriptions</h2>
+            <p class="mt-2 ${ui.muted}">Review your learner plan and teacher workspace plan in one place.</p>
+          </div>
+          <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrowLeft")}<span>My Account</span></a>
+        </div>
+        <div class="mt-5 grid gap-4">
+        <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <span class="${ui.tagGold}">Learner subscription</span>
+              <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(userPlan)}</h3>
+              <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(userStatus)}</p>
+            </div>
+          </div>
+          <div class="mt-4 grid gap-3 md:grid-cols-2">
+            ${userPlans.map(([name, price, body]) => `
+              <article class="rounded-lg border ${name === userPlan ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
+                <strong class="block text-brand-ink">${escapeHtml(name)}</strong>
+                <span class="mt-2 block text-lg font-bold text-brand-ink">${escapeHtml(price)}</span>
+                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${escapeHtml(body)}</p>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+        <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
+          <span class="${ui.tagDark}">Teacher subscription</span>
+          <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(teacherSubscription.name || teacherSubscription.planKey || subscription.teacher?.name || "No teacher subscription")}</h3>
+          <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(teacherSubscription.status || "inactive")}</p>
+          <div class="mt-4 grid gap-3 md:grid-cols-2">
+            ${teacherPlans.map(([name, price, body]) => `
+              <article class="rounded-lg border ${name === (teacherSubscription.name || subscription.teacher?.name) ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
+                <strong class="block text-brand-ink">${escapeHtml(name)}</strong>
+                <span class="mt-2 block text-lg font-bold text-brand-ink">${escapeHtml(price)}</span>
+                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${escapeHtml(body)}</p>
+              </article>
+            `).join("")}
+          </div>
+          ${teacherSubscription.currentPeriodEnd ? `<p class="mt-4 text-sm font-semibold text-brand-graphite">Current period ends ${escapeHtml(formatDate(String(teacherSubscription.currentPeriodEnd).slice(0, 10)))}.</p>` : ""}
+        </section>
+      </div>
+      </section>
+    </div>
+  `;
+}
+
 export function deleteProfileConfirmModal({ state }) {
   return `
     <div>
@@ -116,45 +181,46 @@ export function languageProfilesView({ state, appConfig, selectedProfileLanguage
   const { learningLanguages, selectedLanguage } = getLanguageContext({ state, selectedProfileLanguage });
   const languageNames = learningLanguages.map((item) => item.language);
   const availableLanguages = appConfig.supportedLanguages.filter((language) => !languageNames.includes(language));
+  const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
+  const maxProfiles = capabilities.maxLanguageProfiles;
+  const canAddProfile = !Number.isInteger(maxProfiles) || learningLanguages.length < maxProfiles;
 
   return `
-    <div class="grid gap-4">
-      <section class="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Active language profiles</h2>
-          <p class="mt-2 ${ui.muted}">Manage the languages you are learning and choose which one is current.</p>
+    <div class="grid gap-5">
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-brand-ink">My Language Profiles</h2>
+            <p class="mt-1 ${ui.muted}">Manage the languages you are learning and choose which one is current.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${canAddProfile ? `<button class="${ui.primary}" data-action="openAddLanguageModal">${icon("add")}<span>Add Language</span></button>` : ""}
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <button class="${ui.primary}" data-action="openAddLanguageModal">${icon("add")}<span>Add Language</span></button>
+        <div class="mt-5 grid gap-4 xl:grid-cols-2">
+          ${learningLanguages.map((languageProfile) => languageProfileCard({ state, user, languageProfile, selectedLanguage })).join("")}
         </div>
-      </section>
-
-      <section class="grid gap-4 xl:grid-cols-2">
-        ${learningLanguages.map((languageProfile) => languageProfileCard({ state, user, languageProfile, selectedLanguage })).join("")}
       </section>
     </div>
   `;
 }
 
 export function myProfilesView({ state, appConfig, selectedProfileLanguage, myProfilesTab = "languages", teacherProfilesContent = "" }) {
-  const activeTab = ["languages", "teachers"].includes(myProfilesTab) ? myProfilesTab : "languages";
+  const capabilities = state.subscription?.capabilities || state.user?.subscription?.capabilities || {};
   const tabs = [
     ["languages", "My Language Profiles", "globe"],
-    ["teachers", "My Teacher Profiles", "user"]
+    ...(capabilities.teacherWorkspace ? [["teachers", "My Teacher Profiles", "user"]] : [])
   ];
+  const activeTab = tabs.some(([id]) => id === myProfilesTab) ? myProfilesTab : "languages";
   return `
     <div class="grid gap-5">
-      <section class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span class="${ui.tagGold}">Profiles</span>
-          <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">My Profiles</h2>
-        </div>
-        <div class="flex flex-wrap gap-2" role="tablist" aria-label="My profile views">
+      ${tabs.length > 1 ? `
+        <section class="flex flex-wrap justify-end gap-2" role="tablist" aria-label="My profile views">
           ${tabs.map(([id, label, iconName]) => `
             <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyProfilesTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(iconName, "h-4 w-4")}<span>${label}</span></button>
           `).join("")}
-        </div>
-      </section>
+        </section>
+      ` : ""}
       ${activeTab === "teachers" ? teacherProfilesContent : languageProfilesView({ state, appConfig, selectedProfileLanguage })}
     </div>
   `;
@@ -241,6 +307,9 @@ function languageProfileCard({ state, user, languageProfile, selectedLanguage })
   const completedStories = languageStories.filter((story) => story.completed).length;
   const profileVisibility = languageProfile.profileVisibility || "Private";
   const recentGoals = languageGoals.slice(0, 4);
+  const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
+  const canEditProfiles = Boolean(capabilities.canEditLanguageProfiles);
+  const canDeleteProfiles = Boolean(capabilities.canDeleteLanguageProfiles);
 
   return `
     <article class="rounded-lg border p-5 transition ${
@@ -254,9 +323,9 @@ function languageProfileCard({ state, user, languageProfile, selectedLanguage })
           <h3 class="${language === user.targetLanguage ? "mt-3" : ""} text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(language)}</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(language)}">${icon("edit")}<span>Edit</span></button>
-          ${language !== user.targetLanguage ? button("Make Current", `makeCurrentLanguage:${language}`, ui.secondary) : ""}
-          ${language !== user.targetLanguage ? `<button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(language)}">Remove Profile</button>` : ""}
+          ${canEditProfiles ? `<button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(language)}">${icon("edit")}<span>Edit</span></button>` : ""}
+          ${canEditProfiles && language !== user.targetLanguage ? button("Make Current", `makeCurrentLanguage:${language}`, ui.secondary) : ""}
+          ${canDeleteProfiles && language !== user.targetLanguage ? `<button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(language)}">Remove Profile</button>` : ""}
         </div>
       </div>
 

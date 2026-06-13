@@ -22,6 +22,15 @@ function roomImage(room) {
   `;
 }
 
+function roomTypeIcon(room) {
+  const type = room.roomType === "video" ? "video" : "voice";
+  return `
+    <span class="grid h-9 w-9 place-items-center rounded-full bg-brand-mist text-brand-redDark ring-1 ring-brand-line/70" aria-label="${escapeHtml(type)} room" title="${escapeHtml(type)} room">
+      ${icon(type === "video" ? "video" : "mic", "h-4 w-4")}
+    </span>
+  `;
+}
+
 function disabledButtonClass() {
   return "inline-flex min-h-11 cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-brand-line bg-brand-line/60 px-4 py-2 text-sm font-semibold text-brand-graphite no-underline opacity-70";
 }
@@ -81,7 +90,7 @@ function roomRows({ rooms, activeSession, state, showHistory }) {
           <p class="mt-1 line-clamp-2 text-xs leading-5 text-brand-graphite">${escapeHtml(room.description || "Focused speaking practice for language learners.")}</p>
           ${historyMeta}
         </td>
-        <td class="px-4 py-3"><span class="${ui.tagGold}">${escapeHtml(room.roomType)}</span></td>
+        <td class="px-4 py-3">${roomTypeIcon(room)}</td>
         <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</td>
         <td class="px-4 py-3"><span class="${ui.tag}">${escapeHtml(room.cefrLevel)}</span></td>
         <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${seatCount}/${seatLimit}<span class="mt-1 block text-xs text-brand-graphite">${showHistory ? escapeHtml(room.status) : `${hostStatus} ${room.startedAt ? `· ${formatRemaining(room.secondsRemaining)} left` : ""}`}</span></td>
@@ -89,6 +98,54 @@ function roomRows({ rooms, activeSession, state, showHistory }) {
           ${roomAction({ room, activeSession, state })}
         </td>
       </tr>
+    `;
+  }).join("");
+}
+
+function roomCards({ rooms, activeSession, state, showHistory }) {
+  if (!rooms.length) {
+    return `
+      <div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite">
+        No focused practice rooms match these filters.
+      </div>
+    `;
+  }
+  return rooms.map((room) => {
+    const hostStatus = room.hostActive ? "Started" : room.ownerUserId === state.user.id ? "Ready to start" : "Waiting for host";
+    const historyMeta = showHistory ? `<p class="mt-1 text-xs text-brand-graphite">Joined: ${escapeHtml(room.joinedSummary || "No participants")}</p>` : "";
+    const seatLimit = Math.min(4, Number(room.maxParticipants || 4));
+    const seatCount = Math.min(Number(room.participantCount || 0), seatLimit);
+    return `
+      <article class="rounded-lg border border-brand-line/80 bg-brand-panel p-4 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+        <div class="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
+          ${roomImage(room)}
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-start justify-between gap-2">
+              <h3 class="min-w-0 flex-1 text-base font-bold leading-6 text-brand-ink">${escapeHtml(room.title)}</h3>
+              ${roomTypeIcon(room)}
+            </div>
+            <p class="mt-1 line-clamp-2 text-xs leading-5 text-brand-graphite">${escapeHtml(room.description || "Focused speaking practice for language learners.")}</p>
+            ${historyMeta}
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2">
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
+            <span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Language</span>
+            <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</strong>
+          </div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
+            <span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Level</span>
+            <span class="${ui.tag} mt-1">${escapeHtml(room.cefrLevel)}</span>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-brand-line/70 pt-4">
+          <span class="${ui.tagRed}">Seats ${seatCount}/${seatLimit}</span>
+          <span class="text-xs font-semibold text-brand-graphite">${showHistory ? escapeHtml(room.status) : `${hostStatus} ${room.startedAt ? `· ${formatRemaining(room.secondsRemaining)} left` : ""}`}</span>
+        </div>
+        <div class="mt-4 flex justify-end">
+          ${roomAction({ room, activeSession, state })}
+        </div>
+      </article>
     `;
   }).join("");
 }
@@ -222,6 +279,14 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
 export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], voiceVideoRoomFilters = {}, voiceVideoShowHistory = false, activeVoiceVideoRoom = null, activeVoiceVideoSession = null, activeVoiceVideoParticipants = [] }) {
   const balance = Number(state.wallet?.balance || 0);
   const hasEnoughCoins = balance >= 1000;
+  const filtersForm = `
+    <form class="grid gap-3 lg:grid-cols-[minmax(180px,1fr)_repeat(2,minmax(140px,180px))_auto]" data-form="voiceVideoRoomFilters">
+      <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
+      <label class="${ui.label}">Level<select class="${ui.input}" name="cefrLevel"><option value="">Any</option>${optionList(levels, voiceVideoRoomFilters.cefrLevel)}</select></label>
+      <label class="${ui.label}">Type<select class="${ui.input}" name="roomType"><option value="">Any</option><option value="voice" ${voiceVideoRoomFilters.roomType === "voice" ? "selected" : ""}>Voice</option><option value="video" ${voiceVideoRoomFilters.roomType === "video" ? "selected" : ""}>Video</option></select></label>
+      <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
+    </form>
+  `;
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
@@ -244,24 +309,34 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
         </div>
       </section>
 
-      <section class="${ui.card}">
-        <form class="grid gap-3 lg:grid-cols-[minmax(180px,1fr)_repeat(2,minmax(140px,180px))_auto]" data-form="voiceVideoRoomFilters">
-          <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
-          <label class="${ui.label}">Level<select class="${ui.input}" name="cefrLevel"><option value="">Any</option>${optionList(levels, voiceVideoRoomFilters.cefrLevel)}</select></label>
-          <label class="${ui.label}">Type<select class="${ui.input}" name="roomType"><option value="">Any</option><option value="voice" ${voiceVideoRoomFilters.roomType === "voice" ? "selected" : ""}>Voice</option><option value="video" ${voiceVideoRoomFilters.roomType === "video" ? "selected" : ""}>Video</option></select></label>
-          <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
-        </form>
+      <section class="${ui.card} lg:block">
+        <div class="hidden lg:block">
+          ${filtersForm}
+        </div>
+        <details class="lg:hidden">
+          <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-semibold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white">
+            <span class="inline-flex items-center gap-2">${icon("search", "h-4 w-4")}Search rooms</span>
+            ${icon("filter", "h-4 w-4")}
+          </summary>
+          <div class="mt-4">
+            ${filtersForm}
+          </div>
+        </details>
         <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing rooms for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
       </section>
 
-      <section class="overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+      <section class="grid gap-3 lg:hidden">
+        ${roomCards({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}
+      </section>
+
+      <section class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-brand-panel shadow-[0_1px_2px_rgba(29,41,63,.05)] lg:block">
         <div class="overflow-x-auto">
           <table class="w-full min-w-[860px] border-collapse text-left">
             <thead class="bg-white/65 text-xs font-semibold uppercase tracking-[.12em] text-brand-graphite">
               <tr>
                 <th class="px-4 py-3">Picture</th>
                 <th class="px-4 py-3">Room</th>
-                <th class="px-4 py-3">Type</th>
+                <th class="px-4 py-3" aria-label="Room type"></th>
                 <th class="px-4 py-3">Languages</th>
                 <th class="px-4 py-3">Level</th>
                 <th class="px-4 py-3">Seats</th>
