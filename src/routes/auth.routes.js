@@ -12,7 +12,8 @@ const registerSchema = {
   email: { type: "email", required: true, max: 254, label: "Email" },
   password: { type: "password", required: true, min: 8, max: 256, label: "Password" },
   nativeLanguage: { type: "string", required: true, max: 80, label: "Native language" },
-  targetLanguage: { type: "string", required: true, max: 80, label: "Target language" }
+  targetLanguage: { type: "string", required: true, max: 80, label: "Target language" },
+  tierKey: { type: "string", required: true, max: 40, label: "Account tier" }
 };
 
 const loginSchema = {

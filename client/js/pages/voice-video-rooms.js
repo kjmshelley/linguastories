@@ -1,4 +1,5 @@
 import { escapeHtml, icon, ui } from "../ui.js";
+import { languageName, languageSelectOptions } from "../languages.js";
 
 const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
@@ -7,8 +8,7 @@ function optionList(items, selected = "") {
 }
 
 function languageOptions(appConfig, selected = "") {
-  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Korean", "Spanish", "French", "German"];
-  return optionList(languages, selected);
+  return languageSelectOptions(appConfig, selected);
 }
 
 function roomImage(room) {
@@ -69,7 +69,7 @@ function formatRemaining(seconds = 360) {
   return `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
 }
 
-function roomCards({ rooms, activeSession, state, showHistory }) {
+function roomCards({ appConfig, rooms, activeSession, state, showHistory }) {
   if (!rooms.length) {
     return `
       <div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite">
@@ -98,7 +98,7 @@ function roomCards({ rooms, activeSession, state, showHistory }) {
         <div class="mt-4 grid grid-cols-2 gap-2">
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
             <span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Language</span>
-            <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(room.sourceLanguage)} to ${escapeHtml(room.targetLanguage)}</strong>
+            <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(languageName(appConfig, room.sourceLanguage))} to ${escapeHtml(languageName(appConfig, room.targetLanguage))}</strong>
           </div>
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
             <span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Level</span>
@@ -200,7 +200,7 @@ export function voiceVideoRoomView({ activeVoiceVideoRoom = null, activeVoiceVid
         <section class="w-full max-w-xl rounded-lg border border-brand-line/80 bg-brand-panel p-6 text-center shadow-[0_1px_2px_rgba(29,41,63,.05)]">
           <span class="${ui.tagRed}">No active session</span>
           <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Join a room first</h2>
-          <p class="mt-2 ${ui.muted}">Choose an available ${escapeHtml(state.user.targetLanguage)} voice or video room to start a LiveKit session.</p>
+          <p class="mt-2 ${ui.muted}">Choose an available ${escapeHtml(languageName(appConfig, state.user.targetLanguage))} voice or video room to start a LiveKit session.</p>
           <div class="mt-5 flex justify-center">
             <a class="${ui.primary}" href="${appPath("voiceVideoRooms")}">${icon("video", "h-4 w-4")}<span>Back to rooms</span></a>
           </div>
@@ -229,7 +229,7 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
           <label class="${ui.label}">Room type<select class="${ui.input}" name="roomType"><option value="voice">Voice</option><option value="video">Video</option></select></label>
           <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${optionList(levels, state.user.currentLevel || "A1")}</select></label>
           <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage">${languageOptions(appConfig, state.user.targetLanguage)}</select></label>
-          <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "English")}</select></label>
+          <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "en-US")}</select></label>
           <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="4" value="4"></label>
           <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate"><option value="false">Public</option><option value="true">Private</option></select></label>
         </div>
@@ -289,11 +289,11 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
             ${filtersForm}
           </div>
         </details>
-        <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing rooms for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
+        <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing rooms for your selected profile language: ${escapeHtml(languageName(appConfig, state.user.targetLanguage))}.</p>
       </section>
 
       <section class="grid gap-3 lg:grid-cols-2">
-        ${roomCards({ rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}
+        ${roomCards({ appConfig, rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}
       </section>
     </div>
   `;

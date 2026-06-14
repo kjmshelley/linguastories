@@ -1,4 +1,5 @@
 import { button, escapeHtml, formatDate, icon, pct, progressBar, ui } from "../ui.js";
+import { languageName, languageSelectOptions, supportedLanguageOptions } from "../languages.js";
 
 function getLanguageContext({ state, selectedProfileLanguage }) {
   const user = state.user;
@@ -24,7 +25,7 @@ function getLanguageContext({ state, selectedProfileLanguage }) {
 }
 
 function languageOptions(languages, selected) {
-  return languages.map((language) => `<option ${language === selected ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
+  return languageSelectOptions({ supportedLanguages: languages }, selected);
 }
 
 function levelOptions(selected = "A1") {
@@ -84,8 +85,8 @@ export function profileInfoView({ state, appConfig }) {
           <p class="mt-1 text-sm font-bold text-brand-graphite">${escapeHtml(user.email)}</p>
         </div>
         <div class="mt-4 grid gap-3">
-          ${infoRow("Native language", user.nativeLanguage)}
-          ${infoRow("Current app language", user.targetLanguage)}
+          ${infoRow("Native language", languageName(appConfig, user.nativeLanguage))}
+          ${infoRow("Current app language", languageName(appConfig, user.targetLanguage))}
           ${infoRow("Current level", user.currentLevel)}
         </div>
         <div class="mt-4 border-t border-brand-line pt-4">
@@ -96,65 +97,149 @@ export function profileInfoView({ state, appConfig }) {
   `;
 }
 
-export function subscriptionsView({ state, teacherStudentData = {} }) {
+function accountInfoRow(label, value) {
+  return `
+    <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
+      <span class="block text-xs font-bold uppercase text-brand-graphite">${escapeHtml(label)}</span>
+      <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(value || "Not set")}</strong>
+    </div>
+  `;
+}
+
+function permissionLabel(value) {
+  return String(value || "")
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function money(value) {
+  return `$${Number(value || 0).toFixed(2)}`;
+}
+
+function dateValue(value) {
+  return value ? formatDate(String(value).slice(0, 10)) : "";
+}
+
+export function subscriptionsView({ state, teacherStudentData = {}, accountBillingData = {} }) {
   const user = state.user || {};
   const subscription = state.subscription || user.subscription || {};
+  const account = accountBillingData.account || subscription.account || user.account || {};
+  const currentTier = account.tier || {};
+  const tiers = accountBillingData.tiers?.length ? accountBillingData.tiers : [currentTier].filter((tier) => tier.key);
+  const invoices = accountBillingData.invoices || [];
+  const paymentMethods = accountBillingData.paymentMethods || [];
+  const billingHistory = accountBillingData.billingHistory || [];
   const teacherSubscription = teacherStudentData.subscription || teacherStudentData.dashboard?.subscription || {};
-  const userPlan = subscription.learner?.name || user.subscriptionName || user.subscriptionTier || user.planName || "Free Tier";
-  const userStatus = subscription.learner?.status || user.subscriptionStatus || "active";
-  const userPlans = [
-    ["Free Tier", "$0/month", "Core learner tools, Connect, Moments, Find a Teacher, My Schedule, one language profile, one personal deck, and 100 coins/month."],
-    ["Basic Tier", "$2.99/month", "Full learner access except Teacher Dashboard and Teacher Profile, plus 500 coins/month."]
-  ];
-  const teacherPlans = [
-    ["Teacher Tier", "$2.99/month", "Full access except group lessons, plus 1000 coins/month."],
-    ["Teacher Pro Tier", "$6.99/month", "Full access including group lessons, plus 5000 coins/month."]
-  ];
+  const isFree = Number(currentTier.monthlyPriceUsd || 0) === 0;
+  const isTrial = Boolean(account.isTrial);
+  const canChangeTier = Boolean(account.canChangeTier);
+  const canReactivate = Boolean(account.canReactivate);
+  const canCancelTrial = Boolean(account.canCancelTrial);
   return `
     <div class="grid gap-5">
       <section class="${ui.card}">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Subscriptions</h2>
-            <p class="mt-2 ${ui.muted}">Review your learner plan and teacher workspace plan in one place.</p>
+            <p class="mt-2 ${ui.muted}">Review account status, tier access, trial state, and billing history.</p>
           </div>
           <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrowLeft")}<span>My Account</span></a>
         </div>
-        <div class="mt-5 grid gap-4">
-        <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
-          <div class="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <span class="${ui.tagGold}">Learner subscription</span>
-              <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(userPlan)}</h3>
-              <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(userStatus)}</p>
+
+        <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+          <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
+            <span class="${ui.tagGold}">Current account</span>
+            <h3 class="mt-3 text-2xl font-bold text-brand-ink">${escapeHtml(currentTier.name || "Account tier")}</h3>
+            <div class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              ${accountInfoRow("Account status", account.accountState || "active")}
+              ${accountInfoRow("Subscription status", account.subscriptionStatus || "none")}
+              ${accountInfoRow("Billing status", account.billingStatus || "none")}
+              ${accountInfoRow("Monthly price", money(currentTier.monthlyPriceUsd))}
+              ${accountInfoRow("Yearly price", money(currentTier.yearlyPriceUsd))}
+              ${accountInfoRow("Next payment", dateValue(account.renewalDate))}
+              ${accountInfoRow("Renewal date", dateValue(account.renewalDate))}
+              ${accountInfoRow("Cancellation date", dateValue(account.cancellationDate))}
+              ${accountInfoRow("Payment method", account.hasPaymentMethod ? "Saved" : "Not saved")}
+            </div>
+            ${isTrial && !isFree ? `
+              <div class="mt-4 rounded-lg border border-brand-orange/35 bg-brand-gold/15 p-4">
+                <h4 class="font-bold text-brand-ink">Trial status</h4>
+                <p class="mt-1 text-sm font-semibold text-brand-graphite">${account.trialDaysRemaining} day${account.trialDaysRemaining === 1 ? "" : "s"} remaining. ${escapeHtml(account.trialExpirationMessage || "")}</p>
+                <div class="mt-3 grid gap-3 sm:grid-cols-3">
+                  ${accountInfoRow("Trial start", dateValue(account.trialStartDate))}
+                  ${accountInfoRow("Trial end", dateValue(account.trialEndDate))}
+                  ${accountInfoRow("Cancellation", account.trialCancelled ? "Cancels at trial end" : "Not cancelled")}
+                </div>
+              </div>
+            ` : ""}
+            <div class="mt-4">
+              <h4 class="font-bold text-brand-ink">Current permissions</h4>
+              <div class="mt-2 flex flex-wrap gap-2">
+                ${(currentTier.permissions || subscription.permissions || []).map((permission) => `<span class="${ui.tag}">${escapeHtml(permissionLabel(permission))}</span>`).join("") || `<span class="${ui.tag}">Free access</span>`}
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-2 border-t border-brand-line pt-4">
+              ${canCancelTrial ? `<button class="${ui.secondary}" data-action="cancelAccountTrial">${icon("alert", "h-4 w-4")}<span>Cancel trial</span></button>` : ""}
+              ${canReactivate ? tiers.map((tier) => `<button class="${ui.primary}" data-action="reactivateAccount:${escapeHtml(tier.key)}">${icon("check", "h-4 w-4")}<span>Reactivate ${escapeHtml(tier.name)}</span></button>`).join("") : ""}
+              ${isTrial ? `<span class="text-sm font-semibold text-brand-graphite">Tier changes unlock after the trial ends.</span>` : ""}
+            </div>
+          </section>
+
+          <aside class="rounded-lg border border-brand-line/70 bg-brand-snow p-4">
+            <span class="${ui.tagDark}">Teacher plan context</span>
+            <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(teacherSubscription.name || teacherSubscription.planKey || subscription.teacher?.name || "No teacher subscription")}</h3>
+            <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(teacherSubscription.status || "inactive")}</p>
+            ${teacherSubscription.currentPeriodEnd ? `<p class="mt-3 text-sm font-semibold text-brand-graphite">Current period ends ${escapeHtml(formatDate(String(teacherSubscription.currentPeriodEnd).slice(0, 10)))}.</p>` : ""}
+          </aside>
+        </div>
+      </section>
+
+      <section class="${ui.card}">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 class="text-2xl font-bold tracking-tight text-brand-ink">Plan options</h3>
+            <p class="mt-1 ${ui.muted}">Active subscribers can upgrade or downgrade immediately. Trial users keep their selected tier until the trial ends.</p>
+          </div>
+        </div>
+        <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          ${tiers.map((tier) => {
+            const active = tier.key === currentTier.key;
+            const disabled = active || !canChangeTier;
+            return `
+              <article class="rounded-lg border ${active ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
+                <strong class="block text-brand-ink">${escapeHtml(tier.name)}</strong>
+                <span class="mt-2 block text-lg font-bold text-brand-ink">${money(tier.monthlyPriceUsd)}/month</span>
+                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${Number(tier.monthlyPriceUsd || 0) > 0 ? `${tier.trialLengthDays || 7}-day trial for new accounts.` : "No trial. Free access only."}</p>
+                <button class="${disabled ? `${ui.secondary} pointer-events-none opacity-60` : ui.primary} mt-4 w-full justify-center" ${disabled ? "disabled" : ""} data-action="changeAccountTier:${escapeHtml(tier.key)}">${icon("arrowRight", "h-4 w-4")}<span>${active ? "Current plan" : Number(tier.monthlyPriceUsd || 0) > Number(currentTier.monthlyPriceUsd || 0) ? "Upgrade" : "Downgrade"}</span></button>
+              </article>
+            `;
+          }).join("")}
+        </div>
+      </section>
+
+      <section class="${ui.card}">
+        <div class="grid gap-4 lg:grid-cols-2">
+          <div>
+            <h3 class="text-xl font-bold text-brand-ink">Payment methods</h3>
+            <div class="mt-3 grid gap-2">
+              ${paymentMethods.length ? paymentMethods.map((method) => accountInfoRow(method.isDefault ? "Default method" : "Payment method", `${method.brand || "Card"} ${method.last4 ? `ending ${method.last4}` : method.providerPaymentMethodId}`)).join("") : `<p class="${ui.muted}">No saved payment method. Use Stripe billing settings when available to add or replace a tokenized payment method.</p>`}
             </div>
           </div>
-          <div class="mt-4 grid gap-3 md:grid-cols-2">
-            ${userPlans.map(([name, price, body]) => `
-              <article class="rounded-lg border ${name === userPlan ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
-                <strong class="block text-brand-ink">${escapeHtml(name)}</strong>
-                <span class="mt-2 block text-lg font-bold text-brand-ink">${escapeHtml(price)}</span>
-                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${escapeHtml(body)}</p>
-              </article>
-            `).join("")}
+          <div>
+            <h3 class="text-xl font-bold text-brand-ink">Invoices</h3>
+            <div class="mt-3 grid gap-2">
+              ${invoices.length ? invoices.map((invoice) => accountInfoRow(invoice.status, `${money(invoice.amountPaidUsd)} paid ${invoice.hostedInvoiceUrl ? "- invoice available" : ""}`)).join("") : `<p class="${ui.muted}">No invoices yet.</p>`}
+            </div>
           </div>
-        </section>
-        <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
-          <span class="${ui.tagDark}">Teacher subscription</span>
-          <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(teacherSubscription.name || teacherSubscription.planKey || subscription.teacher?.name || "No teacher subscription")}</h3>
-          <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(teacherSubscription.status || "inactive")}</p>
-          <div class="mt-4 grid gap-3 md:grid-cols-2">
-            ${teacherPlans.map(([name, price, body]) => `
-              <article class="rounded-lg border ${name === (teacherSubscription.name || subscription.teacher?.name) ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
-                <strong class="block text-brand-ink">${escapeHtml(name)}</strong>
-                <span class="mt-2 block text-lg font-bold text-brand-ink">${escapeHtml(price)}</span>
-                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${escapeHtml(body)}</p>
-              </article>
-            `).join("")}
-          </div>
-          ${teacherSubscription.currentPeriodEnd ? `<p class="mt-4 text-sm font-semibold text-brand-graphite">Current period ends ${escapeHtml(formatDate(String(teacherSubscription.currentPeriodEnd).slice(0, 10)))}.</p>` : ""}
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <section class="${ui.card}">
+        <h3 class="text-xl font-bold text-brand-ink">Billing history</h3>
+        <div class="mt-3 grid gap-2">
+          ${billingHistory.length ? billingHistory.map((event) => accountInfoRow(event.eventType, dateValue(event.createdAt))).join("") : `<p class="${ui.muted}">No billing events yet.</p>`}
+        </div>
       </section>
     </div>
   `;
@@ -180,7 +265,7 @@ export function languageProfilesView({ state, appConfig, selectedProfileLanguage
   const user = state.user;
   const { learningLanguages, selectedLanguage } = getLanguageContext({ state, selectedProfileLanguage });
   const languageNames = learningLanguages.map((item) => item.language);
-  const availableLanguages = appConfig.supportedLanguages.filter((language) => !languageNames.includes(language));
+  const availableLanguages = supportedLanguageOptions(appConfig).filter((language) => !languageNames.includes(language.code));
   const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
   const maxProfiles = capabilities.maxLanguageProfiles;
   const canAddProfile = !Number.isInteger(maxProfiles) || learningLanguages.length < maxProfiles;
@@ -198,7 +283,7 @@ export function languageProfilesView({ state, appConfig, selectedProfileLanguage
           </div>
         </div>
         <div class="mt-5 grid gap-4 xl:grid-cols-2">
-          ${learningLanguages.map((languageProfile) => languageProfileCard({ state, user, languageProfile, selectedLanguage })).join("")}
+          ${learningLanguages.map((languageProfile) => languageProfileCard({ state, appConfig, user, languageProfile, selectedLanguage })).join("")}
         </div>
       </section>
     </div>
@@ -228,7 +313,7 @@ export function myProfilesView({ state, appConfig, selectedProfileLanguage, myPr
 
 export function addLanguageModal({ appConfig, state }) {
   const languageNames = (state.learningLanguages || []).map((item) => item.language);
-  const availableLanguages = appConfig.supportedLanguages.filter((language) => !languageNames.includes(language));
+  const availableLanguages = supportedLanguageOptions(appConfig).filter((language) => !languageNames.includes(language.code));
 
   return `
     <div class="pr-10">
@@ -242,7 +327,7 @@ export function addLanguageModal({ appConfig, state }) {
           Language
           <select class="${ui.input}" name="language" required>
             <option value="" disabled selected>Choose a language</option>
-            ${availableLanguages.map((language) => `<option>${escapeHtml(language)}</option>`).join("")}
+            ${availableLanguages.map((language) => `<option value="${escapeHtml(language.code)}">${escapeHtml(language.name)}</option>`).join("")}
           </select>
         </label>
         <label class="${ui.label}">Current Level<select class="${ui.input}" name="currentLevel">${levelOptions("A1")}</select></label>
@@ -255,7 +340,7 @@ export function addLanguageModal({ appConfig, state }) {
   `;
 }
 
-export function editLanguageModal({ state }, language) {
+export function editLanguageModal({ state, appConfig }, language) {
   const profile = state.learningLanguages.find((item) => item.language === language);
   if (!profile) return `<h2 class="text-2xl font-bold text-brand-ink">Language profile not found</h2>`;
   const isCurrent = profile.language === state.user.targetLanguage;
@@ -263,7 +348,7 @@ export function editLanguageModal({ state }, language) {
   return `
     <div class="pr-10">
       <span class="${ui.tagGold}">Language Profile</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Edit ${escapeHtml(profile.language)}</h2>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Edit ${escapeHtml(languageName(appConfig, profile.language))}</h2>
       <p class="mt-2 ${ui.muted}">Update the level and visibility for this language profile.</p>
     </div>
     <form class="mt-6 grid gap-4" data-form="editLanguage">
@@ -299,8 +384,9 @@ function infoField(label, value) {
   `;
 }
 
-function languageProfileCard({ state, user, languageProfile, selectedLanguage }) {
+function languageProfileCard({ state, appConfig, user, languageProfile, selectedLanguage }) {
   const language = languageProfile.language;
+  const displayLanguage = languageName(appConfig, language);
   const isSelected = language === user.targetLanguage;
   const languageStories = state.stories.filter((story) => !story.targetLanguage || story.targetLanguage === language);
   const languageGoals = state.goals.filter((goal) => goal.goalScope !== "Global" && goal.targetLanguage === language);
@@ -320,7 +406,7 @@ function languageProfileCard({ state, user, languageProfile, selectedLanguage })
           <div class="${ui.row}">
             ${language === user.targetLanguage ? `<span class="${ui.tagDark}">Current</span>` : ""}
           </div>
-          <h3 class="${language === user.targetLanguage ? "mt-3" : ""} text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(language)}</h3>
+          <h3 class="${language === user.targetLanguage ? "mt-3" : ""} text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(displayLanguage)}</h3>
         </div>
         <div class="flex flex-wrap gap-2">
           ${canEditProfiles ? `<button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(language)}">${icon("edit")}<span>Edit</span></button>` : ""}

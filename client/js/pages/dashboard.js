@@ -1,4 +1,5 @@
 import { escapeHtml, icon, progressBar, ui } from "../ui.js";
+import { languageName } from "../languages.js";
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
@@ -64,8 +65,9 @@ function progressLine(label, value) {
   `;
 }
 
-export function dashboardView({ state, appPath = (route) => `/app/${route}`, selectedProfileLanguage }) {
+export function dashboardView({ appConfig, state, appPath = (route) => `/app/${route}`, selectedProfileLanguage }) {
   const activeLanguage = selectedProfileLanguage || state.user.targetLanguage;
+  const activeLanguageName = languageName(appConfig, activeLanguage);
   const sentences = (state.sentences || []).filter((sentence) => sameLanguage(sentence, activeLanguage));
   const stories = (state.stories || []).filter((story) => sameLanguage(story, activeLanguage));
   const goals = (state.goals || []).filter((goal) => sameLanguage(goal, activeLanguage));
@@ -124,7 +126,7 @@ export function dashboardView({ state, appPath = (route) => `/app/${route}`, sel
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <span class="${ui.tagGold}">${escapeHtml(activeLanguage)} workspace</span>
+            <span class="${ui.tagGold}">${escapeHtml(activeLanguageName)} workspace</span>
             <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Today on LinguaStories</h2>
             <p class="mt-2 max-w-3xl text-sm leading-6 text-brand-graphite">Jump into the work that matters: reading, reviews, sentence mining, live practice, community, and lessons.</p>
           </div>

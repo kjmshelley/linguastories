@@ -1,4 +1,5 @@
 import { browseButton, escapeHtml, formatDate, icon, progressBar, ui } from "../ui.js";
+import { languageName, languageSelectOptions } from "../languages.js";
 
 const DECK_COLORS = [
   "from-brand-red via-brand-amber to-brand-panel",
@@ -177,8 +178,7 @@ function deckGrid(decks, startIndex = 0) {
 }
 
 function sourceLanguageOptions(appConfig, selected) {
-  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Spanish", "French", "Korean"];
-  return languages.map((language) => `<option value="${escapeHtml(language)}" ${language === selected ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
+  return languageSelectOptions(appConfig, selected);
 }
 
 function levelOptions(selected) {
@@ -193,7 +193,7 @@ export function addMinedSentenceModal({ state, appConfig }) {
         <label class="${ui.label}">Sentence<textarea class="${ui.input} min-h-24" name="target" required placeholder="駅はどこですか。"></textarea></label>
         <label class="${ui.label}">Translation<input class="${ui.input}" name="translation" required placeholder="Where is the train station?"></label>
         <div class="grid gap-3 sm:grid-cols-2">
-          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "English")}</select></label>
+          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "en-US")}</select></label>
           <label class="${ui.label}">Target Language<select class="${ui.input}" name="targetLanguage">${sourceLanguageOptions(appConfig, state.user.targetLanguage)}</select></label>
         </div>
         <label class="${ui.label}">CEFR Level<select class="${ui.input}" name="level">${levelOptions(state.user.currentLevel || "A1")}</select></label>
@@ -219,7 +219,7 @@ export function createDeckModal({ state, appConfig }) {
         <label class="${ui.label}">Name<input class="${ui.input}" name="name" required maxlength="120" placeholder="Travel sentences I want to keep"></label>
         <label class="${ui.label}">Description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000" placeholder="What this deck helps you practice"></textarea></label>
         <div class="grid gap-3 sm:grid-cols-2">
-          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "English")}</select></label>
+          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "en-US")}</select></label>
           <label class="${ui.label}">Target Language<select class="${ui.input}" name="targetLanguage">${sourceLanguageOptions(appConfig, state.user.targetLanguage)}</select></label>
         </div>
         <div class="grid gap-3 sm:grid-cols-3">
@@ -362,7 +362,7 @@ export function editMinedSentenceModal({ state, appConfig }, sentenceId) {
         <label class="${ui.label}">Sentence<textarea class="${ui.input} min-h-24" name="target" required>${escapeHtml(sentence.target)}</textarea></label>
         <label class="${ui.label}">Translation<input class="${ui.input}" name="translation" required value="${escapeHtml(sentence.translation)}"></label>
         <div class="grid gap-3 sm:grid-cols-2">
-          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "English")}</select></label>
+          <label class="${ui.label}">Source Language<select class="${ui.input}" name="sourceLanguage">${sourceLanguageOptions(appConfig, state.user.sourceLanguage || "en-US")}</select></label>
           <label class="${ui.label}">Target Language<select class="${ui.input}" name="targetLanguage">${sourceLanguageOptions(appConfig, sentence.targetLanguage || state.user.targetLanguage)}</select></label>
         </div>
         <label class="${ui.label}">CEFR Level<select class="${ui.input}" name="level">${levelOptions(sentence.level || "A1")}</select></label>
@@ -394,8 +394,9 @@ export function deleteMinedSentenceModal({ state }, sentenceId) {
   `;
 }
 
-export function sentenceMiningView({ state, selectedProfileLanguage }) {
+export function sentenceMiningView({ appConfig, state, selectedProfileLanguage }) {
   const activeLanguage = selectedProfileLanguage || state.user.targetLanguage;
+  const activeLanguageName = languageName(appConfig, activeLanguage);
   const decks = (state.sentenceDecks || []).filter((deck) => !deck.targetLanguage || deck.targetLanguage === activeLanguage);
   const myDecks = decks.filter((deck) => deck.owner || deck.category === "My Decks");
   const savedDecks = decks.filter((deck) => deck.custom && !deck.owner && deck.savedByUser);
@@ -426,7 +427,7 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
               <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-bold uppercase text-brand-redDark ring-1 ring-brand-red/15">Sentence Mining</span>
               <h2 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">Build fluency from sentences worth keeping.</h2>
               <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse decks, mine useful lines, and keep due reviews close without turning practice into an admin screen.</p>
-              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
+              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguageName)} decks</p>
               <div class="mt-5 flex flex-wrap gap-2">
                 ${canCreateDeck ? `<button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white shadow-[0_10px_20px_rgba(29,41,63,.14)] transition hover:bg-brand-redDark" data-action="openCreateDeckModal">${icon("add")}<span>Create Deck</span></button>` : ""}
                 <button class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-bold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white" data-action="openReview">${icon("book")}<span>Practice Reviews</span></button>
@@ -455,8 +456,9 @@ export function sentenceMiningView({ state, selectedProfileLanguage }) {
   `;
 }
 
-export function sentenceDeckLibraryView({ state, selectedProfileLanguage }) {
+export function sentenceDeckLibraryView({ appConfig, state, selectedProfileLanguage }) {
   const activeLanguage = selectedProfileLanguage || state.user.targetLanguage;
+  const activeLanguageName = languageName(appConfig, activeLanguage);
   const publicDecks = (state.publicSentenceDecks || []).filter((deck) => !deck.targetLanguage || deck.targetLanguage === activeLanguage);
 
   return `
@@ -472,7 +474,7 @@ export function sentenceDeckLibraryView({ state, selectedProfileLanguage }) {
               <span class="inline-flex min-h-6 items-center rounded-full bg-brand-red/10 px-2.5 py-1 text-xs font-bold uppercase text-brand-redDark ring-1 ring-brand-red/15">Public Decks</span>
               <h2 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-brand-ink sm:text-5xl">Sentence Deck Library</h2>
               <p class="mt-4 max-w-2xl text-base leading-7 text-brand-charcoal">Browse public decks created by other learners and save useful ones to your profile.</p>
-              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguage)} decks</p>
+              <p class="mt-2 text-sm font-bold text-brand-graphite">Showing ${escapeHtml(activeLanguageName)} decks</p>
             </div>
             <div class="rounded-lg border border-brand-line/80 bg-white/75 p-4 text-sm font-bold text-brand-charcoal">
               ${publicDecks.length} public ${publicDecks.length === 1 ? "deck" : "decks"}
@@ -526,7 +528,7 @@ function topicSentenceRows(topic, deck) {
   `).join("");
 }
 
-export function sentenceDeckTopicSentencesView({ state, activeDeckId, activeTopicId }) {
+export function sentenceDeckTopicSentencesView({ appConfig, state, activeDeckId, activeTopicId }) {
   const deck = state.sentenceDecks?.find((item) => item.id === activeDeckId);
   const topic = deck?.topics?.find((item) => item.id === activeTopicId);
   if (!deck || !topic) {
@@ -580,11 +582,11 @@ function reviewStatus(sentence) {
   return "Need Review";
 }
 
-function sentenceDeckTable(deck) {
+function sentenceDeckTable(deck, appConfig = {}) {
   const canManage = deck.owner && !deck.system;
   const rows = (deck.sentences || []).map((sentence) => `
     <tr class="border-t border-brand-line/70">
-      <td class="px-4 py-3 text-sm font-semibold text-brand-ink">${escapeHtml(sentence.sourceLanguage || deck.sourceLanguage || "English")}</td>
+      <td class="px-4 py-3 text-sm font-semibold text-brand-ink">${escapeHtml(languageName(appConfig, sentence.sourceLanguage || deck.sourceLanguage || "en-US"))}</td>
       <td class="px-4 py-3 text-sm text-brand-charcoal">
         <div class="font-bold text-brand-ink">${escapeHtml(sentence.target)}</div>
         <div class="mt-1">${escapeHtml(sentence.translation)}</div>
@@ -625,7 +627,7 @@ function sentenceDeckTable(deck) {
   `;
 }
 
-export function sentenceDeckDetailView({ state, activeDeckId }) {
+export function sentenceDeckDetailView({ appConfig, state, activeDeckId }) {
   const deck = state.sentenceDecks?.find((item) => item.id === activeDeckId);
   if (!deck) {
     return `<section class="${ui.card}"><h2 class="text-2xl font-bold text-brand-ink">Deck not found</h2><p class="mt-2 ${ui.muted}">This deck may be private or unavailable.</p></section>`;
@@ -647,7 +649,7 @@ export function sentenceDeckDetailView({ state, activeDeckId }) {
               <span class="${ui.tag}">Level ${escapeHtml(deck.level)}</span>
               <span class="${ui.tagGold}">${escapeHtml(deck.coins)} coins</span>
               <span class="${ui.tagDark}">${escapeHtml(deck.reviewStatus)}</span>
-              <span class="${ui.tag}">${escapeHtml(deck.sourceLanguage || "English")} to ${escapeHtml(deck.targetLanguage || state.user.targetLanguage)}</span>
+              <span class="${ui.tag}">${escapeHtml(languageName(appConfig, deck.sourceLanguage || "en-US"))} to ${escapeHtml(languageName(appConfig, deck.targetLanguage || state.user.targetLanguage))}</span>
             </div>
           </div>
           <div class="grid gap-2">
@@ -665,7 +667,7 @@ export function sentenceDeckDetailView({ state, activeDeckId }) {
         </div>
       </section>
       <div class="mt-6 grid gap-4">
-        ${hasTopics ? `<section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">${deck.topics.map((topic) => topicSection(topic, deck)).join("")}</section>` : sentenceDeckTable(deck)}
+        ${hasTopics ? `<section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">${deck.topics.map((topic) => topicSection(topic, deck)).join("")}</section>` : sentenceDeckTable(deck, appConfig)}
       </div>
     </div>
   `;

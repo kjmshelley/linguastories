@@ -124,6 +124,8 @@ const FEATURE_MESSAGES = {
   personalDeckLimit: "Free tier users can create one personal deck."
 };
 
+const INACTIVE_ACCOUNT_STATES = new Set(["past_due", "deactivated", "canceled"]);
+
 function normalizeLearnerPlan(value) {
   return Object.prototype.hasOwnProperty.call(LEARNER_PLANS, value) ? value : "free";
 }
@@ -141,6 +143,46 @@ function effectivePlanKey(user = {}) {
 }
 
 function subscriptionForUser(user = {}) {
+  if (user.account?.tier) {
+    const tier = user.account.tier;
+    const accountState = user.account.accountState || "active";
+    const billingStatus = user.account.billingStatus || "none";
+    const paidAccess = !INACTIVE_ACCOUNT_STATES.has(accountState);
+    const capabilities = paidAccess ? { ...tier.featureFlags } : { ...PLAN_CAPABILITIES.free };
+    if (!paidAccess) {
+      capabilities.voiceVideoRooms = false;
+      capabilities.teacherWorkspace = false;
+      capabilities.groupLessons = false;
+      capabilities.canCreateShortStories = false;
+      capabilities.canEditLanguageProfiles = false;
+      capabilities.canDeleteLanguageProfiles = false;
+      capabilities.maxLanguageProfiles = 1;
+      capabilities.personalDeckLimit = 1;
+    }
+    return {
+      learner: {
+        key: tier.accountType === "learner" ? tier.key : "basic",
+        name: tier.accountType === "learner" ? tier.name : LEARNER_PLANS.basic.name,
+        monthlyPriceUsd: tier.accountType === "learner" ? tier.monthlyPriceUsd : LEARNER_PLANS.basic.monthlyPriceUsd,
+        monthlyCoins: capabilities.monthlyCoins || 0,
+        status: billingStatus
+      },
+      teacher: tier.accountType === "teacher"
+        ? {
+            key: tier.key,
+            name: tier.name,
+            monthlyPriceUsd: tier.monthlyPriceUsd,
+            monthlyCoins: capabilities.monthlyCoins || 0,
+            status: billingStatus
+          }
+        : null,
+      account: user.account,
+      effectivePlanKey: tier.key,
+      effectivePlanName: tier.name,
+      permissions: [...tier.permissions],
+      capabilities
+    };
+  }
   const learnerKey = normalizeLearnerPlan(user.learnerSubscriptionTier || user.subscriptionTier);
   const teacherKey = normalizeTeacherPlan(user.teacherSubscriptionTier || user.teacherPlanKey);
   const effectiveKey = teacherKey || learnerKey;

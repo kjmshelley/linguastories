@@ -145,8 +145,8 @@ async function createRoom(user, payload) {
   if (title.length < 3) throw badRequest("Room title is required");
   const description = cleanText(payload.description, { max: 1000 });
   const roomType = normalizeRoomType(payload.roomType);
-  const targetLanguage = cleanText(payload.targetLanguage || user.targetLanguage || "Japanese", { max: 80 });
-  const sourceLanguage = cleanText(payload.sourceLanguage || "English", { max: 80 });
+  const targetLanguage = cleanText(payload.targetLanguage || user.targetLanguage || "ja-JP", { max: 80 });
+  const sourceLanguage = cleanText(payload.sourceLanguage || "en-US", { max: 80 });
   const cefrLevel = normalizeLevel(payload.cefrLevel);
   const maxParticipants = Math.min(MAX_ROOM_PARTICIPANTS, Math.max(2, Number(payload.maxParticipants || MAX_ROOM_PARTICIPANTS)));
   const image = await uploadRoomImage(user.id, payload);

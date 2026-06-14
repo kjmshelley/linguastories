@@ -15,6 +15,14 @@
 begin;
 
 drop table if exists
+  email_notification_queue,
+  account_notifications,
+  billing_invoices,
+  billing_payment_methods,
+  billing_webhook_events,
+  account_events,
+  user_accounts,
+  subscription_tiers,
   lesson_coin_reward_suggestions,
   teacher_payouts,
   teacher_reviews,

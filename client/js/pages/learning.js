@@ -1,4 +1,5 @@
 import { escapeHtml, icon, ui } from "../ui.js";
+import { languageMultiSelectOptions, languageName, languageSelectOptions } from "../languages.js";
 
 const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -14,14 +15,11 @@ function dateTime(value) {
 }
 
 function languageOptions(appConfig, selected = "") {
-  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Korean", "Spanish", "French", "German"];
-  return languages.map((language) => `<option value="${escapeHtml(language)}" ${language === selected ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
+  return languageSelectOptions(appConfig, selected);
 }
 
 function languageMultiOptions(appConfig, selected = []) {
-  const selectedLanguages = new Set(selected);
-  const languages = appConfig.supportedLanguages?.length ? appConfig.supportedLanguages : ["English", "Japanese", "Korean", "Spanish", "French", "German"];
-  return languages.map((language) => `<option value="${escapeHtml(language)}" ${selectedLanguages.has(language) ? "selected" : ""}>${escapeHtml(language)}</option>`).join("");
+  return languageMultiSelectOptions(appConfig, selected);
 }
 
 function levelOptions(selected = "A1") {
@@ -54,7 +52,7 @@ function emptyState(title, body) {
   `;
 }
 
-export function findTeacherView({ appPath, state, teacherStudentData = {}, teacherStudentFilters = {} }) {
+export function findTeacherView({ appPath, appConfig, state, teacherStudentData = {}, teacherStudentFilters = {} }) {
   const teachers = teacherStudentData.teachers || [];
   return `
     <div class="grid gap-5">
@@ -71,7 +69,7 @@ export function findTeacherView({ appPath, state, teacherStudentData = {}, teach
           <input class="${ui.input}" name="maxRate" type="number" min="1" step="1" value="${escapeHtml(teacherStudentFilters.maxRate || "")}" placeholder="Max $/hr">
           <button class="${ui.primary}">${icon("search", "h-4 w-4")}<span>Search</span></button>
         </form>
-        <p class="mt-3 inline-flex rounded-full bg-brand-red/10 px-3 py-1.5 text-xs font-bold text-brand-redDark ring-1 ring-brand-red/15">Showing teachers for your selected profile language: ${escapeHtml(state.user.targetLanguage)}.</p>
+        <p class="mt-3 inline-flex rounded-full bg-brand-red/10 px-3 py-1.5 text-xs font-bold text-brand-redDark ring-1 ring-brand-red/15">Showing teachers for your selected profile language: ${escapeHtml(languageName(appConfig, state.user.targetLanguage))}.</p>
       </section>
       <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         ${
@@ -88,7 +86,7 @@ export function findTeacherView({ appPath, state, teacherStudentData = {}, teach
                 </div>
                 <p class="mt-4 line-clamp-3 text-sm leading-6 text-brand-graphite">${escapeHtml(teacher.bio)}</p>
                 <div class="mt-4 flex flex-wrap gap-2">
-                  ${(teacher.languages || []).filter((item) => item.role === "teaches").slice(0, 3).map((item) => `<span class="${ui.tag}">${escapeHtml(item.language)}</span>`).join("")}
+                  ${(teacher.languages || []).filter((item) => item.role === "teaches").slice(0, 3).map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))}</span>`).join("")}
                   <span class="${ui.tagGold}">${money(teacher.hourlyRateUsd)}/hr</span>
                 </div>
                 <div class="mt-5 flex justify-end gap-2 border-t border-brand-line pt-4">
@@ -105,7 +103,7 @@ export function findTeacherView({ appPath, state, teacherStudentData = {}, teach
   `;
 }
 
-export function teacherProfileDetailView({ activeTeacherProfileId, appPath, teacherStudentData = {}, state }) {
+export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, appPath, teacherStudentData = {}, state }) {
   const profile = teacherStudentData.profile;
   if (!profile || profile.id !== activeTeacherProfileId) return emptyState("Loading teacher", "Teacher details will appear here.");
   const reviews = teacherStudentData.reviews || [];
@@ -120,7 +118,7 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appPath, teac
               <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(profile.displayName)}</h2>
               <p class="mt-2 text-lg font-semibold text-brand-charcoal">${escapeHtml(profile.headline)}</p>
               <div class="mt-3 flex flex-wrap gap-2">
-                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(item.language)} · ${escapeHtml(item.cefrLevel || "All")}</span>`).join("")}
+                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))} · ${escapeHtml(item.cefrLevel || "All")}</span>`).join("")}
                 <span class="${ui.tagGold}">${money(profile.hourlyRateUsd)}/hr</span>
               </div>
             </div>
@@ -161,7 +159,7 @@ function teacherProfileForm({ appConfig, state, profile = null }) {
       <div class="grid gap-3 md:grid-cols-2">
         <label class="${ui.label}">Display name<input class="${ui.input}" name="displayName" required value="${escapeHtml(profile?.displayName || state.user.displayName || "")}"></label>
         <label class="${ui.label}">Headline<input class="${ui.input}" name="headline" required maxlength="160" value="${escapeHtml(profile?.headline || "")}" placeholder="Friendly Japanese conversation coach"></label>
-        <label class="${ui.label}">Native language<select class="${ui.input}" name="nativeLanguage">${languageOptions(appConfig, profile?.nativeLanguage || state.user.nativeLanguage || "English")}</select></label>
+        <label class="${ui.label}">Native language<select class="${ui.input}" name="nativeLanguage">${languageOptions(appConfig, profile?.nativeLanguage || state.user.nativeLanguage || "en-US")}</select></label>
         <label class="${ui.label}">Timezone${timezoneSelect(profile?.timezone)}</label>
         <label class="${ui.label}">Hourly rate USD<input class="${ui.input}" name="hourlyRateUsd" required type="number" min="1" step="0.01" value="${escapeHtml(profile?.hourlyRateUsd || "20")}"></label>
         <label class="${ui.label}">Trial rate USD<input class="${ui.input}" name="trialRateUsd" type="number" min="0" step="0.01" value="${escapeHtml(profile?.trialRateUsd ?? "")}"></label>
@@ -243,7 +241,7 @@ function timeRange(slot) {
   return `${formatter.format(new Date(slot.startsAt))}-${formatter.format(new Date(slot.endsAt))}`;
 }
 
-export function bookLessonView({ teacherStudentData = {}, bookingSelection = {}, appPath }) {
+export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSelection = {}, appPath }) {
   const page = teacherStudentData.bookingPage || {};
   const profile = page.profile;
   const calendar = page.calendar || {};
@@ -272,7 +270,7 @@ export function bookLessonView({ teacherStudentData = {}, bookingSelection = {},
               <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(profile.displayName)}</h2>
               <p class="mt-2 text-lg font-semibold text-brand-charcoal">${escapeHtml(profile.headline)}</p>
               <div class="mt-3 flex flex-wrap gap-2">
-                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(item.language)}</span>`).join("")}
+                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))}</span>`).join("")}
                 <span class="${ui.tagGold}">${money(profile.hourlyRateUsd)}/hr</span>
                 <span class="${ui.tag}">${escapeHtml(calendar.timezone || profile.timezone)}</span>
               </div>
@@ -524,7 +522,7 @@ function noteRows(notes = []) {
   return notes.length ? notes.map((note) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><div class="flex flex-wrap justify-between gap-2"><strong class="text-brand-ink">${escapeHtml(note.authorName)}</strong><span class="${note.visibility === "teacher_private" ? ui.tagRed : ui.tagGold}">${escapeHtml(note.visibility)}</span></div><p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(note.body)}</p></article>`).join("") : emptyState("No notes yet", "Shared lesson notes will appear here.");
 }
 
-export function teacherDashboardView({ teacherStudentData = {} }) {
+export function teacherDashboardView({ appConfig, teacherStudentData = {} }) {
   const stats = teacherStudentData.dashboard?.stats || {};
   const lessons = teacherWorkspaceBookings(teacherStudentData);
   return `
@@ -550,8 +548,8 @@ export function teacherDashboardView({ teacherStudentData = {} }) {
           </div>
         </div>
         <div class="mt-5">
-          ${teacherBookingsTable(lessons)}
-          ${teacherBookingsCards(lessons)}
+          ${teacherBookingsTable(lessons, appConfig)}
+          ${teacherBookingsCards(lessons, appConfig)}
         </div>
       </section>
     </div>
@@ -638,7 +636,7 @@ function bookingActions(lesson) {
   `;
 }
 
-function teacherBookingsTable(lessons = []) {
+function teacherBookingsTable(lessons = [], appConfig = {}) {
   return `
     <div class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-white/60 lg:block">
       <table class="w-full border-collapse text-left">
@@ -655,7 +653,7 @@ function teacherBookingsTable(lessons = []) {
         <tbody>
           ${lessons.length ? lessons.map((lesson) => `
             <tr class="border-t border-brand-line/70 align-middle">
-              <td class="px-4 py-3"><strong class="text-sm text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong><span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(lesson.targetLanguage || "")} · ${lesson.durationMinutes || 30} min</span></td>
+              <td class="px-4 py-3"><strong class="text-sm text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong><span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(languageName(appConfig, lesson.targetLanguage))} · ${lesson.durationMinutes || 30} min</span></td>
               <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(lesson.studentName || "Student")}</td>
               <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${dateTime(lesson.startsAt)}</td>
               <td class="px-4 py-3"><span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span></td>
@@ -669,7 +667,7 @@ function teacherBookingsTable(lessons = []) {
   `;
 }
 
-function teacherBookingsCards(lessons = []) {
+function teacherBookingsCards(lessons = [], appConfig = {}) {
   return `
     <div class="grid gap-3 lg:hidden">
       ${lessons.length ? lessons.map((lesson) => `
@@ -678,7 +676,7 @@ function teacherBookingsCards(lessons = []) {
             <div>
               <span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span>
               <h4 class="mt-3 text-base font-bold text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</h4>
-              <p class="mt-1 text-sm font-semibold text-brand-graphite">${dateTime(lesson.startsAt)}</p>
+              <p class="mt-1 text-sm font-semibold text-brand-graphite">${escapeHtml(languageName(appConfig, lesson.targetLanguage))} · ${dateTime(lesson.startsAt)}</p>
             </div>
             ${bookingPaymentBadge(lesson)}
           </div>

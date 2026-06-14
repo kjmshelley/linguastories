@@ -8,6 +8,13 @@ alter table if exists stories
 do $$
 declare
   requested_tables text[] := array[
+    'email_notification_queue',
+    'account_notifications',
+    'billing_invoices',
+    'billing_payment_methods',
+    'billing_webhook_events',
+    'account_events',
+    'user_accounts',
     'lesson_coin_reward_suggestions',
     'teacher_payouts',
     'teacher_reviews',
@@ -84,28 +91,48 @@ begin
   end if;
 end $$;
 
-insert into supported_languages (name, sort_order)
+alter table if exists supported_languages
+  add column if not exists code text;
+
+do $$
+begin
+  alter table supported_languages
+    add constraint supported_languages_code_key unique (code);
+exception
+  when duplicate_object or duplicate_table then null;
+end $$;
+
+insert into supported_languages (code, name, sort_order, active)
 values
-  ('Arabic', 1),
-  ('Dutch', 2),
-  ('English', 3),
-  ('French', 4),
-  ('German', 5),
-  ('Greek', 6),
-  ('Hindi', 7),
-  ('Indonesian', 8),
-  ('Italian', 9),
-  ('Japanese', 10),
-  ('Korean', 11),
-  ('Mandarin Chinese', 12),
-  ('Polish', 13),
-  ('Portuguese', 14),
-  ('Russian', 15),
-  ('Spanish', 16),
-  ('Swedish', 17),
-  ('Thai', 18),
-  ('Turkish', 19),
-  ('Vietnamese', 20);
+  ('en-US', 'English (US)', 1, true),
+  ('en-GB', 'English (UK)', 2, true),
+  ('en-AU', 'English (Australia)', 3, true),
+  ('es-ES', 'Spanish (Spain)', 4, true),
+  ('es-MX', 'Spanish (Mexico)', 5, true),
+  ('zh-CN', 'Chinese (Simplified - China)', 6, true),
+  ('zh-TW', 'Chinese (Traditional - Taiwan)', 7, true),
+  ('ja-JP', 'Japanese (Standard)', 8, true),
+  ('ko-KR', 'Korean (South Korea)', 9, true),
+  ('fr-FR', 'French (France)', 10, true),
+  ('fr-BE', 'French (Belgium)', 11, true),
+  ('de-DE', 'German (Germany)', 12, true),
+  ('pt-PT', 'Portuguese (Portugal)', 13, true),
+  ('it-IT', 'Italian (Italy)', 14, true),
+  ('ru-RU', 'Russian (Russia)', 15, true),
+  ('ar-SA', 'Arabic (Modern Standard)', 16, true),
+  ('hi-IN', 'Hindi (India)', 17, true),
+  ('tr-TR', 'Turkish (Turkey)', 18, true),
+  ('vi-VN', 'Vietnamese (Northern / Standard)', 19, true),
+  ('th-TH', 'Thai (Central / Standard)', 20, true),
+  ('id-ID', 'Indonesian (Standard)', 21, true),
+  ('nl-NL', 'Dutch (Netherlands)', 22, true),
+  ('pl-PL', 'Polish (Standard)', 23, true),
+  ('uk-UA', 'Ukrainian (Standard)', 24, true),
+  ('sv-SE', 'Swedish (Sweden)', 25, true)
+on conflict (code) do update
+set name = excluded.name,
+    sort_order = excluded.sort_order,
+    active = true;
 
 insert into story_categories (name, slug, sort_order)
 values
@@ -168,19 +195,19 @@ create temporary table seed_system_deck_payload (
 
 insert into seed_system_deck_payload (deck_name, target_language, topic, level, target, translation, romanization, difficulty, notes, variations)
 values
-  ('Japanese Travel Essentials', 'Japanese', 'Travel', 'A1', '駅はどこですか。', 'Where is the train station?', 'Eki wa doko desu ka.', 1, 'Use this pattern for asking where places are.', '["ホテルはどこですか。", "出口はどこですか。"]'::jsonb),
-  ('Japanese Travel Essentials', 'Japanese', 'Travel', 'A2', '飛行機が遅れています。', 'My flight is delayed.', 'Hikoki ga okurete imasu.', 3, 'Present-progressive form for travel problems.', '["電車が遅れています。", "バスが遅れています。"]'::jsonb),
-  ('Japanese Daily Requests', 'Japanese', 'Daily Life', 'A1', '手伝ってください。', 'Please help me.', 'Tetsudatte kudasai.', 2, 'Polite request form with kudasai.', '["待ってください。", "見てください。"]'::jsonb),
-  ('Japanese Workplace Basics', 'Japanese', 'Workplace', 'A2', '何時に始まりますか。', 'What time does it start?', 'Nanji ni hajimarimasu ka.', 2, 'Time question pattern for meetings.', '["何時に終わりますか。", "何時に開きますか。"]'::jsonb),
-  ('Japanese Workplace Basics', 'Japanese', 'Workplace', 'B1', '確認してもいいですか。', 'May I confirm?', 'Kakunin shite mo ii desu ka.', 3, 'Useful for polite clarification.', '["質問してもいいですか。", "共有してもいいですか。"]'::jsonb),
-  ('Spanish Cafe Conversations', 'Spanish', 'Food', 'A1', 'Quisiera un cafe, por favor.', 'I would like a coffee, please.', '', 1, 'Polite cafe ordering.', '["Quisiera un te, por favor.", "Quisiera agua, por favor."]'::jsonb),
-  ('Spanish Cafe Conversations', 'Spanish', 'Food', 'A1', 'La cuenta, por favor.', 'The bill, please.', '', 1, 'Short restaurant request.', '["El menu, por favor.", "Una mesa, por favor."]'::jsonb),
-  ('Spanish Travel Moments', 'Spanish', 'Travel', 'A2', 'Mi tren sale a las ocho.', 'My train leaves at eight.', '', 2, 'Travel time sentence.', '["Mi autobus sale a las nueve.", "Mi vuelo sale a las seis."]'::jsonb),
-  ('Spanish Travel Moments', 'Spanish', 'Travel', 'A2', 'Estoy buscando la estacion.', 'I am looking for the station.', '', 2, 'Useful city navigation phrase.', '["Estoy buscando el hotel.", "Estoy buscando la salida."]'::jsonb),
-  ('French Weekend Plans', 'French', 'Daily Life', 'A1', 'Je vais au marche samedi.', 'I am going to the market on Saturday.', '', 1, 'Weekend plan sentence.', '["Je vais au parc samedi.", "Je vais au musee dimanche."]'::jsonb),
-  ('French Weekend Plans', 'French', 'Friendship', 'A2', 'Tu veux venir avec moi ?', 'Do you want to come with me?', '', 2, 'Friendly invitation.', '["Tu veux etudier avec moi ?", "Tu veux manger avec moi ?"]'::jsonb),
-  ('Korean Study Group', 'Korean', 'Study', 'A1', '오늘 같이 공부해요.', 'Let us study together today.', 'Oneul gachi gongbuhaeyo.', 1, 'Friendly study invitation.', '["내일 같이 공부해요.", "도서관에서 공부해요."]'::jsonb),
-  ('Korean Study Group', 'Korean', 'Study', 'A2', '이 문장을 다시 읽어요.', 'Read this sentence again.', 'I munjangeul dasi ilgeoyo.', 2, 'Reading practice phrase.', '["이 단어를 다시 읽어요.", "이 이야기를 다시 읽어요."]'::jsonb);
+  ('Japanese Travel Essentials', 'ja-JP', 'Travel', 'A1', '駅はどこですか。', 'Where is the train station?', 'Eki wa doko desu ka.', 1, 'Use this pattern for asking where places are.', '["ホテルはどこですか。", "出口はどこですか。"]'::jsonb),
+  ('Japanese Travel Essentials', 'ja-JP', 'Travel', 'A2', '飛行機が遅れています。', 'My flight is delayed.', 'Hikoki ga okurete imasu.', 3, 'Present-progressive form for travel problems.', '["電車が遅れています。", "バスが遅れています。"]'::jsonb),
+  ('Japanese Daily Requests', 'ja-JP', 'Daily Life', 'A1', '手伝ってください。', 'Please help me.', 'Tetsudatte kudasai.', 2, 'Polite request form with kudasai.', '["待ってください。", "見てください。"]'::jsonb),
+  ('Japanese Workplace Basics', 'ja-JP', 'Workplace', 'A2', '何時に始まりますか。', 'What time does it start?', 'Nanji ni hajimarimasu ka.', 2, 'Time question pattern for meetings.', '["何時に終わりますか。", "何時に開きますか。"]'::jsonb),
+  ('Japanese Workplace Basics', 'ja-JP', 'Workplace', 'B1', '確認してもいいですか。', 'May I confirm?', 'Kakunin shite mo ii desu ka.', 3, 'Useful for polite clarification.', '["質問してもいいですか。", "共有してもいいですか。"]'::jsonb),
+  ('Spanish Cafe Conversations', 'es-ES', 'Food', 'A1', 'Quisiera un cafe, por favor.', 'I would like a coffee, please.', '', 1, 'Polite cafe ordering.', '["Quisiera un te, por favor.", "Quisiera agua, por favor."]'::jsonb),
+  ('Spanish Cafe Conversations', 'es-ES', 'Food', 'A1', 'La cuenta, por favor.', 'The bill, please.', '', 1, 'Short restaurant request.', '["El menu, por favor.", "Una mesa, por favor."]'::jsonb),
+  ('Spanish Travel Moments', 'es-ES', 'Travel', 'A2', 'Mi tren sale a las ocho.', 'My train leaves at eight.', '', 2, 'Travel time sentence.', '["Mi autobus sale a las nueve.", "Mi vuelo sale a las seis."]'::jsonb),
+  ('Spanish Travel Moments', 'es-ES', 'Travel', 'A2', 'Estoy buscando la estacion.', 'I am looking for the station.', '', 2, 'Useful city navigation phrase.', '["Estoy buscando el hotel.", "Estoy buscando la salida."]'::jsonb),
+  ('French Weekend Plans', 'fr-FR', 'Daily Life', 'A1', 'Je vais au marche samedi.', 'I am going to the market on Saturday.', '', 1, 'Weekend plan sentence.', '["Je vais au parc samedi.", "Je vais au musee dimanche."]'::jsonb),
+  ('French Weekend Plans', 'fr-FR', 'Friendship', 'A2', 'Tu veux venir avec moi ?', 'Do you want to come with me?', '', 2, 'Friendly invitation.', '["Tu veux etudier avec moi ?", "Tu veux manger avec moi ?"]'::jsonb),
+  ('Korean Study Group', 'ko-KR', 'Study', 'A1', '오늘 같이 공부해요.', 'Let us study together today.', 'Oneul gachi gongbuhaeyo.', 1, 'Friendly study invitation.', '["내일 같이 공부해요.", "도서관에서 공부해요."]'::jsonb),
+  ('Korean Study Group', 'ko-KR', 'Study', 'A2', '이 문장을 다시 읽어요.', 'Read this sentence again.', 'I munjangeul dasi ilgeoyo.', 2, 'Reading practice phrase.', '["이 단어를 다시 읽어요.", "이 이야기를 다시 읽어요."]'::jsonb);
 
 insert into sentence_decks (deck_kind, name, description, coins, level, visibility, source_language, target_language)
 select 'System',
@@ -189,13 +216,13 @@ select 'System',
        count(*)::int * 10,
        min(level),
        'Public',
-       'English',
+       'en-US',
        target_language
   from seed_system_deck_payload
  group by deck_name, target_language;
 
 insert into sentences (source_language, target_language, target, translation, romanization, level, topic, difficulty, notes, source, variations)
-select 'English',
+select 'en-US',
        target_language,
        target,
        translation,
@@ -237,42 +264,42 @@ insert into seed_story_payload (
   title, category_id, source_language, topic, level, reading_time, text, translation, highlights, key_sentences, key_words, grammar_points, unlock_cost, reward_coins
 )
 values
-  ('The Lost Passport', (select id from story_categories where slug = 'travel'), 'English', 'Travel', 'A1', '4 min',
+  ('The Lost Passport', (select id from story_categories where slug = 'travel'), 'en-US', 'Travel', 'A1', '4 min',
    'Mika is at the airport. Her flight is delayed, and she cannot find her passport. She asks, "Where is the information desk?" A worker smiles and says, "Please wait here." After ten minutes, the worker returns with the passport.',
    'A travel story about asking for help at the airport.',
    '["airport", "delayed", "passport", "please wait"]'::jsonb,
    '["駅はどこですか。", "手伝ってください。", "飛行機が遅れています。"]'::jsonb,
    '["airport", "delayed", "passport", "information desk"]'::jsonb,
    '["Location questions", "Polite requests", "Present-progressive travel problems"]'::jsonb, 20, 15),
-  ('First Day at the Office', (select id from story_categories where slug = 'workplace'), 'English', 'Workplace', 'A2', '6 min',
+  ('First Day at the Office', (select id from story_categories where slug = 'workplace'), 'en-US', 'Workplace', 'A2', '6 min',
    'Ren joins a new team on Monday. He asks when the meeting starts, introduces himself, and writes down useful phrases from his coworkers.',
    'A workplace story about meetings and introductions.',
    '["meeting", "team", "introduction", "coworkers"]'::jsonb,
    '["何時に始まりますか。", "確認してもいいですか。"]'::jsonb,
    '["meeting", "team", "introduction", "phrases"]'::jsonb,
    '["Time questions", "Self-introduction", "Polite clarification"]'::jsonb, 20, 15),
-  ('The Rainy Cafe', (select id from story_categories where slug = 'food'), 'English', 'Food', 'A1', '3 min',
+  ('The Rainy Cafe', (select id from story_categories where slug = 'food'), 'en-US', 'Food', 'A1', '3 min',
    'Lucia enters a small cafe because it is raining. She orders coffee, reads a short story, and asks for the bill before the sun returns.',
    'A simple cafe story for ordering and small talk.',
    '["cafe", "rain", "coffee", "bill"]'::jsonb,
    '["Quisiera un cafe, por favor.", "La cuenta, por favor."]'::jsonb,
    '["cafe", "rain", "coffee", "bill"]'::jsonb,
    '["Polite ordering", "Simple past sequence", "Restaurant requests"]'::jsonb, 15, 12),
-  ('The Late Train', (select id from story_categories where slug = 'travel'), 'English', 'Travel', 'A2', '5 min',
+  ('The Late Train', (select id from story_categories where slug = 'travel'), 'en-US', 'Travel', 'A2', '5 min',
    'Mateo arrives at the station early, but his train is late. He asks for help, checks the platform, and sends a message to his friend.',
    'A station story with travel timing and problem solving.',
    '["station", "train", "platform", "message"]'::jsonb,
    '["Mi tren sale a las ocho.", "Estoy buscando la estacion."]'::jsonb,
    '["station", "train", "platform", "message"]'::jsonb,
    '["Time expressions", "Estoy buscando", "Travel updates"]'::jsonb, 20, 15),
-  ('Saturday Market', (select id from story_categories where slug = 'daily-life'), 'English', 'Daily Life', 'A1', '4 min',
+  ('Saturday Market', (select id from story_categories where slug = 'daily-life'), 'en-US', 'Daily Life', 'A1', '4 min',
    'Camille goes to the market on Saturday. She buys bread, meets a friend, and invites him to walk with her.',
    'A weekend daily-life story with invitations.',
    '["market", "Saturday", "bread", "friend"]'::jsonb,
    '["Je vais au marche samedi.", "Tu veux venir avec moi ?"]'::jsonb,
    '["market", "Saturday", "bread", "friend"]'::jsonb,
    '["Near future", "Invitations", "Weekend plans"]'::jsonb, 15, 12),
-  ('Study Room Window', (select id from story_categories where slug = 'study'), 'English', 'Study', 'A2', '5 min',
+  ('Study Room Window', (select id from story_categories where slug = 'study'), 'en-US', 'Study', 'A2', '5 min',
    'Hana meets her study group near the window. They read one story again, compare notes, and choose three sentences to review tomorrow.',
    'A study-group story about reading and review habits.',
    '["study group", "window", "notes", "review"]'::jsonb,
@@ -315,12 +342,12 @@ from stories s
 join seed_story_payload payload on payload.title = s.title
 join (
   values
-    ('The Lost Passport', 'Japanese'),
-    ('First Day at the Office', 'Japanese'),
-    ('The Rainy Cafe', 'Spanish'),
-    ('The Late Train', 'Spanish'),
-    ('Saturday Market', 'French'),
-    ('Study Room Window', 'Korean')
+    ('The Lost Passport', 'ja-JP'),
+    ('First Day at the Office', 'ja-JP'),
+    ('The Rainy Cafe', 'es-ES'),
+    ('The Late Train', 'es-ES'),
+    ('Saturday Market', 'fr-FR'),
+    ('Study Room Window', 'ko-KR')
 ) as language_map(title, target_language) on language_map.title = s.title
 cross join lateral jsonb_each(
   jsonb_build_object(
@@ -335,11 +362,11 @@ cross join lateral jsonb_each(
 
 insert into learning_paths (title, target_language, description, level)
 values
-  ('Japanese Travel Path', 'Japanese', 'Airport, train, hotel, and travel stories.', 'A1-A2'),
-  ('Japanese Workplace Path', 'Japanese', 'Meetings, introductions, and office story practice.', 'A2-B1'),
-  ('Spanish Daily Path', 'Spanish', 'Cafe, travel, and daily life moments.', 'A1-A2'),
-  ('French Weekend Path', 'French', 'Weekend plans, invitations, and market stories.', 'A1'),
-  ('Korean Study Path', 'Korean', 'Study group and review routine practice.', 'A1-A2');
+  ('Japanese Travel Path', 'ja-JP', 'Airport, train, hotel, and travel stories.', 'A1-A2'),
+  ('Japanese Workplace Path', 'ja-JP', 'Meetings, introductions, and office story practice.', 'A2-B1'),
+  ('Spanish Daily Path', 'es-ES', 'Cafe, travel, and daily life moments.', 'A1-A2'),
+  ('French Weekend Path', 'fr-FR', 'Weekend plans, invitations, and market stories.', 'A1'),
+  ('Korean Study Path', 'ko-KR', 'Study group and review routine practice.', 'A1-A2');
 
 insert into learning_path_items (path_id, label, sort_order)
 select lp.id, item.label, item.sort_order
@@ -357,22 +384,22 @@ do $$
 declare
   password_hash constant text := 'pbkdf2_sha256$310000$linguastories-demo-salt$4dcf782c48e2ddcfca5e2fc7babb9ecaf14ed4318768aea46ee4be4b0992b75d';
   user_specs text[][] := array[
-    array['Mika Tan','demo@linguastories.local','MT','English','Japanese','A2','Building fluency through useful sentences and short stories.'],
-    array['Noah Reed','noah@linguastories.local','NR','English','Japanese','A2','Travel-story learner who likes mining practical airport and train sentences.'],
-    array['Ari Kim','ari@linguastories.local','AK','English','Japanese','B1','Reading short stories twice: once for flow and once for sentence mining.'],
-    array['Sofia Rivera','sofia@linguastories.local','SR','English','Spanish','A2','Cafe conversations, train stations, and small wins every morning.'],
-    array['Mateo Cruz','mateo@linguastories.local','MC','English','Spanish','B1','Spanish learner focused on travel stories and speaking confidence.'],
-    array['Camille Stone','camille@linguastories.local','CS','English','French','A1','French beginner building a weekend routine with tiny stories.'],
-    array['Hana Park','hana@linguastories.local','HP','English','Korean','A2','Korean learner who studies through group reading and shadowing.'],
-    array['Eli Morgan','eli@linguastories.local','EM','English','Japanese','A1','Starting over with Japanese and keeping the streak gentle.'],
-    array['Priya Shah','priya@linguastories.local','PS','Hindi','Japanese','A2','Uses story context to make grammar feel less abstract.'],
-    array['Lucas Meyer','lucas@linguastories.local','LM','German','Spanish','A1','Spanish learner who loves food scenes and travel moments.'],
-    array['Nora Ellis','nora@linguastories.local','NE','English','French','A2','Collects useful weekend phrases and reads aloud after work.'],
-    array['Kenji Brooks','kenji@linguastories.local','KB','English','Korean','B1','Korean study-group regular focused on listening and recall.'],
-    array['Amara Okafor','amara@linguastories.local','AO','English','Japanese','B2','Advanced reader who comments on grammar patterns in stories.'],
-    array['Theo Grant','theo@linguastories.local','TG','English','Spanish','A2','Building travel confidence one short story at a time.'],
-    array['Lina Chen','lina@linguastories.local','LC','Mandarin Chinese','French','A1','French beginner who likes simple daily-life stories.'],
-    array['Owen Patel','owen@linguastories.local','OP','English','Japanese','A2','Practices shadowing with workplace stories before meetings.']
+    array['Mika Tan','demo@linguastories.local','MT','en-US','ja-JP','A2','Building fluency through useful sentences and short stories.'],
+    array['Noah Reed','noah@linguastories.local','NR','en-US','ja-JP','A2','Travel-story learner who likes mining practical airport and train sentences.'],
+    array['Ari Kim','ari@linguastories.local','AK','en-US','ja-JP','B1','Reading short stories twice: once for flow and once for sentence mining.'],
+    array['Sofia Rivera','sofia@linguastories.local','SR','en-US','es-ES','A2','Cafe conversations, train stations, and small wins every morning.'],
+    array['Mateo Cruz','mateo@linguastories.local','MC','en-US','es-ES','B1','Spanish learner focused on travel stories and speaking confidence.'],
+    array['Camille Stone','camille@linguastories.local','CS','en-US','fr-FR','A1','French beginner building a weekend routine with tiny stories.'],
+    array['Hana Park','hana@linguastories.local','HP','en-US','ko-KR','A2','Korean learner who studies through group reading and shadowing.'],
+    array['Eli Morgan','eli@linguastories.local','EM','en-US','ja-JP','A1','Starting over with Japanese and keeping the streak gentle.'],
+    array['Priya Shah','priya@linguastories.local','PS','hi-IN','ja-JP','A2','Uses story context to make grammar feel less abstract.'],
+    array['Lucas Meyer','lucas@linguastories.local','LM','de-DE','es-ES','A1','Spanish learner who loves food scenes and travel moments.'],
+    array['Nora Ellis','nora@linguastories.local','NE','en-US','fr-FR','A2','Collects useful weekend phrases and reads aloud after work.'],
+    array['Kenji Brooks','kenji@linguastories.local','KB','en-US','ko-KR','B1','Korean study-group regular focused on listening and recall.'],
+    array['Amara Okafor','amara@linguastories.local','AO','en-US','ja-JP','B2','Advanced reader who comments on grammar patterns in stories.'],
+    array['Theo Grant','theo@linguastories.local','TG','en-US','es-ES','A2','Building travel confidence one short story at a time.'],
+    array['Lina Chen','lina@linguastories.local','LC','zh-CN','fr-FR','A1','French beginner who likes simple daily-life stories.'],
+    array['Owen Patel','owen@linguastories.local','OP','en-US','ja-JP','A2','Practices shadowing with workplace stories before meetings.']
   ];
   spec text[];
   idx integer := 0;
@@ -422,15 +449,15 @@ begin
 
     if idx % 3 = 0 then
       insert into user_languages (user_id, language, current_level, profile_visibility, active)
-      values (new_user_id, 'Japanese', 'A1', 'Public', true)
+      values (new_user_id, 'ja-JP', 'A1', 'Public', true)
       on conflict do nothing;
     elsif idx % 3 = 1 then
       insert into user_languages (user_id, language, current_level, profile_visibility, active)
-      values (new_user_id, 'Spanish', 'A1', 'Public', true)
+      values (new_user_id, 'es-ES', 'A1', 'Public', true)
       on conflict do nothing;
     else
       insert into user_languages (user_id, language, current_level, profile_visibility, active)
-      values (new_user_id, 'French', 'A1', 'Private', true)
+      values (new_user_id, 'fr-FR', 'A1', 'Private', true)
       on conflict do nothing;
     end if;
 
@@ -486,17 +513,17 @@ begin
     values (
       new_user_id,
       case (select target_language from users where id = new_user_id)
-        when 'Japanese' then 'Airport Survival Sentences'
-        when 'Spanish' then 'Cafe Counter Confidence'
-        when 'French' then 'Weekend Errand Phrases'
-        when 'Korean' then 'Study Group Starters'
+        when 'ja-JP' then 'Airport Survival Sentences'
+        when 'es-ES' then 'Cafe Counter Confidence'
+        when 'fr-FR' then 'Weekend Errand Phrases'
+        when 'ko-KR' then 'Study Group Starters'
         else 'Useful Daily Sentences'
       end,
       case (select target_language from users where id = new_user_id)
-        when 'Japanese' then 'Mined lines for airport delays, station questions, and polite help requests.'
-        when 'Spanish' then 'Short cafe and travel phrases for ordering, paying, and finding places.'
-        when 'French' then 'Weekend plans, invitations, and practical market phrases.'
-        when 'Korean' then 'Friendly sentences for study groups, rereading, and making plans.'
+        when 'ja-JP' then 'Mined lines for airport delays, station questions, and polite help requests.'
+        when 'es-ES' then 'Short cafe and travel phrases for ordering, paying, and finding places.'
+        when 'fr-FR' then 'Weekend plans, invitations, and practical market phrases.'
+        when 'ko-KR' then 'Friendly sentences for study groups, rereading, and making plans.'
         else 'A starter deck of high-utility mined sentences.'
       end,
       6 + idx,
@@ -513,10 +540,10 @@ begin
       (
         deck_id,
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Getting Oriented'
-          when 'Spanish' then 'Ordering Clearly'
-          when 'French' then 'Making Plans'
-          when 'Korean' then 'Starting Study'
+          when 'ja-JP' then 'Getting Oriented'
+          when 'es-ES' then 'Ordering Clearly'
+          when 'fr-FR' then 'Making Plans'
+          when 'ko-KR' then 'Starting Study'
           else 'Daily Basics'
         end,
         'First-response sentences that are easy to reuse in real conversations.',
@@ -529,10 +556,10 @@ begin
       (
         deck_id,
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Solving Problems'
-          when 'Spanish' then 'Travel Follow-ups'
-          when 'French' then 'Weekend Details'
-          when 'Korean' then 'Review Routine'
+          when 'ja-JP' then 'Solving Problems'
+          when 'es-ES' then 'Travel Follow-ups'
+          when 'fr-FR' then 'Weekend Details'
+          when 'ko-KR' then 'Review Routine'
           else 'Follow-up Lines'
         end,
         'Follow-up sentences for keeping the exchange moving.',
@@ -545,22 +572,22 @@ begin
       (
         (select target_language from users where id = new_user_id),
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then '案内所はどこですか。'
-          when 'Spanish' then 'Quisiera pedir algo pequeno.'
-          when 'French' then 'Je voudrais faire quelques courses.'
-          when 'Korean' then '오늘 같이 복습할까요?'
+          when 'ja-JP' then '案内所はどこですか。'
+          when 'es-ES' then 'Quisiera pedir algo pequeno.'
+          when 'fr-FR' then 'Je voudrais faire quelques courses.'
+          when 'ko-KR' then '오늘 같이 복습할까요?'
           else 'Can you say that again?'
         end,
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Where is the information desk?'
-          when 'Spanish' then 'I would like to order something small.'
-          when 'French' then 'I would like to run a few errands.'
-          when 'Korean' then 'Shall we review together today?'
+          when 'ja-JP' then 'Where is the information desk?'
+          when 'es-ES' then 'I would like to order something small.'
+          when 'fr-FR' then 'I would like to run a few errands.'
+          when 'ko-KR' then 'Shall we review together today?'
           else 'Can you say that again?'
         end,
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Annai-jo wa doko desu ka.'
-          when 'Korean' then 'Oneul gachi bokseup halkkayo?'
+          when 'ja-JP' then 'Annai-jo wa doko desu ka.'
+          when 'ko-KR' then 'Oneul gachi bokseup halkkayo?'
           else ''
         end,
         (select current_level from users where id = new_user_id),
@@ -583,16 +610,16 @@ begin
       (
         (select target_language from users where id = new_user_id),
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'もう一度ゆっくり言ってください。'
-          when 'Spanish' then 'Puede hablar mas despacio, por favor?'
-          when 'French' then 'Vous pouvez repeter plus lentement ?'
-          when 'Korean' then '조금 천천히 말해 주세요.'
+          when 'ja-JP' then 'もう一度ゆっくり言ってください。'
+          when 'es-ES' then 'Puede hablar mas despacio, por favor?'
+          when 'fr-FR' then 'Vous pouvez repeter plus lentement ?'
+          when 'ko-KR' then '조금 천천히 말해 주세요.'
           else 'Please speak a little more slowly.'
         end,
         'Please say it a little more slowly.',
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Mo ichido yukkuri itte kudasai.'
-          when 'Korean' then 'Jogeum cheoncheonhi malhae juseyo.'
+          when 'ja-JP' then 'Mo ichido yukkuri itte kudasai.'
+          when 'ko-KR' then 'Jogeum cheoncheonhi malhae juseyo.'
           else ''
         end,
         (select current_level from users where id = new_user_id),
@@ -615,16 +642,16 @@ begin
       (
         (select target_language from users where id = new_user_id),
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'この表現を覚えておきたいです。'
-          when 'Spanish' then 'Quiero recordar esta expresion.'
-          when 'French' then 'Je veux retenir cette expression.'
-          when 'Korean' then '이 표현을 기억하고 싶어요.'
+          when 'ja-JP' then 'この表現を覚えておきたいです。'
+          when 'es-ES' then 'Quiero recordar esta expresion.'
+          when 'fr-FR' then 'Je veux retenir cette expression.'
+          when 'ko-KR' then '이 표현을 기억하고 싶어요.'
           else 'I want to remember this expression.'
         end,
         'I want to remember this expression.',
         case (select target_language from users where id = new_user_id)
-          when 'Japanese' then 'Kono hyogen o oboete okitai desu.'
-          when 'Korean' then 'I pyohyeoneul gieokhago sipeoyo.'
+          when 'ja-JP' then 'Kono hyogen o oboete okitai desu.'
+          when 'ko-KR' then 'I pyohyeoneul gieokhago sipeoyo.'
           else ''
         end,
         (select current_level from users where id = new_user_id),
@@ -993,7 +1020,7 @@ begin
       'Seeded room for checking the voice/video rooms list, history, participant counts, and moderation controls.',
       case when idx % 3 = 0 then 'voice' else 'video' end,
       (select target_language from users where id = room_host_id),
-      'English',
+      'en-US',
       case idx % 6 when 0 then 'A1' when 1 then 'A2' when 2 then 'B1' when 3 then 'B2' when 4 then 'C1' else 'C2' end,
       2 + (idx % 3),
       idx % 4 = 0,
@@ -1117,10 +1144,10 @@ begin
       teacher_user_id,
       (select display_name from users where id = teacher_user_id),
       case (select target_language from users where id = teacher_user_id)
-        when 'Japanese' then 'Practical Japanese through story retells and sentence repair'
-        when 'Spanish' then 'Warm Spanish conversation practice for travel and cafes'
-        when 'French' then 'Gentle French lessons for weekend-life conversations'
-        when 'Korean' then 'Korean study partner for reading, shadowing, and recall'
+        when 'ja-JP' then 'Practical Japanese through story retells and sentence repair'
+        when 'es-ES' then 'Warm Spanish conversation practice for travel and cafes'
+        when 'fr-FR' then 'Gentle French lessons for weekend-life conversations'
+        when 'ko-KR' then 'Korean study partner for reading, shadowing, and recall'
         else 'Conversation lessons built around useful sentences'
       end,
       'I teach with short stories, concrete correction, and repeatable sentences. Each lesson ends with a small set of phrases the student can review inside LinguaStories.',
@@ -1161,7 +1188,7 @@ begin
     values
       (teacher_profile_id, (select target_language from users where id = teacher_user_id), 'teaches', case idx % 6 when 0 then 'A1' when 1 then 'A2' when 2 then 'B1' when 3 then 'B2' when 4 then 'C1' else 'C2' end),
       (teacher_profile_id, (select native_language from users where id = teacher_user_id), 'speaks', 'Native'),
-      (teacher_profile_id, 'English', 'speaks', 'C1')
+      (teacher_profile_id, 'en-US', 'speaks', 'C1')
     on conflict do nothing;
 
     insert into teacher_profile_tags (teacher_profile_id, tag)
@@ -1404,5 +1431,41 @@ begin
       (seed_data.conversation_id, seed_data.student_user_id, seed_data.teacher_user_id, 'Got it. I will bring a travel sentence and a shadowing question.', 0, 'teacher_student', null, now() - interval '30 minutes');
   end loop;
 end $$;
+
+insert into user_accounts (
+  user_id, subscription_tier, account_state, billing_status, subscription_status,
+  subscription_start_date, renewal_date, payment_provider_customer_id, payment_provider_subscription_id,
+  created_at, updated_at
+)
+select
+  u.id,
+  coalesce(ts.plan_key, 'free'),
+  'active',
+  case when ts.plan_key is null then 'none' else 'active' end,
+  case when ts.plan_key is null then 'none' else 'active' end,
+  u.created_at,
+  ts.current_period_end,
+  ts.stripe_customer_id,
+  ts.stripe_subscription_id,
+  u.created_at,
+  now()
+from users u
+left join lateral (
+  select plan_key, stripe_customer_id, stripe_subscription_id, current_period_end
+    from teacher_subscriptions
+   where teacher_subscriptions.user_id = u.id
+     and teacher_subscriptions.status in ('active', 'past_due', 'incomplete')
+   order by updated_at desc
+   limit 1
+) ts on true
+on conflict (user_id) do update
+set subscription_tier = excluded.subscription_tier,
+    account_state = excluded.account_state,
+    billing_status = excluded.billing_status,
+    subscription_status = excluded.subscription_status,
+    renewal_date = excluded.renewal_date,
+    payment_provider_customer_id = excluded.payment_provider_customer_id,
+    payment_provider_subscription_id = excluded.payment_provider_subscription_id,
+    updated_at = now();
 
 commit;

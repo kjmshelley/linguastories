@@ -1,4 +1,5 @@
 import { escapeHtml, formatDate, icon, pct, progressBar, ui } from "../ui.js";
+import { languageName } from "../languages.js";
 
 const GOAL_TYPES = ["Sentences", "Stories", "Streak", "Shadowing"];
 const VISIBILITIES = ["Public", "Private"];
@@ -15,8 +16,8 @@ function currentGoalsLanguage(state) {
   return selectedGoalsLanguage() || state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
 }
 
-function goalScopeLabel(goal) {
-  return goal.goalScope === "Global" ? "All languages" : goal.targetLanguage || "Language specific";
+function goalScopeLabel(goal, appConfig = {}) {
+  return goal.goalScope === "Global" ? "All languages" : languageName(appConfig, goal.targetLanguage) || "Language specific";
 }
 
 function supporterAvatar(supporter) {
@@ -24,14 +25,14 @@ function supporterAvatar(supporter) {
   return `<div class="grid h-10 w-10 place-items-center rounded-full bg-brand-sidebar text-sm font-bold text-white">${escapeHtml(supporter.avatar || "?")}</div>`;
 }
 
-function goalCard(goal) {
+function goalCard(goal, appConfig = {}) {
   const supportReceived = Number(goal.supportReceived || 0);
   return `
     <article class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)] transition hover:border-brand-orange/35">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div class="${ui.row}">
-            <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goalScopeLabel(goal))}</span>
+            <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goalScopeLabel(goal, appConfig))}</span>
             <span class="${ui.tag}">${escapeHtml(goal.type)}</span>
             <span class="${ui.tagDark}">${escapeHtml(goal.visibility)}</span>
             ${goal.dueDate ? `<span class="${ui.tagRed}">Complete by ${escapeHtml(formatDate(goal.dueDate))}</span>` : ""}
@@ -96,7 +97,7 @@ export function goalSupportersModal({ state }, goalId) {
   `;
 }
 
-function goalSection(title, goals, emptyText, description = "") {
+function goalSection(title, goals, emptyText, description = "", appConfig = {}) {
   return `
     <section class="grid gap-3">
       <div class="flex flex-wrap items-end justify-between gap-3">
@@ -108,15 +109,16 @@ function goalSection(title, goals, emptyText, description = "") {
       </div>
       ${
         goals.length
-          ? goals.map(goalCard).join("")
+          ? goals.map((goal) => goalCard(goal, appConfig)).join("")
           : `<article class="${ui.card}"><p class="${ui.muted}">${escapeHtml(emptyText)}</p></article>`
       }
     </section>
   `;
 }
 
-export function goalsView({ state }) {
+export function goalsView({ appConfig, state }) {
   const selectedLanguage = currentGoalsLanguage(state);
+  const selectedLanguageName = languageName(appConfig, selectedLanguage);
   const globalGoals = state.goals.filter((goal) => goal.goalScope === "Global" || !goal.targetLanguage);
   const languageGoals = state.goals.filter((goal) => goal.goalScope !== "Global" && goal.targetLanguage === selectedLanguage);
 
@@ -126,14 +128,15 @@ export function goalsView({ state }) {
         <button class="${ui.primary}" data-action="openCreateGoalModal">${icon("add")}<span>Create Goal</span></button>
       </section>
 
-      ${goalSection("Global Goals", globalGoals, "No global goals yet.", `Global goals apply to every language. Language goals apply to ${selectedLanguage}.`)}
-      ${goalSection("Language-Specific Goals", languageGoals, "No goals for this language profile yet.")}
+      ${goalSection("Global Goals", globalGoals, "No global goals yet.", `Global goals apply to every language. Language goals apply to ${selectedLanguageName}.`, appConfig)}
+      ${goalSection("Language-Specific Goals", languageGoals, "No goals for this language profile yet.", "", appConfig)}
     </div>
   `;
 }
 
-export function createGoalModal({ state }) {
+export function createGoalModal({ appConfig, state }) {
   const selectedLanguage = currentGoalsLanguage(state);
+  const selectedLanguageName = languageName(appConfig, selectedLanguage);
 
   return `
     <div class="pr-10">
@@ -145,7 +148,7 @@ export function createGoalModal({ state }) {
       <label class="${ui.label}">Goal<input class="${ui.input}" name="title" required placeholder="Complete 5 stories"></label>
       <div class="rounded-lg bg-brand-mist/60 px-4 py-3">
         <span class="block text-xs font-semibold uppercase text-brand-graphite">Current language</span>
-        <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(selectedLanguage)}</strong>
+        <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(selectedLanguageName)}</strong>
         <input type="hidden" name="targetLanguage" value="${escapeHtml(selectedLanguage)}">
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
@@ -158,7 +161,7 @@ export function createGoalModal({ state }) {
         <input class="mt-0.5 h-4 w-4 rounded border-brand-line accent-brand-ink" name="isGlobal" type="checkbox">
         <span>
           <span class="block text-sm font-semibold text-brand-ink">Global goal</span>
-          <span class="mt-1 block text-xs leading-5 text-brand-graphite">Applies to every language instead of only ${escapeHtml(selectedLanguage)}.</span>
+          <span class="mt-1 block text-xs leading-5 text-brand-graphite">Applies to every language instead of only ${escapeHtml(selectedLanguageName)}.</span>
         </span>
       </label>
       <div class="flex justify-end border-t border-brand-line pt-4">
@@ -168,13 +171,13 @@ export function createGoalModal({ state }) {
   `;
 }
 
-export function editGoalModal({ state }, goalId) {
+export function editGoalModal({ appConfig, state }, goalId) {
   const goal = state.goals.find((item) => item.id === goalId);
   if (!goal) return `<h2 class="text-2xl font-bold text-brand-ink">Goal not found</h2>`;
 
   return `
     <div class="pr-10">
-      <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goalScopeLabel(goal))}</span>
+      <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goalScopeLabel(goal, appConfig))}</span>
       <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Edit Goal</h2>
       <p class="mt-2 ${ui.muted}">Update the goal details. Goal language cannot be changed.</p>
     </div>
@@ -183,7 +186,7 @@ export function editGoalModal({ state }, goalId) {
       <label class="${ui.label}">Goal<input class="${ui.input}" name="title" required value="${escapeHtml(goal.title)}"></label>
       <div class="rounded-lg bg-brand-mist/60 px-4 py-3">
         <span class="block text-xs font-semibold uppercase text-brand-graphite">Applies to</span>
-        <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(goalScopeLabel(goal))}</strong>
+        <strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(goalScopeLabel(goal, appConfig))}</strong>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         <label class="${ui.label}">Type<select class="${ui.input}" name="type">${optionList(GOAL_TYPES, goal.type)}</select></label>

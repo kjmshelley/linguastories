@@ -3,6 +3,7 @@ const { today, addDays } = require("../utils/date");
 const configService = require("./config.service");
 const storageService = require("./storage.service");
 const subscriptionPolicy = require("./subscription-policy.service");
+const accountService = require("./account.service");
 
 const reviewDelay = { Again: 0, Hard: 1, Good: 3, Easy: 7 };
 const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
@@ -1005,7 +1006,7 @@ function getNotifications({ wallet, sentences, goals, directChat }) {
 async function getState(user) {
   const userId = user.id;
   const subscription = subscriptionPolicy.subscriptionForUser(user);
-  const [wallet, coinRules, sentences, stories, goals, communityGoals, posts, postComments, storyComments, learners, learnerActivities, directChat, savedSentences, paths, storyCategories] = await Promise.all([
+  const [wallet, coinRules, sentences, stories, goals, communityGoals, posts, postComments, storyComments, learners, learnerActivities, directChat, savedSentences, paths, storyCategories, accountNotifications] = await Promise.all([
     getWallet(userId),
     getCoinRules(),
     getSentences(userId),
@@ -1020,7 +1021,8 @@ async function getState(user) {
     getDirectChat(userId),
     getSavedSentences(userId),
     getPaths(userId),
-    getStoryCategories()
+    getStoryCategories(),
+    accountService.listAccountNotifications(userId)
   ]);
   const commentsByPost = postComments.reduce((groups, comment) => {
     groups[comment.postId] = groups[comment.postId] || [];
@@ -1065,7 +1067,7 @@ async function getState(user) {
     storyComments: storyCommentsByStory,
     savedSentences,
     paths,
-    notifications: getNotifications({ wallet, sentences, goals, directChat }),
+    notifications: [...accountNotifications, ...getNotifications({ wallet, sentences, goals, directChat })],
     dashboard: await getDashboard(user, wallet, sentences, stories, goals),
     admin: {
       sentenceDecks: Number((await query("select count(*) from sentence_decks")).rows[0].count),
@@ -1375,7 +1377,7 @@ async function addCustomSentence(user, body) {
        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        returning id`,
       [
-        body.sourceLanguage || "English",
+        body.sourceLanguage || "en-US",
         body.targetLanguage || user.targetLanguage,
         body.target,
         body.translation,
@@ -1444,7 +1446,7 @@ async function updateCustomSentence(user, sentenceId, body) {
               source = 'Sentence Mining',
               updated_at = now()
         where id = $1`,
-      [sentenceId, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, body.target, body.translation, body.level || "A1", body.notes || "", audioUrl, imageUrl, videoUrl]
+      [sentenceId, body.sourceLanguage || "en-US", body.targetLanguage || user.targetLanguage, body.target, body.translation, body.level || "A1", body.notes || "", audioUrl, imageUrl, videoUrl]
     );
     await client.query("commit");
     return getState(user);
@@ -1540,7 +1542,7 @@ async function createSentenceDeck(user, body) {
       `insert into sentence_decks (deck_kind, user_id, name, description, coins, level, visibility, source_language, target_language, image_url)
        values ('User', $1, $2, $3, $4, $5, $6, $7, $8, $9)
        returning id`,
-      [user.id, name, description, coins, level, visibility, body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, imageUrl]
+      [user.id, name, description, coins, level, visibility, body.sourceLanguage || "en-US", body.targetLanguage || user.targetLanguage, imageUrl]
     );
     if (visibility === "Public") {
       const deckPath = `/app/sentence-mining/decks/${deck.rows[0].id}`;
@@ -1835,7 +1837,7 @@ async function addSentenceDeckSentence(user, deckId, body) {
       `insert into sentences (source_language, target_language, target, translation, audio_url, image_url, video_url, topic, level, difficulty, notes, source)
        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, 2, $10, 'Sentence Mining')
        returning id`,
-      [body.sourceLanguage || "English", body.targetLanguage || user.targetLanguage, target, translation, audioUrl, imageUrl, videoUrl, topicName, normalizeLevel(body.level || user.currentLevel || "A1"), body.notes || ""]
+      [body.sourceLanguage || "en-US", body.targetLanguage || user.targetLanguage, target, translation, audioUrl, imageUrl, videoUrl, topicName, normalizeLevel(body.level || user.currentLevel || "A1"), body.notes || ""]
     );
     await client.query(
       `insert into sentence_deck_items (deck_id, topic_id, sentence_id, sort_order)

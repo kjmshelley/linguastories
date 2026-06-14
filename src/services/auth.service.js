@@ -3,6 +3,7 @@ const { query, pool } = require("../db/pool");
 const configService = require("./config.service");
 const storageService = require("./storage.service");
 const subscriptionPolicy = require("./subscription-policy.service");
+const accountService = require("./account.service");
 
 const SESSION_COOKIE = "lingua_session";
 const SESSION_DAYS = Number(process.env.SESSION_DAYS);
@@ -78,8 +79,28 @@ function publicUserSql(whereClause) {
 	                 listening_time as "listeningTime",
 	                 shadowing_time as "shadowingTime",
 	                 coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
-	                 coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus"
+	                 coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus",
+	                 ua.subscription_tier as "accountSubscriptionTier",
+	                 ua.account_state as "accountState",
+	                 ua.billing_status as "billingStatus",
+	                 ua.subscription_status as "accountSubscriptionStatus",
+	                 ua.trial_start_date as "trialStartDate",
+	                 ua.trial_end_date as "trialEndDate",
+	                 ua.subscription_start_date as "subscriptionStartDate",
+	                 ua.renewal_date as "renewalDate",
+	                 ua.cancellation_date as "cancellationDate",
+	                 st.tier_key as "tierKey",
+	                 st.name as "tierName",
+	                 st.monthly_price_usd as "tierMonthlyPriceUsd",
+	                 st.yearly_price_usd as "tierYearlyPriceUsd",
+	                 st.trial_eligible as "tierTrialEligible",
+	                 st.trial_length_days as "tierTrialLengthDays",
+	                 st.permissions as "tierPermissions",
+	                 st.feature_flags as "tierFeatureFlags",
+	                 st.account_type as "tierAccountType"
 	            from users
+              left join user_accounts ua on ua.user_id = users.id
+              left join subscription_tiers st on st.tier_key = ua.subscription_tier
 	           ${whereClause}`;
 }
 
@@ -114,7 +135,35 @@ async function attachSubscription(user) {
       limit 1`,
     [user.id]
   );
-  const withTeacher = teacher.rows[0] ? { ...user, ...teacher.rows[0] } : user;
+  const account = user.accountSubscriptionTier
+    ? {
+        userId: user.id,
+        subscriptionTier: user.accountSubscriptionTier,
+        accountState: user.accountState,
+        billingStatus: user.billingStatus,
+        subscriptionStatus: user.accountSubscriptionStatus,
+        trialStartDate: user.trialStartDate,
+        trialEndDate: user.trialEndDate,
+        trialDaysRemaining: user.trialEndDate ? Math.max(0, Math.ceil((new Date(user.trialEndDate).getTime() - Date.now()) / 86400000)) : null,
+        trialCancelled: user.accountState === "trial_cancelled",
+        isTrial: ["trialing", "trial_cancelled"].includes(user.accountState),
+        subscriptionStartDate: user.subscriptionStartDate,
+        renewalDate: user.renewalDate,
+        cancellationDate: user.cancellationDate,
+        tier: {
+          key: user.tierKey,
+          name: user.tierName,
+          monthlyPriceUsd: Number(user.tierMonthlyPriceUsd || 0),
+          yearlyPriceUsd: Number(user.tierYearlyPriceUsd || 0),
+          trialEligible: Boolean(user.tierTrialEligible),
+          trialLengthDays: Number(user.tierTrialLengthDays || 0),
+          permissions: Array.isArray(user.tierPermissions) ? user.tierPermissions : [],
+          featureFlags: user.tierFeatureFlags || {},
+          accountType: user.tierAccountType
+        }
+      }
+    : null;
+  const withTeacher = teacher.rows[0] ? { ...user, ...teacher.rows[0], account } : { ...user, account };
   return { ...withTeacher, subscription: subscriptionPolicy.subscriptionForUser(withTeacher) };
 }
 
@@ -141,8 +190,28 @@ async function getUserByEmail(email) {
             listening_time as "listeningTime",
             shadowing_time as "shadowingTime",
             coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
-            coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus"
+            coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus",
+            ua.subscription_tier as "accountSubscriptionTier",
+            ua.account_state as "accountState",
+            ua.billing_status as "billingStatus",
+            ua.subscription_status as "accountSubscriptionStatus",
+            ua.trial_start_date as "trialStartDate",
+            ua.trial_end_date as "trialEndDate",
+            ua.subscription_start_date as "subscriptionStartDate",
+            ua.renewal_date as "renewalDate",
+            ua.cancellation_date as "cancellationDate",
+            st.tier_key as "tierKey",
+            st.name as "tierName",
+            st.monthly_price_usd as "tierMonthlyPriceUsd",
+            st.yearly_price_usd as "tierYearlyPriceUsd",
+            st.trial_eligible as "tierTrialEligible",
+            st.trial_length_days as "tierTrialLengthDays",
+            st.permissions as "tierPermissions",
+            st.feature_flags as "tierFeatureFlags",
+            st.account_type as "tierAccountType"
        from users
+       left join user_accounts ua on ua.user_id = users.id
+       left join subscription_tiers st on st.tier_key = ua.subscription_tier
       where lower(email) = lower($1)`,
     [email]
   );
@@ -190,9 +259,10 @@ async function registerUser(input, res) {
   const displayName = String(input.displayName || "").trim();
   const targetLanguage = String(input.targetLanguage || "").trim();
   const nativeLanguage = String(input.nativeLanguage || "").trim();
+  const tierKey = String(input.tierKey || "").trim().toLowerCase();
 
-  if (!email || !password || !displayName || !targetLanguage || !nativeLanguage) {
-    const error = new Error("Name, email, password, native language, and first learning language are required");
+  if (!email || !password || !displayName || !targetLanguage || !nativeLanguage || !tierKey) {
+    const error = new Error("Name, email, password, native language, first learning language, and account tier are required");
     error.status = 400;
     throw error;
   }
@@ -246,6 +316,7 @@ async function registerUser(input, res) {
        values ($1, $2, $3, $4)`,
       [user.rows[0].id, signupBonus.id, signupBonus.amount, signupBonus.label]
     );
+    await accountService.createAccountForUser(client, user.rows[0].id, tierKey);
     await client.query("commit");
     await createSession(res, user.rows[0].id);
     return getUserById(user.rows[0].id);

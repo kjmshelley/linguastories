@@ -1,10 +1,8 @@
 import { escapeHtml, icon, ui } from "../ui.js";
+import { languageSelectOptions, supportedLanguageOptions } from "../languages.js";
 
 function languageOptions(languages, selected) {
-  return [
-    `<option value="" disabled ${selected ? "" : "selected"}>Choose a language</option>`,
-    ...languages.map((language) => `<option ${language === selected ? "selected" : ""}>${escapeHtml(language)}</option>`)
-  ].join("");
+  return languageSelectOptions({ supportedLanguages: languages }, selected, { placeholder: "Choose a language" });
 }
 
 export function publicNav(active = "", options = {}) {
@@ -94,10 +92,62 @@ function journeyStep(index, title, body, iconName) {
   `;
 }
 
+const fallbackTiers = [
+  ["free", "Free Tier", 0, 0, false, 0, "learner", ["read_stories", "sentence_mining", "connect", "moments", "find_teacher"]],
+  ["basic", "Basic Tier", 2.99, 29.99, true, 7, "learner", ["read_stories", "sentence_mining", "voice_video_rooms", "language_profiles"]],
+  ["teacher", "Teacher Tier", 2.99, 29.99, true, 7, "teacher", ["teacher_workspace", "teacher_profile", "voice_video_rooms"]],
+  ["teacher_pro", "Teacher Pro Tier", 6.99, 69.99, true, 7, "teacher", ["teacher_workspace", "teacher_profile", "group_lessons"]]
+].map(([key, name, monthlyPriceUsd, yearlyPriceUsd, trialEligible, trialLengthDays, accountType, permissions]) => ({
+  key,
+  name,
+  monthlyPriceUsd,
+  yearlyPriceUsd,
+  trialEligible,
+  trialLengthDays,
+  accountType,
+  permissions
+}));
+
+function accountTiers(appConfig) {
+  return appConfig.accountTiers?.length ? appConfig.accountTiers : fallbackTiers;
+}
+
+function permissionLabel(value) {
+  return String(value || "")
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function tierSummary(tier) {
+  if (Number(tier.monthlyPriceUsd || 0) === 0) return "No trial. Free-tier permissions only.";
+  return `${tier.trialLengthDays || 7}-day free trial. No card required at signup.`;
+}
+
+function pricingCard(tier, { selectable = false, selected = false } = {}) {
+  const price = Number(tier.monthlyPriceUsd || 0) > 0 ? `$${Number(tier.monthlyPriceUsd).toFixed(2)}` : "$0";
+  return `
+    <article class="h-full rounded-lg border ${selected ? "border-brand-red/45 bg-brand-red/10" : "border-brand-line bg-brand-panel"} p-4 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <h3 class="text-lg font-black text-brand-ink">${escapeHtml(tier.name)}</h3>
+          <p class="mt-1 text-xs font-bold uppercase text-brand-graphite">${escapeHtml(tier.accountType || "learner")}</p>
+        </div>
+        ${selectable ? `<input class="mt-1 h-5 w-5 accent-brand-red" type="radio" name="tierKey" value="${escapeHtml(tier.key)}" ${selected ? "checked" : ""} required aria-label="${escapeHtml(tier.name)}">` : ""}
+      </div>
+      <p class="mt-4 text-3xl font-black text-brand-ink">${escapeHtml(price)}<span class="text-sm font-bold text-brand-graphite">/month</span></p>
+      <p class="mt-1 text-sm font-semibold text-brand-graphite">${escapeHtml(Number(tier.yearlyPriceUsd || 0) > 0 ? `$${Number(tier.yearlyPriceUsd).toFixed(2)}/year` : "Free forever")}</p>
+      <p class="mt-3 rounded-lg bg-white/70 px-3 py-2 text-xs font-bold leading-5 text-brand-charcoal">${escapeHtml(tierSummary(tier))}</p>
+      <ul class="mt-4 grid gap-2 text-sm leading-5 text-brand-graphite">
+        ${(tier.permissions || []).slice(0, 5).map((permission) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(permissionLabel(permission))}</span></li>`).join("")}
+      </ul>
+    </article>
+  `;
+}
+
 export function landingView({ appConfig }) {
-  const languages = appConfig.supportedLanguages.length
-    ? appConfig.supportedLanguages
-    : ["Arabic", "Dutch", "English", "French", "German", "Greek", "Hindi", "Indonesian", "Italian", "Japanese", "Korean", "Mandarin Chinese", "Polish", "Portuguese", "Russian", "Spanish", "Swedish", "Thai", "Turkish", "Vietnamese"];
+  const tiers = accountTiers(appConfig);
+  const languages = supportedLanguageOptions(appConfig);
   const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
   const problems = [
     ["Random words do not stick", "A word list can help for a day. A sentence from a story gives your brain something to hold onto.", "scanText"],
@@ -286,7 +336,7 @@ export function landingView({ appConfig }) {
               body: "Create learner profiles for different languages, switch the active language, and keep stories, decks, goals, and progress easier to understand."
             })}
             <div class="mt-8 columns-1 gap-10 sm:columns-2 lg:columns-4">
-              ${languages.map((language) => `<p class="mb-3 break-inside-avoid rounded-lg border border-brand-line/70 bg-white/55 px-3 py-2 text-base font-bold text-brand-charcoal">${escapeHtml(language)}</p>`).join("")}
+              ${languages.map((language) => `<p class="mb-3 break-inside-avoid rounded-lg border border-brand-line/70 bg-white/55 px-3 py-2 text-base font-bold text-brand-charcoal">${escapeHtml(language.name)}</p>`).join("")}
             </div>
           </div>
         </section>
@@ -299,14 +349,7 @@ export function landingView({ appConfig }) {
               <p class="mt-3 leading-7 text-brand-graphite">Begin with the core learner tools, then unlock live rooms, teacher workspace features, and larger coin allowances as your routine grows.</p>
             </div>
             <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              ${[
-                ["Free Tier", "$0", ["100 coins/month", "Short Stories", "Sentence Mining", "Connect and Moments", "Find a Teacher and My Schedule"]],
-                ["Basic Tier", "$2.99", ["500 coins/month", "Full learner access", "Voice/Video Rooms", "Public and system decks", "No teacher workspace"]],
-                ["Teacher Tier", "$2.99", ["1000 coins/month", "Full learner access", "Teacher Dashboard", "Teacher Profile", "No group lessons"]],
-                ["Teacher Pro Tier", "$6.99", ["5000 coins/month", "Full learner access", "Teacher workspace", "Group lessons", "Teacher profile tools"]]
-              ]
-                .map(([tier, price, features]) => `<article class="${ui.card}"><h3 class="text-xl font-black text-brand-charcoal">${tier}</h3><p class="mt-4 text-4xl font-black text-brand-ink">${price}</p><ul class="mt-4 grid min-h-48 gap-2 text-sm leading-6 text-brand-graphite">${features.map((feature) => `<li class="flex gap-2">${icon("check", "mt-1 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(feature)}</span></li>`).join("")}</ul><a class="${ui.secondary} mt-5 w-full" href="/signup" data-link>${icon("arrowRight")}<span>Get Started</span></a></article>`)
-                .join("")}
+              ${tiers.map((tier) => `<div>${pricingCard(tier)}<a class="${ui.secondary} mt-3 w-full" href="/signup" data-link>${icon("arrowRight")}<span>Get Started</span></a></div>`).join("")}
             </div>
           </div>
         </section>
@@ -362,10 +405,11 @@ export function landingView({ appConfig }) {
 
 function authPage(mode, { appConfig }) {
   const isLogin = mode === "login";
+  const tiers = accountTiers(appConfig);
   return `
     <section class="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#fbfbfd_62%,#f4f4f9_100%)]">
       ${publicNav(mode, { hideActions: true })}
-      <main class="mx-auto grid w-[min(1080px,calc(100%_-_32px))] items-center gap-10 px-4 py-12 lg:grid-cols-[1fr_430px] lg:py-20">
+      <main class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-10 px-4 py-12 ${isLogin ? "lg:grid-cols-[1fr_430px]" : "lg:grid-cols-[.8fr_1.2fr]"} lg:py-20">
         <section>
           <span class="${isLogin ? ui.tagGold : ui.tagRed}">${isLogin ? "Welcome back" : "Start free"}</span>
           <h1 class="mt-5 max-w-3xl text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${isLogin ? "Pick up right where your stories left off." : "Create your story-learning loop in a few seconds."}</h1>
@@ -380,7 +424,13 @@ function authPage(mode, { appConfig }) {
             ${
               isLogin
                 ? ""
-                : `<label class="${ui.label}">Native Language<select class="${ui.input}" name="nativeLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label><label class="${ui.label}">First Learning Language<select class="${ui.input}" name="targetLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label>`
+                : `<div class="grid gap-4 sm:grid-cols-2"><label class="${ui.label}">Native Language<select class="${ui.input}" name="nativeLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label><label class="${ui.label}">First Learning Language<select class="${ui.input}" name="targetLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label></div>
+                  <fieldset class="grid gap-3">
+                    <legend class="text-sm font-black text-brand-ink">Choose account tier</legend>
+                    <div class="grid max-h-[520px] gap-3 overflow-y-auto pr-1 sm:grid-cols-2">
+                      ${tiers.map((tier, index) => `<label class="block cursor-pointer">${pricingCard(tier, { selectable: true, selected: index === 0 })}</label>`).join("")}
+                    </div>
+                  </fieldset>`
             }
             <button class="${ui.primary} w-full">${icon(isLogin ? "login" : "add")}<span>${isLogin ? "Log in" : "Create account"}</span></button>
           </form>

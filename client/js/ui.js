@@ -28,7 +28,11 @@ export const posterPalettes = [
 ];
 
 export function escapeHtml(value) {
-  return String(value ?? "")
+  const text =
+    value && typeof value === "object" && ("name" in value || "code" in value)
+      ? value.name || value.code
+      : value;
+  return String(text ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")

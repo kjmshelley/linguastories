@@ -22,12 +22,93 @@ create table if not exists users (
 );
 
 create table if not exists supported_languages (
-  id uuid primary key default gen_random_uuid(),
+  code text unique,
   name text unique not null,
   active boolean default true,
   sort_order integer default 0,
   created_at timestamptz default now()
 );
+
+alter table if exists supported_languages
+  add column if not exists code text;
+
+update supported_languages
+   set code = case name
+     when 'Arabic' then 'ar-SA'
+     when 'Dutch' then 'nl-NL'
+     when 'English' then 'en-US'
+     when 'French' then 'fr-FR'
+     when 'German' then 'de-DE'
+     when 'Hindi' then 'hi-IN'
+     when 'Indonesian' then 'id-ID'
+     when 'Italian' then 'it-IT'
+     when 'Japanese' then 'ja-JP'
+     when 'Korean' then 'ko-KR'
+     when 'Mandarin Chinese' then 'zh-CN'
+     when 'Polish' then 'pl-PL'
+     when 'Portuguese' then 'pt-PT'
+     when 'Russian' then 'ru-RU'
+     when 'Spanish' then 'es-ES'
+     when 'Swedish' then 'sv-SE'
+     when 'Thai' then 'th-TH'
+     when 'Turkish' then 'tr-TR'
+     when 'Vietnamese' then 'vi-VN'
+     else code
+   end
+ where code is null;
+
+do $$
+begin
+  alter table supported_languages
+    add constraint supported_languages_code_key unique (code);
+exception
+  when duplicate_object or duplicate_table then null;
+end $$;
+
+insert into supported_languages (code, name, sort_order, active)
+values
+  ('en-US', 'English (US)', 1, true),
+  ('en-GB', 'English (UK)', 2, true),
+  ('en-AU', 'English (Australia)', 3, true),
+  ('es-ES', 'Spanish (Spain)', 4, true),
+  ('es-MX', 'Spanish (Mexico)', 5, true),
+  ('zh-CN', 'Chinese (Simplified - China)', 6, true),
+  ('zh-TW', 'Chinese (Traditional - Taiwan)', 7, true),
+  ('ja-JP', 'Japanese (Standard)', 8, true),
+  ('ko-KR', 'Korean (South Korea)', 9, true),
+  ('fr-FR', 'French (France)', 10, true),
+  ('fr-BE', 'French (Belgium)', 11, true),
+  ('de-DE', 'German (Germany)', 12, true),
+  ('pt-PT', 'Portuguese (Portugal)', 13, true),
+  ('it-IT', 'Italian (Italy)', 14, true),
+  ('ru-RU', 'Russian (Russia)', 15, true),
+  ('ar-SA', 'Arabic (Modern Standard)', 16, true),
+  ('hi-IN', 'Hindi (India)', 17, true),
+  ('tr-TR', 'Turkish (Turkey)', 18, true),
+  ('vi-VN', 'Vietnamese (Northern / Standard)', 19, true),
+  ('th-TH', 'Thai (Central / Standard)', 20, true),
+  ('id-ID', 'Indonesian (Standard)', 21, true),
+  ('nl-NL', 'Dutch (Netherlands)', 22, true),
+  ('pl-PL', 'Polish (Standard)', 23, true),
+  ('uk-UA', 'Ukrainian (Standard)', 24, true),
+  ('sv-SE', 'Swedish (Sweden)', 25, true)
+on conflict (code) do update
+set name = excluded.name,
+    sort_order = excluded.sort_order,
+    active = true;
+
+delete from supported_languages
+ where code is null
+    or code not in (
+      'en-US', 'en-GB', 'en-AU', 'es-ES', 'es-MX',
+      'zh-CN', 'zh-TW', 'ja-JP', 'ko-KR', 'fr-FR',
+      'fr-BE', 'de-DE', 'pt-PT', 'it-IT', 'ru-RU',
+      'ar-SA', 'hi-IN', 'tr-TR', 'vi-VN', 'th-TH',
+      'id-ID', 'nl-NL', 'pl-PL', 'uk-UA', 'sv-SE'
+    );
+
+alter table if exists supported_languages
+  alter column code set not null;
 
 alter table if exists users
   add column if not exists avatar_url text;
@@ -156,8 +237,8 @@ end $$;
 
 create table if not exists sentences (
   id uuid primary key default gen_random_uuid(),
-  source_language text not null default 'English',
-  target_language text not null default 'Japanese',
+  source_language text not null default 'en-US',
+  target_language text not null default 'ja-JP',
   target text not null,
   translation text not null,
   romanization text,
@@ -195,8 +276,8 @@ create table if not exists sentence_decks (
   coins integer not null default 0 check (coins >= 0),
   level text not null default 'A1' check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
   visibility text not null default 'Private' check (visibility in ('Private', 'Public')),
-  source_language text not null default 'English',
-  target_language text not null default 'Japanese',
+  source_language text not null default 'en-US',
+  target_language text not null default 'ja-JP',
   image_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
@@ -296,7 +377,7 @@ alter table if exists stories
   add column if not exists source_language text;
 
 update stories
-   set source_language = 'English'
+   set source_language = 'en-US'
  where source_language is null;
 
 alter table if exists stories
@@ -505,7 +586,7 @@ create table if not exists direct_messages (
 create table if not exists learning_paths (
   id uuid primary key default gen_random_uuid(),
   title text not null,
-  target_language text not null default 'Japanese',
+  target_language text not null default 'ja-JP',
   description text,
   level text,
   unlocks_advanced_content boolean default true,
@@ -528,10 +609,10 @@ create table if not exists user_learning_path_progress (
 );
 
 alter table if exists sentences
-  add column if not exists source_language text not null default 'English';
+  add column if not exists source_language text not null default 'en-US';
 
 alter table if exists sentences
-  add column if not exists target_language text not null default 'Japanese';
+  add column if not exists target_language text not null default 'ja-JP';
 
 alter table if exists sentences
   add column if not exists image_url text;
@@ -546,10 +627,10 @@ alter table if exists sentence_decks
   add column if not exists deck_kind text not null default 'User';
 
 alter table if exists sentence_decks
-  add column if not exists source_language text not null default 'English';
+  add column if not exists source_language text not null default 'en-US';
 
 alter table if exists sentence_decks
-  add column if not exists target_language text not null default 'Japanese';
+  add column if not exists target_language text not null default 'ja-JP';
 
 alter table if exists sentence_decks
   add column if not exists image_url text;
@@ -597,7 +678,7 @@ begin
         greatest(count(s.id)::int * 10, 0),
         coalesce(min(p.level), 'A1'),
         'Public',
-        'English',
+        'en-US',
         p.target_language,
         min(p.created_at),
         now()
@@ -642,7 +723,7 @@ alter table if exists stories
   add column if not exists source_language text;
 
 update stories
-   set source_language = 'English'
+   set source_language = 'en-US'
  where source_language is null;
 
 alter table if exists stories
@@ -829,7 +910,7 @@ alter table if exists goals
   );
 
 alter table if exists learning_paths
-  add column if not exists target_language text not null default 'Japanese';
+  add column if not exists target_language text not null default 'ja-JP';
 
 
 create index if not exists idx_coin_transactions_user_created on coin_transactions (user_id, created_at desc);
@@ -1365,8 +1446,8 @@ create table if not exists voice_video_rooms (
   title text not null check (char_length(title) between 3 and 120),
   description text not null default '' check (char_length(description) <= 1000),
   room_type text not null check (room_type in ('voice', 'video')),
-  target_language text not null default 'Japanese',
-  source_language text not null default 'English',
+  target_language text not null default 'ja-JP',
+  source_language text not null default 'en-US',
   cefr_level text not null default 'A1' check (cefr_level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
   max_participants integer not null default 4 check (max_participants between 2 and 4),
   is_private boolean not null default false,
@@ -1454,4 +1535,317 @@ begin
   alter table voice_video_rooms
     add constraint voice_video_rooms_max_participants_check
     check (max_participants between 2 and 4);
+end $$;
+
+-- Account subscription and billing lifecycle schema
+
+create table if not exists subscription_tiers (
+  tier_key text primary key,
+  name text not null,
+  monthly_price_usd numeric(10, 2) not null check (monthly_price_usd >= 0),
+  yearly_price_usd numeric(10, 2) not null check (yearly_price_usd >= 0),
+  trial_eligible boolean not null default false,
+  trial_length_days integer not null default 0 check (trial_length_days >= 0 and trial_length_days <= 365),
+  permissions jsonb not null default '[]'::jsonb check (jsonb_typeof(permissions) = 'array'),
+  feature_flags jsonb not null default '{}'::jsonb check (jsonb_typeof(feature_flags) = 'object'),
+  account_type text not null check (account_type in ('learner', 'teacher')),
+  signup_visible boolean not null default true,
+  active boolean not null default true,
+  sort_order integer not null default 0,
+  payment_provider_price_id_monthly text,
+  payment_provider_price_id_yearly text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+insert into subscription_tiers (
+  tier_key, name, monthly_price_usd, yearly_price_usd, trial_eligible, trial_length_days,
+  permissions, feature_flags, account_type, signup_visible, sort_order
+)
+values
+  (
+    'free', 'Free Tier', 0, 0, false, 0,
+    '["read_stories","sentence_mining","connect","moments","find_teacher","my_schedule","wallet"]'::jsonb,
+    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":false,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":1,"connect":true,"moments":true,"voiceVideoRooms":false,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":1,"canEditLanguageProfiles":false,"canDeleteLanguageProfiles":false,"goals":true,"wallet":true,"teacherWorkspace":false,"groupLessons":false,"monthlyCoins":100}'::jsonb,
+    'learner', true, 10
+  ),
+  (
+    'basic', 'Basic Tier', 2.99, 29.99, true, 7,
+    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","connect","moments","find_teacher","my_schedule","wallet","language_profiles"]'::jsonb,
+    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":false,"groupLessons":false,"monthlyCoins":500}'::jsonb,
+    'learner', true, 20
+  ),
+  (
+    'teacher', 'Teacher Tier', 2.99, 29.99, true, 7,
+    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","teacher_workspace","teacher_profile","connect","moments","wallet","language_profiles"]'::jsonb,
+    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":true,"groupLessons":false,"monthlyCoins":1000}'::jsonb,
+    'teacher', true, 30
+  ),
+  (
+    'teacher_pro', 'Teacher Pro Tier', 6.99, 69.99, true, 7,
+    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","teacher_workspace","teacher_profile","group_lessons","connect","moments","wallet","language_profiles"]'::jsonb,
+    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":true,"groupLessons":true,"monthlyCoins":5000}'::jsonb,
+    'teacher', true, 40
+  )
+on conflict (tier_key) do update
+set name = excluded.name,
+    monthly_price_usd = excluded.monthly_price_usd,
+    yearly_price_usd = excluded.yearly_price_usd,
+    trial_eligible = excluded.trial_eligible,
+    trial_length_days = excluded.trial_length_days,
+    permissions = excluded.permissions,
+    feature_flags = excluded.feature_flags,
+    account_type = excluded.account_type,
+    signup_visible = excluded.signup_visible,
+    sort_order = excluded.sort_order,
+    active = true,
+    updated_at = now();
+
+create table if not exists user_accounts (
+  user_id uuid primary key references users(id) on delete cascade,
+  subscription_tier text not null references subscription_tiers(tier_key),
+  account_state text not null check (account_state in ('active', 'trialing', 'trial_cancelled', 'past_due', 'deactivated', 'canceled')),
+  billing_status text not null check (billing_status in ('none', 'trialing', 'active', 'past_due', 'payment_required', 'canceled', 'deactivated')),
+  subscription_status text not null check (subscription_status in ('none', 'trialing', 'active', 'past_due', 'canceled', 'incomplete')),
+  trial_start_date timestamptz,
+  trial_end_date timestamptz,
+  subscription_start_date timestamptz,
+  renewal_date timestamptz,
+  cancellation_date timestamptz,
+  payment_provider_customer_id text,
+  payment_provider_subscription_id text unique,
+  payment_provider_payment_method_id text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  check ((account_state in ('trialing', 'trial_cancelled')) = (trial_start_date is not null and trial_end_date is not null)),
+  check (trial_end_date is null or trial_start_date is null or trial_end_date > trial_start_date)
+);
+
+create index if not exists idx_user_accounts_tier on user_accounts (subscription_tier);
+create index if not exists idx_user_accounts_state on user_accounts (account_state, billing_status);
+create index if not exists idx_user_accounts_trial_end on user_accounts (trial_end_date) where account_state in ('trialing', 'trial_cancelled');
+create index if not exists idx_user_accounts_renewal on user_accounts (renewal_date) where subscription_status = 'active';
+create index if not exists idx_user_accounts_provider_customer on user_accounts (payment_provider_customer_id);
+
+create table if not exists account_events (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references users(id) on delete set null,
+  event_type text not null,
+  metadata jsonb not null default '{}'::jsonb check (jsonb_typeof(metadata) = 'object'),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_account_events_user_created on account_events (user_id, created_at desc);
+create index if not exists idx_account_events_type_created on account_events (event_type, created_at desc);
+
+create table if not exists billing_webhook_events (
+  provider text not null,
+  provider_event_id text not null,
+  event_type text not null,
+  payload jsonb not null default '{}'::jsonb,
+  processed_at timestamptz not null default now(),
+  primary key (provider, provider_event_id)
+);
+
+create table if not exists billing_payment_methods (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  provider text not null default 'stripe',
+  provider_payment_method_id text not null,
+  brand text,
+  last4 text,
+  exp_month integer check (exp_month is null or exp_month between 1 and 12),
+  exp_year integer check (exp_year is null or exp_year >= 2000),
+  is_default boolean not null default false,
+  status text not null default 'active' check (status in ('active', 'removed')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (provider, provider_payment_method_id)
+);
+
+create unique index if not exists idx_billing_payment_methods_default
+  on billing_payment_methods (user_id)
+  where is_default = true and status = 'active';
+
+create table if not exists billing_invoices (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  provider text not null default 'stripe',
+  provider_invoice_id text,
+  amount_due_usd numeric(10, 2) not null default 0 check (amount_due_usd >= 0),
+  amount_paid_usd numeric(10, 2) not null default 0 check (amount_paid_usd >= 0),
+  status text not null check (status in ('draft', 'open', 'paid', 'void', 'uncollectible', 'refunded')),
+  hosted_invoice_url text,
+  period_start timestamptz,
+  period_end timestamptz,
+  created_at timestamptz not null default now(),
+  unique (provider, provider_invoice_id)
+);
+
+create index if not exists idx_billing_invoices_user_created on billing_invoices (user_id, created_at desc);
+
+create table if not exists account_notifications (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  type text not null,
+  title text not null,
+  body text not null,
+  tone text not null default 'neutral' check (tone in ('neutral', 'good', 'urgent')),
+  email_queued boolean not null default false,
+  read_at timestamptz,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_account_notifications_user_created on account_notifications (user_id, created_at desc);
+
+create table if not exists email_notification_queue (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  notification_id uuid references account_notifications(id) on delete set null,
+  recipient_email text not null,
+  subject text not null,
+  body text not null,
+  status text not null default 'queued' check (status in ('queued', 'sent', 'failed')),
+  attempts integer not null default 0 check (attempts >= 0),
+  last_error text,
+  created_at timestamptz not null default now(),
+  sent_at timestamptz
+);
+
+insert into user_accounts (
+  user_id, subscription_tier, account_state, billing_status, subscription_status,
+  subscription_start_date, created_at, updated_at
+)
+select
+  u.id,
+  coalesce(nullif(u.learner_subscription_tier, ''), 'free'),
+  case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'active' end,
+  case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'none' end,
+  case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'none' end,
+  u.created_at,
+  u.created_at,
+  now()
+from users u
+on conflict (user_id) do nothing;
+
+do $$
+declare
+  target record;
+begin
+  for target in
+    select * from (values
+      ('users', 'native_language'),
+      ('users', 'target_language'),
+      ('user_languages', 'language'),
+      ('sentences', 'source_language'),
+      ('sentences', 'target_language'),
+      ('sentence_decks', 'source_language'),
+      ('sentence_decks', 'target_language'),
+      ('stories', 'source_language'),
+      ('story_translations', 'target_language'),
+      ('goals', 'target_language'),
+      ('posts', 'target_language'),
+      ('learning_paths', 'target_language'),
+      ('teacher_profiles', 'native_language'),
+      ('teacher_profile_languages', 'language'),
+      ('lesson_bookings', 'target_language'),
+      ('lesson_templates', 'target_language'),
+      ('voice_video_rooms', 'target_language'),
+      ('voice_video_rooms', 'source_language')
+    ) as language_columns(table_name, column_name)
+  loop
+    if exists (
+      select 1
+        from information_schema.columns
+       where table_schema = 'public'
+         and table_name = target.table_name
+         and column_name = target.column_name
+    ) then
+      execute format(
+        $sql$
+          update %I
+             set %I = case %I
+               when 'Arabic' then 'ar-SA'
+               when 'Dutch' then 'nl-NL'
+               when 'English' then 'en-US'
+               when 'French' then 'fr-FR'
+               when 'German' then 'de-DE'
+               when 'Hindi' then 'hi-IN'
+               when 'Indonesian' then 'id-ID'
+               when 'Italian' then 'it-IT'
+               when 'Japanese' then 'ja-JP'
+               when 'Korean' then 'ko-KR'
+               when 'Mandarin Chinese' then 'zh-CN'
+               when 'Polish' then 'pl-PL'
+               when 'Portuguese' then 'pt-PT'
+               when 'Russian' then 'ru-RU'
+               when 'Spanish' then 'es-ES'
+               when 'Swedish' then 'sv-SE'
+               when 'Thai' then 'th-TH'
+               when 'Turkish' then 'tr-TR'
+               when 'Vietnamese' then 'vi-VN'
+               else %I
+             end
+           where %I in (
+             'Arabic', 'Dutch', 'English', 'French', 'German', 'Hindi',
+             'Indonesian', 'Italian', 'Japanese', 'Korean', 'Mandarin Chinese',
+             'Polish', 'Portuguese', 'Russian', 'Spanish', 'Swedish', 'Thai',
+             'Turkish', 'Vietnamese'
+           )
+        $sql$,
+        target.table_name,
+        target.column_name,
+        target.column_name,
+        target.column_name,
+        target.column_name
+      );
+    end if;
+  end loop;
+end $$;
+
+do $$
+declare
+  fk record;
+begin
+  for fk in
+    select * from (values
+      ('users', 'native_language', 'users_native_language_fkey'),
+      ('users', 'target_language', 'users_target_language_fkey'),
+      ('user_languages', 'language', 'user_languages_language_fkey'),
+      ('sentences', 'source_language', 'sentences_source_language_fkey'),
+      ('sentences', 'target_language', 'sentences_target_language_fkey'),
+      ('sentence_decks', 'source_language', 'sentence_decks_source_language_fkey'),
+      ('sentence_decks', 'target_language', 'sentence_decks_target_language_fkey'),
+      ('stories', 'source_language', 'stories_source_language_fkey'),
+      ('story_translations', 'target_language', 'story_translations_target_language_fkey'),
+      ('goals', 'target_language', 'goals_target_language_fkey'),
+      ('posts', 'target_language', 'posts_target_language_fkey'),
+      ('learning_paths', 'target_language', 'learning_paths_target_language_fkey'),
+      ('teacher_profiles', 'native_language', 'teacher_profiles_native_language_fkey'),
+      ('teacher_profile_languages', 'language', 'teacher_profile_languages_language_fkey'),
+      ('lesson_bookings', 'target_language', 'lesson_bookings_target_language_fkey'),
+      ('lesson_templates', 'target_language', 'lesson_templates_target_language_fkey'),
+      ('voice_video_rooms', 'target_language', 'voice_video_rooms_target_language_fkey'),
+      ('voice_video_rooms', 'source_language', 'voice_video_rooms_source_language_fkey')
+    ) as language_fks(table_name, column_name, constraint_name)
+  loop
+    if exists (
+      select 1
+        from information_schema.columns
+       where table_schema = 'public'
+         and table_name = fk.table_name
+         and column_name = fk.column_name
+    ) then
+      begin
+        execute format(
+          'alter table %I add constraint %I foreign key (%I) references supported_languages(code) not valid',
+          fk.table_name,
+          fk.constraint_name,
+          fk.column_name
+        );
+      exception
+        when duplicate_object then null;
+      end;
+    end if;
+  end loop;
 end $$;

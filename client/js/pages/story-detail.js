@@ -1,4 +1,5 @@
 import { button, escapeHtml, ui } from "../ui.js";
+import { languageName } from "../languages.js";
 
 const LEVELS = [
   ["A1", "Short, direct sentences with very common words."],
@@ -148,7 +149,7 @@ function readerControlButton({ story, key, label, iconName, enabled }) {
   `;
 }
 
-function readerLanguageSelector({ story, languages, selectedLanguage }) {
+function readerLanguageSelector({ appConfig, story, languages, selectedLanguage }) {
   if (!languages.length) return "";
   return `
     <div class="rounded-lg bg-brand-mist/55 p-2">
@@ -160,7 +161,7 @@ function readerLanguageSelector({ story, languages, selectedLanguage }) {
               <button class="min-h-11 rounded-lg px-3 py-2 text-left text-sm font-semibold transition ${
                 language === selectedLanguage ? "bg-white text-brand-ink ring-1 ring-brand-orange/45" : "text-brand-charcoal hover:bg-white/80"
               }" data-action="setStoryLanguage:${story.id}:${language}">
-                ${escapeHtml(language)}
+                ${escapeHtml(languageName(appConfig, language))}
               </button>
             `
           )
@@ -170,12 +171,12 @@ function readerLanguageSelector({ story, languages, selectedLanguage }) {
   `;
 }
 
-function readerTools({ story, options, languages, selectedLanguage }) {
+function readerTools({ appConfig, story, options, languages, selectedLanguage }) {
   return `
     <aside class="self-start rounded-lg border border-brand-line/80 bg-brand-panel p-4 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
       <h3 class="text-base font-bold text-brand-ink">Reader tools</h3>
       <div class="mt-4 grid gap-2">
-        ${readerLanguageSelector({ story, languages, selectedLanguage })}
+        ${readerLanguageSelector({ appConfig, story, languages, selectedLanguage })}
         <button class="flex min-h-11 w-full items-center gap-2 rounded-lg border border-brand-line/80 bg-white/60 px-3 py-2 text-left text-sm font-semibold text-brand-charcoal transition hover:border-brand-orange/45 hover:bg-white" data-action="playStoryAudio:${story.id}">
           ${readerIcon("audio")}
           <span>Play Audio</span>
@@ -316,7 +317,7 @@ export function storyLevelModal({ state, selectedStoryLanguages, selectedStoryLe
   `;
 }
 
-export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLanguages, selectedStoryLevels, selectedStoryTabs, selectedStoryReaderOptions }) {
+export function storyDetailView({ appConfig, state, activeStoryId, appPath, selectedStoryLanguages, selectedStoryLevels, selectedStoryTabs, selectedStoryReaderOptions }) {
   const storiesPath = appPath("shortStories");
   const story = state.stories.find((item) => item.id === activeStoryId());
   if (!story) {
@@ -355,7 +356,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
               <div class="flex flex-wrap items-start justify-between gap-4">
                 <div class="${ui.row}">
                   <span class="${ui.tagDark}">Target: ${escapeHtml(currentLanguage)}</span>
-                  <span class="${ui.tag}">Source: ${escapeHtml(story.sourceLanguage || "Source")}</span>
+                  <span class="${ui.tag}">Source: ${escapeHtml(languageName(appConfig, story.sourceLanguage) || "Source")}</span>
                   <span class="${ui.tagGold}">${escapeHtml(currentLevel)}</span>
                   <span class="${ui.tag}">${escapeHtml(content.readingTime)}</span>
                   <span class="${ui.tag}">${escapeHtml(story.topic)}</span>
@@ -390,7 +391,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
             <div class="min-w-0">
               <div class="${ui.row}">
                 <span class="${ui.tagDark}">Target: ${escapeHtml(currentLanguage)}</span>
-                <span class="${ui.tag}">Source: ${escapeHtml(story.sourceLanguage || "Source")}</span>
+                <span class="${ui.tag}">Source: ${escapeHtml(languageName(appConfig, story.sourceLanguage) || "Source")}</span>
                 <span class="${ui.tagGold}">${escapeHtml(currentLevel)}</span>
                 <span class="${ui.tag}">${escapeHtml(content.readingTime)}</span>
                 <span class="${ui.tag}">${escapeHtml(story.topic)}</span>
@@ -411,7 +412,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
       </section>
 
       <section class="grid items-start gap-4 xl:grid-cols-[270px_minmax(0,1fr)]">
-        ${readerTools({ story, options: readerOptions, languages: languageOptions, selectedLanguage: currentLanguage })}
+        ${readerTools({ appConfig, story, options: readerOptions, languages: languageOptions, selectedLanguage: currentLanguage })}
         <div class="w-full rounded-lg border border-brand-line/80 bg-brand-panel px-5 py-8 shadow-[0_22px_50px_rgba(29,41,63,.1)] sm:px-8 lg:px-10 lg:py-10">
           <span class="hidden" data-reading-text>${escapeHtml(content.text)}</span>
           <div class="mb-6 flex items-center justify-between gap-3 border-b border-brand-line pb-4">
@@ -426,7 +427,7 @@ export function storyDetailView({ state, activeStoryId, appPath, selectedStoryLa
             }
             ${
               readerOptions.source
-                ? `<div class="rounded-lg bg-brand-mist/60 p-4"><span class="block text-xs font-semibold uppercase text-brand-graphite">${escapeHtml(story.sourceLanguage || "Source Language")}</span><p class="mt-2 text-sm leading-6 text-brand-charcoal">${escapeHtml(content.translation)}</p></div>`
+                ? `<div class="rounded-lg bg-brand-mist/60 p-4"><span class="block text-xs font-semibold uppercase text-brand-graphite">${escapeHtml(languageName(appConfig, story.sourceLanguage) || "Source Language")}</span><p class="mt-2 text-sm leading-6 text-brand-charcoal">${escapeHtml(content.translation)}</p></div>`
                 : ""
             }
             ${

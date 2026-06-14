@@ -33,6 +33,7 @@ import {
 } from "./pages/learning.js";
 import { createVoiceVideoRoomModal, voiceVideoRoomView, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
 import { coinRulesModal, walletView } from "./pages/wallet.js";
+import { languageName } from "./languages.js";
 import { escapeHtml, icon, ui } from "./ui.js";
 import { gsap } from "../vendor/gsap/gsap.esm.js";
 
@@ -155,7 +156,7 @@ const browseRoutes = new Set(["sentenceMining", "sentenceDeckLibrary", "sentence
 const communityRoutes = new Set(["communityLearner", "communityMoment"]);
 const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
-let appConfig = { supportedLanguages: [] };
+let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
 let selectedProfileLanguage = "";
 let selectedFeaturedStoryIndex = 0;
@@ -180,6 +181,7 @@ let voiceVideoRoomsLoaded = false;
 let voiceVideoShowHistory = false;
 let voiceVideoPollTimer = null;
 let teacherStudentData = {};
+let accountBillingData = {};
 let teacherStudentFilters = { q: "", maxRate: "" };
 let teacherStudentLoadedKeys = new Set();
 let syncedStripeReturnBookings = new Set();
@@ -450,6 +452,7 @@ function context() {
       unavailableBlocksHref: appPath("teacherBookings"),
       currentUserId: state?.user?.id || ""
     },
+    accountBillingData,
     teacherStudentFilters,
     bookingSelection,
     myLearningTab,
@@ -740,6 +743,29 @@ async function teacherStudentApi(path, options = {}) {
     return null;
   }
   return body;
+}
+
+async function accountApi(path, options = {}) {
+  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
+  if (response.status === 401) {
+    state = null;
+    navigatePublic("/login");
+    return null;
+  }
+  const body = await response.json().catch(() => ({ error: "Request failed" }));
+  if (!response.ok) {
+    showModal(`<h2 class="text-xl font-black">Billing action unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
+    return null;
+  }
+  return body;
+}
+
+async function loadAccountBillingData({ force = false } = {}) {
+  if (!force && accountBillingData.account) return;
+  const body = await accountApi("/api/account");
+  if (!body) return;
+  accountBillingData = body;
+  if (activeRoute() === "profileSubscriptions") render();
 }
 
 function teacherStudentQuery() {
@@ -1446,7 +1472,7 @@ function removeLanguageConfirmModal(language) {
   return `
     <div>
       <span class="${ui.tagRed}">Remove Profile</span>
-      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Remove ${escapeHtml(language)}?</span></h2>
+      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Remove ${escapeHtml(languageName(appConfig, language))}?</span></h2>
       <p class="mt-2 ${ui.muted}">This will remove this language profile and delete its language-specific goals, reviews, story progress, and path progress. This cannot be undone.</p>
     </div>
     <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
@@ -1483,7 +1509,7 @@ function languageSwitcherModal({ state }) {
                     <span class="${ui.tag}">${icon("target", "h-3.5 w-3.5")}<span>${escapeHtml(profile.currentLevel || "A1")}</span></span>
                     <span class="${ui.tag}">${icon("eye", "h-3.5 w-3.5")}<span>${escapeHtml(profile.profileVisibility || "Private")}</span></span>
                   </div>
-                  <h3 class="mt-3 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(language)}</h3>
+                  <h3 class="mt-3 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(languageName(appConfig, language))}</h3>
                 </div>
                 <span class="mt-1 text-sm font-bold text-brand-red">${isCurrent ? "Default" : "Make default"}</span>
               </div>
@@ -2647,6 +2673,21 @@ function bindActions(root = document) {
         state = null;
         navigatePublic("/");
       }
+      if (action === "changeAccountTier") {
+        await api("/api/account/tier", { method: "POST", body: JSON.stringify({ tierKey: id }) });
+        accountBillingData = {};
+        await loadAccountBillingData({ force: true });
+      }
+      if (action === "cancelAccountTrial") {
+        await api("/api/account/trial/cancel", { method: "POST" });
+        accountBillingData = {};
+        await loadAccountBillingData({ force: true });
+      }
+      if (action === "reactivateAccount") {
+        await api("/api/account/reactivate", { method: "POST", body: JSON.stringify({ tierKey: id }) });
+        accountBillingData = {};
+        await loadAccountBillingData({ force: true });
+      }
     });
   });
 
@@ -3057,7 +3098,7 @@ function render() {
   const goalsLanguage = new URLSearchParams(window.location.search).get("language") || state.user.targetLanguage;
   const titleText =
     route === "profileGoals" || route === "goals"
-      ? `My ${goalsLanguage} Goals`
+      ? `My ${languageName(appConfig, goalsLanguage)} Goals`
       : route === "sentenceDeckTopicSentences" && deckForTitle
         ? topicForTitle ? `${deckForTitle.name}: ${topicForTitle.name}` : deckForTitle.name
       : route === "sentenceDeckDetail" && deckForTitle
@@ -3067,11 +3108,11 @@ function render() {
       : route === "sentenceDeckLibrary"
         ? "Sentence Deck Library"
       : route === "shortStories"
-        ? `Short Stories (${state.user.targetLanguage})`
-        : route === "shortStorySearch"
-          ? `Search Short Stories (${state.user.targetLanguage})`
+        ? `Short Stories (${languageName(appConfig, state.user.targetLanguage)})`
+      : route === "shortStorySearch"
+          ? `Search Short Stories (${languageName(appConfig, state.user.targetLanguage)})`
         : route === "storyDetail" && storyForTitle
-          ? `${storyForTitle.title} (${storyLanguageForTitle})`
+          ? `${storyForTitle.title} (${languageName(appConfig, storyLanguageForTitle)})`
       : route === "communityLearner" && learnerForTitle
             ? learnerForTitle.displayName
         : route === "communityConnect"
@@ -3101,7 +3142,7 @@ function render() {
   if (mobilePageTitle) mobilePageTitle.textContent = titleText.replace(/\s+\([^)]*\)$/, "");
   coinBalance.textContent = state.wallet.balance;
   if (mobileCoinBalance) mobileCoinBalance.textContent = state.wallet.balance;
-  if (topbarLanguage) topbarLanguage.textContent = state.user.targetLanguage;
+  if (topbarLanguage) topbarLanguage.textContent = languageName(appConfig, state.user.targetLanguage);
   if (messageBadge) {
     const unread = Number(state.directChat?.unreadCount || 0);
     messageBadge.textContent = unread;
@@ -3116,7 +3157,7 @@ function render() {
     ? `<img class="h-10 w-10 rounded-full object-cover" src="${escapeHtml(state.user.avatarUrl)}" alt="">`
     : escapeHtml(state.user.avatar);
   document.querySelector("#miniName").innerHTML = `${icon("user", "h-3.5 w-3.5")}<span>${escapeHtml(state.user.displayName)}</span>`;
-  document.querySelector("#miniTarget").textContent = state.user.targetLanguage;
+  document.querySelector("#miniTarget").textContent = languageName(appConfig, state.user.targetLanguage);
   renderNav();
 
   const views = {
@@ -3189,6 +3230,7 @@ function render() {
 	    loadTeacherStudentData(route);
 	    syncStripeReturnPayment(route);
   }
+  if (canAccessRoute(route) && route === "profileSubscriptions") loadAccountBillingData();
   scrollToPageTopOnRouteChange();
 }
 
@@ -3236,6 +3278,9 @@ async function init() {
     setPublicShell();
     const configResponse = await fetch("/api/config");
     appConfig = await configResponse.json().catch(() => ({ supportedLanguages: [] }));
+    const tiersResponse = await fetch("/api/account/tiers").catch(() => null);
+    const tiersBody = tiersResponse?.ok ? await tiersResponse.json().catch(() => ({ tiers: [] })) : { tiers: [] };
+    appConfig.accountTiers = tiersBody.tiers || [];
     const response = await fetch("/api/auth/me");
     const auth = await response.json().catch(() => ({ authenticated: false }));
     if (!auth.authenticated) {

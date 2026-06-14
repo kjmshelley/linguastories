@@ -1,4 +1,5 @@
 import { button, escapeHtml, formatDate, icon, pct, progressBar, ui } from "../ui.js";
+import { languageName, languageNameList } from "../languages.js";
 
 const POST_TYPES = ["Learning Update", "Sentence Share", "Story Completion", "Goal Share", "Question Post"];
 const COMMUNITY_PAGE_SIZE = 10;
@@ -17,9 +18,9 @@ function learningLanguages(learner) {
   return languages.filter((item) => item.language);
 }
 
-function learnerLanguageText(learner) {
+function learnerLanguageText(learner, appConfig = {}) {
   return learningLanguages(learner)
-    .map((item) => `${item.language}${item.level ? ` ${item.level}` : ""}`)
+    .map((item) => `${languageName(appConfig, item.language)}${item.level ? ` ${item.level}` : ""}`)
     .join(", ");
 }
 
@@ -91,13 +92,13 @@ function postMomentButton() {
   return `<button class="${ui.primary}" data-action="openCreatePostModal">${icon("message", "h-4 w-4")}<span>Post a moment</span></button>`;
 }
 
-export function createPostModal({ state }) {
+export function createPostModal({ appConfig, state }) {
   const completedStories = state.stories.filter((story) => story.completed || story.unlocked);
   const savedSentences = state.sentences.filter((sentence) => state.savedSentences.includes(sentence.id));
   const publicGoals = state.goals.filter((goal) => goal.visibility === "Public");
   return `
     <div>
-      <span class="${ui.tagGold}">${escapeHtml(state.user.targetLanguage)}</span>
+      <span class="${ui.tagGold}">${escapeHtml(languageName(appConfig, state.user.targetLanguage))}</span>
       <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Post a moment</h2>
       <p class="mt-2 ${ui.muted}">Post a story insight, sentence you practiced, goal update, or question for other learners.</p>
       <form class="mt-5 grid gap-3" data-form="post">
@@ -259,13 +260,13 @@ function languagePanel(title, items) {
   `;
 }
 
-function supportGoalCard(goal) {
+function supportGoalCard(goal, appConfig = {}) {
   return `
     <article class="rounded-lg border border-brand-line/80 bg-white/68 p-4 ring-1 ring-white/35">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div class="flex flex-wrap gap-2">
-            <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goal.goalScope === "Global" ? "All languages" : goal.targetLanguage || "Language")}</span>
+            <span class="${goal.goalScope === "Global" ? ui.tagDark : ui.tagGold}">${escapeHtml(goal.goalScope === "Global" ? "All languages" : languageName(appConfig, goal.targetLanguage) || "Language")}</span>
             <span class="${ui.tag}">${escapeHtml(goal.type)}</span>
             ${goal.dueDate ? `<span class="${ui.tagRed}">By ${escapeHtml(formatDate(goal.dueDate))}</span>` : ""}
           </div>
@@ -288,7 +289,7 @@ function supportGoalCard(goal) {
   `;
 }
 
-function learnerActivityRow(activity) {
+function learnerActivityRow(activity, appConfig = {}) {
   return `
     <article class="flex gap-3 rounded-lg border border-brand-line/80 bg-white/68 p-4">
       <div class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-mist text-brand-redDark">
@@ -297,7 +298,7 @@ function learnerActivityRow(activity) {
       <div class="min-w-0">
         <div class="${ui.row}">
           <span class="${activity.type === "story" ? ui.tagGold : ui.tagRed}">${escapeHtml(activity.label)}</span>
-          <span class="${ui.tag}">${escapeHtml(activity.targetLanguage || "Language")}</span>
+          <span class="${ui.tag}">${escapeHtml(languageName(appConfig, activity.targetLanguage) || "Language")}</span>
           <span class="text-xs font-semibold text-brand-graphite">${escapeHtml(formatDate(activity.date))}</span>
         </div>
         <p class="mt-2 text-sm font-semibold leading-6 text-brand-charcoal">${escapeHtml(activity.detail)}</p>
@@ -306,7 +307,7 @@ function learnerActivityRow(activity) {
   `;
 }
 
-function learnerProfileTabs({ learner, posts, activities, activeTab, appPath, currentUserId }) {
+function learnerProfileTabs({ appConfig, learner, posts, activities, activeTab, appPath, currentUserId }) {
   const tabs = [
     ["activity", "Recent Learning Activity", activities.length],
     ["moments", "Moments", posts.length]
@@ -325,7 +326,7 @@ function learnerProfileTabs({ learner, posts, activities, activeTab, appPath, cu
         ? posts.map((post) => feedRow(post, { appPath, currentUserId, showFollow: false })).join("")
         : emptyState("No moments yet", "This learner has not created any moment posts yet.")
       : activities.length
-        ? `<div class="grid gap-3 px-5 py-5 sm:px-7">${activities.map(learnerActivityRow).join("")}</div>`
+        ? `<div class="grid gap-3 px-5 py-5 sm:px-7">${activities.map((activity) => learnerActivityRow(activity, appConfig)).join("")}</div>`
         : emptyState("No learning activity yet", "Completed stories and remembered sentences will appear here.");
 
   return `
@@ -416,7 +417,7 @@ function myMomentRow(post, { appPath }) {
   `;
 }
 
-export function profileMomentsView({ state, appPath }) {
+export function profileMomentsView({ appConfig, state, appPath }) {
   const moments = state.posts.filter((post) => post.userId === state.user.id);
   return communityShell({
     title: "My Moments",
@@ -437,7 +438,7 @@ function learnerRow(learner, { appPath }) {
               <h3 class="font-bold text-brand-ink">${escapeHtml(learner.displayName)}</h3>
               <span class="${ui.tag}">${learner.following ? "Following" : "Connect"}</span>
             </div>
-            <p class="mt-1 text-xs font-semibold text-brand-graphite">Learning ${escapeHtml(learnerLanguageText(learner) || "a language")} · Native ${escapeHtml(learner.nativeLanguage || "Not set")}</p>
+            <p class="mt-1 text-xs font-semibold text-brand-graphite">Learning ${escapeHtml(learnerLanguageText(learner, appConfig) || "a language")} · Native ${escapeHtml(languageName(appConfig, learner.nativeLanguage) || "Not set")}</p>
             <p class="mt-3 line-clamp-2 max-w-3xl text-sm leading-6 text-brand-charcoal">${escapeHtml(learner.bio || "Practicing through stories, sentences, and steady progress.")}</p>
           </div>
         </div>
@@ -450,7 +451,7 @@ function learnerRow(learner, { appPath }) {
   `;
 }
 
-export function communityConnectView({ state, appPath, communityListLimits, connectMyCommunityOnly = false }) {
+export function communityConnectView({ appConfig, state, appPath, communityListLimits, connectMyCommunityOnly = false }) {
   const recentLearnerIds = new Set(state.posts.filter((post) => isWithinLastDays(post.date, 7)).map((post) => post.userId).filter(Boolean));
   const matchedLearners = state.learners.filter((learner) => recentLearnerIds.has(learner.id) && isLikeMinded(state, learner));
   const communityLearners = matchedLearners.filter((learner) => learner.following);
@@ -503,8 +504,8 @@ function momentRow(post, { appPath, currentUserId = "" }) {
                   ? `<a class="font-bold text-brand-ink no-underline hover:text-brand-redDark" href="${profileHref}" data-app-link>${escapeHtml(post.author)}</a>`
                   : `<strong class="text-brand-ink">${escapeHtml(post.author)}</strong>`
               }
-              <span class="${ui.tag}">Learning ${escapeHtml(post.targetLanguage || post.authorLanguage || "Language")}</span>
-              <span class="${ui.tagGold}">Native ${escapeHtml(post.nativeLanguage || "Not set")}</span>
+              <span class="${ui.tag}">Learning ${escapeHtml(languageName(appConfig, post.targetLanguage || post.authorLanguage) || "Language")}</span>
+              <span class="${ui.tagGold}">Native ${escapeHtml(languageName(appConfig, post.nativeLanguage) || "Not set")}</span>
             </div>
             <p class="mt-1 text-xs font-semibold text-brand-graphite">${escapeHtml(post.type)} · ${escapeHtml(formatDate(post.date))}</p>
             <p class="mt-3 text-sm leading-6 text-brand-charcoal">${escapeHtml(post.body)}</p>
@@ -541,7 +542,7 @@ export function communityMomentsView({ state, appPath, communityListLimits }) {
   });
 }
 
-export function communityLearnerView({ state, appPath, activeLearnerId, selectedLearnerProfileTabs }) {
+export function communityLearnerView({ appConfig, state, appPath, activeLearnerId, selectedLearnerProfileTabs }) {
   const learner = state.learners.find((item) => item.id === activeLearnerId);
   if (!learner) {
     return communityShell({
@@ -558,7 +559,7 @@ export function communityLearnerView({ state, appPath, activeLearnerId, selected
   const latestPost = posts[0];
   return communityShell({
     title: learner.displayName,
-    subtitle: `${learner.displayName} is learning ${learnerLanguageText(learner) || learner.targetLanguage}. Native language: ${learner.nativeLanguage || "Not set"}.`,
+    subtitle: `${learner.displayName} is learning ${learnerLanguageText(learner, appConfig) || languageName(appConfig, learner.targetLanguage)}. Native language: ${languageName(appConfig, learner.nativeLanguage) || "Not set"}.`,
     children: `
       <section class="border-b border-brand-line/70 bg-[linear-gradient(135deg,rgba(255,250,244,.92),rgba(240,247,245,.88))] px-5 py-6 sm:px-7">
         <div class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
@@ -580,7 +581,7 @@ export function communityLearnerView({ state, appPath, activeLearnerId, selected
             <h3 class="text-sm font-bold uppercase text-brand-graphite">Why follow</h3>
             <p class="mt-3 text-sm leading-6 text-brand-charcoal">${
               sharedLanguages.length
-                ? `You both practice ${escapeHtml(sharedLanguages.map((item) => item.language).join(", "))}, so their sentences, story notes, and goals are likely useful to your own study.`
+                ? `You both practice ${escapeHtml(languageNameList(appConfig, sharedLanguages.map((item) => item.language)))}, so their sentences, story notes, and goals are likely useful to your own study.`
                 : "This learner shares story-based updates, sentence practice, and goal progress you can learn from."
             }</p>
           </aside>
@@ -597,9 +598,9 @@ export function communityLearnerView({ state, appPath, activeLearnerId, selected
           <div class="mt-7 grid gap-6 lg:grid-cols-2">
             ${languagePanel(
               "Learning",
-              learningLanguages(learner).map((item) => `<span class="${ui.tagGold}">${escapeHtml(item.language)} ${escapeHtml(item.level || "")}</span>`)
+              learningLanguages(learner).map((item) => `<span class="${ui.tagGold}">${escapeHtml(languageName(appConfig, item.language))} ${escapeHtml(item.level || "")}</span>`)
             )}
-            ${languagePanel("Native Language", learner.nativeLanguage ? [`<span class="${ui.tagDark}">${escapeHtml(learner.nativeLanguage)}</span>`] : [])}
+            ${languagePanel("Native Language", learner.nativeLanguage ? [`<span class="${ui.tagDark}">${escapeHtml(languageName(appConfig, learner.nativeLanguage))}</span>`] : [])}
           </div>
         </div>
         <aside class="border-t border-brand-line/70 bg-brand-mist/25 px-5 py-6 sm:px-7 lg:border-l lg:border-t-0">
@@ -624,15 +625,15 @@ export function communityLearnerView({ state, appPath, activeLearnerId, selected
           <span class="text-xs font-semibold uppercase text-brand-graphite">${publicGoals.length} goals</span>
         </div>
         <div class="mt-4 grid gap-3 lg:grid-cols-2">
-          ${publicGoals.length ? publicGoals.map(supportGoalCard).join("") : `<div class="rounded-lg bg-white/68 p-4 ring-1 ring-brand-line/75"><p class="${ui.muted}">No public goals available to support yet.</p></div>`}
+          ${publicGoals.length ? publicGoals.map((goal) => supportGoalCard(goal, appConfig)).join("") : `<div class="rounded-lg bg-white/68 p-4 ring-1 ring-brand-line/75"><p class="${ui.muted}">No public goals available to support yet.</p></div>`}
         </div>
       </section>
-      ${learnerProfileTabs({ learner, posts, activities, activeTab: activeProfileTab, appPath, currentUserId: state.user.id })}
+      ${learnerProfileTabs({ appConfig, learner, posts, activities, activeTab: activeProfileTab, appPath, currentUserId: state.user.id })}
     `
   });
 }
 
-export function communityMomentView({ state, appPath, activePostId }) {
+export function communityMomentView({ appConfig, state, appPath, activePostId }) {
   const post = state.posts.find((item) => item.id === activePostId);
   if (!post) {
     return communityShell({
@@ -643,7 +644,7 @@ export function communityMomentView({ state, appPath, activePostId }) {
   }
   return communityShell({
     title: "Moment Detail",
-    subtitle: `${post.author} shared a ${post.type.toLowerCase()} for ${post.targetLanguage || post.authorLanguage || "language learning"}.`,
+    subtitle: `${post.author} shared a ${post.type.toLowerCase()} for ${languageName(appConfig, post.targetLanguage || post.authorLanguage) || "language learning"}.`,
     children: `
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-brand-line/70 px-5 py-4 sm:px-7">
         <a class="${ui.secondary}" href="${appPath("communityMoments")}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Moments</span></a>
