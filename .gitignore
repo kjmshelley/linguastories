@@ -5,3 +5,4 @@ admin
 creds
 sql_scripts
 generated
+.DS_Store
