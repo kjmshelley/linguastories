@@ -3,8 +3,9 @@ const { AccessToken, TrackSource } = require("livekit-server-sdk");
 const { pool, query } = require("../db/pool");
 const storageService = require("./storage.service");
 const subscriptionPolicy = require("./subscription-policy.service");
+const { LANGUAGE_SKILL_LEVELS, normalizeLanguageSkillLevel } = require("../constants/language-levels");
 
-const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
+const CEFR_LEVELS = new Set(LANGUAGE_SKILL_LEVELS);
 const LESSON_TYPES = new Set(["trial", "one_on_one", "group"]);
 const VIDEO_HOSTS = [
   { provider: "youtube", pattern: /(^|\.)youtube\.com$|(^|\.)youtu\.be$/i },
@@ -48,9 +49,22 @@ function list(value, { maxItems = 12, maxLength = 80 } = {}) {
 }
 
 function normalizeLevel(value) {
-  const level = text(value, { fallback: "A1", max: 2 }).toUpperCase();
-  if (!CEFR_LEVELS.has(level)) throw serviceError("Choose a valid CEFR level");
+  const level = normalizeLanguageSkillLevel(value);
+  if (!CEFR_LEVELS.has(level)) throw serviceError("Choose a valid skill level");
   return level;
+}
+
+function languageLevelMap(value) {
+  if (!value) return {};
+  try {
+    const parsed = JSON.parse(String(value));
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    return Object.fromEntries(
+      Object.entries(parsed).map(([language, level]) => [text(language, { max: 80 }), normalizeLevel(level)])
+    );
+  } catch {
+    return {};
+  }
 }
 
 function normalizeLessonType(value) {
@@ -87,7 +101,8 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
            tp.native_language as "nativeLanguage",
            tp.timezone,
            tp.country,
-           tp.city,
+           tp.professional_tutor as "professionalTutor",
+           tp.speaking_practice_only as "speakingPracticeOnly",
            tp.hourly_rate_usd as "hourlyRateUsd",
            tp.trial_rate_usd as "trialRateUsd",
            tp.min_lesson_minutes as "minLessonMinutes",
@@ -138,6 +153,8 @@ function mapProfile(row) {
     maxLessonMinutes: Number(row.maxLessonMinutes || 60),
     groupMaxStudents: Number(row.groupMaxStudents || 1),
     groupLessonEnabled: Boolean(row.groupLessonEnabled),
+    professionalTutor: Boolean(row.professionalTutor),
+    speakingPracticeOnly: Boolean(row.speakingPracticeOnly),
     canCreateGroupLessons: Boolean(row.canCreateGroupLessons),
     averageRating: Number(row.averageRating || 0),
     languages: Array.isArray(row.languages) ? row.languages : [],
@@ -269,11 +286,13 @@ async function upsertProfileMetadata(client, profileId, payload) {
   await client.query("delete from teacher_profile_languages where teacher_profile_id = $1", [profileId]);
   const teaches = list(payload.teachesLanguages, { maxItems: 8 });
   const speaks = list(payload.speaksLanguages, { maxItems: 8 });
+  const teachesLevels = languageLevelMap(payload.teachesLanguageLevels);
+  const speaksLevels = languageLevelMap(payload.speaksLanguageLevels);
   for (const language of teaches) {
     await client.query(
       `insert into teacher_profile_languages (teacher_profile_id, language, role, cefr_level)
        values ($1, $2, 'teaches', $3)`,
-      [profileId, language, normalizeLevel(payload.cefrLevel || "A1")]
+      [profileId, language, teachesLevels[language] || normalizeLevel(payload.cefrLevel || "A1")]
     );
   }
   for (const language of speaks) {
@@ -281,7 +300,7 @@ async function upsertProfileMetadata(client, profileId, payload) {
       `insert into teacher_profile_languages (teacher_profile_id, language, role, cefr_level)
        values ($1, $2, 'speaks', $3)
        on conflict do nothing`,
-      [profileId, language, language.toLowerCase() === text(payload.nativeLanguage).toLowerCase() ? "Native" : null]
+      [profileId, language, speaksLevels[language] || (language.toLowerCase() === text(payload.nativeLanguage).toLowerCase() ? "Native" : null)]
     );
   }
 
@@ -323,6 +342,17 @@ async function myProfiles(user) {
   return { profiles: result.rows.map(mapProfile), subscription: await teacherSubscriptionForUser(user.id) };
 }
 
+async function teacherFilterOptions() {
+  const countries = await query(
+    `select distinct country
+       from teacher_profiles
+      where status = 'published'
+        and nullif(trim(country), '') is not null
+      order by country`
+  );
+  return { countries: countries.rows.map((row) => row.country).filter(Boolean) };
+}
+
 async function searchTeachers(user, filters = {}) {
   const params = [];
   const clauses = ["tp.status = 'published'", "tp.user_id <> $1"];
@@ -337,13 +367,37 @@ async function searchTeachers(user, filters = {}) {
     params.push(language);
     clauses.push(`exists (select 1 from teacher_profile_languages tpl where tpl.teacher_profile_id = tp.id and tpl.role = 'teaches' and lower(tpl.language) = lower($${params.length}))`);
   }
+  const countryOfBirth = text(filters.countryOfBirth || filters.country, { max: 80 });
+  if (countryOfBirth) {
+    params.push(countryOfBirth);
+    clauses.push(`lower(tp.country) = lower($${params.length})`);
+  }
+  const speaksLanguage = text(filters.speaksLanguage, { max: 80 });
+  if (speaksLanguage) {
+    params.push(speaksLanguage);
+    clauses.push(`exists (select 1 from teacher_profile_languages tpl where tpl.teacher_profile_id = tp.id and tpl.role = 'speaks' and lower(tpl.language) = lower($${params.length}))`);
+  }
+  if (String(filters.nativeSpeaker || "") === "true") {
+    if (language) {
+      params.push(language);
+      clauses.push(`lower(tp.native_language) = lower($${params.length})`);
+    } else {
+      clauses.push(`exists (select 1 from teacher_profile_languages tpl where tpl.teacher_profile_id = tp.id and tpl.role = 'teaches' and lower(tpl.language) = lower(tp.native_language))`);
+    }
+  }
+  if (String(filters.professionalTutor || "") === "true") {
+    clauses.push("tp.professional_tutor = true");
+  }
+  if (String(filters.speakingPracticeOnly || "") === "true") {
+    clauses.push("tp.speaking_practice_only = true");
+  }
   const maxRate = filters.maxRate ? money(filters.maxRate, { min: 1 }) : 0;
   if (maxRate) {
     params.push(maxRate);
     clauses.push(`tp.hourly_rate_usd <= $${params.length}`);
   }
   const result = await query(`${profileSelect(`where ${clauses.join(" and ")}`, "tp.status asc, reviews.average_rating desc nulls last, tp.hourly_rate_usd asc")} limit 40`, params);
-  return { teachers: result.rows.map(mapProfile) };
+  return { teachers: result.rows.map(mapProfile), filterOptions: await teacherFilterOptions() };
 }
 
 async function getProfile(user, profileId) {
@@ -363,7 +417,6 @@ async function getProfile(user, profileId) {
 
 async function saveProfile(user, payload, profileId = "") {
   const video = normalizeVideoUrl(payload.videoIntroUrl);
-  const status = ["draft", "published", "paused"].includes(payload.status) ? payload.status : "draft";
   const image = await profileImage(user.id, payload);
   const displayName = text(payload.displayName || user.displayName, { required: true, min: 2, max: 120 });
   const headline = text(payload.headline, { required: true, min: 3, max: 160 });
@@ -373,7 +426,6 @@ async function saveProfile(user, payload, profileId = "") {
   const subscription = await teacherSubscriptionForUser(user.id);
   const groupEnabled = payload.groupLessonEnabled === true || String(payload.groupLessonEnabled) === "true";
   const entitlementUser = userWithTeacherSubscription(user, subscription);
-  subscriptionPolicy.requireCapability(entitlementUser, "teacherWorkspace");
   if (groupEnabled && !subscription.canCreateGroupLessons) subscriptionPolicy.requireCapability(entitlementUser, "groupLessons");
 
   const client = await pool.connect();
@@ -381,7 +433,7 @@ async function saveProfile(user, payload, profileId = "") {
     await client.query("begin");
     let saved;
     if (profileId) {
-      const owner = await client.query("select id, image_url, image_file_id from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
+      const owner = await client.query("select id, image_url, image_file_id, status from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
       if (!owner.rows[0]) throw serviceError("Teacher profile not found", 404);
       saved = await client.query(
         `update teacher_profiles
@@ -394,18 +446,19 @@ async function saveProfile(user, payload, profileId = "") {
                 native_language = $9,
                 timezone = $10,
                 country = $11,
-                city = $12,
-                hourly_rate_usd = $13,
-                trial_rate_usd = $14,
-                min_lesson_minutes = $15,
-                max_lesson_minutes = $16,
-                group_lesson_enabled = $17,
-                group_max_students = $18,
-                video_intro_url = $19,
-                video_provider = $20,
-                image_url = coalesce($21, image_url),
-                image_file_id = coalesce($22, image_file_id),
-                status = $23,
+                professional_tutor = $12,
+                speaking_practice_only = $13,
+                hourly_rate_usd = $14,
+                trial_rate_usd = $15,
+                min_lesson_minutes = $16,
+                max_lesson_minutes = $17,
+                group_lesson_enabled = $18,
+                group_max_students = $19,
+                video_intro_url = $20,
+                video_provider = $21,
+                image_url = coalesce($22, image_url),
+                image_file_id = coalesce($23, image_file_id),
+                status = $24,
                 updated_at = now()
           where id = $1 and user_id = $2
           returning id`,
@@ -421,7 +474,8 @@ async function saveProfile(user, payload, profileId = "") {
           text(payload.nativeLanguage || user.nativeLanguage || "en-US", { required: true, max: 80 }),
           text(payload.timezone || "UTC", { required: true, max: 80 }),
           text(payload.country, { max: 80 }),
-          text(payload.city, { max: 80 }),
+          payload.professionalTutor === true || String(payload.professionalTutor) === "true",
+          payload.speakingPracticeOnly === true || String(payload.speakingPracticeOnly) === "true",
           money(payload.hourlyRateUsd, { min: 1, fallback: 20 }),
           payload.trialRateUsd === "" || payload.trialRateUsd === undefined ? null : money(payload.trialRateUsd, { min: 0 }),
           minLessonMinutes,
@@ -432,18 +486,18 @@ async function saveProfile(user, payload, profileId = "") {
           video.provider,
           image?.url || null,
           image?.boxFileId || null,
-          status
+          owner.rows[0].status || "draft"
         ]
       );
     } else {
       saved = await client.query(
         `insert into teacher_profiles (
            user_id, display_name, headline, bio, teaching_style, experience_summary, certifications,
-           native_language, timezone, country, city, hourly_rate_usd, trial_rate_usd, min_lesson_minutes,
+           native_language, timezone, country, professional_tutor, speaking_practice_only, hourly_rate_usd, trial_rate_usd, min_lesson_minutes,
            max_lesson_minutes, group_lesson_enabled, group_max_students, video_intro_url, video_provider,
            image_url, image_file_id, status
          )
-         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
+         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
          returning id`,
         [
           user.id,
@@ -456,7 +510,8 @@ async function saveProfile(user, payload, profileId = "") {
           text(payload.nativeLanguage || user.nativeLanguage || "en-US", { required: true, max: 80 }),
           text(payload.timezone || "UTC", { required: true, max: 80 }),
           text(payload.country, { max: 80 }),
-          text(payload.city, { max: 80 }),
+          payload.professionalTutor === true || String(payload.professionalTutor) === "true",
+          payload.speakingPracticeOnly === true || String(payload.speakingPracticeOnly) === "true",
           money(payload.hourlyRateUsd, { min: 1, fallback: 20 }),
           payload.trialRateUsd === "" || payload.trialRateUsd === undefined ? null : money(payload.trialRateUsd, { min: 0 }),
           minLessonMinutes,
@@ -467,7 +522,7 @@ async function saveProfile(user, payload, profileId = "") {
           video.provider,
           image?.url || null,
           image?.boxFileId || null,
-          status
+          "draft"
         ]
       );
       await client.query(
@@ -791,7 +846,7 @@ async function createBooking(user, payload) {
         user.id,
         slot.lessonType,
         text(payload.title || `${teacher.displayName} lesson`, { required: true, max: 160 }),
-        text(payload.targetLanguage || teacher.languages.find((item) => item.role === "teaches")?.language || user.targetLanguage, { required: true, max: 80 }),
+        text(payload.targetLanguage || teacher.languages.find((item) => item.role === "teaches")?.language, { required: true, max: 80 }),
         slot.startsAt,
         slot.endsAt,
         slot.durationMinutes,
@@ -1563,19 +1618,6 @@ async function createReview(user, profileId, payload) {
   return getProfile(user, profileId);
 }
 
-async function suggestReward(user, bookingId, payload) {
-  const booking = await query("select teacher_user_id, student_user_id from lesson_bookings where id = $1 and (teacher_user_id = $2 or student_user_id = $2)", [bookingId, user.id]);
-  if (!booking.rows[0]) throw serviceError("Lesson not found", 404);
-  const recipient = text(payload.recipientUserId, { required: true, max: 64 });
-  if (![booking.rows[0].teacher_user_id, booking.rows[0].student_user_id].includes(recipient)) throw serviceError("Reward recipient must be in the lesson");
-  await query(
-    `insert into lesson_coin_reward_suggestions (lesson_booking_id, suggested_by_user_id, recipient_user_id, amount, reason)
-     values ($1, $2, $3, $4, $5)`,
-    [bookingId, user.id, recipient, integer(payload.amount, { min: 1, max: 100, fallback: 10 }), text(payload.reason, { max: 500 })]
-  );
-  return { ok: true };
-}
-
 async function sendTeacherMessage(user, payload) {
   const recipientId = text(payload.recipientId, { required: true, max: 64 });
   const body = text(payload.body, { required: true, max: 1000 });
@@ -1611,8 +1653,8 @@ async function sendTeacherMessage(user, payload) {
       );
     }
     await client.query(
-      `insert into direct_messages (conversation_id, sender_id, recipient_id, body, coin_amount, message_context)
-       values ($1, $2, $3, $4, 0, 'teacher_student')`,
+      `insert into direct_messages (conversation_id, sender_id, recipient_id, body, message_context)
+       values ($1, $2, $3, $4, 'teacher_student')`,
       [conversation.rows[0].id, user.id, recipientId, body]
     );
     await client.query("update direct_conversations set updated_at = now() where id = $1", [conversation.rows[0].id]);
@@ -1675,7 +1717,6 @@ module.exports = {
   listTemplates,
   createTemplate,
   createReview,
-  suggestReward,
   sendTeacherMessage,
   teacherSubscriptionForUser,
   handleStripeWebhook

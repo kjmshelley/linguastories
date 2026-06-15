@@ -4,6 +4,7 @@ const { requireAuth } = require("../middleware/auth.middleware");
 const { rateLimit } = require("../middleware/rate-limit.middleware");
 const { validateBody, validateUuidParam } = require("../middleware/validation.middleware");
 const controller = require("../controllers/livekit.controller");
+const { LANGUAGE_SKILL_LEVELS } = require("../constants/language-levels");
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.post("/rooms", livekitCreateRateLimit, validateBody({
   roomType: { type: "enum", options: ["voice", "video"], fallback: "voice", label: "Room type" },
   targetLanguage: { type: "string", required: true, max: 80, label: "Target language" },
   sourceLanguage: { type: "string", required: true, max: 80, label: "Source language" },
-  cefrLevel: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "CEFR level" },
+  cefrLevel: { type: "enum", options: LANGUAGE_SKILL_LEVELS, fallback: "A1", label: "Skill level" },
   maxParticipants: { type: "integer", min: 2, max: 4, label: "Max participants" },
   isPrivate: { type: "enum", options: ["true", "false", true, false], fallback: false, label: "Privacy" },
   imageDataUrl: { type: "dataUrl", max: 800000, label: "Room image" },

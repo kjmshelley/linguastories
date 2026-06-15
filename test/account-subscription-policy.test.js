@@ -9,57 +9,55 @@ function userWithAccount(accountState, tierOverrides = {}) {
       billingStatus: accountState === "trialing" ? "trialing" : accountState,
       subscriptionStatus: accountState === "trialing" ? "trialing" : accountState,
       tier: {
-        key: "basic",
-        name: "Basic Tier",
-        monthlyPriceUsd: 2.99,
-        permissions: ["voice_video_rooms"],
+        key: "teacher",
+        name: "Teacher",
+        monthlyPriceUsd: 0,
+        permissions: ["teacher_workspace"],
         featureFlags: {
           voiceVideoRooms: true,
-          teacherWorkspace: false,
+          teacherWorkspace: true,
           groupLessons: false,
-          canCreateShortStories: true,
           canEditLanguageProfiles: true,
           canDeleteLanguageProfiles: true,
-          maxLanguageProfiles: null,
-          personalDeckLimit: null
+          maxLanguageProfiles: null
         },
-        accountType: "learner",
+        accountType: "teacher",
         ...tierOverrides
       }
     }
   };
 }
 
-test("trialing paid accounts receive selected tier capabilities", () => {
-  const subscription = subscriptionPolicy.subscriptionForUser(userWithAccount("trialing"));
-  assert.equal(subscription.effectivePlanKey, "basic");
-  assert.equal(subscription.capabilities.voiceVideoRooms, true);
-  assert.equal(subscription.capabilities.canEditLanguageProfiles, true);
+test("active teacher accounts receive teacher capabilities", () => {
+  const subscription = subscriptionPolicy.subscriptionForUser(userWithAccount("active"));
+  assert.equal(subscription.effectivePlanKey, "teacher");
+  assert.equal(subscription.capabilities.teacherWorkspace, true);
+  assert.equal(subscription.learner.key, "free");
 });
 
-test("deactivated paid accounts lose paid feature access", () => {
+test("deactivated teacher accounts lose teacher feature access", () => {
   const subscription = subscriptionPolicy.subscriptionForUser(userWithAccount("deactivated"));
   assert.equal(subscription.capabilities.voiceVideoRooms, false);
-  assert.equal(subscription.capabilities.canCreateShortStories, false);
-  assert.equal(subscription.capabilities.personalDeckLimit, 1);
+  assert.equal(subscription.capabilities.teacherWorkspace, false);
+  assert.equal(subscription.capabilities.maxLanguageProfiles, 10);
 });
 
-test("free account capabilities remain free-tier scoped", () => {
+test("free account capabilities remain free membership scoped", () => {
   const subscription = subscriptionPolicy.subscriptionForUser(
     userWithAccount("active", {
       key: "free",
-      name: "Free Tier",
+      name: "Free Membership",
       monthlyPriceUsd: 0,
-      permissions: ["read_stories"],
+      permissions: ["connect"],
       featureFlags: {
-        voiceVideoRooms: false,
-        canCreateShortStories: false,
-        maxLanguageProfiles: 1,
-        personalDeckLimit: 1
+        voiceVideoRooms: true,
+        connect: true,
+        communityPosts: true,
+        maxLanguageProfiles: 10
       }
     })
   );
   assert.equal(subscription.effectivePlanKey, "free");
-  assert.equal(subscription.capabilities.voiceVideoRooms, false);
-  assert.equal(subscription.capabilities.maxLanguageProfiles, 1);
+  assert.equal(subscription.capabilities.voiceVideoRooms, true);
+  assert.equal(subscription.capabilities.maxLanguageProfiles, 10);
 });

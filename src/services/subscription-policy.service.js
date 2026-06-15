@@ -1,127 +1,54 @@
 const LEARNER_PLANS = {
   free: {
     key: "free",
-    name: "Free Tier",
-    monthlyPriceUsd: 0,
-    monthlyCoins: 100
-  },
-  basic: {
-    key: "basic",
-    name: "Basic Tier",
-    monthlyPriceUsd: 2.99,
-    monthlyCoins: 500
+    name: "Free Membership",
+    monthlyPriceUsd: 0
   }
 };
 
 const TEACHER_PLANS = {
   teacher: {
     key: "teacher",
-    name: "Teacher Tier",
-    monthlyPriceUsd: 2.99,
-    monthlyCoins: 1000
-  },
-  teacher_pro: {
-    key: "teacher_pro",
-    name: "Teacher Pro Tier",
-    monthlyPriceUsd: 6.99,
-    monthlyCoins: 5000
+    name: "Teacher",
+    monthlyPriceUsd: 0
   }
 };
 
 const PLAN_CAPABILITIES = {
   free: {
     dashboard: true,
-    shortStories: true,
-    sentenceMining: true,
-    canCreateShortStories: false,
-    canUseSystemDecks: true,
-    canUsePublicDecks: true,
-    personalDeckLimit: 1,
     connect: true,
-    moments: true,
-    voiceVideoRooms: false,
-    findTeacher: true,
-    mySchedule: true,
-    maxLanguageProfiles: 1,
-    canEditLanguageProfiles: false,
-    canDeleteLanguageProfiles: false,
-    goals: true,
-    wallet: true,
-    teacherWorkspace: false,
-    groupLessons: false
-  },
-  basic: {
-    dashboard: true,
-    shortStories: true,
-    sentenceMining: true,
-    canCreateShortStories: true,
-    canUseSystemDecks: true,
-    canUsePublicDecks: true,
-    personalDeckLimit: null,
-    connect: true,
-    moments: true,
+    communityPosts: true,
     voiceVideoRooms: true,
     findTeacher: true,
     mySchedule: true,
-    maxLanguageProfiles: null,
+    maxLanguageProfiles: 10,
     canEditLanguageProfiles: true,
     canDeleteLanguageProfiles: true,
-    goals: true,
-    wallet: true,
     teacherWorkspace: false,
     groupLessons: false
   },
   teacher: {
     dashboard: true,
-    shortStories: true,
-    sentenceMining: true,
-    canCreateShortStories: true,
-    canUseSystemDecks: true,
-    canUsePublicDecks: true,
-    personalDeckLimit: null,
     connect: true,
-    moments: true,
+    communityPosts: true,
     voiceVideoRooms: true,
     findTeacher: true,
     mySchedule: true,
     maxLanguageProfiles: null,
     canEditLanguageProfiles: true,
     canDeleteLanguageProfiles: true,
-    goals: true,
-    wallet: true,
     teacherWorkspace: true,
     groupLessons: false
-  },
-  teacher_pro: {
-    dashboard: true,
-    shortStories: true,
-    sentenceMining: true,
-    canCreateShortStories: true,
-    canUseSystemDecks: true,
-    canUsePublicDecks: true,
-    personalDeckLimit: null,
-    connect: true,
-    moments: true,
-    voiceVideoRooms: true,
-    findTeacher: true,
-    mySchedule: true,
-    maxLanguageProfiles: null,
-    canEditLanguageProfiles: true,
-    canDeleteLanguageProfiles: true,
-    goals: true,
-    wallet: true,
-    teacherWorkspace: true,
-    groupLessons: true
   }
 };
 
 const FEATURE_MESSAGES = {
-  voiceVideoRooms: "Voice/Video Rooms require the Basic tier or higher.",
-  teacherWorkspace: "Teacher workspace access requires the Teacher tier or Teacher Pro tier.",
-  groupLessons: "Group lessons require the Teacher Pro tier.",
-  canEditLanguageProfiles: "Free tier profiles cannot be changed.",
-  canDeleteLanguageProfiles: "Free tier profiles cannot be deleted.",
-  personalDeckLimit: "Free tier users can create one personal deck."
+  voiceVideoRooms: "Voice/Video Rooms are unavailable.",
+  teacherWorkspace: "Teacher workspace access requires an active Teacher profile.",
+  groupLessons: "Group lessons are unavailable.",
+  canEditLanguageProfiles: "Language editing is unavailable.",
+  canDeleteLanguageProfiles: "Language removal is unavailable."
 };
 
 const INACTIVE_ACCOUNT_STATES = new Set(["past_due", "deactivated", "canceled"]);
@@ -131,8 +58,6 @@ function normalizeLearnerPlan(value) {
 }
 
 function normalizeTeacherPlan(value) {
-  if (value === "starter") return "teacher";
-  if (value === "pro") return "teacher_pro";
   return Object.prototype.hasOwnProperty.call(TEACHER_PLANS, value) ? value : "";
 }
 
@@ -153,18 +78,15 @@ function subscriptionForUser(user = {}) {
       capabilities.voiceVideoRooms = false;
       capabilities.teacherWorkspace = false;
       capabilities.groupLessons = false;
-      capabilities.canCreateShortStories = false;
-      capabilities.canEditLanguageProfiles = false;
-      capabilities.canDeleteLanguageProfiles = false;
-      capabilities.maxLanguageProfiles = 1;
-      capabilities.personalDeckLimit = 1;
+      capabilities.canEditLanguageProfiles = true;
+      capabilities.canDeleteLanguageProfiles = true;
+      capabilities.maxLanguageProfiles = 10;
     }
     return {
       learner: {
-        key: tier.accountType === "learner" ? tier.key : "basic",
-        name: tier.accountType === "learner" ? tier.name : LEARNER_PLANS.basic.name,
-        monthlyPriceUsd: tier.accountType === "learner" ? tier.monthlyPriceUsd : LEARNER_PLANS.basic.monthlyPriceUsd,
-        monthlyCoins: capabilities.monthlyCoins || 0,
+        key: tier.accountType === "learner" ? tier.key : "free",
+        name: tier.accountType === "learner" ? tier.name : LEARNER_PLANS.free.name,
+        monthlyPriceUsd: tier.accountType === "learner" ? tier.monthlyPriceUsd : LEARNER_PLANS.free.monthlyPriceUsd,
         status: billingStatus
       },
       teacher: tier.accountType === "teacher"
@@ -172,7 +94,6 @@ function subscriptionForUser(user = {}) {
             key: tier.key,
             name: tier.name,
             monthlyPriceUsd: tier.monthlyPriceUsd,
-            monthlyCoins: capabilities.monthlyCoins || 0,
             status: billingStatus
           }
         : null,

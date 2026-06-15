@@ -1,14 +1,21 @@
 import { escapeHtml, icon, ui } from "../ui.js";
 import { languageName, languageSelectOptions } from "../languages.js";
-
-const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+import { languageSkillLevelLabel, languageSkillLevelOptions } from "../levels.js";
 
 function optionList(items, selected = "") {
   return items.map((item) => `<option value="${escapeHtml(item)}" ${item === selected ? "selected" : ""}>${escapeHtml(item)}</option>`).join("");
 }
 
+function levelFilterOptions(selected = "") {
+  return `<option value="" ${selected ? "" : "selected"}>Any</option>${languageSkillLevelOptions(selected)}`;
+}
+
 function languageOptions(appConfig, selected = "") {
   return languageSelectOptions(appConfig, selected);
+}
+
+function languageOptionsWithPlaceholder(appConfig, selected = "") {
+  return languageSelectOptions(appConfig, selected, { placeholder: "Choose a language" });
 }
 
 function roomImage(room) {
@@ -36,16 +43,11 @@ function disabledButtonClass() {
 }
 
 function roomAction({ room, activeSession, state }) {
-  const balance = Number(state.wallet?.balance || 0);
-  const hasCoins = balance >= 1000;
   const active = activeSession?.roomId === room.id;
   const isOwner = room.ownerUserId === state.user.id;
   const full = room.participantCount >= room.maxParticipants;
   if (active) {
     return `<button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(room.id)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>`;
-  }
-  if (!hasCoins) {
-    return `<button class="${disabledButtonClass()}" disabled>${icon("coins", "h-4 w-4")}<span>Need coins</span></button>`;
   }
   if (isOwner) {
     return `
@@ -102,7 +104,7 @@ function roomCards({ appConfig, rooms, activeSession, state, showHistory }) {
           </div>
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-3">
             <span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Level</span>
-            <span class="${ui.tag} mt-1">${escapeHtml(room.cefrLevel)}</span>
+            <span class="${ui.tag} mt-1">${escapeHtml(languageSkillLevelLabel(room.cefrLevel || "A1"))}</span>
           </div>
         </div>
         <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-brand-line/70 pt-4">
@@ -151,8 +153,6 @@ function participantList({ activeRoom, participants = [], state }) {
 
 function activeRoomPanel({ activeRoom, activeSession, activeParticipants, state }) {
   if (!activeRoom || !activeSession) return "";
-  const elapsed = Math.max(0, 360 - Number(activeRoom.secondsRemaining ?? activeSession.secondsRemaining ?? 360));
-  const minutes = Math.min(6, Math.max(1, Math.ceil(Math.max(1, elapsed) / 60)));
   return `
     <section class="${ui.card}">
       <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -181,7 +181,6 @@ function activeRoomPanel({ activeRoom, activeSession, activeParticipants, state 
         <aside class="rounded-lg border border-brand-line/80 bg-white/60 p-4">
           <div class="text-xs font-semibold uppercase tracking-[.16em] text-brand-graphite">Countdown</div>
           <strong class="mt-2 block text-4xl font-bold tabular-nums text-brand-ink" data-room-countdown>06:00</strong>
-          <p class="mt-3 text-sm font-semibold text-brand-charcoal">Estimated charge: <span data-room-estimated-charge>${minutes * 1000}</span> coins</p>
           <div class="mt-4 grid gap-2 text-xs font-semibold text-brand-graphite">
             <span>Warnings show at 3 minutes, 1 minute, and 10 seconds remaining.</span>
             <span>At 6 minutes, you are disconnected automatically.</span>
@@ -200,7 +199,7 @@ export function voiceVideoRoomView({ activeVoiceVideoRoom = null, activeVoiceVid
         <section class="w-full max-w-xl rounded-lg border border-brand-line/80 bg-brand-panel p-6 text-center shadow-[0_1px_2px_rgba(29,41,63,.05)]">
           <span class="${ui.tagRed}">No active session</span>
           <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Join a room first</h2>
-          <p class="mt-2 ${ui.muted}">Choose an available ${escapeHtml(languageName(appConfig, state.user.targetLanguage))} voice or video room to start a LiveKit session.</p>
+          <p class="mt-2 ${ui.muted}">Choose an available voice or video room to start a LiveKit session.</p>
           <div class="mt-5 flex justify-center">
             <a class="${ui.primary}" href="${appPath("voiceVideoRooms")}">${icon("video", "h-4 w-4")}<span>Back to rooms</span></a>
           </div>
@@ -221,14 +220,13 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
       <span class="${ui.tagGold}">Focused practice</span>
       <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Create Voice/Video Room</h2>
       <p class="mt-2 ${ui.muted}">Create a short practice room with a clear language goal. Rooms are limited to 6 minutes.</p>
-      <p class="mt-2 text-xs font-semibold text-brand-graphite">Cost is paid only by participants when they join and leave.</p>
       <form class="mt-5 grid gap-3" data-form="voiceVideoRoom">
         <label class="${ui.label}">Title<input class="${ui.input}" name="title" required maxlength="120" placeholder="Pronunciation practice: travel phrases"></label>
         <label class="${ui.label}">Description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000" placeholder="Practice 5 useful phrases and give quick feedback."></textarea></label>
         <div class="grid gap-3 md:grid-cols-2">
           <label class="${ui.label}">Room type<select class="${ui.input}" name="roomType"><option value="voice">Voice</option><option value="video">Video</option></select></label>
-          <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${optionList(levels, state.user.currentLevel || "A1")}</select></label>
-          <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage">${languageOptions(appConfig, state.user.targetLanguage)}</select></label>
+          <label class="${ui.label}">Skill level<select class="${ui.input}" name="cefrLevel">${languageSkillLevelOptions(state.user.currentLevel || "A1")}</select></label>
+          <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage" required>${languageOptionsWithPlaceholder(appConfig)}</select></label>
           <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "en-US")}</select></label>
           <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="4" value="4"></label>
           <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate"><option value="false">Public</option><option value="true">Private</option></select></label>
@@ -244,12 +242,10 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
 }
 
 export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], voiceVideoRoomFilters = {}, voiceVideoShowHistory = false, activeVoiceVideoRoom = null, activeVoiceVideoSession = null, activeVoiceVideoParticipants = [] }) {
-  const balance = Number(state.wallet?.balance || 0);
-  const hasEnoughCoins = balance >= 1000;
   const filtersForm = `
     <form class="grid gap-3 lg:grid-cols-[minmax(180px,1fr)_repeat(2,minmax(140px,180px))_auto]" data-form="voiceVideoRoomFilters">
       <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
-      <label class="${ui.label}">Level<select class="${ui.input}" name="cefrLevel"><option value="">Any</option>${optionList(levels, voiceVideoRoomFilters.cefrLevel)}</select></label>
+      <label class="${ui.label}">Skill level<select class="${ui.input}" name="cefrLevel">${levelFilterOptions(voiceVideoRoomFilters.cefrLevel)}</select></label>
       <label class="${ui.label}">Type<select class="${ui.input}" name="roomType"><option value="">Any</option><option value="voice" ${voiceVideoRoomFilters.roomType === "voice" ? "selected" : ""}>Voice</option><option value="video" ${voiceVideoRoomFilters.roomType === "video" ? "selected" : ""}>Video</option></select></label>
       <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
     </form>
@@ -265,14 +261,13 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <button class="${ui.secondary}" data-action="toggleVoiceVideoHistory">${icon("book", "h-4 w-4")}<span>${voiceVideoShowHistory ? "Hide Past Rooms" : "Past Rooms"}</span></button>
-            <button class="${hasEnoughCoins ? ui.primary : disabledButtonClass()}" data-action="openCreateVoiceVideoRoomModal" ${hasEnoughCoins ? "" : "disabled"}>${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+            <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
           </div>
         </div>
         <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6 minutes</strong><span class="text-sm text-brand-graphite">Voice/video rooms are limited to 6 minutes.</span></div>
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">1000 coins</strong><span class="text-sm text-brand-graphite">Cost: 1000 coins per minute.</span></div>
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6000 coins</strong><span class="text-sm text-brand-graphite">Maximum cost: 6000 coins.</span></div>
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">Earn more</strong><span class="text-sm text-brand-graphite">Read stories, mine sentences, review decks, and engage thoughtfully with the community.</span></div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">4 seats</strong><span class="text-sm text-brand-graphite">Rooms stay small enough for real speaking turns.</span></div>
+          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">People first</strong><span class="text-sm text-brand-graphite">Use rooms for quick practice with other learners.</span></div>
         </div>
       </section>
 
@@ -289,7 +284,6 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
             ${filtersForm}
           </div>
         </details>
-        <p class="mt-3 text-xs font-semibold text-brand-graphite">Showing rooms for your selected profile language: ${escapeHtml(languageName(appConfig, state.user.targetLanguage))}.</p>
       </section>
 
       <section class="grid gap-3 lg:grid-cols-2">

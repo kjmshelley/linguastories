@@ -25,6 +25,9 @@ const profileSchema = {
   displayName: { type: "string", required: true, max: 80, label: "Display name" },
   email: { type: "email", required: true, max: 254, label: "Email" },
   nativeLanguage: { type: "string", required: true, max: 80, label: "Native language" },
+  timezone: { type: "string", max: 80, label: "Timezone" },
+  siteLanguage: { type: "enum", options: ["en-US", "es-ES", "fr-FR", "it-IT", "pt-PT", "nl-NL", "de-DE", "ru-RU", "zh-CN", "ja-JP", "ko-KR", "th-TH", "id-ID", "vi-VN", "ar-SA"], fallback: "en-US", label: "Site language" },
+  currency: { type: "enum", options: ["USD", "EUR", "GBP", "JPY", "CNY", "TWD", "KRW", "CAD", "AUD", "SGD"], fallback: "USD", label: "Currency" },
   bio: { type: "string", max: 500, label: "Bio", allowEmpty: true }
 };
 
