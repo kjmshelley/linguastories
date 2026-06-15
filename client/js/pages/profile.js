@@ -57,12 +57,12 @@ function timezoneOptions(selected = "UTC") {
   const resolved = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const current = selected && selected !== "UTC" ? selected : resolved && resolved !== "UTC" ? resolved : fallbackTimezones[0];
   const supported = (typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimezones).filter((timezone) => timezone !== "UTC");
-  const timezones = supported.includes(current) ? supported : [current, ...supported];
+  const timezones = (supported.includes(current) ? supported : [current, ...supported]).sort((a, b) => a.localeCompare(b));
   return timezones.map((timezone) => `<option value="${escapeHtml(timezone)}" ${timezone === current ? "selected" : ""}>${escapeHtml(timezone)}</option>`).join("");
 }
 
 function optionPairs(options, selected = "") {
-  return options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label)}</option>`).join("");
+  return [...options].sort((a, b) => a[1].localeCompare(b[1])).map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label)}</option>`).join("");
 }
 
 function learningLanguageList({ state, appConfig }) {
@@ -321,10 +321,9 @@ export function languageProfilesView({ state, appConfig }) {
 }
 
 export function myProfilesView({ state, appConfig, myProfilesTab = "languages", teacherProfilesContent = "" }) {
-  const capabilities = state.subscription?.capabilities || state.user?.subscription?.capabilities || {};
   const tabs = [
     ["languages", "Languages I'm learning", "globe"],
-    ...(capabilities.teacherWorkspace ? [["teachers", "My Teacher Profiles", "user"]] : [])
+    ["teachers", "My Teacher Profiles", "user"]
   ];
   const activeTab = tabs.some(([id]) => id === myProfilesTab) ? myProfilesTab : "languages";
   return `

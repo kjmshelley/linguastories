@@ -24,22 +24,16 @@ const frontendAppRoutes = [
   /^\/app\/community\/posts\/[0-9a-f-]+\/?$/i,
   /^\/app\/community\/voice-video-rooms\/?$/,
   /^\/app\/community\/voice-video-rooms\/[0-9a-f-]+\/?$/i,
-  /^\/app\/learning\/?$/,
   /^\/app\/learning\/find-teacher\/?$/,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/book\/?$/i,
-  /^\/app\/learning\/my-learning\/?$/,
   /^\/app\/learning\/my-lessons\/?$/,
   /^\/app\/learning\/my-teachers\/?$/,
   /^\/app\/learning\/learning-notes\/?$/,
   /^\/app\/learning\/teacher-dashboard\/?$/,
-  /^\/app\/learning\/teacher-profiles\/?$/,
-  /^\/app\/learning\/teacher-profiles\/new\/?$/,
-  /^\/app\/learning\/teacher-profiles\/[0-9a-f-]+\/edit\/?$/i,
   /^\/app\/learning\/availability\/?$/,
   /^\/app\/learning\/unavailable-blocks\/?$/,
   /^\/app\/learning\/students\/?$/,
-  /^\/app\/learning\/classroom\/?$/,
   /^\/app\/learning\/lesson-notes\/?$/,
   /^\/app\/learning\/resources\/?$/,
   /^\/app\/learning\/templates\/?$/,
@@ -48,8 +42,7 @@ const frontendAppRoutes = [
   /^\/app\/profile\/subscriptions\/?$/,
   /^\/app\/profile\/my-profiles\/?$/,
   /^\/app\/profile\/my-profiles\/teacher\/new\/?$/,
-  /^\/app\/profile\/my-profiles\/teacher\/[0-9a-f-]+\/edit\/?$/i,
-  /^\/app\/profile\/language-profiles\/?$/
+  /^\/app\/profile\/my-profiles\/teacher\/[0-9a-f-]+\/edit\/?$/i
 ];
 
 app.disable("x-powered-by");

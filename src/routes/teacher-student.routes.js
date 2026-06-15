@@ -39,9 +39,7 @@ const profileSchema = {
   teachesLanguageLevels: { type: "string", max: 1200, label: "Taught language levels" },
   speaksLanguageLevels: { type: "string", max: 1200, label: "Spoken language levels" },
   cefrLevel: { type: "enum", options: LANGUAGE_SKILL_LEVELS, fallback: "A1", label: "Skill level" },
-  tags: { type: "string", max: 500, label: "Tags" },
-  imageDataUrl: { type: "dataUrl", max: 1_200_000, label: "Teacher profile image" },
-  imageFileName: { type: "string", max: 180, label: "Image file name" }
+  tags: { type: "string", max: 500, label: "Tags" }
 };
 
 router.use(requireAuth);

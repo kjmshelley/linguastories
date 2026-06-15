@@ -512,8 +512,6 @@ create table if not exists teacher_profiles (
   group_max_students integer not null default 1 check (group_max_students between 1 and 8),
   video_intro_url text,
   video_provider text check (video_provider in ('youtube', 'vimeo')),
-  image_url text,
-  image_file_id text,
   status text not null default 'draft' check (status in ('draft', 'published', 'paused', 'archived')),
   created_at timestamptz default now(),
   updated_at timestamptz default now(),
@@ -522,6 +520,10 @@ create table if not exists teacher_profiles (
   check (char_length(bio) between 20 and 3000),
   check (max_lesson_minutes >= min_lesson_minutes)
 );
+
+alter table if exists teacher_profiles
+  drop column if exists image_url,
+  drop column if exists image_file_id;
 
 alter table if exists teacher_profiles
   drop column if exists city;

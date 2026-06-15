@@ -124,7 +124,10 @@ function normalizeLanguage(language) {
 
 export function supportedLanguageOptions(appConfig = {}) {
   const languages = Array.isArray(appConfig.supportedLanguages) && appConfig.supportedLanguages.length ? appConfig.supportedLanguages : fallbackLanguages;
-  return languages.map(normalizeLanguage).filter(Boolean);
+  return languages
+    .map(normalizeLanguage)
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function languageName(appConfig = {}, code = "") {

@@ -211,7 +211,15 @@ declare
     array['Amara Okafor','amara@linguastories.local','AO','en-US','ja-JP','B2','Advanced learner who shares grammar questions with the community.'],
     array['Theo Grant','theo@linguastories.local','TG','en-US','es-ES','A2','Building travel confidence one conversation at a time.'],
     array['Lina Chen','lina@linguastories.local','LC','zh-CN','fr-FR','A1','French beginner who likes simple daily-life conversations.'],
-    array['Owen Patel','owen@linguastories.local','OP','en-US','ja-JP','A2','Practices pronunciation before workplace meetings.']
+    array['Owen Patel','owen@linguastories.local','OP','en-US','ja-JP','A2','Practices pronunciation before workplace meetings.'],
+    array['Yuna Sato','yuna@linguastories.local','YS','ja-JP','en-US','B1','Teacher and learner who likes practical pronunciation drills.'],
+    array['Diego Navarro','diego@linguastories.local','DN','es-ES','en-US','B2','Conversation teacher building a library of travel roleplays.'],
+    array['Mina Laurent','mina@linguastories.local','ML','fr-FR','en-US','C1','Teacher focused on gentle correction and listening confidence.'],
+    array['Jiho Choi','jiho@linguastories.local','JC','ko-KR','en-US','B2','Speaking coach who turns daily notes into live practice.'],
+    array['Iris Novak','iris@linguastories.local','IN','en-US','de-DE','A2','Practices German for workplace calls and short presentations.'],
+    array['Samir Khan','samir@linguastories.local','SK','en-US','hi-IN','A1','Building a daily Hindi speaking habit with community support.'],
+    array['Elena Rossi','elena@linguastories.local','ER','it-IT','en-US','B1','Teacher who loves cafe roleplays and friendly correction.'],
+    array['Talia Green','talia@linguastories.local','TG','en-US','pt-PT','A2','Portuguese learner preparing for travel and family conversations.']
   ];
   spec text[];
   idx integer := 0;
@@ -267,7 +275,7 @@ begin
   end loop;
 
 
-  for idx in 1..16 loop
+  for idx in 1..24 loop
     select id into new_user_id from users order by display_name offset idx - 1 limit 1;
 
     insert into posts (user_id, type, body, target_language, created_at)
@@ -407,7 +415,7 @@ begin
       can_create_group_lessons = excluded.can_create_group_lessons,
       active = true;
 
-  for idx in 1..10 loop
+  for idx in 1..16 loop
     select id into room_host_id from users order by display_name offset idx - 1 limit 1;
     insert into voice_video_rooms (
       owner_user_id, title, description, room_type, target_language, source_language, cefr_level,
@@ -514,7 +522,7 @@ begin
   end loop;
 
   for teacher_user_id in
-    select id from users order by display_name limit 8
+    select id from users order by display_name limit 12
   loop
     idx := idx + 1;
     insert into teacher_subscriptions (
@@ -535,7 +543,7 @@ begin
       user_id, display_name, headline, bio, teaching_style, experience_summary, certifications,
       native_language, timezone, country, professional_tutor, speaking_practice_only, hourly_rate_usd, trial_rate_usd,
       min_lesson_minutes, max_lesson_minutes, group_lesson_enabled, group_max_students,
-      video_intro_url, video_provider, image_url, image_file_id, status, created_at, updated_at
+      video_intro_url, video_provider, status, created_at, updated_at
     )
     values (
       teacher_user_id,
@@ -564,18 +572,6 @@ begin
       case when idx % 2 = 0 then 4 else 1 end,
       case when idx % 2 = 0 then 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' else 'https://vimeo.com/76979871' end,
       case when idx % 2 = 0 then 'youtube' else 'vimeo' end,
-      'https://images.unsplash.com/photo-' ||
-        case idx % 8
-          when 0 then '1494790108377-be9c29b29330'
-          when 1 then '1500648767791-00dcc994a43e'
-          when 2 then '1517841905240-472988babdf9'
-          when 3 then '1544005313-94ddf0286df2'
-          when 4 then '1527980965255-d3b416303d12'
-          when 5 then '1506794778202-cad84cf45f1d'
-          when 6 then '1547425260-76bcadfb4f2c'
-          else '1531123897727-8f129e1688ce'
-        end || '?auto=format&fit=crop&w=520&q=80',
-      'seed/teacher-profile-' || idx || '.jpg',
       'published',
       now() - ((idx * 4) || ' days')::interval,
       now() - ((idx * 2) || ' hours')::interval
@@ -655,7 +651,7 @@ begin
     on conflict do nothing;
   end loop;
 
-  for idx in 1..36 loop
+  for idx in 1..72 loop
     select tp.id, tp.user_id
       into teacher_profile_id, teacher_user_id
       from teacher_profiles tp
@@ -680,7 +676,9 @@ begin
       teacher_profile_id, teacher_user_id, student_user_id, lesson_type, title, target_language,
       starts_at, ends_at, duration_minutes, max_students, status, payment_status,
       lesson_price_usd, platform_fee_usd, total_student_charge_usd, teacher_payout_usd,
-      stripe_checkout_session_id, stripe_payment_intent_id, livekit_room_name, created_at, updated_at
+      stripe_checkout_session_id, stripe_payment_intent_id, livekit_room_name,
+      payment_expires_at, cancel_reason, cancelled_at, cancelled_by_user_id, refund_status,
+      created_at, updated_at
     )
     values (
       teacher_profile_id,
@@ -699,15 +697,50 @@ begin
       now() + (((idx - 18) * 10 + case when idx % 3 = 0 then 90 else 60 end) || ' hours')::interval,
       case when idx % 3 = 0 then 90 else 60 end,
       case when idx % 7 = 0 then 4 else 1 end,
-      case when idx < 18 then 'completed' when idx = 18 then 'active' when idx % 11 = 0 then 'cancelled_by_student' when idx % 5 = 0 then 'pending_payment' else 'confirmed' end,
-      case when idx % 5 = 0 then 'pending' when idx % 11 = 0 then 'refunded' else 'paid' end,
+      case idx % 14
+        when 0 then 'completed'
+        when 1 then 'confirmed'
+        when 2 then 'pending_payment'
+        when 3 then 'pending_teacher_approval'
+        when 4 then 'reschedule_requested'
+        when 5 then 'rescheduled'
+        when 6 then 'active'
+        when 7 then 'cancelled_by_student'
+        when 8 then 'cancelled_by_teacher'
+        when 9 then 'expired_payment'
+        when 10 then 'failed_payment'
+        when 11 then 'no_show_student'
+        when 12 then 'no_show_teacher'
+        else 'canceled'
+      end,
+      case idx % 14
+        when 2 then 'pending'
+        when 3 then 'pending'
+        when 9 then 'failed'
+        when 10 then 'failed'
+        when 7 then 'refunded'
+        when 8 then 'refunded'
+        else 'paid'
+      end,
       18 + (idx % 8) * 4,
       0.50,
       18.50 + (idx % 8) * 4,
       18 + (idx % 8) * 4,
       'cs_seed_' || idx,
-      case when idx % 5 = 0 then null else 'pi_seed_' || idx end,
+      case when (idx % 14) in (2, 3) then null else 'pi_seed_' || idx end,
       'seed-classroom-' || idx,
+      case when (idx % 14) in (2, 3) then now() + interval '45 minutes' else null end,
+      case idx % 14
+        when 7 then 'Student cancelled from the booking page.'
+        when 8 then 'Teacher cancelled because of a schedule conflict.'
+        when 9 then 'Checkout expired before payment completed.'
+        when 10 then 'Payment failed during checkout.'
+        when 13 then 'Legacy cancellation state kept for compatibility.'
+        else null
+      end,
+      case when (idx % 14) in (7, 8, 9, 10, 13) then now() - interval '2 hours' else null end,
+      case when (idx % 14) in (7, 13) then student_user_id when (idx % 14) in (8, 10) then teacher_user_id else null end,
+      case when (idx % 14) in (7, 8) then 'refunded' when (idx % 14) in (9, 10) then 'not_required' else 'none' end,
       now() - ((idx + 3) || ' days')::interval,
       now() - ((idx % 5) || ' hours')::interval
     )
@@ -715,8 +748,20 @@ begin
 
     insert into lesson_participants (lesson_booking_id, user_id, role, joined_at, left_at)
     values
-      (seed_data.lesson_id, seed_data.teacher_user_id, 'teacher', case when idx <= 18 then (select lb.starts_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end, case when idx < 18 then (select lb.ends_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end),
-      (seed_data.lesson_id, seed_data.student_user_id, 'student', case when idx <= 18 then (select lb.starts_at from lesson_bookings lb where lb.id = seed_data.lesson_id) + interval '3 minutes' else null end, case when idx < 18 then (select lb.ends_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end);
+      (
+        seed_data.lesson_id,
+        seed_data.teacher_user_id,
+        'teacher',
+        case when (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) in ('active', 'completed', 'no_show_student', 'no_show_teacher', 'no_show') then (select lb.starts_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end,
+        case when (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) in ('completed', 'no_show_student', 'no_show_teacher', 'no_show') then (select lb.ends_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end
+      ),
+      (
+        seed_data.lesson_id,
+        seed_data.student_user_id,
+        'student',
+        case when (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) in ('active', 'completed', 'no_show_teacher') then (select lb.starts_at from lesson_bookings lb where lb.id = seed_data.lesson_id) + interval '3 minutes' else null end,
+        case when (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) in ('completed', 'no_show_teacher') then (select lb.ends_at from lesson_bookings lb where lb.id = seed_data.lesson_id) else null end
+      );
 
     insert into lesson_payments (
       lesson_booking_id, student_user_id, teacher_user_id, lesson_price_usd, platform_fee_usd,
@@ -738,6 +783,37 @@ begin
            case when lb.status = 'active' then 'active' when lb.status = 'completed' then 'ended' else 'scheduled' end
       from lesson_bookings lb
      where lb.id = seed_data.lesson_id;
+
+    if (idx % 6 = 0) or (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) in ('reschedule_requested', 'rescheduled') then
+      insert into lesson_reschedule_requests (
+        lesson_id, requested_by_user_id, proposed_start_time, proposed_end_time, reason,
+        status, responded_by_user_id, responded_at, created_at, updated_at
+      )
+      select lb.id,
+             case when idx % 2 = 0 then lb.student_user_id else lb.teacher_user_id end,
+             lb.starts_at + interval '2 days',
+             lb.ends_at + interval '2 days',
+             case idx % 5
+               when 0 then 'Student asked for an evening time.'
+               when 1 then 'Teacher proposed moving around a schedule conflict.'
+               when 2 then 'Both sides are checking a weekend slot.'
+               when 3 then 'Original classroom time no longer works.'
+               else 'Seeded request for reschedule workflow testing.'
+             end,
+             case idx % 5
+               when 0 then 'pending'
+               when 1 then 'accepted'
+               when 2 then 'rejected'
+               when 3 then 'expired'
+               else 'cancelled'
+             end,
+             case when idx % 5 = 0 then null when idx % 2 = 0 then lb.teacher_user_id else lb.student_user_id end,
+             case when idx % 5 = 0 then null else now() - interval '1 hour' end,
+             now() - interval '1 day',
+             now() - interval '30 minutes'
+        from lesson_bookings lb
+       where lb.id = seed_data.lesson_id;
+    end if;
 
     update teacher_student_relationships tsr
        set last_lesson_at = greatest(tsr.last_lesson_at, (select lb.starts_at from lesson_bookings lb where lb.id = seed_data.lesson_id)),
@@ -767,7 +843,7 @@ begin
     insert into teacher_private_notes (teacher_user_id, student_user_id, lesson_booking_id, body, created_at)
     values (seed_data.teacher_user_id, seed_data.student_user_id, seed_data.lesson_id, 'Seeded CRM-style note: prefers gentle pacing and concrete examples.', now() - interval '80 minutes');
 
-    if idx <= 18 then
+    if (select lb.status from lesson_bookings lb where lb.id = seed_data.lesson_id) = 'completed' then
       insert into teacher_reviews (teacher_profile_id, lesson_booking_id, student_user_id, rating, body, created_at)
       values (
         seed_data.teacher_profile_id,
@@ -852,5 +928,208 @@ set subscription_tier = excluded.subscription_tier,
     payment_provider_customer_id = excluded.payment_provider_customer_id,
     payment_provider_subscription_id = excluded.payment_provider_subscription_id,
     updated_at = now();
+
+with ranked_accounts as (
+  select ua.user_id,
+         row_number() over (order by u.display_name) as rn
+    from user_accounts ua
+    join users u on u.id = ua.user_id
+)
+update user_accounts ua
+   set account_state = case ranked_accounts.rn
+         when 2 then 'trialing'
+         when 3 then 'past_due'
+         when 4 then 'deactivated'
+         when 5 then 'canceled'
+         when 6 then 'trial_cancelled'
+         else 'active'
+       end,
+       billing_status = case ranked_accounts.rn
+         when 2 then 'trialing'
+         when 3 then 'past_due'
+         when 4 then 'deactivated'
+         when 5 then 'canceled'
+         when 6 then 'trialing'
+         else ua.billing_status
+       end,
+       subscription_status = case ranked_accounts.rn
+         when 2 then 'trialing'
+         when 3 then 'past_due'
+         when 4 then 'canceled'
+         when 5 then 'canceled'
+         when 6 then 'trialing'
+         else ua.subscription_status
+       end,
+       trial_start_date = case when ranked_accounts.rn in (2, 6) then now() - interval '3 days' else null end,
+       trial_end_date = case when ranked_accounts.rn in (2, 6) then now() + interval '4 days' else null end,
+       cancellation_date = case when ranked_accounts.rn in (4, 5, 6) then now() - interval '1 day' else null end,
+       updated_at = now()
+  from ranked_accounts
+ where ranked_accounts.user_id = ua.user_id;
+
+insert into billing_payment_methods (
+  user_id, provider_payment_method_id, brand, last4, exp_month, exp_year, is_default, status, created_at, updated_at
+)
+select user_id,
+       'pm_seed_' || rn,
+       case rn % 4 when 0 then 'visa' when 1 then 'mastercard' when 2 then 'amex' else 'discover' end,
+       lpad(((1000 + rn * 37) % 10000)::text, 4, '0'),
+       1 + (rn % 12),
+       2028 + (rn % 5),
+       true,
+       case when rn % 9 = 0 then 'removed' else 'active' end,
+       now() - ((rn + 2) || ' days')::interval,
+       now() - ((rn % 4) || ' hours')::interval
+  from (
+    select u.id as user_id, row_number() over (order by u.display_name) as rn
+      from users u
+  ) ranked_users
+ where rn <= 18
+on conflict (provider, provider_payment_method_id) do update
+set brand = excluded.brand,
+    last4 = excluded.last4,
+    exp_month = excluded.exp_month,
+    exp_year = excluded.exp_year,
+    is_default = excluded.is_default,
+    status = excluded.status,
+    updated_at = now();
+
+update user_accounts ua
+   set payment_provider_payment_method_id = bpm.provider_payment_method_id,
+       updated_at = now()
+  from billing_payment_methods bpm
+ where bpm.user_id = ua.user_id
+   and bpm.is_default = true
+   and bpm.status = 'active';
+
+insert into billing_invoices (
+  user_id, provider_invoice_id, amount_due_usd, amount_paid_usd, status,
+  hosted_invoice_url, period_start, period_end, created_at
+)
+select u.id,
+       'in_seed_' || rn || '_' || cycle,
+       case when ua.subscription_tier = 'teacher' then 0.00 else 0.00 end,
+       case when cycle = 1 then 0.00 else 0.00 end,
+       case (rn + cycle) % 6
+         when 0 then 'paid'
+         when 1 then 'paid'
+         when 2 then 'open'
+         when 3 then 'void'
+         when 4 then 'refunded'
+         else 'draft'
+       end,
+       'https://example.com/invoices/in_seed_' || rn || '_' || cycle,
+       now() - ((cycle * 30 + rn) || ' days')::interval,
+       now() - (((cycle - 1) * 30 + rn) || ' days')::interval,
+       now() - ((cycle * 30 + rn - 1) || ' days')::interval
+  from (
+    select u.id, row_number() over (order by u.display_name) as rn
+      from users u
+  ) u
+  join user_accounts ua on ua.user_id = u.id
+  cross join generate_series(1, 2) as cycles(cycle)
+ where rn <= 20
+on conflict (provider, provider_invoice_id) do update
+set amount_due_usd = excluded.amount_due_usd,
+    amount_paid_usd = excluded.amount_paid_usd,
+    status = excluded.status,
+    hosted_invoice_url = excluded.hosted_invoice_url,
+    period_start = excluded.period_start,
+    period_end = excluded.period_end;
+
+insert into account_events (user_id, event_type, metadata, created_at)
+select u.id,
+       event_type,
+       jsonb_build_object('seeded', true, 'membership', ua.subscription_tier, 'accountState', ua.account_state),
+       now() - ((rn + event_offset) || ' hours')::interval
+  from (
+    select u.id, row_number() over (order by u.display_name) as rn
+      from users u
+  ) u
+  join user_accounts ua on ua.user_id = u.id
+  cross join lateral (
+    values
+      ('account_created', 1),
+      ('membership_synced', 2),
+      (case when ua.account_state = 'past_due' then 'payment_failed' when ua.account_state in ('deactivated', 'canceled') then 'account_cancelled' else 'account_active' end, 3)
+  ) events(event_type, event_offset)
+ where rn <= 24;
+
+insert into account_notifications (user_id, type, title, body, tone, email_queued, read_at, created_at)
+select u.id,
+       case rn % 5
+         when 0 then 'lesson_reminder'
+         when 1 then 'membership'
+         when 2 then 'payment'
+         when 3 then 'teacher_profile'
+         else 'community'
+       end,
+       case rn % 5
+         when 0 then 'Upcoming lesson'
+         when 1 then 'Membership active'
+         when 2 then 'Payment method check'
+         when 3 then 'Teacher profile update'
+         else 'New community activity'
+       end,
+       case rn % 5
+         when 0 then 'Your next live lesson is ready on your schedule.'
+         when 1 then 'Free Membership includes practice voice/video rooms.'
+         when 2 then 'Review your payment method before your next booking.'
+         when 3 then 'Your teacher profile has fresh seeded activity.'
+         else 'Learners replied to a practice post.'
+       end,
+       case rn % 5 when 2 then 'urgent' when 1 then 'good' else 'neutral' end,
+       rn % 2 = 0,
+       case when rn % 3 = 0 then now() - interval '30 minutes' else null end,
+       now() - ((rn * 2) || ' hours')::interval
+  from (
+    select id, row_number() over (order by display_name) as rn
+      from users
+  ) u
+ where rn <= 24;
+
+insert into email_notification_queue (
+  user_id, notification_id, recipient_email, subject, body, status, attempts, last_error, created_at, sent_at
+)
+select n.user_id,
+       n.id,
+       u.email,
+       n.title,
+       n.body,
+       case when row_number() over (order by n.created_at, n.id) % 6 = 0 then 'failed'
+            when row_number() over (order by n.created_at, n.id) % 2 = 0 then 'sent'
+            else 'queued'
+       end,
+       case when row_number() over (order by n.created_at, n.id) % 6 = 0 then 2 else 0 end,
+       case when row_number() over (order by n.created_at, n.id) % 6 = 0 then 'Seeded SMTP retry example' else null end,
+       n.created_at + interval '2 minutes',
+       case when row_number() over (order by n.created_at, n.id) % 2 = 0 then n.created_at + interval '5 minutes' else null end
+  from account_notifications n
+  join users u on u.id = n.user_id
+ where n.email_queued = true;
+
+insert into billing_webhook_events (provider, provider_event_id, event_type, payload, processed_at)
+values
+  ('stripe', 'evt_seed_checkout_completed', 'checkout.session.completed', '{"seeded":true,"surface":"lesson_payment"}'::jsonb, now() - interval '3 days'),
+  ('stripe', 'evt_seed_payment_failed', 'invoice.payment_failed', '{"seeded":true,"surface":"billing"}'::jsonb, now() - interval '2 days'),
+  ('stripe', 'evt_seed_payment_succeeded', 'payment_intent.succeeded', '{"seeded":true,"surface":"lesson_payment"}'::jsonb, now() - interval '1 day')
+on conflict (provider, provider_event_id) do update
+set event_type = excluded.event_type,
+    payload = excluded.payload,
+    processed_at = excluded.processed_at;
+
+insert into user_sessions (user_id, token_hash, expires_at, created_at)
+select id,
+       'seed_session_hash_' || rn,
+       now() + ((rn + 1) || ' days')::interval,
+       now() - ((rn * 3) || ' hours')::interval
+  from (
+    select id, row_number() over (order by display_name) as rn
+      from users
+  ) ranked_users
+ where rn <= 12
+on conflict (token_hash) do update
+set expires_at = excluded.expires_at,
+    created_at = excluded.created_at;
 
 commit;

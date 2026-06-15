@@ -1,7 +1,6 @@
 const crypto = require("crypto");
 const { AccessToken, TrackSource } = require("livekit-server-sdk");
 const { pool, query } = require("../db/pool");
-const storageService = require("./storage.service");
 const subscriptionPolicy = require("./subscription-policy.service");
 const { LANGUAGE_SKILL_LEVELS, normalizeLanguageSkillLevel } = require("../constants/language-levels");
 
@@ -111,7 +110,8 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
            tp.group_max_students as "groupMaxStudents",
            tp.video_intro_url as "videoIntroUrl",
            tp.video_provider as "videoProvider",
-           tp.image_url as "imageUrl",
+           coalesce(u.avatar, left(u.display_name, 2)) as avatar,
+           case when u.avatar_box_file_id is not null then '/api/learners/' || u.id || '/avatar' else coalesce(u.avatar_url, '') end as "avatarUrl",
            tp.status,
            coalesce(lang.languages, '[]'::json) as languages,
            coalesce(tags.tags, '[]'::json) as tags,
@@ -310,15 +310,6 @@ async function upsertProfileMetadata(client, profileId, payload) {
   }
 }
 
-async function profileImage(userId, payload) {
-  if (!payload.imageDataUrl) return null;
-  return storageService.uploadTeacherProfileImage({
-    userId,
-    fileName: payload.imageFileName || "teacher-profile.webp",
-    dataUrl: payload.imageDataUrl
-  });
-}
-
 async function teacherSubscriptionForUser(userId) {
   const result = await query(
     `select coalesce(ts.plan_key, '') as "planKey",
@@ -417,7 +408,6 @@ async function getProfile(user, profileId) {
 
 async function saveProfile(user, payload, profileId = "") {
   const video = normalizeVideoUrl(payload.videoIntroUrl);
-  const image = await profileImage(user.id, payload);
   const displayName = text(payload.displayName || user.displayName, { required: true, min: 2, max: 120 });
   const headline = text(payload.headline, { required: true, min: 3, max: 160 });
   const bio = text(payload.bio, { required: true, min: 20, max: 3000 });
@@ -433,7 +423,7 @@ async function saveProfile(user, payload, profileId = "") {
     await client.query("begin");
     let saved;
     if (profileId) {
-      const owner = await client.query("select id, image_url, image_file_id, status from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
+      const owner = await client.query("select id, status from teacher_profiles where id = $1 and user_id = $2", [profileId, user.id]);
       if (!owner.rows[0]) throw serviceError("Teacher profile not found", 404);
       saved = await client.query(
         `update teacher_profiles
@@ -456,9 +446,7 @@ async function saveProfile(user, payload, profileId = "") {
                 group_max_students = $19,
                 video_intro_url = $20,
                 video_provider = $21,
-                image_url = coalesce($22, image_url),
-                image_file_id = coalesce($23, image_file_id),
-                status = $24,
+                status = $22,
                 updated_at = now()
           where id = $1 and user_id = $2
           returning id`,
@@ -484,8 +472,6 @@ async function saveProfile(user, payload, profileId = "") {
           groupEnabled ? integer(payload.groupMaxStudents, { min: 2, max: 8, fallback: 4 }) : 1,
           video.url || null,
           video.provider,
-          image?.url || null,
-          image?.boxFileId || null,
           owner.rows[0].status || "draft"
         ]
       );
@@ -495,9 +481,9 @@ async function saveProfile(user, payload, profileId = "") {
            user_id, display_name, headline, bio, teaching_style, experience_summary, certifications,
            native_language, timezone, country, professional_tutor, speaking_practice_only, hourly_rate_usd, trial_rate_usd, min_lesson_minutes,
            max_lesson_minutes, group_lesson_enabled, group_max_students, video_intro_url, video_provider,
-           image_url, image_file_id, status
+           status
          )
-         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
+         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)
          returning id`,
         [
           user.id,
@@ -520,8 +506,6 @@ async function saveProfile(user, payload, profileId = "") {
           groupEnabled ? integer(payload.groupMaxStudents, { min: 2, max: 8, fallback: 4 }) : 1,
           video.url || null,
           video.provider,
-          image?.url || null,
-          image?.boxFileId || null,
           "draft"
         ]
       );
@@ -1059,12 +1043,14 @@ async function listMyTeachers(user) {
             tsr.teacher_profile_id as "teacherProfileId",
             tp.display_name as "teacherName",
             tp.headline,
-            tp.image_url as "imageUrl",
+            coalesce(u.avatar, left(u.display_name, 2)) as avatar,
+            case when u.avatar_box_file_id is not null then '/api/learners/' || u.id || '/avatar' else coalesce(u.avatar_url, '') end as "avatarUrl",
             tsr.first_lesson_at as "firstLessonAt",
             tsr.last_lesson_at as "lastLessonAt",
             tsr.total_lessons as "totalLessons"
        from teacher_student_relationships tsr
        join teacher_profiles tp on tp.id = tsr.teacher_profile_id
+       join users u on u.id = tp.user_id
       where tsr.student_user_id = $1
       order by tsr.updated_at desc`,
     [user.id]

@@ -3,7 +3,15 @@ import { languageName, languageSelectOptions } from "../languages.js";
 import { languageSkillLevelLabel, languageSkillLevelOptions } from "../levels.js";
 
 function optionList(items, selected = "") {
-  return items.map((item) => `<option value="${escapeHtml(item)}" ${item === selected ? "selected" : ""}>${escapeHtml(item)}</option>`).join("");
+  return [...items].sort((a, b) => a.localeCompare(b)).map((item) => `<option value="${escapeHtml(item)}" ${item === selected ? "selected" : ""}>${escapeHtml(item)}</option>`).join("");
+}
+
+function optionPairs(items, selected = "", placeholder = "") {
+  const options = [...items]
+    .sort((a, b) => a[1].localeCompare(b[1]))
+    .map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label)}</option>`);
+  if (placeholder) options.unshift(`<option value="" ${selected ? "" : "selected"}>${escapeHtml(placeholder)}</option>`);
+  return options.join("");
 }
 
 function levelFilterOptions(selected = "") {
@@ -224,12 +232,12 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
         <label class="${ui.label}">Title<input class="${ui.input}" name="title" required maxlength="120" placeholder="Pronunciation practice: travel phrases"></label>
         <label class="${ui.label}">Description<textarea class="${ui.input} min-h-24" name="description" maxlength="1000" placeholder="Practice 5 useful phrases and give quick feedback."></textarea></label>
         <div class="grid gap-3 md:grid-cols-2">
-          <label class="${ui.label}">Room type<select class="${ui.input}" name="roomType"><option value="voice">Voice</option><option value="video">Video</option></select></label>
+          <label class="${ui.label}">Room type<select class="${ui.input}" name="roomType">${optionPairs([["video", "Video"], ["voice", "Voice"]])}</select></label>
           <label class="${ui.label}">Skill level<select class="${ui.input}" name="cefrLevel">${languageSkillLevelOptions(state.user.currentLevel || "A1")}</select></label>
           <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage" required>${languageOptionsWithPlaceholder(appConfig)}</select></label>
           <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "en-US")}</select></label>
           <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="4" value="4"></label>
-          <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate"><option value="false">Public</option><option value="true">Private</option></select></label>
+          <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate">${optionPairs([["true", "Private"], ["false", "Public"]])}</select></label>
         </div>
         <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
         <div class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-brand-line pt-4">
@@ -246,7 +254,7 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
     <form class="grid gap-3 lg:grid-cols-[minmax(180px,1fr)_repeat(2,minmax(140px,180px))_auto]" data-form="voiceVideoRoomFilters">
       <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
       <label class="${ui.label}">Skill level<select class="${ui.input}" name="cefrLevel">${levelFilterOptions(voiceVideoRoomFilters.cefrLevel)}</select></label>
-      <label class="${ui.label}">Type<select class="${ui.input}" name="roomType"><option value="">Any</option><option value="voice" ${voiceVideoRoomFilters.roomType === "voice" ? "selected" : ""}>Voice</option><option value="video" ${voiceVideoRoomFilters.roomType === "video" ? "selected" : ""}>Video</option></select></label>
+      <label class="${ui.label}">Type<select class="${ui.input}" name="roomType">${optionPairs([["video", "Video"], ["voice", "Voice"]], voiceVideoRoomFilters.roomType, "Any")}</select></label>
       <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
     </form>
   `;

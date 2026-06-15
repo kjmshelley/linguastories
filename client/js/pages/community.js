@@ -6,7 +6,7 @@ const POST_TYPES = ["Learning Update", "Practice Note", "Lesson Win", "Question 
 const COMMUNITY_PAGE_SIZE = 10;
 
 function optionList(items) {
-  return items.map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join("");
+  return [...items].sort((a, b) => a.localeCompare(b)).map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join("");
 }
 
 function displayName(person = {}) {
@@ -94,7 +94,7 @@ export function createPostModal() {
         <label class="${ui.label}">Picture<input class="${ui.input}" name="postImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
         <label class="${ui.label}">Post<textarea class="${ui.input} min-h-28" name="body" maxlength="5000" required placeholder="Share what you practiced, what helped, or what you want help with."></textarea></label>
         <div class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-brand-line pt-4">
-          <button class="${ui.primary}">${icon("message", "h-4 w-4")}<span>Post</span></button>
+          <button class="${ui.primary}" type="submit" data-pending-label="Posting">${icon("message", "h-4 w-4")}<span>Post</span></button>
         </div>
       </form>
     </div>
@@ -117,9 +117,14 @@ export function postImageModal({ state }, postId) {
   return `
     <div>
       <span class="${ui.tagGold}">${escapeHtml(post.author)}</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Post picture</h2>
-      <div class="mt-5 overflow-hidden rounded-lg border border-brand-line/80 bg-white">
-        <img class="max-h-[76vh] w-full object-contain" src="${escapeHtml(post.imageUrl)}" alt="${escapeHtml(post.author)}'s post picture">
+      <div class="relative mt-5 min-h-[18rem] overflow-hidden rounded-lg border border-brand-line/80 bg-white" data-loading-image-frame>
+        <div class="absolute inset-0 grid place-items-center text-brand-redDark" data-loading-image-indicator>
+          <svg class="h-8 w-8 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3"></circle>
+            <path class="opacity-90" d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <img class="max-h-[76vh] w-full object-contain opacity-0 transition-opacity duration-200" data-loading-image src="${escapeHtml(post.imageUrl)}" alt="${escapeHtml(post.author)}'s post picture">
       </div>
     </div>
   `;

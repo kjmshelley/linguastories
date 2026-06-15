@@ -44,8 +44,7 @@ const routeGroups = [
       ["teacherDashboard", "Teacher Workspace"],
       ["teacherAvailability", "Schedule"],
       ["teacherStudents", "Students"],
-      ["teacherLessonNotes", "Lessons"],
-      ["teacherProfiles", "Profile"]
+      ["teacherLessonNotes", "Lessons"]
     ]
   }
 ];
@@ -74,7 +73,7 @@ const hiddenRoutes = [
   ["teacherResources", "Resources"],
   ["teacherTemplates", "Lesson Templates"],
   ["profileSubscriptions", "Subscriptions"],
-  ["profileLanguages", "Languages I'm learning"],
+  ["profileProfiles", "My Profiles"],
   ["profile", "Profile"],
 ];
 
@@ -85,16 +84,14 @@ const routeSlugs = {
   voiceVideoRooms: "community/voice-video-rooms",
   voiceVideoRoom: "community/voice-video-rooms",
   findTeacher: "learning/find-teacher",
-  myLearning: "learning/my-learning",
   teacherProfileDetail: "learning/teacher-profile",
-  teacherProfileCreate: "learning/teacher-profiles/new",
-  teacherProfileEdit: "learning/teacher-profiles",
+  teacherProfileCreate: "profile/my-profiles/teacher/new",
+  teacherProfileEdit: "profile/my-profiles/teacher",
   bookLesson: "learning/teacher-profile",
   myLessons: "learning/my-lessons",
   myTeachers: "learning/my-teachers",
   learningNotes: "learning/learning-notes",
   teacherDashboard: "learning/teacher-dashboard",
-  teacherProfiles: "learning/teacher-profiles",
   teacherAvailability: "learning/availability",
   teacherBookings: "learning/unavailable-blocks",
   teacherStudents: "learning/students",
@@ -104,11 +101,10 @@ const routeSlugs = {
   profileInfo: "profile/my-info",
   profileSubscriptions: "profile/subscriptions",
   profileProfiles: "profile/my-profiles",
-  profileLanguages: "profile/language-profiles",
 };
 const browseRoutes = new Set([]);
 const communityRoutes = new Set(["communityLearner", "communityPost"]);
-const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
+const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
@@ -182,7 +178,14 @@ function activeRoute() {
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/posts/")) return "communityPost";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
-  if (/^learning\/teacher-profiles\/[^/]+\/edit$/.test(slug) || /^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) return "teacherProfileEdit";
+  if (slug === "profile/my-profiles/teacher/new") {
+    myProfilesTab = "teachers";
+    return "teacherProfileCreate";
+  }
+  if (/^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) {
+    myProfilesTab = "teachers";
+    return "teacherProfileEdit";
+  }
   if (/^learning\/teacher-profile\/[^/]+\/book$/.test(slug)) return "bookLesson";
   if (slug.startsWith("learning/teacher-profile/")) return "teacherProfileDetail";
   const match = routes.find(([id]) => (routeSlugs[id] || id) === slug);
@@ -196,8 +199,7 @@ function activeNavRoute() {
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
   if (["myTeachers", "learningNotes"].includes(route)) return "myLessons";
   if (route === "profileSubscriptions") return "profileInfo";
-  if (["profileLanguages"].includes(route)) return "profileInfo";
-  if (["teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "teacherProfiles";
+  if (["teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "profileProfiles";
   if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route;
 }
@@ -219,7 +221,6 @@ function activeVoiceVideoRoomId() {
 
 function activeTeacherProfileId() {
   const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/)
-    || location.pathname.match(/^\/app\/learning\/teacher-profiles\/([^/]+)\/edit\/?$/)
     || location.pathname.match(/^\/app\/profile\/my-profiles\/teacher\/([^/]+)\/edit\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
 }
@@ -229,7 +230,7 @@ function appPath(id, params = {}) {
   if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
-  if (id === "teacherProfileEdit") return `/app/learning/teacher-profiles/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
+  if (id === "teacherProfileEdit") return `/app/profile/my-profiles/teacher/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
   return `/app/${routeSlugs[id] || id}`;
 }
@@ -240,18 +241,15 @@ function routeIcon(id) {
     communityConnect: "search",
     voiceVideoRooms: "video",
     findTeacher: "search",
-    myLearning: "calendar",
     myLessons: "book",
     myTeachers: "users",
     teacherDashboard: "dashboard",
-    teacherProfiles: "user",
     teacherAvailability: "calendar",
     teacherBookings: "book",
     teacherStudents: "users",
     teacherLessonNotes: "book",
     profileInfo: "user",
     profileProfiles: "users",
-    profileLanguages: "globe",
   };
   return icon(icons[id] || "book");
 }
@@ -315,8 +313,8 @@ function subscriptionCapabilities() {
 
 function canAccessRoute(id) {
   const capabilities = subscriptionCapabilities();
-  if (["teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(id)) return true;
-  if (["teacherDashboard", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
+  if (["teacherProfileCreate", "teacherProfileEdit"].includes(id)) return true;
+  if (["teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
     return Boolean(capabilities.teacherWorkspace);
   }
   return true;
@@ -433,6 +431,84 @@ function syncMobileMenu() {
     ? "fixed inset-y-0 left-0 z-50 block w-[min(286px,calc(100vw-24px))] overflow-y-auto border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white shadow-[18px_0_50px_rgba(29,41,63,.26)] lg:sticky lg:top-0 lg:block lg:min-h-screen lg:w-[286px] lg:shadow-none"
     : "hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white lg:sticky lg:top-0 lg:block";
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = mobileMenuOpen ? "fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" : "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
+}
+
+function loadingSpinnerMarkup(className = "h-4 w-4") {
+  return `<svg class="${className} shrink-0 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3"></circle><path class="opacity-90" d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>`;
+}
+
+function setButtonPending(button, pendingLabel = "Working") {
+  if (!button?.matches?.("button, a, [role='button'], input[type='submit']")) return () => {};
+  if (!button || button.dataset.pending === "true" || button.disabled) return () => {};
+  const explicitLoadingLabel = button.dataset.pendingLabel;
+  const loadingLabel = explicitLoadingLabel || pendingLabel;
+  if (button.matches("input[type='submit']")) {
+    const originalValue = button.value;
+    const originalAriaBusy = button.getAttribute("aria-busy");
+    button.dataset.pending = "true";
+    button.setAttribute("aria-busy", "true");
+    button.disabled = true;
+    button.value = loadingLabel;
+    return () => {
+      if (!button.isConnected) return;
+      button.value = originalValue;
+      button.disabled = false;
+      if (originalAriaBusy === null) button.removeAttribute("aria-busy");
+      else button.setAttribute("aria-busy", originalAriaBusy);
+      delete button.dataset.pending;
+    };
+  }
+  const originalHtml = button.innerHTML;
+  const originalAriaBusy = button.getAttribute("aria-busy");
+  const originalAriaDisabled = button.getAttribute("aria-disabled");
+  const label = explicitLoadingLabel || button.querySelector("span")?.textContent?.trim() || button.textContent?.trim() || button.getAttribute("aria-label") || button.getAttribute("title") || pendingLabel;
+  const iconOnly = !button.querySelector("span") && (button.className.includes("place-items-center") || button.className.includes("w-11"));
+  button.dataset.pending = "true";
+  button.setAttribute("aria-busy", "true");
+  button.setAttribute("aria-disabled", "true");
+  button.classList.add("pointer-events-none", "opacity-75");
+  if ("disabled" in button) button.disabled = true;
+  button.innerHTML = iconOnly
+    ? loadingSpinnerMarkup("h-5 w-5")
+    : `${loadingSpinnerMarkup()}<span>${escapeHtml(label)}</span>`;
+  return () => {
+    if (!button.isConnected) return;
+    button.innerHTML = originalHtml;
+    button.classList.remove("pointer-events-none", "opacity-75");
+    if ("disabled" in button) button.disabled = false;
+    if (originalAriaBusy === null) button.removeAttribute("aria-busy");
+    else button.setAttribute("aria-busy", originalAriaBusy);
+    if (originalAriaDisabled === null) button.removeAttribute("aria-disabled");
+    else button.setAttribute("aria-disabled", originalAriaDisabled);
+    delete button.dataset.pending;
+  };
+}
+
+function pendingButtonForForm(form, submitter) {
+  if (submitter?.matches?.("button, input[type='submit']")) return submitter;
+  return form.querySelector("button[type='submit'], button:not([type]), input[type='submit']");
+}
+
+function bindLoadingImages(root = document) {
+  root.querySelectorAll("[data-loading-image]").forEach((image) => {
+    if (image.dataset.boundLoadingImage) return;
+    image.dataset.boundLoadingImage = "true";
+    const frame = image.closest("[data-loading-image-frame]");
+    const indicator = frame?.querySelector("[data-loading-image-indicator]");
+    const showImage = () => {
+      indicator?.classList.add("hidden");
+      image.classList.remove("opacity-0");
+    };
+    if (image.complete && image.naturalWidth > 0) {
+      showImage();
+      return;
+    }
+    image.addEventListener("load", showImage, { once: true });
+    image.addEventListener("error", () => {
+      indicator?.classList.add("hidden");
+      image.classList.remove("opacity-0");
+    }, { once: true });
+  });
 }
 
 async function api(path, options = {}) {
@@ -585,10 +661,10 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "findTeacher") requests.push(["teachers", `/api/teacher-student/teachers${teacherStudentQuery()}`]);
   if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
   if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
-  if (["profileProfiles", "teacherProfileCreate", "teacherProfileEdit", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
-  if (["myLearning", "myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
+  if (["profileProfiles", "teacherProfileCreate", "teacherProfileEdit", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
+  if (["myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
-  if (route === "myLearning" || route === "myLessons" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
+  if (route === "myLessons" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
   if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
   if (route === "teacherAvailability") requests.push(["availability", "/api/teacher-student/availability"]);
   if (route === "teacherDashboard") requests.push(["dashboard", "/api/teacher-student/dashboard"]);
@@ -630,7 +706,7 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
 }
 
 async function syncStripeReturnPayment(route = activeRoute()) {
-  if (route !== "myLearning" && route !== "myLessons") return;
+  if (route !== "myLessons") return;
   const params = new URLSearchParams(window.location.search);
   const bookingId = params.get("booking") || "";
   if (params.get("payment") !== "success" || !bookingId || syncedStripeReturnBookings.has(bookingId)) return;
@@ -641,7 +717,7 @@ async function syncStripeReturnPayment(route = activeRoute()) {
   params.delete("payment");
   const queryString = params.toString();
   history.replaceState({}, "", `${location.pathname}${queryString ? `?${queryString}` : ""}`);
-  await loadTeacherStudentData(route === "myLessons" ? "myLessons" : "myLearning", { force: true });
+  await loadTeacherStudentData("myLessons", { force: true });
 }
 
 function voiceVideoRoomQuery() {
@@ -1525,8 +1601,54 @@ function addTeacherTag(form, rawTag) {
   renderTeacherTags(form, [...existing, tag].slice(0, 16));
 }
 
+function teacherLanguageRows(form, role) {
+  return [...form.querySelectorAll(`[data-teacher-language-row="${role}"]`)];
+}
+
+function syncTeacherLanguageOptions(form, role) {
+  const rows = teacherLanguageRows(form, role);
+  const used = new Set();
+  rows.forEach((row) => {
+    const select = row.querySelector(`[name="${role}Language"]`);
+    if (!select) return;
+    const current = select.value || "";
+    const currentKey = current.toLowerCase();
+    if (current && used.has(currentKey)) {
+      const available = [...select.options].find((option) => option.value && !used.has(option.value.toLowerCase()));
+      if (available) select.value = available.value;
+    }
+    if (select.value) used.add(select.value.toLowerCase());
+  });
+  const selected = rows.map((row) => row.querySelector(`[name="${role}Language"]`)?.value || "").filter(Boolean);
+  rows.forEach((row) => {
+    const select = row.querySelector(`[name="${role}Language"]`);
+    if (!select) return;
+    [...select.options].forEach((option) => {
+      option.disabled = Boolean(option.value) && option.value !== select.value && selected.some((value) => value.toLowerCase() === option.value.toLowerCase());
+    });
+  });
+}
+
+function syncTeacherLanguageOptionGroups(form) {
+  ["teaches", "speaks"].forEach((role) => syncTeacherLanguageOptions(form, role));
+}
+
+function duplicateTeacherLanguages(form, role) {
+  const seen = new Set();
+  const duplicates = new Set();
+  teacherLanguageRows(form, role).forEach((row) => {
+    const select = row.querySelector(`[name="${role}Language"]`);
+    const language = select?.value || "";
+    if (!language) return;
+    const key = language.toLowerCase();
+    if (seen.has(key)) duplicates.add(select?.selectedOptions?.[0]?.textContent?.trim() || language);
+    seen.add(key);
+  });
+  return [...duplicates];
+}
+
 function teacherLanguagePayload(form, role) {
-  const rows = [...form.querySelectorAll(`[data-teacher-language-row="${role}"]`)];
+  const rows = teacherLanguageRows(form, role);
   const pairs = rows
     .map((row) => ({
       language: row.querySelector(`[name="${role}Language"]`)?.value || "",
@@ -1541,6 +1663,7 @@ function teacherLanguagePayload(form, role) {
 }
 
 function bindActions(root = document) {
+  bindLoadingImages(root);
   if (root === document && !document.documentElement.dataset.boundAppNavigationDelegates) {
     document.documentElement.dataset.boundAppNavigationDelegates = "true";
     document.addEventListener(
@@ -1628,6 +1751,16 @@ function bindActions(root = document) {
       });
     });
   });
+
+  root.querySelectorAll("[data-teacher-language-row]").forEach((row) => {
+    if (row.dataset.boundTeacherLanguageRow) return;
+    row.dataset.boundTeacherLanguageRow = "true";
+    const form = row.closest("form");
+    const role = row.dataset.teacherLanguageRow;
+    row.querySelector(`[name="${role}Language"]`)?.addEventListener("change", () => syncTeacherLanguageOptions(form, role));
+    if (form && role) syncTeacherLanguageOptions(form, role);
+  });
+
   root.querySelectorAll("[data-teacher-tag-input]").forEach((input) => {
     if (input.dataset.boundTeacherTagInput) return;
     input.dataset.boundTeacherTagInput = "true";
@@ -1660,10 +1793,12 @@ function bindActions(root = document) {
       if (nestedControl && nestedControl !== element) return;
       event.preventDefault();
       event.stopPropagation();
-      const [action, id, value] = element.dataset.action.split(":");
-      if (action === "closeModal") closeModal();
-      if (action === "like") await api(`/api/posts/${id}/like`, { method: "POST" });
-      if (action === "followLearner") await api(`/api/learners/${id}/follow`, { method: "POST" });
+      const restorePending = setButtonPending(element);
+      try {
+        const [action, id, value] = element.dataset.action.split(":");
+        if (action === "closeModal") closeModal();
+        if (action === "like") await api(`/api/posts/${id}/like`, { method: "POST" });
+        if (action === "followLearner") await api(`/api/learners/${id}/follow`, { method: "POST" });
       if (action === "openMobileMenu") {
         mobileMenuOpen = true;
         syncMobileMenu();
@@ -1730,16 +1865,23 @@ function bindActions(root = document) {
         render();
       }
       if (action === "addTeacherLanguageRow") {
-        const list = element.closest("form")?.querySelector(`[data-teacher-language-list="${id}"]`);
+        const form = element.closest("form");
+        const list = form?.querySelector(`[data-teacher-language-list="${id}"]`);
         if (list) {
           list.insertAdjacentHTML("beforeend", teacherLanguageRowHtml(id));
           bindActions(list);
+          syncTeacherLanguageOptions(form, id);
         }
       }
       if (action === "removeTeacherLanguageRow") {
         const row = element.closest("[data-teacher-language-row]");
         const list = row?.parentElement;
-        if (row && list && list.querySelectorAll("[data-teacher-language-row]").length > 1) row.remove();
+        const form = row?.closest("form");
+        const role = row?.dataset.teacherLanguageRow;
+        if (row && list && list.querySelectorAll("[data-teacher-language-row]").length > 1) {
+          row.remove();
+          if (form && role) syncTeacherLanguageOptions(form, role);
+        }
       }
       if (action === "removeTeacherTag") {
         const form = element.closest("form");
@@ -1846,7 +1988,8 @@ function bindActions(root = document) {
       }
       if (action === "goToLanguageProfiles") {
         closeModal();
-        history.pushState({}, "", appPath("profileLanguages"));
+        myProfilesTab = "languages";
+        history.pushState({}, "", appPath("profileProfiles"));
         render();
       }
       if (action === "openAddLanguageModal") showModal(addLanguageModal(context()));
@@ -1892,6 +2035,9 @@ function bindActions(root = document) {
         accountBillingData = {};
         await loadAccountBillingData({ force: true });
       }
+      } finally {
+        restorePending();
+      }
     });
   });
 
@@ -1931,9 +2077,17 @@ function bindActions(root = document) {
     }
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const restorePending = setButtonPending(pendingButtonForForm(form, event.submitter), "Saving");
+      try {
       const data = Object.fromEntries(new FormData(form).entries());
-      if (form.dataset.form === "login") return authRequest("/api/auth/login", data);
-      if (form.dataset.form === "register") return authRequest("/api/auth/register", data);
+      if (form.dataset.form === "login") {
+        await authRequest("/api/auth/login", data);
+        return;
+      }
+      if (form.dataset.form === "register") {
+        await authRequest("/api/auth/register", data);
+        return;
+      }
       if (form.dataset.form === "profileInfo") await api("/api/auth/profile", { method: "POST", body: JSON.stringify(data) });
       if (form.dataset.form === "avatarUpload") {
         const file = form.elements.avatarImage.files[0];
@@ -2012,7 +2166,17 @@ function bindActions(root = document) {
       }
       if (form.dataset.form === "teacherProfile" || form.dataset.form === "teacherProfileEdit") {
         const creatingTeacherProfile = form.dataset.form === "teacherProfile";
-        const imageFile = form.elements.teacherImage?.files?.[0];
+        syncTeacherLanguageOptionGroups(form);
+        const duplicateTeaches = duplicateTeacherLanguages(form, "teaches");
+        const duplicateSpeaks = duplicateTeacherLanguages(form, "speaks");
+        if (duplicateTeaches.length || duplicateSpeaks.length) {
+          const messages = [
+            duplicateTeaches.length ? `Teaches: ${duplicateTeaches.join(", ")}` : "",
+            duplicateSpeaks.length ? `Speaks: ${duplicateSpeaks.join(", ")}` : ""
+          ].filter(Boolean);
+          showModal(`<h2 class="text-xl font-black">Duplicate language</h2><p class="${ui.muted}">Each language can only be selected once in the same card.</p><p class="mt-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(messages.join(" · "))}</p>`);
+          return;
+        }
         const teachesPayload = teacherLanguagePayload(form, "teaches");
         const speaksPayload = teacherLanguagePayload(form, "speaks");
         if (!teachesPayload.count) {
@@ -2025,28 +2189,19 @@ function bindActions(root = document) {
         data.speaksLanguageLevels = speaksPayload.levels;
         syncTeacherTags(form);
         data.tags = form.querySelector("[data-teacher-tags-value]")?.value || "";
-        delete data.teacherImage;
         delete data.teachesLanguage;
         delete data.teachesLevel;
         delete data.speaksLanguage;
         delete data.speaksLevel;
         const profileId = data.id;
         delete data.id;
-        if (imageFile) {
-          try {
-            Object.assign(data, await processDeckImage(imageFile));
-          } catch (error) {
-            showModal(`<h2 class="text-xl font-black">Profile image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-            return;
-          }
-        }
         const path = form.dataset.form === "teacherProfileEdit" ? `/api/teacher-student/teacher-profiles/${profileId}` : "/api/teacher-student/teacher-profiles";
         await teacherStudentApi(path, { method: "POST", body: JSON.stringify(data) });
         teacherStudentLoadedKeys = new Set();
         if (activeRoute() === "teacherProfileCreate" || activeRoute() === "teacherProfileEdit") {
           myProfilesTab = "teachers";
-          history.pushState({}, "", appPath("teacherProfiles"));
-          await loadTeacherStudentData("teacherProfiles", { force: true });
+          history.pushState({}, "", appPath("profileProfiles"));
+          await loadTeacherStudentData("profileProfiles", { force: true });
           if (creatingTeacherProfile) {
             showModal(`
               <div>
@@ -2062,7 +2217,7 @@ function bindActions(root = document) {
           return;
         }
         closeModal();
-        await loadTeacherStudentData(activeRoute() === "profileProfiles" ? "profileProfiles" : "teacherProfiles", { force: true });
+        await loadTeacherStudentData("profileProfiles", { force: true });
       }
       if (form.dataset.form === "teacherAvailability") {
         await teacherStudentApi("/api/teacher-student/availability", { method: "POST", body: JSON.stringify(data) });
@@ -2163,6 +2318,9 @@ function bindActions(root = document) {
         renderChatDrawer();
       }
       form.reset();
+      } finally {
+        restorePending();
+      }
     });
   });
 }
@@ -2249,16 +2407,12 @@ function render() {
           ? "Practice"
         : route === "findTeacher"
           ? "Find a Teacher"
-        : route === "myLearning"
-          ? "My Lessons"
         : route === "myLessons"
           ? myLearningTabTitles.lessons
         : route === "myTeachers"
           ? myLearningTabTitles.teachers
-        : route === "profileProfiles" || route === "profileLanguages"
-          ? "Languages I'm learning"
-        : route === "teacherProfiles"
-          ? "Teacher Profile"
+        : route === "profileProfiles"
+          ? myProfilesTab === "teachers" ? "My Teacher Profiles" : "Languages I'm learning"
         : route === "teacherProfileCreate"
           ? "Create Teacher Profile"
           : route === "teacherProfileEdit"
@@ -2297,12 +2451,10 @@ function render() {
     teacherProfileCreate: teacherProfileCreateView,
     teacherProfileEdit: (ctx) => teacherProfileEditView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
     bookLesson: bookLessonView,
-    myLearning: myLearningView,
     myLessons: myLearningView,
     myTeachers: (ctx) => myLearningView({ ...ctx, myLearningTab: "teachers" }),
     learningNotes: learningNotesView,
     teacherDashboard: teacherDashboardView,
-    teacherProfiles: teacherProfilesPanel,
     teacherAvailability: teacherAvailabilityView,
     teacherBookings: teacherBookingsView,
     teacherStudents: teacherStudentsView,
@@ -2312,8 +2464,7 @@ function render() {
     profile: profileView,
     profileInfo: profileInfoView,
     profileSubscriptions: subscriptionsView,
-    profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) }),
-    profileLanguages: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "languages", teacherProfilesContent: teacherProfilesPanel(ctx) })
+    profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) })
   };
 	  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
 	  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";

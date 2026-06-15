@@ -239,7 +239,7 @@ async function getDirectChat(user) {
 
 async function getNotifications(user, directChat) {
   const accountNotifications = await accountService.listAccountNotifications(user.id).catch(() => []);
-  const unread = directChat.reduce((sum, conversation) => sum + Number(conversation.unreadCount || conversation.unread || 0), 0);
+  const unread = Number(directChat.unreadCount || 0);
   return [
     ...accountNotifications,
     ...(unread ? [{ type: "messages", label: "Messages", title: "Unread messages", body: `You have ${unread} unread message${unread === 1 ? "" : "s"}.`, tone: "info" }] : [])
@@ -247,7 +247,7 @@ async function getNotifications(user, directChat) {
 }
 
 async function getState(user) {
-  const [subscription, learningLanguages, posts, learners, learnerActivities, directChat] = await Promise.all([
+  const [subscription, learningLanguages, posts, learners, learnerActivities, directChatConversations] = await Promise.all([
     subscriptionFor(user),
     getLearningLanguages(user.id),
     getPosts(user),
@@ -255,6 +255,10 @@ async function getState(user) {
     getLearnerActivities(),
     getDirectChat(user)
   ]);
+  const directChat = {
+    conversations: directChatConversations,
+    unreadCount: directChatConversations.reduce((sum, conversation) => sum + Number(conversation.unreadCount || conversation.unread || 0), 0)
+  };
   return {
     user: { ...user, subscription },
     subscription,
@@ -267,7 +271,7 @@ async function getState(user) {
     dashboard: {
       communityPosts: posts.length,
       following: learners.filter((learner) => learner.following).length,
-      unreadMessages: directChat.reduce((sum, conversation) => sum + Number(conversation.unreadCount || conversation.unread || 0), 0)
+      unreadMessages: directChat.unreadCount
     }
   };
 }
