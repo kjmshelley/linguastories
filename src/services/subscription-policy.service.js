@@ -62,18 +62,22 @@ function normalizeTeacherPlan(value) {
 }
 
 function effectivePlanKey(user = {}) {
-  const teacherPlan = normalizeTeacherPlan(user.teacherSubscriptionTier || user.teacherPlanKey);
+  const teacherPlan = normalizeTeacherPlan(user.teacherSubscriptionTier || user.teacherPlanKey || (user.hasActiveTeacherProfile ? "teacher" : ""));
   if (teacherPlan) return teacherPlan;
   return normalizeLearnerPlan(user.learnerSubscriptionTier || user.subscriptionTier);
 }
 
 function subscriptionForUser(user = {}) {
+  const hasActiveTeacherProfile = Boolean(user.hasActiveTeacherProfile);
   if (user.account?.tier) {
     const tier = user.account.tier;
     const accountState = user.account.accountState || "active";
     const billingStatus = user.account.billingStatus || "none";
     const paidAccess = !INACTIVE_ACCOUNT_STATES.has(accountState);
     const capabilities = paidAccess ? { ...tier.featureFlags } : { ...PLAN_CAPABILITIES.free };
+    if (paidAccess && hasActiveTeacherProfile) {
+      capabilities.teacherWorkspace = true;
+    }
     if (!paidAccess) {
       capabilities.voiceVideoRooms = false;
       capabilities.teacherWorkspace = false;
@@ -105,7 +109,7 @@ function subscriptionForUser(user = {}) {
     };
   }
   const learnerKey = normalizeLearnerPlan(user.learnerSubscriptionTier || user.subscriptionTier);
-  const teacherKey = normalizeTeacherPlan(user.teacherSubscriptionTier || user.teacherPlanKey);
+  const teacherKey = normalizeTeacherPlan(user.teacherSubscriptionTier || user.teacherPlanKey || (hasActiveTeacherProfile ? "teacher" : ""));
   const effectiveKey = teacherKey || learnerKey;
   return {
     learner: {

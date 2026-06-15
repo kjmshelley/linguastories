@@ -61,3 +61,32 @@ test("free account capabilities remain free membership scoped", () => {
   assert.equal(subscription.capabilities.voiceVideoRooms, true);
   assert.equal(subscription.capabilities.maxLanguageProfiles, 10);
 });
+
+test("active teacher profiles unlock the teacher workspace on free accounts", () => {
+  const subscription = subscriptionPolicy.subscriptionForUser({
+    ...userWithAccount("active", {
+      key: "free",
+      name: "Free Membership",
+      monthlyPriceUsd: 0,
+      permissions: ["connect"],
+      featureFlags: {
+        voiceVideoRooms: true,
+        connect: true,
+        communityPosts: true,
+        maxLanguageProfiles: 10,
+        teacherWorkspace: false
+      }
+    }),
+    hasActiveTeacherProfile: true
+  });
+  assert.equal(subscription.effectivePlanKey, "free");
+  assert.equal(subscription.capabilities.teacherWorkspace, true);
+});
+
+test("inactive accounts do not receive teacher workspace from an active teacher profile", () => {
+  const subscription = subscriptionPolicy.subscriptionForUser({
+    ...userWithAccount("deactivated"),
+    hasActiveTeacherProfile: true
+  });
+  assert.equal(subscription.capabilities.teacherWorkspace, false);
+});

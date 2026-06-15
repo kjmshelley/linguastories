@@ -167,9 +167,28 @@ function userWithTeacherSubscription(user, subscription) {
   return activeTeacherStatus ? { ...user, teacherSubscriptionTier: subscription.planKey, teacherSubscriptionStatus: subscription.status } : user;
 }
 
+async function hasActiveTeacherProfile(userId) {
+  const result = await query(
+    `select exists (
+       select 1
+         from teacher_profiles
+        where user_id = $1
+          and status = 'published'
+     ) as "hasActiveTeacherProfile"`,
+    [userId]
+  );
+  return Boolean(result.rows[0]?.hasActiveTeacherProfile);
+}
+
 async function requireTeacherWorkspace(user) {
-  const subscription = await teacherSubscriptionForUser(user.id);
-  subscriptionPolicy.requireCapability(userWithTeacherSubscription(user, subscription), "teacherWorkspace");
+  const [subscription, activeTeacherProfile] = await Promise.all([
+    teacherSubscriptionForUser(user.id),
+    hasActiveTeacherProfile(user.id)
+  ]);
+  subscriptionPolicy.requireCapability(
+    userWithTeacherSubscription({ ...user, hasActiveTeacherProfile: activeTeacherProfile }, subscription),
+    "teacherWorkspace"
+  );
   return subscription;
 }
 

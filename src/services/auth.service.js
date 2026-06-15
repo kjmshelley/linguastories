@@ -135,6 +135,18 @@ async function attachSubscription(user) {
       limit 1`,
     [user.id]
   );
+  const activeTeacherProfile = await query(
+    `select exists (
+       select 1
+         from teacher_profiles
+        where user_id = $1
+          and status = 'published'
+     ) as "hasActiveTeacherProfile"`,
+    [user.id]
+  );
+  const teacherProfileAccess = {
+    hasActiveTeacherProfile: Boolean(activeTeacherProfile.rows[0]?.hasActiveTeacherProfile)
+  };
   const account = user.accountSubscriptionTier
     ? {
         userId: user.id,
@@ -163,7 +175,9 @@ async function attachSubscription(user) {
         }
       }
     : null;
-  const withTeacher = teacher.rows[0] ? { ...user, ...teacher.rows[0], account } : { ...user, account };
+  const withTeacher = teacher.rows[0]
+    ? { ...user, ...teacherProfileAccess, ...teacher.rows[0], account }
+    : { ...user, ...teacherProfileAccess, account };
   return { ...withTeacher, subscription: subscriptionPolicy.subscriptionForUser(withTeacher) };
 }
 
