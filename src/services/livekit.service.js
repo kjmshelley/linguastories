@@ -2,12 +2,11 @@ const crypto = require("crypto");
 const { pool, query } = require("../db/pool");
 const storageService = require("./storage.service");
 const subscriptionPolicy = require("./subscription-policy.service");
+const { LANGUAGE_SKILL_LEVELS, normalizeLanguageSkillLevel } = require("../constants/language-levels");
 
 const SESSION_LIMIT_SECONDS = 6 * 60;
-const COINS_PER_MINUTE = 1000;
-const MIN_JOIN_COINS = 1000;
 const TOKEN_TTL_SECONDS = 7 * 60;
-const CEFR_LEVELS = new Set(["A1", "A2", "B1", "B2", "C1", "C2"]);
+const CEFR_LEVELS = new Set(LANGUAGE_SKILL_LEVELS);
 const ROOM_TYPES = new Set(["voice", "video"]);
 const MAX_ROOM_PARTICIPANTS = 4;
 const ROOM_LIMIT_MS = SESSION_LIMIT_SECONDS * 1000;
@@ -29,8 +28,8 @@ function normalizeRoomType(value) {
 }
 
 function normalizeLevel(value) {
-  const level = String(value || "A1").toUpperCase();
-  if (!CEFR_LEVELS.has(level)) throw badRequest("Choose a valid CEFR level");
+  const level = normalizeLanguageSkillLevel(value);
+  if (!CEFR_LEVELS.has(level)) throw badRequest("Choose a valid skill level");
   return level;
 }
 
@@ -75,9 +74,7 @@ function mapRoom(row) {
       : SESSION_LIMIT_SECONDS,
     joinedSummary: row.joinedSummary || "",
     createdAt: row.createdAt,
-    costPerMinute: COINS_PER_MINUTE,
-    maxMinutes: 6,
-    maxCost: COINS_PER_MINUTE * 6
+    maxMinutes: 6
   };
 }
 
@@ -96,8 +93,7 @@ function mapSession(row) {
     durationSeconds: Number(row.durationSeconds || elapsedSeconds),
     elapsedSeconds,
     secondsRemaining: Math.max(0, SESSION_LIMIT_SECONDS - elapsedSeconds),
-    billedMinutes: Number(row.billedMinutes || Math.ceil(Math.max(1, elapsedSeconds) / 60)),
-    coinsCharged: Number(row.coinsCharged || 0)
+    billedMinutes: Number(row.billedMinutes || Math.ceil(Math.max(1, elapsedSeconds) / 60))
   };
 }
 
@@ -124,11 +120,6 @@ async function uploadRoomImage(userId, payload) {
 
 async function createRoom(user, payload) {
   subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
-  const wallet = await query(`select balance from wallets where user_id = $1`, [user.id]);
-  if (Number(wallet.rows[0]?.balance || 0) < MIN_JOIN_COINS) {
-    throw badRequest("You need at least 1000 coins to create a voice/video room.", 402);
-  }
-
   const activeRooms = await query(
     `select count(*)::int as count
        from voice_video_rooms
@@ -145,7 +136,8 @@ async function createRoom(user, payload) {
   if (title.length < 3) throw badRequest("Room title is required");
   const description = cleanText(payload.description, { max: 1000 });
   const roomType = normalizeRoomType(payload.roomType);
-  const targetLanguage = cleanText(payload.targetLanguage || user.targetLanguage || "ja-JP", { max: 80 });
+  const targetLanguage = cleanText(payload.targetLanguage, { fallback: "", max: 80 });
+  if (!targetLanguage) throw badRequest("Choose a target language");
   const sourceLanguage = cleanText(payload.sourceLanguage || "en-US", { max: 80 });
   const cefrLevel = normalizeLevel(payload.cefrLevel);
   const maxParticipants = Math.min(MAX_ROOM_PARTICIPANTS, Math.max(2, Number(payload.maxParticipants || MAX_ROOM_PARTICIPANTS)));
@@ -371,10 +363,6 @@ async function joinRoom(user, roomId) {
       throw badRequest("The host has not started this room yet.");
     }
 
-    const wallet = await client.query(`select balance from wallets where user_id = $1 for update`, [user.id]);
-    const balance = Number(wallet.rows[0]?.balance || 0);
-    if (balance < MIN_JOIN_COINS) throw badRequest("You need at least 1000 coins to join a voice/video room.", 402);
-
     const staleSession = await client.query(
       `select id
          from voice_video_room_sessions
@@ -396,7 +384,6 @@ async function joinRoom(user, roomId) {
               s.ended_at as "endedAt",
               s.duration_seconds as "durationSeconds",
               s.billed_minutes as "billedMinutes",
-              s.coins_charged as "coinsCharged",
               s.status
          from voice_video_room_sessions s
         where s.user_id = $1
@@ -460,7 +447,6 @@ async function joinRoom(user, roomId) {
                    ended_at as "endedAt",
                    duration_seconds as "durationSeconds",
                    billed_minutes as "billedMinutes",
-                   coins_charged as "coinsCharged",
                    status`,
         [roomId, user.id, participant.id, livekitIdentity]
       )).rows[0];
@@ -504,42 +490,23 @@ async function endSessionWithClient(client, userId, sessionId, status = "complet
   const session = sessionResult.rows[0];
   if (!session) throw badRequest("Session not found", 404);
 
-  const existingCharge = await client.query(
+  const existingSession = await client.query(
     `select s.id,
             s.room_id as "roomId",
             s.started_at as "startedAt",
             s.ended_at as "endedAt",
             s.duration_seconds as "durationSeconds",
             s.billed_minutes as "billedMinutes",
-            s.coins_charged as "coinsCharged",
             s.status
        from voice_video_room_sessions s
       where s.id = $1
         and s.status <> 'active'`,
     [sessionId]
   );
-  if (existingCharge.rows[0]) return existingCharge.rows[0];
+  if (existingSession.rows[0]) return existingSession.rows[0];
 
   const durationSeconds = Math.max(1, Math.min(SESSION_LIMIT_SECONDS, Math.ceil((Date.now() - new Date(session.startedAt).getTime()) / 1000)));
   const billedMinutes = Math.min(6, Math.max(1, Math.ceil(durationSeconds / 60)));
-  const coinsCharged = billedMinutes * COINS_PER_MINUTE;
-  const wallet = await client.query(`select balance from wallets where user_id = $1 for update`, [userId]);
-  const balance = Number(wallet.rows[0]?.balance || 0);
-  if (balance < coinsCharged) throw badRequest("Not enough coins to settle this room session.", 402);
-
-  await client.query(
-    `update wallets
-        set balance = balance - $2,
-            lifetime_spent = lifetime_spent + $2
-      where user_id = $1`,
-    [userId, coinsCharged]
-  );
-  await client.query(
-    `insert into voice_video_room_coin_transactions (user_id, room_id, session_id, coins)
-     values ($1, $2, $3, $4)
-     on conflict (session_id) do nothing`,
-    [userId, session.roomId, sessionId, coinsCharged]
-  );
   await client.query(
     `update voice_video_room_participants
         set status = $3,
@@ -554,8 +521,7 @@ async function endSessionWithClient(client, userId, sessionId, status = "complet
         set status = $2,
             ended_at = now(),
             duration_seconds = $3,
-            billed_minutes = $4,
-            coins_charged = $5
+            billed_minutes = $4
       where id = $1
       returning id,
                 room_id as "roomId",
@@ -563,9 +529,8 @@ async function endSessionWithClient(client, userId, sessionId, status = "complet
                 ended_at as "endedAt",
                 duration_seconds as "durationSeconds",
                 billed_minutes as "billedMinutes",
-                coins_charged as "coinsCharged",
                 status`,
-    [sessionId, status, durationSeconds, billedMinutes, coinsCharged]
+    [sessionId, status, durationSeconds, billedMinutes]
   );
 
   if (session.ownerUserId === userId) {
@@ -754,7 +719,7 @@ async function endSession(user, sessionId, status = "completed") {
     await client.query("begin");
     const session = await endSessionWithClient(client, user.id, sessionId, status);
     await client.query("commit");
-    return { session: mapSession(session), wallet: await walletSnapshot(user.id) };
+    return { session: mapSession(session) };
   } catch (error) {
     await client.query("rollback");
     throw error;
@@ -777,20 +742,7 @@ async function leaveRoom(user, roomId) {
   return endSession(user, active.rows[0].id, "completed");
 }
 
-async function walletSnapshot(userId) {
-  const result = await query(
-    `select balance,
-            lifetime_earned as "lifetimeEarned",
-            lifetime_spent as "lifetimeSpent"
-       from wallets
-      where user_id = $1`,
-    [userId]
-  );
-  return result.rows[0] || { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0 };
-}
-
 module.exports = {
-  COINS_PER_MINUTE,
   SESSION_LIMIT_SECONDS,
   createRoom,
   endSession,

@@ -1,18 +1,7 @@
 import { dashboardView } from "./pages/dashboard.js";
-import { adminView } from "./pages/admin.js";
-import { appreciateMomentModal, communityConnectView, communityLearnerView, communityMomentView, communityMomentsView, createPostModal, momentImageModal, profileMomentsView, supportGoalModal } from "./pages/community.js";
-import { deckView } from "./pages/deck.js";
-import { createGoalModal, editGoalModal, goalSupportersModal, goalsView } from "./pages/goals.js";
-import { landingView, loginView, signupView } from "./pages/public.js";
+import { communityConnectView, communityLearnerView, communityPostView, createPostModal, postImageModal } from "./pages/community.js";
+import { landingView, loginView, signupView } from "./pages/public.js?v=auth-logo-copy-20260615";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
-import { progressView } from "./pages/progress.js";
-import { reviewView } from "./pages/review.js";
-import { addDeckSentenceModal, createDeckModal, deleteDeckConfirmModal, deleteDeckSentenceConfirmModal, deleteMinedSentenceModal, deleteTopicConfirmModal, editMinedSentenceModal, editTopicModal, sentenceDeckDetailView, sentenceDeckLibraryView, sentenceDeckTopicSentencesView, sentenceMiningView, topicModal } from "./pages/sentence-mining.js";
-import { sentencesView } from "./pages/sentence-library.js";
-import { shadowingView } from "./pages/shadowing.js";
-import { shortStoriesView, shortStorySearchView } from "./pages/short-stories.js";
-import { storiesView } from "./pages/stories.js";
-import { storyDetailView, storyLevelModal } from "./pages/story-detail.js";
 import {
   bookLessonView,
   findTeacherView,
@@ -32,68 +21,50 @@ import {
   teacherTemplatesView
 } from "./pages/learning.js";
 import { createVoiceVideoRoomModal, voiceVideoRoomView, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
-import { coinRulesModal, walletView } from "./pages/wallet.js";
-import { languageName } from "./languages.js";
+import { languageName, languageSelectOptions } from "./languages.js";
+import { languageSkillLevelOptions } from "./levels.js";
 import { escapeHtml, icon, ui } from "./ui.js";
 import { gsap } from "../vendor/gsap/gsap.esm.js";
 
 const routeGroups = [
   {
-    title: "Menu",
+    title: "All users",
     routes: [
       ["dashboard", "Dashboard"],
-      ["shortStories", "Short Stories"],
-      ["sentenceMining", "Sentence Mining"]
-    ]
-  },
-  {
-    title: "Community",
-    routes: [
-      ["communityConnect", "Connect"],
-      ["communityMoments", "Moments"],
-      ["voiceVideoRooms", "Voice/Video Rooms"]
-    ]
-  },
-  {
-    title: "Learning",
-    routes: [
       ["findTeacher", "Find a Teacher"],
-      ["myLearning", "My Schedule"],
-      ["teacherDashboard", "Teacher Dashboard"]
+      ["myLessons", "My Lessons"],
+      ["voiceVideoRooms", "Practice"],
+      ["communityConnect", "Community"],
+      ["profileInfo", "My Account"]
     ]
   },
   {
-    title: "Profile",
+    title: "For teachers",
     routes: [
-      ["profileInfo", "My Account"],
-      ["profileProfiles", "My Profiles"],
-      ["profileGoals", "My Goals"],
-      ["profileMoments", "My Moments"],
-      ["profileWallet", "My Wallet"]
+      ["teacherDashboard", "Teacher Workspace"],
+      ["teacherAvailability", "Schedule"],
+      ["teacherStudents", "Students"],
+      ["teacherLessonNotes", "Lessons"],
+      ["teacherProfiles", "Profile"]
     ]
   }
 ];
 
 const myLearningTabTitles = {
-  lessons: "My Booked lessons",
+  lessons: "My Lessons",
   teachers: "My Booked Teachers",
   calendar: "My Scheduled Classes"
 };
 
 const hiddenRoutes = [
-  ["storyDetail", "Story"],
-  ["sentenceDeckLibrary", "Sentence Deck Library"],
-  ["sentenceDeckDetail", "Sentence Deck"],
-  ["sentenceDeckTopicSentences", "Topic Sentences"],
-  ["shortStorySearch", "Search Short Stories"],
   ["communityLearner", "Learner Profile"],
-  ["communityMoment", "Moment Detail"],
+  ["communityPost", "Post"],
   ["voiceVideoRoom", "Voice/Video Room"],
   ["teacherProfileDetail", "Teacher Profile"],
   ["teacherProfileCreate", "Create Teacher Profile"],
   ["teacherProfileEdit", "Edit Teacher Profile"],
   ["bookLesson", "Book Lesson"],
-  ["myLessons", "My Booked lessons"],
+  ["myLessons", "My Lessons"],
   ["myTeachers", "My Booked Teachers"],
   ["learningNotes", "Learning Notes"],
   ["teacherAvailability", "Availability"],
@@ -103,35 +74,21 @@ const hiddenRoutes = [
   ["teacherResources", "Resources"],
   ["teacherTemplates", "Lesson Templates"],
   ["profileSubscriptions", "Subscriptions"],
-  ["profileLanguages", "My Language Profiles"],
-  ["stories", "Stories"],
-  ["review", "SRS Review"],
-  ["shadowing", "Shadowing"],
-  ["wallet", "Coin Wallet"],
-  ["goals", "Goals"],
-  ["progress", "Progress Dashboard"],
+  ["profileLanguages", "Languages I'm learning"],
   ["profile", "Profile"],
-  ["admin", "Admin"]
 ];
 
 const routes = [...routeGroups.flatMap((group) => group.routes), ...hiddenRoutes];
 const routeSlugs = {
   dashboard: "dashboard",
-  sentenceMining: "sentence-mining",
-  sentenceDeckLibrary: "sentence-mining/deck-library",
-  sentences: "sentence-library",
-  shortStories: "short-stories",
-  shortStorySearch: "short-stories/search",
-  stories: "stories",
-  communityConnect: "community/connect",
-  communityMoments: "community/moments",
+  communityConnect: "community",
   voiceVideoRooms: "community/voice-video-rooms",
   voiceVideoRoom: "community/voice-video-rooms",
   findTeacher: "learning/find-teacher",
   myLearning: "learning/my-learning",
   teacherProfileDetail: "learning/teacher-profile",
-  teacherProfileCreate: "profile/my-profiles/teacher/new",
-  teacherProfileEdit: "profile/my-profiles/teacher",
+  teacherProfileCreate: "learning/teacher-profiles/new",
+  teacherProfileEdit: "learning/teacher-profiles",
   bookLesson: "learning/teacher-profile",
   myLessons: "learning/my-lessons",
   myTeachers: "learning/my-teachers",
@@ -148,33 +105,14 @@ const routeSlugs = {
   profileSubscriptions: "profile/subscriptions",
   profileProfiles: "profile/my-profiles",
   profileLanguages: "profile/language-profiles",
-  profileGoals: "profile/goals",
-  profileMoments: "profile/moments",
-  profileWallet: "profile/wallet"
 };
-const browseRoutes = new Set(["sentenceMining", "sentenceDeckLibrary", "sentenceDeckDetail", "sentenceDeckTopicSentences", "sentences", "shortStories", "shortStorySearch", "stories"]);
-const communityRoutes = new Set(["communityLearner", "communityMoment"]);
+const browseRoutes = new Set([]);
+const communityRoutes = new Set(["communityLearner", "communityPost"]);
 const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLearning", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
-let selectedProfileLanguage = "";
-let selectedFeaturedStoryIndex = 0;
-let shortStoryFilters = {
-  query: "",
-  status: "all",
-  maxMinutes: "",
-  reward: "all",
-  engagement: "all",
-  sort: "recommended"
-};
-let selectedStoryLanguages = {};
-let selectedStoryLevels = {};
-let selectedStoryTabs = {};
-let selectedStoryReaderOptions = {};
-let selectedLearnerProfileTabs = {};
-let communityListLimits = { communityConnect: 10, communityMoments: 10 };
-let connectMyCommunityOnly = true;
+let communityListLimits = { communityConnect: 10 };
 let voiceVideoRooms = [];
 let voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
 let voiceVideoRoomsLoaded = false;
@@ -182,8 +120,9 @@ let voiceVideoShowHistory = false;
 let voiceVideoPollTimer = null;
 let teacherStudentData = {};
 let accountBillingData = {};
-let teacherStudentFilters = { q: "", maxRate: "" };
+let teacherStudentFilters = { q: "", language: "", countryOfBirth: "", speaksLanguage: "", nativeSpeaker: "", professionalTutor: "", speakingPracticeOnly: "", maxRate: "" };
 let teacherStudentLoadedKeys = new Set();
+let teacherSearchDebounceTimer = null;
 let syncedStripeReturnBookings = new Set();
 let bookingSelection = { teacherProfileId: "", lessonType: "one_on_one", durationMinutes: "", date: "", startsAt: "" };
 let myLearningTab = "lessons";
@@ -209,18 +148,8 @@ let chatMobileScreen = "contacts";
 let mobileMenuOpen = false;
 let selectedConversationId = "";
 let pendingChatRecipientId = "";
-let topicAudioPlayback = { active: false, stopRequested: false, audio: null, resolve: null, runId: 0 };
-let activeReviewResults = { key: "", total: 0, responses: [] };
 let seenNotificationKeys = loadSeenNotificationKeys();
 
-const defaultReviewSettings = {
-  playAudioAutomatically: true,
-  showSourceLanguage: false,
-  showRomanization: false,
-  goToNextCardAutomatically: true,
-  autoNextDelaySeconds: 5
-};
-let reviewSettings = loadReviewSettings();
 
 const appShell = document.querySelector("#appShell");
 const sidebar = document.querySelector("#sidebar");
@@ -229,18 +158,12 @@ const view = document.querySelector("#view");
 const nav = document.querySelector("#nav");
 const chatDrawer = document.querySelector("#chatDrawer");
 const pageTitle = document.querySelector("#pageTitle");
-const coinBalance = document.querySelector("#coinBalance");
-const mobileCoinBalance = document.querySelector("#mobileCoinBalance");
-const topbarLanguage = document.querySelector("#topbarLanguage");
 const messageBadge = document.querySelector("#messageBadge");
 const notificationBadge = document.querySelector("#notificationBadge");
 const mobileTopbar = document.querySelector("#mobileTopbar");
 const mobilePageTitle = document.querySelector("#mobilePageTitle");
 const mobileMessageBadge = document.querySelector("#mobileMessageBadge");
-const shortStorySearchButton = document.querySelector("#shortStorySearchButton");
-const mobileShortStorySearchButton = document.querySelector("#mobileShortStorySearchButton");
 const mobileMenuBackdrop = document.querySelector("#mobileMenuBackdrop");
-let lastCoinAnimationOrigin = null;
 let lastRenderedPageKey = "";
 
 function scrollToPageTopOnRouteChange() {
@@ -250,32 +173,16 @@ function scrollToPageTopOnRouteChange() {
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
 
-function hasActiveShortStoryFilters() {
-  return Boolean(
-    String(shortStoryFilters.query || "").trim() ||
-      shortStoryFilters.status !== "all" ||
-      shortStoryFilters.maxMinutes ||
-      shortStoryFilters.reward !== "all" ||
-      shortStoryFilters.engagement !== "all" ||
-      shortStoryFilters.sort !== "recommended"
-  );
-}
-
 function activeRoute() {
   const hashRoute = location.hash.replace("#", "");
   if (hashRoute) return routes.some(([id]) => id === hashRoute) ? hashRoute : "dashboard";
-  if (location.pathname === "/sentence-mining") return "sentenceMining";
   if (!location.pathname.startsWith("/app")) return "dashboard";
   const slug = location.pathname.replace(/^\/app\/?/, "").replace(/\/$/, "") || "dashboard";
-  if (slug === "community") return "communityMoments";
-  if (slug === "sentence-mining/deck-library") return "sentenceDeckLibrary";
-  if (/^sentence-mining\/decks\/[^/]+\/topics\/[^/]+$/.test(slug)) return "sentenceDeckTopicSentences";
-  if (slug.startsWith("sentence-mining/decks/")) return "sentenceDeckDetail";
-  if (slug.startsWith("stories/")) return "storyDetail";
+  if (slug === "community/connect") return "communityConnect";
   if (slug.startsWith("community/connect/")) return "communityLearner";
-  if (slug.startsWith("community/moments/")) return "communityMoment";
+  if (slug.startsWith("community/posts/")) return "communityPost";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
-  if (/^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) return "teacherProfileEdit";
+  if (/^learning\/teacher-profiles\/[^/]+\/edit$/.test(slug) || /^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) return "teacherProfileEdit";
   if (/^learning\/teacher-profile\/[^/]+\/book$/.test(slug)) return "bookLesson";
   if (slug.startsWith("learning/teacher-profile/")) return "teacherProfileDetail";
   const match = routes.find(([id]) => (routeSlugs[id] || id) === slug);
@@ -284,31 +191,15 @@ function activeRoute() {
 
 function activeNavRoute() {
   const route = activeRoute();
-  if (route === "sentences" || route === "deck") return "sentenceMining";
-  if (route === "sentenceDeckLibrary" || route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences") return "sentenceMining";
-  if (route === "shortStorySearch") return "shortStories";
   if (route === "voiceVideoRoom") return "voiceVideoRooms";
+  if (route === "communityPost") return "communityConnect";
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
-  if (["myLessons", "myTeachers", "learningNotes"].includes(route)) return "myLearning";
+  if (["myTeachers", "learningNotes"].includes(route)) return "myLessons";
   if (route === "profileSubscriptions") return "profileInfo";
-  if (["profileLanguages", "teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "profileProfiles";
+  if (["profileLanguages"].includes(route)) return "profileInfo";
+  if (["teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "teacherProfiles";
   if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
-  return route === "storyDetail" ? "stories" : route;
-}
-
-function activeStoryId() {
-  const match = location.pathname.match(/^\/app\/stories\/([^/]+)\/?$/);
-  return match ? decodeURIComponent(match[1]) : "";
-}
-
-function activeDeckId() {
-  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/([^/]+)(?:\/topics\/[^/]+)?\/?$/);
-  return match ? decodeURIComponent(match[1]) : "";
-}
-
-function activeTopicId() {
-  const match = location.pathname.match(/^\/app\/sentence-mining\/decks\/[^/]+\/topics\/([^/]+)\/?$/);
-  return match ? decodeURIComponent(match[1]) : "";
+  return route;
 }
 
 function activeLearnerId() {
@@ -317,27 +208,8 @@ function activeLearnerId() {
 }
 
 function activePostId() {
-  const match = location.pathname.match(/^\/app\/community\/moments\/([^/]+)\/?$/);
+  const match = location.pathname.match(/^\/app\/community\/posts\/([^/]+)\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
-}
-
-function resetLanguageScopedViews() {
-  shortStoryFilters = {
-    query: "",
-    status: "all",
-    maxMinutes: "",
-    reward: "all",
-    engagement: "all",
-    sort: "recommended"
-  };
-  selectedFeaturedStoryIndex = 0;
-  selectedStoryLanguages = {};
-  selectedStoryLevels = {};
-  selectedStoryTabs = {};
-  selectedStoryReaderOptions = {};
-  activeReviewResults = { key: "", total: 0, responses: [] };
-  voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
-  voiceVideoRoomsLoaded = false;
 }
 
 function activeVoiceVideoRoomId() {
@@ -347,24 +219,17 @@ function activeVoiceVideoRoomId() {
 
 function activeTeacherProfileId() {
   const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/)
+    || location.pathname.match(/^\/app\/learning\/teacher-profiles\/([^/]+)\/edit\/?$/)
     || location.pathname.match(/^\/app\/profile\/my-profiles\/teacher\/([^/]+)\/edit\/?$/);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
-function momentIdFromPath(path) {
-  const match = String(path || "").match(/^\/app\/community\/moments\/([^/]+)\/?$/);
-  return match ? decodeURIComponent(match[1]) : "";
-}
-
 function appPath(id, params = {}) {
-  if (id === "storyDetail") return `/app/stories/${encodeURIComponent(params.storyId || "")}`;
-  if (id === "sentenceDeckDetail") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}`;
-  if (id === "sentenceDeckTopicSentences") return `/app/sentence-mining/decks/${encodeURIComponent(params.deckId || "")}/topics/${encodeURIComponent(params.topicId || "")}`;
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
-  if (id === "communityMoment") return `/app/community/moments/${encodeURIComponent(params.postId || "")}`;
+  if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
-  if (id === "teacherProfileEdit") return `/app/profile/my-profiles/teacher/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
+  if (id === "teacherProfileEdit") return `/app/learning/teacher-profiles/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
   return `/app/${routeSlugs[id] || id}`;
 }
@@ -372,10 +237,7 @@ function appPath(id, params = {}) {
 function routeIcon(id) {
   const icons = {
     dashboard: "dashboard",
-    shortStories: "reading",
-    sentenceMining: "scanText",
     communityConnect: "search",
-    communityMoments: "message",
     voiceVideoRooms: "video",
     findTeacher: "search",
     myLearning: "calendar",
@@ -383,13 +245,13 @@ function routeIcon(id) {
     myTeachers: "users",
     teacherDashboard: "dashboard",
     teacherProfiles: "user",
+    teacherAvailability: "calendar",
     teacherBookings: "book",
+    teacherStudents: "users",
+    teacherLessonNotes: "book",
     profileInfo: "user",
     profileProfiles: "users",
     profileLanguages: "globe",
-    profileGoals: "goal",
-    profileMoments: "message",
-    profileWallet: "wallet"
   };
   return icon(icons[id] || "book");
 }
@@ -398,17 +260,11 @@ function normalizeAppUrl() {
   if (!location.pathname.startsWith("/app")) return;
   const route = activeRoute();
   const cleanPath =
-    route === "storyDetail"
-      ? appPath(route, { storyId: activeStoryId() })
-      : route === "sentenceDeckDetail"
-        ? appPath(route, { deckId: activeDeckId() })
-      : route === "sentenceDeckTopicSentences"
-        ? appPath(route, { deckId: activeDeckId(), topicId: activeTopicId() })
-      : route === "communityLearner"
+    route === "communityLearner"
         ? appPath(route, { learnerId: activeLearnerId() })
-        : route === "communityMoment"
+        : route === "communityPost"
           ? appPath(route, { postId: activePostId() })
-          : route === "voiceVideoRoom"
+        : route === "voiceVideoRoom"
             ? appPath(route, { roomId: activeVoiceVideoRoomId() || activeVoiceVideoRoom?.id })
           : route === "teacherProfileDetail"
             ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
@@ -425,21 +281,11 @@ function context() {
     state,
     appConfig,
     appPath,
-    activeStoryId,
     activeLearnerId,
     activePostId,
     activeVoiceVideoRoomId,
     activeTeacherProfileId,
-    selectedProfileLanguage,
-    selectedFeaturedStoryIndex,
-    shortStoryFilters,
-    selectedStoryLanguages,
-    selectedStoryLevels,
-    selectedStoryTabs,
-    selectedStoryReaderOptions,
-    selectedLearnerProfileTabs,
     communityListLimits,
-    connectMyCommunityOnly,
     voiceVideoRooms,
     voiceVideoRoomFilters,
     voiceVideoShowHistory,
@@ -469,7 +315,7 @@ function subscriptionCapabilities() {
 
 function canAccessRoute(id) {
   const capabilities = subscriptionCapabilities();
-  if (["voiceVideoRooms", "voiceVideoRoom"].includes(id)) return Boolean(capabilities.voiceVideoRooms);
+  if (["teacherProfiles", "teacherProfileCreate", "teacherProfileEdit"].includes(id)) return true;
   if (["teacherDashboard", "teacherProfileCreate", "teacherProfiles", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
     return Boolean(capabilities.teacherWorkspace);
   }
@@ -477,33 +323,32 @@ function canAccessRoute(id) {
 }
 
 function subscriptionLockedView(route) {
-  const message = ["voiceVideoRooms", "voiceVideoRoom"].includes(route)
-    ? "Voice/Video Rooms require the Basic tier or higher."
-    : "Teacher workspace access requires the Teacher tier or Teacher Pro tier.";
   return `
     <section class="${ui.card}">
       <span class="${ui.tagGold}">Subscription</span>
       <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Upgrade required</h2>
-      <p class="mt-2 ${ui.muted}">${escapeHtml(message)}</p>
-      <a class="${ui.primary} mt-5" href="${appPath("profileSubscriptions")}" data-app-link>${icon("wallet", "h-4 w-4")}<span>View Subscriptions</span></a>
+      <p class="mt-2 ${ui.muted}">Teacher workspace access requires a teacher account.</p>
+      <a class="${ui.primary} mt-5" href="${appPath("profileSubscriptions")}" data-app-link>${icon("user", "h-4 w-4")}<span>View Account</span></a>
     </section>
   `;
 }
 
 function renderNav() {
   const activeNav = activeNavRoute();
+  const capabilities = subscriptionCapabilities();
   nav.innerHTML = routeGroups
-    .map(
-      (group) => `
+    .map((group) => {
+      if (group.title === "For teachers" && !capabilities.teacherWorkspace) return "";
+      const visibleRoutes = group.routes.filter(([id]) => canAccessRoute(id));
+      if (!visibleRoutes.length) return "";
+      return `
         <section class="grid gap-1.5">
           <div class="px-2 text-[11px] font-semibold uppercase text-white/38">${group.title}</div>
-          ${group.routes
-            .filter(([id]) => canAccessRoute(id))
+          ${visibleRoutes
             .map(([id, label]) => {
               const active =
                 activeNav === id ||
-                (activeNav === "communityLearner" && id === "communityConnect") ||
-                (activeNav === "communityMoment" && id === "communityMoments");
+                (activeNav === "communityLearner" && id === "communityConnect");
               return `
                 <a href="${appPath(id)}" data-app-link class="flex min-h-10 items-center gap-2.5 rounded-lg px-3 text-sm font-medium no-underline transition ${
                   active ? "bg-white/12 text-white ring-1 ring-white/10" : "text-white/58 hover:bg-white/[.07] hover:text-white"
@@ -515,32 +360,9 @@ function renderNav() {
             })
             .join("")}
         </section>
-      `
-    )
+      `;
+    })
     .join("");
-}
-
-function syncShortStorySearchButtons(route = activeRoute()) {
-  const show = route === "shortStories" || route === "shortStorySearch";
-  const active = hasActiveShortStoryFilters();
-  const buttons = [shortStorySearchButton, mobileShortStorySearchButton].filter(Boolean);
-  buttons.forEach((button) => {
-    const isDesktop = button === shortStorySearchButton;
-    button.className = `${show ? "flex" : "hidden"} h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-semibold shadow-sm transition ${
-      route === "shortStorySearch"
-        ? "border-brand-orange/60 bg-brand-orange text-white hover:bg-brand-redDark"
-        : active
-          ? "border-brand-orange/60 bg-brand-mist text-brand-redDark hover:-translate-y-0.5 hover:bg-white"
-          : "border-brand-line bg-white/70 text-brand-charcoal hover:-translate-y-0.5 hover:border-brand-orange/60 hover:bg-white"
-    }`;
-    if (!isDesktop) button.className = button.className.replace("px-3 text-sm", "w-11 px-0 text-sm");
-    const iconElement = button.querySelector("svg");
-    const labelElement = button.querySelector("span");
-    if (iconElement) iconElement.classList.toggle("text-white", route === "shortStorySearch");
-    if (iconElement) iconElement.classList.toggle("text-brand-redDark", route !== "shortStorySearch");
-    if (labelElement) labelElement.className = route === "shortStorySearch" ? "text-white" : active ? "text-brand-redDark" : "text-brand-graphite";
-    button.title = active ? "Search filters active" : "Search Short Stories";
-  });
 }
 
 function notificationItems() {
@@ -599,7 +421,7 @@ function notificationsModal() {
                 )
                 .join("")}
             </div>`
-          : `<p class="mt-4 ${ui.muted}">You are all caught up. New messages, due reviews, goal deadlines, and wallet updates will show here.</p>`
+          : `<p class="mt-4 ${ui.muted}">You are all caught up. New messages, lesson updates, and community replies will show here.</p>`
       }
     </div>
   `;
@@ -613,67 +435,7 @@ function syncMobileMenu() {
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = mobileMenuOpen ? "fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" : "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
 }
 
-function captureCoinAnimationOrigin(element) {
-  if (!element) return;
-  const rect = element.getBoundingClientRect();
-  if (!rect.width && !rect.height) return;
-  lastCoinAnimationOrigin = {
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2
-  };
-}
-
-function visibleCoinTarget() {
-  const candidates = [coinBalance, mobileCoinBalance].filter(Boolean);
-  return candidates.find((element) => element.getClientRects().length && element.offsetParent !== null) || coinBalance || mobileCoinBalance;
-}
-
-function animateCoinsToWallet(amount, origin = lastCoinAnimationOrigin) {
-  const target = visibleCoinTarget();
-  if (!gsap || !target || !amount || amount <= 0) return;
-
-  const targetRect = target.getBoundingClientRect();
-  const start = origin || { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-  const end = {
-    x: targetRect.left + targetRect.width / 2,
-    y: targetRect.top + targetRect.height / 2
-  };
-  const count = Math.min(8, Math.max(3, amount));
-  const layer = document.createElement("div");
-  layer.className = "pointer-events-none fixed inset-0 z-[70]";
-  document.body.appendChild(layer);
-
-  for (let index = 0; index < count; index += 1) {
-    const coin = document.createElement("div");
-    coin.className = "absolute grid h-7 w-7 place-items-center rounded-full border border-brand-orange/40 bg-brand-mist text-xs font-black text-brand-brown shadow-[0_8px_18px_rgba(29,41,63,.18)]";
-    coin.textContent = "¢";
-    coin.style.left = `${start.x - 14}px`;
-    coin.style.top = `${start.y - 14}px`;
-    layer.appendChild(coin);
-    gsap.to(coin, {
-      x: end.x - start.x + (index % 2 ? 10 : -10),
-      y: end.y - start.y,
-      scale: 0.55,
-      opacity: 0,
-      rotate: 260,
-      duration: 0.72,
-      delay: index * 0.045,
-      ease: "power2.inOut",
-      onComplete: () => coin.remove()
-    });
-  }
-
-  gsap.fromTo(target, { scale: 1 }, { scale: 1.18, duration: 0.16, yoyo: true, repeat: 1, ease: "power1.out", delay: 0.42 });
-  window.setTimeout(() => layer.remove(), 1400);
-  lastCoinAnimationOrigin = null;
-}
-
 async function api(path, options = {}) {
-  const hadWalletState = Boolean(state?.wallet);
-  const requestMethod = String(options.method || "GET").toUpperCase();
-  const previousBalance = Number(state?.wallet?.balance || 0);
-  const previousTargetLanguage = state?.user?.targetLanguage || "";
-  const animationOrigin = lastCoinAnimationOrigin;
   const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
   if (response.status === 401) {
     state = null;
@@ -686,15 +448,7 @@ async function api(path, options = {}) {
     return state;
   }
   state = await response.json();
-  const nextBalance = Number(state?.wallet?.balance || 0);
-  const languageExists = state.learningLanguages?.some((item) => item.language === selectedProfileLanguage);
-  if (!selectedProfileLanguage || !languageExists) selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
-  if (previousTargetLanguage && previousTargetLanguage !== state.user.targetLanguage) {
-    voiceVideoRoomsLoaded = false;
-    teacherStudentLoadedKeys = new Set();
-  }
   render();
-  if (hadWalletState && requestMethod !== "GET" && nextBalance > previousBalance) animateCoinsToWallet(nextBalance - previousBalance, animationOrigin);
   return state;
 }
 
@@ -710,7 +464,6 @@ async function authRequest(path, data) {
     return;
   }
   state = await response.json();
-  selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
   history.pushState({}, "", appPath("dashboard"));
   render();
 }
@@ -770,12 +523,31 @@ async function loadAccountBillingData({ force = false } = {}) {
 
 function teacherStudentQuery() {
   const params = new URLSearchParams();
-  if (activeRoute() === "findTeacher" && state?.user?.targetLanguage) params.set("language", state.user.targetLanguage);
   Object.entries(teacherStudentFilters).forEach(([key, value]) => {
     if (value) params.set(key, value);
   });
   const queryString = params.toString();
   return queryString ? `?${queryString}` : "";
+}
+
+function teacherSearchFiltersFromForm(form) {
+  const data = Object.fromEntries(new FormData(form).entries());
+  return {
+    q: data.q || "",
+    language: data.language || "",
+    countryOfBirth: data.countryOfBirth || "",
+    speaksLanguage: data.speaksLanguage || "",
+    nativeSpeaker: data.nativeSpeaker || "",
+    professionalTutor: data.professionalTutor || "",
+    speakingPracticeOnly: data.speakingPracticeOnly || "",
+    maxRate: data.maxRate || ""
+  };
+}
+
+async function applyTeacherSearchFilters(form) {
+  teacherStudentFilters = teacherSearchFiltersFromForm(form);
+  teacherStudentLoadedKeys = new Set();
+  await loadTeacherStudentData("findTeacher", { force: true });
 }
 
 function localDateKey(date = new Date()) {
@@ -816,18 +588,19 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (["profileProfiles", "teacherProfileCreate", "teacherProfileEdit", "teacherProfiles", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
   if (["myLearning", "myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
-  if (route === "myLearning" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
+  if (route === "myLearning" || route === "myLessons" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
   if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
   if (route === "teacherAvailability") requests.push(["availability", "/api/teacher-student/availability"]);
   if (route === "teacherDashboard") requests.push(["dashboard", "/api/teacher-student/dashboard"]);
   if (route === "teacherResources") requests.push(["resources", "/api/teacher-student/resources"]);
   if (route === "teacherTemplates") requests.push(["templates", "/api/teacher-student/templates"]);
   if (route === "profileInfo" || route === "profileSubscriptions") requests.push(["subscription", "/api/teacher-student/subscription"]);
+  if (route === "profileSubscriptions") requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
   if (!requests.length) return;
   const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path)]));
   loaded.forEach(([name, body]) => {
     if (!body) return;
-    if (name === "teachers") teacherStudentData.teachers = body.teachers || [];
+    if (name === "teachers") teacherStudentData = { ...teacherStudentData, teachers: body.teachers || [], filterOptions: body.filterOptions || {} };
     if (name === "profileDetail") teacherStudentData = { ...teacherStudentData, profile: body.profile, reviews: body.reviews || [] };
     if (name === "bookingPage") {
       teacherStudentData = { ...teacherStudentData, bookingPage: body };
@@ -873,7 +646,6 @@ async function syncStripeReturnPayment(route = activeRoute()) {
 
 function voiceVideoRoomQuery() {
   const params = new URLSearchParams();
-  if (state?.user?.targetLanguage) params.set("targetLanguage", state.user.targetLanguage);
   Object.entries(voiceVideoRoomFilters).forEach(([key, value]) => {
     if (value) params.set(key, value);
   });
@@ -898,16 +670,14 @@ function updateVoiceVideoCountdown() {
   const remaining = Math.max(0, 360 - elapsed);
   activeVoiceVideoSession = { ...activeVoiceVideoSession, elapsedSeconds: elapsed, secondsRemaining: remaining };
   const countdown = document.querySelector("[data-room-countdown]");
-  const charge = document.querySelector("[data-room-estimated-charge]");
   if (countdown) {
     const minutes = Math.floor(remaining / 60);
     const seconds = remaining % 60;
     countdown.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
-  if (charge) charge.textContent = Math.min(6000, Math.max(1000, Math.ceil(Math.max(1, elapsed) / 60) * 1000));
   if (remaining <= 180 && !livekitWarningFlags.three) {
     livekitWarningFlags.three = true;
-    showModal(`<h2 class="text-xl font-black">3 minutes remaining</h2><p class="${ui.muted}">Keep the practice focused: one sentence, one correction, one retry.</p>`);
+    showModal(`<h2 class="text-xl font-black">3 minutes remaining</h2><p class="${ui.muted}">Keep the practice focused: one phrase, one correction, one retry.</p>`);
   }
   if (remaining <= 60 && !livekitWarningFlags.one) {
     livekitWarningFlags.one = true;
@@ -1182,7 +952,7 @@ async function disconnectLiveKitTracks() {
     livekitHiddenAudioLayer = null;
     livekitLocalTracks = [];
   } catch (_error) {
-    // The server-side end call is the billing source of truth.
+    // Best-effort cleanup after disconnect.
   }
 }
 
@@ -1200,8 +970,6 @@ async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
       method: "POST",
       body: JSON.stringify(wasTimedOut ? { status: "timed_out" } : {})
     });
-    if (payload?.wallet && state?.wallet) state.wallet = { ...state.wallet, ...payload.wallet };
-    const charged = payload?.session?.coinsCharged;
     activeVoiceVideoRoom = null;
     activeVoiceVideoSession = null;
     activeVoiceVideoParticipants = [];
@@ -1209,9 +977,6 @@ async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
     if (activeRoute() === "voiceVideoRoom") history.pushState({}, "", appPath("voiceVideoRooms"));
     await loadVoiceVideoRooms({ force: true });
     render();
-    if (!silent && charged) {
-      showModal(`<h2 class="text-xl font-black">Session ended</h2><p class="${ui.muted}">You were charged ${charged} coins for ${payload.session.billedMinutes} minute${payload.session.billedMinutes === 1 ? "" : "s"} of focused practice.</p>`);
-    }
   } finally {
     endingVoiceVideoRoom = false;
   }
@@ -1329,141 +1094,6 @@ function showModal(html, options = {}) {
   bindActions(modal);
 }
 
-function loadReviewSettings() {
-  try {
-    return { ...defaultReviewSettings, ...JSON.parse(localStorage.getItem("linguaStoriesReviewSettings") || "{}") };
-  } catch {
-    return { ...defaultReviewSettings };
-  }
-}
-
-function saveReviewSettings() {
-  localStorage.setItem("linguaStoriesReviewSettings", JSON.stringify(reviewSettings));
-}
-
-function reviewDelayControl() {
-  return `
-    <label class="grid gap-2 rounded-lg border border-brand-line/80 bg-white/70 px-4 py-3 text-sm font-bold text-brand-ink sm:grid-cols-[minmax(0,1fr)_120px] sm:items-center">
-      <span>Seconds before next card</span>
-      <input class="${ui.input}" type="number" min="1" max="60" step="1" value="${escapeHtml(reviewSettings.autoNextDelaySeconds || 5)}" data-review-setting-number="autoNextDelaySeconds">
-    </label>
-  `;
-}
-
-function reviewSettingControl(key, label) {
-  return `
-    <label class="flex items-center justify-between gap-4 rounded-lg border border-brand-line/80 bg-white/70 px-4 py-3 text-sm font-bold text-brand-ink">
-      <span>${escapeHtml(label)}</span>
-      <input class="h-5 w-5 accent-brand-red" type="checkbox" data-review-setting="${key}" ${reviewSettings[key] ? "checked" : ""}>
-    </label>
-  `;
-}
-
-function reviewSettingsModal() {
-  return `
-    <div>
-      <span class="${ui.tagGold}">Review Settings</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Sentence Review</h2>
-      <div class="mt-5 grid gap-3">
-        ${reviewSettingControl("playAudioAutomatically", "Play audio automatically")}
-        ${reviewSettingControl("showSourceLanguage", "Show Source Language")}
-        ${reviewSettingControl("showRomanization", "Show romanization")}
-        ${reviewSettingControl("goToNextCardAutomatically", "Go to next card automatically")}
-        ${reviewDelayControl()}
-      </div>
-    </div>
-  `;
-}
-
-function sentenceDetail(id) {
-  const sentence = state.sentences.find((item) => item.id === id);
-  showModal(`
-    <div class="${ui.row}"><span class="${ui.tagGold}">${sentence.level}</span><span class="${ui.tag}">${escapeHtml(sentence.topic)}</span></div>
-    <h2 class="mt-4 text-3xl font-black">${escapeHtml(sentence.target)}</h2>
-    <p class="mt-2 text-brand-charcoal">${escapeHtml(sentence.translation)}</p>
-    <p class="mt-1 text-sm text-brand-graphite">${escapeHtml(sentence.romanization)}</p>
-    <h3 class="mt-5 font-black">Variations</h3>
-    <p class="mt-2 leading-7 text-brand-charcoal">${sentence.variations.map(escapeHtml).join("<br>") || "No variations yet."}</p>
-  `);
-}
-
-function advanceReviewCardUrl() {
-  if (activeRoute() !== "review") return;
-  const params = new URLSearchParams(location.search);
-  const reviewCard = document.querySelector("[data-review-card]");
-  const currentIndex = Number(reviewCard?.dataset.cardIndex ?? params.get("card") ?? 0) || 0;
-  const cardCount = Number(reviewCard?.dataset.cardCount || 0) || 0;
-  if (cardCount && currentIndex >= cardCount - 1) {
-    params.set("card", String(cardCount - 1));
-    history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
-    return;
-  }
-  params.set("card", String(currentIndex + 1));
-  history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
-}
-
-function currentReviewSession() {
-  const params = new URLSearchParams(location.search);
-  const deckId = params.get("deckId") || "";
-  const topicId = params.get("topicId") || "";
-  return {
-    key: `${deckId}:${topicId}`,
-    deckId,
-    topicId,
-    card: Number(params.get("card") || 0) || 0
-  };
-}
-
-function ensureReviewResultsSession(total = 0) {
-  const session = currentReviewSession();
-  if (activeReviewResults.key !== session.key || session.card === 0) {
-    activeReviewResults = { key: session.key, total, responses: [] };
-  }
-  if (total) activeReviewResults.total = total;
-  return session;
-}
-
-function recordReviewResult(response) {
-  const reviewCard = document.querySelector("[data-review-card]");
-  ensureReviewResultsSession(Number(reviewCard?.dataset.cardCount || 0) || 0);
-  const normalized = { Again: "show_again", Hard: "hard", Good: "easy", Easy: "known" }[response] || response;
-  activeReviewResults.responses.push(normalized);
-}
-
-function reviewResultsModal() {
-  const session = currentReviewSession();
-  const deck = state?.sentenceDecks?.find((item) => item.id === session.deckId);
-  const topic = deck?.topics?.find((item) => item.id === session.topicId);
-  const total = activeReviewResults.total || activeReviewResults.responses.length;
-  const counts = activeReviewResults.responses.reduce((items, response) => {
-    items[response] = (items[response] || 0) + 1;
-    return items;
-  }, {});
-  const stat = (label, key) => `
-    <div class="rounded-lg bg-brand-mist/60 px-3 py-2">
-      <span class="block text-xs font-semibold uppercase text-brand-graphite">${label}</span>
-      <strong class="mt-1 block text-lg text-brand-ink">${counts[key] || 0}</strong>
-    </div>
-  `;
-  return `
-    <div>
-      <span class="${ui.tagGold}">Review Complete</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(topic?.name || deck?.name || "Sentence Review")}</h2>
-      <p class="mt-2 ${ui.muted}">You reviewed ${activeReviewResults.responses.length || total} of ${total} sentences.</p>
-      <div class="mt-5 grid gap-2 sm:grid-cols-4">
-        ${stat("Show again", "show_again")}
-        ${stat("Hard", "hard")}
-        ${stat("Easy", "easy")}
-        ${stat("I know this", "known")}
-      </div>
-    </div>
-    <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
-      <button class="${ui.secondary}" data-action="reviewAgain">${icon("book")}<span>Review again</span></button>
-      <button class="${ui.primary}" data-action="goBackToReviewDeck:${escapeHtml(session.deckId)}">${icon("arrowLeft")}<span>Go back to deck</span></button>
-    </div>
-  `;
-}
-
 function closeModal() {
   document.querySelector(".fixed.inset-0.z-50")?.remove();
 }
@@ -1471,69 +1101,12 @@ function closeModal() {
 function removeLanguageConfirmModal(language) {
   return `
     <div>
-      <span class="${ui.tagRed}">Remove Profile</span>
+      <span class="${ui.tagRed}">Remove Language</span>
       <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Remove ${escapeHtml(languageName(appConfig, language))}?</span></h2>
-      <p class="mt-2 ${ui.muted}">This will remove this language profile and delete its language-specific goals, reviews, story progress, and path progress. This cannot be undone.</p>
+      <p class="mt-2 ${ui.muted}">This will remove the language from your learning list. This cannot be undone.</p>
     </div>
     <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
-      <button class="${ui.danger}" data-action="confirmRemoveLanguage:${escapeHtml(language)}">Remove Profile</button>
-    </div>
-  `;
-}
-
-function languageSwitcherModal({ state }) {
-  const user = state.user;
-  const languages = state.learningLanguages?.length
-    ? state.learningLanguages
-    : [{ language: user.targetLanguage, currentLevel: user.currentLevel, profileVisibility: "Private", currentStreak: user.currentStreak, listeningTime: user.listeningTime, shadowingTime: user.shadowingTime }];
-
-  return `
-    <div class="pr-10">
-      <span class="${ui.tagGold}">Language Profile</span>
-      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("globe", "h-5 w-5 text-brand-redDark")}<span>Choose Current Language</span></h2>
-      <p class="mt-2 ${ui.muted}">Choose the default language profile for the app.</p>
-    </div>
-    <div class="mt-6 grid gap-3">
-      ${languages
-        .map((profile) => {
-          const language = profile.language;
-          const isCurrent = language === user.targetLanguage;
-          return `
-            <button class="group rounded-lg border p-4 text-left transition ${
-              isCurrent ? "border-brand-red/50 bg-brand-mist shadow-sm" : "border-brand-line bg-white hover:-translate-y-0.5 hover:border-brand-orange/60 hover:shadow-md"
-            }" data-action="makeCurrentLanguage:${escapeHtml(language)}">
-              <div class="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <div class="${ui.row}">
-                    ${isCurrent ? `<span class="${ui.tagDark}">${icon("check", "h-3.5 w-3.5")}<span>Default</span></span>` : ""}
-                    <span class="${ui.tag}">${icon("target", "h-3.5 w-3.5")}<span>${escapeHtml(profile.currentLevel || "A1")}</span></span>
-                    <span class="${ui.tag}">${icon("eye", "h-3.5 w-3.5")}<span>${escapeHtml(profile.profileVisibility || "Private")}</span></span>
-                  </div>
-                  <h3 class="mt-3 text-xl font-bold tracking-tight text-brand-ink">${escapeHtml(languageName(appConfig, language))}</h3>
-                </div>
-                <span class="mt-1 text-sm font-bold text-brand-red">${isCurrent ? "Default" : "Make default"}</span>
-              </div>
-              <div class="mt-4 grid gap-2 sm:grid-cols-3">
-                <div class="rounded-lg bg-brand-snow px-3 py-2">
-                  <span class="flex items-center gap-1.5 text-[11px] font-bold uppercase text-brand-graphite">${icon("trophy", "h-3.5 w-3.5")}<span>Streak</span></span>
-                  <strong class="text-sm text-brand-ink">${Number(profile.currentStreak || 0)} days</strong>
-                </div>
-                <div class="rounded-lg bg-brand-snow px-3 py-2">
-                  <span class="flex items-center gap-1.5 text-[11px] font-bold uppercase text-brand-graphite">${icon("play", "h-3.5 w-3.5")}<span>Listening</span></span>
-                  <strong class="text-sm text-brand-ink">${Number(profile.listeningTime || 0)} min</strong>
-                </div>
-                <div class="rounded-lg bg-brand-snow px-3 py-2">
-                  <span class="flex items-center gap-1.5 text-[11px] font-bold uppercase text-brand-graphite">${icon("book", "h-3.5 w-3.5")}<span>Reading</span></span>
-                  <strong class="text-sm text-brand-ink">${Number(profile.shadowingTime || 0)} min</strong>
-                </div>
-              </div>
-            </button>
-          `;
-        })
-        .join("")}
-    </div>
-    <div class="mt-6 flex flex-wrap justify-between gap-2 border-t border-brand-line pt-4">
-      <button class="${ui.secondary}" data-action="goToLanguageProfiles">Manage Profiles</button>
+      <button class="${ui.danger}" data-action="confirmRemoveLanguage:${escapeHtml(language)}">Remove Language</button>
     </div>
   `;
 }
@@ -1589,8 +1162,7 @@ function renderChatDrawer() {
   const messages = selected?.messages || [];
   const selectedContextLabel = chatContextLabel(selected);
   const teacherStudentConversation = selected?.conversationType === "teacher_student";
-  const balance = state.wallet?.balance || 0;
-  const drawerWidth = chatContactsHidden ? "w-full sm:w-[min(560px,calc(100vw-24px))]" : "w-full sm:w-[min(760px,calc(100vw-24px))]";
+    const drawerWidth = chatContactsHidden ? "w-full sm:w-[min(560px,calc(100vw-24px))]" : "w-full sm:w-[min(760px,calc(100vw-24px))]";
   const gridClass = chatContactsHidden ? "" : "md:grid-cols-[250px_minmax(0,1fr)]";
   const contactsClass = chatMobileScreen === "contacts" ? "block" : "hidden md:block";
   const contactPanelClass = chatContactsHidden ? `${chatMobileScreen === "contacts" ? "block" : "hidden"} md:hidden` : contactsClass;
@@ -1603,7 +1175,7 @@ function renderChatDrawer() {
           ${icon("message", "h-4 w-4")}
           <div>
             <h2 class="text-sm font-bold">Messages</h2>
-            <p class="text-xs font-semibold text-white/55">Community messages use coins. Lesson messages stay contextual.</p>
+            <p class="text-xs font-semibold text-white/55">Community and lesson messages stay organized here.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -1660,10 +1232,9 @@ function renderChatDrawer() {
                     ${chatAvatar(recipient, "h-10 w-10")}
                     <div class="min-w-0">
                       <h3 class="text-sm font-bold text-brand-ink">${escapeHtml(recipient.name)}</h3>
-                      <p class="text-xs font-semibold text-brand-graphite">${escapeHtml(selectedContextLabel)} message${teacherStudentConversation ? "" : " · recipient earns 1 coin"}</p>
+                      <p class="text-xs font-semibold text-brand-graphite">${escapeHtml(selectedContextLabel)} message</p>
                     </div>
                   </div>
-                  <span class="${balance > 0 ? ui.tagGold : ui.tagRed}">${icon("coins", "h-3.5 w-3.5")}<span>${balance} coins</span></span>
                 </div>
                 <div class="overflow-auto bg-white/45 px-4 py-4">
                   <div class="grid gap-3">
@@ -1678,24 +1249,24 @@ function renderChatDrawer() {
                                   }">
                                     <p class="text-sm leading-6">${escapeHtml(message.body)}</p>
                                     <div class="mt-2 flex items-center justify-end gap-1.5 text-[11px] font-semibold ${message.mine ? "text-white/55" : "text-brand-graphite"}">
-                                      ${Number(message.coinAmount || 0) > 0 ? `${icon("coins", "h-3 w-3")}<span>${message.mine ? "-1" : "+1"} coin</span>` : `<span>${escapeHtml(chatContextLabel({ conversationType: message.messageContext }))}</span>`}
+                                      <span>${escapeHtml(chatContextLabel({ conversationType: message.messageContext }))}</span>
                                     </div>
                                   </div>
                                 </article>
                               `
                             )
                             .join("")
-                        : `<div class="rounded-lg border border-dashed border-brand-line bg-brand-panel/65 p-5 text-center"><p class="${ui.muted}">${teacherStudentConversation ? "Start the lesson conversation." : `Start the conversation. Your first message costs 1 coin and gives it to ${escapeHtml(recipient.name)}.`}</p></div>`
+                        : `<div class="rounded-lg border border-dashed border-brand-line bg-brand-panel/65 p-5 text-center"><p class="${ui.muted}">${teacherStudentConversation ? "Start the lesson conversation." : `Start the conversation.`}</p></div>`
                     }
                   </div>
                 </div>
                 <form class="border-t border-brand-line bg-brand-panel p-3" data-form="directMessage">
                   <input type="hidden" name="recipientId" value="${escapeHtml(recipient.id)}">
                   <div class="grid gap-2">
-                    <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="${teacherStudentConversation || balance > 0 ? `Message ${escapeHtml(recipient.name)}...` : "You need coins to send a direct message."}" ${teacherStudentConversation || balance > 0 ? "" : "disabled"}></textarea>
+                    <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="Message ${escapeHtml(recipient.name)}..."></textarea>
                     <div class="flex flex-wrap items-center justify-between gap-3">
-                      <span class="text-xs font-semibold text-brand-graphite">${teacherStudentConversation ? "Teacher/Student context" : "Cost: 1 coin per message"}</span>
-                      <button class="${teacherStudentConversation || balance > 0 ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}" ${teacherStudentConversation || balance > 0 ? "" : "disabled"}>${icon("message")}<span>Send Message</span></button>
+                      <span class="text-xs font-semibold text-brand-graphite">Teacher/Student and community context</span>
+                      <button class="${ui.primary}">${icon("message")}<span>Send Message</span></button>
                     </div>
                   </div>
                 </form>
@@ -1879,10 +1450,10 @@ async function resizeImageToWebP(image, maxSize, quality = 0.8) {
   return canvasToBlob(canvas, quality);
 }
 
-async function processMomentImage(file) {
+async function processPostImage(file) {
   const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
-  if (!allowedTypes.has(file.type)) throw new Error("Moment picture must be a JPG, PNG, or WebP image.");
-  if (file.size > 10 * 1024 * 1024) throw new Error("Moment picture must be 10 MB or smaller.");
+  if (!allowedTypes.has(file.type)) throw new Error("Post picture must be a JPG, PNG, or WebP image.");
+  if (file.size > 10 * 1024 * 1024) throw new Error("Post picture must be 10 MB or smaller.");
 
   const image = new Image();
   const objectUrl = URL.createObjectURL(file);
@@ -1905,133 +1476,68 @@ async function processMomentImage(file) {
     return {
       imageDataUrl: await blobToDataUrl(imageBlob),
       imageThumbnailDataUrl: await blobToDataUrl(thumbnailBlob),
-      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "moment"}.webp`
+      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "community-post"}.webp`
     };
   } finally {
     URL.revokeObjectURL(objectUrl);
   }
 }
 
-async function processDeckImage(file) {
-  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
-  if (!allowedTypes.has(file.type)) throw new Error("Deck image must be a JPG, PNG, or WebP image.");
-  if (file.size > 10 * 1024 * 1024) throw new Error("Deck image must be 10 MB or smaller.");
-
-  const image = new Image();
-  const objectUrl = URL.createObjectURL(file);
-  image.src = objectUrl;
-  await waitForImageLoad(image);
-
-  try {
-    let imageBlob = await resizeImageToWebP(image, 900, 0.8);
-    const sizeSteps = [820, 760, 700, 640, 560];
-    const qualitySteps = [0.76, 0.72, 0.68, 0.64];
-    for (const quality of qualitySteps) {
-      if (imageBlob.size <= 350 * 1024) break;
-      imageBlob = await resizeImageToWebP(image, 900, quality);
-    }
-    for (const maxSize of sizeSteps) {
-      if (imageBlob.size <= 350 * 1024) break;
-      imageBlob = await resizeImageToWebP(image, maxSize, 0.68);
-    }
-    return {
-      imageDataUrl: await blobToDataUrl(imageBlob),
-      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "deck"}.webp`
-    };
-  } finally {
-    URL.revokeObjectURL(objectUrl);
-  }
+function teacherLanguageRowHtml(role) {
+  return `
+    <div class="grid gap-2 rounded-lg border border-brand-line/70 bg-white/65 p-3 sm:grid-cols-[minmax(0,1fr)_220px_auto] sm:items-end" data-teacher-language-row="${escapeHtml(role)}">
+      <label class="${ui.label}">Language<select class="${ui.input}" name="${escapeHtml(role)}Language">${languageSelectOptions(appConfig, "")}</select></label>
+      <label class="${ui.label}">Skill level<select class="${ui.input}" name="${escapeHtml(role)}Level">${languageSkillLevelOptions(role === "speaks" ? "Native" : "A1")}</select></label>
+      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+    </div>
+  `;
 }
 
-async function processSentenceImage(file) {
-  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
-  if (!allowedTypes.has(file.type)) throw new Error("Sentence image must be a JPG, PNG, or WebP image.");
-  if (file.size > 10 * 1024 * 1024) throw new Error("Sentence image must be 10 MB or smaller.");
-
-  const image = new Image();
-  const objectUrl = URL.createObjectURL(file);
-  image.src = objectUrl;
-  await waitForImageLoad(image);
-
-  try {
-    let imageBlob = await resizeImageToWebP(image, 900, 0.8);
-    const sizeSteps = [820, 760, 700, 640, 560];
-    const qualitySteps = [0.76, 0.72, 0.68, 0.64];
-    for (const quality of qualitySteps) {
-      if (imageBlob.size <= 350 * 1024) break;
-      imageBlob = await resizeImageToWebP(image, 900, quality);
-    }
-    for (const maxSize of sizeSteps) {
-      if (imageBlob.size <= 350 * 1024) break;
-      imageBlob = await resizeImageToWebP(image, maxSize, 0.68);
-    }
-    return {
-      imageDataUrl: await blobToDataUrl(imageBlob),
-      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "sentence-image"}.webp`
-    };
-  } finally {
-    URL.revokeObjectURL(objectUrl);
-  }
+function teacherTagValues(form) {
+  return [...form.querySelectorAll("[data-teacher-tag]")]
+    .map((item) => item.dataset.teacherTag || "")
+    .filter(Boolean);
 }
 
-async function processSentenceAudio(file) {
-  const allowedTypes = new Set(["audio/mpeg", "audio/mp3"]);
-  const hasMp3Extension = /\.mp3$/i.test(file.name || "");
-  if (!allowedTypes.has(file.type) && !hasMp3Extension) throw new Error("Sentence audio must be an MP3 file.");
-  if (file.size > 6 * 1024 * 1024) throw new Error("Sentence audio must be 6 MB or smaller.");
+function syncTeacherTags(form) {
+  const hidden = form.querySelector("[data-teacher-tags-value]");
+  if (hidden) hidden.value = teacherTagValues(form).join(", ");
+}
+
+function renderTeacherTags(form, tags) {
+  const container = form.querySelector("[data-teacher-tags]");
+  if (!container) return;
+  container.innerHTML = tags.map((tag) => `
+    <span class="inline-flex items-center gap-1 rounded-full bg-brand-mist px-3 py-1 text-xs font-bold text-brand-charcoal" data-teacher-tag="${escapeHtml(tag)}">
+      <span>${escapeHtml(tag)}</span>
+      <button class="text-brand-redDark" type="button" data-action="removeTeacherTag" data-tag="${escapeHtml(tag)}" aria-label="Remove ${escapeHtml(tag)}">x</button>
+    </span>
+  `).join("");
+  syncTeacherTags(form);
+  bindActions(container);
+}
+
+function addTeacherTag(form, rawTag) {
+  const tag = String(rawTag || "").trim().replace(/\s+/g, " ").slice(0, 50);
+  if (!tag) return;
+  const existing = teacherTagValues(form);
+  if (existing.some((item) => item.toLowerCase() === tag.toLowerCase())) return;
+  renderTeacherTags(form, [...existing, tag].slice(0, 16));
+}
+
+function teacherLanguagePayload(form, role) {
+  const rows = [...form.querySelectorAll(`[data-teacher-language-row="${role}"]`)];
+  const pairs = rows
+    .map((row) => ({
+      language: row.querySelector(`[name="${role}Language"]`)?.value || "",
+      level: row.querySelector(`[name="${role}Level"]`)?.value || ""
+    }))
+    .filter((item) => item.language);
   return {
-    audioDataUrl: await fileToDataUrl(file),
-    audioFileName: file.name || "sentence-audio.mp3"
+    languages: pairs.map((item) => item.language).join(", "),
+    levels: JSON.stringify(Object.fromEntries(pairs.map((item) => [item.language, item.level || (role === "speaks" ? "Native" : "A1")]))),
+    count: pairs.length
   };
-}
-
-async function processSentenceVideo(file) {
-  const allowedTypes = new Set(["video/mp4", "video/webm", "video/quicktime"]);
-  if (!allowedTypes.has(file.type)) throw new Error("Sentence video must be an MP4, WebM, or MOV file.");
-  if (file.size > 8 * 1024 * 1024) throw new Error("Sentence video must be 8 MB or smaller.");
-  return {
-    videoDataUrl: await fileToDataUrl(file),
-    videoFileName: file.name || "sentence-video.mp4"
-  };
-}
-
-async function appendSentenceAssets(data, form) {
-  const audioFile = form.elements.sentenceAudio?.files?.[0];
-  const imageFile = form.elements.sentenceImage?.files?.[0];
-  const videoFile = form.elements.sentenceVideo?.files?.[0];
-  delete data.sentenceAudio;
-  delete data.sentenceImage;
-  delete data.sentenceVideo;
-  if (audioFile) Object.assign(data, await processSentenceAudio(audioFile));
-  if (imageFile) Object.assign(data, await processSentenceImage(imageFile));
-  if (videoFile) Object.assign(data, await processSentenceVideo(videoFile));
-}
-
-function clearTopicAudioHighlights() {
-  document.querySelectorAll("[data-topic-audio-row]").forEach((row) => {
-    row.classList.remove("bg-brand-mist", "ring-2", "ring-brand-orange/40");
-  });
-}
-
-function setPlayAllTopicAudioState(button, playing) {
-  if (!button) return;
-  button.dataset.playing = playing ? "true" : "false";
-  const label = button.querySelector("span");
-  if (label) label.textContent = playing ? "Stop" : "Play All";
-}
-
-function stopTopicAudioPlayback(button = document.querySelector("[data-action='playAllTopicAudio']")) {
-  topicAudioPlayback.stopRequested = true;
-  topicAudioPlayback.active = false;
-  if (topicAudioPlayback.audio) {
-    topicAudioPlayback.audio.pause();
-    topicAudioPlayback.audio.currentTime = 0;
-  }
-  if (topicAudioPlayback.resolve) topicAudioPlayback.resolve();
-  topicAudioPlayback.audio = null;
-  topicAudioPlayback.resolve = null;
-  setPlayAllTopicAudioState(button, false);
-  clearTopicAudioHighlights();
 }
 
 function bindActions(root = document) {
@@ -2047,13 +1553,6 @@ function bindActions(root = document) {
           event.stopPropagation();
           mobileMenuOpen = false;
           const href = appLink.getAttribute("href");
-          const momentId = momentIdFromPath(href);
-          if (momentId) {
-            await fetch(`/api/posts/${encodeURIComponent(momentId)}/view`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" }
-            }).catch(() => null);
-          }
           history.pushState({}, "", href);
           render();
           return;
@@ -2063,12 +1562,6 @@ function bindActions(root = document) {
         if (!row || event.target.closest("a, button, input, textarea, select, label")) return;
         event.preventDefault();
         event.stopPropagation();
-        if (row.dataset.momentViewId) {
-          await fetch(`/api/posts/${encodeURIComponent(row.dataset.momentViewId)}/view`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-          }).catch(() => null);
-        }
         history.pushState({}, "", row.dataset.rowLink);
         render();
       },
@@ -2092,13 +1585,6 @@ function bindActions(root = document) {
       event.preventDefault();
       mobileMenuOpen = false;
       const href = link.getAttribute("href");
-      const momentId = momentIdFromPath(href);
-      if (momentId) {
-        await fetch(`/api/posts/${encodeURIComponent(momentId)}/view`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" }
-        }).catch(() => null);
-      }
       history.pushState({}, "", href);
       render();
     });
@@ -2109,12 +1595,6 @@ function bindActions(root = document) {
     row.dataset.boundRowLink = "true";
     row.addEventListener("click", async (event) => {
       if (event.target.closest("a, button, input, textarea, select, label")) return;
-      if (row.dataset.momentViewId) {
-        await fetch(`/api/posts/${encodeURIComponent(row.dataset.momentViewId)}/view`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" }
-        }).catch(() => null);
-      }
       history.pushState({}, "", row.dataset.rowLink);
       render();
     });
@@ -2148,53 +1628,22 @@ function bindActions(root = document) {
       });
     });
   });
-
-  root.querySelectorAll("[data-short-story-filter]").forEach((control) => {
-    if (control.dataset.boundAction) return;
-    control.dataset.boundAction = "true";
-    const updateFilter = () => {
-      const key = control.dataset.shortStoryFilter;
-      const selectionStart = typeof control.selectionStart === "number" ? control.selectionStart : null;
-      const selectionEnd = typeof control.selectionEnd === "number" ? control.selectionEnd : null;
-      shortStoryFilters = { ...shortStoryFilters, [key]: control.value };
-      if (key !== "query") selectedFeaturedStoryIndex = 0;
-      render();
-      window.requestAnimationFrame(() => {
-        const nextControl = document.querySelector(`[data-short-story-filter="${key}"]`);
-        if (!nextControl) return;
-        nextControl.focus();
-        if (selectionStart !== null && typeof nextControl.setSelectionRange === "function") {
-          nextControl.setSelectionRange(selectionStart, selectionEnd);
-        }
-      });
-    };
-    control.addEventListener(control.tagName === "SELECT" ? "change" : "input", updateFilter);
-  });
-
-  root.querySelectorAll("[data-review-setting]").forEach((control) => {
-    if (control.dataset.boundAction) return;
-    control.dataset.boundAction = "true";
-    control.addEventListener("change", () => {
-      const key = control.dataset.reviewSetting;
-      reviewSettings = { ...reviewSettings, [key]: control.checked };
-      saveReviewSettings();
-      if (activeRoute() === "review") render();
+  root.querySelectorAll("[data-teacher-tag-input]").forEach((input) => {
+    if (input.dataset.boundTeacherTagInput) return;
+    input.dataset.boundTeacherTagInput = "true";
+    input.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== ",") return;
+      event.preventDefault();
+      const form = input.closest("form");
+      addTeacherTag(form, input.value);
+      input.value = "";
+    });
+    input.addEventListener("blur", () => {
+      const form = input.closest("form");
+      addTeacherTag(form, input.value);
+      input.value = "";
     });
   });
-
-  root.querySelectorAll("[data-review-setting-number]").forEach((control) => {
-    if (control.dataset.boundAction) return;
-    control.dataset.boundAction = "true";
-    control.addEventListener("change", () => {
-      const key = control.dataset.reviewSettingNumber;
-      const value = Math.min(60, Math.max(1, Number(control.value || 5) || 5));
-      control.value = String(value);
-      reviewSettings = { ...reviewSettings, [key]: value };
-      saveReviewSettings();
-      if (activeRoute() === "review") render();
-    });
-  });
-
   root.querySelectorAll("[data-action]").forEach((element) => {
     if (element.dataset.boundAction) return;
     element.dataset.boundAction = "true";
@@ -2209,72 +1658,10 @@ function bindActions(root = document) {
     element.addEventListener("click", async (event) => {
       const nestedControl = event.target.closest("a, button, input, textarea, select, label");
       if (nestedControl && nestedControl !== element) return;
+      event.preventDefault();
       event.stopPropagation();
-      captureCoinAnimationOrigin(element);
       const [action, id, value] = element.dataset.action.split(":");
-      if (action === "learn") await api(`/api/sentences/${id}/learn`, { method: "POST" });
-      if (action === "review") {
-        const reviewCard = document.querySelector("[data-review-card]");
-        const isLastCard = Number(reviewCard?.dataset.cardIndex || 0) >= Number(reviewCard?.dataset.cardCount || 0) - 1;
-        recordReviewResult(value);
-        advanceReviewCardUrl();
-        await api(`/api/reviews/${id}/rate`, { method: "POST", body: JSON.stringify({ rating: value }) });
-        if (isLastCard) showModal(reviewResultsModal(), { closeButton: false });
-      }
-      if (action === "deckReview") {
-        const [, deckId, sentenceId, response] = element.dataset.action.split(":");
-        const reviewCard = document.querySelector("[data-review-card]");
-        const isLastCard = Number(reviewCard?.dataset.cardIndex || 0) >= Number(reviewCard?.dataset.cardCount || 0) - 1;
-        recordReviewResult(response);
-        advanceReviewCardUrl();
-        await api(`/api/sentence-decks/${deckId}/reviews`, { method: "POST", body: JSON.stringify({ sentenceId, response }) });
-        if (isLastCard) showModal(reviewResultsModal(), { closeButton: false });
-      }
-      if (action === "flipReviewCard") {
-        const answer = document.querySelector("[data-review-answer]");
-        if (answer) answer.classList.toggle("hidden");
-        return;
-      }
-      if (action === "unlockStory") await api(`/api/stories/${id}/unlock`, { method: "POST" });
-      if (action === "readStory") {
-        history.pushState({}, "", appPath("storyDetail", { storyId: id }));
-        render();
-      }
-      if (action === "completeStory") await api(`/api/stories/${id}/complete`, { method: "POST" });
-      if (action === "toggleStoryLike") await api(`/api/stories/${id}/like`, { method: "POST" });
-      if (action === "toggleStoryFavorite") await api(`/api/stories/${id}/favorite`, { method: "POST" });
-      if (action === "saveStory") await api(`/api/stories/${id}/save-sentences`, { method: "POST" });
-      if (action === "saveSentence") await api(`/api/sentences/${id}/save`, { method: "POST" });
-      if (action === "openCreateDeckModal") showModal(createDeckModal(context()));
-      if (action === "openDeleteDeckModal") showModal(deleteDeckConfirmModal(context(), id));
-      if (action === "openReviewSettingsModal") showModal(reviewSettingsModal());
-      if (action === "openAddTopicModal") showModal(topicModal(context(), id));
-      if (action === "openEditTopicModal") showModal(editTopicModal(context(), id));
-      if (action === "openDeleteTopicModal") showModal(deleteTopicConfirmModal(context(), id));
-      if (action === "deleteTopic") {
-        await api(`/api/sentence-decks/topics/${id}`, { method: "DELETE" });
-        closeModal();
-      }
-      if (action === "openAddDeckSentenceModal") showModal(addDeckSentenceModal(context(), id));
-      if (action === "openDeleteDeckSentenceModal") showModal(deleteDeckSentenceConfirmModal(context(), id));
-      if (action === "openEditSentenceModal") showModal(editMinedSentenceModal(context(), id));
-      if (action === "openDeleteSentenceModal") showModal(deleteMinedSentenceModal(context(), id));
-      if (action === "deleteDeck") {
-        await api(`/api/sentence-decks/${id}`, { method: "DELETE" });
-        closeModal();
-        history.pushState({}, "", appPath("sentenceMining"));
-        render();
-      }
-      if (action === "deleteDeckSentence") {
-        await api(`/api/sentence-decks/items/${id}`, { method: "DELETE" });
-        closeModal();
-      }
-      if (action === "deleteSentence") {
-        await api(`/api/sentences/${id}`, { method: "DELETE" });
-        closeModal();
-      }
       if (action === "closeModal") closeModal();
-      if (action === "completeShadowing") await api("/api/shadowing", { method: "POST" });
       if (action === "like") await api(`/api/posts/${id}/like`, { method: "POST" });
       if (action === "followLearner") await api(`/api/learners/${id}/follow`, { method: "POST" });
       if (action === "openMobileMenu") {
@@ -2290,10 +1677,6 @@ function bindActions(root = document) {
         pendingChatRecipientId = "";
         chatMobileScreen = "contacts";
         renderChatDrawer();
-      }
-      if (action === "openWallet") {
-        history.pushState({}, "", appPath("profileWallet"));
-        render();
       }
       if (action === "closeChatPanel") {
         chatOpen = false;
@@ -2326,63 +1709,6 @@ function bindActions(root = document) {
         await api(`/api/messages/${id}/read`, { method: "POST" });
         renderChatDrawer();
       }
-      if (action === "sentence") sentenceDetail(id);
-      if (action === "openDeck") {
-        history.pushState({}, "", appPath("sentenceDeckDetail", { deckId: id }));
-        render();
-      }
-      if (action === "practiceDeck") {
-        activeReviewResults = { key: `${id}:`, total: 0, responses: [] };
-        history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}`);
-        render();
-      }
-      if (action === "savePublicDeck") {
-        await api(`/api/sentence-decks/${id}/save`, { method: "POST" });
-      }
-      if (action === "unsavePublicDeck") {
-        await api(`/api/sentence-decks/${id}/save`, { method: "DELETE" });
-      }
-      if (action === "reviewTopic") {
-        activeReviewResults = { key: `${id}:${value}`, total: 0, responses: [] };
-        history.pushState({}, "", `${appPath("review")}?deckId=${encodeURIComponent(id)}&topicId=${encodeURIComponent(value)}`);
-        render();
-      }
-      if (action === "showTopicSentences") {
-        const [, deckId, topicId] = element.dataset.action.split(":");
-        const targetDeckId = element.dataset.deckId || deckId || "";
-        const targetTopicId = element.dataset.topicId || topicId || "";
-        history.pushState({}, "", `/app/sentence-mining/decks/${encodeURIComponent(targetDeckId)}/topics/${encodeURIComponent(targetTopicId)}`);
-        render();
-      }
-      if (action === "toggleDeckTopic") {
-        const topic = document.querySelector(`[data-topic-body="${CSS.escape(id)}"]`);
-        const icon = document.querySelector(`[data-topic-toggle="${CSS.escape(id)}"]`);
-        if (topic) topic.classList.toggle("hidden");
-        if (icon) icon.classList.toggle("rotate-180");
-      }
-      if (action === "scrollCarousel") {
-        const carousel = document.querySelector(`#${id}`);
-        if (carousel) carousel.scrollBy({ left: (value === "prev" ? -1 : 1) * Math.max(carousel.clientWidth * 0.86, 280), behavior: "smooth" });
-      }
-      if (action === "featuredStory") {
-        const total = Number(document.querySelector("[data-featured-story-count]")?.dataset.featuredStoryCount || 0);
-        if (total) {
-          if (id === "prev") selectedFeaturedStoryIndex = (selectedFeaturedStoryIndex - 1 + total) % total;
-          else if (id === "next") selectedFeaturedStoryIndex = (selectedFeaturedStoryIndex + 1) % total;
-          else selectedFeaturedStoryIndex = Math.max(0, Math.min(Number(id), total - 1));
-          render();
-        }
-      }
-      if (action === "resetShortStoryFilters") {
-        shortStoryFilters = { query: "", status: "all", maxMinutes: "", reward: "all", engagement: "all", sort: "recommended" };
-        selectedFeaturedStoryIndex = 0;
-        render();
-      }
-      if (action === "setConnectCommunityFilter") {
-        connectMyCommunityOnly = id === "community";
-        communityListLimits = { ...communityListLimits, communityConnect: 10 };
-        render();
-      }
       if (action === "openCreateVoiceVideoRoomModal") showModal(createVoiceVideoRoomModal(context()));
       if (action === "joinVoiceVideoRoom") await joinVoiceVideoRoom(id);
       if (action === "leaveVoiceVideoRoom") await leaveVoiceVideoRoom();
@@ -2403,6 +1729,23 @@ function bindActions(root = document) {
         history.pushState({}, "", appPath("teacherProfileCreate"));
         render();
       }
+      if (action === "addTeacherLanguageRow") {
+        const list = element.closest("form")?.querySelector(`[data-teacher-language-list="${id}"]`);
+        if (list) {
+          list.insertAdjacentHTML("beforeend", teacherLanguageRowHtml(id));
+          bindActions(list);
+        }
+      }
+      if (action === "removeTeacherLanguageRow") {
+        const row = element.closest("[data-teacher-language-row]");
+        const list = row?.parentElement;
+        if (row && list && list.querySelectorAll("[data-teacher-language-row]").length > 1) row.remove();
+      }
+      if (action === "removeTeacherTag") {
+        const form = element.closest("form");
+        element.closest("[data-teacher-tag]")?.remove();
+        if (form) syncTeacherTags(form);
+      }
       if (action === "deleteTeacherProfile") {
         await teacherStudentApi(`/api/teacher-student/teacher-profiles/${id}`, { method: "DELETE" });
         teacherStudentLoadedKeys = new Set();
@@ -2415,7 +1758,8 @@ function bindActions(root = document) {
       if (action === "openTeacherBookingRulesModal") showModal(teacherBookingRulesModal(context()));
       if (action === "setMyLearningTab") {
         myLearningTab = ["lessons", "teachers", "calendar"].includes(id) ? id : "lessons";
-        if (activeRoute() !== "myLearning") history.pushState({}, "", appPath("myLearning"));
+        if (activeRoute() !== "myLessons") history.pushState({}, "", appPath("myLessons"));
+        await loadTeacherStudentData("myLessons", { force: true });
         render();
       }
       if (action === "shiftMyLearningWeek") {
@@ -2423,7 +1767,8 @@ function bindActions(root = document) {
         if (id === "today") myLearningWeekStart = weekStartKey();
         else myLearningWeekStart = shiftDateKey(currentStart, id === "next" ? 7 : -7);
         myLearningTab = "calendar";
-        if (activeRoute() !== "myLearning") history.pushState({}, "", appPath("myLearning"));
+        if (activeRoute() !== "myLessons") history.pushState({}, "", appPath("myLessons"));
+        await loadTeacherStudentData("myLessons", { force: true });
         render();
       }
       if (action === "setMyProfilesTab") {
@@ -2476,7 +1821,7 @@ function bindActions(root = document) {
           <form class="mt-5 grid gap-3" data-form="teacherMessage">
             <input type="hidden" name="recipientId" value="${escapeHtml(id)}">
             <input type="hidden" name="teacherProfileId" value="${escapeHtml(value || "")}">
-            <textarea class="${ui.input} min-h-24" name="body" required maxlength="1000" placeholder="Ask about lesson fit, availability, or goals."></textarea>
+            <textarea class="${ui.input} min-h-24" name="body" required maxlength="1000" placeholder="Ask about lesson fit, availability, or practice needs."></textarea>
             <div class="flex justify-end border-t border-brand-line pt-4"><button class="${ui.primary}">${icon("message", "h-4 w-4")}<span>Send Message</span></button></div>
           </form>
         `);
@@ -2499,158 +1844,26 @@ function bindActions(root = document) {
         teacherStudentLoadedKeys = new Set();
         await loadTeacherStudentData(activeRoute(), { force: true });
       }
-      if (action === "openShortStorySearch") {
-        history.pushState({}, "", appPath("shortStorySearch"));
-        render();
-      }
-      if (action === "openReview") {
-        history.pushState({}, "", id ? `${appPath("review")}?deckId=${encodeURIComponent(id)}` : appPath("review"));
-        render();
-      }
-      if (action === "openStoryLevelModal") {
-        const story = state.stories.find((item) => item.id === id);
-        if (story) showModal(storyLevelModal(context(), story));
-      }
-      if (action === "setStoryLevel") {
-        selectedStoryLevels = { ...selectedStoryLevels, [id]: value };
-        closeModal();
-        render();
-      }
-      if (action === "setStoryLanguage") {
-        selectedStoryLanguages = { ...selectedStoryLanguages, [id]: value };
-        const nextStoryLevels = { ...selectedStoryLevels };
-        delete nextStoryLevels[id];
-        selectedStoryLevels = nextStoryLevels;
-        render();
-      }
-      if (action === "setStoryTab") {
-        selectedStoryTabs = { ...selectedStoryTabs, [id]: value };
-        render();
-      }
-      if (action === "setLearnerProfileTab") {
-        selectedLearnerProfileTabs = { ...selectedLearnerProfileTabs, [id]: value };
-        render();
-      }
-      if (action === "toggleStoryReader") {
-        const current = selectedStoryReaderOptions[id] || { target: true, source: false, romanization: false };
-        selectedStoryReaderOptions = {
-          ...selectedStoryReaderOptions,
-          [id]: { ...current, [value]: !current[value] }
-        };
-        render();
-      }
-      if (action === "playStoryAudio") {
-        const text = document.querySelector("[data-reading-text]")?.textContent?.trim();
-        if (text && "speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-        }
-      }
-      if (action === "playSentenceAudio") {
-        stopTopicAudioPlayback();
-        const audioUrl = element.dataset.audioUrl || "";
-        if (audioUrl) new Audio(audioUrl).play().catch(() => null);
-      }
-      if (action === "playAllTopicAudio") {
-        if (topicAudioPlayback.active) {
-          stopTopicAudioPlayback(element);
-          return;
-        }
-        const audioButtons = [...document.querySelectorAll("[data-action='playSentenceAudio'][data-audio-url]")]
-          .filter((button) => button.dataset.audioUrl && !button.disabled);
-        const runId = topicAudioPlayback.runId + 1;
-        topicAudioPlayback = { active: true, stopRequested: false, audio: null, resolve: null, runId };
-        setPlayAllTopicAudioState(element, true);
-        clearTopicAudioHighlights();
-        try {
-          for (const button of audioButtons) {
-            if (topicAudioPlayback.stopRequested || topicAudioPlayback.runId !== runId) break;
-            const row = button.closest("[data-topic-audio-row]");
-            clearTopicAudioHighlights();
-            row?.classList.add("bg-brand-mist", "ring-2", "ring-brand-orange/40");
-            const audio = new Audio(button.dataset.audioUrl);
-            topicAudioPlayback.audio = audio;
-            await new Promise((resolve) => {
-              topicAudioPlayback.resolve = resolve;
-              audio.addEventListener("ended", resolve, { once: true });
-              audio.addEventListener("error", resolve, { once: true });
-              audio.play().catch(resolve);
-            });
-          }
-        } finally {
-          if (topicAudioPlayback.runId === runId) {
-            topicAudioPlayback = { active: false, stopRequested: false, audio: null, resolve: null, runId };
-            setPlayAllTopicAudioState(element, false);
-            clearTopicAudioHighlights();
-          }
-        }
-      }
-      if (action === "shareStory") {
-        const story = state.stories.find((item) => item.id === id);
-        const url = `${location.origin}${appPath("storyDetail", { storyId: id })}`;
-        if (navigator.share) {
-          await navigator.share({ title: story?.title || "LinguaStories", text: story?.translation || "Read this story on LinguaStories.", url });
-        } else if (navigator.clipboard) {
-          await navigator.clipboard.writeText(url);
-          showModal(`<h2 class="text-xl font-bold text-brand-ink">Link copied</h2><p class="${ui.muted}">The story link is ready to share.</p>`);
-        }
-      }
-      if (action === "setProfileLanguage") {
-        selectedProfileLanguage = id;
-        render();
-      }
-      if (action === "openLanguageSwitcher") showModal(languageSwitcherModal(context()));
-      if (action === "reviewAgain") {
-        const params = new URLSearchParams(location.search);
-        const session = currentReviewSession();
-        activeReviewResults = { key: session.key, total: activeReviewResults.total, responses: [] };
-        params.set("card", "0");
-        closeModal();
-        history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
-        render();
-      }
-      if (action === "goBackToReviewDeck") {
-        closeModal();
-        history.pushState({}, "", appPath("sentenceDeckDetail", { deckId: id }));
-        render();
-      }
       if (action === "goToLanguageProfiles") {
         closeModal();
         history.pushState({}, "", appPath("profileLanguages"));
         render();
       }
-      if (action === "makeCurrentLanguage") {
-        selectedProfileLanguage = id;
-        closeModal();
-        const updatedState = await api("/api/languages/current", { method: "POST", body: JSON.stringify({ language: id }) });
-        if (updatedState?.user?.targetLanguage === id) {
-          resetLanguageScopedViews();
-          history.pushState({}, "", appPath("shortStories"));
-          render();
-        }
-      }
       if (action === "openAddLanguageModal") showModal(addLanguageModal(context()));
       if (action === "openEditLanguageModal") showModal(editLanguageModal(context(), id));
       if (action === "openDeleteProfileModal") showModal(deleteProfileConfirmModal(context()));
-      if (action === "openCreateGoalModal") showModal(createGoalModal(context()));
-      if (action === "openEditGoalModal") showModal(editGoalModal(context(), id));
-      if (action === "openGoalSupporters") showModal(goalSupportersModal(context(), id));
       if (action === "goToLearnerProfile") {
         closeModal();
         history.pushState({}, "", appPath("communityLearner", { learnerId: id }));
         render();
       }
       if (action === "openCreatePostModal") showModal(createPostModal(context()));
-      if (action === "openSupportGoalModal") showModal(supportGoalModal(context(), id));
-      if (action === "openMomentAppreciation") showModal(appreciateMomentModal(context(), id));
-      if (action === "expandMomentImage") showModal(momentImageModal(context(), id));
-      if (action === "openCoinRulesModal") showModal(coinRulesModal(context()));
+      if (action === "expandPostImage") showModal(postImageModal(context(), id));
       if (action === "removeLanguage") {
         showModal(removeLanguageConfirmModal(id));
       }
       if (action === "confirmRemoveLanguage") {
         await api("/api/languages/remove", { method: "POST", body: JSON.stringify({ language: id }) });
-        if (selectedProfileLanguage === id) selectedProfileLanguage = state.user.targetLanguage || state.learningLanguages?.[0]?.language || "";
         closeModal();
       }
       if (action === "confirmDeleteProfile") {
@@ -2664,19 +1877,10 @@ function bindActions(root = document) {
         closeModal();
         navigatePublic("/");
       }
-      if (action === "shadowing") {
-        history.pushState({}, "", appPath("shadowing"));
-        render();
-      }
       if (action === "logout") {
         await fetch("/api/auth/logout", { method: "POST" });
         state = null;
         navigatePublic("/");
-      }
-      if (action === "changeAccountTier") {
-        await api("/api/account/tier", { method: "POST", body: JSON.stringify({ tierKey: id }) });
-        accountBillingData = {};
-        await loadAccountBillingData({ force: true });
       }
       if (action === "cancelAccountTrial") {
         await api("/api/account/trial/cancel", { method: "POST" });
@@ -2713,9 +1917,20 @@ function bindActions(root = document) {
         await loadTeacherStudentData("bookLesson", { force: true });
       });
     }
+    if (form.dataset.form === "teacherSearch") {
+      form.addEventListener("change", async () => {
+        clearTimeout(teacherSearchDebounceTimer);
+        await applyTeacherSearchFilters(form);
+      });
+      form.addEventListener("input", () => {
+        clearTimeout(teacherSearchDebounceTimer);
+        teacherSearchDebounceTimer = setTimeout(() => {
+          applyTeacherSearchFilters(form);
+        }, 350);
+      });
+    }
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      captureCoinAnimationOrigin(event.submitter || form.querySelector("button"));
       const data = Object.fromEntries(new FormData(form).entries());
       if (form.dataset.form === "login") return authRequest("/api/auth/login", data);
       if (form.dataset.form === "register") return authRequest("/api/auth/register", data);
@@ -2754,91 +1969,20 @@ function bindActions(root = document) {
         closeModal();
         render();
       }
-      if (form.dataset.form === "customSentence") {
-        try {
-          await appendSentenceAssets(data, form);
-        } catch (error) {
-          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-          return;
-        }
-        await api("/api/sentences/custom", { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
-      if (form.dataset.form === "sentenceDeck") {
-        const imageFile = form.elements.deckImage?.files?.[0];
-        delete data.deckImage;
-        if (imageFile) {
-          try {
-            Object.assign(data, await processDeckImage(imageFile));
-          } catch (error) {
-            showModal(`<h2 class="text-xl font-black">Deck image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-            return;
-          }
-        }
-        await api("/api/sentence-decks", { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
-      if (form.dataset.form === "sentenceDeckTopic") {
-        const { deckId, ...topicData } = data;
-        await api(`/api/sentence-decks/${deckId}/topics`, { method: "POST", body: JSON.stringify(topicData) });
-        closeModal();
-      }
-      if (form.dataset.form === "editSentenceDeckTopic") {
-        const { id, ...topicData } = data;
-        await api(`/api/sentence-decks/topics/${id}`, { method: "POST", body: JSON.stringify(topicData) });
-        closeModal();
-      }
-      if (form.dataset.form === "deckSentence") {
-        try {
-          await appendSentenceAssets(data, form);
-        } catch (error) {
-          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-          return;
-        }
-        const { deckId, ...sentenceData } = data;
-        await api(`/api/sentence-decks/${deckId}/sentences`, { method: "POST", body: JSON.stringify(sentenceData) });
-        closeModal();
-      }
-      if (form.dataset.form === "editSentence") {
-        try {
-          await appendSentenceAssets(data, form);
-        } catch (error) {
-          showModal(`<h2 class="text-xl font-black">Sentence asset unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-          return;
-        }
-        await api(`/api/sentences/${data.id}`, { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
-      if (form.dataset.form === "goal") {
-        data.goalScope = form.elements.isGlobal?.checked ? "Global" : "Language";
-        delete data.isGlobal;
-        await api("/api/goals", { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
-      if (form.dataset.form === "editGoal") {
-        await api(`/api/goals/${data.id}`, { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
-      if (form.dataset.form === "goalSupport") {
-        await api(`/api/goals/${data.goalId}/support`, { method: "POST", body: JSON.stringify(data) });
-        closeModal();
-      }
       if (form.dataset.form === "addLanguage") {
-        selectedProfileLanguage = data.language;
         await api("/api/languages", { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
       if (form.dataset.form === "editLanguage") {
-        selectedProfileLanguage = data.language;
         await api("/api/languages/update", { method: "POST", body: JSON.stringify(data) });
         closeModal();
       }
       if (form.dataset.form === "post") {
-        const imageFile = form.elements.momentImage?.files?.[0];
-        delete data.momentImage;
+        const imageFile = form.elements.postImage?.files?.[0];
+        delete data.postImage;
         if (imageFile) {
           try {
-            Object.assign(data, await processMomentImage(imageFile));
+            Object.assign(data, await processPostImage(imageFile));
           } catch (error) {
             showModal(`<h2 class="text-xl font-black">Picture unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
             return;
@@ -2848,16 +1992,6 @@ function bindActions(root = document) {
         closeModal();
       }
       if (form.dataset.form === "voiceVideoRoom") {
-        const imageFile = form.elements.roomImage?.files?.[0];
-        delete data.roomImage;
-        if (imageFile) {
-          try {
-            Object.assign(data, await processDeckImage(imageFile));
-          } catch (error) {
-            showModal(`<h2 class="text-xl font-black">Room image unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
-            return;
-          }
-        }
         await livekitApi("/api/livekit/rooms", { method: "POST", body: JSON.stringify(data) });
         closeModal();
         voiceVideoRoomsLoaded = false;
@@ -2873,15 +2007,29 @@ function bindActions(root = document) {
         await loadVoiceVideoRooms({ force: true });
       }
       if (form.dataset.form === "teacherSearch") {
-        teacherStudentFilters = { q: data.q || "", maxRate: data.maxRate || "" };
-        teacherStudentLoadedKeys = new Set();
-        await loadTeacherStudentData("findTeacher", { force: true });
+        clearTimeout(teacherSearchDebounceTimer);
+        await applyTeacherSearchFilters(form);
       }
       if (form.dataset.form === "teacherProfile" || form.dataset.form === "teacherProfileEdit") {
+        const creatingTeacherProfile = form.dataset.form === "teacherProfile";
         const imageFile = form.elements.teacherImage?.files?.[0];
-        data.teachesLanguages = Array.from(form.elements.teachesLanguages?.selectedOptions || []).map((option) => option.value).join(", ");
-        data.speaksLanguages = Array.from(form.elements.speaksLanguages?.selectedOptions || []).map((option) => option.value).join(", ");
+        const teachesPayload = teacherLanguagePayload(form, "teaches");
+        const speaksPayload = teacherLanguagePayload(form, "speaks");
+        if (!teachesPayload.count) {
+          showModal(`<h2 class="text-xl font-black">Language required</h2><p class="${ui.muted}">Add at least one language this teacher can teach.</p>`);
+          return;
+        }
+        data.teachesLanguages = teachesPayload.languages;
+        data.teachesLanguageLevels = teachesPayload.levels;
+        data.speaksLanguages = speaksPayload.languages;
+        data.speaksLanguageLevels = speaksPayload.levels;
+        syncTeacherTags(form);
+        data.tags = form.querySelector("[data-teacher-tags-value]")?.value || "";
         delete data.teacherImage;
+        delete data.teachesLanguage;
+        delete data.teachesLevel;
+        delete data.speaksLanguage;
+        delete data.speaksLevel;
         const profileId = data.id;
         delete data.id;
         if (imageFile) {
@@ -2897,8 +2045,20 @@ function bindActions(root = document) {
         teacherStudentLoadedKeys = new Set();
         if (activeRoute() === "teacherProfileCreate" || activeRoute() === "teacherProfileEdit") {
           myProfilesTab = "teachers";
-          history.pushState({}, "", appPath("profileProfiles"));
-          await loadTeacherStudentData("profileProfiles", { force: true });
+          history.pushState({}, "", appPath("teacherProfiles"));
+          await loadTeacherStudentData("teacherProfiles", { force: true });
+          if (creatingTeacherProfile) {
+            showModal(`
+              <div>
+                <span class="${ui.tagGold}">Profile created</span>
+                <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Awaiting approval</h2>
+                <p class="mt-2 ${ui.muted}">Your teacher profile has been created and is awaiting approval. Approval typically takes 1 - 2 days.</p>
+                <div class="mt-5 flex justify-end">
+                  <button class="${ui.primary}" data-action="closeModal">${icon("check", "h-4 w-4")}<span>Done</span></button>
+                </div>
+              </div>
+            `);
+          }
           return;
         }
         closeModal();
@@ -2965,18 +2125,19 @@ function bindActions(root = document) {
         await loadTeacherStudentData("teacherTemplates", { force: true });
       }
       if (form.dataset.form === "teacherMessage") {
-        await teacherStudentApi("/api/teacher-student/messages", { method: "POST", body: JSON.stringify(data) });
+        const nextState = await teacherStudentApi("/api/teacher-student/messages", { method: "POST", body: JSON.stringify(data) });
+        if (!nextState) return;
+        state = nextState;
         closeModal();
         chatOpen = true;
+        chatMobileScreen = "messages";
+        const nextConversation = state.directChat?.conversations?.find((item) => item.otherUserId === data.recipientId && item.conversationType === "teacher_student");
+        selectedConversationId = nextConversation?.id || selectedConversationId;
         pendingChatRecipientId = "";
-        await api("/api/state");
+        render();
       }
       if (form.dataset.form === "comment") {
         await api(`/api/posts/${data.postId}/comments`, { method: "POST", body: JSON.stringify(data) });
-      }
-      if (form.dataset.form === "momentAppreciation") {
-        await api(`/api/posts/${data.postId}/appreciate`, { method: "POST", body: JSON.stringify(data) });
-        closeModal();
       }
       if (form.dataset.form === "directMessage") {
         const recipientId = data.recipientId;
@@ -3001,32 +2162,9 @@ function bindActions(root = document) {
         chatOpen = true;
         renderChatDrawer();
       }
-      if (form.dataset.form === "storyComment") await api(`/api/stories/${data.storyId}/comments`, { method: "POST", body: JSON.stringify(data) });
       form.reset();
     });
   });
-
-  const reviewCard = root.querySelector("[data-review-card]");
-  if (reviewCard && !reviewCard.dataset.timerBound) {
-    reviewCard.dataset.timerBound = "true";
-    ensureReviewResultsSession(Number(reviewCard.dataset.cardCount || 0) || 0);
-    const audioElement = reviewCard.querySelector("audio");
-    if (audioElement && reviewCard.dataset.autoPlayAudio === "true") {
-      window.setTimeout(() => {
-        if (!document.body.contains(reviewCard)) return;
-        audioElement.currentTime = 0;
-        audioElement.play().catch(() => null);
-      }, 120);
-    }
-    if (reviewCard.dataset.autoNextCard === "true") {
-      const delayMs = Math.min(60000, Math.max(1000, Number(reviewCard.dataset.autoNextDelayMs || 5000) || 5000));
-      window.setTimeout(() => {
-        if (!document.body.contains(reviewCard)) return;
-        advanceReviewCardUrl();
-        render();
-      }, delayMs);
-    }
-  }
 }
 
 function setPublicShell() {
@@ -3035,7 +2173,6 @@ function setPublicShell() {
   topbar.className = "hidden";
   if (mobileTopbar) mobileTopbar.className = "hidden";
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
-  syncShortStorySearchButtons("");
   mobileMenuOpen = false;
   if (chatDrawer) chatDrawer.innerHTML = "";
   view.className = "min-h-screen";
@@ -3058,9 +2195,6 @@ function renderPublicPage() {
   setPublicShell();
   pageTitle.textContent = "LinguaStories";
   if (mobilePageTitle) mobilePageTitle.textContent = "LinguaStories";
-  coinBalance.textContent = "0";
-  if (mobileCoinBalance) mobileCoinBalance.textContent = "0";
-  if (topbarLanguage) topbarLanguage.textContent = "Language";
   if (messageBadge) {
     messageBadge.textContent = "0";
     messageBadge.className = "absolute -right-1 -top-1 hidden min-w-5 rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white";
@@ -3080,69 +2214,60 @@ function renderPublicPage() {
   scrollToPageTopOnRouteChange();
 }
 
+async function fetchJsonWithTimeout(url, fallback, timeoutMs = 4000) {
+  try {
+    const response = await Promise.race([
+      fetch(url),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("Request timed out")), timeoutMs))
+    ]);
+    if (!response?.ok) return fallback;
+    return await response.json().catch(() => fallback);
+  } catch (_error) {
+    return fallback;
+  }
+}
+
 function render() {
   if (!state) return;
+  document.documentElement.lang = state.user.siteLanguage || "en-US";
   normalizeAppUrl();
   setAppShell();
   const route = activeRoute();
-  if (communityRoutes.has(route) || route === "voiceVideoRoom") topbar.className = "hidden";
+  if (route === "communityConnect" || communityRoutes.has(route) || route === "voiceVideoRoom") topbar.className = "hidden";
   if (route === "voiceVideoRoom" && mobileTopbar) mobileTopbar.className = "hidden";
-  syncShortStorySearchButtons(route);
   const match = routes.find(([id]) => id === route) || routes[0];
-  const storyForTitle = route === "storyDetail" ? state.stories.find((story) => story.id === activeStoryId()) : null;
-  const deckForTitle = route === "sentenceDeckDetail" || route === "sentenceDeckTopicSentences" ? state.sentenceDecks?.find((deck) => deck.id === activeDeckId()) : null;
-  const topicForTitle = route === "sentenceDeckTopicSentences" ? deckForTitle?.topics?.find((topic) => topic.id === activeTopicId()) : null;
-  const storyLanguageForTitle = storyForTitle ? selectedStoryLanguages[storyForTitle.id] || storyForTitle.targetLanguage || state.user.targetLanguage : "";
-  const learnerForTitle = route === "communityLearner" ? state.learners.find((learner) => learner.id === activeLearnerId()) : null;
+  const learnerForTitle = route === "communityLearner"
+    ? state.learners.find((learner) => learner.id === activeLearnerId()) || state.posts.find((post) => post.userId === activeLearnerId())
+    : null;
   const teacherProfileForTitle = route === "teacherProfileDetail" ? teacherStudentData.profile : route === "bookLesson" ? teacherStudentData.bookingPage?.profile : null;
-  const goalsLanguage = new URLSearchParams(window.location.search).get("language") || state.user.targetLanguage;
   const titleText =
-    route === "profileGoals" || route === "goals"
-      ? `My ${languageName(appConfig, goalsLanguage)} Goals`
-      : route === "sentenceDeckTopicSentences" && deckForTitle
-        ? topicForTitle ? `${deckForTitle.name}: ${topicForTitle.name}` : deckForTitle.name
-      : route === "sentenceDeckDetail" && deckForTitle
-        ? deckForTitle.name
-      : route === "sentenceMining"
-        ? "Sentence Mining"
-      : route === "sentenceDeckLibrary"
-        ? "Sentence Deck Library"
-      : route === "shortStories"
-        ? `Short Stories (${languageName(appConfig, state.user.targetLanguage)})`
-      : route === "shortStorySearch"
-          ? `Search Short Stories (${languageName(appConfig, state.user.targetLanguage)})`
-        : route === "storyDetail" && storyForTitle
-          ? `${storyForTitle.title} (${languageName(appConfig, storyLanguageForTitle)})`
-      : route === "communityLearner" && learnerForTitle
-            ? learnerForTitle.displayName
-        : route === "communityConnect"
-          ? "Connect"
-        : route === "communityMoments"
-          ? "Moments"
+    route === "communityLearner" && learnerForTitle
+      ? learnerForTitle.displayName || learnerForTitle.name || learnerForTitle.author || match[1]
+      : route === "communityConnect"
+        ? "Community"
         : route === "voiceVideoRooms"
-          ? "Community Voice/Video Rooms"
+          ? "Practice"
         : route === "findTeacher"
-          ? "Learning - Find a Teacher"
+          ? "Find a Teacher"
         : route === "myLearning"
-          ? "My Schedule"
+          ? "My Lessons"
         : route === "myLessons"
           ? myLearningTabTitles.lessons
         : route === "myTeachers"
           ? myLearningTabTitles.teachers
-        : route === "profileProfiles" || route === "profileLanguages" || route === "teacherProfiles"
-          ? "My Profiles"
+        : route === "profileProfiles" || route === "profileLanguages"
+          ? "Languages I'm learning"
+        : route === "teacherProfiles"
+          ? "Teacher Profile"
         : route === "teacherProfileCreate"
           ? "Create Teacher Profile"
           : route === "teacherProfileEdit"
             ? "Edit Teacher Profile"
             : (route === "teacherProfileDetail" || route === "bookLesson") && teacherProfileForTitle
               ? teacherProfileForTitle.displayName
-            : storyForTitle?.title || match[1];
+              : match[1] || "LinguaStories";
   pageTitle.textContent = titleText;
   if (mobilePageTitle) mobilePageTitle.textContent = titleText.replace(/\s+\([^)]*\)$/, "");
-  coinBalance.textContent = state.wallet.balance;
-  if (mobileCoinBalance) mobileCoinBalance.textContent = state.wallet.balance;
-  if (topbarLanguage) topbarLanguage.textContent = languageName(appConfig, state.user.targetLanguage);
   if (messageBadge) {
     const unread = Number(state.directChat?.unreadCount || 0);
     messageBadge.textContent = unread;
@@ -3157,58 +2282,38 @@ function render() {
     ? `<img class="h-10 w-10 rounded-full object-cover" src="${escapeHtml(state.user.avatarUrl)}" alt="">`
     : escapeHtml(state.user.avatar);
   document.querySelector("#miniName").innerHTML = `${icon("user", "h-3.5 w-3.5")}<span>${escapeHtml(state.user.displayName)}</span>`;
-  document.querySelector("#miniTarget").textContent = languageName(appConfig, state.user.targetLanguage);
+  document.querySelector("#miniTarget").textContent = "Learner";
   renderNav();
 
   const views = {
     dashboard: dashboardView,
-    sentenceMining: sentenceMiningView,
-    sentenceDeckLibrary: sentenceDeckLibraryView,
-    sentenceDeckDetail: (ctx) => sentenceDeckDetailView({ ...ctx, activeDeckId: activeDeckId() }),
-    sentenceDeckTopicSentences: (ctx) => sentenceDeckTopicSentencesView({ ...ctx, activeDeckId: activeDeckId(), activeTopicId: activeTopicId() }),
-    sentences: sentencesView,
-    shortStories: shortStoriesView,
-    shortStorySearch: shortStorySearchView,
-    storyDetail: storyDetailView,
-    stories: storiesView,
-    review: (ctx) => reviewView({ ...ctx, reviewSettings }),
-    shadowing: shadowingView,
-    deck: deckView,
-    wallet: walletView,
-    goals: goalsView,
     communityConnect: communityConnectView,
-    communityMoments: communityMomentsView,
     voiceVideoRooms: voiceVideoRoomsView,
     voiceVideoRoom: voiceVideoRoomView,
     communityLearner: (ctx) => communityLearnerView({ ...ctx, activeLearnerId: activeLearnerId() }),
-    communityMoment: (ctx) => communityMomentView({ ...ctx, activePostId: activePostId() }),
+    communityPost: (ctx) => communityPostView({ ...ctx, activePostId: activePostId() }),
     findTeacher: findTeacherView,
     teacherProfileDetail: (ctx) => teacherProfileDetailView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
     teacherProfileCreate: teacherProfileCreateView,
     teacherProfileEdit: (ctx) => teacherProfileEditView({ ...ctx, activeTeacherProfileId: activeTeacherProfileId() }),
     bookLesson: bookLessonView,
     myLearning: myLearningView,
-    myLessons: (ctx) => myLearningView({ ...ctx, myLearningTab: "lessons" }),
+    myLessons: myLearningView,
     myTeachers: (ctx) => myLearningView({ ...ctx, myLearningTab: "teachers" }),
     learningNotes: learningNotesView,
     teacherDashboard: teacherDashboardView,
-    teacherProfiles: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "teachers", teacherProfilesContent: teacherProfilesPanel(ctx) }),
+    teacherProfiles: teacherProfilesPanel,
     teacherAvailability: teacherAvailabilityView,
     teacherBookings: teacherBookingsView,
     teacherStudents: teacherStudentsView,
     teacherLessonNotes: teacherLessonNotesView,
     teacherResources: teacherResourcesView,
     teacherTemplates: teacherTemplatesView,
-    progress: progressView,
     profile: profileView,
     profileInfo: profileInfoView,
     profileSubscriptions: subscriptionsView,
     profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) }),
-    profileLanguages: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "languages", teacherProfilesContent: teacherProfilesPanel(ctx) }),
-    profileGoals: goalsView,
-    profileMoments: profileMomentsView,
-    profileWallet: walletView,
-    admin: adminView
+    profileLanguages: (ctx) => myProfilesView({ ...ctx, myProfilesTab: "languages", teacherProfilesContent: teacherProfilesPanel(ctx) })
   };
 	  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
 	  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";
@@ -3237,7 +2342,7 @@ function render() {
 function loadMoreCommunityListIfNeeded() {
   if (!state) return;
   const route = activeRoute();
-  if (route !== "communityConnect" && route !== "communityMoments") return;
+  if (route !== "communityConnect") return;
   const marker = document.querySelector(`[data-community-load-more="${route}"]`);
   if (!marker) return;
 
@@ -3276,15 +2381,16 @@ document.querySelector("#notifyButton").addEventListener("click", () => {
 async function init() {
   try {
     setPublicShell();
-    const configResponse = await fetch("/api/config");
-    appConfig = await configResponse.json().catch(() => ({ supportedLanguages: [] }));
-    const tiersResponse = await fetch("/api/account/tiers").catch(() => null);
-    const tiersBody = tiersResponse?.ok ? await tiersResponse.json().catch(() => ({ tiers: [] })) : { tiers: [] };
+    const isPublicPath = !window.location.pathname.startsWith("/app");
+    if (isPublicPath) renderPublicPage();
+    appConfig = await fetchJsonWithTimeout("/api/config", { supportedLanguages: [] });
+    if (isPublicPath) renderPublicPage();
+    const tiersBody = await fetchJsonWithTimeout("/api/account/tiers", { tiers: [] });
     appConfig.accountTiers = tiersBody.tiers || [];
-    const response = await fetch("/api/auth/me");
-    const auth = await response.json().catch(() => ({ authenticated: false }));
+    if (isPublicPath) renderPublicPage();
+    const auth = await fetchJsonWithTimeout("/api/auth/me", { authenticated: false });
     if (!auth.authenticated) {
-      if (window.location.pathname.startsWith("/app") || window.location.pathname === "/sentence-mining") history.replaceState({}, "", "/login");
+      if (window.location.pathname.startsWith("/app")) history.replaceState({}, "", "/login");
       renderPublicPage();
       return;
     }
@@ -3293,7 +2399,6 @@ async function init() {
       return;
     }
     if (["/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("dashboard"));
-    if (window.location.pathname === "/sentence-mining") history.replaceState({}, "", appPath("sentenceMining"));
     normalizeAppUrl();
     await api("/api/state");
   } catch (_error) {

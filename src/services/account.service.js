@@ -255,7 +255,7 @@ async function queueNotification(client, userId, type, title, body, tone = "neut
 async function createAccountForUser(client, userId, requestedTierKey) {
   const tierKey = String(requestedTierKey || "free").trim().toLowerCase();
   const tier = await getTier(tierKey, client);
-  if (!tier || !tier.signupVisible) throw serviceError("Choose a valid account tier", 400);
+  if (!tier || !tier.signupVisible) throw serviceError("Choose a valid membership option", 400);
 
   const now = new Date();
   const startsTrial = tier.monthlyPriceUsd > 0 && tier.trialEligible && tier.trialLengthDays > 0;
@@ -291,7 +291,7 @@ async function createAccountForUser(client, userId, requestedTierKey) {
 }
 
 async function syncLegacySubscriptionColumns(client, userId, tierKey, status) {
-  const learnerTier = tierKey === "free" || tierKey === "basic" ? tierKey : "basic";
+  const learnerTier = "free";
   const learnerStatus = status === "past_due" ? "past_due" : status === "canceled" ? "canceled" : "active";
   await client.query(
     `update users
@@ -300,7 +300,7 @@ async function syncLegacySubscriptionColumns(client, userId, tierKey, status) {
       where id = $1`,
     [userId, learnerTier, learnerStatus]
   );
-  if (tierKey === "teacher" || tierKey === "teacher_pro") {
+  if (tierKey === "teacher") {
     await client.query(
       `insert into teacher_subscriptions (user_id, plan_key, status, current_period_end, created_at, updated_at)
        values ($1, $2, $3, now() + interval '30 days', now(), now())
@@ -321,7 +321,7 @@ async function changeTier(user, requestedTierKey, { immediatePayment = true } = 
     if (!current) throw serviceError("Account record is missing", 404);
     if (!current.canChangeTier) throw serviceError("Trial or inactive accounts cannot change tiers.", 409);
     const nextTier = await getTier(String(requestedTierKey || "").trim().toLowerCase(), client);
-    if (!nextTier) throw serviceError("Choose a valid account tier", 400);
+    if (!nextTier) throw serviceError("Choose a valid membership option", 400);
     if (nextTier.key === current.subscriptionTier) throw serviceError("You are already on this tier.", 400);
     const isUpgrade = nextTier.monthlyPriceUsd > current.tier.monthlyPriceUsd;
     if (isUpgrade && immediatePayment && nextTier.monthlyPriceUsd > 0 && !current.hasPaymentMethod && process.env.STRIPE_SECRET_KEY) {
@@ -388,7 +388,7 @@ async function reactivate(user, requestedTierKey) {
     const account = mapAccount((await client.query(accountSelect("where ua.user_id = $1 for update of ua"), [user.id])).rows[0]);
     if (!account?.canReactivate) throw serviceError("This account is not eligible for reactivation.", 409);
     const tier = await getTier(requestedTierKey || account.subscriptionTier, client);
-    if (!tier) throw serviceError("Choose a valid account tier", 400);
+    if (!tier) throw serviceError("Choose a valid membership option", 400);
     await client.query(
       `update user_accounts
           set subscription_tier = $2,

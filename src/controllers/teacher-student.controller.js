@@ -128,10 +128,6 @@ async function createReview(req, res) {
   res.status(201).json(await teacherStudentService.createReview(req.user, req.params.id, req.body));
 }
 
-async function suggestReward(req, res) {
-  res.status(201).json(await teacherStudentService.suggestReward(req.user, req.params.id, req.body));
-}
-
 async function sendMessage(req, res) {
   res.json(await teacherStudentService.sendTeacherMessage(req.user, req.body));
 }
@@ -177,7 +173,6 @@ module.exports = {
   listTemplates,
   createTemplate,
   createReview,
-  suggestReward,
   sendMessage,
   subscription,
   stripeWebhook

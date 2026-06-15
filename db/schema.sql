@@ -1,5 +1,32 @@
 create extension if not exists pgcrypto;
 
+drop table if exists
+  user_sentence_review_results,
+  user_saved_sentence_decks,
+  sentence_deck_items,
+  sentence_deck_topics,
+  sentence_decks,
+  user_sentence_reviews,
+  sentences,
+  story_comments,
+  user_story_states,
+  story_translations,
+  stories,
+  story_categories,
+  user_learning_path_progress,
+  learning_path_items,
+  learning_paths,
+  goal_supports,
+  goal_templates,
+  goals,
+  voice_video_room_coin_transactions,
+  lesson_coin_reward_suggestions,
+  post_appreciations,
+  coin_transactions,
+  coin_rules,
+  wallets
+cascade;
+
 create table if not exists users (
   id uuid primary key default gen_random_uuid(),
   display_name text not null,
@@ -12,11 +39,13 @@ create table if not exists users (
   native_language text,
   target_language text not null,
   current_level text default 'A1',
+  timezone text not null default 'UTC',
+  site_language text not null default 'en-US',
+  currency text not null default 'USD',
   current_streak integer default 0,
   longest_streak integer default 0,
   listening_time integer default 0,
-  shadowing_time integer default 0,
-  learner_subscription_tier text not null default 'free' check (learner_subscription_tier in ('free', 'basic')),
+  learner_subscription_tier text not null default 'free' check (learner_subscription_tier in ('free')),
   learner_subscription_status text not null default 'active' check (learner_subscription_status in ('active', 'past_due', 'canceled', 'incomplete')),
   created_at timestamptz default now()
 );
@@ -67,44 +96,183 @@ end $$;
 
 insert into supported_languages (code, name, sort_order, active)
 values
-  ('en-US', 'English (US)', 1, true),
-  ('en-GB', 'English (UK)', 2, true),
-  ('en-AU', 'English (Australia)', 3, true),
-  ('es-ES', 'Spanish (Spain)', 4, true),
-  ('es-MX', 'Spanish (Mexico)', 5, true),
-  ('zh-CN', 'Chinese (Simplified - China)', 6, true),
-  ('zh-TW', 'Chinese (Traditional - Taiwan)', 7, true),
-  ('ja-JP', 'Japanese (Standard)', 8, true),
-  ('ko-KR', 'Korean (South Korea)', 9, true),
-  ('fr-FR', 'French (France)', 10, true),
-  ('fr-BE', 'French (Belgium)', 11, true),
-  ('de-DE', 'German (Germany)', 12, true),
-  ('pt-PT', 'Portuguese (Portugal)', 13, true),
-  ('it-IT', 'Italian (Italy)', 14, true),
-  ('ru-RU', 'Russian (Russia)', 15, true),
-  ('ar-SA', 'Arabic (Modern Standard)', 16, true),
-  ('hi-IN', 'Hindi (India)', 17, true),
-  ('tr-TR', 'Turkish (Turkey)', 18, true),
-  ('vi-VN', 'Vietnamese (Northern / Standard)', 19, true),
-  ('th-TH', 'Thai (Central / Standard)', 20, true),
-  ('id-ID', 'Indonesian (Standard)', 21, true),
-  ('nl-NL', 'Dutch (Netherlands)', 22, true),
-  ('pl-PL', 'Polish (Standard)', 23, true),
-  ('uk-UA', 'Ukrainian (Standard)', 24, true),
-  ('sv-SE', 'Swedish (Sweden)', 25, true)
+  ('af', 'Afrikaans', 1, true),
+  ('sq', 'Albanian', 2, true),
+  ('am', 'Amharic', 3, true),
+  ('ar-SA', 'Arabic', 4, true),
+  ('hy', 'Armenian', 5, true),
+  ('az', 'Azerbaijani', 6, true),
+  ('eu', 'Basque', 7, true),
+  ('be', 'Belarusian', 8, true),
+  ('bn', 'Bengali', 9, true),
+  ('bs', 'Bosnian', 10, true),
+  ('bg', 'Bulgarian', 11, true),
+  ('my', 'Burmese', 12, true),
+  ('ca', 'Catalan', 13, true),
+  ('ceb', 'Cebuano', 14, true),
+  ('zh-CN', 'Chinese', 15, true),
+  ('hr', 'Croatian', 16, true),
+  ('cs', 'Czech', 17, true),
+  ('da', 'Danish', 18, true),
+  ('nl-NL', 'Dutch', 19, true),
+  ('en-US', 'English', 20, true),
+  ('eo', 'Esperanto', 21, true),
+  ('et', 'Estonian', 22, true),
+  ('fil', 'Filipino', 23, true),
+  ('fi', 'Finnish', 24, true),
+  ('fr-FR', 'French', 25, true),
+  ('gl', 'Galician', 26, true),
+  ('ka', 'Georgian', 27, true),
+  ('de-DE', 'German', 28, true),
+  ('el', 'Greek', 29, true),
+  ('gu', 'Gujarati', 30, true),
+  ('ht', 'Haitian Creole', 31, true),
+  ('ha', 'Hausa', 32, true),
+  ('he', 'Hebrew', 33, true),
+  ('hi-IN', 'Hindi', 34, true),
+  ('hmn', 'Hmong', 35, true),
+  ('hu', 'Hungarian', 36, true),
+  ('is', 'Icelandic', 37, true),
+  ('ig', 'Igbo', 38, true),
+  ('id-ID', 'Indonesian', 39, true),
+  ('ga', 'Irish', 40, true),
+  ('it-IT', 'Italian', 41, true),
+  ('ja-JP', 'Japanese', 42, true),
+  ('jv', 'Javanese', 43, true),
+  ('kn', 'Kannada', 44, true),
+  ('kk', 'Kazakh', 45, true),
+  ('km', 'Khmer', 46, true),
+  ('ko-KR', 'Korean', 47, true),
+  ('ku', 'Kurdish', 48, true),
+  ('ky', 'Kyrgyz', 49, true),
+  ('lo', 'Lao', 50, true),
+  ('la', 'Latin', 51, true),
+  ('lv', 'Latvian', 52, true),
+  ('lt', 'Lithuanian', 53, true),
+  ('lb', 'Luxembourgish', 54, true),
+  ('mk', 'Macedonian', 55, true),
+  ('mg', 'Malagasy', 56, true),
+  ('ms', 'Malay', 57, true),
+  ('ml', 'Malayalam', 58, true),
+  ('mt', 'Maltese', 59, true),
+  ('mi', 'Maori', 60, true),
+  ('mr', 'Marathi', 61, true),
+  ('mn', 'Mongolian', 62, true),
+  ('ne', 'Nepali', 63, true),
+  ('no', 'Norwegian', 64, true),
+  ('ny', 'Nyanja', 65, true),
+  ('ps', 'Pashto', 66, true),
+  ('fa', 'Persian', 67, true),
+  ('pl-PL', 'Polish', 68, true),
+  ('pt-PT', 'Portuguese', 69, true),
+  ('pa', 'Punjabi', 70, true),
+  ('ro', 'Romanian', 71, true),
+  ('ru-RU', 'Russian', 72, true),
+  ('sm', 'Samoan', 73, true),
+  ('gd', 'Scottish Gaelic', 74, true),
+  ('sr', 'Serbian', 75, true),
+  ('st', 'Sesotho', 76, true),
+  ('sn', 'Shona', 77, true),
+  ('sd', 'Sindhi', 78, true),
+  ('si', 'Sinhala', 79, true),
+  ('sk', 'Slovak', 80, true),
+  ('sl', 'Slovenian', 81, true),
+  ('so', 'Somali', 82, true),
+  ('es-ES', 'Spanish', 83, true),
+  ('su', 'Sundanese', 84, true),
+  ('sw', 'Swahili', 85, true),
+  ('sv-SE', 'Swedish', 86, true),
+  ('tg', 'Tajik', 87, true),
+  ('ta', 'Tamil', 88, true),
+  ('te', 'Telugu', 89, true),
+  ('th-TH', 'Thai', 90, true),
+  ('tr-TR', 'Turkish', 91, true),
+  ('uk-UA', 'Ukrainian', 92, true),
+  ('ur', 'Urdu', 93, true),
+  ('uz', 'Uzbek', 94, true),
+  ('vi-VN', 'Vietnamese', 95, true),
+  ('cy', 'Welsh', 96, true),
+  ('xh', 'Xhosa', 97, true),
+  ('yi', 'Yiddish', 98, true),
+  ('yo', 'Yoruba', 99, true),
+  ('zu', 'Zulu', 100, true),
+  ('ak', 'Akan', 101, true),
+  ('as', 'Assamese', 102, true),
+  ('ay', 'Aymara', 103, true),
+  ('bm', 'Bambara', 104, true),
+  ('bho', 'Bhojpuri', 105, true),
+  ('co', 'Corsican', 106, true),
+  ('dv', 'Divehi', 107, true),
+  ('ee', 'Ewe', 108, true),
+  ('fy', 'Frisian', 109, true),
+  ('rw', 'Kinyarwanda', 110, true)
 on conflict (code) do update
 set name = excluded.name,
     sort_order = excluded.sort_order,
     active = true;
 
+do $$
+declare
+  target record;
+begin
+  for target in
+    select * from (values
+      ('users', 'native_language'),
+      ('users', 'target_language'),
+      ('user_languages', 'language'),
+      ('posts', 'target_language'),
+      ('teacher_profiles', 'native_language'),
+      ('teacher_profile_languages', 'language'),
+      ('lesson_bookings', 'target_language'),
+      ('lesson_templates', 'target_language'),
+      ('voice_video_rooms', 'target_language'),
+      ('voice_video_rooms', 'source_language')
+    ) as language_columns(table_name, column_name)
+  loop
+    if exists (
+      select 1
+        from information_schema.columns
+       where table_schema = 'public'
+         and table_name = target.table_name
+         and column_name = target.column_name
+    ) then
+      execute format(
+        $sql$
+          update %I
+             set %I = case %I
+               when 'en-GB' then 'en-US'
+               when 'en-AU' then 'en-US'
+               when 'es-MX' then 'es-ES'
+               when 'zh-TW' then 'zh-CN'
+               when 'fr-BE' then 'fr-FR'
+               else %I
+             end
+           where %I in ('en-GB', 'en-AU', 'es-MX', 'zh-TW', 'fr-BE')
+        $sql$,
+        target.table_name,
+        target.column_name,
+        target.column_name,
+        target.column_name,
+        target.column_name
+      );
+    end if;
+  end loop;
+end $$;
+
 delete from supported_languages
  where code is null
     or code not in (
-      'en-US', 'en-GB', 'en-AU', 'es-ES', 'es-MX',
-      'zh-CN', 'zh-TW', 'ja-JP', 'ko-KR', 'fr-FR',
-      'fr-BE', 'de-DE', 'pt-PT', 'it-IT', 'ru-RU',
-      'ar-SA', 'hi-IN', 'tr-TR', 'vi-VN', 'th-TH',
-      'id-ID', 'nl-NL', 'pl-PL', 'uk-UA', 'sv-SE'
+      'af', 'sq', 'am', 'ar-SA', 'hy', 'az', 'eu', 'be', 'bn', 'bs',
+      'bg', 'my', 'ca', 'ceb', 'zh-CN', 'hr', 'cs', 'da', 'nl-NL', 'en-US',
+      'eo', 'et', 'fil', 'fi', 'fr-FR', 'gl', 'ka', 'de-DE', 'el', 'gu',
+      'ht', 'ha', 'he', 'hi-IN', 'hmn', 'hu', 'is', 'ig', 'id-ID', 'ga',
+      'it-IT', 'ja-JP', 'jv', 'kn', 'kk', 'km', 'ko-KR', 'ku', 'ky', 'lo',
+      'la', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi',
+      'mr', 'mn', 'ne', 'no', 'ny', 'ps', 'fa', 'pl-PL', 'pt-PT', 'pa',
+      'ro', 'ru-RU', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk',
+      'sl', 'so', 'es-ES', 'su', 'sw', 'sv-SE', 'tg', 'ta', 'te', 'th-TH',
+      'tr-TR', 'uk-UA', 'ur', 'uz', 'vi-VN', 'cy', 'xh', 'yi', 'yo', 'zu',
+      'ak', 'as', 'ay', 'bm', 'bho', 'co', 'dv', 'ee', 'fy', 'rw'
     );
 
 alter table if exists supported_languages
@@ -123,10 +291,26 @@ alter table if exists users
   add column if not exists learner_subscription_status text not null default 'active';
 
 alter table if exists users
-  drop constraint if exists users_learner_subscription_tier_check;
+  add column if not exists timezone text not null default 'UTC';
 
 alter table if exists users
-  add constraint users_learner_subscription_tier_check check (learner_subscription_tier in ('free', 'basic'));
+  add column if not exists site_language text not null default 'en-US';
+
+alter table if exists users
+  add column if not exists currency text not null default 'USD';
+
+alter table if exists users
+  drop column if exists shadowing_time;
+
+alter table if exists users
+  drop constraint if exists users_learner_subscription_tier_check;
+
+update users
+   set learner_subscription_tier = 'free'
+ where learner_subscription_tier <> 'free';
+
+alter table if exists users
+  add constraint users_learner_subscription_tier_check check (learner_subscription_tier in ('free'));
 
 alter table if exists users
   drop constraint if exists users_learner_subscription_status_check;
@@ -141,7 +325,6 @@ create table if not exists user_languages (
   current_streak integer default 0,
   longest_streak integer default 0,
   listening_time integer default 0,
-  shadowing_time integer default 0,
   profile_visibility text default 'Private' check (profile_visibility in ('Public', 'Private')),
   active boolean default true,
   created_at timestamptz default now(),
@@ -152,6 +335,9 @@ create table if not exists user_languages (
 alter table if exists user_languages
   add column if not exists profile_visibility text default 'Private';
 
+alter table if exists user_languages
+  drop column if exists shadowing_time;
+
 insert into user_languages (
   user_id,
   language,
@@ -159,7 +345,6 @@ insert into user_languages (
   current_streak,
   longest_streak,
   listening_time,
-  shadowing_time,
   profile_visibility,
   active
 )
@@ -170,7 +355,6 @@ select
   current_streak,
   longest_streak,
   listening_time,
-  shadowing_time,
   'Private',
   true
 from users
@@ -185,270 +369,6 @@ create table if not exists user_sessions (
   created_at timestamptz default now()
 );
 
-create table if not exists wallets (
-  user_id uuid primary key references users(id) on delete cascade,
-  balance integer default 0 check (balance >= 0),
-  lifetime_earned integer default 0 check (lifetime_earned >= 0),
-  lifetime_spent integer default 0 check (lifetime_spent >= 0),
-  daily_earned integer default 0 check (daily_earned >= 0),
-  weekly_earned integer default 0 check (weekly_earned >= 0)
-);
-
-create table if not exists coin_rules (
-  id uuid primary key default gen_random_uuid(),
-  rule_key text unique not null,
-  label text unique not null,
-  amount integer not null,
-  rule_type text not null check (rule_type in ('earn', 'spend')),
-  trigger_event text,
-  active boolean default true,
-  created_at timestamptz default now()
-);
-
-alter table if exists coin_rules
-  add column if not exists rule_key text;
-
-alter table if exists coin_rules
-  add column if not exists active boolean default true;
-
-alter table if exists coin_rules
-  add column if not exists trigger_event text;
-
-create table if not exists coin_transactions (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references users(id) on delete cascade,
-  coin_rule_id uuid references coin_rules(id) on delete set null,
-  amount integer not null,
-  label text not null,
-  created_at timestamptz default now()
-);
-
-alter table if exists coin_transactions
-  add column if not exists coin_rule_id uuid;
-
-do $$
-begin
-  alter table coin_transactions
-    add constraint coin_transactions_coin_rule_id_fkey
-    foreign key (coin_rule_id) references coin_rules(id) on delete set null;
-exception
-  when duplicate_object then null;
-end $$;
-
-create table if not exists sentences (
-  id uuid primary key default gen_random_uuid(),
-  source_language text not null default 'en-US',
-  target_language text not null default 'ja-JP',
-  target text not null,
-  translation text not null,
-  romanization text,
-  audio_url text,
-  image_url text,
-  video_url text,
-  level text not null,
-  topic text not null,
-  difficulty integer default 1 check (difficulty between 1 and 5),
-  notes text,
-  source text,
-  variations jsonb default '[]'::jsonb,
-  created_at timestamptz default now(),
-  updated_at timestamptz default now()
-);
-
-create table if not exists user_sentence_reviews (
-  user_id uuid references users(id) on delete cascade,
-  sentence_id uuid references sentences(id) on delete cascade,
-  state text default 'New' check (state in ('New', 'Learning', 'Review', 'Mastered')),
-  due_date date default current_date,
-  last_rating text check (last_rating is null or last_rating in ('Again', 'Hard', 'Good', 'Easy')),
-  saved boolean default false,
-  created_at timestamptz default now(),
-  updated_at timestamptz default now(),
-  primary key (user_id, sentence_id)
-);
-
-create table if not exists sentence_decks (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid references users(id) on delete cascade,
-  deck_kind text not null default 'User' check (deck_kind in ('System', 'User')),
-  name text not null,
-  description text,
-  coins integer not null default 0 check (coins >= 0),
-  level text not null default 'A1' check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
-  visibility text not null default 'Private' check (visibility in ('Private', 'Public')),
-  source_language text not null default 'en-US',
-  target_language text not null default 'ja-JP',
-  image_url text,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
-  check ((deck_kind = 'System' and user_id is null and visibility = 'Public') or (deck_kind = 'User' and user_id is not null))
-);
-
-create table if not exists sentence_deck_topics (
-  id uuid primary key default gen_random_uuid(),
-  deck_id uuid not null references sentence_decks(id) on delete cascade,
-  name text not null,
-  description text,
-  sort_order integer not null default 0,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
-);
-
-create table if not exists sentence_deck_items (
-  id uuid primary key default gen_random_uuid(),
-  deck_id uuid not null references sentence_decks(id) on delete cascade,
-  topic_id uuid references sentence_deck_topics(id) on delete cascade,
-  sentence_id uuid not null references sentences(id) on delete cascade,
-  sort_order integer not null default 0,
-  created_at timestamptz not null default now(),
-  unique (deck_id, sentence_id)
-);
-
-create table if not exists user_saved_sentence_decks (
-  user_id uuid not null references users(id) on delete cascade,
-  deck_id uuid not null references sentence_decks(id) on delete cascade,
-  saved_at timestamptz not null default now(),
-  primary key (user_id, deck_id)
-);
-
-create table if not exists user_sentence_review_results (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references users(id) on delete cascade,
-  deck_id uuid references sentence_decks(id) on delete cascade,
-  topic_id uuid references sentence_deck_topics(id) on delete set null,
-  sentence_item_id uuid references sentence_deck_items(id) on delete cascade,
-  sentence_id uuid references sentences(id) on delete cascade,
-  response text not null check (response in ('show_again', 'hard', 'easy', 'known')),
-  reviewed_at timestamptz not null default now()
-);
-
-create table if not exists story_categories (
-  id uuid primary key default gen_random_uuid(),
-  name text unique not null,
-  slug text unique not null,
-  sort_order integer default 0,
-  active boolean default true,
-  created_at timestamptz default now()
-);
-
-insert into story_categories (name, slug, sort_order)
-values
-  ('Travel', 'travel', 10),
-  ('Workplace', 'workplace', 20)
-on conflict (slug) do nothing;
-
-create table if not exists stories (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  category_id uuid references story_categories(id) on delete set null,
-  source_language text not null,
-  topic text not null,
-  image_url text,
-  image_path_file_id text,
-  audio_url text,
-  video_url text,
-  unlock_cost integer default 20 check (unlock_cost >= 0),
-  reward_coins integer default 15 check (reward_coins >= 0),
-  created_at timestamptz default now()
-);
-
-create table if not exists story_translations (
-  id uuid primary key default gen_random_uuid(),
-  story_id uuid not null references stories(id) on delete cascade,
-  target_language text not null,
-  level text not null,
-  title text not null,
-  text text not null,
-  source_text text,
-  romanization text,
-  reading_time text,
-  highlights jsonb default '[]'::jsonb,
-  key_sentences jsonb default '[]'::jsonb,
-  key_words jsonb default '[]'::jsonb,
-  grammar_points jsonb default '[]'::jsonb,
-  created_at timestamptz default now(),
-  unique (story_id, target_language, level)
-);
-
-alter table if exists stories
-  add column if not exists category_id uuid references story_categories(id) on delete set null;
-
-alter table if exists stories
-  add column if not exists source_language text;
-
-update stories
-   set source_language = 'en-US'
- where source_language is null;
-
-alter table if exists stories
-  alter column source_language set not null;
-
-alter table if exists stories
-  add column if not exists image_url text;
-
-alter table if exists stories
-  add column if not exists image_path_file_id text;
-
-alter table if exists stories
-  add column if not exists video_url text;
-
-update stories
-   set category_id = story_categories.id
-  from story_categories
- where stories.category_id is null
-   and lower(stories.topic) = lower(story_categories.name);
-
-create table if not exists user_story_states (
-  user_id uuid references users(id) on delete cascade,
-  story_id uuid references stories(id) on delete cascade,
-  unlocked boolean default false,
-  completed boolean default false,
-  liked boolean default false,
-  favorite boolean default false,
-  created_at timestamptz default now(),
-  updated_at timestamptz default now(),
-  primary key (user_id, story_id)
-);
-
-alter table if exists user_story_states
-  add column if not exists liked boolean default false,
-  add column if not exists favorite boolean default false;
-
-create table if not exists goals (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references users(id) on delete cascade,
-  goal_scope text not null default 'Language' check (goal_scope in ('Global', 'Language')),
-  target_language text,
-  title text not null,
-  type text not null,
-  target integer not null check (target > 0),
-  progress integer default 0 check (progress >= 0),
-  visibility text default 'Public' check (visibility in ('Public', 'Private')),
-  reward integer default 25 check (reward >= 0),
-  completed boolean default false,
-  due_date date not null default (current_date + 30),
-  created_at timestamptz default now()
-);
-
-create table if not exists goal_supports (
-  id uuid primary key default gen_random_uuid(),
-  goal_id uuid not null references goals(id) on delete cascade,
-  supporter_id uuid not null references users(id) on delete cascade,
-  recipient_id uuid not null references users(id) on delete cascade,
-  amount integer not null check (amount > 0),
-  message text,
-  created_at timestamptz default now(),
-  check (supporter_id <> recipient_id)
-);
-
-create table if not exists goal_templates (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  type text not null,
-  target integer not null check (target > 0),
-  created_at timestamptz default now()
-);
-
 create table if not exists posts (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id) on delete cascade,
@@ -457,9 +377,6 @@ create table if not exists posts (
   target_language text,
   image_path_file_id text,
   image_thumb_path_file_id text,
-  sentence_id uuid references sentences(id) on delete set null,
-  story_id uuid references stories(id) on delete set null,
-  goal_id uuid references goals(id) on delete set null,
   created_at timestamptz default now()
 );
 
@@ -473,13 +390,13 @@ alter table if exists posts
   add column if not exists image_thumb_path_file_id text;
 
 alter table if exists posts
-  add column if not exists sentence_id uuid references sentences(id) on delete set null;
+  drop column if exists sentence_id;
 
 alter table if exists posts
-  add column if not exists story_id uuid references stories(id) on delete set null;
+  drop column if exists story_id;
 
 alter table if exists posts
-  add column if not exists goal_id uuid references goals(id) on delete set null;
+  drop column if exists goal_id;
 
 create table if not exists post_likes (
   post_id uuid references posts(id) on delete cascade,
@@ -508,43 +425,8 @@ alter table if exists post_comments
 alter table if exists post_comments
   add constraint post_comments_body_255_check check (char_length(body) <= 255);
 
-create table if not exists post_views (
-  post_id uuid references posts(id) on delete cascade,
-  viewer_id uuid references users(id) on delete cascade,
-  created_at timestamptz default now(),
-  primary key (post_id, viewer_id)
-);
-
-create table if not exists post_appreciations (
-  id uuid primary key default gen_random_uuid(),
-  post_id uuid not null references posts(id) on delete cascade,
-  sender_id uuid not null references users(id) on delete cascade,
-  recipient_id uuid not null references users(id) on delete cascade,
-  amount integer not null check (amount > 0),
-  message text,
-  created_at timestamptz default now(),
-  check (sender_id <> recipient_id)
-);
-
-alter table if exists post_appreciations
-  add column if not exists message text;
-
-create table if not exists saved_posts (
-  post_id uuid references posts(id) on delete cascade,
-  user_id uuid references users(id) on delete cascade,
-  created_at timestamptz default now(),
-  primary key (post_id, user_id)
-);
-
-create table if not exists story_comments (
-  id uuid primary key default gen_random_uuid(),
-  story_id uuid not null references stories(id) on delete cascade,
-  user_id uuid not null references users(id) on delete cascade,
-  parent_comment_id uuid references story_comments(id) on delete cascade,
-  body text not null,
-  created_at timestamptz default now(),
-  check (body <> '')
-);
+drop table if exists saved_posts;
+drop table if exists post_views;
 
 create table if not exists user_follows (
   follower_id uuid references users(id) on delete cascade,
@@ -575,7 +457,6 @@ create table if not exists direct_messages (
   sender_id uuid not null references users(id) on delete cascade,
   recipient_id uuid not null references users(id) on delete cascade,
   body text not null,
-  coin_amount integer not null default 1 check (coin_amount = 1),
   read_at timestamptz,
   created_at timestamptz default now(),
   check (sender_id <> recipient_id),
@@ -583,405 +464,12 @@ create table if not exists direct_messages (
   check (char_length(body) <= 1000)
 );
 
-create table if not exists learning_paths (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  target_language text not null default 'ja-JP',
-  description text,
-  level text,
-  unlocks_advanced_content boolean default true,
-  created_at timestamptz default now()
-);
-
-create table if not exists learning_path_items (
-  id uuid primary key default gen_random_uuid(),
-  path_id uuid not null references learning_paths(id) on delete cascade,
-  label text not null,
-  sort_order integer default 1
-);
-
-create table if not exists user_learning_path_progress (
-  user_id uuid references users(id) on delete cascade,
-  path_id uuid references learning_paths(id) on delete cascade,
-  progress integer default 0 check (progress between 0 and 100),
-  updated_at timestamptz default now(),
-  primary key (user_id, path_id)
-);
-
-alter table if exists sentences
-  add column if not exists source_language text not null default 'en-US';
-
-alter table if exists sentences
-  add column if not exists target_language text not null default 'ja-JP';
-
-alter table if exists sentences
-  add column if not exists image_url text;
-
-alter table if exists sentences
-  add column if not exists video_url text;
-
-alter table if exists sentences
-  add column if not exists updated_at timestamptz default now();
-
-alter table if exists sentence_decks
-  add column if not exists deck_kind text not null default 'User';
-
-alter table if exists sentence_decks
-  add column if not exists source_language text not null default 'en-US';
-
-alter table if exists sentence_decks
-  add column if not exists target_language text not null default 'ja-JP';
-
-alter table if exists sentence_decks
-  add column if not exists image_url text;
-
-alter table if exists sentence_decks
-  drop constraint if exists sentence_decks_deck_kind_check;
-
-update sentence_decks
-   set deck_kind = 'User'
- where deck_kind is null
-    or deck_kind not in ('System', 'User');
-
-alter table if exists sentence_decks
-  add constraint sentence_decks_deck_kind_check check (deck_kind in ('System', 'User'));
-
-alter table if exists sentence_decks
-  drop constraint if exists sentence_decks_kind_owner_check;
-
-alter table if exists sentence_decks
-  add constraint sentence_decks_kind_owner_check check (
-    (deck_kind = 'System' and user_id is null and visibility = 'Public')
-    or (deck_kind = 'User' and user_id is not null)
-  );
-
-do $$
-begin
-  if to_regclass('public.sentence_packs') is not null then
-    execute $migrate_sentence_packs$
-      insert into sentence_decks (
-        deck_kind,
-        name,
-        description,
-        coins,
-        level,
-        visibility,
-        source_language,
-        target_language,
-        created_at,
-        updated_at
-      )
-      select
-        'System',
-        p.title,
-        'Official LinguaStories learning material.',
-        greatest(count(s.id)::int * 10, 0),
-        coalesce(min(p.level), 'A1'),
-        'Public',
-        'en-US',
-        p.target_language,
-        min(p.created_at),
-        now()
-      from sentence_packs p
-      left join sentences s on s.pack_id = p.id
-      where not exists (
-        select 1
-          from sentence_decks d
-         where d.deck_kind = 'System'
-           and d.name = p.title
-           and d.target_language = p.target_language
-      )
-      group by p.id, p.title, p.target_language
-    $migrate_sentence_packs$;
-
-    execute $migrate_sentence_pack_items$
-      insert into sentence_deck_items (deck_id, sentence_id, sort_order)
-      select d.id,
-             s.id,
-             row_number() over (partition by d.id order by s.created_at, s.id)::int
-        from sentence_packs p
-        join sentence_decks d
-          on d.deck_kind = 'System'
-         and d.name = p.title
-         and d.target_language = p.target_language
-        join sentences s on s.pack_id = p.id
-       where not exists (
-         select 1
-           from sentence_deck_items i
-          where i.deck_id = d.id
-            and i.sentence_id = s.id
-       )
-    $migrate_sentence_pack_items$;
-
-    alter table sentences drop constraint if exists sentences_pack_id_fkey;
-    alter table sentences drop column if exists pack_id;
-    drop table if exists sentence_packs cascade;
-  end if;
-end $$;
-
-alter table if exists stories
-  add column if not exists source_language text;
-
-update stories
-   set source_language = 'en-US'
- where source_language is null;
-
-alter table if exists stories
-  alter column source_language set not null;
-
-create table if not exists story_translations (
-  id uuid primary key default gen_random_uuid(),
-  story_id uuid not null references stories(id) on delete cascade,
-  target_language text not null,
-  level text not null,
-  title text not null,
-  text text not null,
-  source_text text,
-  romanization text,
-  reading_time text,
-  highlights jsonb default '[]'::jsonb,
-  key_sentences jsonb default '[]'::jsonb,
-  key_words jsonb default '[]'::jsonb,
-  grammar_points jsonb default '[]'::jsonb,
-  created_at timestamptz default now(),
-  unique (story_id, target_language, level)
-);
-
-do $$
-begin
-  if exists (
-    select 1
-      from information_schema.columns
-     where table_name = 'stories'
-       and column_name = 'target_language'
-  ) then
-    execute $migrate_base$
-      insert into story_translations (
-        story_id,
-        target_language,
-        level,
-        title,
-        text,
-        source_text,
-        reading_time,
-        highlights,
-        key_sentences,
-        key_words,
-        grammar_points
-      )
-      select
-        id,
-        target_language,
-        level,
-        title,
-        text,
-        translation,
-        reading_time,
-        '[]'::jsonb,
-        '[]'::jsonb,
-        '[]'::jsonb,
-        '[]'::jsonb
-      from stories
-      where target_language is not null
-      on conflict (story_id, target_language, level) do update
-      set title = excluded.title,
-          text = excluded.text,
-          source_text = excluded.source_text,
-          reading_time = excluded.reading_time,
-          highlights = excluded.highlights,
-          key_sentences = excluded.key_sentences,
-          key_words = excluded.key_words,
-          grammar_points = excluded.grammar_points
-    $migrate_base$;
-
-    execute $migrate_levels$
-      insert into story_translations (
-        story_id,
-        target_language,
-        level,
-        title,
-        text,
-        source_text,
-        reading_time,
-        highlights,
-        key_sentences,
-        key_words,
-        grammar_points
-      )
-      select
-        s.id,
-        s.target_language,
-        versions.level,
-        coalesce(versions.content ->> 'title', s.title),
-        coalesce(versions.content ->> 'text', s.text),
-        coalesce(versions.content ->> 'translation', s.translation),
-        coalesce(versions.content ->> 'readingTime', s.reading_time),
-        coalesce(versions.content -> 'highlights', '[]'::jsonb),
-        coalesce(versions.content -> 'keySentences', '[]'::jsonb),
-        coalesce(versions.content -> 'keyWords', versions.content -> 'highlights', '[]'::jsonb),
-        coalesce(versions.content -> 'grammarPoints', '[]'::jsonb)
-      from stories s
-      cross join lateral jsonb_each(coalesce(s.level_versions, '{}'::jsonb)) as versions(level, content)
-      where s.target_language is not null
-        and coalesce(versions.content ->> 'text', '') <> ''
-      on conflict (story_id, target_language, level) do update
-      set title = excluded.title,
-          text = excluded.text,
-          source_text = excluded.source_text,
-          reading_time = excluded.reading_time,
-          highlights = excluded.highlights,
-          key_sentences = excluded.key_sentences,
-          key_words = excluded.key_words,
-          grammar_points = excluded.grammar_points
-    $migrate_levels$;
-
-    drop index if exists idx_stories_language;
-    alter table stories drop column target_language;
-  end if;
-end $$;
-
-alter table if exists stories
-  drop column if exists level;
-
-alter table if exists stories
-  drop column if exists highlights;
-
-alter table if exists stories
-  drop column if exists key_sentences;
-
-alter table if exists stories
-  drop column if exists key_words;
-
-alter table if exists stories
-  drop column if exists grammar_points;
-
-alter table if exists stories
-  drop column if exists image_url;
-
-alter table if exists stories
-  drop column if exists text;
-
-alter table if exists stories
-  drop column if exists translation;
-
-alter table if exists stories
-  drop column if exists reading_time;
-
-alter table if exists stories
-  drop column if exists level_versions;
-
-alter table if exists goals
-  add column if not exists target_language text;
-
-alter table if exists goals
-  alter column target_language drop not null;
-
-alter table if exists goals
-  add column if not exists goal_scope text not null default 'Language';
-
-alter table if exists goals
-  add column if not exists due_date date;
-
-update goals
-   set due_date = current_date + 30
- where due_date is null;
-
-alter table if exists goals
-  alter column due_date set not null;
-
-alter table if exists goals
-  drop constraint if exists goals_goal_scope_check;
-
-update goals
-   set goal_scope = case when target_language is null then 'Global' else 'Language' end
- where goal_scope is null
-    or goal_scope not in ('Global', 'Language');
-
-alter table if exists goals
-  add constraint goals_goal_scope_check check (goal_scope in ('Global', 'Language'));
-
-alter table if exists goals
-  drop constraint if exists goals_scope_language_check;
-
-alter table if exists goals
-  add constraint goals_scope_language_check check (
-    (goal_scope = 'Global' and target_language is null)
-    or (goal_scope = 'Language' and target_language is not null)
-  );
-
-alter table if exists learning_paths
-  add column if not exists target_language text not null default 'ja-JP';
-
-
-create index if not exists idx_coin_transactions_user_created on coin_transactions (user_id, created_at desc);
-create index if not exists idx_coin_transactions_rule on coin_transactions (coin_rule_id);
-create index if not exists idx_coin_rules_key on coin_rules (rule_key);
-create unique index if not exists idx_coin_rules_rule_key_unique on coin_rules (rule_key);
-create index if not exists idx_coin_rules_trigger_event on coin_rules (trigger_event);
-insert into coin_rules (rule_key, label, amount, rule_type, trigger_event)
-values ('follow_learner', 'Follow Learner', 1, 'earn', 'learner_followed')
-on conflict (rule_key) do update
-set label = excluded.label,
-    amount = excluded.amount,
-    rule_type = excluded.rule_type,
-    trigger_event = excluded.trigger_event,
-    active = true;
-insert into coin_rules (rule_key, label, amount, rule_type, trigger_event)
-values
-  ('sentence_deck_completed', 'Sentence Deck Completed', 10, 'earn', 'sentence_deck_completed'),
-  ('receive_like', 'Receive Like', 1, 'earn', 'moment_liked'),
-  ('receive_comment', 'Receive Comment', 1, 'earn', 'moment_commented'),
-  ('moment_appreciation_sent', 'Moment Appreciation Sent', -1, 'spend', 'moment_appreciation_sent'),
-  ('moment_appreciation_received', 'Moment Appreciation Received', 1, 'earn', 'moment_appreciation_received')
-on conflict (rule_key) do update
-set label = excluded.label,
-    amount = excluded.amount,
-    rule_type = excluded.rule_type,
-    trigger_event = excluded.trigger_event,
-    active = true;
-
-update coin_rules
-   set active = false
- where rule_key = 'sentence_pack_completed';
-create index if not exists idx_user_sessions_hash on user_sessions (token_hash);
-create index if not exists idx_user_sessions_expires on user_sessions (expires_at);
-drop index if exists idx_sentences_pack;
-create index if not exists idx_sentences_language on sentences (target_language);
-create index if not exists idx_reviews_user_due on user_sentence_reviews (user_id, due_date);
-create index if not exists idx_user_saved_sentence_decks_user on user_saved_sentence_decks (user_id, saved_at desc);
-create index if not exists idx_user_saved_sentence_decks_deck on user_saved_sentence_decks (deck_id);
-create index if not exists idx_stories_category on stories (category_id);
-create index if not exists idx_story_translations_story_language on story_translations (story_id, target_language);
-create index if not exists idx_story_translations_language_level on story_translations (target_language, level);
-create index if not exists idx_story_states_user on user_story_states (user_id);
-create index if not exists idx_goals_user on goals (user_id);
-create index if not exists idx_goals_user_scope on goals (user_id, goal_scope);
-create index if not exists idx_goals_user_language on goals (user_id, target_language);
-create index if not exists idx_goal_supports_goal on goal_supports (goal_id, created_at desc);
-create index if not exists idx_goal_supports_supporter on goal_supports (supporter_id, created_at desc);
-create index if not exists idx_goal_supports_recipient on goal_supports (recipient_id, created_at desc);
-create index if not exists idx_posts_created on posts (created_at desc);
-create index if not exists idx_posts_story on posts (story_id, created_at desc);
-create index if not exists idx_posts_goal on posts (goal_id);
-create index if not exists idx_posts_sentence on posts (sentence_id);
-create index if not exists idx_post_appreciations_post on post_appreciations (post_id, created_at desc);
-create index if not exists idx_post_appreciations_sender on post_appreciations (sender_id, created_at desc);
-create index if not exists idx_post_appreciations_recipient on post_appreciations (recipient_id, created_at desc);
-create index if not exists idx_story_comments_story on story_comments (story_id, created_at);
-create index if not exists idx_story_comments_parent on story_comments (parent_comment_id);
-create index if not exists idx_user_follows_follower on user_follows (follower_id);
-create index if not exists idx_user_follows_following on user_follows (following_id);
-create index if not exists idx_user_languages_user on user_languages (user_id);
-create index if not exists idx_direct_conversations_participant_one on direct_conversations (participant_one, updated_at desc);
-create index if not exists idx_direct_conversations_participant_two on direct_conversations (participant_two, updated_at desc);
-create index if not exists idx_direct_messages_conversation_created on direct_messages (conversation_id, created_at asc);
-create index if not exists idx_direct_messages_recipient_unread on direct_messages (recipient_id, read_at);
-
--- Combined teacher/student schema
+alter table if exists direct_messages
+  drop column if exists coin_amount;
 
 create table if not exists teacher_subscription_plans (
   id uuid primary key default gen_random_uuid(),
-  plan_key text unique not null check (plan_key in ('teacher', 'teacher_pro')),
+  plan_key text unique not null check (plan_key in ('teacher')),
   name text not null,
   monthly_price_usd numeric(10, 2) not null check (monthly_price_usd >= 0),
   stripe_price_id text,
@@ -993,13 +481,9 @@ create table if not exists teacher_subscription_plans (
 alter table if exists teacher_subscription_plans
   drop constraint if exists teacher_subscription_plans_plan_key_check;
 
-alter table if exists teacher_subscription_plans
-  add constraint teacher_subscription_plans_plan_key_check check (plan_key in ('starter', 'pro', 'teacher', 'teacher_pro'));
-
 insert into teacher_subscription_plans (plan_key, name, monthly_price_usd, can_create_group_lessons)
 values
-  ('teacher', 'Teacher Tier', 2.99, false),
-  ('teacher_pro', 'Teacher Pro Tier', 6.99, true)
+  ('teacher', 'Teacher', 0, false)
 on conflict (plan_key) do update
 set name = excluded.name,
     monthly_price_usd = excluded.monthly_price_usd,
@@ -1018,7 +502,8 @@ create table if not exists teacher_profiles (
   native_language text not null,
   timezone text not null default 'UTC',
   country text,
-  city text,
+  professional_tutor boolean not null default true,
+  speaking_practice_only boolean not null default false,
   hourly_rate_usd numeric(10, 2) not null check (hourly_rate_usd >= 1),
   trial_rate_usd numeric(10, 2) check (trial_rate_usd is null or trial_rate_usd >= 0),
   min_lesson_minutes integer not null default 30 check (min_lesson_minutes in (15, 30, 45, 60, 90)),
@@ -1037,6 +522,9 @@ create table if not exists teacher_profiles (
   check (char_length(bio) between 20 and 3000),
   check (max_lesson_minutes >= min_lesson_minutes)
 );
+
+alter table if exists teacher_profiles
+  drop column if exists city;
 
 create table if not exists teacher_profile_languages (
   teacher_profile_id uuid not null references teacher_profiles(id) on delete cascade,
@@ -1124,16 +612,15 @@ create unique index if not exists idx_teacher_subscriptions_user_active
   on teacher_subscriptions (user_id)
   where status in ('active', 'past_due', 'incomplete');
 
-update teacher_subscriptions set plan_key = 'teacher' where plan_key = 'starter';
-update teacher_subscriptions set plan_key = 'teacher_pro' where plan_key = 'pro';
+update teacher_subscriptions set plan_key = 'teacher' where plan_key <> 'teacher';
 
-delete from teacher_subscription_plans where plan_key in ('starter', 'pro');
+delete from teacher_subscription_plans where plan_key <> 'teacher';
 
 alter table if exists teacher_subscription_plans
   drop constraint if exists teacher_subscription_plans_plan_key_check;
 
 alter table if exists teacher_subscription_plans
-  add constraint teacher_subscription_plans_plan_key_check check (plan_key in ('teacher', 'teacher_pro'));
+  add constraint teacher_subscription_plans_plan_key_check check (plan_key in ('teacher'));
 
 create table if not exists lesson_bookings (
   id uuid primary key default gen_random_uuid(),
@@ -1312,12 +799,18 @@ create table if not exists lesson_templates (
   teacher_profile_id uuid references teacher_profiles(id) on delete cascade,
   title text not null,
   target_language text,
-  level text check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
+  level text check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native')),
   lesson_type text not null default 'one_on_one' check (lesson_type in ('trial', 'one_on_one', 'group')),
   body text not null,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
+
+alter table if exists lesson_templates
+  drop constraint if exists lesson_templates_level_check;
+
+alter table if exists lesson_templates
+  add constraint lesson_templates_level_check check (level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'));
 
 create table if not exists lesson_template_resources (
   lesson_template_id uuid not null references lesson_templates(id) on delete cascade,
@@ -1334,18 +827,6 @@ create table if not exists teacher_reviews (
   body text,
   created_at timestamptz default now(),
   unique (teacher_profile_id, lesson_booking_id, student_user_id)
-);
-
-create table if not exists lesson_coin_reward_suggestions (
-  id uuid primary key default gen_random_uuid(),
-  lesson_booking_id uuid not null references lesson_bookings(id) on delete cascade,
-  suggested_by_user_id uuid not null references users(id) on delete cascade,
-  recipient_user_id uuid not null references users(id) on delete cascade,
-  amount integer not null check (amount between 1 and 100),
-  reason text,
-  status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
-  created_at timestamptz default now(),
-  check (suggested_by_user_id <> recipient_user_id)
 );
 
 create table if not exists teacher_payouts (
@@ -1368,12 +849,6 @@ alter table if exists direct_conversations
 
 alter table if exists direct_conversations
   add column if not exists lesson_booking_id uuid references lesson_bookings(id) on delete set null;
-
-alter table if exists direct_messages
-  drop constraint if exists direct_messages_coin_amount_check;
-
-alter table if exists direct_messages
-  add constraint direct_messages_coin_amount_check check (coin_amount >= 0);
 
 alter table if exists direct_messages
   add column if not exists message_context text not null default 'community'
@@ -1448,7 +923,7 @@ create table if not exists voice_video_rooms (
   room_type text not null check (room_type in ('voice', 'video')),
   target_language text not null default 'ja-JP',
   source_language text not null default 'en-US',
-  cefr_level text not null default 'A1' check (cefr_level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2')),
+  cefr_level text not null default 'A1' check (cefr_level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native')),
   max_participants integer not null default 4 check (max_participants between 2 and 4),
   is_private boolean not null default false,
   status text not null default 'active' check (status in ('active', 'ended', 'cancelled')),
@@ -1485,25 +960,19 @@ create table if not exists voice_video_room_sessions (
   ended_at timestamptz,
   duration_seconds integer not null default 0 check (duration_seconds >= 0 and duration_seconds <= 360),
   billed_minutes integer not null default 0 check (billed_minutes >= 0 and billed_minutes <= 6),
-  coins_charged integer not null default 0 check (coins_charged >= 0 and coins_charged <= 6000),
   status text not null default 'active' check (status in ('active', 'completed', 'timed_out', 'disconnected', 'failed')),
   created_at timestamptz not null default now()
 );
 
+alter table if exists voice_video_rooms
+  drop constraint if exists voice_video_rooms_cefr_level_check;
+
+alter table if exists voice_video_rooms
+  add constraint voice_video_rooms_cefr_level_check check (cefr_level in ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'));
+
 create unique index if not exists uniq_voice_video_active_session
   on voice_video_room_sessions (user_id)
   where status = 'active';
-
-create table if not exists voice_video_room_coin_transactions (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references users(id) on delete cascade,
-  room_id uuid not null references voice_video_rooms(id) on delete cascade,
-  session_id uuid not null unique references voice_video_room_sessions(id) on delete cascade,
-  coins integer not null check (coins > 0),
-  transaction_type text not null default 'debit' check (transaction_type in ('debit')),
-  reason text not null default 'voice_video_room_usage',
-  created_at timestamptz not null default now()
-);
 
 create index if not exists idx_voice_video_rooms_active
   on voice_video_rooms (status, created_at desc);
@@ -1514,9 +983,6 @@ create index if not exists idx_voice_video_rooms_filters
 
 create index if not exists idx_voice_video_room_sessions_user_created
   on voice_video_room_sessions (user_id, created_at desc);
-
-create index if not exists idx_voice_video_room_coin_transactions_user_created
-  on voice_video_room_coin_transactions (user_id, created_at desc);
 
 alter table if exists voice_video_rooms
   alter column max_participants set default 4;
@@ -1564,28 +1030,16 @@ insert into subscription_tiers (
 )
 values
   (
-    'free', 'Free Tier', 0, 0, false, 0,
-    '["read_stories","sentence_mining","connect","moments","find_teacher","my_schedule","wallet"]'::jsonb,
-    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":false,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":1,"connect":true,"moments":true,"voiceVideoRooms":false,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":1,"canEditLanguageProfiles":false,"canDeleteLanguageProfiles":false,"goals":true,"wallet":true,"teacherWorkspace":false,"groupLessons":false,"monthlyCoins":100}'::jsonb,
+    'free', 'Free Membership', 0, 0, false, 0,
+    '["voice_video_rooms","connect","community_posts","find_teacher","my_schedule","practice"]'::jsonb,
+    '{"dashboard":true,"connect":true,"communityPosts":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"practice":true,"maxLanguageProfiles":10,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"teacherWorkspace":false,"groupLessons":false}'::jsonb,
     'learner', true, 10
   ),
   (
-    'basic', 'Basic Tier', 2.99, 29.99, true, 7,
-    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","connect","moments","find_teacher","my_schedule","wallet","language_profiles"]'::jsonb,
-    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":false,"groupLessons":false,"monthlyCoins":500}'::jsonb,
-    'learner', true, 20
-  ),
-  (
-    'teacher', 'Teacher Tier', 2.99, 29.99, true, 7,
-    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","teacher_workspace","teacher_profile","connect","moments","wallet","language_profiles"]'::jsonb,
-    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":true,"groupLessons":false,"monthlyCoins":1000}'::jsonb,
-    'teacher', true, 30
-  ),
-  (
-    'teacher_pro', 'Teacher Pro Tier', 6.99, 69.99, true, 7,
-    '["read_stories","sentence_mining","custom_stories","voice_video_rooms","teacher_workspace","teacher_profile","group_lessons","connect","moments","wallet","language_profiles"]'::jsonb,
-    '{"dashboard":true,"shortStories":true,"sentenceMining":true,"canCreateShortStories":true,"canUseSystemDecks":true,"canUsePublicDecks":true,"personalDeckLimit":null,"connect":true,"moments":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"goals":true,"wallet":true,"teacherWorkspace":true,"groupLessons":true,"monthlyCoins":5000}'::jsonb,
-    'teacher', true, 40
+    'teacher', 'Teacher', 0, 0, false, 0,
+    '["voice_video_rooms","teacher_workspace","teacher_profile","connect","community_posts","find_teacher","my_schedule","practice","language_profiles"]'::jsonb,
+    '{"dashboard":true,"connect":true,"communityPosts":true,"voiceVideoRooms":true,"findTeacher":true,"mySchedule":true,"practice":true,"maxLanguageProfiles":null,"canEditLanguageProfiles":true,"canDeleteLanguageProfiles":true,"teacherWorkspace":true,"groupLessons":false}'::jsonb,
+    'teacher', true, 20
   )
 on conflict (tier_key) do update
 set name = excluded.name,
@@ -1626,6 +1080,18 @@ create index if not exists idx_user_accounts_state on user_accounts (account_sta
 create index if not exists idx_user_accounts_trial_end on user_accounts (trial_end_date) where account_state in ('trialing', 'trial_cancelled');
 create index if not exists idx_user_accounts_renewal on user_accounts (renewal_date) where subscription_status = 'active';
 create index if not exists idx_user_accounts_provider_customer on user_accounts (payment_provider_customer_id);
+
+update user_accounts
+   set subscription_tier = coalesce((
+     select case when st.account_type = 'teacher' then 'teacher' else 'free' end
+       from subscription_tiers st
+      where st.tier_key = user_accounts.subscription_tier
+   ), 'free'),
+       updated_at = now()
+ where subscription_tier not in ('free', 'teacher');
+
+delete from subscription_tiers
+ where tier_key not in ('free', 'teacher');
 
 create table if not exists account_events (
   id uuid primary key default gen_random_uuid(),
@@ -1718,7 +1184,7 @@ insert into user_accounts (
 )
 select
   u.id,
-  coalesce(nullif(u.learner_subscription_tier, ''), 'free'),
+  'free',
   case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'active' end,
   case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'none' end,
   case when coalesce(u.learner_subscription_status, 'active') = 'past_due' then 'past_due' else 'none' end,
@@ -1737,15 +1203,7 @@ begin
       ('users', 'native_language'),
       ('users', 'target_language'),
       ('user_languages', 'language'),
-      ('sentences', 'source_language'),
-      ('sentences', 'target_language'),
-      ('sentence_decks', 'source_language'),
-      ('sentence_decks', 'target_language'),
-      ('stories', 'source_language'),
-      ('story_translations', 'target_language'),
-      ('goals', 'target_language'),
       ('posts', 'target_language'),
-      ('learning_paths', 'target_language'),
       ('teacher_profiles', 'native_language'),
       ('teacher_profile_languages', 'language'),
       ('lesson_bookings', 'target_language'),
@@ -1812,15 +1270,7 @@ begin
       ('users', 'native_language', 'users_native_language_fkey'),
       ('users', 'target_language', 'users_target_language_fkey'),
       ('user_languages', 'language', 'user_languages_language_fkey'),
-      ('sentences', 'source_language', 'sentences_source_language_fkey'),
-      ('sentences', 'target_language', 'sentences_target_language_fkey'),
-      ('sentence_decks', 'source_language', 'sentence_decks_source_language_fkey'),
-      ('sentence_decks', 'target_language', 'sentence_decks_target_language_fkey'),
-      ('stories', 'source_language', 'stories_source_language_fkey'),
-      ('story_translations', 'target_language', 'story_translations_target_language_fkey'),
-      ('goals', 'target_language', 'goals_target_language_fkey'),
       ('posts', 'target_language', 'posts_target_language_fkey'),
-      ('learning_paths', 'target_language', 'learning_paths_target_language_fkey'),
       ('teacher_profiles', 'native_language', 'teacher_profiles_native_language_fkey'),
       ('teacher_profile_languages', 'language', 'teacher_profile_languages_language_fkey'),
       ('lesson_bookings', 'target_language', 'lesson_bookings_target_language_fkey'),

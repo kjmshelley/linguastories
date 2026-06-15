@@ -1,26 +1,46 @@
-import { button, escapeHtml, formatDate, icon, pct, progressBar, ui } from "../ui.js";
+import { button, escapeHtml, formatDate, icon, ui } from "../ui.js";
 import { languageName, languageSelectOptions, supportedLanguageOptions } from "../languages.js";
+import { languageSkillLevelLabel, languageSkillLevelOptions } from "../levels.js";
 
-function getLanguageContext({ state, selectedProfileLanguage }) {
+const siteLanguageOptions = [
+  ["en-US", "English"],
+  ["es-ES", "Spanish"],
+  ["fr-FR", "French"],
+  ["it-IT", "Italian"],
+  ["pt-PT", "Portuguese"],
+  ["nl-NL", "Dutch"],
+  ["de-DE", "German"],
+  ["ru-RU", "Russian"],
+  ["zh-CN", "Mandarin Chinese"],
+  ["ja-JP", "Japanese"],
+  ["ko-KR", "Korean"],
+  ["th-TH", "Thai"],
+  ["id-ID", "Indonesian"],
+  ["vi-VN", "Vietnamese"],
+  ["ar-SA", "Arabic"]
+];
+
+const currencyOptions = [
+  ["USD", "USD — US Dollar ($)"],
+  ["EUR", "EUR — Euro (€)"],
+  ["GBP", "GBP — British Pound (£)"],
+  ["JPY", "JPY — Japanese Yen (¥)"],
+  ["CNY", "CNY — Chinese Yuan (¥)"],
+  ["TWD", "TWD — Taiwan Dollar (NT$)"],
+  ["KRW", "KRW — South Korean Won (₩)"],
+  ["CAD", "CAD — Canadian Dollar (C$)"],
+  ["AUD", "AUD — Australian Dollar (A$)"],
+  ["SGD", "SGD — Singapore Dollar (S$)"]
+];
+
+function getLanguageContext({ state }) {
   const user = state.user;
   const learningLanguages = state.learningLanguages?.length
     ? state.learningLanguages
-    : [{ language: user.targetLanguage, currentLevel: user.currentLevel, currentStreak: user.currentStreak, longestStreak: user.longestStreak, listeningTime: user.listeningTime, shadowingTime: user.shadowingTime, active: true }];
-  const selectedLanguage = selectedProfileLanguage || user.targetLanguage || learningLanguages[0]?.language || "";
-  const selectedLanguageProfile = learningLanguages.find((item) => item.language === selectedLanguage) || learningLanguages[0] || {};
-  const languageSentences = state.sentences.filter((sentence) => !sentence.targetLanguage || sentence.targetLanguage === selectedLanguage);
-  const languageStories = state.stories.filter((story) => !story.targetLanguage || story.targetLanguage === selectedLanguage);
-  const languageGoals = state.goals.filter((goal) => goal.goalScope !== "Global" && goal.targetLanguage === selectedLanguage);
-  const languagePaths = state.paths.filter((path) => !path.targetLanguage || path.targetLanguage === selectedLanguage);
+    : [];
 
   return {
-    learningLanguages,
-    selectedLanguage,
-    selectedLanguageProfile,
-    languageSentences,
-    languageStories,
-    languageGoals,
-    languagePaths
+    learningLanguages
   };
 }
 
@@ -29,13 +49,41 @@ function languageOptions(languages, selected) {
 }
 
 function levelOptions(selected = "A1") {
-  return ["A1", "A2", "B1", "B2", "C1", "C2"]
-    .map((level) => `<option ${level === selected ? "selected" : ""}>${level}</option>`)
-    .join("");
+  return languageSkillLevelOptions(selected);
 }
 
-function visibilityOptions(selected = "Private") {
-  return ["Private", "Public"].map((visibility) => `<option ${visibility === selected ? "selected" : ""}>${visibility}</option>`).join("");
+function timezoneOptions(selected = "UTC") {
+  const fallbackTimezones = ["America/Los_Angeles", "America/Denver", "America/Chicago", "America/New_York", "Europe/London", "Europe/Paris", "Asia/Taipei", "Asia/Tokyo", "Australia/Sydney"];
+  const resolved = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const current = selected && selected !== "UTC" ? selected : resolved && resolved !== "UTC" ? resolved : fallbackTimezones[0];
+  const supported = (typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimezones).filter((timezone) => timezone !== "UTC");
+  const timezones = supported.includes(current) ? supported : [current, ...supported];
+  return timezones.map((timezone) => `<option value="${escapeHtml(timezone)}" ${timezone === current ? "selected" : ""}>${escapeHtml(timezone)}</option>`).join("");
+}
+
+function optionPairs(options, selected = "") {
+  return options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label)}</option>`).join("");
+}
+
+function learningLanguageList({ state, appConfig }) {
+  const user = state.user;
+  const languages = state.learningLanguages?.length
+    ? state.learningLanguages
+    : [];
+  return languages
+    .map((item) => `
+      <div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-line/70 bg-white/65 p-3">
+        <div>
+          <strong class="block text-sm text-brand-ink">${escapeHtml(languageName(appConfig, item.language))}</strong>
+          <span class="mt-1 block text-xs font-bold text-brand-graphite">${escapeHtml(languageSkillLevelLabel(item.currentLevel || "A1"))}</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(item.language)}">${icon("edit", "h-4 w-4")}<span>Edit</span></button>
+          <button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(item.language)}">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+        </div>
+      </div>
+    `)
+    .join("");
 }
 
 export function profileInfoView({ state, appConfig }) {
@@ -45,15 +93,15 @@ export function profileInfoView({ state, appConfig }) {
     : `<div class="grid h-24 w-24 place-items-center rounded-full bg-brand-sidebar text-3xl font-bold text-white">${escapeHtml(user.avatar)}</div>`;
 
   return `
-    <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
+    <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
       <section class="${ui.card}">
         <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Account details</h2>
-            <p class="mt-2 ${ui.muted}">Keep your account identity and native language current.</p>
+            <p class="mt-2 ${ui.muted}">Keep your account identity, preferences, and learning languages updated.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <a class="${ui.secondary}" href="/app/profile/subscriptions" data-app-link>${icon("wallet")}<span>Subscriptions</span></a>
+            <a class="${ui.secondary}" href="/app/profile/subscriptions" data-app-link>${icon("user")}<span>Membership</span></a>
             ${button("Log Out", "logout", ui.secondary)}
           </div>
         </div>
@@ -63,11 +111,13 @@ export function profileInfoView({ state, appConfig }) {
             <label class="${ui.label}">Display Name<input class="${ui.input}" name="displayName" value="${escapeHtml(user.displayName)}" required></label>
             <label class="${ui.label}">Email<input class="${ui.input}" name="email" type="email" value="${escapeHtml(user.email)}" required></label>
             <label class="${ui.label}">Native Language<select class="${ui.input}" name="nativeLanguage" required>${languageOptions(appConfig.supportedLanguages, user.nativeLanguage)}</select></label>
+            <label class="${ui.label}">Time Zone<select class="${ui.input}" name="timezone" required>${timezoneOptions(user.timezone || "UTC")}</select></label>
+            <label class="${ui.label}">Site Language<select class="${ui.input}" name="siteLanguage" required>${optionPairs(siteLanguageOptions, user.siteLanguage || "en-US")}</select></label>
+            <label class="${ui.label}">Currency<select class="${ui.input}" name="currency" required>${optionPairs(currencyOptions, user.currency || "USD")}</select></label>
           </div>
           <label class="${ui.label}">Bio<textarea class="${ui.input} min-h-32 resize-y" name="bio" placeholder="Tell the community what you are practicing.">${escapeHtml(user.bio || "")}</textarea></label>
           <div class="flex flex-wrap gap-2">
             <button class="${ui.primary}">${icon("edit")}<span>Save Info</span></button>
-            <a class="${ui.secondary}" href="/app/profile/my-profiles" data-app-link>My Profiles</a>
           </div>
         </form>
         <form class="mt-6 border-t border-brand-line pt-5" data-form="avatarUpload">
@@ -86,11 +136,13 @@ export function profileInfoView({ state, appConfig }) {
         </div>
         <div class="mt-4 grid gap-3">
           ${infoRow("Native language", languageName(appConfig, user.nativeLanguage))}
-          ${infoRow("Current app language", languageName(appConfig, user.targetLanguage))}
-          ${infoRow("Current level", user.currentLevel)}
-        </div>
-        <div class="mt-4 border-t border-brand-line pt-4">
-          ${button("Delete Account", "openDeleteProfileModal", `${ui.danger} w-full justify-center`)}
+          <div class="rounded-lg bg-brand-mist/70 px-4 py-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-sm font-semibold text-brand-graphite">Languages I'm learning</span>
+              <button class="${ui.secondary} px-3 py-1.5 text-xs" data-action="openAddLanguageModal">${icon("add", "h-3.5 w-3.5")}<span>Add</span></button>
+            </div>
+            <div class="mt-3 grid gap-2">${learningLanguageList({ state, appConfig })}</div>
+          </div>
         </div>
       </aside>
     </div>
@@ -106,13 +158,6 @@ function accountInfoRow(label, value) {
   `;
 }
 
-function permissionLabel(value) {
-  return String(value || "")
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
 function money(value) {
   return `$${Number(value || 0).toFixed(2)}`;
 }
@@ -121,100 +166,77 @@ function dateValue(value) {
   return value ? formatDate(String(value).slice(0, 10)) : "";
 }
 
-export function subscriptionsView({ state, teacherStudentData = {}, accountBillingData = {} }) {
+function teacherProfileStatusLabel(status = "") {
+  if (status === "published") return "Active";
+  if (status === "paused" || status === "archived") return "Disabled";
+  return "Awaiting approval";
+}
+
+function teacherProfileStatusTone(status = "") {
+  if (status === "published") return ui.tagGold;
+  if (status === "paused" || status === "archived") return ui.tagRed;
+  return ui.tag;
+}
+
+export function subscriptionsView({ state, teacherStudentData = {}, accountBillingData = {}, appPath }) {
   const user = state.user || {};
   const subscription = state.subscription || user.subscription || {};
   const account = accountBillingData.account || subscription.account || user.account || {};
-  const currentTier = account.tier || {};
-  const tiers = accountBillingData.tiers?.length ? accountBillingData.tiers : [currentTier].filter((tier) => tier.key);
   const invoices = accountBillingData.invoices || [];
   const paymentMethods = accountBillingData.paymentMethods || [];
   const billingHistory = accountBillingData.billingHistory || [];
-  const teacherSubscription = teacherStudentData.subscription || teacherStudentData.dashboard?.subscription || {};
-  const isFree = Number(currentTier.monthlyPriceUsd || 0) === 0;
-  const isTrial = Boolean(account.isTrial);
-  const canChangeTier = Boolean(account.canChangeTier);
-  const canReactivate = Boolean(account.canReactivate);
-  const canCancelTrial = Boolean(account.canCancelTrial);
+  const teacherProfiles = teacherStudentData.profiles || [];
+  const disabledStates = new Set(["disabled", "cancelled", "canceled", "deactivated", "inactive"]);
+  const accountStatus = disabledStates.has(String(account.accountState || "").toLowerCase()) ? "disabled" : "active";
+  const freeMembershipFeatures = ["Create an account", "Browse teachers", "Book lessons anytime", "Join the community"];
   return `
     <div class="grid gap-5">
       <section class="${ui.card}">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Subscriptions</h2>
-            <p class="mt-2 ${ui.muted}">Review account status, tier access, trial state, and billing history.</p>
+            <p class="mt-2 ${ui.muted}">Review account status, membership access, trial state, and billing history.</p>
           </div>
           <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrowLeft")}<span>My Account</span></a>
         </div>
 
         <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
           <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
-            <span class="${ui.tagGold}">Current account</span>
-            <h3 class="mt-3 text-2xl font-bold text-brand-ink">${escapeHtml(currentTier.name || "Account tier")}</h3>
-            <div class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              ${accountInfoRow("Account status", account.accountState || "active")}
-              ${accountInfoRow("Subscription status", account.subscriptionStatus || "none")}
-              ${accountInfoRow("Billing status", account.billingStatus || "none")}
-              ${accountInfoRow("Monthly price", money(currentTier.monthlyPriceUsd))}
-              ${accountInfoRow("Yearly price", money(currentTier.yearlyPriceUsd))}
-              ${accountInfoRow("Next payment", dateValue(account.renewalDate))}
-              ${accountInfoRow("Renewal date", dateValue(account.renewalDate))}
-              ${accountInfoRow("Cancellation date", dateValue(account.cancellationDate))}
-              ${accountInfoRow("Payment method", account.hasPaymentMethod ? "Saved" : "Not saved")}
-            </div>
-            ${isTrial && !isFree ? `
-              <div class="mt-4 rounded-lg border border-brand-orange/35 bg-brand-gold/15 p-4">
-                <h4 class="font-bold text-brand-ink">Trial status</h4>
-                <p class="mt-1 text-sm font-semibold text-brand-graphite">${account.trialDaysRemaining} day${account.trialDaysRemaining === 1 ? "" : "s"} remaining. ${escapeHtml(account.trialExpirationMessage || "")}</p>
-                <div class="mt-3 grid gap-3 sm:grid-cols-3">
-                  ${accountInfoRow("Trial start", dateValue(account.trialStartDate))}
-                  ${accountInfoRow("Trial end", dateValue(account.trialEndDate))}
-                  ${accountInfoRow("Cancellation", account.trialCancelled ? "Cancels at trial end" : "Not cancelled")}
+            <span class="${accountStatus === "active" ? ui.tagGold : ui.tagRed}">${accountStatus}</span>
+            <h3 class="mt-3 text-2xl font-bold text-brand-ink">Free Membership</h3>
+            <div class="mt-4 grid gap-2">
+              ${freeMembershipFeatures.map((feature) => `
+                <div class="flex items-center gap-2 text-sm font-semibold text-brand-charcoal">
+                  ${icon("check", "h-4 w-4 text-brand-redDark")}
+                  <span>${escapeHtml(feature)}</span>
                 </div>
-              </div>
-            ` : ""}
-            <div class="mt-4">
-              <h4 class="font-bold text-brand-ink">Current permissions</h4>
-              <div class="mt-2 flex flex-wrap gap-2">
-                ${(currentTier.permissions || subscription.permissions || []).map((permission) => `<span class="${ui.tag}">${escapeHtml(permissionLabel(permission))}</span>`).join("") || `<span class="${ui.tag}">Free access</span>`}
-              </div>
-            </div>
-            <div class="mt-5 flex flex-wrap gap-2 border-t border-brand-line pt-4">
-              ${canCancelTrial ? `<button class="${ui.secondary}" data-action="cancelAccountTrial">${icon("alert", "h-4 w-4")}<span>Cancel trial</span></button>` : ""}
-              ${canReactivate ? tiers.map((tier) => `<button class="${ui.primary}" data-action="reactivateAccount:${escapeHtml(tier.key)}">${icon("check", "h-4 w-4")}<span>Reactivate ${escapeHtml(tier.name)}</span></button>`).join("") : ""}
-              ${isTrial ? `<span class="text-sm font-semibold text-brand-graphite">Tier changes unlock after the trial ends.</span>` : ""}
+              `).join("")}
             </div>
           </section>
 
           <aside class="rounded-lg border border-brand-line/70 bg-brand-snow p-4">
-            <span class="${ui.tagDark}">Teacher plan context</span>
-            <h3 class="mt-3 text-xl font-bold text-brand-ink">${escapeHtml(teacherSubscription.name || teacherSubscription.planKey || subscription.teacher?.name || "No teacher subscription")}</h3>
-            <p class="mt-1 text-sm font-semibold text-brand-graphite">Status: ${escapeHtml(teacherSubscription.status || "inactive")}</p>
-            ${teacherSubscription.currentPeriodEnd ? `<p class="mt-3 text-sm font-semibold text-brand-graphite">Current period ends ${escapeHtml(formatDate(String(teacherSubscription.currentPeriodEnd).slice(0, 10)))}.</p>` : ""}
+            <span class="${ui.tagDark}">Teacher Profile</span>
+            <h3 class="mt-3 text-xl font-bold text-brand-ink">${teacherProfiles.length ? "Your teacher profiles" : "Start teaching"}</h3>
+            ${
+              teacherProfiles.length
+                ? `<div class="mt-4 grid gap-3">
+                    ${teacherProfiles.slice(0, 3).map((profile) => `
+                      <article class="rounded-lg border border-brand-line/70 bg-white/70 p-3">
+                        <span class="${teacherProfileStatusTone(profile.status)}">${escapeHtml(teacherProfileStatusLabel(profile.status))}</span>
+                        <h4 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h4>
+                        <p class="mt-1 line-clamp-2 text-sm text-brand-graphite">${escapeHtml(profile.headline || "")}</p>
+                        ${profile.status === "draft" ? `<p class="mt-2 text-xs font-semibold text-brand-graphite">Approval typically takes 1 - 2 days.</p>` : ""}
+                        <div class="mt-3 flex justify-end">
+                          <a class="${ui.secondary} px-3 py-1.5 text-xs" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-3.5 w-3.5")}<span>Edit</span></a>
+                        </div>
+                      </article>
+                    `).join("")}
+                  </div>
+                  <a class="${ui.primary} mt-4 w-full justify-center" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Add Teacher Profile</span></a>`
+                : `<p class="mt-2 text-sm font-semibold leading-6 text-brand-graphite">Create a teacher profile for admin review. Once approved, your active profile can appear on Find a Teacher.</p>
+                  <a class="${ui.primary} mt-4 w-full justify-center" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Create a teacher profile...</span></a>`
+            }
           </aside>
-        </div>
-      </section>
-
-      <section class="${ui.card}">
-        <div class="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <h3 class="text-2xl font-bold tracking-tight text-brand-ink">Plan options</h3>
-            <p class="mt-1 ${ui.muted}">Active subscribers can upgrade or downgrade immediately. Trial users keep their selected tier until the trial ends.</p>
-          </div>
-        </div>
-        <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          ${tiers.map((tier) => {
-            const active = tier.key === currentTier.key;
-            const disabled = active || !canChangeTier;
-            return `
-              <article class="rounded-lg border ${active ? "border-brand-red/35 bg-brand-red/10" : "border-brand-line/70 bg-brand-snow"} p-3">
-                <strong class="block text-brand-ink">${escapeHtml(tier.name)}</strong>
-                <span class="mt-2 block text-lg font-bold text-brand-ink">${money(tier.monthlyPriceUsd)}/month</span>
-                <p class="mt-2 text-xs font-semibold leading-5 text-brand-graphite">${Number(tier.monthlyPriceUsd || 0) > 0 ? `${tier.trialLengthDays || 7}-day trial for new accounts.` : "No trial. Free access only."}</p>
-                <button class="${disabled ? `${ui.secondary} pointer-events-none opacity-60` : ui.primary} mt-4 w-full justify-center" ${disabled ? "disabled" : ""} data-action="changeAccountTier:${escapeHtml(tier.key)}">${icon("arrowRight", "h-4 w-4")}<span>${active ? "Current plan" : Number(tier.monthlyPriceUsd || 0) > Number(currentTier.monthlyPriceUsd || 0) ? "Upgrade" : "Downgrade"}</span></button>
-              </article>
-            `;
-          }).join("")}
         </div>
       </section>
 
@@ -241,6 +263,15 @@ export function subscriptionsView({ state, teacherStudentData = {}, accountBilli
           ${billingHistory.length ? billingHistory.map((event) => accountInfoRow(event.eventType, dateValue(event.createdAt))).join("") : `<p class="${ui.muted}">No billing events yet.</p>`}
         </div>
       </section>
+
+      <section class="rounded-lg border border-brand-red/20 bg-brand-red/10 p-5">
+        <span class="${ui.tagRed}">Danger zone</span>
+        <h3 class="mt-3 text-xl font-bold text-brand-ink">Delete Account</h3>
+        <p class="mt-2 ${ui.muted}">Permanently delete your account, profile picture, learning languages, community posts, comments, messages, and lesson activity.</p>
+        <div class="mt-4 flex justify-end">
+          ${button("Delete Account", "openDeleteProfileModal", ui.danger)}
+        </div>
+      </section>
     </div>
   `;
 }
@@ -250,7 +281,7 @@ export function deleteProfileConfirmModal({ state }) {
     <div>
       <span class="${ui.tagRed}">Delete Account</span>
       <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Delete your account?</span></h2>
-      <p class="mt-2 ${ui.muted}">This permanently deletes ${escapeHtml(state.user.displayName)}'s account, profile picture, language profiles, wallet records, story progress, goals, community posts, comments, messages, and saved learning activity. This cannot be undone.</p>
+      <p class="mt-2 ${ui.muted}">This permanently deletes ${escapeHtml(state.user.displayName)}'s account, profile picture, learning languages, community posts, comments, messages, and lesson activity. This cannot be undone.</p>
       <div class="mt-5 rounded-lg border border-brand-red/20 bg-brand-red/10 p-4">
         <p class="text-sm font-semibold leading-6 text-brand-redDark">Only continue if you are sure you no longer need this LinguaStories profile.</p>
       </div>
@@ -261,39 +292,38 @@ export function deleteProfileConfirmModal({ state }) {
   `;
 }
 
-export function languageProfilesView({ state, appConfig, selectedProfileLanguage }) {
+export function languageProfilesView({ state, appConfig }) {
   const user = state.user;
-  const { learningLanguages, selectedLanguage } = getLanguageContext({ state, selectedProfileLanguage });
+  const { learningLanguages } = getLanguageContext({ state });
   const languageNames = learningLanguages.map((item) => item.language);
   const availableLanguages = supportedLanguageOptions(appConfig).filter((language) => !languageNames.includes(language.code));
-  const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
-  const maxProfiles = capabilities.maxLanguageProfiles;
-  const canAddProfile = !Number.isInteger(maxProfiles) || learningLanguages.length < maxProfiles;
+  const maxLearningLanguages = 10;
+  const canAddProfile = learningLanguages.length < maxLearningLanguages;
 
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 class="text-2xl font-bold tracking-tight text-brand-ink">My Language Profiles</h2>
-            <p class="mt-1 ${ui.muted}">Manage the languages you are learning and choose which one is current.</p>
+            <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Languages I'm learning</h2>
+            <p class="mt-1 ${ui.muted}">Manage up to 10 learning languages.</p>
           </div>
           <div class="flex flex-wrap gap-2">
             ${canAddProfile ? `<button class="${ui.primary}" data-action="openAddLanguageModal">${icon("add")}<span>Add Language</span></button>` : ""}
           </div>
         </div>
         <div class="mt-5 grid gap-4 xl:grid-cols-2">
-          ${learningLanguages.map((languageProfile) => languageProfileCard({ state, appConfig, user, languageProfile, selectedLanguage })).join("")}
+          ${learningLanguages.length ? learningLanguages.map((languageProfile) => languageProfileCard({ state, appConfig, user, languageProfile })).join("") : `<div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite xl:col-span-2">No learning languages added yet.</div>`}
         </div>
       </section>
     </div>
   `;
 }
 
-export function myProfilesView({ state, appConfig, selectedProfileLanguage, myProfilesTab = "languages", teacherProfilesContent = "" }) {
+export function myProfilesView({ state, appConfig, myProfilesTab = "languages", teacherProfilesContent = "" }) {
   const capabilities = state.subscription?.capabilities || state.user?.subscription?.capabilities || {};
   const tabs = [
-    ["languages", "My Language Profiles", "globe"],
+    ["languages", "Languages I'm learning", "globe"],
     ...(capabilities.teacherWorkspace ? [["teachers", "My Teacher Profiles", "user"]] : [])
   ];
   const activeTab = tabs.some(([id]) => id === myProfilesTab) ? myProfilesTab : "languages";
@@ -306,7 +336,7 @@ export function myProfilesView({ state, appConfig, selectedProfileLanguage, myPr
           `).join("")}
         </section>
       ` : ""}
-      ${activeTab === "teachers" ? teacherProfilesContent : languageProfilesView({ state, appConfig, selectedProfileLanguage })}
+      ${activeTab === "teachers" ? teacherProfilesContent : languageProfilesView({ state, appConfig })}
     </div>
   `;
 }
@@ -317,9 +347,9 @@ export function addLanguageModal({ appConfig, state }) {
 
   return `
     <div class="pr-10">
-      <span class="${ui.tagGold}">Language Profile</span>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Create Language Profile</h2>
-      <p class="mt-2 ${ui.muted}">Choose the language, starting level, and who can see this profile.</p>
+      <span class="${ui.tagGold}">Learning Language</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Add Learning Language</h2>
+      <p class="mt-2 ${ui.muted}">Choose the language and starting level.</p>
     </div>
     <form class="mt-6 grid gap-4" data-form="addLanguage">
       <div class="grid gap-4 sm:grid-cols-2">
@@ -330,11 +360,10 @@ export function addLanguageModal({ appConfig, state }) {
             ${availableLanguages.map((language) => `<option value="${escapeHtml(language.code)}">${escapeHtml(language.name)}</option>`).join("")}
           </select>
         </label>
-        <label class="${ui.label}">Current Level<select class="${ui.input}" name="currentLevel">${levelOptions("A1")}</select></label>
-        <label class="${ui.label}">Profile Visibility<select class="${ui.input}" name="profileVisibility">${visibilityOptions("Private")}</select></label>
+        <label class="${ui.label}">Skill Level<select class="${ui.input}" name="currentLevel">${levelOptions("A1")}</select></label>
       </div>
       <div class="flex justify-end border-t border-brand-line pt-4">
-        <button class="${availableLanguages.length ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}">${icon("add")}<span>Create Profile</span></button>
+        <button class="${availableLanguages.length ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}">${icon("add")}<span>Add Language</span></button>
       </div>
     </form>
   `;
@@ -342,23 +371,21 @@ export function addLanguageModal({ appConfig, state }) {
 
 export function editLanguageModal({ state, appConfig }, language) {
   const profile = state.learningLanguages.find((item) => item.language === language);
-  if (!profile) return `<h2 class="text-2xl font-bold text-brand-ink">Language profile not found</h2>`;
-  const isCurrent = profile.language === state.user.targetLanguage;
+  if (!profile) return `<h2 class="text-2xl font-bold text-brand-ink">Language not found</h2>`;
 
   return `
     <div class="pr-10">
-      <span class="${ui.tagGold}">Language Profile</span>
+      <span class="${ui.tagGold}">Learning Language</span>
       <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Edit ${escapeHtml(languageName(appConfig, profile.language))}</h2>
-      <p class="mt-2 ${ui.muted}">Update the level and visibility for this language profile.</p>
+      <p class="mt-2 ${ui.muted}">Update the skill level for this language.</p>
     </div>
     <form class="mt-6 grid gap-4" data-form="editLanguage">
       <input type="hidden" name="language" value="${escapeHtml(profile.language)}">
       <div class="grid gap-4 sm:grid-cols-2">
-        <label class="${ui.label}">Current Level<select class="${ui.input}" name="currentLevel">${levelOptions(profile.currentLevel || "A1")}</select></label>
-        <label class="${ui.label}">Profile Visibility<select class="${ui.input}" name="profileVisibility">${visibilityOptions(profile.profileVisibility || "Private")}</select></label>
+        <label class="${ui.label}">Skill Level<select class="${ui.input}" name="currentLevel">${levelOptions(profile.currentLevel || "A1")}</select></label>
       </div>
       <div class="flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
-        <button class="${ui.primary}">${icon("edit")}<span>Save Profile</span></button>
+        <button class="${ui.primary}">${icon("edit")}<span>Save Language</span></button>
       </div>
     </form>
   `;
@@ -384,73 +411,34 @@ function infoField(label, value) {
   `;
 }
 
-function languageProfileCard({ state, appConfig, user, languageProfile, selectedLanguage }) {
+function languageProfileCard({ state, appConfig, user, languageProfile }) {
   const language = languageProfile.language;
   const displayLanguage = languageName(appConfig, language);
-  const isSelected = language === user.targetLanguage;
-  const languageStories = state.stories.filter((story) => !story.targetLanguage || story.targetLanguage === language);
-  const languageGoals = state.goals.filter((goal) => goal.goalScope !== "Global" && goal.targetLanguage === language);
-  const completedStories = languageStories.filter((story) => story.completed).length;
   const profileVisibility = languageProfile.profileVisibility || "Private";
-  const recentGoals = languageGoals.slice(0, 4);
   const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
   const canEditProfiles = Boolean(capabilities.canEditLanguageProfiles);
   const canDeleteProfiles = Boolean(capabilities.canDeleteLanguageProfiles);
 
   return `
-    <article class="rounded-lg border p-5 transition ${
-      isSelected ? "border-brand-red/35 bg-brand-panel shadow-[0_14px_28px_rgba(29,41,63,.08)]" : "border-brand-line/80 bg-brand-panel/85 hover:border-brand-orange/35"
-    }">
+    <article class="rounded-lg border border-brand-line/80 bg-brand-panel/85 p-5 transition hover:border-brand-orange/35">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <div class="${ui.row}">
-            ${language === user.targetLanguage ? `<span class="${ui.tagDark}">Current</span>` : ""}
-          </div>
-          <h3 class="${language === user.targetLanguage ? "mt-3" : ""} text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(displayLanguage)}</h3>
+          <h3 class="text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(displayLanguage)}</h3>
         </div>
         <div class="flex flex-wrap gap-2">
           ${canEditProfiles ? `<button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(language)}">${icon("edit")}<span>Edit</span></button>` : ""}
-          ${canEditProfiles && language !== user.targetLanguage ? button("Make Current", `makeCurrentLanguage:${language}`, ui.secondary) : ""}
-          ${canDeleteProfiles && language !== user.targetLanguage ? `<button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(language)}">Remove Profile</button>` : ""}
+          ${canDeleteProfiles ? `<button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(language)}">Remove</button>` : ""}
         </div>
       </div>
 
       <div class="mt-5 grid gap-3 sm:grid-cols-2">
-        ${infoField("Current level", languageProfile.currentLevel || "A1")}
-        ${infoField("Profile visibility", profileVisibility)}
+        ${infoField("Skill level", languageSkillLevelLabel(languageProfile.currentLevel || "A1"))}
+        ${infoField("Visibility", profileVisibility)}
       </div>
 
       <div class="mt-5 rounded-lg bg-brand-mist/55 p-4">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <strong class="text-sm text-brand-charcoal">Story fluency progress</strong>
-          <span class="text-sm font-semibold text-brand-red">${completedStories} completed / ${languageStories.length} available</span>
-        </div>
-        <div class="mt-3">${progressBar(pct(completedStories, languageStories.length))}</div>
-      </div>
-
-      <div class="mt-5">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <h4 class="text-sm font-semibold uppercase text-brand-graphite">Goals</h4>
-          <a class="text-sm font-semibold text-brand-red no-underline hover:text-brand-redDark" href="/app/profile/goals?language=${encodeURIComponent(language)}" data-app-link>My Goals for this language</a>
-        </div>
-        <div class="mt-3 grid gap-3">
-          ${
-            recentGoals.length
-              ? recentGoals
-                  .map(
-                    (goal) => `
-                      <div class="rounded-lg bg-white/55 p-3">
-                        <div class="${ui.row}"><span class="${ui.tag}">${escapeHtml(goal.type)}</span><span class="${ui.tagGold}">${escapeHtml(goal.visibility)}</span>${goal.dueDate ? `<span class="${ui.tagRed}">${escapeHtml(formatDate(goal.dueDate))}</span>` : ""}</div>
-                        <h5 class="mt-2 font-bold text-brand-charcoal">${escapeHtml(goal.title)}</h5>
-                        <p class="mt-1 text-sm text-brand-graphite">${goal.progress} / ${goal.target}</p>
-                        <div class="mt-2">${progressBar(pct(goal.progress, goal.target))}</div>
-                      </div>
-                    `
-                  )
-                  .join("")
-              : `<p class="${ui.muted}">No goals for this language profile yet.</p>`
-          }
-        </div>
+        <strong class="text-sm text-brand-charcoal">Practice focus</strong>
+        <p class="mt-2 text-sm leading-6 text-brand-graphite">Use this language to track what you are learning and share it on your account.</p>
       </div>
     </article>
   `;

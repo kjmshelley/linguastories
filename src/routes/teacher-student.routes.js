@@ -4,6 +4,7 @@ const { requireAuth } = require("../middleware/auth.middleware");
 const { rateLimit, uploadRateLimit } = require("../middleware/rate-limit.middleware");
 const { validateBody, validateUuidParam } = require("../middleware/validation.middleware");
 const controller = require("../controllers/teacher-student.controller");
+const { LANGUAGE_SKILL_LEVELS } = require("../constants/language-levels");
 
 const router = express.Router();
 
@@ -23,8 +24,9 @@ const profileSchema = {
   certifications: { type: "string", max: 1000, label: "Certifications" },
   nativeLanguage: { type: "string", required: true, max: 80, label: "Native language" },
   timezone: { type: "string", required: true, max: 80, label: "Timezone" },
-  country: { type: "string", max: 80, label: "Country" },
-  city: { type: "string", max: 80, label: "City" },
+  country: { type: "string", max: 80, label: "Country of birth" },
+  professionalTutor: { type: "enum", options: ["true", "false", true, false], fallback: true, label: "Professional tutor" },
+  speakingPracticeOnly: { type: "enum", options: ["true", "false", true, false], fallback: false, label: "Speaking practice tutor" },
   hourlyRateUsd: { type: "string", required: true, max: 20, label: "Hourly rate" },
   trialRateUsd: { type: "string", max: 20, label: "Trial rate" },
   minLessonMinutes: { type: "integer", min: 15, max: 90, label: "Minimum lesson minutes" },
@@ -34,9 +36,10 @@ const profileSchema = {
   videoIntroUrl: { type: "string", max: 500, label: "Intro video" },
   teachesLanguages: { type: "string", required: true, max: 500, label: "Languages taught" },
   speaksLanguages: { type: "string", max: 500, label: "Languages spoken" },
-  cefrLevel: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "CEFR level" },
+  teachesLanguageLevels: { type: "string", max: 1200, label: "Taught language levels" },
+  speaksLanguageLevels: { type: "string", max: 1200, label: "Spoken language levels" },
+  cefrLevel: { type: "enum", options: LANGUAGE_SKILL_LEVELS, fallback: "A1", label: "Skill level" },
   tags: { type: "string", max: 500, label: "Tags" },
-  status: { type: "enum", options: ["draft", "published", "paused"], fallback: "draft", label: "Status" },
   imageDataUrl: { type: "dataUrl", max: 1_200_000, label: "Teacher profile image" },
   imageFileName: { type: "string", max: 180, label: "Image file name" }
 };
@@ -118,11 +121,6 @@ router.post("/reschedule-requests/:requestId/respond", validateBody({
 }), asyncHandler(controller.respondToRescheduleRequest));
 router.post("/bookings/:id/classroom-token", asyncHandler(controller.classroomToken));
 router.post("/bookings/:id/leave-classroom", asyncHandler(controller.leaveClassroom));
-router.post("/bookings/:id/reward-suggestions", validateBody({
-  recipientUserId: { type: "uuid", required: true, label: "Recipient" },
-  amount: { type: "integer", required: true, min: 1, max: 100, label: "Coins" },
-  reason: { type: "string", max: 500, label: "Reason" }
-}), asyncHandler(controller.suggestReward));
 
 router.get("/notes", asyncHandler(controller.listNotes));
 router.post("/notes", validateBody({
@@ -144,7 +142,7 @@ router.post("/templates", validateBody({
   teacherProfileId: { type: "uuid", label: "Teacher profile" },
   title: { type: "string", required: true, max: 160, label: "Title" },
   targetLanguage: { type: "string", max: 80, label: "Target language" },
-  level: { type: "enum", options: ["A1", "A2", "B1", "B2", "C1", "C2"], fallback: "A1", label: "Level" },
+  level: { type: "enum", options: LANGUAGE_SKILL_LEVELS, fallback: "A1", label: "Skill level" },
   lessonType: { type: "enum", options: ["trial", "one_on_one", "group"], fallback: "one_on_one", label: "Lesson type" },
   body: { type: "string", required: true, max: 5000, label: "Template" }
 }), asyncHandler(controller.createTemplate));

@@ -8,7 +8,6 @@ const accountService = require("./account.service");
 const SESSION_COOKIE = "lingua_session";
 const SESSION_DAYS = Number(process.env.SESSION_DAYS);
 const PASSWORD_ITERATIONS = Number(process.env.PASSWORD_ITERATIONS);
-const SIGNUP_BONUS_TRIGGER_EVENT = "user_signup";
 const MIN_PASSWORD_ITERATIONS = 210000;
 
 if (!SESSION_DAYS || !PASSWORD_ITERATIONS) {
@@ -74,10 +73,12 @@ function publicUserSql(whereClause) {
                  native_language as "nativeLanguage",
                  target_language as "targetLanguage",
                  current_level as "currentLevel",
+                 timezone,
+                 site_language as "siteLanguage",
+                 currency,
 	                 current_streak as "currentStreak",
 	                 longest_streak as "longestStreak",
 	                 listening_time as "listeningTime",
-	                 shadowing_time as "shadowingTime",
 	                 coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
 	                 coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus",
 	                 ua.subscription_tier as "accountSubscriptionTier",
@@ -112,7 +113,6 @@ async function attachLearningLanguages(user) {
             current_streak as "currentStreak",
             longest_streak as "longestStreak",
             listening_time as "listeningTime",
-            shadowing_time as "shadowingTime",
             coalesce(profile_visibility, 'Private') as "profileVisibility",
             active
        from user_languages
@@ -185,10 +185,12 @@ async function getUserByEmail(email) {
             native_language as "nativeLanguage",
             target_language as "targetLanguage",
             current_level as "currentLevel",
+            timezone,
+            site_language as "siteLanguage",
+            currency,
             current_streak as "currentStreak",
             longest_streak as "longestStreak",
             listening_time as "listeningTime",
-            shadowing_time as "shadowingTime",
             coalesce(learner_subscription_tier, 'free') as "learnerSubscriptionTier",
             coalesce(learner_subscription_status, 'active') as "learnerSubscriptionStatus",
             ua.subscription_tier as "accountSubscriptionTier",
@@ -262,7 +264,7 @@ async function registerUser(input, res) {
   const tierKey = String(input.tierKey || "").trim().toLowerCase();
 
   if (!email || !password || !displayName || !targetLanguage || !nativeLanguage || !tierKey) {
-    const error = new Error("Name, email, password, native language, first learning language, and account tier are required");
+    const error = new Error("Name, email, password, native language, first learning language, and membership option are required");
     error.status = 400;
     throw error;
   }
@@ -280,20 +282,6 @@ async function registerUser(input, res) {
   const client = await pool.connect();
   try {
     await client.query("begin");
-    const bonusRule = await client.query(
-      `select id, label, amount
-         from coin_rules
-        where trigger_event = $1 and rule_type = 'earn' and active = true
-        limit 1`,
-      [SIGNUP_BONUS_TRIGGER_EVENT]
-    );
-    if (!bonusRule.rows[0]) {
-      const error = new Error("Signup bonus coin rule is not configured");
-      error.status = 500;
-      throw error;
-    }
-
-    const signupBonus = bonusRule.rows[0];
     const user = await client.query(
       `insert into users
         (display_name, email, password_hash, avatar, native_language, target_language, current_level)
@@ -302,19 +290,9 @@ async function registerUser(input, res) {
       [displayName, email, hashPassword(password), displayName.slice(0, 2).toUpperCase(), nativeLanguage, targetLanguage]
     );
     await client.query(
-      `insert into wallets (user_id, balance, lifetime_earned, daily_earned, weekly_earned)
-       values ($1, $2, $2, $2, $2)`,
-      [user.rows[0].id, signupBonus.amount]
-    );
-    await client.query(
       `insert into user_languages (user_id, language, current_level, active)
        values ($1, $2, 'A1', true)`,
       [user.rows[0].id, targetLanguage]
-    );
-    await client.query(
-      `insert into coin_transactions (user_id, coin_rule_id, amount, label)
-       values ($1, $2, $3, $4)`,
-      [user.rows[0].id, signupBonus.id, signupBonus.amount, signupBonus.label]
     );
     await accountService.createAccountForUser(client, user.rows[0].id, tierKey);
     await client.query("commit");
@@ -347,6 +325,9 @@ async function updateUserProfile(user, input) {
   const displayName = String(input.displayName || "").trim();
   const email = String(input.email || "").trim().toLowerCase();
   const nativeLanguage = String(input.nativeLanguage || "").trim();
+  const timezone = String(input.timezone || user.timezone || "UTC").trim() || "UTC";
+  const siteLanguage = String(input.siteLanguage || user.siteLanguage || "en-US").trim();
+  const currency = String(input.currency || user.currency || "USD").trim().toUpperCase();
   const bio = String(input.bio || "").trim();
   const avatar = displayName
     .split(/\s+/)
@@ -366,6 +347,16 @@ async function updateUserProfile(user, input) {
     error.status = 400;
     throw error;
   }
+  if (!new Set(["en-US", "es-ES", "fr-FR", "it-IT", "pt-PT", "nl-NL", "de-DE", "ru-RU", "zh-CN", "ja-JP", "ko-KR", "th-TH", "id-ID", "vi-VN", "ar-SA"]).has(siteLanguage)) {
+    const error = new Error("Please choose a supported site language");
+    error.status = 400;
+    throw error;
+  }
+  if (!new Set(["USD", "EUR", "GBP", "JPY", "CNY", "TWD", "KRW", "CAD", "AUD", "SGD"]).has(currency)) {
+    const error = new Error("Please choose a supported currency");
+    error.status = 400;
+    throw error;
+  }
 
   try {
     await query(
@@ -374,9 +365,12 @@ async function updateUserProfile(user, input) {
               email = $3,
               avatar = $4,
               bio = $5,
-              native_language = $6
+              native_language = $6,
+              timezone = $7,
+              site_language = $8,
+              currency = $9
         where id = $1`,
-      [user.id, displayName, email, avatar, bio, nativeLanguage]
+      [user.id, displayName, email, avatar, bio, nativeLanguage, timezone, siteLanguage, currency]
     );
   } catch (error) {
     if (error.code === "23505") {

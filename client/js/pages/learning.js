@@ -1,9 +1,12 @@
 import { escapeHtml, icon, ui } from "../ui.js";
 import { languageMultiSelectOptions, languageName, languageSelectOptions } from "../languages.js";
+import { languageSkillLevelLabel, languageSkillLevelOptions } from "../levels.js";
 
-const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const fallbackTimezones = ["UTC", "America/Los_Angeles", "America/Denver", "America/Chicago", "America/New_York", "Europe/London", "Europe/Paris", "Asia/Taipei", "Asia/Tokyo", "Australia/Sydney"];
+const fallbackTimezones = ["America/Los_Angeles", "America/Denver", "America/Chicago", "America/New_York", "Europe/London", "Europe/Paris", "Asia/Taipei", "Asia/Tokyo", "Australia/Sydney"];
+const countryCodes = [
+  "AF", "AL", "DZ", "AD", "AO", "AG", "AR", "AM", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BT", "BO", "BA", "BW", "BR", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "CF", "TD", "CL", "CN", "CO", "KM", "CG", "CD", "CR", "CI", "HR", "CU", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FJ", "FI", "FR", "GA", "GM", "GE", "DE", "GH", "GR", "GD", "GT", "GN", "GW", "GY", "HT", "HN", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "MX", "FM", "MD", "MC", "MN", "ME", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NZ", "NI", "NE", "NG", "KP", "MK", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PL", "PT", "QA", "RO", "RU", "RW", "KN", "LC", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "KR", "SS", "ES", "LK", "SD", "SR", "SE", "CH", "SY", "TJ", "TZ", "TH", "TL", "TG", "TO", "TT", "TN", "TR", "TM", "TV", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "YE", "ZM", "ZW"
+];
 
 function money(value) {
   return `$${Number(value || 0).toFixed(2)}`;
@@ -18,17 +21,59 @@ function languageOptions(appConfig, selected = "") {
   return languageSelectOptions(appConfig, selected);
 }
 
+function languageFilterOptions(appConfig, selected = "", placeholder = "Any language") {
+  return `<option value="">${escapeHtml(placeholder)}</option>${languageSelectOptions(appConfig, selected)}`;
+}
+
 function languageMultiOptions(appConfig, selected = []) {
   return languageMultiSelectOptions(appConfig, selected);
 }
 
 function levelOptions(selected = "A1") {
-  return levels.map((level) => `<option value="${level}" ${level === selected ? "selected" : ""}>${level}</option>`).join("");
+  return languageSkillLevelOptions(selected);
+}
+
+function teacherLanguageRow({ appConfig, role, language = "", level = "A1" }) {
+  return `
+    <div class="grid gap-2 rounded-lg border border-brand-line/70 bg-white/65 p-3 sm:grid-cols-[minmax(0,1fr)_220px_auto] sm:items-end" data-teacher-language-row="${escapeHtml(role)}">
+      <label class="${ui.label}">Language<select class="${ui.input}" name="${escapeHtml(role)}Language">${languageOptions(appConfig, language)}</select></label>
+      <label class="${ui.label}">Skill level<select class="${ui.input}" name="${escapeHtml(role)}Level">${levelOptions(level || "A1")}</select></label>
+      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+    </div>
+  `;
+}
+
+function teacherLanguagePanel({ appConfig, role, title, items = [], fallbackLanguage = "", fallbackLevel = "A1" }) {
+  const rows = items.length ? items : [{ language: fallbackLanguage, cefrLevel: fallbackLevel }].filter((item) => item.language);
+  return `
+    <section class="rounded-lg border border-brand-line/70 bg-brand-snow p-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-bold uppercase text-brand-graphite">${escapeHtml(title)}</h3>
+          <p class="mt-1 text-xs font-semibold text-brand-graphite">Add each language with its own skill level.</p>
+        </div>
+        <button class="${ui.secondary} px-3 py-2 text-xs" type="button" data-action="addTeacherLanguageRow:${escapeHtml(role)}">${icon("add", "h-3.5 w-3.5")}<span>Add</span></button>
+      </div>
+      <div class="mt-3 grid gap-2" data-teacher-language-list="${escapeHtml(role)}" data-empty-language="${escapeHtml(fallbackLanguage)}">
+        ${(rows.length ? rows : [{ language: "", cefrLevel: fallbackLevel }]).map((item) => teacherLanguageRow({ appConfig, role, language: item.language, level: item.cefrLevel || fallbackLevel })).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function tagChips(tags = []) {
+  return tags.map((tag) => `
+    <span class="inline-flex items-center gap-1 rounded-full bg-brand-mist px-3 py-1 text-xs font-bold text-brand-charcoal" data-teacher-tag="${escapeHtml(tag)}">
+      <span>${escapeHtml(tag)}</span>
+      <button class="text-brand-redDark" type="button" data-action="removeTeacherTag" data-tag="${escapeHtml(tag)}" aria-label="Remove ${escapeHtml(tag)}">x</button>
+    </span>
+  `).join("");
 }
 
 function timezoneOptions(selected = "UTC") {
-  const current = selected || Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-  const supported = typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimezones;
+  const resolved = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const current = selected && selected !== "UTC" ? selected : resolved && resolved !== "UTC" ? resolved : fallbackTimezones[0];
+  const supported = (typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimezones).filter((timezone) => timezone !== "UTC");
   const timezones = supported.includes(current) ? supported : [current, ...supported];
   return timezones.map((timezone) => `<option value="${escapeHtml(timezone)}" ${timezone === current ? "selected" : ""}>${escapeHtml(timezone)}</option>`).join("");
 }
@@ -37,9 +82,73 @@ function timezoneSelect(selected) {
   return `<select class="${ui.input}" name="timezone" required>${timezoneOptions(selected)}</select>`;
 }
 
+function countryFilterOptions(countries = [], selected = "") {
+  return `<option value="">Any country</option>${countries.map((country) => `<option value="${escapeHtml(country)}" ${country === selected ? "selected" : ""}>${escapeHtml(country)}</option>`).join("")}`;
+}
+
+function countryOptions(selected = "") {
+  const displayNames = typeof Intl.DisplayNames === "function" ? new Intl.DisplayNames(["en"], { type: "region" }) : null;
+  return `<option value="">Choose country</option>${countryCodes
+    .map((code) => displayNames?.of(code) || code)
+    .sort((a, b) => a.localeCompare(b))
+    .map((country) => `<option value="${escapeHtml(country)}" ${country === selected ? "selected" : ""}>${escapeHtml(country)}</option>`)
+    .join("")}`;
+}
+
+function toggleFilter({ name, label, checked = false }) {
+  return `
+    <label class="flex min-h-11 items-center gap-2 rounded-lg border border-brand-line/70 bg-white/70 px-3 py-2 text-sm font-semibold text-brand-charcoal">
+      <input class="h-4 w-4 accent-brand-red" type="checkbox" name="${escapeHtml(name)}" value="true" ${checked ? "checked" : ""}>
+      <span>${escapeHtml(label)}</span>
+    </label>
+  `;
+}
+
 function profileImage(profile, size = "h-20 w-20") {
   if (profile.imageUrl) return `<img class="${size} rounded-lg object-cover" src="${escapeHtml(profile.imageUrl)}" alt="${escapeHtml(profile.displayName)}">`;
   return `<div class="grid ${size} place-items-center rounded-lg bg-brand-mist text-brand-redDark">${icon("user", "h-7 w-7")}</div>`;
+}
+
+function teacherLanguageList(appConfig, languages = [], role = "teaches") {
+  const items = languages.filter((item) => item.role === role);
+  if (!items.length) return `<p class="${ui.muted}">Not listed yet.</p>`;
+  return `
+    <div class="mt-3 grid gap-2">
+      ${items.map((item) => `
+        <div class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-brand-line/70 bg-brand-snow px-3 py-2">
+          <span class="text-sm font-bold text-brand-ink">${escapeHtml(languageName(appConfig, item.language))}</span>
+          <span class="${ui.tag}">${escapeHtml(languageSkillLevelLabel(item.cefrLevel || "A1"))}</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function teacherTutorType(profile = {}) {
+  return profile.professionalTutor ? "Professional Tutor / Teacher" : "Community Practice Tutor";
+}
+
+function teacherPracticeFocus(profile = {}) {
+  return profile.speakingPracticeOnly ? "Only Practice Speaking Tutor" : "Structured lessons";
+}
+
+function teacherTextSection(title, body) {
+  if (!body) return "";
+  return `
+    <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+      <h3 class="font-bold text-brand-ink">${escapeHtml(title)}</h3>
+      <p class="mt-2 whitespace-pre-line text-sm leading-7 text-brand-graphite">${escapeHtml(body)}</p>
+    </div>
+  `;
+}
+
+function teacherProfileTags(tags = []) {
+  if (!tags.length) return `<p class="${ui.muted}">No tags listed.</p>`;
+  return `
+    <div class="mt-3 flex flex-wrap gap-2">
+      ${tags.map((tag) => `<span class="${ui.tag}">${escapeHtml(tag)}</span>`).join("")}
+    </div>
+  `;
 }
 
 function emptyState(title, body) {
@@ -52,8 +161,21 @@ function emptyState(title, body) {
   `;
 }
 
+function teacherProfileStatusLabel(status = "") {
+  if (status === "published") return "Active";
+  if (status === "paused" || status === "archived") return "Disabled";
+  return "Awaiting approval";
+}
+
+function teacherProfileStatusTone(status = "") {
+  if (status === "published") return ui.tagGold;
+  if (status === "paused" || status === "archived") return ui.tagRed;
+  return ui.tag;
+}
+
 export function findTeacherView({ appPath, appConfig, state, teacherStudentData = {}, teacherStudentFilters = {} }) {
   const teachers = teacherStudentData.teachers || [];
+  const filterOptions = teacherStudentData.filterOptions || {};
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
@@ -61,15 +183,24 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
           <div>
             <span class="${ui.tagGold}">Live lessons</span>
             <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Search Teachers</h2>
-            <p class="mt-2 ${ui.muted}">Book paid live lessons with teachers. Lesson payments use Stripe, not coins.</p>
+            <p class="mt-2 ${ui.muted}">Book paid live lessons with professional teachers. Lesson payments are handled through Stripe.</p>
           </div>
         </div>
-        <form class="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_150px_auto]" data-form="teacherSearch">
-          <input class="${ui.input}" name="q" value="${escapeHtml(teacherStudentFilters.q || "")}" placeholder="Search by name, goal, or style">
-          <input class="${ui.input}" name="maxRate" type="number" min="1" step="1" value="${escapeHtml(teacherStudentFilters.maxRate || "")}" placeholder="Max $/hr">
-          <button class="${ui.primary}">${icon("search", "h-4 w-4")}<span>Search</span></button>
+        <form class="mt-5 grid gap-3" data-form="teacherSearch">
+          <div class="grid gap-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(4,minmax(150px,1fr))_120px]">
+            <input class="${ui.input}" name="q" value="${escapeHtml(teacherStudentFilters.q || "")}" placeholder="Search by name, goal, or style">
+            <select class="${ui.input}" name="language" aria-label="Language taught">${languageFilterOptions(appConfig, teacherStudentFilters.language || "", "Any taught language")}</select>
+            <select class="${ui.input}" name="countryOfBirth" aria-label="Country of birth">${countryFilterOptions(filterOptions.countries || [], teacherStudentFilters.countryOfBirth || "")}</select>
+            <select class="${ui.input}" name="speaksLanguage" aria-label="Also speaks">${languageFilterOptions(appConfig, teacherStudentFilters.speaksLanguage || "", "Also speaks")}</select>
+            <input class="${ui.input}" name="maxRate" type="number" min="1" step="1" value="${escapeHtml(teacherStudentFilters.maxRate || "")}" placeholder="Max $/hr">
+            <button class="${ui.primary}">${icon("search", "h-4 w-4")}<span>Search</span></button>
+          </div>
+          <div class="grid gap-2 md:grid-cols-3">
+            ${toggleFilter({ name: "nativeSpeaker", label: "Native speaker", checked: teacherStudentFilters.nativeSpeaker === "true" })}
+            ${toggleFilter({ name: "professionalTutor", label: "Professional Tutor (Teacher)", checked: teacherStudentFilters.professionalTutor === "true" })}
+            ${toggleFilter({ name: "speakingPracticeOnly", label: "Only Practice Speaking Tutor", checked: teacherStudentFilters.speakingPracticeOnly === "true" })}
+          </div>
         </form>
-        <p class="mt-3 inline-flex rounded-full bg-brand-red/10 px-3 py-1.5 text-xs font-bold text-brand-redDark ring-1 ring-brand-red/15">Showing teachers for your selected profile language: ${escapeHtml(languageName(appConfig, state.user.targetLanguage))}.</p>
       </section>
       <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         ${
@@ -87,6 +218,10 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
                 <p class="mt-4 line-clamp-3 text-sm leading-6 text-brand-graphite">${escapeHtml(teacher.bio)}</p>
                 <div class="mt-4 flex flex-wrap gap-2">
                   ${(teacher.languages || []).filter((item) => item.role === "teaches").slice(0, 3).map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))}</span>`).join("")}
+                  ${teacher.nativeLanguage ? `<span class="${ui.tag}">Native ${escapeHtml(languageName(appConfig, teacher.nativeLanguage))}</span>` : ""}
+                  ${teacher.country ? `<span class="${ui.tag}">${escapeHtml(teacher.country)}</span>` : ""}
+                  ${teacher.professionalTutor ? `<span class="${ui.tagGold}">Professional tutor</span>` : ""}
+                  ${teacher.speakingPracticeOnly ? `<span class="${ui.tag}">Speaking practice</span>` : ""}
                   <span class="${ui.tagGold}">${money(teacher.hourlyRateUsd)}/hr</span>
                 </div>
                 <div class="mt-5 flex justify-end gap-2 border-t border-brand-line pt-4">
@@ -118,7 +253,9 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, ap
               <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(profile.displayName)}</h2>
               <p class="mt-2 text-lg font-semibold text-brand-charcoal">${escapeHtml(profile.headline)}</p>
               <div class="mt-3 flex flex-wrap gap-2">
-                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))} · ${escapeHtml(item.cefrLevel || "All")}</span>`).join("")}
+                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))} · ${escapeHtml(languageSkillLevelLabel(item.cefrLevel || "A1"))}</span>`).join("")}
+                <span class="${profile.professionalTutor ? ui.tagGold : ui.tag}">${escapeHtml(teacherTutorType(profile))}</span>
+                <span class="${profile.speakingPracticeOnly ? ui.tag : ui.tagGold}">${escapeHtml(teacherPracticeFocus(profile))}</span>
                 <span class="${ui.tagGold}">${money(profile.hourlyRateUsd)}/hr</span>
               </div>
             </div>
@@ -131,11 +268,36 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, ap
         <div class="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div class="grid gap-4">
             <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">About</h3><p class="mt-2 text-sm leading-7 text-brand-graphite">${escapeHtml(profile.bio)}</p></div>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+                <h3 class="font-bold text-brand-ink">Teaches</h3>
+                ${teacherLanguageList(appConfig, profile.languages || [], "teaches")}
+              </div>
+              <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+                <h3 class="font-bold text-brand-ink">Speaks</h3>
+                ${teacherLanguageList(appConfig, profile.languages || [], "speaks")}
+              </div>
+            </div>
             ${profile.videoIntroUrl ? `<div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">Intro Video</h3><a class="mt-2 inline-flex text-sm font-bold text-brand-red" href="${escapeHtml(profile.videoIntroUrl)}" target="_blank" rel="noreferrer">Open ${escapeHtml(profile.videoProvider || "video")}</a></div>` : ""}
+            ${teacherTextSection("Teaching style", profile.teachingStyle)}
+            ${teacherTextSection("Experience", profile.experienceSummary)}
+            ${teacherTextSection("Certifications", profile.certifications)}
+            <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+              <h3 class="font-bold text-brand-ink">Tags</h3>
+              ${teacherProfileTags(profile.tags || [])}
+            </div>
             <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">Reviews</h3><div class="mt-3 grid gap-3">${reviews.length ? reviews.map((review) => `<article class="rounded-lg bg-brand-snow p-3"><strong class="text-sm text-brand-ink">${review.rating} stars · ${escapeHtml(review.studentName)}</strong><p class="mt-1 text-sm text-brand-graphite">${escapeHtml(review.body || "")}</p></article>`).join("") : `<p class="${ui.muted}">No reviews yet.</p>`}</div></div>
           </div>
           <aside class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-            <h3 class="font-bold text-brand-ink">Booking</h3>
+            <h3 class="font-bold text-brand-ink">Profile image</h3>
+            <div class="mt-3">${profileImage(profile, "h-28 w-28")}</div>
+            <h3 class="mt-5 border-t border-brand-line pt-4 font-bold text-brand-ink">Tutor details</h3>
+            <div class="mt-3 grid gap-2 text-sm font-semibold text-brand-charcoal">
+              <span>Tutor type: ${escapeHtml(teacherTutorType(profile))}</span>
+              <span>Practice focus: ${escapeHtml(teacherPracticeFocus(profile))}</span>
+              ${profile.videoIntroUrl ? `<span class="break-words">Intro video URL: <a class="font-bold text-brand-red" href="${escapeHtml(profile.videoIntroUrl)}" target="_blank" rel="noreferrer">${escapeHtml(profile.videoIntroUrl)}</a></span>` : `<span>Intro video URL: Not listed</span>`}
+            </div>
+            <h3 class="mt-5 border-t border-brand-line pt-4 font-bold text-brand-ink">Booking</h3>
             <div class="mt-3 grid gap-2 text-sm font-semibold text-brand-charcoal">
               <span>Lessons: ${profile.minLessonMinutes}-${profile.maxLessonMinutes} minutes</span>
               <span>Trial: ${profile.trialRateUsd === null ? "Not listed" : money(profile.trialRateUsd)}</span>
@@ -151,8 +313,9 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, ap
 }
 
 function teacherProfileForm({ appConfig, state, profile = null }) {
-  const teachesLanguages = (profile?.languages || []).filter((item) => item.role === "teaches").map((item) => item.language);
-  const speaksLanguages = (profile?.languages || []).filter((item) => item.role === "speaks").map((item) => item.language);
+  const teachesLanguages = (profile?.languages || []).filter((item) => item.role === "teaches");
+  const speaksLanguages = (profile?.languages || []).filter((item) => item.role === "speaks");
+  const tags = profile?.tags || [];
   return `
     <form class="grid gap-3" data-form="${profile ? "teacherProfileEdit" : "teacherProfile"}">
       ${profile ? `<input type="hidden" name="id" value="${escapeHtml(profile.id)}">` : ""}
@@ -165,24 +328,29 @@ function teacherProfileForm({ appConfig, state, profile = null }) {
         <label class="${ui.label}">Trial rate USD<input class="${ui.input}" name="trialRateUsd" type="number" min="0" step="0.01" value="${escapeHtml(profile?.trialRateUsd ?? "")}"></label>
         <label class="${ui.label}">Min lesson minutes<input class="${ui.input}" name="minLessonMinutes" type="number" min="15" max="90" step="15" value="${escapeHtml(profile?.minLessonMinutes || "30")}"></label>
         <label class="${ui.label}">Max lesson minutes<input class="${ui.input}" name="maxLessonMinutes" type="number" min="15" max="90" step="15" value="${escapeHtml(profile?.maxLessonMinutes || "60")}"></label>
-        <label class="${ui.label}">Teaches<select class="${ui.input} min-h-28" name="teachesLanguages" multiple required>${languageMultiOptions(appConfig, teachesLanguages.length ? teachesLanguages : [state.user.targetLanguage].filter(Boolean))}</select></label>
-        <label class="${ui.label}">Speaks<select class="${ui.input} min-h-28" name="speaksLanguages" multiple>${languageMultiOptions(appConfig, speaksLanguages.length ? speaksLanguages : [state.user.nativeLanguage].filter(Boolean))}</select></label>
-        <label class="${ui.label}">CEFR level<select class="${ui.input}" name="cefrLevel">${levelOptions((profile?.languages || []).find((item) => item.role === "teaches")?.cefrLevel || state.user.currentLevel || "A1")}</select></label>
-        <label class="${ui.label}">Status<select class="${ui.input}" name="status"><option value="draft" ${profile?.status === "draft" ? "selected" : ""}>Draft</option><option value="published" ${profile?.status === "published" ? "selected" : ""}>Published</option><option value="paused" ${profile?.status === "paused" ? "selected" : ""}>Paused</option></select></label>
         <label class="${ui.label}">Group lessons<select class="${ui.input}" name="groupLessonEnabled"><option value="false">Off</option><option value="true" ${profile?.groupLessonEnabled ? "selected" : ""}>On</option></select></label>
         <label class="${ui.label}">Group max students<input class="${ui.input}" name="groupMaxStudents" type="number" min="1" max="8" value="${escapeHtml(profile?.groupMaxStudents || "4")}"></label>
-        <label class="${ui.label}">Country<input class="${ui.input}" name="country" value="${escapeHtml(profile?.country || "")}"></label>
-        <label class="${ui.label}">City<input class="${ui.input}" name="city" value="${escapeHtml(profile?.city || "")}"></label>
+        <label class="${ui.label}">Country of birth<select class="${ui.input}" name="country">${countryOptions(profile?.country || "")}</select></label>
+        <label class="${ui.label}">Tutor type<select class="${ui.input}" name="professionalTutor"><option value="true" ${profile?.professionalTutor !== false ? "selected" : ""}>Professional Tutor (Teacher)</option><option value="false" ${profile?.professionalTutor === false ? "selected" : ""}>Community Practice Tutor</option></select></label>
+        <label class="${ui.label}">Practice focus<select class="${ui.input}" name="speakingPracticeOnly"><option value="false" ${!profile?.speakingPracticeOnly ? "selected" : ""}>Structured lessons</option><option value="true" ${profile?.speakingPracticeOnly ? "selected" : ""}>Only Practice Speaking Tutor</option></select></label>
+      </div>
+      <div class="grid gap-3 lg:grid-cols-2">
+        ${teacherLanguagePanel({ appConfig, role: "teaches", title: "Teaches", items: teachesLanguages, fallbackLanguage: state.user.targetLanguage || "", fallbackLevel: state.user.currentLevel || "A1" })}
+        ${teacherLanguagePanel({ appConfig, role: "speaks", title: "Speaks", items: speaksLanguages, fallbackLanguage: state.user.nativeLanguage || "", fallbackLevel: "Native" })}
       </div>
       <label class="${ui.label}">Bio<textarea class="${ui.input} min-h-28" name="bio" required maxlength="3000">${escapeHtml(profile?.bio || "")}</textarea></label>
       <label class="${ui.label}">Teaching style<textarea class="${ui.input} min-h-20" name="teachingStyle" maxlength="1200">${escapeHtml(profile?.teachingStyle || "")}</textarea></label>
       <label class="${ui.label}">Experience<textarea class="${ui.input} min-h-20" name="experienceSummary" maxlength="1200">${escapeHtml(profile?.experienceSummary || "")}</textarea></label>
       <label class="${ui.label}">Certifications<textarea class="${ui.input} min-h-20" name="certifications" maxlength="1000">${escapeHtml(profile?.certifications || "")}</textarea></label>
-      <label class="${ui.label}">Tags<input class="${ui.input}" name="tags" value="${escapeHtml((profile?.tags || []).join(", "))}" placeholder="conversation, business, JLPT"></label>
+      <section class="grid gap-2">
+        <label class="${ui.label}">Tags<input class="${ui.input}" data-teacher-tag-input placeholder="Type a tag and press Enter"></label>
+        <input type="hidden" name="tags" value="${escapeHtml(tags.join(", "))}" data-teacher-tags-value>
+        <div class="flex flex-wrap gap-2" data-teacher-tags>${tagChips(tags)}</div>
+      </section>
       <label class="${ui.label}">Intro video URL<input class="${ui.input}" name="videoIntroUrl" value="${escapeHtml(profile?.videoIntroUrl || "")}" placeholder="YouTube or Vimeo only"></label>
       <label class="${ui.label}">Profile image<input class="${ui.input}" name="teacherImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
       <div class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-brand-line pt-4">
-        <p class="text-xs font-semibold text-brand-graphite">JPG, PNG, and WebP images are supported.</p>
+        <p class="text-xs font-semibold text-brand-graphite">New profiles are reviewed before they appear on Find a Teacher.</p>
         <button class="${ui.primary}">${icon("save", "h-4 w-4")}<span>Save Profile</span></button>
       </div>
     </form>
@@ -197,7 +365,7 @@ export function teacherProfileCreateView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Create Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileProfiles"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to My Profiles</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileSubscriptions"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Profile</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${teacherProfileForm(ctx)}
@@ -215,7 +383,7 @@ export function teacherProfileEditView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Edit Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileProfiles"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to My Profiles</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileSubscriptions"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Profile</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${profile ? teacherProfileForm({ ...ctx, profile }) : emptyState("Profile not found", "This teacher profile could not be loaded.")}
@@ -319,7 +487,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
             <div class="flex justify-between gap-3"><span>Platform fee</span><strong class="text-brand-ink">$0.50</strong></div>
             <div class="flex justify-between gap-3 border-t border-brand-line pt-3 text-base"><span>Total</span><strong class="text-brand-ink">${money(calendar.price?.totalStudentChargeUsd)}</strong></div>
           </div>
-          <button class="${selectedSlot ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("wallet", "h-4 w-4")}<span>Continue to Stripe</span></button>
+          <button class="${selectedSlot ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("arrowRight", "h-4 w-4")}<span>Continue to Stripe</span></button>
           <p class="mt-3 text-xs font-semibold leading-5 text-brand-graphite">Payment uses Stripe. Coins are not used for paid lessons. Teacher keeps 100% of the listed lesson price.</p>
         </aside>
       </div>
@@ -343,7 +511,7 @@ function lessonsTable(lessons = [], state) {
               <td class="px-4 py-3 text-right">
                 <div class="flex justify-end gap-2">
                   <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></button>
-                  ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("wallet", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
+                  ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrowRight", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
                   ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
                 </div>
               </td>
@@ -473,11 +641,10 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
 export function myLearningView({ teacherStudentData = {}, state, myLearningTab = "lessons", myLearningWeekStart = "" }) {
   const activeTab = ["lessons", "teachers", "calendar"].includes(myLearningTab) ? myLearningTab : "lessons";
   const tabs = [
-    ["lessons", "My Booked lessons"],
+    ["lessons", "My Booked Lessons"],
     ["teachers", "My Booked Teachers"],
     ["calendar", "My Scheduled Classes"]
   ];
-  const activeTitle = tabs.find(([id]) => id === activeTab)?.[1] || tabs[0][1];
   const panels = {
     lessons: `<div>${lessonsTable(teacherStudentData.lessons || [], state)}</div>`,
     teachers: myTeachersPanel(teacherStudentData),
@@ -486,12 +653,8 @@ export function myLearningView({ teacherStudentData = {}, state, myLearningTab =
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <span class="${ui.tagGold}">Live lessons</span>
-            <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(activeTitle)}</h2>
-          </div>
-          <div class="flex flex-wrap gap-2" role="tablist" aria-label="My learning views">
+        <div>
+          <div class="flex flex-wrap justify-start gap-2" role="tablist" aria-label="My lessons views">
             ${tabs.map(([id, label]) => `
               <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyLearningTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(id === "teachers" ? "users" : id === "calendar" ? "calendar" : "book", "h-4 w-4")}<span>${label}</span></button>
             `).join("")}
@@ -506,7 +669,7 @@ export function myLearningView({ teacherStudentData = {}, state, myLearningTab =
 }
 
 export function myLessonsView({ teacherStudentData = {}, state }) {
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Booked lessons</h2><div class="mt-5">${lessonsTable(teacherStudentData.lessons || [], state)}</div></section></div>`;
+  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Lessons</h2><div class="mt-5">${lessonsTable(teacherStudentData.lessons || [], state)}</div></section></div>`;
 }
 
 export function myTeachersView({ teacherStudentData = {} }) {
@@ -562,11 +725,27 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <div><h2 class="text-2xl font-bold text-brand-ink">My Teacher Profiles</h2><p class="mt-1 ${ui.muted}">You can create more than one profile.</p></div>
-          <a class="${ui.primary}" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Create Profile</span></a>
+          <div><h2 class="text-2xl font-bold text-brand-ink">Teacher Profile</h2><p class="mt-1 ${ui.muted}">Create and manage teacher profiles for admin approval.</p></div>
+          <a class="${ui.primary}" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>${profiles.length ? "Add Teacher Profile" : "Create a teacher profile..."}</span></a>
         </div>
         <div class="mt-5 grid gap-4 md:grid-cols-2">
-          ${profiles.length ? profiles.map((profile) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><div class="flex gap-4">${profileImage(profile, "h-16 w-16")}<div><span class="${ui.tag}">${escapeHtml(profile.status)}</span><h3 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h3><p class="text-sm text-brand-graphite">${escapeHtml(profile.headline)}</p></div></div><div class="mt-4 flex justify-end gap-2"><a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a><button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button></div></article>`).join("") : emptyState("No profiles yet", "Create your first teacher profile to appear in search.")}
+          ${profiles.length ? profiles.map((profile) => `
+            <article class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+              <div class="flex gap-4">
+                ${profileImage(profile, "h-16 w-16")}
+                <div>
+                  <span class="${teacherProfileStatusTone(profile.status)}">${escapeHtml(teacherProfileStatusLabel(profile.status))}</span>
+                  <h3 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h3>
+                  <p class="text-sm text-brand-graphite">${escapeHtml(profile.headline)}</p>
+                  ${profile.status === "draft" ? `<p class="mt-2 text-xs font-semibold text-brand-graphite">Awaiting approval. Approval typically takes 1 - 2 days.</p>` : ""}
+                </div>
+              </div>
+              <div class="mt-4 flex justify-end gap-2">
+                <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a>
+                <button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button>
+              </div>
+            </article>
+          `).join("") : emptyState("No teacher profiles yet", "Create a teacher profile to apply for approval.")}
         </div>
       </section>
     </div>
@@ -780,7 +959,7 @@ function simpleCreateForm(type, profiles) {
   if (type === "resource") {
     return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherResource"><input class="${ui.input}" name="title" required placeholder="Resource title"><input class="${ui.input}" name="url" placeholder="https://..."><textarea class="${ui.input} min-h-20" name="body" placeholder="Optional notes"></textarea><button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add Resource</span></button></form>`;
   }
-  return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherTemplate"><input class="${ui.input}" name="title" required placeholder="Template title"><select class="${ui.input}" name="teacherProfileId"><option value="">Any profile</option>${profiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.displayName)}</option>`).join("")}</select><select class="${ui.input}" name="lessonType"><option value="one_on_one">1:1</option><option value="trial">Trial</option><option value="group">Group</option></select><textarea class="${ui.input} min-h-28" name="body" required placeholder="Lesson structure, prompts, goals..."></textarea><button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add Template</span></button></form>`;
+  return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherTemplate"><input class="${ui.input}" name="title" required placeholder="Template title"><select class="${ui.input}" name="teacherProfileId"><option value="">Any profile</option>${profiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.displayName)}</option>`).join("")}</select><select class="${ui.input}" name="lessonType"><option value="one_on_one">1:1</option><option value="trial">Trial</option><option value="group">Group</option></select><textarea class="${ui.input} min-h-28" name="body" required placeholder="Lesson structure, prompts, practice notes..."></textarea><button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add Template</span></button></form>`;
 }
 
 export function teacherResourcesView({ teacherStudentData = {} }) {

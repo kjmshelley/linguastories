@@ -18,20 +18,10 @@ const livekitClientPath = path.join(__dirname, "..", "node_modules", "livekit-cl
 const frontendAppRoutes = [
   /^\/app\/?$/,
   /^\/app\/dashboard\/?$/,
-  /^\/app\/sentence-mining\/?$/,
-  /^\/app\/sentence-mining\/deck-library\/?$/,
-  /^\/app\/sentence-mining\/decks\/[a-z0-9-]+\/?$/i,
-  /^\/app\/sentence-mining\/decks\/[a-z0-9-]+\/topics\/[a-z0-9-]+\/?$/i,
-  /^\/app\/sentence-library\/?$/,
-  /^\/app\/short-stories\/?$/,
-  /^\/app\/short-stories\/search\/?$/,
-  /^\/app\/stories\/?$/,
-  /^\/app\/stories\/[0-9a-f-]+\/?$/i,
   /^\/app\/community\/?$/,
   /^\/app\/community\/connect\/?$/,
   /^\/app\/community\/connect\/[0-9a-f-]+\/?$/i,
-  /^\/app\/community\/moments\/?$/,
-  /^\/app\/community\/moments\/[0-9a-f-]+\/?$/i,
+  /^\/app\/community\/posts\/[0-9a-f-]+\/?$/i,
   /^\/app\/community\/voice-video-rooms\/?$/,
   /^\/app\/community\/voice-video-rooms\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/?$/,
@@ -44,6 +34,8 @@ const frontendAppRoutes = [
   /^\/app\/learning\/learning-notes\/?$/,
   /^\/app\/learning\/teacher-dashboard\/?$/,
   /^\/app\/learning\/teacher-profiles\/?$/,
+  /^\/app\/learning\/teacher-profiles\/new\/?$/,
+  /^\/app\/learning\/teacher-profiles\/[0-9a-f-]+\/edit\/?$/i,
   /^\/app\/learning\/availability\/?$/,
   /^\/app\/learning\/unavailable-blocks\/?$/,
   /^\/app\/learning\/students\/?$/,
@@ -57,17 +49,7 @@ const frontendAppRoutes = [
   /^\/app\/profile\/my-profiles\/?$/,
   /^\/app\/profile\/my-profiles\/teacher\/new\/?$/,
   /^\/app\/profile\/my-profiles\/teacher\/[0-9a-f-]+\/edit\/?$/i,
-  /^\/app\/profile\/language-profiles\/?$/,
-  /^\/app\/profile\/goals\/?$/,
-  /^\/app\/profile\/moments\/?$/,
-  /^\/app\/profile\/wallet\/?$/,
-  /^\/app\/stories\/?$/,
-  /^\/app\/review\/?$/,
-  /^\/app\/shadowing\/?$/,
-  /^\/app\/deck\/?$/,
-  /^\/app\/wallet\/?$/,
-  /^\/app\/goals\/?$/,
-  /^\/app\/progress\/?$/
+  /^\/app\/profile\/language-profiles\/?$/
 ];
 
 app.disable("x-powered-by");
@@ -92,7 +74,7 @@ if (process.env.NODE_ENV !== "production" && process.env.APP_ENV !== "PROD") {
 }
 
 app.get("/", (_req, res) => res.sendFile(indexPath));
-app.get(["/login", "/signup", "/sentence-mining"], (_req, res) => res.sendFile(indexPath));
+app.get(["/login", "/signup"], (_req, res) => res.sendFile(indexPath));
 app.get(/^\/app(\/.*)?$/, (req, res, next) => {
   if (frontendAppRoutes.some((route) => route.test(req.path))) {
     return res.sendFile(indexPath);
