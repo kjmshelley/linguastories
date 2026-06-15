@@ -25,7 +25,9 @@ const frontendAppRoutes = [
   /^\/app\/community\/voice-video-rooms\/?$/,
   /^\/app\/community\/voice-video-rooms\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/find-teacher\/?$/,
+  /^\/app\/learning\/teacher-profile\/new\/?$/,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/?$/i,
+  /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/edit\/?$/i,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/book\/?$/i,
   /^\/app\/learning\/my-lessons\/?$/,
   /^\/app\/learning\/my-teachers\/?$/,
@@ -39,10 +41,7 @@ const frontendAppRoutes = [
   /^\/app\/learning\/templates\/?$/,
   /^\/app\/profile\/?$/,
   /^\/app\/profile\/my-info\/?$/,
-  /^\/app\/profile\/subscriptions\/?$/,
-  /^\/app\/profile\/my-profiles\/?$/,
-  /^\/app\/profile\/my-profiles\/teacher\/new\/?$/,
-  /^\/app\/profile\/my-profiles\/teacher\/[0-9a-f-]+\/edit\/?$/i
+  /^\/app\/profile\/subscriptions\/?$/
 ];
 
 app.disable("x-powered-by");

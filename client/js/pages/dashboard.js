@@ -45,6 +45,7 @@ export function dashboardView({ state, appPath = (route) => `/app/${route}` }) {
   const recentPosts = state.posts || [];
   const upcomingLessons = (state.lessons || state.myLessons || []).filter((lesson) => !["completed", "cancelled_by_student", "cancelled_by_teacher"].includes(lesson.status));
   const unreadMessages = Number(state.directChat?.unreadCount || 0);
+  const canUseTeacherWorkspace = Boolean(state.subscription?.capabilities?.teacherWorkspace || state.user?.subscription?.capabilities?.teacherWorkspace);
 
   const primaryActions = [
     actionCard({
@@ -74,6 +75,17 @@ export function dashboardView({ state, appPath = (route) => `/app/${route}` }) {
       href: appPath("voiceVideoRooms"),
       buttonLabel: "Practice",
       buttonIcon: "video"
+    }),
+    actionCard({
+      title: canUseTeacherWorkspace ? "Teacher Workspace" : "Create a teacher profile",
+      body: canUseTeacherWorkspace
+        ? "Manage profiles, bookings, students, lesson notes, and scheduling."
+        : "Apply to teach by submitting a teacher profile for review.",
+      meta: canUseTeacherWorkspace ? "Workspace tools unlocked." : "Approval typically takes 1 - 2 days.",
+      iconName: "user",
+      href: canUseTeacherWorkspace ? appPath("teacherDashboard") : appPath("teacherProfileCreate"),
+      buttonLabel: canUseTeacherWorkspace ? "Open Workspace" : "Create Profile",
+      buttonIcon: canUseTeacherWorkspace ? "dashboard" : "add"
     })
   ].join("");
 

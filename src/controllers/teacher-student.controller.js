@@ -24,6 +24,10 @@ async function deleteProfile(req, res) {
   res.json(await teacherStudentService.deleteProfile(req.user, req.params.id));
 }
 
+async function enableProfile(req, res) {
+  res.json(await teacherStudentService.enableProfile(req.user, req.params.id));
+}
+
 async function getAvailability(req, res) {
   res.json(await teacherStudentService.getAvailability(req.user));
 }
@@ -147,6 +151,7 @@ module.exports = {
   createProfile,
   updateProfile,
   deleteProfile,
+  enableProfile,
   getAvailability,
   saveAvailability,
   getBookingPage,

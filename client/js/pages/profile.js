@@ -33,17 +33,6 @@ const currencyOptions = [
   ["SGD", "SGD — Singapore Dollar (S$)"]
 ];
 
-function getLanguageContext({ state }) {
-  const user = state.user;
-  const learningLanguages = state.learningLanguages?.length
-    ? state.learningLanguages
-    : [];
-
-  return {
-    learningLanguages
-  };
-}
-
 function languageOptions(languages, selected) {
   return languageSelectOptions({ supportedLanguages: languages }, selected);
 }
@@ -166,26 +155,13 @@ function dateValue(value) {
   return value ? formatDate(String(value).slice(0, 10)) : "";
 }
 
-function teacherProfileStatusLabel(status = "") {
-  if (status === "published") return "Active";
-  if (status === "paused" || status === "archived") return "Disabled";
-  return "Awaiting approval";
-}
-
-function teacherProfileStatusTone(status = "") {
-  if (status === "published") return ui.tagGold;
-  if (status === "paused" || status === "archived") return ui.tagRed;
-  return ui.tag;
-}
-
-export function subscriptionsView({ state, teacherStudentData = {}, accountBillingData = {}, appPath }) {
+export function subscriptionsView({ state, accountBillingData = {} }) {
   const user = state.user || {};
   const subscription = state.subscription || user.subscription || {};
   const account = accountBillingData.account || subscription.account || user.account || {};
   const invoices = accountBillingData.invoices || [];
   const paymentMethods = accountBillingData.paymentMethods || [];
   const billingHistory = accountBillingData.billingHistory || [];
-  const teacherProfiles = teacherStudentData.profiles || [];
   const disabledStates = new Set(["disabled", "cancelled", "canceled", "deactivated", "inactive"]);
   const accountStatus = disabledStates.has(String(account.accountState || "").toLowerCase()) ? "disabled" : "active";
   const freeMembershipFeatures = ["Create an account", "Browse teachers", "Book lessons anytime", "Join the community"];
@@ -200,7 +176,7 @@ export function subscriptionsView({ state, teacherStudentData = {}, accountBilli
           <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrowLeft")}<span>My Account</span></a>
         </div>
 
-        <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div class="mt-5 grid gap-4">
           <section class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
             <span class="${accountStatus === "active" ? ui.tagGold : ui.tagRed}">${accountStatus}</span>
             <h3 class="mt-3 text-2xl font-bold text-brand-ink">Free Membership</h3>
@@ -213,30 +189,6 @@ export function subscriptionsView({ state, teacherStudentData = {}, accountBilli
               `).join("")}
             </div>
           </section>
-
-          <aside class="rounded-lg border border-brand-line/70 bg-brand-snow p-4">
-            <span class="${ui.tagDark}">Teacher Profile</span>
-            <h3 class="mt-3 text-xl font-bold text-brand-ink">${teacherProfiles.length ? "Your teacher profiles" : "Start teaching"}</h3>
-            ${
-              teacherProfiles.length
-                ? `<div class="mt-4 grid gap-3">
-                    ${teacherProfiles.slice(0, 3).map((profile) => `
-                      <article class="rounded-lg border border-brand-line/70 bg-white/70 p-3">
-                        <span class="${teacherProfileStatusTone(profile.status)}">${escapeHtml(teacherProfileStatusLabel(profile.status))}</span>
-                        <h4 class="mt-2 font-bold text-brand-ink">${escapeHtml(profile.displayName)}</h4>
-                        <p class="mt-1 line-clamp-2 text-sm text-brand-graphite">${escapeHtml(profile.headline || "")}</p>
-                        ${profile.status === "draft" ? `<p class="mt-2 text-xs font-semibold text-brand-graphite">Approval typically takes 1 - 2 days.</p>` : ""}
-                        <div class="mt-3 flex justify-end">
-                          <a class="${ui.secondary} px-3 py-1.5 text-xs" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-3.5 w-3.5")}<span>Edit</span></a>
-                        </div>
-                      </article>
-                    `).join("")}
-                  </div>
-                  <a class="${ui.primary} mt-4 w-full justify-center" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Add Teacher Profile</span></a>`
-                : `<p class="mt-2 text-sm font-semibold leading-6 text-brand-graphite">Create a teacher profile for admin review. Once approved, your active profile can appear on Find a Teacher.</p>
-                  <a class="${ui.primary} mt-4 w-full justify-center" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>Create a teacher profile...</span></a>`
-            }
-          </aside>
         </div>
       </section>
 
@@ -288,54 +240,6 @@ export function deleteProfileConfirmModal({ state }) {
       <div class="mt-6 flex justify-end border-t border-brand-line pt-4">
         <button class="${ui.danger}" data-action="confirmDeleteProfile">${icon("trash", "h-4 w-4")}<span>Delete Account</span></button>
       </div>
-    </div>
-  `;
-}
-
-export function languageProfilesView({ state, appConfig }) {
-  const user = state.user;
-  const { learningLanguages } = getLanguageContext({ state });
-  const languageNames = learningLanguages.map((item) => item.language);
-  const availableLanguages = supportedLanguageOptions(appConfig).filter((language) => !languageNames.includes(language.code));
-  const maxLearningLanguages = 10;
-  const canAddProfile = learningLanguages.length < maxLearningLanguages;
-
-  return `
-    <div class="grid gap-5">
-      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 class="text-2xl font-bold tracking-tight text-brand-ink">Languages I'm learning</h2>
-            <p class="mt-1 ${ui.muted}">Manage up to 10 learning languages.</p>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${canAddProfile ? `<button class="${ui.primary}" data-action="openAddLanguageModal">${icon("add")}<span>Add Language</span></button>` : ""}
-          </div>
-        </div>
-        <div class="mt-5 grid gap-4 xl:grid-cols-2">
-          ${learningLanguages.length ? learningLanguages.map((languageProfile) => languageProfileCard({ state, appConfig, user, languageProfile })).join("") : `<div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite xl:col-span-2">No learning languages added yet.</div>`}
-        </div>
-      </section>
-    </div>
-  `;
-}
-
-export function myProfilesView({ state, appConfig, myProfilesTab = "languages", teacherProfilesContent = "" }) {
-  const tabs = [
-    ["languages", "Languages I'm learning", "globe"],
-    ["teachers", "My Teacher Profiles", "user"]
-  ];
-  const activeTab = tabs.some(([id]) => id === myProfilesTab) ? myProfilesTab : "languages";
-  return `
-    <div class="grid gap-5">
-      ${tabs.length > 1 ? `
-        <section class="flex flex-wrap justify-end gap-2" role="tablist" aria-label="My profile views">
-          ${tabs.map(([id, label, iconName]) => `
-            <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyProfilesTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(iconName, "h-4 w-4")}<span>${label}</span></button>
-          `).join("")}
-        </section>
-      ` : ""}
-      ${activeTab === "teachers" ? teacherProfilesContent : languageProfilesView({ state, appConfig })}
     </div>
   `;
 }
@@ -398,47 +302,5 @@ function infoRow(label, value) {
       <span class="text-sm font-semibold text-brand-graphite">${label}</span>
       <strong class="text-sm text-brand-ink">${escapeHtml(value)}</strong>
     </div>
-  `;
-}
-
-function infoField(label, value) {
-  return `
-    <div class="rounded-lg border border-brand-line/70 bg-white/50 p-4">
-      <span class="block text-xs font-semibold uppercase text-brand-graphite">${label}</span>
-      <strong class="mt-1 block text-lg font-bold text-brand-charcoal">${escapeHtml(value)}</strong>
-    </div>
-  `;
-}
-
-function languageProfileCard({ state, appConfig, user, languageProfile }) {
-  const language = languageProfile.language;
-  const displayLanguage = languageName(appConfig, language);
-  const profileVisibility = languageProfile.profileVisibility || "Private";
-  const capabilities = state.subscription?.capabilities || user.subscription?.capabilities || {};
-  const canEditProfiles = Boolean(capabilities.canEditLanguageProfiles);
-  const canDeleteProfiles = Boolean(capabilities.canDeleteLanguageProfiles);
-
-  return `
-    <article class="rounded-lg border border-brand-line/80 bg-brand-panel/85 p-5 transition hover:border-brand-orange/35">
-      <div class="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 class="text-2xl font-bold tracking-tight text-brand-ink">${escapeHtml(displayLanguage)}</h3>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          ${canEditProfiles ? `<button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(language)}">${icon("edit")}<span>Edit</span></button>` : ""}
-          ${canDeleteProfiles ? `<button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(language)}">Remove</button>` : ""}
-        </div>
-      </div>
-
-      <div class="mt-5 grid gap-3 sm:grid-cols-2">
-        ${infoField("Skill level", languageSkillLevelLabel(languageProfile.currentLevel || "A1"))}
-        ${infoField("Visibility", profileVisibility)}
-      </div>
-
-      <div class="mt-5 rounded-lg bg-brand-mist/55 p-4">
-        <strong class="text-sm text-brand-charcoal">Practice focus</strong>
-        <p class="mt-2 text-sm leading-6 text-brand-graphite">Use this language to track what you are learning and share it on your account.</p>
-      </div>
-    </article>
   `;
 }

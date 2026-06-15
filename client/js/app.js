@@ -1,7 +1,7 @@
 import { dashboardView } from "./pages/dashboard.js";
 import { communityConnectView, communityLearnerView, communityPostView, createPostModal, postImageModal } from "./pages/community.js";
 import { landingView, loginView, signupView } from "./pages/public.js?v=auth-logo-copy-20260615";
-import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, myProfilesView, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
+import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
 import {
   bookLessonView,
   findTeacherView,
@@ -15,7 +15,6 @@ import {
   teacherProfileCreateView,
   teacherProfileDetailView,
   teacherProfileEditView,
-  teacherProfilesPanel,
   teacherResourcesView,
   teacherStudentsView,
   teacherTemplatesView
@@ -73,7 +72,6 @@ const hiddenRoutes = [
   ["teacherResources", "Resources"],
   ["teacherTemplates", "Lesson Templates"],
   ["profileSubscriptions", "Subscriptions"],
-  ["profileProfiles", "My Profiles"],
   ["profile", "Profile"],
 ];
 
@@ -85,8 +83,8 @@ const routeSlugs = {
   voiceVideoRoom: "community/voice-video-rooms",
   findTeacher: "learning/find-teacher",
   teacherProfileDetail: "learning/teacher-profile",
-  teacherProfileCreate: "profile/my-profiles/teacher/new",
-  teacherProfileEdit: "profile/my-profiles/teacher",
+  teacherProfileCreate: "learning/teacher-profile/new",
+  teacherProfileEdit: "learning/teacher-profile",
   bookLesson: "learning/teacher-profile",
   myLessons: "learning/my-lessons",
   myTeachers: "learning/my-teachers",
@@ -100,11 +98,10 @@ const routeSlugs = {
   teacherTemplates: "learning/templates",
   profileInfo: "profile/my-info",
   profileSubscriptions: "profile/subscriptions",
-  profileProfiles: "profile/my-profiles",
 };
 const browseRoutes = new Set([]);
 const communityRoutes = new Set(["communityLearner", "communityPost"]);
-const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "profileProfiles", "teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
+const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
@@ -123,7 +120,6 @@ let syncedStripeReturnBookings = new Set();
 let bookingSelection = { teacherProfileId: "", lessonType: "one_on_one", durationMinutes: "", date: "", startsAt: "" };
 let myLearningTab = "lessons";
 let myLearningWeekStart = "";
-let myProfilesTab = "languages";
 let teacherCalendarFilters = { view: "month", teacherProfileId: "", status: "" };
 let teacherWorkspaceShowCompletedPaid = false;
 let activeVoiceVideoRoom = null;
@@ -178,12 +174,10 @@ function activeRoute() {
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/posts/")) return "communityPost";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
-  if (slug === "profile/my-profiles/teacher/new") {
-    myProfilesTab = "teachers";
+  if (slug === "learning/teacher-profile/new") {
     return "teacherProfileCreate";
   }
-  if (/^profile\/my-profiles\/teacher\/[^/]+\/edit$/.test(slug)) {
-    myProfilesTab = "teachers";
+  if (/^learning\/teacher-profile\/[^/]+\/edit$/.test(slug)) {
     return "teacherProfileEdit";
   }
   if (/^learning\/teacher-profile\/[^/]+\/book$/.test(slug)) return "bookLesson";
@@ -199,7 +193,7 @@ function activeNavRoute() {
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
   if (["myTeachers", "learningNotes"].includes(route)) return "myLessons";
   if (route === "profileSubscriptions") return "profileInfo";
-  if (["teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "profileProfiles";
+  if (["teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "teacherDashboard";
   if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route;
 }
@@ -220,8 +214,8 @@ function activeVoiceVideoRoomId() {
 }
 
 function activeTeacherProfileId() {
-  const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([^/]+)(?:\/book)?\/?$/)
-    || location.pathname.match(/^\/app\/profile\/my-profiles\/teacher\/([^/]+)\/edit\/?$/);
+  const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)(?:\/book)?\/?$/i)
+    || location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)\/edit\/?$/i);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
@@ -230,7 +224,7 @@ function appPath(id, params = {}) {
   if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
-  if (id === "teacherProfileEdit") return `/app/profile/my-profiles/teacher/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
+  if (id === "teacherProfileEdit") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
   return `/app/${routeSlugs[id] || id}`;
 }
@@ -249,7 +243,6 @@ function routeIcon(id) {
     teacherStudents: "users",
     teacherLessonNotes: "book",
     profileInfo: "user",
-    profileProfiles: "users",
   };
   return icon(icons[id] || "book");
 }
@@ -301,7 +294,6 @@ function context() {
     bookingSelection,
     myLearningTab,
     myLearningWeekStart,
-    myProfilesTab,
     teacherCalendarFilters,
     activeTeacherProfileId: activeTeacherProfileId()
   };
@@ -314,6 +306,7 @@ function subscriptionCapabilities() {
 function canAccessRoute(id) {
   const capabilities = subscriptionCapabilities();
   if (["teacherProfileCreate", "teacherProfileEdit"].includes(id)) return true;
+  if (id === "teacherDashboard") return true;
   if (["teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
     return Boolean(capabilities.teacherWorkspace);
   }
@@ -336,8 +329,10 @@ function renderNav() {
   const capabilities = subscriptionCapabilities();
   nav.innerHTML = routeGroups
     .map((group) => {
-      if (group.title === "For teachers" && !capabilities.teacherWorkspace) return "";
-      const visibleRoutes = group.routes.filter(([id]) => canAccessRoute(id));
+      const visibleRoutes = group.routes.filter(([id]) => {
+        if (group.title === "For teachers" && !capabilities.teacherWorkspace) return id === "teacherDashboard";
+        return canAccessRoute(id);
+      });
       if (!visibleRoutes.length) return "";
       return `
         <section class="grid gap-1.5">
@@ -648,6 +643,8 @@ function shiftDateKey(dateKey, days) {
 }
 
 async function loadTeacherStudentData(route = activeRoute(), { force = false } = {}) {
+  const capabilities = subscriptionCapabilities();
+  const canUseTeacherWorkspace = Boolean(capabilities.teacherWorkspace);
   const profileId = activeTeacherProfileId();
   const bookingQuery = new URLSearchParams({
     lessonType: bookingSelection.lessonType || "one_on_one",
@@ -661,17 +658,16 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "findTeacher") requests.push(["teachers", `/api/teacher-student/teachers${teacherStudentQuery()}`]);
   if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
   if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
-  if (["profileProfiles", "teacherProfileCreate", "teacherProfileEdit", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
-  if (["myLessons", "teacherDashboard"].includes(route)) requests.push(["lessons", "/api/teacher-student/lessons"]);
+  if (["teacherProfileCreate", "teacherProfileEdit", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
+  if (["myLessons"].includes(route) || (route === "teacherDashboard" && canUseTeacherWorkspace)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
   if (route === "myLessons" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
   if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
   if (route === "teacherAvailability") requests.push(["availability", "/api/teacher-student/availability"]);
-  if (route === "teacherDashboard") requests.push(["dashboard", "/api/teacher-student/dashboard"]);
+  if (route === "teacherDashboard" && canUseTeacherWorkspace) requests.push(["dashboard", "/api/teacher-student/dashboard"]);
   if (route === "teacherResources") requests.push(["resources", "/api/teacher-student/resources"]);
   if (route === "teacherTemplates") requests.push(["templates", "/api/teacher-student/templates"]);
   if (route === "profileInfo" || route === "profileSubscriptions") requests.push(["subscription", "/api/teacher-student/subscription"]);
-  if (route === "profileSubscriptions") requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
   if (!requests.length) return;
   const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path)]));
   loaded.forEach(([name, body]) => {
@@ -951,7 +947,8 @@ async function createTeacherClassroomLocalTracks() {
   return createLocalTracks(constraints);
 }
 
-async function connectLiveKitRoom(payload, localTracks = []) {
+async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
+  const { modalOnError = true } = options;
   const stage = document.querySelector("[data-livekit-stage]");
   if (stage) stage.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[.04] p-4 text-sm font-semibold text-white/72">Connecting media...</div>`;
   try {
@@ -984,10 +981,20 @@ async function connectLiveKitRoom(payload, localTracks = []) {
     if (stage && !stage.children.length) {
       stage.innerHTML = `<div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-sm font-semibold text-white/72">Connected. Audio is active.</div>`;
     }
+    return true;
   } catch (error) {
     stopLocalTracks(localTracks);
     livekitLocalTracks = [];
-    showModal(`<h2 class="text-xl font-black">LiveKit connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to the room.")}</p>`);
+    if (modalOnError) {
+      showModal(`<h2 class="text-xl font-black">LiveKit connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to the room.")}</p>`);
+    } else if (stage) {
+      stage.innerHTML = `
+        <div class="grid min-h-[360px] place-items-center rounded-lg border border-white/10 bg-white/[.04] p-4 text-center text-sm font-semibold text-white/76">
+          ${escapeHtml(error.message || "Could not connect to the classroom.")}
+        </div>
+      `;
+    }
+    return false;
   }
 }
 
@@ -1082,44 +1089,50 @@ async function moderateVoiceVideoParticipant(roomId, value = "") {
 }
 
 async function joinTeacherClassroom(bookingId) {
+  if (livekitRoomConnection) await disconnectLiveKitTracks();
+  showModal(`
+    <div>
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl font-black text-brand-ink">Classroom</h2>
+          <p class="${ui.muted}">Connecting your microphone and camera...</p>
+        </div>
+        <span class="${ui.tagGold}">Live</span>
+      </div>
+      <div class="mt-5 rounded-lg bg-brand-ink p-3 text-white">
+        <div class="grid min-h-[360px] place-items-center rounded-lg border border-white/10 bg-white/[.04]" data-livekit-stage>
+          <div class="text-center text-sm font-semibold text-white/72">
+            <span class="mx-auto mb-3 block h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white"></span>
+            Connecting classroom...
+          </div>
+        </div>
+        <div class="mt-3 flex flex-wrap justify-end gap-2 border-t border-white/10 pt-3">
+          <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave Classroom</span></button>
+        </div>
+      </div>
+    </div>
+  `, { closeButton: false, wide: true });
   let localTracks = [];
   try {
     localTracks = await createTeacherClassroomLocalTracks();
   } catch (_error) {
+    closeModal();
     return;
   }
   const payload = await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/classroom-token`, { method: "POST" });
   if (!payload) {
     stopLocalTracks(localTracks);
+    closeModal();
     return;
   }
-  try {
-    const { Room } = await import("/vendor/livekit/livekit-client.esm.mjs");
-    const room = new Room({ adaptiveStream: true, dynacast: true });
-    await room.connect(payload.livekitUrl, payload.token);
-    for (const track of localTracks) await room.localParticipant.publishTrack(track);
-    showModal(`
-      <h2 class="text-xl font-black">Classroom connected</h2>
-      <p class="${ui.muted}">Your microphone and camera are connected to the LiveKit classroom. Keep this page open during the lesson.</p>
-      <div class="mt-5 flex justify-end border-t border-brand-line pt-4">
-        <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave Classroom</span></button>
-      </div>
-    `, { closeButton: false });
-    window.activeTeacherClassroomConnection = room;
-    window.activeTeacherClassroomTracks = localTracks;
-  } catch (error) {
-    stopLocalTracks(localTracks);
-    showModal(`<h2 class="text-xl font-black">Classroom connection failed</h2><p class="${ui.muted}">${escapeHtml(error.message || "Could not connect to LiveKit.")}</p>`);
-  }
+  await connectLiveKitRoom(payload, localTracks, { modalOnError: false });
 }
 
 async function leaveTeacherClassroom(bookingId) {
   try {
-    window.activeTeacherClassroomTracks?.forEach((track) => track.stop?.());
-    window.activeTeacherClassroomConnection?.disconnect?.();
-  } finally {
-    window.activeTeacherClassroomTracks = [];
-    window.activeTeacherClassroomConnection = null;
+    await disconnectLiveKitTracks();
+  } catch (_error) {
+    // Classroom cleanup should not block the server-side leave call.
   }
   await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/leave-classroom`, { method: "POST" });
   closeModal();
@@ -1128,11 +1141,15 @@ async function leaveTeacherClassroom(bookingId) {
 }
 
 function showModal(html, options = {}) {
-  const { closeButton: includeCloseButton = true } = options;
+  const { closeButton: includeCloseButton = true, wide = false } = options;
   const template = document.querySelector("#modalTemplate").content.cloneNode(true);
   const modalBody = template.querySelector("[data-modal-body]");
   modalBody.innerHTML = html;
   const modal = template.querySelector(".fixed.inset-0.z-50");
+  if (wide) {
+    modal.querySelector(".relative")?.classList.remove("max-w-lg");
+    modal.querySelector(".relative")?.classList.add("max-w-5xl");
+  }
   if (includeCloseButton) {
     const removedCloseRows = [...modalBody.querySelectorAll('[data-action="closeModal"]')]
       .map((button) => {
@@ -1892,6 +1909,13 @@ function bindActions(root = document) {
         await teacherStudentApi(`/api/teacher-student/teacher-profiles/${id}`, { method: "DELETE" });
         teacherStudentLoadedKeys = new Set();
         await loadTeacherStudentData(activeRoute(), { force: true });
+        render();
+      }
+      if (action === "enableTeacherProfile") {
+        await teacherStudentApi(`/api/teacher-student/teacher-profiles/${id}/enable`, { method: "POST" });
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+        render();
       }
       if (action === "toggleTeacherCompletedPaid") {
         teacherWorkspaceShowCompletedPaid = !teacherWorkspaceShowCompletedPaid;
@@ -1911,11 +1935,6 @@ function bindActions(root = document) {
         myLearningTab = "calendar";
         if (activeRoute() !== "myLessons") history.pushState({}, "", appPath("myLessons"));
         await loadTeacherStudentData("myLessons", { force: true });
-        render();
-      }
-      if (action === "setMyProfilesTab") {
-        myProfilesTab = ["languages", "teachers"].includes(id) ? id : "languages";
-        if (activeRoute() !== "profileProfiles") history.pushState({}, "", appPath("profileProfiles"));
         render();
       }
       if (action === "selectBookingSlot") {
@@ -1985,12 +2004,6 @@ function bindActions(root = document) {
         await teacherStudentApi(`/api/teacher-student/reschedule-requests/${id}/respond`, { method: "POST", body: JSON.stringify({ action: value }) });
         teacherStudentLoadedKeys = new Set();
         await loadTeacherStudentData(activeRoute(), { force: true });
-      }
-      if (action === "goToLanguageProfiles") {
-        closeModal();
-        myProfilesTab = "languages";
-        history.pushState({}, "", appPath("profileProfiles"));
-        render();
       }
       if (action === "openAddLanguageModal") showModal(addLanguageModal(context()));
       if (action === "openEditLanguageModal") showModal(editLanguageModal(context(), id));
@@ -2199,9 +2212,8 @@ function bindActions(root = document) {
         await teacherStudentApi(path, { method: "POST", body: JSON.stringify(data) });
         teacherStudentLoadedKeys = new Set();
         if (activeRoute() === "teacherProfileCreate" || activeRoute() === "teacherProfileEdit") {
-          myProfilesTab = "teachers";
-          history.pushState({}, "", appPath("profileProfiles"));
-          await loadTeacherStudentData("profileProfiles", { force: true });
+          history.pushState({}, "", appPath("teacherDashboard"));
+          await loadTeacherStudentData("teacherDashboard", { force: true });
           if (creatingTeacherProfile) {
             showModal(`
               <div>
@@ -2217,7 +2229,7 @@ function bindActions(root = document) {
           return;
         }
         closeModal();
-        await loadTeacherStudentData("profileProfiles", { force: true });
+        await loadTeacherStudentData(activeRoute(), { force: true });
       }
       if (form.dataset.form === "teacherAvailability") {
         await teacherStudentApi("/api/teacher-student/availability", { method: "POST", body: JSON.stringify(data) });
@@ -2411,8 +2423,6 @@ function render() {
           ? myLearningTabTitles.lessons
         : route === "myTeachers"
           ? myLearningTabTitles.teachers
-        : route === "profileProfiles"
-          ? myProfilesTab === "teachers" ? "My Teacher Profiles" : "Languages I'm learning"
         : route === "teacherProfileCreate"
           ? "Create Teacher Profile"
           : route === "teacherProfileEdit"
@@ -2463,8 +2473,7 @@ function render() {
     teacherTemplates: teacherTemplatesView,
     profile: profileView,
     profileInfo: profileInfoView,
-    profileSubscriptions: subscriptionsView,
-    profileProfiles: (ctx) => myProfilesView({ ...ctx, teacherProfilesContent: teacherProfilesPanel(ctx) })
+    profileSubscriptions: subscriptionsView
   };
 	  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
 	  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";

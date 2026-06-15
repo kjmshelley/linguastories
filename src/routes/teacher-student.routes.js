@@ -56,6 +56,7 @@ router.get("/teacher-profiles/:id/booking-page", asyncHandler(controller.getBook
 router.get("/teacher-profiles/:id/available-days", asyncHandler(controller.availableDays));
 router.get("/teacher-profiles/:id/available-slots", asyncHandler(controller.availableSlots));
 router.post("/teacher-profiles/:id", uploadRateLimit, validateBody(profileSchema), asyncHandler(controller.updateProfile));
+router.post("/teacher-profiles/:id/enable", asyncHandler(controller.enableProfile));
 router.delete("/teacher-profiles/:id", asyncHandler(controller.deleteProfile));
 router.post("/teacher-profiles/:id/reviews", validateBody({
   lessonBookingId: { type: "uuid", required: true, label: "Lesson" },

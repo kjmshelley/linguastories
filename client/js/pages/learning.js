@@ -189,6 +189,10 @@ function teacherProfileStatusTone(status = "") {
   return ui.tag;
 }
 
+function isDisabledTeacherProfile(status = "") {
+  return status === "paused" || status === "archived";
+}
+
 export function findTeacherView({ appPath, appConfig, state, teacherStudentData = {}, teacherStudentFilters = {} }) {
   const teachers = teacherStudentData.teachers || [];
   const filterOptions = teacherStudentData.filterOptions || {};
@@ -378,7 +382,7 @@ export function teacherProfileCreateView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Create Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileProfiles"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to My Profiles</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${teacherProfileForm(ctx)}
@@ -396,7 +400,7 @@ export function teacherProfileEditView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Edit Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("profileProfiles"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to My Profiles</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${profile ? teacherProfileForm({ ...ctx, profile }) : emptyState("Profile not found", "This teacher profile could not be loaded.")}
@@ -698,9 +702,22 @@ function noteRows(notes = []) {
   return notes.length ? notes.map((note) => `<article class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><div class="flex flex-wrap justify-between gap-2"><strong class="text-brand-ink">${escapeHtml(note.authorName)}</strong><span class="${note.visibility === "teacher_private" ? ui.tagRed : ui.tagGold}">${escapeHtml(note.visibility)}</span></div><p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(note.body)}</p></article>`).join("") : emptyState("No notes yet", "Shared lesson notes will appear here.");
 }
 
-export function teacherDashboardView({ appConfig, teacherStudentData = {} }) {
+export function teacherDashboardView({ appConfig, appPath, state, teacherStudentData = {} }) {
+  const canUseTeacherWorkspace = Boolean(state?.subscription?.capabilities?.teacherWorkspace || state?.user?.subscription?.capabilities?.teacherWorkspace);
   const stats = teacherStudentData.dashboard?.stats || {};
   const lessons = teacherWorkspaceBookings(teacherStudentData);
+  if (!canUseTeacherWorkspace) {
+    return `
+      <div class="grid gap-5">
+        ${teacherProfilesPanel({ appPath, teacherStudentData })}
+        <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+          <span class="${ui.tag}">Awaiting approval</span>
+          <h2 class="mt-3 text-2xl font-bold text-brand-ink">Workspace tools unlock after approval</h2>
+          <p class="mt-2 ${ui.muted}">Create and manage your teacher profile here. Once a profile is approved, scheduling, bookings, students, and lesson tools appear in Teacher Workspace.</p>
+        </section>
+      </div>
+    `;
+  }
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
@@ -711,6 +728,7 @@ export function teacherDashboardView({ appConfig, teacherStudentData = {} }) {
           <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><span class="text-xs font-bold uppercase text-brand-graphite">Earnings</span><strong class="mt-2 block text-3xl text-brand-ink">${money(stats.totalEarningsUsd)}</strong></div>
         </div>
       </section>
+      ${teacherProfilesPanel({ appPath, teacherStudentData })}
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -724,8 +742,8 @@ export function teacherDashboardView({ appConfig, teacherStudentData = {} }) {
           </div>
         </div>
         <div class="mt-5">
-          ${teacherBookingsTable(lessons, appConfig)}
-          ${teacherBookingsCards(lessons, appConfig)}
+          ${teacherBookingsTable(lessons, appConfig, teacherStudentData.currentUserId)}
+          ${teacherBookingsCards(lessons, appConfig, teacherStudentData.currentUserId)}
         </div>
       </section>
     </div>
@@ -754,6 +772,7 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
                 </div>
               </div>
               <div class="mt-4 flex justify-end gap-2">
+                ${isDisabledTeacherProfile(profile.status) ? `<button class="${ui.primary}" data-action="enableTeacherProfile:${escapeHtml(profile.id)}">${icon("check", "h-4 w-4")}<span>Request re-enable</span></button>` : ""}
                 <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a>
                 <button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button>
               </div>
@@ -815,16 +834,17 @@ function bookingPaymentBadge(lesson) {
   return `<span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus || "unpaid")} · ${money(lesson.totalStudentChargeUsd)}</span>`;
 }
 
-function bookingActions(lesson) {
+function bookingActions(lesson, currentUserId = "") {
+  const classroomLabel = currentUserId && lesson.teacherUserId === currentUserId ? "Start" : "Join";
   return `
     <div class="flex flex-wrap justify-end gap-2">
-      <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>Join</span></button>
+      <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></button>
       ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
     </div>
   `;
 }
 
-function teacherBookingsTable(lessons = [], appConfig = {}) {
+function teacherBookingsTable(lessons = [], appConfig = {}, currentUserId = "") {
   return `
     <div class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-white/60 lg:block">
       <table class="w-full border-collapse text-left">
@@ -846,7 +866,7 @@ function teacherBookingsTable(lessons = [], appConfig = {}) {
               <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${dateTime(lesson.startsAt)}</td>
               <td class="px-4 py-3"><span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span></td>
               <td class="px-4 py-3">${bookingPaymentBadge(lesson)}</td>
-              <td class="px-4 py-3 text-right">${bookingActions(lesson)}</td>
+              <td class="px-4 py-3 text-right">${bookingActions(lesson, currentUserId)}</td>
             </tr>
           `).join("") : `<tr><td colspan="6" class="px-4 py-10 text-center text-sm font-semibold text-brand-graphite">No bookings match this view.</td></tr>`}
         </tbody>
@@ -855,7 +875,7 @@ function teacherBookingsTable(lessons = [], appConfig = {}) {
   `;
 }
 
-function teacherBookingsCards(lessons = [], appConfig = {}) {
+function teacherBookingsCards(lessons = [], appConfig = {}, currentUserId = "") {
   return `
     <div class="grid gap-3 lg:hidden">
       ${lessons.length ? lessons.map((lesson) => `
@@ -872,7 +892,7 @@ function teacherBookingsCards(lessons = [], appConfig = {}) {
             <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Student</span><strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(lesson.studentName || "Student")}</strong></div>
             <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Duration</span><strong class="mt-1 block text-sm text-brand-ink">${lesson.durationMinutes || 30} min</strong></div>
           </div>
-          <div class="mt-4">${bookingActions(lesson)}</div>
+          <div class="mt-4">${bookingActions(lesson, currentUserId)}</div>
         </article>
       `).join("") : emptyState("No bookings match this view", "Active bookings will appear here.")}
     </div>

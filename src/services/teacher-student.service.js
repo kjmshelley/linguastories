@@ -546,9 +546,23 @@ async function saveProfile(user, payload, profileId = "") {
 }
 
 async function deleteProfile(user, profileId) {
-  await requireTeacherWorkspace(user);
   const result = await query("update teacher_profiles set status = 'archived', updated_at = now() where id = $1 and user_id = $2 returning id", [profileId, user.id]);
   if (!result.rows[0]) throw serviceError("Teacher profile not found", 404);
+  return myProfiles(user);
+}
+
+async function enableProfile(user, profileId) {
+  const result = await query(
+    `update teacher_profiles
+        set status = 'draft',
+            updated_at = now()
+      where id = $1
+        and user_id = $2
+        and status in ('paused', 'archived')
+      returning id`,
+    [profileId, user.id]
+  );
+  if (!result.rows[0]) throw serviceError("Disabled teacher profile not found", 404);
   return myProfiles(user);
 }
 
@@ -1696,6 +1710,7 @@ module.exports = {
   myProfiles,
   saveProfile,
   deleteProfile,
+  enableProfile,
   getAvailability,
   saveAvailability,
   getBookingPage,
