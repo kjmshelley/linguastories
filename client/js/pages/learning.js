@@ -114,7 +114,7 @@ function countryOptions(selected = "") {
 function toggleFilter({ name, label, checked = false }) {
   return `
     <label class="flex min-h-11 items-center gap-2 rounded-lg border border-brand-line/70 bg-white/70 px-3 py-2 text-sm font-semibold text-brand-charcoal">
-      <input class="h-4 w-4 accent-brand-red" type="checkbox" name="${escapeHtml(name)}" value="true" ${checked ? "checked" : ""}>
+      <input class="h-5 w-5 accent-brand-red" type="checkbox" name="${escapeHtml(name)}" value="true" ${checked ? "checked" : ""}>
       <span>${escapeHtml(label)}</span>
     </label>
   `;
@@ -207,7 +207,7 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
           </div>
         </div>
         <form class="mt-5 grid gap-3" data-form="teacherSearch">
-          <div class="grid gap-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(4,minmax(150px,1fr))_120px]">
+          <div class="grid gap-3 xl:grid-cols-[minmax(0,1.5fr)_repeat(4,minmax(150px,1fr))_120px]">
             <input class="${ui.input}" name="q" value="${escapeHtml(teacherStudentFilters.q || "")}" placeholder="Search by name, goal, or style">
             <select class="${ui.input}" name="language" aria-label="Language taught">${languageFilterOptions(appConfig, teacherStudentFilters.language || "", "Any taught language")}</select>
             <select class="${ui.input}" name="countryOfBirth" aria-label="Country of birth">${countryFilterOptions(filterOptions.countries || [], teacherStudentFilters.countryOfBirth || "")}</select>
@@ -244,7 +244,7 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
                   ${teacher.speakingPracticeOnly ? `<span class="${ui.tag}">Speaking practice</span>` : ""}
                   <span class="${ui.tagGold}">${money(teacher.hourlyRateUsd)}/hr</span>
                 </div>
-                <div class="mt-5 flex justify-end gap-2 border-t border-brand-line pt-4">
+                <div class="mt-5 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
                   <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(teacher.userId)}:${escapeHtml(teacher.id)}">${icon("message", "h-4 w-4")}<span>Message</span></button>
                   <a class="${ui.secondary}" href="/app/learning/teacher-profile/${escapeHtml(teacher.id)}" data-app-link>${icon("user", "h-4 w-4")}<span>View</span></a>
                   <a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: teacher.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book</span></a>
@@ -515,19 +515,19 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
 function lessonsTable(lessons = [], state) {
   if (!lessons.length) return emptyState("No lessons yet", "Booked lessons will appear here.");
   return `
-    <div class="overflow-auto rounded-lg border border-brand-line bg-brand-panel">
-      <table class="min-w-full text-left text-sm">
+    <div class="responsive-table-shell overflow-auto rounded-lg border border-brand-line bg-brand-panel">
+      <table class="responsive-card-table min-w-full text-left text-sm">
         <thead class="bg-brand-mist/60 text-xs uppercase text-brand-graphite"><tr><th class="px-4 py-3">Lesson</th><th class="px-4 py-3">When</th><th class="px-4 py-3">Status</th><th class="px-4 py-3">Payment</th><th class="px-4 py-3 text-right">Action</th></tr></thead>
         <tbody>
           ${lessons.map((lesson) => `
             <tr class="border-t border-brand-line/70">
-              <td class="px-4 py-3"><strong class="text-brand-ink">${escapeHtml(lesson.title)}</strong><span class="mt-1 block text-xs text-brand-graphite">${escapeHtml(lesson.teacherName || lesson.studentName || "")}</span></td>
-              <td class="px-4 py-3 text-brand-charcoal">${dateTime(lesson.startsAt)}</td>
-              <td class="px-4 py-3"><span class="${ui.tag}">${escapeHtml(lesson.status)}</span></td>
-              <td class="px-4 py-3"><span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus)} · ${money(lesson.totalStudentChargeUsd)}</span></td>
-              <td class="px-4 py-3 text-right">
+              <td class="px-4 py-3" data-label="Lesson"><strong class="text-brand-ink">${escapeHtml(lesson.title)}</strong><span class="mt-1 block text-xs text-brand-graphite">${escapeHtml(lesson.teacherName || lesson.studentName || "")}</span></td>
+              <td class="px-4 py-3 text-brand-charcoal" data-label="When">${dateTime(lesson.startsAt)}</td>
+              <td class="px-4 py-3" data-label="Status"><span class="${ui.tag}">${escapeHtml(lesson.status)}</span></td>
+              <td class="px-4 py-3" data-label="Payment"><span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus)} · ${money(lesson.totalStudentChargeUsd)}</span></td>
+              <td class="px-4 py-3 text-right" data-label="Action">
                 <div class="flex justify-end gap-2">
-                  <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></button>
+                  <a class="${ui.secondary}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></a>
                   ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrowRight", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
                   ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
                 </div>
@@ -616,11 +616,11 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
         <div>
           <p class="${ui.muted}">${visibleCount} scheduled class${visibleCount === 1 ? "" : "es"} this week.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
+        <div class="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2 sm:flex sm:flex-wrap">
           <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:prev" aria-label="Previous week">${icon("chevronLeft", "h-4 w-4")}</button>
-          <span class="min-w-[190px] text-center text-sm font-bold text-brand-ink">${escapeHtml(weekRangeLabel(days))}</span>
+          <span class="min-w-0 text-center text-sm font-bold text-brand-ink sm:min-w-[190px]">${escapeHtml(weekRangeLabel(days))}</span>
           <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:next" aria-label="Next week">${icon("chevronRight", "h-4 w-4")}</button>
-          <button class="${ui.secondary}" data-action="shiftMyLearningWeek:today">${icon("calendar", "h-4 w-4")}<span>Today</span></button>
+          <button class="${ui.secondary} col-span-3 sm:col-span-1" data-action="shiftMyLearningWeek:today">${icon("calendar", "h-4 w-4")}<span>Today</span></button>
         </div>
       </div>
       <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-7">
@@ -643,7 +643,7 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
                     <span class="block text-xs font-black uppercase text-brand-redDark">${escapeHtml(new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(new Date(lesson.startsAt)))}</span>
                     <strong class="mt-1 block text-sm leading-5 text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong>
                     <span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(lesson.teacherUserId === state.user.id ? lesson.studentName || "Student" : lesson.teacherName || "Teacher")} · ${escapeHtml(lesson.status || "scheduled")}</span>
-                    <button class="${ui.secondary} mt-3 w-full justify-center" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></button>
+                    <a class="${ui.secondary} mt-3 w-full justify-center" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></a>
                   </div>
                 `).join("") : `<p class="rounded-lg border border-dashed border-brand-line bg-brand-snow p-3 text-xs font-semibold leading-5 text-brand-graphite">No classes scheduled.</p>`}
               </div>
@@ -691,7 +691,7 @@ export function myLessonsView({ teacherStudentData = {}, state }) {
 
 export function myTeachersView({ teacherStudentData = {} }) {
   const teachers = teacherStudentData.myTeachers || [];
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Booked Teachers</h2><div class="mt-5 grid gap-3">${teachers.length ? teachers.map((teacher) => `<article class="flex items-center gap-4 rounded-lg border border-brand-line/70 bg-white/60 p-4">${profileImage(teacher, "h-14 w-14")}<div><h3 class="font-bold text-brand-ink">${escapeHtml(teacher.teacherName)}</h3><p class="text-sm text-brand-graphite">${Number(teacher.totalLessons || 0)} lessons · last lesson ${teacher.lastLessonAt ? dateTime(teacher.lastLessonAt) : "not yet"}</p></div></article>`).join("") : emptyState("No teachers yet", "Teachers appear after confirmed lessons.")}</div></section></div>`;
+  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Booked Teachers</h2><div class="mt-5 grid gap-3">${teachers.length ? teachers.map((teacher) => `<article class="flex flex-col gap-4 rounded-lg border border-brand-line/70 bg-white/60 p-4 sm:flex-row sm:items-center">${profileImage(teacher, "h-14 w-14")}<div class="min-w-0"><h3 class="font-bold text-brand-ink">${escapeHtml(teacher.teacherName)}</h3><p class="text-sm text-brand-graphite">${Number(teacher.totalLessons || 0)} lessons · last lesson ${teacher.lastLessonAt ? dateTime(teacher.lastLessonAt) : "not yet"}</p></div></article>`).join("") : emptyState("No teachers yet", "Teachers appear after confirmed lessons.")}</div></section></div>`;
 }
 
 export function learningNotesView({ teacherStudentData = {} }) {
@@ -771,7 +771,7 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
                   ${profile.status === "draft" ? `<p class="mt-2 text-xs font-semibold text-brand-graphite">Awaiting approval. Approval typically takes 1 - 2 days.</p>` : ""}
                 </div>
               </div>
-              <div class="mt-4 flex justify-end gap-2">
+              <div class="mt-4 flex flex-wrap justify-end gap-2">
                 ${isDisabledTeacherProfile(profile.status) ? `<button class="${ui.primary}" data-action="enableTeacherProfile:${escapeHtml(profile.id)}">${icon("check", "h-4 w-4")}<span>Request re-enable</span></button>` : ""}
                 <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a>
                 <button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button>
@@ -838,7 +838,7 @@ function bookingActions(lesson, currentUserId = "") {
   const classroomLabel = currentUserId && lesson.teacherUserId === currentUserId ? "Start" : "Join";
   return `
     <div class="flex flex-wrap justify-end gap-2">
-      <button class="${ui.secondary}" data-action="joinClassroom:${escapeHtml(lesson.id)}">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></button>
+      <a class="${ui.secondary}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></a>
       ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
     </div>
   `;
@@ -847,7 +847,7 @@ function bookingActions(lesson, currentUserId = "") {
 function teacherBookingsTable(lessons = [], appConfig = {}, currentUserId = "") {
   return `
     <div class="hidden overflow-hidden rounded-lg border border-brand-line/80 bg-white/60 lg:block">
-      <table class="w-full border-collapse text-left">
+      <table class="responsive-card-table w-full border-collapse text-left">
         <thead class="bg-brand-mist/60 text-xs font-semibold uppercase tracking-[.12em] text-brand-graphite">
           <tr>
             <th class="px-4 py-3">Class</th>
@@ -861,12 +861,12 @@ function teacherBookingsTable(lessons = [], appConfig = {}, currentUserId = "") 
         <tbody>
           ${lessons.length ? lessons.map((lesson) => `
             <tr class="border-t border-brand-line/70 align-middle">
-              <td class="px-4 py-3"><strong class="text-sm text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong><span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(languageName(appConfig, lesson.targetLanguage))} · ${lesson.durationMinutes || 30} min</span></td>
-              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${escapeHtml(lesson.studentName || "Student")}</td>
-              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal">${dateTime(lesson.startsAt)}</td>
-              <td class="px-4 py-3"><span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span></td>
-              <td class="px-4 py-3">${bookingPaymentBadge(lesson)}</td>
-              <td class="px-4 py-3 text-right">${bookingActions(lesson, currentUserId)}</td>
+              <td class="px-4 py-3" data-label="Class"><strong class="text-sm text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong><span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(languageName(appConfig, lesson.targetLanguage))} · ${lesson.durationMinutes || 30} min</span></td>
+              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal" data-label="Student">${escapeHtml(lesson.studentName || "Student")}</td>
+              <td class="px-4 py-3 text-sm font-semibold text-brand-charcoal" data-label="When">${dateTime(lesson.startsAt)}</td>
+              <td class="px-4 py-3" data-label="Status"><span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status)}</span></td>
+              <td class="px-4 py-3" data-label="Payment">${bookingPaymentBadge(lesson)}</td>
+              <td class="px-4 py-3 text-right" data-label="Action">${bookingActions(lesson, currentUserId)}</td>
             </tr>
           `).join("") : `<tr><td colspan="6" class="px-4 py-10 text-center text-sm font-semibold text-brand-graphite">No bookings match this view.</td></tr>`}
         </tbody>
@@ -888,7 +888,7 @@ function teacherBookingsCards(lessons = [], appConfig = {}, currentUserId = "") 
             </div>
             ${bookingPaymentBadge(lesson)}
           </div>
-          <div class="mt-4 grid grid-cols-2 gap-2">
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
             <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Student</span><strong class="mt-1 block text-sm text-brand-ink">${escapeHtml(lesson.studentName || "Student")}</strong></div>
             <div class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><span class="block text-[11px] font-bold uppercase tracking-[.12em] text-brand-graphite">Duration</span><strong class="mt-1 block text-sm text-brand-ink">${lesson.durationMinutes || 30} min</strong></div>
           </div>

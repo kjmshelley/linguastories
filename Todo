@@ -13,6 +13,15 @@ The dashboard should show the next review sentence mining deck or the short stor
 
 
 
+Unlimited language profiles
+
+What is the logic for professional tutor toggle?
+Let's change the teacher card's badge "Speaking practice" to "Community Practice Tutor"
+
+When I change the site language and click save info, it should acutally chagne the site UI language. For Arabic, obviously, you need to use right to left.
+
+Classroom needs to be on it's own page. And we need to include mute, turn off/on camera features.
+When someone leaves the classroom, the booking should not disappear from the teacher page until after the class is past the time. 
 
 
 

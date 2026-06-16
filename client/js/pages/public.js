@@ -28,15 +28,20 @@ export function publicNav(active = "", options = {}) {
             <div class="flex items-center gap-2">
               <a class="${active === "login" ? activeTopButton : inactiveTopButton}" href="/login" data-link>Login</a>
             </div>
-            <details class="relative lg:hidden">
+            <details class="relative lg:hidden" data-public-menu>
               <summary class="grid h-11 w-11 cursor-pointer list-none place-items-center rounded-lg border border-brand-line bg-white text-brand-ink shadow-sm [&::-webkit-details-marker]:hidden" aria-label="Open navigation">
                 ${icon("menu", "h-5 w-5")}
               </summary>
-              <div class="absolute right-0 top-14 z-30 grid w-[min(260px,calc(100vw-32px))] gap-1 rounded-lg border border-brand-line bg-brand-panel p-2 shadow-2xl">
-                <a class="rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teachers">Teachers</a>
-                <a class="rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#how-it-works">How it works</a>
-                <a class="rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#community">Community</a>
-                <a class="rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#pricing">Pricing</a>
+              <div class="fixed inset-0 z-40 bg-brand-ink/45 backdrop-blur-sm" data-public-menu-backdrop></div>
+              <div class="fixed inset-y-0 right-0 z-50 grid w-[min(286px,calc(100vw-24px))] content-start gap-1 overflow-y-auto border-l border-brand-line bg-brand-panel p-4 pt-[max(1rem,var(--safe-top))] shadow-2xl">
+                <div class="mb-2 flex items-center justify-between gap-3">
+                  <span class="text-xs font-black uppercase tracking-[.16em] text-brand-graphite">Menu</span>
+                  <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink" type="button" data-action="closePublicMenu" aria-label="Close navigation">x</button>
+                </div>
+                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teachers" data-public-menu-link>Teachers</a>
+                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#how-it-works" data-public-menu-link>How it works</a>
+                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#community" data-public-menu-link>Community</a>
+                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#pricing" data-public-menu-link>Pricing</a>
               </div>
             </details>`
       }

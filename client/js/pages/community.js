@@ -140,7 +140,7 @@ function smallIcon(name) {
 
 function iconAction({ label, count, action, active = false }) {
   return `
-    <button class="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+    <button class="inline-flex min-h-11 items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold transition ${
       active ? "border-brand-red/35 bg-brand-red/10 text-brand-redDark" : "border-brand-line/90 bg-white/60 text-brand-charcoal hover:border-brand-orange/50 hover:bg-white"
     }" data-action="${action}" aria-label="${escapeHtml(label)}">
       ${smallIcon("like")}
@@ -151,7 +151,7 @@ function iconAction({ label, count, action, active = false }) {
 
 function iconMetric({ label, count, iconName }) {
   return `
-    <span class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-brand-line/90 bg-white/60 px-3 py-2 text-sm font-semibold text-brand-charcoal" aria-label="${escapeHtml(label)}">
+    <span class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-brand-line/90 bg-white/60 px-3 py-2 text-sm font-semibold text-brand-charcoal" aria-label="${escapeHtml(label)}">
       ${smallIcon(iconName)}
       <span>${escapeHtml(count)}</span>
     </span>
@@ -192,7 +192,7 @@ function commentSection(post, { appPath }) {
     <form class="mt-4 grid items-center gap-2 sm:grid-cols-[minmax(0,1fr)_auto]" data-form="comment">
       <input type="hidden" name="postId" value="${escapeHtml(post.id)}">
       <textarea class="${ui.input} min-h-16 resize-y" name="body" maxlength="255" rows="2" required placeholder="Add a helpful reply"></textarea>
-      <button class="${ui.primary} min-h-10 px-4 py-2 sm:w-auto">Reply</button>
+      <button class="${ui.primary} px-4 py-2 sm:w-auto">Reply</button>
     </form>
   `;
 }

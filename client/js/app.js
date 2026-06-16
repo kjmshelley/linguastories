@@ -62,6 +62,7 @@ const hiddenRoutes = [
   ["teacherProfileCreate", "Create Teacher Profile"],
   ["teacherProfileEdit", "Edit Teacher Profile"],
   ["bookLesson", "Book Lesson"],
+  ["teacherClassroom", "Classroom"],
   ["myLessons", "My Lessons"],
   ["myTeachers", "My Booked Teachers"],
   ["learningNotes", "Learning Notes"],
@@ -86,6 +87,7 @@ const routeSlugs = {
   teacherProfileCreate: "learning/teacher-profile/new",
   teacherProfileEdit: "learning/teacher-profile",
   bookLesson: "learning/teacher-profile",
+  teacherClassroom: "learning/classroom",
   myLessons: "learning/my-lessons",
   myTeachers: "learning/my-teachers",
   learningNotes: "learning/learning-notes",
@@ -134,9 +136,16 @@ let livekitHiddenAudioLayer = null;
 let livekitLocalTracks = [];
 let livekitLocalAudioMuted = false;
 let livekitLocalVideoMuted = false;
+let livekitLayoutMode = "grid";
+let classroomBookingId = "";
+let classroomConnecting = false;
+let classroomConnected = false;
+let classroomSelfPosition = localStorage.getItem("linguaStoriesClassroomSelfPosition") || "bottom-right";
+let classroomSelfCustomPosition = loadClassroomSelfCustomPosition();
 let chatOpen = false;
 let chatContactsHidden = false;
 let chatMobileScreen = "contacts";
+let modalRestoreFocus = null;
 let mobileMenuOpen = false;
 let selectedConversationId = "";
 let pendingChatRecipientId = "";
@@ -174,6 +183,7 @@ function activeRoute() {
   if (slug.startsWith("community/connect/")) return "communityLearner";
   if (slug.startsWith("community/posts/")) return "communityPost";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
+  if (slug.startsWith("learning/classroom/")) return "teacherClassroom";
   if (slug === "learning/teacher-profile/new") {
     return "teacherProfileCreate";
   }
@@ -213,6 +223,11 @@ function activeVoiceVideoRoomId() {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
+function activeClassroomBookingId() {
+  const match = location.pathname.match(/^\/app\/learning\/classroom\/([0-9a-f-]+)\/?$/i);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
 function activeTeacherProfileId() {
   const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)(?:\/book)?\/?$/i)
     || location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)\/edit\/?$/i);
@@ -223,6 +238,7 @@ function appPath(id, params = {}) {
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
   if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
+  if (id === "teacherClassroom") return `/app/learning/classroom/${encodeURIComponent(params.bookingId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
   if (id === "teacherProfileEdit") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
@@ -257,6 +273,8 @@ function normalizeAppUrl() {
           ? appPath(route, { postId: activePostId() })
         : route === "voiceVideoRoom"
             ? appPath(route, { roomId: activeVoiceVideoRoomId() || activeVoiceVideoRoom?.id })
+          : route === "teacherClassroom"
+            ? appPath(route, { bookingId: activeClassroomBookingId() || classroomBookingId })
           : route === "teacherProfileDetail"
             ? appPath(route, { teacherProfileId: activeTeacherProfileId() })
           : route === "teacherProfileEdit"
@@ -324,6 +342,38 @@ function subscriptionLockedView(route) {
   `;
 }
 
+function classroomView() {
+  const bookingId = activeClassroomBookingId();
+  const audioLabel = livekitLocalAudioMuted ? "Unmute" : "Mute";
+  const cameraLabel = livekitLocalVideoMuted ? "Turn camera on" : "Turn camera off";
+  return `
+    <section class="relative min-h-screen overflow-hidden bg-black text-white">
+      <div class="absolute inset-0" data-livekit-stage>
+        <div class="grid h-full min-h-screen place-items-center p-6 text-center text-sm font-semibold text-white/70">
+          <div>
+            <span class="mx-auto mb-3 block h-9 w-9 animate-spin rounded-full border-2 border-white/20 border-t-white"></span>
+            Opening classroom...
+          </div>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 z-20 bg-gradient-to-b from-black/70 to-transparent p-4">
+        <div class="pointer-events-auto flex items-center justify-between gap-3">
+          <a class="grid h-11 w-11 place-items-center rounded-lg bg-white/12 text-white ring-1 ring-white/15 transition hover:bg-white/18" href="${appPath("myLessons")}" aria-label="Back to lessons">${icon("arrowLeft", "h-5 w-5")}</a>
+          <span class="rounded bg-black/45 px-3 py-1 text-xs font-bold uppercase tracking-[.12em] text-white/72">Classroom</span>
+        </div>
+      </div>
+      <div class="absolute inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-t from-black/75 to-transparent px-3 pb-[max(0.75rem,var(--safe-bottom))] pt-8 sm:px-4">
+        <div class="grid w-full max-w-3xl grid-cols-2 gap-2 rounded-lg bg-black/55 p-2 ring-1 ring-white/15 backdrop-blur sm:flex sm:flex-wrap sm:items-center sm:justify-center">
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomAudio">${icon(livekitLocalAudioMuted ? "mic" : "mic", "h-4 w-4")}<span>${audioLabel}</span></button>
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomCamera">${icon("video", "h-4 w-4")}<span>${cameraLabel}</span></button>
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="moveClassroomSelfView">${icon("arrowRight", "h-4 w-4")}<span>Move preview</span></button>
+          <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderNav() {
   const activeNav = activeNavRoute();
   const capabilities = subscriptionCapabilities();
@@ -371,6 +421,14 @@ function loadSeenNotificationKeys() {
     return new Set(JSON.parse(localStorage.getItem("linguaStoriesSeenNotifications") || "[]"));
   } catch {
     return new Set();
+  }
+}
+
+function loadClassroomSelfCustomPosition() {
+  try {
+    return JSON.parse(localStorage.getItem("linguaStoriesClassroomSelfCustomPosition") || "null");
+  } catch {
+    return null;
   }
 }
 
@@ -425,7 +483,9 @@ function syncMobileMenu() {
   sidebar.className = mobileMenuOpen
     ? "fixed inset-y-0 left-0 z-50 block w-[min(286px,calc(100vw-24px))] overflow-y-auto border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white shadow-[18px_0_50px_rgba(29,41,63,.26)] lg:sticky lg:top-0 lg:block lg:min-h-screen lg:w-[286px] lg:shadow-none"
     : "hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white lg:sticky lg:top-0 lg:block";
+  sidebar.setAttribute("aria-hidden", mobileMenuOpen || window.matchMedia("(min-width: 1024px)").matches ? "false" : "true");
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = mobileMenuOpen ? "fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" : "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
+  document.body.classList.toggle("overflow-hidden", mobileMenuOpen);
 }
 
 function loadingSpinnerMarkup(className = "h-4 w-4") {
@@ -485,6 +545,10 @@ function pendingButtonForForm(form, submitter) {
 }
 
 function bindLoadingImages(root = document) {
+  root.querySelectorAll("img").forEach((image) => {
+    if (!image.hasAttribute("loading")) image.loading = "lazy";
+    if (!image.hasAttribute("decoding")) image.decoding = "async";
+  });
   root.querySelectorAll("[data-loading-image]").forEach((image) => {
     if (image.dataset.boundLoadingImage) return;
     image.dataset.boundLoadingImage = "true";
@@ -796,13 +860,79 @@ function applyLiveKitTileLayout() {
   const stage = document.querySelector("[data-livekit-stage]");
   if (!stage) return;
   const tiles = [...livekitParticipantTiles.values()].slice(0, 4);
+  if (livekitLayoutMode === "classroom") {
+    stage.className = "relative h-full min-h-screen overflow-hidden bg-black";
+    const remoteTiles = tiles.filter((tile) => tile.dataset.livekitLocal !== "true");
+    const mainTile = remoteTiles[0] || tiles[0];
+    tiles.forEach((tile) => {
+      tile.style.left = "";
+      tile.style.top = "";
+      if (tile === mainTile) {
+        tile.className = "absolute inset-0 overflow-hidden bg-black";
+      } else {
+        tile.className = `absolute z-20 h-24 w-32 cursor-move touch-none overflow-hidden rounded-lg border border-white/20 bg-black shadow-2xl ring-1 ring-black/40 min-[380px]:h-28 min-[380px]:w-40 sm:h-40 sm:w-56 ${classroomSelfCustomPosition ? "" : classroomSelfPositionClass()}`;
+        if (classroomSelfCustomPosition) {
+          tile.style.left = `${classroomSelfCustomPosition.left}px`;
+          tile.style.top = `${classroomSelfCustomPosition.top}px`;
+        }
+        bindClassroomSelfDrag(tile);
+      }
+    });
+    return;
+  }
   stage.className = "grid h-full min-h-[360px] grid-cols-2 grid-rows-2 gap-3";
   tiles.forEach((tile, index) => {
     tile.className = tileClassFor(index, tiles.length);
   });
 }
 
-function ensureParticipantTile(identity, participantName = "Participant") {
+function bindClassroomSelfDrag(tile) {
+  if (tile.dataset.boundClassroomDrag) return;
+  tile.dataset.boundClassroomDrag = "true";
+  tile.addEventListener("pointerdown", (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
+    const stage = document.querySelector("[data-livekit-stage]");
+    if (!stage) return;
+    event.preventDefault();
+    tile.setPointerCapture?.(event.pointerId);
+    const tileRect = tile.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const offsetX = event.clientX - tileRect.left;
+    const offsetY = event.clientY - tileRect.top;
+    const move = (moveEvent) => {
+      const margin = stageRect.width < 380 ? 8 : 16;
+      const maxLeft = Math.max(margin, stageRect.width - tile.offsetWidth - margin);
+      const maxTop = Math.max(margin, stageRect.height - tile.offsetHeight - margin);
+      const left = Math.min(maxLeft, Math.max(margin, moveEvent.clientX - stageRect.left - offsetX));
+      const top = Math.min(maxTop, Math.max(margin, moveEvent.clientY - stageRect.top - offsetY));
+      classroomSelfCustomPosition = { left, top };
+      tile.style.left = `${left}px`;
+      tile.style.top = `${top}px`;
+      tile.className = tile.className.replace(/\s?(left|right|top|bottom)-\d+/g, "");
+    };
+    const finish = () => {
+      localStorage.setItem("linguaStoriesClassroomSelfCustomPosition", JSON.stringify(classroomSelfCustomPosition));
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", finish);
+      window.removeEventListener("pointercancel", finish);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", finish, { once: true });
+    window.addEventListener("pointercancel", finish, { once: true });
+  });
+}
+
+function classroomSelfPositionClass() {
+  const positions = {
+    "top-left": "left-4 top-20",
+    "top-right": "right-4 top-20",
+    "bottom-left": "bottom-40 left-4 sm:bottom-28",
+    "bottom-right": "bottom-40 right-4 sm:bottom-28"
+  };
+  return positions[classroomSelfPosition] || positions["bottom-right"];
+}
+
+function ensureParticipantTile(identity, participantName = "Participant", isLocal = false) {
   const stage = document.querySelector("[data-livekit-stage]");
   if (!stage) return null;
   if (livekitParticipantTiles.size === 0) stage.innerHTML = "";
@@ -816,6 +946,7 @@ function ensureParticipantTile(identity, participantName = "Participant") {
   if (!tile) {
     tile = document.createElement("div");
     tile.dataset.livekitTile = key;
+    tile.dataset.livekitLocal = isLocal ? "true" : "false";
     tile.innerHTML = `
       <div class="absolute inset-0 grid place-items-center text-center">
         <div>
@@ -829,6 +960,7 @@ function ensureParticipantTile(identity, participantName = "Participant") {
     stage.append(tile);
     applyLiveKitTileLayout();
   }
+  if (isLocal) tile.dataset.livekitLocal = "true";
   return tile;
 }
 
@@ -837,13 +969,13 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
   if (isLocal && track.kind === "audio") return;
   const element = track.attach();
   if (track.kind === "audio") {
-    ensureParticipantTile(identity, participantName);
+    ensureParticipantTile(identity, participantName, isLocal);
     element.autoplay = true;
     element.dataset.remoteAudio = identity || participantName;
     livekitHiddenAudioLayer?.append(element);
     return;
   }
-  const tile = ensureParticipantTile(identity, participantName);
+  const tile = ensureParticipantTile(identity, participantName, isLocal);
   if (!tile) return;
   tile.innerHTML = `<div class="absolute bottom-2 left-2 z-10 rounded bg-black/45 px-2 py-1 text-xs font-semibold text-white">${escapeHtml(participantName)}</div>`;
   element.className = "absolute inset-0 h-full w-full bg-black object-cover";
@@ -924,6 +1056,13 @@ function toggleVoiceVideoCamera() {
   setLocalTrackMuted("video", livekitLocalVideoMuted);
 }
 
+function syncClassroomControlLabels() {
+  const audioButton = document.querySelector('[data-action="toggleClassroomAudio"] span');
+  const cameraButton = document.querySelector('[data-action="toggleClassroomCamera"] span');
+  if (audioButton) audioButton.textContent = livekitLocalAudioMuted ? "Unmute" : "Mute";
+  if (cameraButton) cameraButton.textContent = livekitLocalVideoMuted ? "Turn camera on" : "Turn camera off";
+}
+
 async function createVoiceVideoLocalTracks(room) {
   const constraints = { audio: true, video: room?.roomType === "video" };
   await requestMediaPermission(constraints);
@@ -948,7 +1087,8 @@ async function createTeacherClassroomLocalTracks() {
 }
 
 async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
-  const { modalOnError = true } = options;
+  const { modalOnError = true, layoutMode = "grid" } = options;
+  livekitLayoutMode = layoutMode;
   const stage = document.querySelector("[data-livekit-stage]");
   if (stage) stage.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[.04] p-4 text-sm font-semibold text-white/72">Connecting media...</div>`;
   try {
@@ -969,7 +1109,7 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
     });
     await room.connect(payload.livekitUrl, payload.token);
     if (stage) stage.innerHTML = "";
-    ensureParticipantTile(room.localParticipant.identity || "local", "You");
+    ensureParticipantTile(room.localParticipant.identity || "local", "You", true);
     room.remoteParticipants?.forEach((participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
     livekitLocalTracks = localTracks;
     livekitLocalAudioMuted = false;
@@ -1034,6 +1174,7 @@ async function disconnectLiveKitTracks() {
     livekitParticipantTiles = new Map();
     livekitHiddenAudioLayer = null;
     livekitLocalTracks = [];
+    livekitLayoutMode = "grid";
   } catch (_error) {
     // Best-effort cleanup after disconnect.
   }
@@ -1089,43 +1230,29 @@ async function moderateVoiceVideoParticipant(roomId, value = "") {
 }
 
 async function joinTeacherClassroom(bookingId) {
+  if (activeRoute() !== "teacherClassroom") {
+    window.open(appPath("teacherClassroom", { bookingId }), "_blank", "noopener");
+    return;
+  }
+  if (classroomConnecting || classroomConnected) return;
+  classroomConnecting = true;
+  classroomBookingId = bookingId;
   if (livekitRoomConnection) await disconnectLiveKitTracks();
-  showModal(`
-    <div>
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 class="text-xl font-black text-brand-ink">Classroom</h2>
-          <p class="${ui.muted}">Connecting your microphone and camera...</p>
-        </div>
-        <span class="${ui.tagGold}">Live</span>
-      </div>
-      <div class="mt-5 rounded-lg bg-brand-ink p-3 text-white">
-        <div class="grid min-h-[360px] place-items-center rounded-lg border border-white/10 bg-white/[.04]" data-livekit-stage>
-          <div class="text-center text-sm font-semibold text-white/72">
-            <span class="mx-auto mb-3 block h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white"></span>
-            Connecting classroom...
-          </div>
-        </div>
-        <div class="mt-3 flex flex-wrap justify-end gap-2 border-t border-white/10 pt-3">
-          <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave Classroom</span></button>
-        </div>
-      </div>
-    </div>
-  `, { closeButton: false, wide: true });
   let localTracks = [];
   try {
     localTracks = await createTeacherClassroomLocalTracks();
   } catch (_error) {
-    closeModal();
+    classroomConnecting = false;
     return;
   }
   const payload = await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/classroom-token`, { method: "POST" });
   if (!payload) {
     stopLocalTracks(localTracks);
-    closeModal();
+    classroomConnecting = false;
     return;
   }
-  await connectLiveKitRoom(payload, localTracks, { modalOnError: false });
+  classroomConnected = await connectLiveKitRoom(payload, localTracks, { modalOnError: false, layoutMode: "classroom" });
+  classroomConnecting = false;
 }
 
 async function leaveTeacherClassroom(bookingId) {
@@ -1135,20 +1262,63 @@ async function leaveTeacherClassroom(bookingId) {
     // Classroom cleanup should not block the server-side leave call.
   }
   await teacherStudentApi(`/api/teacher-student/bookings/${bookingId}/leave-classroom`, { method: "POST" });
+  classroomConnected = false;
+  classroomConnecting = false;
+  classroomBookingId = "";
+  if (activeRoute() === "teacherClassroom") {
+    history.replaceState({}, "", appPath("myLessons"));
+    render();
+    return;
+  }
   closeModal();
   teacherStudentLoadedKeys = new Set();
   await loadTeacherStudentData(activeRoute(), { force: true });
 }
 
+function syncClassroomRoute() {
+  if (activeRoute() !== "teacherClassroom") return;
+  const bookingId = activeClassroomBookingId();
+  if (!bookingId) return;
+  if (bookingId !== classroomBookingId) {
+    classroomConnected = false;
+    classroomConnecting = false;
+    classroomBookingId = bookingId;
+  }
+  joinTeacherClassroom(bookingId);
+}
+
+function moveClassroomSelfView() {
+  const order = ["bottom-right", "bottom-left", "top-left", "top-right"];
+  const next = order[(order.indexOf(classroomSelfPosition) + 1) % order.length] || order[0];
+  classroomSelfPosition = next;
+  classroomSelfCustomPosition = null;
+  localStorage.setItem("linguaStoriesClassroomSelfPosition", next);
+  localStorage.removeItem("linguaStoriesClassroomSelfCustomPosition");
+  applyLiveKitTileLayout();
+}
+
+function dismissModal(modal = document.querySelector(".fixed.inset-0.z-50")) {
+  if (!modal) return;
+  modal.remove();
+  if (!document.querySelector(".fixed.inset-0.z-50")) {
+    document.body.classList.remove("overflow-hidden");
+    modalRestoreFocus?.focus?.();
+    modalRestoreFocus = null;
+  }
+}
+
 function showModal(html, options = {}) {
   const { closeButton: includeCloseButton = true, wide = false } = options;
+  dismissModal();
+  modalRestoreFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   const template = document.querySelector("#modalTemplate").content.cloneNode(true);
   const modalBody = template.querySelector("[data-modal-body]");
   modalBody.innerHTML = html;
   const modal = template.querySelector(".fixed.inset-0.z-50");
+  const panel = modal.querySelector("[data-modal-panel]");
   if (wide) {
-    modal.querySelector(".relative")?.classList.remove("max-w-lg");
-    modal.querySelector(".relative")?.classList.add("max-w-5xl");
+    panel?.classList.remove("max-w-lg");
+    panel?.classList.add("max-w-5xl");
   }
   if (includeCloseButton) {
     const removedCloseRows = [...modalBody.querySelectorAll('[data-action="closeModal"]')]
@@ -1162,7 +1332,7 @@ function showModal(html, options = {}) {
     closeButton.type = "button";
     closeButton.className = ui.secondary;
     closeButton.textContent = "Close";
-    closeButton.addEventListener("click", () => modal.remove());
+    closeButton.addEventListener("click", () => dismissModal(modal));
 
     const actionRow =
       removedCloseRows.find((row) => row.isConnected) ||
@@ -1184,11 +1354,25 @@ function showModal(html, options = {}) {
     }
   }
   document.body.append(template);
+  document.body.classList.add("overflow-hidden");
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal && includeCloseButton) dismissModal(modal);
+  });
+  const handleEscape = (event) => {
+    if (event.key !== "Escape" || !includeCloseButton) return;
+    dismissModal(modal);
+    document.removeEventListener("keydown", handleEscape);
+  };
+  document.addEventListener("keydown", handleEscape);
   bindActions(modal);
+  requestAnimationFrame(() => {
+    const activePanel = document.querySelector("[data-modal-panel]");
+    activePanel?.focus({ preventScroll: true });
+  });
 }
 
 function closeModal() {
-  document.querySelector(".fixed.inset-0.z-50")?.remove();
+  dismissModal();
 }
 
 function removeLanguageConfirmModal(language) {
@@ -1714,7 +1898,26 @@ function bindActions(root = document) {
     link.dataset.boundPublicLink = "true";
     link.addEventListener("click", (event) => {
       event.preventDefault();
+      link.closest("[data-public-menu]")?.removeAttribute("open");
       navigatePublic(link.getAttribute("href"));
+    });
+  });
+
+  root.querySelectorAll("[data-public-menu]").forEach((menu) => {
+    if (menu.dataset.boundPublicMenu) return;
+    menu.dataset.boundPublicMenu = "true";
+    menu.querySelectorAll("[data-public-menu-link]").forEach((link) => {
+      link.addEventListener("click", () => menu.removeAttribute("open"));
+    });
+    menu.querySelector("[data-public-menu-backdrop]")?.addEventListener("click", () => menu.removeAttribute("open"));
+    menu.addEventListener("toggle", () => {
+      document.body.classList.toggle("overflow-hidden", menu.open);
+      menu.querySelector("summary")?.setAttribute("aria-expanded", menu.open ? "true" : "false");
+    });
+    menu.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      menu.removeAttribute("open");
+      menu.querySelector("summary")?.focus();
     });
   });
 
@@ -1814,6 +2017,9 @@ function bindActions(root = document) {
       try {
         const [action, id, value] = element.dataset.action.split(":");
         if (action === "closeModal") closeModal();
+        if (action === "closePublicMenu") {
+          element.closest("[data-public-menu]")?.removeAttribute("open");
+        }
         if (action === "like") await api(`/api/posts/${id}/like`, { method: "POST" });
         if (action === "followLearner") await api(`/api/learners/${id}/follow`, { method: "POST" });
       if (action === "openMobileMenu") {
@@ -1875,6 +2081,17 @@ function bindActions(root = document) {
       }
       if (action === "toggleVoiceVideoCamera") {
         toggleVoiceVideoCamera();
+      }
+      if (action === "toggleClassroomAudio") {
+        toggleVoiceVideoAudio();
+        syncClassroomControlLabels();
+      }
+      if (action === "toggleClassroomCamera") {
+        toggleVoiceVideoCamera();
+        syncClassroomControlLabels();
+      }
+      if (action === "moveClassroomSelfView") {
+        moveClassroomSelfView();
       }
       if (action === "moderateVoiceVideoParticipant") await moderateVoiceVideoParticipant(id, value);
       if (action === "openTeacherProfileModal") {
@@ -2344,6 +2561,7 @@ function setPublicShell() {
   if (mobileTopbar) mobileTopbar.className = "hidden";
   if (mobileMenuBackdrop) mobileMenuBackdrop.className = "hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden";
   mobileMenuOpen = false;
+  document.body.classList.remove("overflow-hidden");
   if (chatDrawer) chatDrawer.innerHTML = "";
   view.className = "min-h-screen";
 }
@@ -2403,8 +2621,12 @@ function render() {
   normalizeAppUrl();
   setAppShell();
   const route = activeRoute();
-  if (route === "communityConnect" || communityRoutes.has(route) || route === "voiceVideoRoom") topbar.className = "hidden";
-  if (route === "voiceVideoRoom" && mobileTopbar) mobileTopbar.className = "hidden";
+  if (route === "communityConnect" || communityRoutes.has(route) || route === "voiceVideoRoom" || route === "teacherClassroom") topbar.className = "hidden";
+  if ((route === "voiceVideoRoom" || route === "teacherClassroom") && mobileTopbar) mobileTopbar.className = "hidden";
+  if (route === "teacherClassroom") {
+    appShell.className = "min-h-screen";
+    sidebar.className = "hidden";
+  }
   const match = routes.find(([id]) => id === route) || routes[0];
   const learnerForTitle = route === "communityLearner"
     ? state.learners.find((learner) => learner.id === activeLearnerId()) || state.posts.find((post) => post.userId === activeLearnerId())
@@ -2454,6 +2676,7 @@ function render() {
     communityConnect: communityConnectView,
     voiceVideoRooms: voiceVideoRoomsView,
     voiceVideoRoom: voiceVideoRoomView,
+    teacherClassroom: classroomView,
     communityLearner: (ctx) => communityLearnerView({ ...ctx, activeLearnerId: activeLearnerId() }),
     communityPost: (ctx) => communityPostView({ ...ctx, activePostId: activePostId() }),
     findTeacher: findTeacherView,
@@ -2477,6 +2700,7 @@ function render() {
   };
 	  if (browseRoutes.has(route)) view.className = `${ui.page} ${ui.appView}`;
 	  if (route === "voiceVideoRoom") view.className = "min-h-screen bg-brand-cream";
+	  if (route === "teacherClassroom") view.className = "min-h-screen bg-black";
 	  view.innerHTML = canAccessRoute(route) ? (views[route] || dashboardView)(context()) : subscriptionLockedView(route);
 	  bindActions();
 	  renderChatDrawer();
@@ -2488,6 +2712,9 @@ function render() {
   } else if (route === "voiceVideoRoom") {
     syncVoiceVideoPolling(route);
     if (activeVoiceVideoSession) startVoiceVideoTimer();
+  } else if (route === "teacherClassroom") {
+    syncVoiceVideoPolling(route);
+    syncClassroomRoute();
   } else {
     syncVoiceVideoPolling(route);
   }
@@ -2524,6 +2751,9 @@ window.addEventListener("popstate", () => {
 });
 
 window.addEventListener("beforeunload", () => {
+  if (activeRoute() === "teacherClassroom" && classroomBookingId) {
+    navigator.sendBeacon?.(`/api/teacher-student/bookings/${encodeURIComponent(classroomBookingId)}/leave-classroom`, new Blob(["{}"], { type: "application/json" }));
+  }
   if (!activeVoiceVideoSession?.id) return;
   const body = JSON.stringify({ status: "disconnected" });
   const blob = new Blob([body], { type: "application/json" });

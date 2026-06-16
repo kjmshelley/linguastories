@@ -1038,7 +1038,31 @@ async function syncStripePayment(user, bookingId) {
   return { synced: true, bookingId, status: "confirmed", paymentStatus: "paid" };
 }
 
+async function completePastActiveClassrooms(userId) {
+  await query(
+    `update classroom_sessions cs
+        set status = 'ended',
+            ended_at = coalesce(cs.ended_at, now())
+       from lesson_bookings lb
+      where cs.lesson_booking_id = lb.id
+        and lb.status = 'active'
+        and lb.ends_at <= now()
+        and (lb.teacher_user_id = $1 or lb.student_user_id = $1)`,
+    [userId]
+  );
+  await query(
+    `update lesson_bookings
+        set status = 'completed',
+            updated_at = now()
+      where status = 'active'
+        and ends_at <= now()
+        and (teacher_user_id = $1 or student_user_id = $1)`,
+    [userId]
+  );
+}
+
 async function listLessons(user) {
+  await completePastActiveClassrooms(user.id);
   const result = await query(
     `select lb.id,
             lb.teacher_profile_id as "teacherProfileId",
@@ -1512,12 +1536,16 @@ async function classroomToken(user, bookingId) {
 
 async function leaveClassroom(user, bookingId) {
   const result = await query(
-    `select teacher_user_id as "teacherUserId" from lesson_bookings where id = $1 and (teacher_user_id = $2 or student_user_id = $2)`,
+    `select teacher_user_id as "teacherUserId",
+            ends_at as "endsAt"
+       from lesson_bookings
+      where id = $1
+        and (teacher_user_id = $2 or student_user_id = $2)`,
     [bookingId, user.id]
   );
   if (!result.rows[0]) throw serviceError("Classroom not found", 404);
   await query("update lesson_participants set left_at = now() where lesson_booking_id = $1 and user_id = $2", [bookingId, user.id]);
-  if (result.rows[0].teacherUserId === user.id) {
+  if (result.rows[0].teacherUserId === user.id && new Date(result.rows[0].endsAt).getTime() <= Date.now()) {
     await query("update classroom_sessions set status = 'ended', ended_at = coalesce(ended_at, now()) where lesson_booking_id = $1", [bookingId]);
     await query("update lesson_bookings set status = case when status = 'active' then 'completed' else status end, updated_at = now() where id = $1", [bookingId]);
   }

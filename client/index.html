@@ -50,7 +50,7 @@
   <body class="min-h-screen bg-brand-cream font-sans text-brand-ink antialiased">
     <div class="hidden bg-brand-red bg-brand-redDark bg-brand-snow bg-brand-mist bg-brand-cream bg-brand-line bg-brand-panel bg-brand-sidebar bg-brand-slate bg-brand-teal bg-brand-blue from-brand-blue from-brand-red from-brand-sidebar via-brand-amber via-brand-snow via-brand-slate to-brand-snow to-brand-panel text-brand-charcoal text-brand-graphite text-brand-muted border-brand-line hover:bg-brand-redDark hover:bg-brand-snow hover:border-brand-orange/60"></div>
     <div id="appShell" class="min-h-screen">
-      <aside id="sidebar" class="hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white">
+      <aside id="sidebar" class="hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white" aria-label="Main navigation">
         <div class="mb-4 flex items-center justify-between lg:hidden">
           <span class="text-xs font-bold uppercase tracking-[.16em] text-white/45">Menu</span>
           <button class="grid h-11 w-11 place-items-center rounded-lg bg-white/10 text-white transition hover:bg-white/15" data-action="closeMobileMenu" aria-label="Close menu">
@@ -80,7 +80,7 @@
           <span>Log out</span>
         </button>
       </aside>
-      <div id="mobileMenuBackdrop" class="hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" data-action="closeMobileMenu"></div>
+      <div id="mobileMenuBackdrop" class="hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" data-action="closeMobileMenu" aria-hidden="true"></div>
 
       <main class="min-w-0">
         <header id="mobileTopbar" class="hidden min-h-16 items-center justify-between gap-3 border-b border-brand-line bg-brand-panel/95 px-4 py-3 backdrop-blur lg:hidden">
@@ -123,7 +123,7 @@
 
     <template id="modalTemplate">
       <div class="fixed inset-0 z-50 grid place-items-center bg-brand-ink/70 p-4 backdrop-blur-sm">
-        <div class="relative max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-auto rounded-lg border border-brand-line bg-brand-panel shadow-2xl">
+        <div class="relative max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-auto rounded-lg border border-brand-line bg-brand-panel shadow-2xl" data-modal-panel role="dialog" aria-modal="true" tabindex="-1">
           <div class="p-4 sm:p-6" data-modal-body></div>
         </div>
       </div>

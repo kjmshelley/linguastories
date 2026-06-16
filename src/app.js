@@ -29,6 +29,7 @@ const frontendAppRoutes = [
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/edit\/?$/i,
   /^\/app\/learning\/teacher-profile\/[0-9a-f-]+\/book\/?$/i,
+  /^\/app\/learning\/classroom\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/my-lessons\/?$/,
   /^\/app\/learning\/my-teachers\/?$/,
   /^\/app\/learning\/learning-notes\/?$/,
