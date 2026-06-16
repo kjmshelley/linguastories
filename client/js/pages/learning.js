@@ -4,6 +4,9 @@ import { languageSkillLevelLabel, languageSkillLevelOptions } from "../levels.js
 
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const fallbackTimezones = ["America/Los_Angeles", "America/Denver", "America/Chicago", "America/New_York", "Europe/London", "Europe/Paris", "Asia/Taipei", "Asia/Tokyo", "Australia/Sydney"];
+const JOIN_EARLY_MINUTES = 5;
+const JOIN_LATE_MINUTES = 15;
+const CLASSROOM_READY_STATUSES = new Set(["confirmed", "rescheduled", "active"]);
 const countryCodes = [
   "AF", "AL", "DZ", "AD", "AO", "AG", "AR", "AM", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BT", "BO", "BA", "BW", "BR", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "CF", "TD", "CL", "CN", "CO", "KM", "CG", "CD", "CR", "CI", "HR", "CU", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FJ", "FI", "FR", "GA", "GM", "GE", "DE", "GH", "GR", "GD", "GT", "GN", "GW", "GY", "HT", "HN", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "MX", "FM", "MD", "MC", "MN", "ME", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NZ", "NI", "NE", "NG", "KP", "MK", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PL", "PT", "QA", "RO", "RU", "RW", "KN", "LC", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "KR", "SS", "ES", "LK", "SD", "SR", "SE", "CH", "SY", "TJ", "TZ", "TH", "TL", "TG", "TO", "TT", "TN", "TR", "TM", "TV", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "YE", "ZM", "ZW"
 ];
@@ -31,6 +34,33 @@ function money(value) {
 function dateTime(value) {
   if (!value) return "Not scheduled";
   return new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+}
+
+function dateTimeShort(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+}
+
+function classroomAvailability(lesson = {}) {
+  if (!CLASSROOM_READY_STATUSES.has(lesson.status) || lesson.paymentStatus !== "paid") return { available: false, label: "" };
+  const startsAt = new Date(lesson.startsAt).getTime();
+  const endsAt = new Date(lesson.endsAt).getTime();
+  if (!Number.isFinite(startsAt) || !Number.isFinite(endsAt)) return { available: false, label: "" };
+  const now = Date.now();
+  const opensAt = startsAt - JOIN_EARLY_MINUTES * 60 * 1000;
+  const closesAt = endsAt + JOIN_LATE_MINUTES * 60 * 1000;
+  if (now < opensAt) return { available: false, label: `Opens ${dateTimeShort(opensAt)}` };
+  if (now > closesAt) return { available: false, label: "Classroom closed" };
+  return { available: true, label: "" };
+}
+
+function classroomAction(lesson = {}, currentUserId = "", className = ui.secondary) {
+  const classroomLabel = currentUserId && lesson.teacherUserId === currentUserId ? "Start" : "Join";
+  const availability = classroomAvailability(lesson);
+  if (availability.available) {
+    return `<a class="${className}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></a>`;
+  }
+  return availability.label ? `<span class="${ui.tag}">${escapeHtml(availability.label)}</span>` : "";
 }
 
 function languageOptions(appConfig, selected = "") {
@@ -519,21 +549,24 @@ function lessonsTable(lessons = [], state) {
       <table class="responsive-card-table min-w-full text-left text-sm">
         <thead class="bg-brand-mist/60 text-xs uppercase text-brand-graphite"><tr><th class="px-4 py-3">Lesson</th><th class="px-4 py-3">When</th><th class="px-4 py-3">Status</th><th class="px-4 py-3">Payment</th><th class="px-4 py-3 text-right">Action</th></tr></thead>
         <tbody>
-          ${lessons.map((lesson) => `
-            <tr class="border-t border-brand-line/70">
-              <td class="px-4 py-3" data-label="Lesson"><strong class="text-brand-ink">${escapeHtml(lesson.title)}</strong><span class="mt-1 block text-xs text-brand-graphite">${escapeHtml(lesson.teacherName || lesson.studentName || "")}</span></td>
-              <td class="px-4 py-3 text-brand-charcoal" data-label="When">${dateTime(lesson.startsAt)}</td>
-              <td class="px-4 py-3" data-label="Status"><span class="${ui.tag}">${escapeHtml(lesson.status)}</span></td>
-              <td class="px-4 py-3" data-label="Payment"><span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus)} · ${money(lesson.totalStudentChargeUsd)}</span></td>
-              <td class="px-4 py-3 text-right" data-label="Action">
-                <div class="flex justify-end gap-2">
-                  <a class="${ui.secondary}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></a>
-                  ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrowRight", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
-                  ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
-                </div>
-              </td>
-            </tr>
-          `).join("")}
+          ${lessons.map((lesson) => {
+            const classroom = classroomAction(lesson, state.user.id);
+            return `
+              <tr class="border-t border-brand-line/70">
+                <td class="px-4 py-3" data-label="Lesson"><strong class="text-brand-ink">${escapeHtml(lesson.title)}</strong><span class="mt-1 block text-xs text-brand-graphite">${escapeHtml(lesson.teacherName || lesson.studentName || "")}</span></td>
+                <td class="px-4 py-3 text-brand-charcoal" data-label="When">${dateTime(lesson.startsAt)}</td>
+                <td class="px-4 py-3" data-label="Status"><span class="${ui.tag}">${escapeHtml(lesson.status)}</span></td>
+                <td class="px-4 py-3" data-label="Payment"><span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus)} · ${money(lesson.totalStudentChargeUsd)}</span></td>
+                <td class="px-4 py-3 text-right" data-label="Action">
+                  <div class="flex flex-wrap justify-end gap-2">
+                    ${classroom}
+                    ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrowRight", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
+                    ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join("")}
         </tbody>
       </table>
     </div>
@@ -583,7 +616,12 @@ function calendarLessons(lessons = []) {
     .sort((a, b) => new Date(a.startsAt) - new Date(b.startsAt));
 }
 
-function myTeachersPanel(teacherStudentData = {}) {
+function teacherProfileName(teacher = {}, appPath) {
+  if (!teacher.teacherProfileId || typeof appPath !== "function") return `<h3 class="font-bold text-brand-ink">${escapeHtml(teacher.teacherName)}</h3>`;
+  return `<a class="font-bold text-brand-ink no-underline hover:text-brand-redDark" href="${escapeHtml(appPath("teacherProfileDetail", { teacherProfileId: teacher.teacherProfileId }))}" data-app-link>${escapeHtml(teacher.teacherName)}</a>`;
+}
+
+function myTeachersPanel(teacherStudentData = {}, appPath) {
   const teachers = teacherStudentData.myTeachers || [];
   return `
     <div class="grid gap-3">
@@ -591,7 +629,7 @@ function myTeachersPanel(teacherStudentData = {}) {
         <article class="flex flex-col gap-4 rounded-lg border border-brand-line/70 bg-white/60 p-4 sm:flex-row sm:items-center">
           ${profileImage(teacher, "h-14 w-14")}
           <div class="min-w-0 flex-1">
-            <h3 class="font-bold text-brand-ink">${escapeHtml(teacher.teacherName)}</h3>
+            ${teacherProfileName(teacher, appPath)}
             <p class="text-sm text-brand-graphite">${Number(teacher.totalLessons || 0)} lessons · last lesson ${teacher.lastLessonAt ? dateTime(teacher.lastLessonAt) : "not yet"}</p>
           </div>
         </article>
@@ -643,7 +681,7 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
                     <span class="block text-xs font-black uppercase text-brand-redDark">${escapeHtml(new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(new Date(lesson.startsAt)))}</span>
                     <strong class="mt-1 block text-sm leading-5 text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</strong>
                     <span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(lesson.teacherUserId === state.user.id ? lesson.studentName || "Student" : lesson.teacherName || "Teacher")} · ${escapeHtml(lesson.status || "scheduled")}</span>
-                    <a class="${ui.secondary} mt-3 w-full justify-center" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${lesson.teacherUserId === state.user.id ? "Start" : "Join"}</span></a>
+                    <div class="mt-3">${classroomAction(lesson, state.user.id, `${ui.secondary} w-full justify-center`)}</div>
                   </div>
                 `).join("") : `<p class="rounded-lg border border-dashed border-brand-line bg-brand-snow p-3 text-xs font-semibold leading-5 text-brand-graphite">No classes scheduled.</p>`}
               </div>
@@ -655,7 +693,7 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
   `;
 }
 
-export function myLearningView({ teacherStudentData = {}, state, myLearningTab = "lessons", myLearningWeekStart = "" }) {
+export function myLearningView({ teacherStudentData = {}, state, appPath, myLearningTab = "lessons", myLearningWeekStart = "" }) {
   const activeTab = ["lessons", "teachers", "calendar"].includes(myLearningTab) ? myLearningTab : "lessons";
   const tabs = [
     ["lessons", "My Booked Lessons"],
@@ -664,7 +702,7 @@ export function myLearningView({ teacherStudentData = {}, state, myLearningTab =
   ];
   const panels = {
     lessons: `<div>${lessonsTable(teacherStudentData.lessons || [], state)}</div>`,
-    teachers: myTeachersPanel(teacherStudentData),
+    teachers: myTeachersPanel(teacherStudentData, appPath),
     calendar: myCalendarPanel({ teacherStudentData, myLearningWeekStart, state })
   };
   return `
@@ -689,9 +727,9 @@ export function myLessonsView({ teacherStudentData = {}, state }) {
   return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Lessons</h2><div class="mt-5">${lessonsTable(teacherStudentData.lessons || [], state)}</div></section></div>`;
 }
 
-export function myTeachersView({ teacherStudentData = {} }) {
+export function myTeachersView({ teacherStudentData = {}, appPath }) {
   const teachers = teacherStudentData.myTeachers || [];
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Booked Teachers</h2><div class="mt-5 grid gap-3">${teachers.length ? teachers.map((teacher) => `<article class="flex flex-col gap-4 rounded-lg border border-brand-line/70 bg-white/60 p-4 sm:flex-row sm:items-center">${profileImage(teacher, "h-14 w-14")}<div class="min-w-0"><h3 class="font-bold text-brand-ink">${escapeHtml(teacher.teacherName)}</h3><p class="text-sm text-brand-graphite">${Number(teacher.totalLessons || 0)} lessons · last lesson ${teacher.lastLessonAt ? dateTime(teacher.lastLessonAt) : "not yet"}</p></div></article>`).join("") : emptyState("No teachers yet", "Teachers appear after confirmed lessons.")}</div></section></div>`;
+  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Booked Teachers</h2><div class="mt-5 grid gap-3">${teachers.length ? teachers.map((teacher) => `<article class="flex flex-col gap-4 rounded-lg border border-brand-line/70 bg-white/60 p-4 sm:flex-row sm:items-center">${profileImage(teacher, "h-14 w-14")}<div class="min-w-0">${teacherProfileName(teacher, appPath)}<p class="text-sm text-brand-graphite">${Number(teacher.totalLessons || 0)} lessons · last lesson ${teacher.lastLessonAt ? dateTime(teacher.lastLessonAt) : "not yet"}</p></div></article>`).join("") : emptyState("No teachers yet", "Teachers appear after confirmed lessons.")}</div></section></div>`;
 }
 
 export function learningNotesView({ teacherStudentData = {} }) {
@@ -706,15 +744,18 @@ export function teacherDashboardView({ appConfig, appPath, state, teacherStudent
   const canUseTeacherWorkspace = Boolean(state?.subscription?.capabilities?.teacherWorkspace || state?.user?.subscription?.capabilities?.teacherWorkspace);
   const stats = teacherStudentData.dashboard?.stats || {};
   const lessons = teacherWorkspaceBookings(teacherStudentData);
+  const profiles = teacherStudentData.profiles || [];
   if (!canUseTeacherWorkspace) {
     return `
       <div class="grid gap-5">
         ${teacherProfilesPanel({ appPath, teacherStudentData })}
-        <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-          <span class="${ui.tag}">Awaiting approval</span>
-          <h2 class="mt-3 text-2xl font-bold text-brand-ink">Workspace tools unlock after approval</h2>
-          <p class="mt-2 ${ui.muted}">Create and manage your teacher profile here. Once a profile is approved, scheduling, bookings, students, and lesson tools appear in Teacher Workspace.</p>
-        </section>
+        ${profiles.length ? `
+          <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+            <span class="${ui.tag}">Awaiting approval</span>
+            <h2 class="mt-3 text-2xl font-bold text-brand-ink">Workspace tools unlock after approval</h2>
+            <p class="mt-2 ${ui.muted}">Once a teacher profile is approved, scheduling, bookings, students, and lesson tools appear in Teacher Workspace.</p>
+          </section>
+        ` : ""}
       </div>
     `;
   }
@@ -835,10 +876,10 @@ function bookingPaymentBadge(lesson) {
 }
 
 function bookingActions(lesson, currentUserId = "") {
-  const classroomLabel = currentUserId && lesson.teacherUserId === currentUserId ? "Start" : "Join";
+  const classroom = classroomAction(lesson, currentUserId);
   return `
     <div class="flex flex-wrap justify-end gap-2">
-      <a class="${ui.secondary}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></a>
+      ${classroom}
       ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
     </div>
   `;

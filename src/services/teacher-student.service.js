@@ -16,11 +16,54 @@ const JOIN_LATE_MINUTES = 15;
 const ACTIVE_BOOKING_STATUSES = new Set(["pending_payment", "confirmed", "pending_teacher_approval", "reschedule_requested", "rescheduled", "active"]);
 const CANCELLED_BOOKING_STATUSES = new Set(["cancelled_by_student", "cancelled_by_teacher", "canceled"]);
 const WEEKDAY_LABELS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const LOCALHOST_NAMES = new Set(["localhost", "127.0.0.1", "::1"]);
 
 function serviceError(message, status = 400) {
   const error = new Error(message);
   error.status = status;
   return error;
+}
+
+function isProductionRuntime() {
+  return process.env.NODE_ENV === "production" || process.env.APP_ENV === "PROD";
+}
+
+function stripeReturnBaseUrl() {
+  const configured = [
+    process.env.APP_BASE_URL,
+    process.env.FRONTEND_ORIGIN,
+    process.env.APP_URL,
+    process.env.PUBLIC_APP_URL,
+    process.env.RENDER_EXTERNAL_URL
+  ]
+    .map((value) => String(value || "").trim())
+    .find(Boolean);
+
+  if (!configured) {
+    if (isProductionRuntime()) {
+      throw serviceError("APP_BASE_URL must be configured before Stripe Checkout can be used in production", 500);
+    }
+    return "http://localhost:3000";
+  }
+
+  let url;
+  try {
+    url = new URL(configured);
+  } catch (_error) {
+    throw serviceError("APP_BASE_URL must be a valid absolute URL before Stripe Checkout can be used", 500);
+  }
+
+  if (isProductionRuntime()) {
+    if (LOCALHOST_NAMES.has(url.hostname)) {
+      throw serviceError("APP_BASE_URL cannot point to localhost when Stripe Checkout is used in production", 500);
+    }
+    if (url.protocol !== "https:") {
+      throw serviceError("APP_BASE_URL must use HTTPS when Stripe Checkout is used in production", 500);
+    }
+  }
+
+  const path = url.pathname === "/" ? "" : url.pathname.replace(/\/+$/, "");
+  return `${url.origin}${path}`;
 }
 
 function text(value, { fallback = "", max = 255, required = false, min = 0 } = {}) {
@@ -905,7 +948,7 @@ async function createBooking(user, payload) {
 
 async function createStripeCheckoutSession(user, booking) {
   if (!process.env.STRIPE_SECRET_KEY) return { configured: false, checkoutUrl: "" };
-  const baseUrl = String(process.env.FRONTEND_ORIGIN || process.env.APP_URL || "http://localhost:3000").replace(/\/+$/, "");
+  const baseUrl = stripeReturnBaseUrl();
   const form = new URLSearchParams();
   form.set("mode", "payment");
   form.set("customer_email", user.email);
