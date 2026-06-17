@@ -16,6 +16,7 @@ import {
   teacherProfileDetailView,
   teacherProfileEditView,
   teacherResourcesView,
+  teacherStudentDetailView,
   teacherStudentsView,
   teacherTemplatesView
 } from "./pages/learning.js";
@@ -27,23 +28,31 @@ import { gsap } from "../vendor/gsap/gsap.esm.js";
 
 const routeGroups = [
   {
-    title: "All users",
+    title: "",
     routes: [
-      ["dashboard", "Dashboard"],
-      ["findTeacher", "Find a Teacher"],
-      ["myLessons", "My Lessons"],
-      ["voiceVideoRooms", "Practice"],
-      ["communityConnect", "Community"],
-      ["profileInfo", "My Account"]
+      ["dashboard", "Home"],
+      ["findTeacher", "Find a Teacher"]
+    ]
+  },
+  {
+    title: "Community",
+    routes: [
+      ["communityConnect", "Connections"],
+      ["voiceVideoRooms", "Video/Voice Practice"]
     ]
   },
   {
     title: "For teachers",
     routes: [
       ["teacherDashboard", "Teacher Workspace"],
-      ["teacherAvailability", "Schedule"],
-      ["teacherStudents", "Students"],
-      ["teacherLessonNotes", "Lessons"]
+      ["teacherAvailability", "My Availablity"],
+      ["teacherStudents", "My Students"]
+    ]
+  },
+  {
+    title: "",
+    routes: [
+      ["teacherProfileCreate", "How do I become a teacher?"]
     ]
   }
 ];
@@ -66,9 +75,11 @@ const hiddenRoutes = [
   ["myLessons", "My Lessons"],
   ["myTeachers", "My Booked Teachers"],
   ["learningNotes", "Learning Notes"],
-  ["teacherAvailability", "Availability"],
+  ["profileInfo", "My Account"],
+  ["teacherAvailability", "My Open Time Slots"],
   ["teacherBookings", "Unavailable Blocks"],
   ["teacherStudents", "My Students"],
+  ["teacherStudentDetail", "Student Profile"],
   ["teacherLessonNotes", "Lesson Notes"],
   ["teacherResources", "Resources"],
   ["teacherTemplates", "Lesson Templates"],
@@ -95,6 +106,7 @@ const routeSlugs = {
   teacherAvailability: "learning/availability",
   teacherBookings: "learning/unavailable-blocks",
   teacherStudents: "learning/students",
+  teacherStudentDetail: "learning/students",
   teacherLessonNotes: "learning/lesson-notes",
   teacherResources: "learning/resources",
   teacherTemplates: "learning/templates",
@@ -103,7 +115,7 @@ const routeSlugs = {
 };
 const browseRoutes = new Set([]);
 const communityRoutes = new Set(["communityLearner", "communityPost"]);
-const teacherStudentRoutes = new Set(["findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
+const teacherStudentRoutes = new Set(["dashboard", "findTeacher", "teacherProfileDetail", "teacherProfileCreate", "teacherProfileEdit", "bookLesson", "myLessons", "myTeachers", "learningNotes", "profileInfo", "profileSubscriptions", "teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherStudentDetail", "teacherLessonNotes", "teacherResources", "teacherTemplates"]);
 
 let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
@@ -184,6 +196,7 @@ function activeRoute() {
   if (slug.startsWith("community/posts/")) return "communityPost";
   if (slug.startsWith("community/voice-video-rooms/")) return "voiceVideoRoom";
   if (slug.startsWith("learning/classroom/")) return "teacherClassroom";
+  if (/^learning\/students\/[^/]+$/.test(slug)) return "teacherStudentDetail";
   if (slug === "learning/teacher-profile/new") {
     return "teacherProfileCreate";
   }
@@ -203,8 +216,10 @@ function activeNavRoute() {
   if (route === "teacherProfileDetail" || route === "bookLesson") return "findTeacher";
   if (["myTeachers", "learningNotes"].includes(route)) return "myLessons";
   if (route === "profileSubscriptions") return "profileInfo";
+  if (route === "teacherProfileCreate" && !hasTeacherProfile()) return "teacherProfileCreate";
   if (["teacherProfileCreate", "teacherProfileEdit"].includes(route)) return "teacherDashboard";
-  if (["teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
+  if (route === "teacherStudentDetail") return "teacherStudents";
+  if (["teacherBookings", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(route)) return "teacherDashboard";
   return route;
 }
 
@@ -228,6 +243,11 @@ function activeClassroomBookingId() {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
+function activeStudentId() {
+  const match = location.pathname.match(/^\/app\/learning\/students\/([0-9a-f-]+)\/?$/i);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
 function activeTeacherProfileId() {
   const match = location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)(?:\/book)?\/?$/i)
     || location.pathname.match(/^\/app\/learning\/teacher-profile\/([0-9a-f-]+)\/edit\/?$/i);
@@ -239,6 +259,7 @@ function appPath(id, params = {}) {
   if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
   if (id === "teacherClassroom") return `/app/learning/classroom/${encodeURIComponent(params.bookingId || "")}`;
+  if (id === "teacherStudentDetail") return `/app/learning/students/${encodeURIComponent(params.studentId || "")}`;
   if (id === "teacherProfileDetail") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}`;
   if (id === "teacherProfileEdit") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/edit`;
   if (id === "bookLesson") return `/app/learning/teacher-profile/${encodeURIComponent(params.teacherProfileId || "")}/book`;
@@ -273,6 +294,8 @@ function normalizeAppUrl() {
           ? appPath(route, { postId: activePostId() })
         : route === "voiceVideoRoom"
             ? appPath(route, { roomId: activeVoiceVideoRoomId() || activeVoiceVideoRoom?.id })
+          : route === "teacherStudentDetail"
+            ? appPath(route, { studentId: activeStudentId() })
           : route === "teacherClassroom"
             ? appPath(route, { bookingId: activeClassroomBookingId() || classroomBookingId })
           : route === "teacherProfileDetail"
@@ -313,7 +336,8 @@ function context() {
     myLearningTab,
     myLearningWeekStart,
     teacherCalendarFilters,
-    activeTeacherProfileId: activeTeacherProfileId()
+    activeTeacherProfileId: activeTeacherProfileId(),
+    activeStudentId: activeStudentId()
   };
 }
 
@@ -321,11 +345,18 @@ function subscriptionCapabilities() {
   return state?.subscription?.capabilities || state?.user?.subscription?.capabilities || {};
 }
 
+function hasTeacherProfile() {
+  if (Array.isArray(teacherStudentData.profiles) && teacherStudentData.profiles.length > 0) return true;
+  if (typeof state?.user?.hasTeacherProfile === "boolean") return state.user.hasTeacherProfile;
+  if (state?.user?.hasActiveTeacherProfile) return true;
+  return false;
+}
+
 function canAccessRoute(id) {
   const capabilities = subscriptionCapabilities();
   if (["teacherProfileCreate", "teacherProfileEdit"].includes(id)) return true;
   if (id === "teacherDashboard") return true;
-  if (["teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
+  if (["teacherDashboard", "teacherAvailability", "teacherBookings", "teacherStudents", "teacherStudentDetail", "teacherLessonNotes", "teacherResources", "teacherTemplates"].includes(id)) {
     return Boolean(capabilities.teacherWorkspace);
   }
   return true;
@@ -377,16 +408,19 @@ function classroomView() {
 function renderNav() {
   const activeNav = activeNavRoute();
   const capabilities = subscriptionCapabilities();
+  const userHasTeacherProfile = hasTeacherProfile();
   nav.innerHTML = routeGroups
     .map((group) => {
       const visibleRoutes = group.routes.filter(([id]) => {
+        if (id === "teacherProfileCreate") return !userHasTeacherProfile;
+        if (group.title === "For teachers" && !userHasTeacherProfile) return false;
         if (group.title === "For teachers" && !capabilities.teacherWorkspace) return id === "teacherDashboard";
         return canAccessRoute(id);
       });
       if (!visibleRoutes.length) return "";
       return `
         <section class="grid gap-1.5">
-          <div class="px-2 text-[11px] font-semibold uppercase text-white/38">${group.title}</div>
+          ${group.title ? `<div class="px-2 text-[11px] font-semibold uppercase text-white/38">${group.title}</div>` : ""}
           ${visibleRoutes
             .map(([id, label]) => {
               const active =
@@ -619,7 +653,8 @@ async function livekitApi(path, options = {}) {
 }
 
 async function teacherStudentApi(path, options = {}) {
-  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
+  const { quiet = false, ...fetchOptions } = options;
+  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...fetchOptions });
   if (response.status === 401) {
     state = null;
     navigatePublic("/login");
@@ -627,7 +662,7 @@ async function teacherStudentApi(path, options = {}) {
   }
   const body = await response.json().catch(() => ({ error: "Request failed" }));
   if (!response.ok) {
-    showModal(`<h2 class="text-xl font-black">Learning action unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
+    if (!quiet) showModal(`<h2 class="text-xl font-black">Learning action unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
     return null;
   }
   return body;
@@ -710,22 +745,25 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   const capabilities = subscriptionCapabilities();
   const canUseTeacherWorkspace = Boolean(capabilities.teacherWorkspace);
   const profileId = activeTeacherProfileId();
+  const studentId = activeStudentId();
   const bookingQuery = new URLSearchParams({
     lessonType: bookingSelection.lessonType || "one_on_one",
     durationMinutes: bookingSelection.durationMinutes || "",
     studentTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Local"
   }).toString();
   const calendarQuery = new URLSearchParams(teacherCalendarFilters);
-  const key = `${route}:${profileId}:${teacherStudentQuery()}:${bookingQuery}:${calendarQuery}`;
+  const key = `${route}:${profileId}:${studentId}:${teacherStudentQuery()}:${bookingQuery}:${calendarQuery}`;
   if (!force && teacherStudentLoadedKeys.has(key)) return;
   const requests = [];
   if (route === "findTeacher") requests.push(["teachers", `/api/teacher-student/teachers${teacherStudentQuery()}`]);
   if (route === "teacherProfileDetail" && profileId) requests.push(["profileDetail", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}`]);
   if (route === "bookLesson" && profileId) requests.push(["bookingPage", `/api/teacher-student/teacher-profiles/${encodeURIComponent(profileId)}/booking-page?${bookingQuery}`]);
   if (["teacherProfileCreate", "teacherProfileEdit", "teacherAvailability", "teacherDashboard", "teacherTemplates"].includes(route)) requests.push(["profiles", "/api/teacher-student/teacher-profiles/my"]);
-  if (["myLessons"].includes(route) || (route === "teacherDashboard" && canUseTeacherWorkspace)) requests.push(["lessons", "/api/teacher-student/lessons"]);
+  if (["dashboard", "myLessons"].includes(route) || (route === "teacherDashboard" && canUseTeacherWorkspace)) requests.push(["lessons", "/api/teacher-student/lessons"]);
   if (route === "teacherBookings") requests.push(["calendar", `/api/teacher-student/calendar?${calendarQuery}`]);
-  if (route === "myLessons" || route === "myTeachers") requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
+  if (route === "teacherStudents") requests.push(["students", "/api/teacher-student/students"]);
+  if (route === "teacherStudentDetail" && studentId) requests.push(["studentDetail", `/api/teacher-student/students/${encodeURIComponent(studentId)}`]);
+  if (["dashboard", "myLessons", "myTeachers"].includes(route)) requests.push(["myTeachers", "/api/teacher-student/my-teachers"]);
   if (["learningNotes", "teacherLessonNotes"].includes(route)) requests.push(["notes", "/api/teacher-student/notes"]);
   if (route === "teacherAvailability") requests.push(["availability", "/api/teacher-student/availability"]);
   if (route === "teacherDashboard" && canUseTeacherWorkspace) requests.push(["dashboard", "/api/teacher-student/dashboard"]);
@@ -733,7 +771,7 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
   if (route === "teacherTemplates") requests.push(["templates", "/api/teacher-student/templates"]);
   if (route === "profileInfo" || route === "profileSubscriptions") requests.push(["subscription", "/api/teacher-student/subscription"]);
   if (!requests.length) return;
-  const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path)]));
+  const loaded = await Promise.all(requests.map(async ([name, path]) => [name, await teacherStudentApi(path, { quiet: route === "dashboard" })]));
   loaded.forEach(([name, body]) => {
     if (!body) return;
     if (name === "teachers") teacherStudentData = { ...teacherStudentData, teachers: body.teachers || [], filterOptions: body.filterOptions || {} };
@@ -753,6 +791,8 @@ async function loadTeacherStudentData(route = activeRoute(), { force = false } =
     if (name === "profiles") teacherStudentData = { ...teacherStudentData, profiles: body.profiles || [], subscription: body.subscription || teacherStudentData.subscription };
     if (name === "lessons") teacherStudentData.lessons = body.lessons || [];
     if (name === "myTeachers") teacherStudentData.myTeachers = body.teachers || [];
+    if (name === "students") teacherStudentData.students = body.students || [];
+    if (name === "studentDetail") teacherStudentData.studentDetail = body;
     if (name === "notes") teacherStudentData.notes = body.notes || [];
     if (name === "availability") teacherStudentData.availability = body.availability || [];
     if (name === "dashboard") teacherStudentData.dashboard = body;
@@ -778,6 +818,19 @@ async function syncStripeReturnPayment(route = activeRoute()) {
   const queryString = params.toString();
   history.replaceState({}, "", `${location.pathname}${queryString ? `?${queryString}` : ""}`);
   await loadTeacherStudentData("myLessons", { force: true });
+}
+
+async function syncTeacherPayoutReturn(route = activeRoute()) {
+  if (route !== "teacherDashboard") return;
+  const params = new URLSearchParams(window.location.search);
+  if (!["return", "refresh"].includes(params.get("payout"))) return;
+  const payload = await teacherStudentApi("/api/teacher-student/payout-account/sync", { method: "POST" });
+  if (!payload) return;
+  teacherStudentLoadedKeys = new Set();
+  params.delete("payout");
+  const queryString = params.toString();
+  history.replaceState({}, "", `${location.pathname}${queryString ? `?${queryString}` : ""}`);
+  await loadTeacherStudentData("teacherDashboard", { force: true });
 }
 
 function voiceVideoRoomQuery() {
@@ -2138,11 +2191,40 @@ function bindActions(root = document) {
         teacherWorkspaceShowCompletedPaid = !teacherWorkspaceShowCompletedPaid;
         render();
       }
+      if (action === "startTeacherPayoutOnboarding") {
+        const response = await fetch("/api/teacher-student/payout-account/onboarding-link", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        if (response.status === 401) {
+          state = null;
+          navigatePublic("/login");
+          return;
+        }
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          showModal(`<h2 class="text-xl font-black">Payout setup unavailable</h2><p class="${ui.muted}">Payout setup could not be started. Please try again or contact support.</p>`);
+          return;
+        }
+        if (payload?.onboardingUrl) {
+          window.location.href = payload.onboardingUrl;
+          return;
+        }
+        showModal(`<h2 class="text-xl font-black">Payout setup unavailable</h2><p class="${ui.muted}">Payout setup could not be started. Please try again or contact support.</p>`);
+      }
+      if (action === "syncTeacherPayoutAccount") {
+        const payload = await teacherStudentApi("/api/teacher-student/payout-account/sync", { method: "POST" });
+        if (!payload) return;
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData("teacherDashboard", { force: true });
+        render();
+      }
       if (action === "openTeacherBookingRulesModal") showModal(teacherBookingRulesModal(context()));
       if (action === "setMyLearningTab") {
         myLearningTab = ["lessons", "teachers", "calendar"].includes(id) ? id : "lessons";
-        if (activeRoute() !== "myLessons") history.pushState({}, "", appPath("myLessons"));
-        await loadTeacherStudentData("myLessons", { force: true });
+        const route = activeRoute() === "dashboard" ? "dashboard" : "myLessons";
+        if (!["dashboard", "myLessons"].includes(activeRoute())) history.pushState({}, "", appPath("myLessons"));
+        await loadTeacherStudentData(route, { force: true });
         render();
       }
       if (action === "shiftMyLearningWeek") {
@@ -2150,8 +2232,9 @@ function bindActions(root = document) {
         if (id === "today") myLearningWeekStart = weekStartKey();
         else myLearningWeekStart = shiftDateKey(currentStart, id === "next" ? 7 : -7);
         myLearningTab = "calendar";
-        if (activeRoute() !== "myLessons") history.pushState({}, "", appPath("myLessons"));
-        await loadTeacherStudentData("myLessons", { force: true });
+        const route = activeRoute() === "dashboard" ? "dashboard" : "myLessons";
+        if (!["dashboard", "myLessons"].includes(activeRoute())) history.pushState({}, "", appPath("myLessons"));
+        await loadTeacherStudentData(route, { force: true });
         render();
       }
       if (action === "selectBookingSlot") {
@@ -2177,7 +2260,14 @@ function bindActions(root = document) {
           return;
         }
         teacherStudentLoadedKeys = new Set();
-        showModal(`<h2 class="text-xl font-black">Booking created</h2><p class="${ui.muted}">Stripe checkout is not configured yet, so this lesson is holding as pending payment for 15 minutes.</p>`);
+        showModal(`<h2 class="text-xl font-black">Booking requested</h2><p class="${ui.muted}">The lesson is ready for the teacher to confirm.</p>`);
+      }
+      if (action === "confirmLesson") {
+        const payload = await teacherStudentApi(`/api/teacher-student/bookings/${id}/confirm`, { method: "POST" });
+        if (!payload) return;
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+        showModal(`<h2 class="text-xl font-black">Booking confirmed</h2><p class="${ui.muted}">The classroom will be available at the scheduled time.</p>`);
       }
       if (action === "syncLessonPayment") {
         const payload = await teacherStudentApi(`/api/teacher-student/bookings/${id}/sync-payment`, { method: "POST" });
@@ -2498,6 +2588,12 @@ function bindActions(root = document) {
         teacherStudentLoadedKeys = new Set();
         await loadTeacherStudentData(activeRoute(), { force: true });
       }
+      if (form.dataset.form === "teacherLessonNote") {
+        await teacherStudentApi("/api/teacher-student/notes", { method: "POST", body: JSON.stringify(data) });
+        form.reset();
+        teacherStudentLoadedKeys = new Set();
+        await loadTeacherStudentData(activeRoute(), { force: true });
+      }
       if (form.dataset.form === "teacherResource") {
         await teacherStudentApi("/api/teacher-student/resources", { method: "POST", body: JSON.stringify(data) });
         teacherStudentLoadedKeys = new Set();
@@ -2691,6 +2787,7 @@ function render() {
     teacherAvailability: teacherAvailabilityView,
     teacherBookings: teacherBookingsView,
     teacherStudents: teacherStudentsView,
+    teacherStudentDetail: teacherStudentDetailView,
     teacherLessonNotes: teacherLessonNotesView,
     teacherResources: teacherResourcesView,
     teacherTemplates: teacherTemplatesView,
@@ -2721,6 +2818,7 @@ function render() {
 	  if (canAccessRoute(route) && teacherStudentRoutes.has(route)) {
 	    loadTeacherStudentData(route);
 	    syncStripeReturnPayment(route);
+	    syncTeacherPayoutReturn(route);
   }
   if (canAccessRoute(route) && route === "profileSubscriptions") loadAccountBillingData();
   scrollToPageTopOnRouteChange();

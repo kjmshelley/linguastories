@@ -65,6 +65,9 @@ router.post("/teacher-profiles/:id/reviews", validateBody({
 }), asyncHandler(controller.createReview));
 
 router.get("/dashboard", asyncHandler(controller.teacherDashboard));
+router.post("/payout-account", asyncHandler(controller.createTeacherPayoutAccount));
+router.post("/payout-account/onboarding-link", asyncHandler(controller.createTeacherPayoutOnboardingLink));
+router.post("/payout-account/sync", asyncHandler(controller.syncTeacherPayoutAccount));
 router.get("/calendar", asyncHandler(controller.teacherCalendar));
 router.post("/calendar/blocks", validateBody({
   teacherProfileId: { type: "uuid", required: true, label: "Teacher profile" },
@@ -106,6 +109,9 @@ router.post("/bookings", validateBody({
 }), asyncHandler(controller.createBooking));
 router.get("/lessons", asyncHandler(controller.listLessons));
 router.get("/my-teachers", asyncHandler(controller.listMyTeachers));
+router.get("/students", asyncHandler(controller.listStudents));
+router.get("/students/:id", asyncHandler(controller.getStudent));
+router.post("/bookings/:id/confirm", asyncHandler(controller.confirmBooking));
 router.post("/bookings/:id/sync-payment", asyncHandler(controller.syncStripePayment));
 router.post("/bookings/:id/cancel", validateBody({
   reason: { type: "string", max: 500, label: "Reason" }

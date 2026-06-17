@@ -13,6 +13,7 @@ declare
     'account_events',
     'user_accounts',
     'teacher_payouts',
+    'teacher_payout_accounts',
     'teacher_reviews',
     'lesson_template_resources',
     'lesson_templates',

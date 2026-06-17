@@ -656,6 +656,22 @@ create table if not exists lesson_bookings (
   check (ends_at > starts_at)
 );
 
+create table if not exists teacher_payout_accounts (
+  id uuid primary key default gen_random_uuid(),
+  teacher_user_id uuid not null unique references users(id) on delete cascade,
+  stripe_account_id text unique,
+  onboarding_complete boolean not null default false,
+  charges_enabled boolean not null default false,
+  payouts_enabled boolean not null default false,
+  requirements_due text[] not null default '{}',
+  disabled_reason text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create index if not exists idx_teacher_payout_accounts_teacher_user_id
+  on teacher_payout_accounts(teacher_user_id);
+
 alter table if exists lesson_bookings
   drop constraint if exists lesson_bookings_status_check;
 

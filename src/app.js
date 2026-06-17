@@ -37,6 +37,7 @@ const frontendAppRoutes = [
   /^\/app\/learning\/availability\/?$/,
   /^\/app\/learning\/unavailable-blocks\/?$/,
   /^\/app\/learning\/students\/?$/,
+  /^\/app\/learning\/students\/[0-9a-f-]+\/?$/i,
   /^\/app\/learning\/lesson-notes\/?$/,
   /^\/app\/learning\/resources\/?$/,
   /^\/app\/learning\/templates\/?$/,
@@ -50,6 +51,7 @@ app.use(securityHeaders);
 app.use(cors);
 app.post("/api/account/stripe/webhook", express.raw({ type: "application/json" }), asyncHandler(accountController.stripeWebhook));
 app.post("/api/teacher-student/stripe/webhook", express.raw({ type: "application/json" }), asyncHandler(teacherStudentController.stripeWebhook));
+app.post("/api/teacher-student/stripe/connect-webhook", express.raw({ type: "application/json" }), asyncHandler(teacherStudentController.stripeConnectWebhook));
 app.use(express.json({ limit: "12mb" }));
 app.use(rejectPrototypePollution);
 app.use(rejectInvalidContentType);

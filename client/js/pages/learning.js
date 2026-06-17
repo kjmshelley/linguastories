@@ -7,6 +7,7 @@ const fallbackTimezones = ["America/Los_Angeles", "America/Denver", "America/Chi
 const JOIN_EARLY_MINUTES = 5;
 const JOIN_LATE_MINUTES = 15;
 const CLASSROOM_READY_STATUSES = new Set(["confirmed", "rescheduled", "active"]);
+const PAYOUT_SETUP_DISABLED = true;
 const countryCodes = [
   "AF", "AL", "DZ", "AD", "AO", "AG", "AR", "AM", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BT", "BO", "BA", "BW", "BR", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "CF", "TD", "CL", "CN", "CO", "KM", "CG", "CD", "CR", "CI", "HR", "CU", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FJ", "FI", "FR", "GA", "GM", "GE", "DE", "GH", "GR", "GD", "GT", "GN", "GW", "GY", "HT", "HN", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "MX", "FM", "MD", "MC", "MN", "ME", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NZ", "NI", "NE", "NG", "KP", "MK", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PL", "PT", "QA", "RO", "RU", "RW", "KN", "LC", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "KR", "SS", "ES", "LK", "SD", "SR", "SE", "CH", "SY", "TJ", "TZ", "TH", "TL", "TG", "TO", "TT", "TN", "TR", "TM", "TV", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "YE", "ZM", "ZW"
 ];
@@ -61,6 +62,35 @@ function classroomAction(lesson = {}, currentUserId = "", className = ui.seconda
     return `<a class="${className}" href="/app/learning/classroom/${escapeHtml(lesson.id)}" target="_blank" rel="noopener">${icon("video", "h-4 w-4")}<span>${classroomLabel}</span></a>`;
   }
   return availability.label ? `<span class="${ui.tag}">${escapeHtml(availability.label)}</span>` : "";
+}
+
+function payoutAccountStatus(account = {}) {
+  if (!account.configured) return { tone: ui.tagRed, label: "Stripe not configured", body: "Stripe needs to be configured before teacher payouts can be set up." };
+  if (account.ready) return { tone: ui.tagGold, label: "Payouts ready", body: "Student payments can be routed to your teacher payout account." };
+  if (account.stripeAccountId) return { tone: ui.tag, label: "Payout setup pending", body: "Finish Stripe payout onboarding before students can book paid lessons." };
+  return { tone: ui.tagRed, label: "Payout setup required", body: "Set up teacher payouts before students can book paid lessons." };
+}
+
+function teacherPayoutPanel(account = {}) {
+  const status = payoutAccountStatus(account);
+  const requirements = Array.isArray(account.requirementsDue) ? account.requirementsDue : [];
+  return `
+    <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <span class="${status.tone}">${escapeHtml(status.label)}</span>
+          <h3 class="mt-3 text-2xl font-bold text-brand-ink">Teacher payouts</h3>
+          <p class="mt-1 ${ui.muted}">${escapeHtml(status.body)}</p>
+          ${requirements.length ? `<p class="mt-2 text-xs font-semibold text-brand-graphite">Stripe still needs: ${escapeHtml(requirements.slice(0, 4).join(", "))}${requirements.length > 4 ? "..." : ""}</p>` : ""}
+          ${account.disabledReason ? `<p class="mt-2 text-xs font-semibold text-brand-redDark">${escapeHtml(account.disabledReason)}</p>` : ""}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          ${!account.configured ? "" : account.ready ? `<button class="${ui.secondary}" data-action="syncTeacherPayoutAccount">${icon("check", "h-4 w-4")}<span>Refresh status</span></button>` : `<button class="${ui.primary}" data-action="startTeacherPayoutOnboarding">${icon("arrowRight", "h-4 w-4")}<span>${account.stripeAccountId ? "Continue payout setup" : "Set up payouts"}</span></button>`}
+          ${account.stripeAccountId && !account.ready ? `<button class="${ui.secondary}" data-action="syncTeacherPayoutAccount">${icon("check", "h-4 w-4")}<span>Refresh status</span></button>` : ""}
+        </div>
+      </div>
+    </section>
+  `;
 }
 
 function languageOptions(appConfig, selected = "") {
@@ -277,7 +307,7 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
                 <div class="mt-5 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
                   <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(teacher.userId)}:${escapeHtml(teacher.id)}">${icon("message", "h-4 w-4")}<span>Message</span></button>
                   <a class="${ui.secondary}" href="/app/learning/teacher-profile/${escapeHtml(teacher.id)}" data-app-link>${icon("user", "h-4 w-4")}<span>View</span></a>
-                  <a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: teacher.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book</span></a>
+                  ${PAYOUT_SETUP_DISABLED || teacher.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: teacher.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
                 </div>
               </article>
             `).join("")
@@ -312,7 +342,7 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, ap
           </div>
           <div class="flex flex-wrap gap-2">
             <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(profile.userId)}:${escapeHtml(profile.id)}">${icon("message", "h-4 w-4")}<span>Message</span></button>
-            <a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: profile.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book Lesson</span></a>
+            ${PAYOUT_SETUP_DISABLED || profile.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: profile.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book Lesson</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
           </div>
         </div>
         <div class="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -468,6 +498,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
   const visibleDays = days.slice(selectedIndex, selectedIndex + 7);
   const selectedSlot = days.flatMap((day) => day.slots || []).find((slot) => slot.startsAt === bookingSelection.startsAt);
   const openSlots = visibleDays.reduce((count, day) => count + Number(day.availableCount || 0), 0);
+  const payoutSetupRequired = !PAYOUT_SETUP_DISABLED && Boolean(calendar.payoutSetupRequired || !profile.payoutAccount?.ready);
   const lessonTypes = [
     ["group", "Group lesson"],
     ["one_on_one", "Private lesson"],
@@ -481,7 +512,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
           <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-start">
             ${profileImage(profile, "h-24 w-24")}
             <div class="min-w-0 flex-1">
-              <span class="${ui.tagGold}">Stripe lesson booking</span>
+              <span class="${ui.tagGold}">${PAYOUT_SETUP_DISABLED ? "Lesson booking" : "Stripe lesson booking"}</span>
               <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(profile.displayName)}</h2>
               <p class="mt-2 text-lg font-semibold text-brand-charcoal">${escapeHtml(profile.headline)}</p>
               <div class="mt-3 flex flex-wrap gap-2">
@@ -504,7 +535,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
             <span class="${openSlots ? ui.tagGold : ui.tagRed}">${openSlots} open slot${openSlots === 1 ? "" : "s"}</span>
           </div>
           <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7">
-            ${visibleDays.length ? visibleDays.map((day) => `
+            ${payoutSetupRequired ? emptyState("Booking unavailable", "This teacher is finishing payout setup before accepting paid lessons.") : visibleDays.length ? visibleDays.map((day) => `
               <article class="min-h-[220px] rounded-lg border ${day.date === selectedDate ? "border-brand-red/45 bg-brand-mist/45" : "border-brand-line bg-white/65"} p-3">
                 <div class="flex items-start justify-between gap-2 border-b border-brand-line/70 pb-3">
                   <div>
@@ -526,7 +557,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
           </div>
         </section>
         <aside class="rounded-lg border border-brand-line bg-brand-panel p-5 xl:sticky xl:top-5 xl:self-start">
-          <h3 class="text-xl font-bold text-brand-ink">Checkout</h3>
+          <h3 class="text-xl font-bold text-brand-ink">${PAYOUT_SETUP_DISABLED ? "Booking request" : "Checkout"}</h3>
           <div class="mt-4 grid gap-3 text-sm font-semibold text-brand-charcoal">
             <div class="flex justify-between gap-3"><span>Date/time</span><strong class="text-right text-brand-ink">${selectedSlot ? dateTime(selectedSlot.startsAt) : "Select a slot"}</strong></div>
             <div class="flex justify-between gap-3"><span>Your timezone</span><strong class="text-right text-brand-ink">${escapeHtml(Intl.DateTimeFormat().resolvedOptions().timeZone || "Local")}</strong></div>
@@ -534,8 +565,8 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
             <div class="flex justify-between gap-3"><span>Platform fee</span><strong class="text-brand-ink">$0.50</strong></div>
             <div class="flex justify-between gap-3 border-t border-brand-line pt-3 text-base"><span>Total</span><strong class="text-brand-ink">${money(calendar.price?.totalStudentChargeUsd)}</strong></div>
           </div>
-          <button class="${selectedSlot ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("arrowRight", "h-4 w-4")}<span>Continue with Payment</span></button>
-          <p class="mt-3 text-xs font-semibold leading-5 text-brand-graphite">Teacher keeps 100% of the listed lesson price.</p>
+          <button class="${selectedSlot && !payoutSetupRequired ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot && !payoutSetupRequired ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("arrowRight", "h-4 w-4")}<span>${payoutSetupRequired ? "Payout setup pending" : PAYOUT_SETUP_DISABLED ? "Request Booking" : "Continue with Payment"}</span></button>
+          <p class="mt-3 text-xs font-semibold leading-5 text-brand-graphite">${payoutSetupRequired ? "This teacher is not accepting paid lesson bookings yet." : PAYOUT_SETUP_DISABLED ? "The teacher can confirm this booking from Teacher Workspace." : "Teacher keeps 100% of the listed lesson price."}</p>
         </aside>
       </div>
     </div>
@@ -745,6 +776,7 @@ export function teacherDashboardView({ appConfig, appPath, state, teacherStudent
   const stats = teacherStudentData.dashboard?.stats || {};
   const lessons = teacherWorkspaceBookings(teacherStudentData);
   const profiles = teacherStudentData.profiles || [];
+  const payoutAccount = teacherStudentData.dashboard?.payoutAccount || profiles.find((profile) => profile.payoutAccount)?.payoutAccount || {};
   if (!canUseTeacherWorkspace) {
     return `
       <div class="grid gap-5">
@@ -770,6 +802,7 @@ export function teacherDashboardView({ appConfig, appPath, state, teacherStudent
         </div>
       </section>
       ${teacherProfilesPanel({ appPath, teacherStudentData })}
+      ${PAYOUT_SETUP_DISABLED ? "" : teacherPayoutPanel(payoutAccount)}
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -831,7 +864,7 @@ export function teacherAvailabilityView({ teacherStudentData = {} }) {
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-        <h2 class="text-2xl font-bold text-brand-ink">Availability</h2>
+        <h2 class="text-2xl font-bold text-brand-ink">My Open Time Slots</h2>
         <form class="mt-5 grid gap-3 lg:grid-cols-[1fr_140px_140px_140px_1fr_auto]" data-form="teacherAvailability">
           <select class="${ui.input}" name="teacherProfileId" required>${profileOptions(profiles)}</select>
           <select class="${ui.input}" name="weekday">${alphabetize(weekdays.map((day, index) => [index, day]), ([, day]) => day).map(([index, day]) => `<option value="${index}">${day}</option>`).join("")}</select>
@@ -879,6 +912,7 @@ function bookingActions(lesson, currentUserId = "") {
   const classroom = classroomAction(lesson, currentUserId);
   return `
     <div class="flex flex-wrap justify-end gap-2">
+      ${lesson.status === "pending_teacher_approval" && lesson.teacherUserId === currentUserId ? `<button class="${ui.primary}" data-action="confirmLesson:${escapeHtml(lesson.id)}">${icon("check", "h-4 w-4")}<span>Confirm</span></button>` : ""}
       ${classroom}
       ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
     </div>
@@ -1013,8 +1047,98 @@ export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFi
   `;
 }
 
-export function teacherStudentsView({ teacherStudentData = {} }) {
-  return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5"><h2 class="text-2xl font-bold text-brand-ink">My Students</h2><div class="mt-5">${emptyState("Students appear after bookings", "Confirmed teacher/student relationships are listed here.")}</div></section></div>`;
+export function teacherStudentsView({ appConfig, teacherStudentData = {}, appPath }) {
+  const students = teacherStudentData.students || [];
+  return `
+    <div class="grid gap-5">
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        <h2 class="text-2xl font-bold text-brand-ink">My Students</h2>
+        <div class="mt-5 grid gap-3">
+          ${students.length ? students.map((student) => `
+            <a class="flex flex-col gap-4 rounded-lg border border-brand-line/70 bg-white/65 p-4 text-brand-charcoal no-underline transition hover:border-brand-orange/70 hover:bg-white sm:flex-row sm:items-center" href="${escapeHtml(appPath("teacherStudentDetail", { studentId: student.id }))}" data-app-link>
+              ${profileImage(student, "h-14 w-14")}
+              <span class="min-w-0 flex-1">
+                <strong class="block text-base text-brand-ink">${escapeHtml(student.displayName || "Student")}</strong>
+                <span class="mt-1 block text-sm font-semibold text-brand-graphite">${Number(student.totalLessons || 0)} classes · last class ${student.lastLessonAt ? dateTime(student.lastLessonAt) : "not yet"}</span>
+                <span class="mt-1 block text-xs font-semibold text-brand-graphite">${escapeHtml(student.teacherProfiles || "")}</span>
+              </span>
+              <span class="${ui.tagGold}">${escapeHtml(languageName(appConfig, student.targetLanguage) || student.targetLanguage || "Learning")}</span>
+            </a>
+          `).join("") : emptyState("Students appear after bookings", "Confirmed teacher/student relationships are listed here.")}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function lessonNoteForm(lesson) {
+  return `
+    <form class="mt-4 grid gap-3 border-t border-brand-line pt-4" data-form="teacherLessonNote">
+      <input type="hidden" name="lessonBookingId" value="${escapeHtml(lesson.id)}">
+      <textarea class="${ui.input} min-h-20" name="body" required placeholder="Add lesson notes for this class"></textarea>
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <select class="${ui.input} max-w-56" name="visibility">
+          <option value="shared">Shared with student</option>
+          <option value="teacher_private">Teacher private</option>
+        </select>
+        <button class="${ui.primary}">${icon("save", "h-4 w-4")}<span>Add note</span></button>
+      </div>
+    </form>
+  `;
+}
+
+function lessonWithNotesCard(lesson) {
+  const notes = lesson.notes || [];
+  return `
+    <article class="rounded-lg border border-brand-line/70 bg-white/65 p-4">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <span class="${statusTone(lesson.status)}">${escapeHtml(lesson.status || "scheduled")}</span>
+          <h3 class="mt-3 text-lg font-bold text-brand-ink">${escapeHtml(lesson.title || "Lesson")}</h3>
+          <p class="mt-1 text-sm font-semibold text-brand-graphite">${escapeHtml(lesson.teacherProfileName || "Teacher profile")} · ${dateTime(lesson.startsAt)} · ${lesson.durationMinutes || 30} min</p>
+        </div>
+        <span class="${lesson.paymentStatus === "paid" ? ui.tagGold : ui.tagRed}">${escapeHtml(lesson.paymentStatus || "unpaid")}</span>
+      </div>
+      <div class="mt-4 grid gap-2">
+        ${notes.length ? notes.map((note) => `<article class="rounded-lg border border-brand-line/70 bg-brand-snow p-3"><div class="flex flex-wrap justify-between gap-2"><strong class="text-sm text-brand-ink">${escapeHtml(note.authorName || "Teacher")}</strong><span class="${note.visibility === "teacher_private" ? ui.tagRed : ui.tagGold}">${escapeHtml(note.visibility || "shared")}</span></div><p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(note.body || "")}</p></article>`).join("") : `<p class="${ui.muted}">No notes for this class yet.</p>`}
+      </div>
+      ${lessonNoteForm(lesson)}
+    </article>
+  `;
+}
+
+export function teacherStudentDetailView({ appConfig, teacherStudentData = {}, appPath }) {
+  const detail = teacherStudentData.studentDetail || {};
+  const student = detail.student || {};
+  const lessons = detail.lessons || [];
+  if (!student.id) {
+    return `<div class="grid gap-5"><section class="rounded-lg border border-brand-line bg-brand-panel p-5">${emptyState("Student profile unavailable", "This student could not be loaded.")}</section></div>`;
+  }
+  return `
+    <div class="grid gap-5">
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherStudents"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>My Students</span></a>
+        <div class="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
+          ${profileImage(student, "h-20 w-20")}
+          <div class="min-w-0">
+            <h2 class="text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(student.displayName || "Student")}</h2>
+            <p class="mt-2 ${ui.muted}">${escapeHtml(student.bio || "No profile bio yet.")}</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="${ui.tagGold}">${Number(student.totalLessons || 0)} classes</span>
+              <span class="${ui.tag}">Target: ${escapeHtml(languageName(appConfig, student.targetLanguage) || student.targetLanguage || "Not listed")}</span>
+              <span class="${ui.tag}">Level: ${escapeHtml(student.currentLevel || "A1")}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+        <h3 class="text-2xl font-bold text-brand-ink">Classes and Lesson Notes</h3>
+        <div class="mt-5 grid gap-4">
+          ${lessons.length ? lessons.map(lessonWithNotesCard).join("") : emptyState("No paid classes yet", "Classes and notes will appear here after paid lessons with this student.")}
+        </div>
+      </section>
+    </div>
+  `;
 }
 
 export function teacherLessonNotesView({ teacherStudentData = {} }) {

@@ -66,6 +66,132 @@ function stripeReturnBaseUrl() {
   return `${url.origin}${path}`;
 }
 
+function stripeBusinessProfileUrl() {
+  const baseUrl = stripeReturnBaseUrl();
+  const url = new URL(baseUrl);
+  if (LOCALHOST_NAMES.has(url.hostname) || url.protocol !== "https:") return "";
+  return baseUrl;
+}
+
+function stripeAmountCents(value) {
+  return String(Math.round(Number(value || 0) * 100));
+}
+
+async function stripeRequest(path, { method = "GET", body = null, stripeAccount = "" } = {}) {
+  if (!process.env.STRIPE_SECRET_KEY) throw serviceError("Stripe is not configured", 500);
+  const headers = {
+    Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`
+  };
+  if (body) headers["Content-Type"] = "application/x-www-form-urlencoded";
+  if (stripeAccount) headers["Stripe-Account"] = stripeAccount;
+  const response = await fetch(`https://api.stripe.com${path}`, { method, headers, body });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    console.error("[stripe] request_failed", {
+      path,
+      method,
+      status: response.status,
+      requestId: response.headers.get("request-id") || "",
+      type: data.error?.type || "",
+      code: data.error?.code || "",
+      message: data.error?.message || "Stripe request failed"
+    });
+    throw serviceError("Stripe request failed", 502);
+  }
+  return data;
+}
+
+function mapStripeAccount(account = {}) {
+  const requirements = account.requirements || {};
+  const currentlyDue = Array.isArray(requirements.currently_due) ? requirements.currently_due : [];
+  const pastDue = Array.isArray(requirements.past_due) ? requirements.past_due : [];
+  return {
+    stripeAccountId: account.id || "",
+    onboardingComplete: Boolean(account.details_submitted),
+    chargesEnabled: Boolean(account.charges_enabled),
+    payoutsEnabled: Boolean(account.payouts_enabled),
+    requirementsDue: [...new Set([...currentlyDue, ...pastDue])],
+    disabledReason: requirements.disabled_reason || ""
+  };
+}
+
+function mapPayoutAccount(row) {
+  if (!row) {
+    return {
+      configured: Boolean(process.env.STRIPE_SECRET_KEY),
+      stripeAccountId: "",
+      onboardingComplete: false,
+      chargesEnabled: false,
+      payoutsEnabled: false,
+      requirementsDue: [],
+      disabledReason: "",
+      ready: false
+    };
+  }
+  const requirementsDue = Array.isArray(row.requirementsDue) ? row.requirementsDue : [];
+  const ready = Boolean(row.stripeAccountId && row.onboardingComplete && row.chargesEnabled && row.payoutsEnabled && requirementsDue.length === 0 && !row.disabledReason);
+  return {
+    configured: Boolean(process.env.STRIPE_SECRET_KEY),
+    stripeAccountId: row.stripeAccountId || "",
+    onboardingComplete: Boolean(row.onboardingComplete),
+    chargesEnabled: Boolean(row.chargesEnabled),
+    payoutsEnabled: Boolean(row.payoutsEnabled),
+    requirementsDue,
+    disabledReason: row.disabledReason || "",
+    ready
+  };
+}
+
+async function savePayoutAccountFromStripe(client, teacherUserId, account) {
+  const mapped = mapStripeAccount(account);
+  const result = await client.query(
+    `insert into teacher_payout_accounts (
+       teacher_user_id, stripe_account_id, onboarding_complete, charges_enabled,
+       payouts_enabled, requirements_due, disabled_reason
+     )
+     values ($1, $2, $3, $4, $5, $6, nullif($7, ''))
+     on conflict (teacher_user_id)
+     do update set stripe_account_id = excluded.stripe_account_id,
+                   onboarding_complete = excluded.onboarding_complete,
+                   charges_enabled = excluded.charges_enabled,
+                   payouts_enabled = excluded.payouts_enabled,
+                   requirements_due = excluded.requirements_due,
+                   disabled_reason = excluded.disabled_reason,
+                   updated_at = now()
+     returning stripe_account_id as "stripeAccountId",
+               onboarding_complete as "onboardingComplete",
+               charges_enabled as "chargesEnabled",
+               payouts_enabled as "payoutsEnabled",
+               requirements_due as "requirementsDue",
+               disabled_reason as "disabledReason"`,
+    [
+      teacherUserId,
+      mapped.stripeAccountId,
+      mapped.onboardingComplete,
+      mapped.chargesEnabled,
+      mapped.payoutsEnabled,
+      mapped.requirementsDue,
+      mapped.disabledReason
+    ]
+  );
+  return mapPayoutAccount(result.rows[0]);
+}
+
+async function teacherPayoutAccountRow(teacherUserId) {
+  const result = await query(
+    `select stripe_account_id as "stripeAccountId",
+            onboarding_complete as "onboardingComplete",
+            charges_enabled as "chargesEnabled",
+            payouts_enabled as "payoutsEnabled",
+            requirements_due as "requirementsDue",
+            disabled_reason as "disabledReason"
+       from teacher_payout_accounts
+      where teacher_user_id = $1`,
+    [teacherUserId]
+  );
+  return mapPayoutAccount(result.rows[0]);
+}
+
 function text(value, { fallback = "", max = 255, required = false, min = 0 } = {}) {
   const output = String(value ?? fallback).trim().replace(/\s+/g, " ");
   if (required && !output) throw serviceError("Required field is missing");
@@ -160,6 +286,12 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
            coalesce(tags.tags, '[]'::json) as tags,
            coalesce(reviews.review_count, 0)::int as "reviewCount",
            coalesce(reviews.average_rating, 0)::float as "averageRating",
+           tpa.stripe_account_id as "stripeAccountId",
+           coalesce(tpa.onboarding_complete, false) as "payoutOnboardingComplete",
+           coalesce(tpa.charges_enabled, false) as "payoutChargesEnabled",
+           coalesce(tpa.payouts_enabled, false) as "payoutsEnabled",
+           coalesce(tpa.requirements_due, '{}'::text[]) as "payoutRequirementsDue",
+           coalesce(tpa.disabled_reason, '') as "payoutDisabledReason",
            coalesce(ts.plan_key, '') as "subscriptionTier",
            coalesce(tsp.can_create_group_lessons, false) as "canCreateGroupLessons",
            tp.created_at as "createdAt",
@@ -181,6 +313,7 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
           from teacher_reviews tr
          where tr.teacher_profile_id = tp.id
       ) reviews on true
+      left join teacher_payout_accounts tpa on tpa.teacher_user_id = tp.user_id
       left join teacher_subscriptions ts on ts.user_id = tp.user_id and ts.status in ('active', 'past_due')
       left join teacher_subscription_plans tsp on tsp.plan_key = ts.plan_key
      ${whereClause}
@@ -200,6 +333,14 @@ function mapProfile(row) {
     speakingPracticeOnly: Boolean(row.speakingPracticeOnly),
     canCreateGroupLessons: Boolean(row.canCreateGroupLessons),
     averageRating: Number(row.averageRating || 0),
+    payoutAccount: mapPayoutAccount({
+      stripeAccountId: row.stripeAccountId,
+      onboardingComplete: row.payoutOnboardingComplete,
+      chargesEnabled: row.payoutChargesEnabled,
+      payoutsEnabled: row.payoutsEnabled,
+      requirementsDue: row.payoutRequirementsDue,
+      disabledReason: row.payoutDisabledReason
+    }),
     languages: Array.isArray(row.languages) ? row.languages : [],
     tags: Array.isArray(row.tags) ? row.tags : []
   };
@@ -233,6 +374,76 @@ async function requireTeacherWorkspace(user) {
     "teacherWorkspace"
   );
   return subscription;
+}
+
+async function requireTeacherPayoutAccountReady(teacherUserId) {
+  const account = await teacherPayoutAccountRow(teacherUserId);
+  if (!account.ready) {
+    throw serviceError("This teacher needs to finish payout setup before paid lessons can be booked", 400);
+  }
+  return account;
+}
+
+function payoutSetupDisabledForTesting() {
+  return true;
+}
+
+async function createTeacherPayoutAccount(user) {
+  await requireTeacherWorkspace(user);
+  const existing = await teacherPayoutAccountRow(user.id);
+  if (existing.stripeAccountId) return { payoutAccount: existing };
+  const form = new URLSearchParams();
+  form.set("type", "express");
+  form.set("email", user.email);
+  form.set("country", process.env.STRIPE_CONNECT_COUNTRY || "US");
+  form.set("capabilities[card_payments][requested]", "true");
+  form.set("capabilities[transfers][requested]", "true");
+  const businessProfileUrl = stripeBusinessProfileUrl();
+  if (businessProfileUrl) form.set("business_profile[url]", businessProfileUrl);
+  const account = await stripeRequest("/v1/accounts", { method: "POST", body: form });
+  const client = await pool.connect();
+  try {
+    const payoutAccount = await savePayoutAccountFromStripe(client, user.id, account);
+    return { payoutAccount };
+  } finally {
+    client.release();
+  }
+}
+
+async function createTeacherPayoutOnboardingLink(user) {
+  await requireTeacherWorkspace(user);
+  const { payoutAccount } = await createTeacherPayoutAccount(user);
+  if (!payoutAccount.stripeAccountId) throw serviceError("Stripe payout account could not be created", 500);
+  const baseUrl = stripeReturnBaseUrl();
+  const form = new URLSearchParams();
+  form.set("account", payoutAccount.stripeAccountId);
+  form.set("type", "account_onboarding");
+  form.set("refresh_url", `${baseUrl}/app/learning/teacher-dashboard?payout=refresh`);
+  form.set("return_url", `${baseUrl}/app/learning/teacher-dashboard?payout=return`);
+  form.set("collection_options[fields]", "currently_due");
+  const link = await stripeRequest("/v1/account_links", { method: "POST", body: form });
+  if (!link.url) {
+    console.error("[stripe] account_link_missing_url", {
+      account: payoutAccount.stripeAccountId,
+      object: link.object || "",
+      expiresAt: link.expires_at || null
+    });
+    throw serviceError("Payout setup could not be started", 502);
+  }
+  return { payoutAccount, onboardingUrl: link.url };
+}
+
+async function syncTeacherPayoutAccount(user) {
+  await requireTeacherWorkspace(user);
+  const existing = await teacherPayoutAccountRow(user.id);
+  if (!existing.stripeAccountId) return { payoutAccount: existing };
+  const account = await stripeRequest(`/v1/accounts/${encodeURIComponent(existing.stripeAccountId)}`);
+  const client = await pool.connect();
+  try {
+    return { payoutAccount: await savePayoutAccountFromStripe(client, user.id, account) };
+  } finally {
+    client.release();
+  }
 }
 
 function mapBooking(row) {
@@ -814,6 +1025,22 @@ async function getBookingPage(user, profileId, filters = {}) {
     if (!result.rows[0]) throw serviceError("Teacher profile not found", 404);
     const profile = mapProfile(result.rows[0]);
     if (profile.userId === user.id) throw serviceError("You cannot book your own teacher profile", 403);
+    if (!payoutSetupDisabledForTesting() && !profile.payoutAccount.ready) {
+      return {
+        profile,
+        calendar: {
+          rules: null,
+          days: [],
+          unavailableBlocks: [],
+          price: slotPrice(profile, normalizeLessonType(filters.lessonType || "one_on_one"), integer(filters.durationMinutes, { min: profile.minLessonMinutes, max: profile.maxLessonMinutes, fallback: profile.minLessonMinutes })),
+          durations: [profile.minLessonMinutes, profile.maxLessonMinutes],
+          lessonType: normalizeLessonType(filters.lessonType || "one_on_one"),
+          timezone: filters.studentTimezone || profile.timezone,
+          payoutSetupRequired: true
+        },
+        platformFeeUsd: PLATFORM_FEE_USD
+      };
+    }
     const source = await bookingSourceData(client, profile, { days: filters.days || 30 });
     return { profile, calendar: buildCalendarFromSource(profile, source, filters), platformFeeUsd: PLATFORM_FEE_USD };
   } finally {
@@ -873,6 +1100,7 @@ async function createBooking(user, payload) {
     if (!profile.rows[0]) throw serviceError("Teacher profile not found", 404);
     const teacher = mapProfile(profile.rows[0]);
     if (teacher.userId === user.id) throw serviceError("You cannot book your own teacher profile");
+    if (!payoutSetupDisabledForTesting() && !teacher.payoutAccount.ready) throw serviceError("This teacher needs to finish payout setup before paid lessons can be booked", 400);
     const slot = await validateBookingSlot(client, teacher, payload);
     const livekitRoomName = `linguastories-classroom-${crypto.randomUUID()}`;
     const booking = await client.query(
@@ -932,10 +1160,34 @@ async function createBooking(user, payload) {
          lesson_booking_id, student_user_id, teacher_user_id, lesson_price_usd,
          total_student_charge_usd, teacher_payout_usd
        )
-       values ($1, $2, $3, $4, $5, $4)`,
-      [booking.rows[0].id, user.id, teacher.userId, slot.price.lessonPriceUsd, slot.price.totalStudentChargeUsd]
+       values ($1, $2, $3, $4, $5, $6)`,
+      [booking.rows[0].id, user.id, teacher.userId, slot.price.lessonPriceUsd, slot.price.totalStudentChargeUsd, slot.price.teacherPayoutUsd]
     );
+    if (payoutSetupDisabledForTesting()) {
+      const updated = await client.query(
+        `update lesson_bookings
+            set status = 'pending_teacher_approval',
+                payment_status = 'paid',
+                payment_expires_at = null,
+                updated_at = now()
+          where id = $1
+        returning status, payment_status as "paymentStatus"`,
+        [booking.rows[0].id]
+      );
+      await client.query(
+        `update lesson_payments
+            set status = 'paid',
+                updated_at = now()
+          where lesson_booking_id = $1`,
+        [booking.rows[0].id]
+      );
+      booking.rows[0].status = updated.rows[0].status;
+      booking.rows[0].paymentStatus = updated.rows[0].paymentStatus;
+      await client.query("commit");
+      return { booking: mapBooking(booking.rows[0]), checkoutUrl: "", stripeConfigured: false, payoutSetupDisabled: true };
+    }
     await client.query("commit");
+    booking.rows[0].stripeConnectAccountId = teacher.payoutAccount.stripeAccountId;
     const checkout = await createStripeCheckoutSession(user, booking.rows[0]);
     return { booking: mapBooking(booking.rows[0]), checkoutUrl: checkout.checkoutUrl, stripeConfigured: checkout.configured };
   } catch (error) {
@@ -948,6 +1200,7 @@ async function createBooking(user, payload) {
 
 async function createStripeCheckoutSession(user, booking) {
   if (!process.env.STRIPE_SECRET_KEY) return { configured: false, checkoutUrl: "" };
+  if (!booking.stripeConnectAccountId) throw serviceError("Teacher payout setup is required before checkout", 400);
   const baseUrl = stripeReturnBaseUrl();
   const form = new URLSearchParams();
   form.set("mode", "payment");
@@ -955,21 +1208,15 @@ async function createStripeCheckoutSession(user, booking) {
   form.set("line_items[0][quantity]", "1");
   form.set("line_items[0][price_data][currency]", "usd");
   form.set("line_items[0][price_data][product_data][name]", booking.title);
-  form.set("line_items[0][price_data][unit_amount]", String(Math.round(Number(booking.totalStudentChargeUsd || 0) * 100)));
+  form.set("line_items[0][price_data][unit_amount]", stripeAmountCents(booking.totalStudentChargeUsd));
+  form.set("payment_intent_data[application_fee_amount]", stripeAmountCents(booking.platformFeeUsd || PLATFORM_FEE_USD));
+  form.set("payment_intent_data[transfer_data][destination]", booking.stripeConnectAccountId);
   form.set("success_url", `${baseUrl}/app/learning/my-lessons?booking=${booking.id}&payment=success`);
   form.set("cancel_url", `${baseUrl}/app/learning/find-teacher?booking=${booking.id}&payment=cancelled`);
   form.set("metadata[lessonBookingId]", booking.id);
   form.set("metadata[studentUserId]", user.id);
-  const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: form
-  });
-  const session = await response.json().catch(() => ({}));
-  if (!response.ok) throw serviceError(session.error?.message || "Stripe checkout could not be created", 502);
+  form.set("metadata[teacherUserId]", booking.teacherUserId);
+  const session = await stripeRequest("/v1/checkout/sessions", { method: "POST", body: form });
   await query(
     `update lesson_bookings
         set stripe_checkout_session_id = $2, updated_at = now()
@@ -985,7 +1232,8 @@ async function createStripeCheckoutSession(user, booking) {
   return { configured: true, checkoutUrl: session.url || "" };
 }
 
-function verifyStripeSignature(rawBody, signatureHeader) {
+function verifyStripeSignature(rawBody, signatureHeader, secret = process.env.STRIPE_WEBHOOK_SECRET) {
+  if (!secret) return false;
   const pairs = String(signatureHeader || "").split(",").reduce((items, part) => {
     const [key, value] = part.split("=");
     items[key] = value;
@@ -1034,8 +1282,62 @@ async function markCheckoutSessionPaid(bookingId, paymentIntentId = null) {
                        updated_at = now()`,
         [bookingId]
       );
+      await client.query(
+        `insert into teacher_payouts (teacher_user_id, lesson_booking_id, amount_usd, status)
+         select teacher_user_id, id, teacher_payout_usd, 'pending'
+           from lesson_bookings
+          where id = $1
+            and teacher_payout_usd > 0`,
+        [bookingId]
+      );
     }
     await client.query("commit");
+  } catch (error) {
+    await client.query("rollback").catch(() => null);
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function confirmBooking(user, bookingId) {
+  await requireTeacherWorkspace(user);
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const booking = await client.query(
+      `update lesson_bookings
+          set status = 'confirmed',
+              payment_status = 'paid',
+              payment_expires_at = null,
+              updated_at = now()
+        where id = $1
+          and teacher_user_id = $2
+          and status = 'pending_teacher_approval'
+        returning id`,
+      [bookingId, user.id]
+    );
+    if (!booking.rows[0]) throw serviceError("Booking could not be confirmed", 404);
+    await client.query(
+      `update lesson_payments
+          set status = 'paid',
+              updated_at = now()
+        where lesson_booking_id = $1`,
+      [bookingId]
+    );
+    await client.query(
+      `insert into teacher_student_relationships (teacher_profile_id, teacher_user_id, student_user_id, first_lesson_at, last_lesson_at, total_lessons)
+       select teacher_profile_id, teacher_user_id, student_user_id, starts_at, starts_at, 1
+         from lesson_bookings
+        where id = $1
+       on conflict (teacher_profile_id, student_user_id)
+       do update set last_lesson_at = excluded.last_lesson_at,
+                     total_lessons = teacher_student_relationships.total_lessons + 1,
+                     updated_at = now()`,
+      [bookingId]
+    );
+    await client.query("commit");
+    return { confirmed: true, bookingId, status: "confirmed", paymentStatus: "paid" };
   } catch (error) {
     await client.query("rollback").catch(() => null);
     throw error;
@@ -1158,9 +1460,111 @@ async function listMyTeachers(user) {
   return { teachers: result.rows };
 }
 
+async function listStudents(user) {
+  await requireTeacherWorkspace(user);
+  const result = await query(
+    `select student.id,
+            student.display_name as "displayName",
+            coalesce(student.avatar, left(student.display_name, 2)) as avatar,
+            case when student.avatar_box_file_id is not null then '/api/learners/' || student.id || '/avatar' else coalesce(student.avatar_url, '') end as "avatarUrl",
+            student.native_language as "nativeLanguage",
+            student.target_language as "targetLanguage",
+            student.current_level as "currentLevel",
+            student.timezone,
+            min(tsr.first_lesson_at) as "firstLessonAt",
+            max(tsr.last_lesson_at) as "lastLessonAt",
+            sum(tsr.total_lessons)::int as "totalLessons",
+            count(distinct tsr.teacher_profile_id)::int as "profileCount",
+            coalesce(string_agg(distinct tp.display_name, ', ' order by tp.display_name), '') as "teacherProfiles"
+       from teacher_student_relationships tsr
+       join users student on student.id = tsr.student_user_id
+       join teacher_profiles tp on tp.id = tsr.teacher_profile_id
+      where tsr.teacher_user_id = $1
+      group by student.id
+      order by max(tsr.last_lesson_at) desc nulls last, student.display_name`,
+    [user.id]
+  );
+  return { students: result.rows };
+}
+
+async function getStudent(user, studentId) {
+  await requireTeacherWorkspace(user);
+  const student = await query(
+    `select student.id,
+            student.display_name as "displayName",
+            coalesce(student.avatar, left(student.display_name, 2)) as avatar,
+            case when student.avatar_box_file_id is not null then '/api/learners/' || student.id || '/avatar' else coalesce(student.avatar_url, '') end as "avatarUrl",
+            student.bio,
+            student.native_language as "nativeLanguage",
+            student.target_language as "targetLanguage",
+            student.current_level as "currentLevel",
+            student.timezone,
+            min(tsr.first_lesson_at) as "firstLessonAt",
+            max(tsr.last_lesson_at) as "lastLessonAt",
+            sum(tsr.total_lessons)::int as "totalLessons",
+            coalesce(string_agg(distinct tp.display_name, ', ' order by tp.display_name), '') as "teacherProfiles"
+       from teacher_student_relationships tsr
+       join users student on student.id = tsr.student_user_id
+       join teacher_profiles tp on tp.id = tsr.teacher_profile_id
+      where tsr.teacher_user_id = $1
+        and tsr.student_user_id = $2
+      group by student.id`,
+    [user.id, studentId]
+  );
+  if (!student.rows[0]) throw serviceError("Student profile not found", 404);
+  const lessons = await query(
+    `select lb.id,
+            lb.teacher_profile_id as "teacherProfileId",
+            tp.display_name as "teacherProfileName",
+            lb.teacher_user_id as "teacherUserId",
+            lb.student_user_id as "studentUserId",
+            student.display_name as "studentName",
+            lb.lesson_type as "lessonType",
+            lb.title,
+            lb.target_language as "targetLanguage",
+            lb.starts_at as "startsAt",
+            lb.ends_at as "endsAt",
+            lb.duration_minutes as "durationMinutes",
+            lb.status,
+            lb.payment_status as "paymentStatus",
+            coalesce(notes.notes, '[]'::json) as notes
+       from lesson_bookings lb
+       join teacher_profiles tp on tp.id = lb.teacher_profile_id
+       join users student on student.id = lb.student_user_id
+       left join lateral (
+         select json_agg(json_build_object(
+                  'id', ln.id,
+                  'lessonBookingId', ln.lesson_booking_id,
+                  'authorUserId', ln.author_user_id,
+                  'authorName', author.display_name,
+                  'visibility', ln.visibility,
+                  'body', ln.body,
+                  'createdAt', ln.created_at
+                ) order by ln.created_at desc) as notes
+           from lesson_notes ln
+           join users author on author.id = ln.author_user_id
+          where ln.lesson_booking_id = lb.id
+       ) notes on true
+      where lb.teacher_user_id = $1
+        and lb.student_user_id = $2
+        and lb.payment_status = 'paid'
+      order by lb.starts_at desc
+      limit 80`,
+    [user.id, studentId]
+  );
+  return {
+    student: student.rows[0],
+    lessons: lessons.rows.map((row) => ({
+      ...mapBooking(row),
+      teacherProfileName: row.teacherProfileName,
+      notes: Array.isArray(row.notes) ? row.notes : []
+    }))
+  };
+}
+
 async function teacherDashboard(user) {
   await requireTeacherWorkspace(user);
-  const [profiles, lessons, subscription] = await Promise.all([myProfiles(user), listLessons(user), teacherSubscriptionForUser(user.id)]);
+  const [profiles, lessons, subscription, payoutAccount] = await Promise.all([myProfiles(user), listLessons(user), teacherSubscriptionForUser(user.id), teacherPayoutAccountRow(user.id)]);
   const teacherLessons = lessons.lessons.filter((lesson) => lesson.teacherUserId === user.id);
   const earnings = teacherLessons
     .filter((lesson) => lesson.paymentStatus === "paid")
@@ -1169,6 +1573,7 @@ async function teacherDashboard(user) {
     profiles: profiles.profiles,
     lessons: teacherLessons,
     subscription,
+    payoutAccount,
     stats: {
       profileCount: profiles.profiles.length,
       upcomingLessons: teacherLessons.filter((lesson) => new Date(lesson.startsAt) > new Date() && !CANCELLED_BOOKING_STATUSES.has(lesson.status)).length,
@@ -1775,6 +2180,38 @@ async function handleStripeWebhook(req) {
   return { received: true };
 }
 
+async function handleStripeConnectWebhook(req) {
+  if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_CONNECT_WEBHOOK_SECRET) throw serviceError("Stripe Connect webhook is not configured", 500);
+  const signature = req.headers["stripe-signature"];
+  if (!Buffer.isBuffer(req.body) || !verifyStripeSignature(req.body, signature, process.env.STRIPE_CONNECT_WEBHOOK_SECRET)) {
+    throw serviceError("Invalid Stripe webhook signature", 400);
+  }
+  const event = JSON.parse(req.body.toString("utf8"));
+  if (event.type === "account.updated") {
+    const account = event.data.object;
+    const mapped = mapStripeAccount(account);
+    await query(
+      `update teacher_payout_accounts
+          set onboarding_complete = $2,
+              charges_enabled = $3,
+              payouts_enabled = $4,
+              requirements_due = $5,
+              disabled_reason = nullif($6, ''),
+              updated_at = now()
+        where stripe_account_id = $1`,
+      [
+        mapped.stripeAccountId,
+        mapped.onboardingComplete,
+        mapped.chargesEnabled,
+        mapped.payoutsEnabled,
+        mapped.requirementsDue,
+        mapped.disabledReason
+      ]
+    );
+  }
+  return { received: true };
+}
+
 module.exports = {
   searchTeachers,
   getProfile,
@@ -1787,10 +2224,16 @@ module.exports = {
   getBookingPage,
   availableDays,
   availableSlots,
+  createTeacherPayoutAccount,
+  createTeacherPayoutOnboardingLink,
+  syncTeacherPayoutAccount,
   createBooking,
+  confirmBooking,
   syncStripePayment,
   listLessons,
   listMyTeachers,
+  listStudents,
+  getStudent,
   teacherDashboard,
   teacherCalendar,
   cancelBooking,
@@ -1810,5 +2253,6 @@ module.exports = {
   createReview,
   sendTeacherMessage,
   teacherSubscriptionForUser,
-  handleStripeWebhook
+  handleStripeWebhook,
+  handleStripeConnectWebhook
 };

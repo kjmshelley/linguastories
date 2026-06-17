@@ -52,6 +52,10 @@ async function createBooking(req, res) {
   res.status(201).json(await teacherStudentService.createBooking(req.user, req.body));
 }
 
+async function confirmBooking(req, res) {
+  res.json(await teacherStudentService.confirmBooking(req.user, req.params.id));
+}
+
 async function syncStripePayment(req, res) {
   res.json(await teacherStudentService.syncStripePayment(req.user, req.params.id));
 }
@@ -64,12 +68,32 @@ async function listMyTeachers(req, res) {
   res.json(await teacherStudentService.listMyTeachers(req.user));
 }
 
+async function listStudents(req, res) {
+  res.json(await teacherStudentService.listStudents(req.user));
+}
+
+async function getStudent(req, res) {
+  res.json(await teacherStudentService.getStudent(req.user, req.params.id));
+}
+
 async function teacherDashboard(req, res) {
   res.json(await teacherStudentService.teacherDashboard(req.user));
 }
 
 async function teacherCalendar(req, res) {
   res.json(await teacherStudentService.teacherCalendar(req.user, req.query));
+}
+
+async function createTeacherPayoutAccount(req, res) {
+  res.status(201).json(await teacherStudentService.createTeacherPayoutAccount(req.user));
+}
+
+async function createTeacherPayoutOnboardingLink(req, res) {
+  res.json(await teacherStudentService.createTeacherPayoutOnboardingLink(req.user));
+}
+
+async function syncTeacherPayoutAccount(req, res) {
+  res.json(await teacherStudentService.syncTeacherPayoutAccount(req.user));
 }
 
 async function cancelBooking(req, res) {
@@ -144,6 +168,10 @@ async function stripeWebhook(req, res) {
   res.json(await teacherStudentService.handleStripeWebhook(req));
 }
 
+async function stripeConnectWebhook(req, res) {
+  res.json(await teacherStudentService.handleStripeConnectWebhook(req));
+}
+
 module.exports = {
   searchTeachers,
   getProfile,
@@ -158,11 +186,17 @@ module.exports = {
   availableDays,
   availableSlots,
   createBooking,
+  confirmBooking,
   syncStripePayment,
   listLessons,
   listMyTeachers,
+  listStudents,
+  getStudent,
   teacherDashboard,
   teacherCalendar,
+  createTeacherPayoutAccount,
+  createTeacherPayoutOnboardingLink,
+  syncTeacherPayoutAccount,
   cancelBooking,
   saveBookingRules,
   createUnavailableBlock,
@@ -180,5 +214,6 @@ module.exports = {
   createReview,
   sendMessage,
   subscription,
-  stripeWebhook
+  stripeWebhook,
+  stripeConnectWebhook
 };

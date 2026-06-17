@@ -135,8 +135,13 @@ async function attachSubscription(user) {
       limit 1`,
     [user.id]
   );
-  const activeTeacherProfile = await query(
+  const teacherProfile = await query(
     `select exists (
+       select 1
+         from teacher_profiles
+        where user_id = $1
+     ) as "hasTeacherProfile",
+     exists (
        select 1
          from teacher_profiles
         where user_id = $1
@@ -145,7 +150,8 @@ async function attachSubscription(user) {
     [user.id]
   );
   const teacherProfileAccess = {
-    hasActiveTeacherProfile: Boolean(activeTeacherProfile.rows[0]?.hasActiveTeacherProfile)
+    hasTeacherProfile: Boolean(teacherProfile.rows[0]?.hasTeacherProfile),
+    hasActiveTeacherProfile: Boolean(teacherProfile.rows[0]?.hasActiveTeacherProfile)
   };
   const account = user.accountSubscriptionTier
     ? {

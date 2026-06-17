@@ -24,6 +24,7 @@ drop table if exists
   user_accounts,
   subscription_tiers,
   teacher_payouts,
+  teacher_payout_accounts,
   teacher_reviews,
   lesson_template_resources,
   lesson_templates,
