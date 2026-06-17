@@ -174,6 +174,7 @@ async function createRoom(user, payload) {
 
 async function listRooms(user, filters = {}) {
   subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
+  await expireStaleRooms();
   const values = [user.id];
   const includeHistory = String(filters.history || "").toLowerCase() === "true";
   const where = [includeHistory ? "r.owner_user_id = $1" : "r.status = 'active'", publicRoomSql()];
@@ -614,6 +615,51 @@ async function closeRoom(client, roomId, status = "ended") {
     [roomId]
   );
   await deleteLiveKitCloudRoom(closedRoom.rows[0]?.livekitRoomName);
+}
+
+async function expireStaleRooms() {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const staleRooms = await client.query(
+      `update voice_video_rooms
+          set status = 'ended',
+              ended_at = coalesce(ended_at, now())
+        where status = 'active'
+          and started_at is not null
+          and started_at <= now() - interval '6 minutes'
+        returning id, livekit_room_name as "livekitRoomName"`
+    );
+    for (const room of staleRooms.rows) {
+      await client.query(
+        `update voice_video_room_participants
+            set status = 'left',
+                left_at = coalesce(left_at, now())
+          where room_id = $1
+            and status = 'joined'`,
+        [room.id]
+      );
+      await client.query(
+        `update voice_video_room_sessions
+            set status = 'timed_out',
+                ended_at = coalesce(ended_at, now()),
+                duration_seconds = least(360, greatest(1, ceil(extract(epoch from (now() - started_at)))::int)),
+                billed_minutes = least(6, greatest(1, ceil(extract(epoch from (now() - started_at)) / 60)::int))
+          where room_id = $1
+            and status = 'active'`,
+        [room.id]
+      );
+    }
+    await client.query("commit");
+    for (const room of staleRooms.rows) {
+      await deleteLiveKitCloudRoom(room.livekitRoomName);
+    }
+  } catch (error) {
+    await client.query("rollback").catch(() => null);
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 async function deleteRoom(user, roomId) {

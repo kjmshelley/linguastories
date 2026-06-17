@@ -1813,6 +1813,38 @@ async function processPostImage(file) {
   }
 }
 
+async function processVoiceVideoRoomImage(file) {
+  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+  if (!allowedTypes.has(file.type)) throw new Error("Room picture must be a JPG, PNG, or WebP image.");
+  if (file.size > 10 * 1024 * 1024) throw new Error("Room picture must be 10 MB or smaller.");
+
+  const image = new Image();
+  const objectUrl = URL.createObjectURL(file);
+  image.src = objectUrl;
+  await waitForImageLoad(image);
+
+  try {
+    let imageBlob = await resizeImageToWebP(image, 1200, 0.78);
+    const sizeSteps = [1100, 1000, 900, 800, 720, 640, 560, 480];
+    const qualitySteps = [0.72, 0.68, 0.64, 0.6, 0.56];
+    for (const quality of qualitySteps) {
+      if (imageBlob.size <= 520 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, 1200, quality);
+    }
+    for (const maxSize of sizeSteps) {
+      if (imageBlob.size <= 520 * 1024) break;
+      imageBlob = await resizeImageToWebP(image, maxSize, 0.62);
+    }
+    if (imageBlob.size > 520 * 1024) throw new Error("Room picture could not be compressed enough. Try a smaller image.");
+    return {
+      imageDataUrl: await blobToDataUrl(imageBlob),
+      imageFileName: `${file.name.replace(/\.[^.]+$/, "") || "voice-video-room"}.webp`
+    };
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
 function teacherLanguageRowHtml(role) {
   return `
     <div class="grid gap-2 rounded-lg border border-brand-line/70 bg-white/65 p-3 sm:grid-cols-[minmax(0,1fr)_220px_auto] sm:items-end" data-teacher-language-row="${escapeHtml(role)}">
@@ -2466,10 +2498,22 @@ function bindActions(root = document) {
         closeModal();
       }
       if (form.dataset.form === "voiceVideoRoom") {
-        await livekitApi("/api/livekit/rooms", { method: "POST", body: JSON.stringify(data) });
+        const imageFile = form.elements.roomImage?.files?.[0];
+        delete data.roomImage;
+        if (imageFile) {
+          try {
+            Object.assign(data, await processVoiceVideoRoomImage(imageFile));
+          } catch (error) {
+            showModal(`<h2 class="text-xl font-black">Room picture unavailable</h2><p class="${ui.muted}">${escapeHtml(error.message)}</p>`);
+            return;
+          }
+        }
+        const payload = await livekitApi("/api/livekit/rooms", { method: "POST", body: JSON.stringify(data) });
+        if (!payload) return;
         closeModal();
         voiceVideoRoomsLoaded = false;
         await loadVoiceVideoRooms({ force: true });
+        render();
       }
       if (form.dataset.form === "voiceVideoRoomFilters") {
         voiceVideoRoomFilters = {

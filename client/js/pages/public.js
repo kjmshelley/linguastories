@@ -21,11 +21,12 @@ export function publicNav(active = "", options = {}) {
           ? ""
             : `<div class="hidden items-center gap-7 text-sm font-bold text-brand-graphite lg:flex">
               <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#teachers">Teachers</a>
+              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#teacher-first">Teacher-first</a>
               <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#how-it-works">How it works</a>
               <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#community">Community</a>
               <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#pricing">Pricing</a>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="hidden items-center gap-2 lg:flex">
               <a class="${active === "login" ? activeTopButton : inactiveTopButton}" href="/login" data-link>Login</a>
             </div>
             <details class="relative lg:hidden" data-public-menu>
@@ -39,9 +40,11 @@ export function publicNav(active = "", options = {}) {
                   <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink" type="button" data-action="closePublicMenu" aria-label="Close navigation">x</button>
                 </div>
                 <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teachers" data-public-menu-link>Teachers</a>
+                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teacher-first" data-public-menu-link>Teacher-first</a>
                 <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#how-it-works" data-public-menu-link>How it works</a>
                 <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#community" data-public-menu-link>Community</a>
                 <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#pricing" data-public-menu-link>Pricing</a>
+                <a class="${active === "login" ? activeTopButton : inactiveTopButton} mt-3 w-full" href="/login" data-link data-public-menu-link>Login</a>
               </div>
             </details>`
       }
@@ -129,6 +132,13 @@ export function landingView({ appConfig }) {
     ["Practice with the community", "Connect with learners and teachers between lessons.", "users"]
   ];
   const communityBullets = ["Meet learners and teachers", "Share community posts", "Find conversation partners", "Stay connected between lessons"];
+  const teacherFirstBenefits = [
+    ["Teachers Keep More of What They Earn", "Our platform is designed to support teachers, not take a large cut from every lesson.", "user"],
+    ["Better Teachers Stay Longer", "Fair compensation helps us attract and retain talented educators from around the world.", "star"],
+    ["More Value for Students", "More of your payment goes directly to the person teaching you.", "users"],
+    ["Simple, Transparent Pricing", "Students only pay a small processing fee when booking a lesson.", "check"],
+    ["Save with Bulk Lesson Packages", "Purchase multiple lessons at once and enjoy a lower cost per lesson.", "book"]
+  ];
   return `
     <section class="min-h-screen bg-brand-snow">
       ${publicNav()}
@@ -178,6 +188,52 @@ export function landingView({ appConfig }) {
             </div>
             <div class="overflow-hidden rounded-lg border border-brand-line bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
               <img class="aspect-[16/10] w-full object-cover" src="/assets/img/landing-booking.png" alt="Teacher profile and booking calendar for a live language lesson" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        <section id="teacher-first" class="bg-brand-snow py-16">
+          <div class="mx-auto w-[min(1180px,calc(100%_-_32px))] px-4">
+            <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
+              <div>
+                <span class="${ui.tagRed}">Teacher-first platform</span>
+                <h2 class="mt-4 text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-4xl">Why Great Teachers Choose LinguaStories</h2>
+                <div class="mt-5 grid gap-4 text-base leading-7 text-brand-charcoal">
+                  <p>Many online teaching platforms take a significant percentage of every lesson a teacher teaches. This means teachers often have to charge higher prices or earn less for the same amount of work.</p>
+                  <p class="text-xl font-black leading-snug text-brand-ink underline decoration-brand-red decoration-2 underline-offset-4">At LinguaStories, we do things differently.</p>
+                  <!--<p>Teachers keep their lesson earnings, allowing them to earn more from every lesson they teach. By creating a platform where teachers are rewarded fairly, we can attract and retain experienced, passionate, and highly qualified language teachers.</p>
+                  <p class="text-xl font-black leading-snug text-brand-ink">This benefits students too.</p>
+                  <p>Because teachers are not losing a large percentage of every lesson to platform commissions, students often receive better value and have access to talented teachers who might otherwise avoid traditional teaching marketplaces.</p>-->
+                </div>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-brand-line bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
+                <img class="aspect-[16/10] w-full object-cover" src="/assets/img/teacher-first-lesson.png" alt="Teacher and students meeting for an online language lesson" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              ${teacherFirstBenefits.map(([title, body, iconName]) => `
+                <article class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
+                  <div class="grid h-10 w-10 place-items-center rounded-lg bg-brand-teal/10 text-brand-teal ring-1 ring-brand-line/50">${icon(iconName, "h-5 w-5")}</div>
+                  <h3 class="mt-4 text-base font-black leading-snug text-brand-ink">${escapeHtml(title)}</h3>
+                  <p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(body)}</p>
+                </article>
+              `).join("")}
+            </div>
+
+            <div class="mt-10 grid gap-4 md:grid-cols-2">
+              <article class="rounded-lg border border-brand-red/25 bg-brand-red/10 p-6">
+                <span class="${ui.tagRed}">For Teachers</span>
+                <h3 class="mt-4 text-2xl font-black leading-tight text-brand-ink">Earn more. Teach freely.</h3>
+                <p class="mt-3 text-base leading-7 text-brand-charcoal">Grow your student base without sacrificing a large portion of your income.</p>
+                <a class="${ui.primary} mt-5" href="/signup" data-link>${icon("user", "h-4 w-4")}<span>Become a Teacher</span></a>
+              </article>
+              <article class="rounded-lg border border-brand-line bg-brand-panel p-6">
+                <span class="${ui.tagGold}">For Students</span>
+                <h3 class="mt-4 text-2xl font-black leading-tight text-brand-ink">Learn at fair prices.</h3>
+                <p class="mt-3 text-base leading-7 text-brand-charcoal">Learn from passionate teachers at fair prices with simple, transparent fees.</p>
+                <a class="${ui.secondary} mt-5" href="/signup" data-link>${icon("search", "h-4 w-4")}<span>Find a Teacher</span></a>
+              </article>
             </div>
           </div>
         </section>
@@ -261,17 +317,17 @@ function authPage(mode, { appConfig }) {
       ];
   return `
     <section class="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#fbfbfd_62%,#f4f4f9_100%)]">
-      ${publicNav(mode, { hideActions: true })}
-      <main class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-10 px-4 py-12 ${isLogin ? "lg:grid-cols-[1fr_430px]" : "lg:grid-cols-[.8fr_1.2fr]"} lg:py-20">
-        <section>
-          <span class="${isLogin ? ui.tagGold : ui.tagRed}">${isLogin ? "Welcome back" : "Join free"}</span>
+      <div class="hidden lg:block">${publicNav(mode, { hideActions: true })}</div>
+      <main class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-6 px-4 py-8 ${isLogin ? "lg:grid-cols-[1fr_430px]" : "lg:grid-cols-[.8fr_1.2fr]"} sm:py-12 lg:gap-10 lg:py-20">
+        <section class="order-1">
+          <span class="${isLogin ? ui.tagGold : ui.tagRed} hidden lg:inline-flex">${isLogin ? "Welcome back" : "Join free"}</span>
           <h1 class="mt-5 max-w-3xl text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${isLogin ? "Continue learning with your teachers and community." : "Create your free LinguaStories account."}</h1>
           <p class="mt-5 max-w-xl text-base leading-7 text-brand-charcoal sm:text-lg sm:leading-8">${isLogin ? "Log in to manage lessons, connect with learners, and keep practicing between sessions." : "Find professional teachers, join the community, and book live lessons when you are ready."}</p>
-          <div class="mt-7 grid max-w-2xl gap-3 sm:grid-cols-3">
+          <div class="mt-7 hidden max-w-2xl gap-3 lg:grid lg:grid-cols-3">
             ${authHighlights.map(([title, body]) => `<article class="rounded-lg border border-brand-line/80 bg-brand-panel/75 p-4 shadow-[0_1px_2px_rgba(29,41,63,.04)]"><h2 class="text-sm font-black text-brand-ink">${escapeHtml(title)}</h2><p class="mt-2 text-xs leading-5 text-brand-graphite">${escapeHtml(body)}</p></article>`).join("")}
           </div>
         </section>
-        <section class="${ui.card} p-6 shadow-2xl">
+        <section class="${ui.card} order-2 p-6 shadow-2xl">
           <h2 class="text-2xl font-black">${isLogin ? "Log in" : "Create free account"}</h2>
           <form class="mt-5 grid gap-4" data-form="${isLogin ? "login" : "register"}">
             ${isLogin ? "" : `<label class="${ui.label}">Name<input class="${ui.input}" name="displayName" required placeholder="Mika Tan"></label>`}
