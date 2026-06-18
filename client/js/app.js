@@ -20,7 +20,7 @@ import {
   teacherStudentsView,
   teacherTemplatesView
 } from "./pages/learning.js";
-import { createVoiceVideoRoomModal, voiceVideoRoomView, voiceVideoRoomsView } from "./pages/voice-video-rooms.js";
+import { createVoiceVideoRoomModal, voiceVideoRoomCardsView, voiceVideoRoomView, voiceVideoRoomsView, voiceVideoRulesModal } from "./pages/voice-video-rooms.js";
 import { languageName, languageSelectOptions } from "./languages.js";
 import { languageSkillLevelOptions } from "./levels.js";
 import { escapeHtml, icon, ui } from "./ui.js";
@@ -52,7 +52,7 @@ const routeGroups = [
   {
     title: "",
     routes: [
-      ["teacherProfileCreate", "How do I become a teacher?"]
+      ["teacherProfileCreate", "How do I become a teacher?", "teacherDashboard"]
     ]
   }
 ];
@@ -125,6 +125,7 @@ let voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
 let voiceVideoRoomsLoaded = false;
 let voiceVideoShowHistory = false;
 let voiceVideoPollTimer = null;
+let voiceVideoPollRoute = "";
 let teacherStudentData = {};
 let accountBillingData = {};
 let teacherStudentFilters = { q: "", language: "", countryOfBirth: "", speaksLanguage: "", nativeSpeaker: "", professionalTutor: "", speakingPracticeOnly: "", maxRate: "" };
@@ -142,7 +143,7 @@ let activeVoiceVideoParticipants = [];
 let livekitRoomConnection = null;
 let livekitRoomTimer = null;
 let endingVoiceVideoRoom = false;
-let livekitWarningFlags = { three: false, one: false, ten: false };
+let livekitWarningFlags = { abandoned: false, three: false, one: false, ten: false };
 let livekitParticipantTiles = new Map();
 let livekitHiddenAudioLayer = null;
 let livekitLocalTracks = [];
@@ -269,7 +270,7 @@ function appPath(id, params = {}) {
 function routeIcon(id) {
   const icons = {
     dashboard: "dashboard",
-    communityConnect: "search",
+    communityConnect: "users",
     voiceVideoRooms: "video",
     findTeacher: "search",
     myLessons: "book",
@@ -279,6 +280,7 @@ function routeIcon(id) {
     teacherBookings: "book",
     teacherStudents: "users",
     teacherLessonNotes: "book",
+    teacherProfileCreate: "trophy",
     profileInfo: "user",
   };
   return icon(icons[id] || "book");
@@ -422,12 +424,12 @@ function renderNav() {
         <section class="grid gap-1.5">
           ${group.title ? `<div class="px-2 text-[11px] font-semibold uppercase text-white/38">${group.title}</div>` : ""}
           ${visibleRoutes
-            .map(([id, label]) => {
+            .map(([id, label, targetId]) => {
               const active =
                 activeNav === id ||
                 (activeNav === "communityLearner" && id === "communityConnect");
               return `
-                <a href="${appPath(id)}" data-app-link class="flex min-h-10 items-center gap-2.5 rounded-lg px-3 text-sm font-medium no-underline transition ${
+                <a href="${appPath(targetId || id)}" data-app-link class="flex min-h-10 items-center gap-2.5 rounded-lg px-3 text-sm font-medium no-underline transition ${
                   active ? "bg-white/12 text-white ring-1 ring-white/10" : "text-white/58 hover:bg-white/[.07] hover:text-white"
                 }">
                   ${routeIcon(id)}
@@ -638,7 +640,8 @@ async function authRequest(path, data) {
 }
 
 async function livekitApi(path, options = {}) {
-  const response = await fetch(path, { headers: { "Content-Type": "application/json" }, ...options });
+  const { quiet = false, ...fetchOptions } = options;
+  const response = await fetch(path, { ...fetchOptions, headers: { "Content-Type": "application/json", ...(fetchOptions.headers || {}) } });
   if (response.status === 401) {
     state = null;
     navigatePublic("/login");
@@ -646,7 +649,7 @@ async function livekitApi(path, options = {}) {
   }
   const body = await response.json().catch(() => ({ error: "Request failed" }));
   if (!response.ok) {
-    showModal(`<h2 class="text-xl font-black">Room unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
+    if (!quiet) showModal(`<h2 class="text-xl font-black">Room unavailable</h2><p class="${ui.muted}">${escapeHtml(body.error || "Request failed")}</p>`);
     return null;
   }
   return body;
@@ -845,11 +848,59 @@ function voiceVideoRoomQuery() {
 
 async function loadVoiceVideoRooms({ force = false, quiet = false } = {}) {
   if (voiceVideoRoomsLoaded && !force) return;
-  const body = await livekitApi(`/api/livekit/rooms${voiceVideoRoomQuery()}`);
+  const body = await livekitApi(`/api/livekit/rooms${voiceVideoRoomQuery()}`, { quiet });
   if (!body) return;
   voiceVideoRooms = body.rooms || [];
   voiceVideoRoomsLoaded = true;
-  if (activeRoute() === "voiceVideoRooms" && (!quiet || !activeVoiceVideoSession)) render();
+  if (activeRoute() === "voiceVideoRooms") {
+    if (quiet) renderVoiceVideoRoomList();
+    else if (!activeVoiceVideoSession) render();
+  }
+}
+
+function renderVoiceVideoRoomList() {
+  const list = document.querySelector("[data-voice-video-room-list]");
+  if (!list || !state) return;
+  list.innerHTML = voiceVideoRoomCardsView({
+    appConfig,
+    voiceVideoRooms,
+    activeVoiceVideoSession,
+    state,
+    voiceVideoShowHistory
+  });
+  bindActions(list);
+}
+
+async function clearActiveVoiceVideoRoom({ quiet = false, message = "" } = {}) {
+  if (endingVoiceVideoRoom) return;
+  endingVoiceVideoRoom = true;
+  try {
+    stopVoiceVideoTimer();
+    await disconnectLiveKitTracks();
+    activeVoiceVideoRoom = null;
+    activeVoiceVideoSession = null;
+    activeVoiceVideoParticipants = [];
+    voiceVideoRoomsLoaded = false;
+    if (activeRoute() === "voiceVideoRoom") history.pushState({}, "", appPath("voiceVideoRooms"));
+    await loadVoiceVideoRooms({ force: true, quiet: true });
+    render();
+    if (message && !quiet) {
+      showModal(`<h2 class="text-xl font-black">Room closed</h2><p class="${ui.muted}">${escapeHtml(message)}</p>`);
+    }
+  } finally {
+    endingVoiceVideoRoom = false;
+  }
+}
+
+async function refreshActiveVoiceVideoRoom({ quiet = true } = {}) {
+  if (!activeVoiceVideoRoom || !activeVoiceVideoSession || endingVoiceVideoRoom) return;
+  const detail = await livekitApi(`/api/livekit/rooms/${activeVoiceVideoRoom.id}`, { quiet: true });
+  if (!detail?.room || detail.room.status !== "active") {
+    await clearActiveVoiceVideoRoom({ quiet, message: "The host closed this room." });
+    return;
+  }
+  activeVoiceVideoRoom = detail.room;
+  activeVoiceVideoParticipants = detail.participants || activeVoiceVideoParticipants;
 }
 
 function updateVoiceVideoCountdown() {
@@ -864,7 +915,16 @@ function updateVoiceVideoCountdown() {
     const seconds = remaining % 60;
     countdown.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
-  if (remaining <= 180 && !livekitWarningFlags.three) {
+  const hostIsAlone = activeVoiceVideoRoom?.ownerUserId === state?.user?.id && Number(activeVoiceVideoRoom?.participantCount || activeVoiceVideoParticipants.length || 0) <= 1;
+  if (hostIsAlone && elapsed >= 120 && elapsed < 180 && !livekitWarningFlags.abandoned) {
+    livekitWarningFlags.abandoned = true;
+    showModal(`<h2 class="text-xl font-black">Waiting for learners</h2><p class="${ui.muted}">This room will close in 60 seconds if no one joins. Invite someone in or join another active room.</p>`);
+  }
+  if (hostIsAlone && elapsed >= 180) {
+    refreshActiveVoiceVideoRoom({ quiet: false });
+    return;
+  }
+  if (remaining <= 180 && !hostIsAlone && !livekitWarningFlags.three) {
     livekitWarningFlags.three = true;
     showModal(`<h2 class="text-xl font-black">3 minutes remaining</h2><p class="${ui.muted}">Keep the practice focused: one phrase, one correction, one retry.</p>`);
   }
@@ -880,13 +940,22 @@ function updateVoiceVideoCountdown() {
 }
 
 function syncVoiceVideoPolling(route = activeRoute()) {
-  if (route === "voiceVideoRooms" && !voiceVideoPollTimer) {
-    voiceVideoPollTimer = window.setInterval(() => loadVoiceVideoRooms({ force: true, quiet: true }), 8000);
+  if (route !== "voiceVideoRooms" && route !== "voiceVideoRoom") {
+    if (voiceVideoPollTimer) window.clearInterval(voiceVideoPollTimer);
+    voiceVideoPollTimer = null;
+    voiceVideoPollRoute = "";
+    return;
   }
-  if (route !== "voiceVideoRooms" && voiceVideoPollTimer) {
+  if (voiceVideoPollTimer && voiceVideoPollRoute === route) return;
+  if (voiceVideoPollTimer) {
     window.clearInterval(voiceVideoPollTimer);
     voiceVideoPollTimer = null;
   }
+  voiceVideoPollRoute = route;
+  voiceVideoPollTimer = window.setInterval(() => {
+    if (activeRoute() === "voiceVideoRooms") loadVoiceVideoRooms({ force: true, quiet: true });
+    if (activeRoute() === "voiceVideoRoom") refreshActiveVoiceVideoRoom({ quiet: true });
+  }, 10000);
 }
 
 function stopVoiceVideoTimer() {
@@ -896,7 +965,7 @@ function stopVoiceVideoTimer() {
 
 function startVoiceVideoTimer() {
   stopVoiceVideoTimer();
-  livekitWarningFlags = { three: false, one: false, ten: false };
+  livekitWarningFlags = { abandoned: false, three: false, one: false, ten: false };
   updateVoiceVideoCountdown();
   livekitRoomTimer = window.setInterval(updateVoiceVideoCountdown, 1000);
 }
@@ -1109,6 +1178,17 @@ function toggleVoiceVideoCamera() {
   setLocalTrackMuted("video", livekitLocalVideoMuted);
 }
 
+function syncVoiceVideoControlLabels() {
+  const audioButton = document.querySelector('[data-action="toggleVoiceVideoAudio"]');
+  const audioLabel = audioButton?.querySelector("span");
+  const cameraButton = document.querySelector('[data-action="toggleVoiceVideoCamera"]');
+  const cameraLabel = cameraButton?.querySelector("span");
+  if (audioLabel) audioLabel.textContent = livekitLocalAudioMuted ? "Unmute myself" : "Mute myself";
+  if (cameraLabel) cameraLabel.textContent = livekitLocalVideoMuted ? "Turn on camera" : "Turn off camera";
+  audioButton?.setAttribute("aria-pressed", String(livekitLocalAudioMuted));
+  cameraButton?.setAttribute("aria-pressed", String(livekitLocalVideoMuted));
+}
+
 function syncClassroomControlLabels() {
   const audioButton = document.querySelector('[data-action="toggleClassroomAudio"] span');
   const cameraButton = document.querySelector('[data-action="toggleClassroomCamera"] span');
@@ -1167,6 +1247,8 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
     livekitLocalTracks = localTracks;
     livekitLocalAudioMuted = false;
     livekitLocalVideoMuted = false;
+    syncVoiceVideoControlLabels();
+    syncClassroomControlLabels();
     for (const track of localTracks) {
       await room.localParticipant.publishTrack(track);
       renderTrack(track, "You", room.localParticipant.identity || "local", true);
@@ -1208,6 +1290,7 @@ async function joinVoiceVideoRoom(roomId) {
   activeVoiceVideoSession = payload.session;
   activeVoiceVideoParticipants = payload.participants || [];
   voiceVideoRoomsLoaded = false;
+  await loadVoiceVideoRooms({ force: true, quiet: true });
   history.pushState({}, "", appPath("voiceVideoRoom", { roomId }));
   render();
   startVoiceVideoTimer();
@@ -1245,6 +1328,7 @@ async function leaveVoiceVideoRoom({ timedOut = false, silent = false } = {}) {
     await disconnectLiveKitTracks();
     const payload = await livekitApi(wasTimedOut ? `/api/livekit/sessions/${sessionId}/end` : `/api/livekit/rooms/${roomId}/leave`, {
       method: "POST",
+      quiet: silent,
       body: JSON.stringify(wasTimedOut ? { status: "timed_out" } : {})
     });
     activeVoiceVideoRoom = null;
@@ -1480,6 +1564,17 @@ function chatContextLabel(conversation) {
   return "Community";
 }
 
+function scrollChatToLatest() {
+  requestAnimationFrame(() => {
+    const scroller = chatDrawer?.querySelector("[data-chat-message-scroll]");
+    if (!scroller) return;
+    scroller.scrollTop = scroller.scrollHeight;
+    requestAnimationFrame(() => {
+      scroller.scrollTop = scroller.scrollHeight;
+    });
+  });
+}
+
 function renderChatDrawer() {
   if (!chatDrawer) return;
   if (!state || !chatOpen) {
@@ -1566,7 +1661,7 @@ function renderChatDrawer() {
                     </div>
                   </div>
                 </div>
-                <div class="overflow-auto bg-white/45 px-4 py-4">
+                <div class="overflow-auto bg-white/45 px-4 py-4" data-chat-message-scroll>
                   <div class="grid gap-3">
                     ${
                       messages.length
@@ -2151,8 +2246,10 @@ function bindActions(root = document) {
         chatMobileScreen = "messages";
         await api(`/api/messages/${id}/read`, { method: "POST" });
         renderChatDrawer();
+        scrollChatToLatest();
       }
       if (action === "openCreateVoiceVideoRoomModal") showModal(createVoiceVideoRoomModal(context()));
+      if (action === "openVoiceVideoRulesModal") showModal(voiceVideoRulesModal());
       if (action === "joinVoiceVideoRoom") await joinVoiceVideoRoom(id);
       if (action === "leaveVoiceVideoRoom") await leaveVoiceVideoRoom();
       if (action === "deleteVoiceVideoRoom") await deleteVoiceVideoRoom(id);
@@ -2163,9 +2260,11 @@ function bindActions(root = document) {
       }
       if (action === "toggleVoiceVideoAudio") {
         toggleVoiceVideoAudio();
+        syncVoiceVideoControlLabels();
       }
       if (action === "toggleVoiceVideoCamera") {
         toggleVoiceVideoCamera();
+        syncVoiceVideoControlLabels();
       }
       if (action === "toggleClassroomAudio") {
         toggleVoiceVideoAudio();
@@ -2659,6 +2758,7 @@ function bindActions(root = document) {
         selectedConversationId = nextConversation?.id || selectedConversationId;
         pendingChatRecipientId = "";
         render();
+        scrollChatToLatest();
       }
       if (form.dataset.form === "comment") {
         await api(`/api/posts/${data.postId}/comments`, { method: "POST", body: JSON.stringify(data) });
@@ -2685,6 +2785,7 @@ function bindActions(root = document) {
         pendingChatRecipientId = "";
         chatOpen = true;
         renderChatDrawer();
+        scrollChatToLatest();
       }
       form.reset();
       } finally {

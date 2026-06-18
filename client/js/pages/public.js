@@ -136,7 +136,7 @@ export function landingView({ appConfig }) {
     ["Teachers Keep More of What They Earn", "Our platform is designed to support teachers, not take a large cut from every lesson.", "user"],
     ["Better Teachers Stay Longer", "Fair compensation helps us attract and retain talented educators from around the world.", "star"],
     ["More Value for Students", "More of your payment goes directly to the person teaching you.", "users"],
-    ["Simple, Transparent Pricing", "Students only pay a small processing fee when booking a lesson.", "check"],
+    ["Simple Lesson Pricing", "See teacher lesson prices clearly before you book.", "check"],
     ["Save with Bulk Lesson Packages", "Purchase multiple lessons at once and enjoy a lower cost per lesson.", "book"]
   ];
   return `
@@ -231,7 +231,7 @@ export function landingView({ appConfig }) {
               <article class="rounded-lg border border-brand-line bg-brand-panel p-6">
                 <span class="${ui.tagGold}">For Students</span>
                 <h3 class="mt-4 text-2xl font-black leading-tight text-brand-ink">Learn at fair prices.</h3>
-                <p class="mt-3 text-base leading-7 text-brand-charcoal">Learn from passionate teachers at fair prices with simple, transparent fees.</p>
+                <p class="mt-3 text-base leading-7 text-brand-charcoal">Learn from passionate teachers at clear lesson prices.</p>
                 <a class="${ui.secondary} mt-5" href="/signup" data-link>${icon("search", "h-4 w-4")}<span>Find a Teacher</span></a>
               </article>
             </div>
@@ -275,9 +275,9 @@ export function landingView({ appConfig }) {
               </article>
               <article class="rounded-lg border border-brand-red/25 bg-brand-red/10 p-6 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
                 <h3 class="text-xl font-black text-brand-ink">Paid Lessons</h3>
-                <p class="mt-3 text-3xl font-black text-brand-ink">Teacher price + small system fee</p>
+                <p class="mt-3 text-3xl font-black text-brand-ink">Teacher-set lesson prices</p>
                 <ul class="mt-5 grid gap-3 text-sm font-semibold text-brand-charcoal">
-                  ${["Verified professional teachers", "Teachers set their own prices", "Teachers keep 100%", "Students pay a small booking fee", "No monthly subscription required"].map((item) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(item)}</span></li>`).join("")}
+                  ${["Verified professional teachers", "Teachers set their own prices", "Teachers keep 100%", "Book lessons when you are ready", "No monthly subscription required"].map((item) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(item)}</span></li>`).join("")}
                 </ul>
               </article>
             </div>

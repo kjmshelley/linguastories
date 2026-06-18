@@ -26,6 +26,42 @@ function languageOptionsWithPlaceholder(appConfig, selected = "") {
   return languageSelectOptions(appConfig, selected, { placeholder: "Choose a language" });
 }
 
+const roomRules = [
+  ["6 minutes", "Voice/video rooms are limited to 6 minutes."],
+  ["4 seats", "Rooms stay small enough for real speaking turns."],
+  ["People first", "Use rooms for quick practice with other learners."]
+];
+
+function roomRulesCards() {
+  return roomRules.map(([title, body]) => `
+    <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+      <strong class="block text-brand-ink">${escapeHtml(title)}</strong>
+      <span class="text-sm text-brand-graphite">${escapeHtml(body)}</span>
+    </div>
+  `).join("");
+}
+
+export function voiceVideoRulesModal() {
+  return `
+    <div>
+      <span class="${ui.tagGold}">Room rules</span>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-brand-ink">Keep rooms focused.</h2>
+      <p class="mt-2 ${ui.muted}">Use the time for short, useful speaking practice with other learners.</p>
+      <div class="mt-5 divide-y divide-brand-line rounded-lg border border-brand-line/80 bg-white/70">
+        ${roomRules.map(([title, body], index) => `
+          <div class="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 p-4">
+            <span class="grid h-8 w-8 place-items-center rounded-full bg-brand-red/10 text-sm font-black text-brand-redDark">${index + 1}</span>
+            <div>
+              <h3 class="text-sm font-black text-brand-ink">${escapeHtml(title)}</h3>
+              <p class="mt-1 text-sm leading-6 text-brand-graphite">${escapeHtml(body)}</p>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function roomImage(room) {
   if (room.imageUrl) {
     return `<img class="h-16 w-20 rounded-lg object-cover" src="${escapeHtml(room.imageUrl)}" alt="${escapeHtml(room.title)} room picture">`;
@@ -54,6 +90,9 @@ function roomAction({ room, activeSession, state }) {
   const active = activeSession?.roomId === room.id;
   const isOwner = room.ownerUserId === state.user.id;
   const full = room.participantCount >= room.maxParticipants;
+  if (room.status !== "active") {
+    return "";
+  }
   if (active) {
     return `<button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(room.id)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>`;
   }
@@ -170,8 +209,8 @@ function activeRoomPanel({ activeRoom, activeSession, activeParticipants, state 
           <p class="mt-2 ${ui.muted}">Use the time for sentence practice, pronunciation checks, or a focused language exchange prompt.</p>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button class="${ui.secondary}" data-action="toggleVoiceVideoAudio">${icon("mic", "h-4 w-4")}<span>Mute myself</span></button>
-          ${activeRoom.roomType === "video" ? `<button class="${ui.secondary}" data-action="toggleVoiceVideoCamera">${icon("video", "h-4 w-4")}<span>Turn off camera</span></button>` : ""}
+          <button class="${ui.secondary}" data-action="toggleVoiceVideoAudio" aria-pressed="false">${icon("mic", "h-4 w-4")}<span>Mute myself</span></button>
+          ${activeRoom.roomType === "video" ? `<button class="${ui.secondary}" data-action="toggleVoiceVideoCamera" aria-pressed="false">${icon("video", "h-4 w-4")}<span>Turn off camera</span></button>` : ""}
           <button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(activeRoom.id)}">${icon("logout", "h-4 w-4")}<span>Leave Room</span></button>
         </div>
       </div>
@@ -240,13 +279,17 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
           <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate">${optionPairs([["true", "Private"], ["false", "Public"]])}</select></label>
         </div>
         <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
-        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-brand-line pt-4">
-          <p class="text-xs font-semibold text-brand-graphite">JPG, PNG, and WebP images are supported.</p>
+        <p class="text-xs font-semibold text-brand-graphite">JPG, PNG, and WebP images are supported.</p>
+        <div class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-brand-line pt-4">
           <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
         </div>
       </form>
     </div>
   `;
+}
+
+export function voiceVideoRoomCardsView({ state, appConfig, voiceVideoRooms = [], voiceVideoShowHistory = false, activeVoiceVideoSession = null }) {
+  return roomCards({ appConfig, rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory });
 }
 
 export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], voiceVideoRoomFilters = {}, voiceVideoShowHistory = false, activeVoiceVideoRoom = null, activeVoiceVideoSession = null, activeVoiceVideoParticipants = [] }) {
@@ -268,14 +311,13 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
             <p class="mt-3 ${ui.muted}">These rooms are for focused language practice, not casual chatting.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <button class="${ui.secondary}" data-action="toggleVoiceVideoHistory">${icon("book", "h-4 w-4")}<span>${voiceVideoShowHistory ? "Hide Past Rooms" : "Past Rooms"}</span></button>
+            <button class="${ui.secondary} lg:hidden" data-action="openVoiceVideoRulesModal">${icon("book", "h-4 w-4")}<span>Show Rules</span></button>
+            <button class="${ui.secondary}" data-action="toggleVoiceVideoHistory">${icon("history", "h-4 w-4")}<span>${voiceVideoShowHistory ? "Hide Past Rooms" : "Past Rooms"}</span></button>
             <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
           </div>
         </div>
-        <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">6 minutes</strong><span class="text-sm text-brand-graphite">Voice/video rooms are limited to 6 minutes.</span></div>
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">4 seats</strong><span class="text-sm text-brand-graphite">Rooms stay small enough for real speaking turns.</span></div>
-          <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><strong class="block text-brand-ink">People first</strong><span class="text-sm text-brand-graphite">Use rooms for quick practice with other learners.</span></div>
+        <div class="mt-5 hidden gap-3 lg:grid lg:grid-cols-3">
+          ${roomRulesCards()}
         </div>
       </section>
 
@@ -294,8 +336,8 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
         </details>
       </section>
 
-      <section class="grid gap-3 lg:grid-cols-2">
-        ${roomCards({ appConfig, rooms: voiceVideoRooms, activeSession: activeVoiceVideoSession, state, showHistory: voiceVideoShowHistory })}
+      <section class="grid gap-3 lg:grid-cols-2" data-voice-video-room-list>
+        ${voiceVideoRoomCardsView({ appConfig, voiceVideoRooms, activeSession: activeVoiceVideoSession, state, voiceVideoShowHistory })}
       </section>
     </div>
   `;

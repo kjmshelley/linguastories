@@ -10,6 +10,12 @@ const CEFR_LEVELS = new Set(LANGUAGE_SKILL_LEVELS);
 const ROOM_TYPES = new Set(["voice", "video"]);
 const MAX_ROOM_PARTICIPANTS = 4;
 const ROOM_LIMIT_MS = SESSION_LIMIT_SECONDS * 1000;
+const ABANDONED_ROOM_WARNING_SECONDS = 2 * 60;
+const ABANDONED_ROOM_LIMIT_SECONDS = 3 * 60;
+const USER_ROOM_CREATION_LIMIT_PER_HOUR = 3;
+const USER_ROOM_CREATION_LIMIT_PER_DAY = 6;
+const HOST_ONLY_ROOM_CREATION_PAUSE_THRESHOLD = 4;
+const MONTHLY_ROOM_USAGE_LIMIT_MINUTES = 40000;
 
 function badRequest(message, status = 400) {
   const error = new Error(message);
@@ -51,6 +57,8 @@ function publicRoomSql() {
 }
 
 function mapRoom(row) {
+  const elapsedSeconds = roomElapsedSeconds(row);
+  const abandonedHostOnly = row.startedAt && row.status === "active" && Boolean(row.hostActive) && Number(row.participantCount || 0) <= 1;
   return {
     id: row.id,
     ownerUserId: row.ownerUserId,
@@ -72,6 +80,9 @@ function mapRoom(row) {
     secondsRemaining: row.startedAt && row.status === "active"
       ? Math.max(0, SESSION_LIMIT_SECONDS - Math.ceil((Date.now() - new Date(row.startedAt).getTime()) / 1000))
       : SESSION_LIMIT_SECONDS,
+    abandonedWarningSecondsRemaining: abandonedHostOnly && elapsedSeconds >= ABANDONED_ROOM_WARNING_SECONDS && elapsedSeconds < ABANDONED_ROOM_LIMIT_SECONDS
+      ? Math.max(0, ABANDONED_ROOM_LIMIT_SECONDS - elapsedSeconds)
+      : null,
     joinedSummary: row.joinedSummary || "",
     createdAt: row.createdAt,
     maxMinutes: 6
@@ -118,19 +129,64 @@ async function uploadRoomImage(userId, payload) {
   });
 }
 
+async function assertRoomCreationAllowed(user) {
+  const [userCreationCounts, hostOnlyRooms, monthlyUsage] = await Promise.all([
+    query(
+      `select count(*) filter (where created_at > now() - interval '1 hour')::int as "hourCount",
+              count(*) filter (where created_at > now() - interval '1 day')::int as "dayCount"
+         from voice_video_rooms
+        where owner_user_id = $1`,
+      [user.id]
+    ),
+    query(
+      `select count(*)::int as count
+         from (
+           select r.id
+             from voice_video_rooms r
+             join voice_video_room_participants p
+               on p.room_id = r.id
+              and p.status = 'joined'
+            where r.status = 'active'
+              and r.is_private = false
+              and r.started_at is not null
+            group by r.id
+           having count(p.id) = 1
+              and bool_or(p.role = 'host')
+         ) available_host_only_rooms`
+    ),
+    query(
+      `select coalesce(sum(extract(epoch from (coalesce(ended_at, now()) - started_at))) / 60, 0)::numeric as minutes
+         from voice_video_rooms
+        where started_at is not null
+          and started_at >= date_trunc('month', now())`
+    )
+  ]);
+
+  const hourCount = Number(userCreationCounts.rows[0]?.hourCount || 0);
+  if (hourCount >= USER_ROOM_CREATION_LIMIT_PER_HOUR) {
+    throw badRequest("You can create up to 3 rooms per 60 minutes. Join an existing room or try again later.", 429);
+  }
+
+  const dayCount = Number(userCreationCounts.rows[0]?.dayCount || 0);
+  if (dayCount >= USER_ROOM_CREATION_LIMIT_PER_DAY) {
+    throw badRequest("You can create up to 6 rooms per day. Join an existing room or try again tomorrow.", 429);
+  }
+
+  const hostOnlyCount = Number(hostOnlyRooms.rows[0]?.count || 0);
+  if (hostOnlyCount >= HOST_ONLY_ROOM_CREATION_PAUSE_THRESHOLD) {
+    throw badRequest("There are already several open rooms waiting for learners. Join one of those rooms before creating a new one.", 429);
+  }
+
+  const monthlyMinutes = Number(monthlyUsage.rows[0]?.minutes || 0);
+  if (monthlyMinutes >= MONTHLY_ROOM_USAGE_LIMIT_MINUTES) {
+    throw badRequest("Monthly Video/Voice room usage has reached the platform limit. New rooms will reopen next month.", 429);
+  }
+}
+
 async function createRoom(user, payload) {
   subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
-  const activeRooms = await query(
-    `select count(*)::int as count
-       from voice_video_rooms
-      where owner_user_id = $1
-        and status = 'active'
-        and created_at > now() - interval '1 hour'`,
-    [user.id]
-  );
-  if (Number(activeRooms.rows[0]?.count || 0) >= 3) {
-    throw badRequest("You can create up to 3 active rooms per hour.", 429);
-  }
+  await expireStaleRooms();
+  await assertRoomCreationAllowed(user);
 
   const title = cleanText(payload.title, { max: 120 });
   if (title.length < 3) throw badRequest("Room title is required");
@@ -230,6 +286,7 @@ async function listRooms(user, filters = {}) {
 
 async function getRoom(user, roomId) {
   subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
+  await expireStaleRooms();
   const result = await query(
     `select r.id,
             r.owner_user_id as "ownerUserId",
@@ -330,6 +387,7 @@ async function deleteLiveKitCloudRoom(roomName) {
 
 async function joinRoom(user, roomId) {
   subscriptionPolicy.requireCapability(user, "voiceVideoRooms");
+  await expireStaleRooms();
   requireLiveKitConfig();
   livekitSdk();
   const client = await pool.connect();
@@ -650,8 +708,49 @@ async function expireStaleRooms() {
         [room.id]
       );
     }
+    const abandonedRooms = await client.query(
+      `update voice_video_rooms
+          set status = 'ended',
+              ended_at = coalesce(ended_at, now())
+        where id in (
+          select r.id
+            from voice_video_rooms r
+            left join voice_video_room_participants p
+              on p.room_id = r.id
+             and p.status = 'joined'
+           where r.status = 'active'
+             and (
+               (r.started_at is not null and r.started_at <= now() - interval '3 minutes')
+               or (r.started_at is null and r.created_at <= now() - interval '3 minutes')
+             )
+           group by r.id
+          having count(p.id) = 0
+              or (count(p.id) = 1 and bool_or(p.role = 'host'))
+        )
+        returning id, livekit_room_name as "livekitRoomName"`
+    );
+    for (const room of abandonedRooms.rows) {
+      await client.query(
+        `update voice_video_room_participants
+            set status = 'left',
+                left_at = coalesce(left_at, now())
+          where room_id = $1
+            and status = 'joined'`,
+        [room.id]
+      );
+      await client.query(
+        `update voice_video_room_sessions
+            set status = 'disconnected',
+                ended_at = coalesce(ended_at, now()),
+                duration_seconds = least(360, greatest(1, ceil(extract(epoch from (now() - started_at)))::int)),
+                billed_minutes = least(6, greatest(1, ceil(extract(epoch from (now() - started_at)) / 60)::int))
+          where room_id = $1
+            and status = 'active'`,
+        [room.id]
+      );
+    }
     await client.query("commit");
-    for (const room of staleRooms.rows) {
+    for (const room of [...staleRooms.rows, ...abandonedRooms.rows]) {
       await deleteLiveKitCloudRoom(room.livekitRoomName);
     }
   } catch (error) {

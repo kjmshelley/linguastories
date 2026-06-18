@@ -15,19 +15,19 @@ const livekitActionRateLimit = rateLimit({
   message: "Too many room actions. Please try again shortly."
 });
 
-const livekitCreateRateLimit = rateLimit({
-  keyPrefix: "livekit-create",
-  windowMs: 60 * 60 * 1000,
-  max: 6,
-  message: "Too many room creation attempts. Please try again later."
+const livekitReadRateLimit = rateLimit({
+  keyPrefix: "livekit-read",
+  windowMs: 15 * 60 * 1000,
+  max: 600,
+  message: "Too many room refreshes. Please try again shortly."
 });
 
 router.use(requireAuth);
 router.param("id", validateUuidParam);
 router.param("participantId", validateUuidParam);
 
-router.get("/rooms", livekitActionRateLimit, asyncHandler(controller.listRooms));
-router.post("/rooms", livekitCreateRateLimit, validateBody({
+router.get("/rooms", livekitReadRateLimit, asyncHandler(controller.listRooms));
+router.post("/rooms", validateBody({
   title: { type: "string", required: true, min: 3, max: 120, label: "Room title" },
   description: { type: "string", max: 1000, label: "Description" },
   roomType: { type: "enum", options: ["voice", "video"], fallback: "voice", label: "Room type" },
@@ -39,7 +39,7 @@ router.post("/rooms", livekitCreateRateLimit, validateBody({
   imageDataUrl: { type: "dataUrl", max: 800000, label: "Room image" },
   imageFileName: { type: "string", max: 180, label: "Room image file name" }
 }), asyncHandler(controller.createRoom));
-router.get("/rooms/:id", livekitActionRateLimit, asyncHandler(controller.getRoom));
+router.get("/rooms/:id", livekitReadRateLimit, asyncHandler(controller.getRoom));
 router.post("/rooms/:id/join", livekitActionRateLimit, asyncHandler(controller.joinRoom));
 router.post("/rooms/:id/leave", livekitActionRateLimit, asyncHandler(controller.leaveRoom));
 router.delete("/rooms/:id", livekitActionRateLimit, asyncHandler(controller.deleteRoom));
