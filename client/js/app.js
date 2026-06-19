@@ -1155,11 +1155,23 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
 }
 
 function renderSubscribedRemoteTracks(participant) {
-  participant.trackPublications?.forEach((publication) => {
+  const publications = new Map();
+  participant.trackPublications?.forEach((publication, key) => publications.set(key || publication.trackSid, publication));
+  participant.videoTrackPublications?.forEach((publication, key) => publications.set(key || publication.trackSid, publication));
+  participant.audioTrackPublications?.forEach((publication, key) => publications.set(key || publication.trackSid, publication));
+  publications.forEach((publication) => {
     publication.setSubscribed?.(true);
     const track = publication.track || publication.videoTrack || publication.audioTrack;
     if (!track || publication.isSubscribed === false) return;
     renderTrack(track, participant.name || "Participant", participant.identity, false);
+  });
+}
+
+function renderAllRemoteParticipants(room) {
+  if (!room || livekitRoomConnection !== room) return;
+  room?.remoteParticipants?.forEach((participant) => {
+    ensureParticipantTile(participant.identity, participant.name || "Participant");
+    renderSubscribedRemoteTracks(participant);
   });
 }
 
@@ -1320,10 +1332,9 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
     await room.connect(payload.livekitUrl, payload.token);
     if (stage) stage.innerHTML = "";
     ensureParticipantTile(room.localParticipant.identity || "local", "You", true);
-    room.remoteParticipants?.forEach((participant) => {
-      ensureParticipantTile(participant.identity, participant.name || "Participant");
-      renderSubscribedRemoteTracks(participant);
-    });
+    renderAllRemoteParticipants(room);
+    window.setTimeout(() => renderAllRemoteParticipants(room), 500);
+    window.setTimeout(() => renderAllRemoteParticipants(room), 1500);
     livekitLocalTracks = localTracks;
     applyLiveKitLocalMediaState();
     syncVoiceVideoControlLabels();
