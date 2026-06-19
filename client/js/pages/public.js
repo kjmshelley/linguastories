@@ -156,7 +156,7 @@ export function landingView({ appConfig }) {
               <p class="mt-5 max-w-2xl text-base leading-7 text-white/84 sm:text-lg sm:leading-8">Book live online lessons, meet other learners, and keep practicing between sessions.</p>
               <div class="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-black text-brand-ink no-underline shadow-[0_14px_28px_rgba(0,0,0,.22)] transition hover:-translate-y-0.5 hover:bg-brand-snow" href="/signup" data-link>${icon("search")}<span>Find a Teacher</span></a>
-                <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-5 py-3 text-sm font-black text-white no-underline backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/16" href="/signup" data-link>${icon("add")}<span>Join Free</span></a>
+                <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-5 py-3 text-sm font-black text-white no-underline backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/16" href="/signup" data-link>${icon("plus")}<span>Join Free</span></a>
               </div>
             </div>
           </div>

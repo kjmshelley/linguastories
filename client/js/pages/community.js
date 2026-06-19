@@ -80,7 +80,7 @@ function communityFeedShell({ action = "", children }) {
 }
 
 function postButton() {
-  return `<button class="${ui.primary}" data-action="openCreatePostModal">${icon("message", "h-4 w-4")}<span>Post</span></button>`;
+  return `<button class="${ui.primary}" data-action="openCreatePostModal">${icon("message-circle", "h-4 w-4")}<span>Post</span></button>`;
 }
 
 export function createPostModal() {
@@ -94,7 +94,7 @@ export function createPostModal() {
         <label class="${ui.label}">Picture<input class="${ui.input}" name="postImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
         <label class="${ui.label}">Post<textarea class="${ui.input} min-h-28" name="body" maxlength="5000" required placeholder="Share what you practiced, what helped, or what you want help with."></textarea></label>
         <div class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-brand-line pt-4">
-          <button class="${ui.primary}" type="submit" data-pending-label="Posting">${icon("message", "h-4 w-4")}<span>Post</span></button>
+          <button class="${ui.primary}" type="submit" data-pending-label="Posting">${icon("message-circle", "h-4 w-4")}<span>Post</span></button>
         </div>
       </form>
     </div>
@@ -341,7 +341,7 @@ export function communityPostView({ state, appPath, activePostId }) {
     subtitle: `${displayName(post)} shared a ${String(post.type || "post").toLowerCase()}.`,
     children: `
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-brand-line/70 px-5 py-4 sm:px-7">
-        <a class="${ui.secondary}" href="${appPath("communityConnect")}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Community</span></a>
+        <a class="${ui.secondary}" href="${appPath("communityConnect")}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Back to Community</span></a>
       </div>
       ${feedRow(post, { appPath, currentUserId: state.user.id, showFollow: true, detail: true })}
       <section class="px-5 py-5 sm:px-7">

@@ -64,6 +64,54 @@ function classroomAction(lesson = {}, currentUserId = "", className = ui.seconda
   return availability.label ? `<span class="${ui.tag}">${escapeHtml(availability.label)}</span>` : "";
 }
 
+function introVideoEmbedUrl(profile = {}) {
+  if (!profile.videoIntroUrl) return "";
+  try {
+    const url = new URL(profile.videoIntroUrl);
+    const hostname = url.hostname.replace(/^www\./, "");
+    if (hostname === "youtu.be") {
+      const id = url.pathname.split("/").filter(Boolean)[0];
+      return id ? `https://www.youtube.com/embed/${encodeURIComponent(id)}` : "";
+    }
+    if (hostname.endsWith("youtube.com")) {
+      const id = url.searchParams.get("v") || (url.pathname.startsWith("/embed/") ? url.pathname.split("/")[2] : "");
+      return id ? `https://www.youtube.com/embed/${encodeURIComponent(id)}` : "";
+    }
+    if (hostname.endsWith("vimeo.com")) {
+      const id = url.pathname.split("/").filter(Boolean).find((part) => /^\d+$/.test(part));
+      return id ? `https://player.vimeo.com/video/${encodeURIComponent(id)}` : "";
+    }
+  } catch (_error) {
+    return "";
+  }
+  return "";
+}
+
+function teacherIntroVideoCard(profile = {}) {
+  const embedUrl = introVideoEmbedUrl(profile);
+  return `
+    <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+      ${teacherCardTitle("video", "Intro Video")}
+      ${
+        embedUrl
+          ? `<div class="mt-3 overflow-hidden rounded-lg border border-brand-line bg-brand-ink">
+              <iframe class="aspect-video w-full" src="${escapeHtml(embedUrl)}" title="${escapeHtml(profile.displayName || "Teacher")} intro video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>`
+          : `<div class="mt-3 grid aspect-video place-items-center rounded-lg border border-dashed border-brand-line bg-brand-snow p-4 text-center text-sm font-semibold text-brand-graphite">No intro video listed.</div>`
+      }
+    </div>
+  `;
+}
+
+function teacherCardTitle(iconName, title) {
+  return `
+    <h3 class="flex items-center gap-2 font-bold text-brand-ink">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-mist text-brand-redDark ring-1 ring-brand-line/70">${icon(iconName, "h-4 w-4")}</span>
+      <span>${escapeHtml(title)}</span>
+    </h3>
+  `;
+}
+
 function payoutAccountStatus(account = {}) {
   if (!account.configured) return { tone: ui.tagRed, label: "Stripe not configured", body: "Stripe needs to be configured before teacher payouts can be set up." };
   if (account.ready) return { tone: ui.tagGold, label: "Payouts ready", body: "Student payments can be routed to your teacher payout account." };
@@ -85,7 +133,7 @@ function teacherPayoutPanel(account = {}) {
           ${account.disabledReason ? `<p class="mt-2 text-xs font-semibold text-brand-redDark">${escapeHtml(account.disabledReason)}</p>` : ""}
         </div>
         <div class="flex flex-wrap gap-2">
-          ${!account.configured ? "" : account.ready ? `<button class="${ui.secondary}" data-action="syncTeacherPayoutAccount">${icon("check", "h-4 w-4")}<span>Refresh status</span></button>` : `<button class="${ui.primary}" data-action="startTeacherPayoutOnboarding">${icon("arrowRight", "h-4 w-4")}<span>${account.stripeAccountId ? "Continue payout setup" : "Set up payouts"}</span></button>`}
+          ${!account.configured ? "" : account.ready ? `<button class="${ui.secondary}" data-action="syncTeacherPayoutAccount">${icon("check", "h-4 w-4")}<span>Refresh status</span></button>` : `<button class="${ui.primary}" data-action="startTeacherPayoutOnboarding">${icon("arrow-right", "h-4 w-4")}<span>${account.stripeAccountId ? "Continue payout setup" : "Set up payouts"}</span></button>`}
           ${account.stripeAccountId && !account.ready ? `<button class="${ui.secondary}" data-action="syncTeacherPayoutAccount">${icon("check", "h-4 w-4")}<span>Refresh status</span></button>` : ""}
         </div>
       </div>
@@ -114,7 +162,7 @@ function teacherLanguageRow({ appConfig, role, language = "", level = "A1" }) {
     <div class="grid gap-2 rounded-lg border border-brand-line/70 bg-white/65 p-3 sm:grid-cols-[minmax(0,1fr)_220px_auto] sm:items-end" data-teacher-language-row="${escapeHtml(role)}">
       <label class="${ui.label}">Language<select class="${ui.input}" name="${escapeHtml(role)}Language">${languageOptions(appConfig, language)}</select></label>
       <label class="${ui.label}">Skill level<select class="${ui.input}" name="${escapeHtml(role)}Level">${levelOptions(level || "A1")}</select></label>
-      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash-2", "h-4 w-4")}<span>Remove</span></button>
     </div>
   `;
 }
@@ -128,7 +176,7 @@ function teacherLanguagePanel({ appConfig, role, title, items = [], fallbackLang
           <h3 class="text-sm font-bold uppercase text-brand-graphite">${escapeHtml(title)}</h3>
           <p class="mt-1 text-xs font-semibold text-brand-graphite">Add each language with its own skill level.</p>
         </div>
-        <button class="${ui.secondary} px-3 py-2 text-xs" type="button" data-action="addTeacherLanguageRow:${escapeHtml(role)}">${icon("add", "h-3.5 w-3.5")}<span>Add</span></button>
+        <button class="${ui.secondary} px-3 py-2 text-xs" type="button" data-action="addTeacherLanguageRow:${escapeHtml(role)}">${icon("plus", "h-3.5 w-3.5")}<span>Add</span></button>
       </div>
       <div class="mt-3 grid gap-2" data-teacher-language-list="${escapeHtml(role)}" data-empty-language="${escapeHtml(fallbackLanguage)}">
         ${(rows.length ? rows : [{ language: "", cefrLevel: fallbackLevel }]).map((item) => teacherLanguageRow({ appConfig, role, language: item.language, level: item.cefrLevel || fallbackLevel })).join("")}
@@ -189,13 +237,8 @@ function teacherLanguageList(appConfig, languages = [], role = "teaches") {
   const items = languages.filter((item) => item.role === role);
   if (!items.length) return `<p class="${ui.muted}">Not listed yet.</p>`;
   return `
-    <div class="mt-3 grid gap-2">
-      ${items.map((item) => `
-        <div class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-brand-line/70 bg-brand-snow px-3 py-2">
-          <span class="text-sm font-bold text-brand-ink">${escapeHtml(languageName(appConfig, item.language))}</span>
-          <span class="${ui.tag}">${escapeHtml(languageSkillLevelLabel(item.cefrLevel || "A1"))}</span>
-        </div>
-      `).join("")}
+    <div class="mt-3 flex flex-wrap gap-2">
+      ${items.map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))} · ${escapeHtml(languageSkillLevelLabel(item.cefrLevel || "A1"))}</span>`).join("")}
     </div>
   `;
 }
@@ -210,9 +253,10 @@ function teacherPracticeFocus(profile = {}) {
 
 function teacherTextSection(title, body) {
   if (!body) return "";
+  const iconName = title === "Teaching style" ? "hand-coins" : title === "Experience" ? "book-open" : title === "Certifications" ? "trophy" : "bookmark";
   return `
     <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-      <h3 class="font-bold text-brand-ink">${escapeHtml(title)}</h3>
+      ${teacherCardTitle(iconName, title)}
       <p class="mt-2 whitespace-pre-line text-sm leading-7 text-brand-graphite">${escapeHtml(body)}</p>
     </div>
   `;
@@ -227,10 +271,29 @@ function teacherProfileTags(tags = []) {
   `;
 }
 
+function detailBadge({ iconName, label, value, tone = "default" }) {
+  const toneClass = tone === "gold"
+    ? "bg-brand-mist text-brand-brown ring-brand-line/70"
+    : tone === "red"
+      ? "bg-brand-red/10 text-brand-redDark ring-brand-red/15"
+      : tone === "dark"
+        ? "bg-brand-sidebar text-white ring-brand-sidebar/25"
+        : "bg-white/70 text-brand-charcoal ring-brand-line/80";
+  return `
+    <span class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold ${toneClass} ring-1">
+      ${icon(iconName, "h-4 w-4")}
+      <span class="grid gap-0.5">
+        <span class="text-[10px] uppercase tracking-[.12em] opacity-70">${escapeHtml(label)}</span>
+        <span>${escapeHtml(value)}</span>
+      </span>
+    </span>
+  `;
+}
+
 function emptyState(title, body) {
   return `
     <div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center">
-      <div class="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-brand-mist text-brand-redDark">${icon("book", "h-5 w-5")}</div>
+      <div class="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-brand-mist text-brand-redDark">${icon("book-open", "h-5 w-5")}</div>
       <h3 class="mt-4 text-lg font-bold text-brand-ink">${escapeHtml(title)}</h3>
       <p class="mt-2 ${ui.muted}">${escapeHtml(body)}</p>
     </div>
@@ -305,9 +368,9 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
                   <span class="${ui.tagGold}">${money(teacher.hourlyRateUsd)}/hr</span>
                 </div>
                 <div class="mt-5 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
-                  <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(teacher.userId)}:${escapeHtml(teacher.id)}">${icon("message", "h-4 w-4")}<span>Message</span></button>
+                  <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(teacher.userId)}:${escapeHtml(teacher.id)}">${icon("message-circle", "h-4 w-4")}<span>Message</span></button>
                   <a class="${ui.secondary}" href="/app/learning/teacher-profile/${escapeHtml(teacher.id)}" data-app-link>${icon("user", "h-4 w-4")}<span>View</span></a>
-                  ${PAYOUT_SETUP_DISABLED || teacher.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: teacher.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
+                  ${PAYOUT_SETUP_DISABLED || teacher.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: teacher.id }))}" data-app-link>${icon("book-open", "h-4 w-4")}<span>Book</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
                 </div>
               </article>
             `).join("")
@@ -332,58 +395,53 @@ export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, ap
               <span class="${ui.tagGold}">${profile.averageRating ? `${profile.averageRating.toFixed(1)} stars` : "New teacher"}</span>
               <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">${escapeHtml(profile.displayName)}</h2>
               <p class="mt-2 text-lg font-semibold text-brand-charcoal">${escapeHtml(profile.headline)}</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                ${(profile.languages || []).filter((item) => item.role === "teaches").map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))} · ${escapeHtml(languageSkillLevelLabel(item.cefrLevel || "A1"))}</span>`).join("")}
-                <span class="${profile.professionalTutor ? ui.tagGold : ui.tag}">${escapeHtml(teacherTutorType(profile))}</span>
-                <span class="${profile.speakingPracticeOnly ? ui.tag : ui.tagGold}">${escapeHtml(teacherPracticeFocus(profile))}</span>
-                <span class="${ui.tagGold}">${money(profile.hourlyRateUsd)}/hr</span>
-              </div>
             </div>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(profile.userId)}:${escapeHtml(profile.id)}">${icon("message", "h-4 w-4")}<span>Message</span></button>
-            ${PAYOUT_SETUP_DISABLED || profile.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: profile.id }))}" data-app-link>${icon("book", "h-4 w-4")}<span>Book Lesson</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
+          <div class="flex flex-wrap items-center gap-2">
+            <button class="${ui.secondary}" data-action="messageTeacher:${escapeHtml(profile.userId)}:${escapeHtml(profile.id)}">${icon("message-circle", "h-4 w-4")}<span>Message</span></button>
+            ${PAYOUT_SETUP_DISABLED || profile.payoutAccount?.ready ? `<a class="${ui.primary}" href="${escapeHtml(appPath("bookLesson", { teacherProfileId: profile.id }))}" data-app-link>${icon("book-open", "h-4 w-4")}<span>Book Lesson</span></a>` : `<span class="${ui.tag}">Payout setup pending</span>`}
           </div>
         </div>
         <div class="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div class="grid gap-4">
-            <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">About</h3><p class="mt-2 text-sm leading-7 text-brand-graphite">${escapeHtml(profile.bio)}</p></div>
+          ${teacherIntroVideoCard(profile)}
+          <aside class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
+            ${teacherCardTitle("book-user", "Tutor details")}
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${detailBadge({ iconName: profile.professionalTutor ? "trophy" : "users", label: "Tutor type", value: teacherTutorType(profile), tone: profile.professionalTutor ? "gold" : "default" })}
+              ${detailBadge({ iconName: profile.speakingPracticeOnly ? "mic" : "book-open", label: "Focus", value: teacherPracticeFocus(profile), tone: profile.speakingPracticeOnly ? "red" : "dark" })}
+              ${detailBadge({ iconName: "users", label: "Students taught", value: Number(profile.studentCount || 0).toLocaleString(), tone: Number(profile.studentCount || 0) > 0 ? "gold" : "default" })}
+            </div>
+            <div class="mt-5 border-t border-brand-line pt-4">
+              ${teacherCardTitle("calendar", "Booking")}
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${detailBadge({ iconName: "clock", label: "Lessons", value: `${profile.minLessonMinutes}-${profile.maxLessonMinutes} minutes`, tone: "default" })}
+              ${detailBadge({ iconName: "banknote-check", label: "Trial", value: profile.trialRateUsd === null ? "Not listed" : money(profile.trialRateUsd), tone: profile.trialRateUsd === null ? "default" : "gold" })}
+              ${detailBadge({ iconName: "coins", label: "Booking Price", value: `${money(profile.hourlyRateUsd)}/hr`, tone: "gold" })}
+              ${detailBadge({ iconName: "users", label: "Group lessons", value: profile.groupLessonEnabled ? "Available" : "Not available", tone: profile.groupLessonEnabled ? "red" : "default" })}
+            </div>
+          </aside>
+          <div class="grid gap-4 lg:col-start-1">
+            <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">${teacherCardTitle("user", "About")}<p class="mt-2 text-sm leading-7 text-brand-graphite">${escapeHtml(profile.bio)}</p></div>
             <div class="grid gap-4 md:grid-cols-2">
               <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-                <h3 class="font-bold text-brand-ink">Teaches</h3>
+                ${teacherCardTitle("book-open-text", "Teaches")}
                 ${teacherLanguageList(appConfig, profile.languages || [], "teaches")}
               </div>
               <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-                <h3 class="font-bold text-brand-ink">Speaks</h3>
+                ${teacherCardTitle("mic-vocal", "Speaks")}
                 ${teacherLanguageList(appConfig, profile.languages || [], "speaks")}
               </div>
             </div>
-            ${profile.videoIntroUrl ? `<div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">Intro Video</h3><a class="mt-2 inline-flex text-sm font-bold text-brand-red" href="${escapeHtml(profile.videoIntroUrl)}" target="_blank" rel="noreferrer">Open ${escapeHtml(profile.videoProvider || "video")}</a></div>` : ""}
             ${teacherTextSection("Teaching style", profile.teachingStyle)}
             ${teacherTextSection("Experience", profile.experienceSummary)}
             ${teacherTextSection("Certifications", profile.certifications)}
             <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-              <h3 class="font-bold text-brand-ink">Tags</h3>
+              ${teacherCardTitle("tags", "Tags")}
               ${teacherProfileTags(profile.tags || [])}
             </div>
-            <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4"><h3 class="font-bold text-brand-ink">Reviews</h3><div class="mt-3 grid gap-3">${reviews.length ? reviews.map((review) => `<article class="rounded-lg bg-brand-snow p-3"><strong class="text-sm text-brand-ink">${review.rating} stars · ${escapeHtml(review.studentName)}</strong><p class="mt-1 text-sm text-brand-graphite">${escapeHtml(review.body || "")}</p></article>`).join("") : `<p class="${ui.muted}">No reviews yet.</p>`}</div></div>
+            <div class="rounded-lg border border-brand-line/70 bg-white/60 p-4">${teacherCardTitle("star", "Reviews")}<div class="mt-3 grid gap-3">${reviews.length ? reviews.map((review) => `<article class="rounded-lg bg-brand-snow p-3"><strong class="text-sm text-brand-ink">${review.rating} stars · ${escapeHtml(review.studentName)}</strong><p class="mt-1 text-sm text-brand-graphite">${escapeHtml(review.body || "")}</p></article>`).join("") : `<p class="${ui.muted}">No reviews yet.</p>`}</div></div>
           </div>
-          <aside class="rounded-lg border border-brand-line/70 bg-white/60 p-4">
-            <h3 class="font-bold text-brand-ink">Tutor details</h3>
-            <div class="mt-3 grid gap-2 text-sm font-semibold text-brand-charcoal">
-              <span>Tutor type: ${escapeHtml(teacherTutorType(profile))}</span>
-              <span>Practice focus: ${escapeHtml(teacherPracticeFocus(profile))}</span>
-              ${profile.videoIntroUrl ? `<span class="break-words">Intro video URL: <a class="font-bold text-brand-red" href="${escapeHtml(profile.videoIntroUrl)}" target="_blank" rel="noreferrer">${escapeHtml(profile.videoIntroUrl)}</a></span>` : `<span>Intro video URL: Not listed</span>`}
-            </div>
-            <h3 class="mt-5 border-t border-brand-line pt-4 font-bold text-brand-ink">Booking</h3>
-            <div class="mt-3 grid gap-2 text-sm font-semibold text-brand-charcoal">
-              <span>Lessons: ${profile.minLessonMinutes}-${profile.maxLessonMinutes} minutes</span>
-              <span>Trial: ${profile.trialRateUsd === null ? "Not listed" : money(profile.trialRateUsd)}</span>
-              <span>Group lessons: ${profile.groupLessonEnabled ? "Available" : "Not available"}</span>
-              <span>Teacher keeps: 100% of listed lesson price</span>
-              <span>Platform fee: $0.50 paid by student</span>
-            </div>
-          </aside>
         </div>
       </section>
     </div>
@@ -442,7 +500,7 @@ export function teacherProfileCreateView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Create Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${teacherProfileForm(ctx)}
@@ -460,7 +518,7 @@ export function teacherProfileEditView(ctx) {
           <span class="${ui.tagGold}">Teacher profile</span>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Edit Teacher Profile</h2>
         </div>
-        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(ctx.appPath("teacherDashboard"))}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Back to Teacher Workspace</span></a>
       </section>
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         ${profile ? teacherProfileForm({ ...ctx, profile }) : emptyState("Profile not found", "This teacher profile could not be loaded.")}
@@ -508,7 +566,7 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
     <div>
       <div class="grid gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
         <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-          <a class="inline-flex items-center gap-2 text-sm font-bold text-brand-red" href="${escapeHtml(appPath("teacherProfileDetail", { teacherProfileId: profile.id }))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>Teacher profile</span></a>
+          <a class="inline-flex items-center gap-2 text-sm font-bold text-brand-red" href="${escapeHtml(appPath("teacherProfileDetail", { teacherProfileId: profile.id }))}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Teacher profile</span></a>
           <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-start">
             ${profileImage(profile, "h-24 w-24")}
             <div class="min-w-0 flex-1">
@@ -561,12 +619,14 @@ export function bookLessonView({ appConfig, teacherStudentData = {}, bookingSele
           <div class="mt-4 grid gap-3 text-sm font-semibold text-brand-charcoal">
             <div class="flex justify-between gap-3"><span>Date/time</span><strong class="text-right text-brand-ink">${selectedSlot ? dateTime(selectedSlot.startsAt) : "Select a slot"}</strong></div>
             <div class="flex justify-between gap-3"><span>Your timezone</span><strong class="text-right text-brand-ink">${escapeHtml(Intl.DateTimeFormat().resolvedOptions().timeZone || "Local")}</strong></div>
-            <div class="flex justify-between gap-3"><span>Teacher price</span><strong class="text-brand-ink">${money(calendar.price?.lessonPriceUsd)}</strong></div>
-            <div class="flex justify-between gap-3"><span>Platform fee</span><strong class="text-brand-ink">$0.50</strong></div>
+            <div class="rounded-lg border border-brand-line/70 bg-brand-mist/60 p-3">
+              <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-[.12em] text-brand-graphite">${icon("coins", "h-4 w-4")}<span>Lesson price</span></span>
+              <strong class="mt-2 block text-2xl text-brand-ink">${money(calendar.price?.lessonPriceUsd)}</strong>
+            </div>
             <div class="flex justify-between gap-3 border-t border-brand-line pt-3 text-base"><span>Total</span><strong class="text-brand-ink">${money(calendar.price?.totalStudentChargeUsd)}</strong></div>
           </div>
-          <button class="${selectedSlot && !payoutSetupRequired ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot && !payoutSetupRequired ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("arrowRight", "h-4 w-4")}<span>${payoutSetupRequired ? "Payout setup pending" : PAYOUT_SETUP_DISABLED ? "Request Booking" : "Continue with Payment"}</span></button>
-          <p class="mt-3 text-xs font-semibold leading-5 text-brand-graphite">${payoutSetupRequired ? "This teacher is not accepting paid lesson bookings yet." : PAYOUT_SETUP_DISABLED ? "The teacher can confirm this booking from Teacher Workspace." : "Teacher keeps 100% of the listed lesson price."}</p>
+          <button class="${selectedSlot && !payoutSetupRequired ? ui.primary : `${ui.secondary} pointer-events-none opacity-60`} mt-5 w-full justify-center" ${selectedSlot && !payoutSetupRequired ? `data-action="checkoutLesson:${escapeHtml(profile.id)}"` : "disabled"}>${icon("arrow-right", "h-4 w-4")}<span>${payoutSetupRequired ? "Payout setup pending" : PAYOUT_SETUP_DISABLED ? "Request Booking" : "Continue with Payment"}</span></button>
+          <p class="mt-3 text-xs font-semibold leading-5 text-brand-graphite">${payoutSetupRequired ? "This teacher is not accepting paid lesson bookings yet." : PAYOUT_SETUP_DISABLED ? "The teacher can confirm this booking from Teacher Workspace." : "Review the lesson details before continuing."}</p>
         </aside>
       </div>
     </div>
@@ -591,8 +651,8 @@ function lessonsTable(lessons = [], state) {
                 <td class="px-4 py-3 text-right" data-label="Action">
                   <div class="flex flex-wrap justify-end gap-2">
                     ${classroom}
-                    ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrowRight", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
-                    ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
+                    ${lesson.status === "pending_payment" ? `<button class="${ui.secondary}" data-action="syncLessonPayment:${escapeHtml(lesson.id)}">${icon("arrow-right", "h-4 w-4")}<span>Sync payment</span></button>` : ""}
+                    ${["pending_payment", "confirmed"].includes(lesson.status) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash-2", "h-4 w-4")}<span>Cancel</span></button>` : ""}
                   </div>
                 </td>
               </tr>
@@ -686,9 +746,9 @@ function myCalendarPanel({ teacherStudentData = {}, myLearningWeekStart = "", st
           <p class="${ui.muted}">${visibleCount} scheduled class${visibleCount === 1 ? "" : "es"} this week.</p>
         </div>
         <div class="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2 sm:flex sm:flex-wrap">
-          <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:prev" aria-label="Previous week">${icon("chevronLeft", "h-4 w-4")}</button>
+          <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:prev" aria-label="Previous week">${icon("chevron-left", "h-4 w-4")}</button>
           <span class="min-w-0 text-center text-sm font-bold text-brand-ink sm:min-w-[190px]">${escapeHtml(weekRangeLabel(days))}</span>
-          <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:next" aria-label="Next week">${icon("chevronRight", "h-4 w-4")}</button>
+          <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink transition hover:border-brand-orange/60 hover:bg-brand-mist/50" data-action="shiftMyLearningWeek:next" aria-label="Next week">${icon("chevron-right", "h-4 w-4")}</button>
           <button class="${ui.secondary} col-span-3 sm:col-span-1" data-action="shiftMyLearningWeek:today">${icon("calendar", "h-4 w-4")}<span>Today</span></button>
         </div>
       </div>
@@ -742,7 +802,7 @@ export function myLearningView({ teacherStudentData = {}, state, appPath, myLear
         <div>
           <div class="flex flex-wrap justify-start gap-2" role="tablist" aria-label="My lessons views">
             ${tabs.map(([id, label]) => `
-              <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyLearningTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(id === "teachers" ? "users" : id === "calendar" ? "calendar" : "book", "h-4 w-4")}<span>${label}</span></button>
+              <button class="${activeTab === id ? ui.primary : ui.secondary}" data-action="setMyLearningTab:${id}" role="tab" aria-selected="${activeTab === id ? "true" : "false"}">${icon(id === "teachers" ? "users" : id === "calendar" ? "calendar" : "book-open", "h-4 w-4")}<span>${label}</span></button>
             `).join("")}
           </div>
         </div>
@@ -831,7 +891,7 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div><h2 class="text-2xl font-bold text-brand-ink">Teacher Profile</h2><p class="mt-1 ${ui.muted}">Create and manage teacher profiles for admin approval.</p></div>
-          <a class="${ui.primary}" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("add", "h-4 w-4")}<span>${profiles.length ? "Add Teacher Profile" : "Create a teacher profile..."}</span></a>
+          <a class="${ui.primary}" href="${escapeHtml(appPath("teacherProfileCreate"))}" data-app-link>${icon("plus", "h-4 w-4")}<span>${profiles.length ? "Add Teacher Profile" : "Create a teacher profile..."}</span></a>
         </div>
         <div class="mt-5 grid gap-4 md:grid-cols-2">
           ${profiles.length ? profiles.map((profile) => `
@@ -847,8 +907,8 @@ export function teacherProfilesPanel({ appPath, teacherStudentData = {} }) {
               </div>
               <div class="mt-4 flex flex-wrap justify-end gap-2">
                 ${isDisabledTeacherProfile(profile.status) ? `<button class="${ui.primary}" data-action="enableTeacherProfile:${escapeHtml(profile.id)}">${icon("check", "h-4 w-4")}<span>Request re-enable</span></button>` : ""}
-                <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("edit", "h-4 w-4")}<span>Edit</span></a>
-                <button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button>
+                <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherProfileEdit", { teacherProfileId: profile.id }))}" data-app-link>${icon("pencil", "h-4 w-4")}<span>Edit</span></a>
+                <button class="${ui.danger}" data-action="deleteTeacherProfile:${escapeHtml(profile.id)}">${icon("trash-2", "h-4 w-4")}<span>Delete</span></button>
               </div>
             </article>
           `).join("") : emptyState("No teacher profiles yet", "Create a teacher profile to apply for approval.")}
@@ -871,7 +931,7 @@ export function teacherAvailabilityView({ teacherStudentData = {} }) {
           <input class="${ui.input}" name="startTime" type="time" required value="09:00">
           <input class="${ui.input}" name="endTime" type="time" required value="10:00">
           ${timezoneSelect()}
-          <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add</span></button>
+          <button class="${ui.primary}">${icon("plus", "h-4 w-4")}<span>Add</span></button>
         </form>
         <div class="mt-5 grid gap-2">${availability.length ? availability.map((slot) => `<div class="rounded-lg border border-brand-line/70 bg-white/60 p-3 text-sm font-semibold text-brand-charcoal">${weekdays[slot.weekday]} · ${escapeHtml(slot.startTime)}-${escapeHtml(slot.endTime)} · ${escapeHtml(slot.timezone)}</div>`).join("") : emptyState("No availability", "Add weekly availability for bookings.")}</div>
       </section>
@@ -914,7 +974,7 @@ function bookingActions(lesson, currentUserId = "") {
     <div class="flex flex-wrap justify-end gap-2">
       ${lesson.status === "pending_teacher_approval" && lesson.teacherUserId === currentUserId ? `<button class="${ui.primary}" data-action="confirmLesson:${escapeHtml(lesson.id)}">${icon("check", "h-4 w-4")}<span>Confirm</span></button>` : ""}
       ${classroom}
-      ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash", "h-4 w-4")}<span>Cancel</span></button>` : ""}
+      ${isActiveTeacherBooking(lesson) ? `<button class="${ui.danger}" data-action="cancelLesson:${escapeHtml(lesson.id)}">${icon("trash-2", "h-4 w-4")}<span>Cancel</span></button>` : ""}
     </div>
   `;
 }
@@ -1030,10 +1090,10 @@ export function teacherBookingsView({ teacherStudentData = {}, teacherCalendarFi
             <input class="${ui.input}" name="startsAt" type="datetime-local" required>
             <input class="${ui.input}" name="endsAt" type="datetime-local" required>
             ${timezoneSelect(firstProfile?.timezone)}
-            <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Block time</span></button>
+            <button class="${ui.primary}">${icon("plus", "h-4 w-4")}<span>Block time</span></button>
           </form>
           <div class="mt-4 grid gap-2">
-            ${blocks.length ? blocks.map((block) => `<div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-line/70 bg-white/70 p-3 text-sm font-semibold text-brand-charcoal"><span>${escapeHtml(block.title || block.reason || "Unavailable")} · ${dateTime(block.startsAt)}-${dateTime(block.endsAt)}</span><button class="${ui.danger}" data-action="deleteUnavailableBlock:${escapeHtml(block.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button></div>`).join("") : `<p class="${ui.muted}">No unavailable blocks in this calendar range.</p>`}
+            ${blocks.length ? blocks.map((block) => `<div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-line/70 bg-white/70 p-3 text-sm font-semibold text-brand-charcoal"><span>${escapeHtml(block.title || block.reason || "Unavailable")} · ${dateTime(block.startsAt)}-${dateTime(block.endsAt)}</span><button class="${ui.danger}" data-action="deleteUnavailableBlock:${escapeHtml(block.id)}">${icon("trash-2", "h-4 w-4")}<span>Delete</span></button></div>`).join("") : `<p class="${ui.muted}">No unavailable blocks in this calendar range.</p>`}
           </div>
         </div>
         <aside class="rounded-lg border border-brand-line bg-brand-panel p-5">
@@ -1117,7 +1177,7 @@ export function teacherStudentDetailView({ appConfig, teacherStudentData = {}, a
   return `
     <div class="grid gap-5">
       <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
-        <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherStudents"))}" data-app-link>${icon("arrowLeft", "h-4 w-4")}<span>My Students</span></a>
+        <a class="${ui.secondary}" href="${escapeHtml(appPath("teacherStudents"))}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>My Students</span></a>
         <div class="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
           ${profileImage(student, "h-20 w-20")}
           <div class="min-w-0">
@@ -1147,9 +1207,9 @@ export function teacherLessonNotesView({ teacherStudentData = {} }) {
 
 function simpleCreateForm(type, profiles) {
   if (type === "resource") {
-    return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherResource"><input class="${ui.input}" name="title" required placeholder="Resource title"><input class="${ui.input}" name="url" placeholder="https://..."><textarea class="${ui.input} min-h-20" name="body" placeholder="Optional notes"></textarea><button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add Resource</span></button></form>`;
+    return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherResource"><input class="${ui.input}" name="title" required placeholder="Resource title"><input class="${ui.input}" name="url" placeholder="https://..."><textarea class="${ui.input} min-h-20" name="body" placeholder="Optional notes"></textarea><button class="${ui.primary}">${icon("plus", "h-4 w-4")}<span>Add Resource</span></button></form>`;
   }
-  return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherTemplate"><input class="${ui.input}" name="title" required placeholder="Template title"><select class="${ui.input}" name="teacherProfileId">${profileOptions(profiles, "", "Any profile")}</select><select class="${ui.input}" name="lessonType">${optionPairs([["group", "Group"], ["one_on_one", "1:1"], ["trial", "Trial"]])}</select><textarea class="${ui.input} min-h-28" name="body" required placeholder="Lesson structure, prompts, practice notes..."></textarea><button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Add Template</span></button></form>`;
+  return `<form class="grid gap-3 rounded-lg border border-brand-line/70 bg-white/60 p-4" data-form="teacherTemplate"><input class="${ui.input}" name="title" required placeholder="Template title"><select class="${ui.input}" name="teacherProfileId">${profileOptions(profiles, "", "Any profile")}</select><select class="${ui.input}" name="lessonType">${optionPairs([["group", "Group"], ["one_on_one", "1:1"], ["trial", "Trial"]])}</select><textarea class="${ui.input} min-h-28" name="body" required placeholder="Lesson structure, prompts, practice notes..."></textarea><button class="${ui.primary}">${icon("plus", "h-4 w-4")}<span>Add Template</span></button></form>`;
 }
 
 export function teacherResourcesView({ teacherStudentData = {} }) {

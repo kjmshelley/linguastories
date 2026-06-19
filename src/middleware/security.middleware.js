@@ -53,6 +53,12 @@ function securityHeaders(req, res, next) {
   const mediaSrc = ["'self'", ...storageOrigins()];
   const imgSrc = ["'self'", "data:", "blob:", "https://images.unsplash.com", ...storageOrigins()];
   const connectSrc = ["'self'", ...allowedOrigins(), ...livekitConnectOrigins()];
+  const frameSrc = [
+    "'self'",
+    "https://www.youtube.com",
+    "https://www.youtube-nocookie.com",
+    "https://player.vimeo.com"
+  ];
   const csp = [
     "default-src 'self'",
     `script-src ${scriptSrc.join(" ")}`,
@@ -60,6 +66,7 @@ function securityHeaders(req, res, next) {
     `img-src ${imgSrc.join(" ")}`,
     `media-src ${mediaSrc.join(" ")}`,
     `connect-src ${connectSrc.join(" ")}`,
+    `frame-src ${frameSrc.join(" ")}`,
     "font-src 'self' data:",
     "object-src 'none'",
     "base-uri 'self'",

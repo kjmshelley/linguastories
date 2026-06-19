@@ -94,13 +94,13 @@ function roomAction({ room, activeSession, state }) {
     return "";
   }
   if (active) {
-    return `<button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(room.id)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>`;
+    return `<button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(room.id)}">${icon("log-out", "h-4 w-4")}<span>Leave</span></button>`;
   }
   if (isOwner) {
     return `
       <div class="flex flex-wrap justify-end gap-2">
         <button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("play", "h-4 w-4")}<span>Start</span></button>
-        <button class="${ui.danger}" data-action="deleteVoiceVideoRoom:${escapeHtml(room.id)}">${icon("trash", "h-4 w-4")}<span>Delete</span></button>
+        <button class="${ui.danger}" data-action="deleteVoiceVideoRoom:${escapeHtml(room.id)}">${icon("trash-2", "h-4 w-4")}<span>Delete</span></button>
       </div>
     `;
   }
@@ -110,7 +110,7 @@ function roomAction({ room, activeSession, state }) {
   if (full) {
     return `<button class="${disabledButtonClass()}" disabled>${icon("users", "h-4 w-4")}<span>Full</span></button>`;
   }
-  return `<button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("login", "h-4 w-4")}<span>Join</span></button>`;
+  return `<button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("log-in", "h-4 w-4")}<span>Join</span></button>`;
 }
 
 function secondsRemainingFromStartedAt(startedAt, fallback = 360) {
@@ -181,7 +181,7 @@ function participantControls({ participant, activeRoom, state }) {
     <div class="mt-2 flex flex-wrap gap-2">
       <button class="${ui.secondary}" data-action="moderateVoiceVideoParticipant:${escapeHtml(activeRoom.id)}:${escapeHtml(`${payload}mute`)}">${icon("mic", "h-4 w-4")}<span>Mute</span></button>
       <button class="${ui.secondary}" data-action="moderateVoiceVideoParticipant:${escapeHtml(activeRoom.id)}:${escapeHtml(`${payload}camera_off`)}">${icon("video", "h-4 w-4")}<span>Camera Off</span></button>
-      <button class="${ui.danger}" data-action="moderateVoiceVideoParticipant:${escapeHtml(activeRoom.id)}:${escapeHtml(`${payload}kick`)}">${icon("logout", "h-4 w-4")}<span>Kick</span></button>
+      <button class="${ui.danger}" data-action="moderateVoiceVideoParticipant:${escapeHtml(activeRoom.id)}:${escapeHtml(`${payload}kick`)}">${icon("log-out", "h-4 w-4")}<span>Kick</span></button>
     </div>
   `;
 }
@@ -219,7 +219,7 @@ function activeRoomPanel({ activeRoom, activeSession, activeParticipants, state 
         <div class="flex flex-wrap gap-2">
           <button class="${ui.secondary}" data-action="toggleVoiceVideoAudio" data-skip-pending="true" aria-pressed="false">${icon("mic", "h-4 w-4")}<span>Mute myself</span></button>
           ${activeRoom.roomType === "video" ? `<button class="${ui.secondary}" data-action="toggleVoiceVideoCamera" data-skip-pending="true" aria-pressed="false">${icon("video", "h-4 w-4")}<span>Turn off camera</span></button>` : ""}
-          <button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(activeRoom.id)}">${icon("logout", "h-4 w-4")}<span>Leave Room</span></button>
+          <button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(activeRoom.id)}">${icon("log-out", "h-4 w-4")}<span>Leave Room</span></button>
         </div>
       </div>
       <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
@@ -289,7 +289,7 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
         <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
         <p class="text-xs font-semibold text-brand-graphite">JPG, PNG, and WebP images are supported.</p>
         <div class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-brand-line pt-4">
-          <button class="${ui.primary}">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+          <button class="${ui.primary}">${icon("plus", "h-4 w-4")}<span>Create Room</span></button>
         </div>
       </form>
     </div>
@@ -306,7 +306,7 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
       <label class="${ui.label}">Search<input class="${ui.input}" name="q" value="${escapeHtml(voiceVideoRoomFilters.q || "")}" placeholder="sentence, pronunciation, exchange"></label>
       <label class="${ui.label}">Skill level<select class="${ui.input}" name="cefrLevel">${levelFilterOptions(voiceVideoRoomFilters.cefrLevel)}</select></label>
       <label class="${ui.label}">Type<select class="${ui.input}" name="roomType">${optionPairs([["video", "Video"], ["voice", "Voice"]], voiceVideoRoomFilters.roomType, "Any")}</select></label>
-      <button class="${ui.secondary} self-end">${icon("filter", "h-4 w-4")}<span>Filter</span></button>
+      <button class="${ui.secondary} self-end">${icon("list-filter", "h-4 w-4")}<span>Filter</span></button>
     </form>
   `;
   return `
@@ -319,9 +319,9 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
             <p class="mt-3 ${ui.muted}">These rooms are for focused language practice, not casual chatting.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <button class="${ui.secondary} lg:hidden" data-action="openVoiceVideoRulesModal">${icon("book", "h-4 w-4")}<span>Show Rules</span></button>
+            <button class="${ui.secondary} lg:hidden" data-action="openVoiceVideoRulesModal">${icon("book-open", "h-4 w-4")}<span>Show Rules</span></button>
             <button class="${ui.secondary}" data-action="toggleVoiceVideoHistory">${icon("history", "h-4 w-4")}<span>${voiceVideoShowHistory ? "Hide Past Rooms" : "Past Rooms"}</span></button>
-            <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("add", "h-4 w-4")}<span>Create Room</span></button>
+            <button class="${ui.primary}" data-action="openCreateVoiceVideoRoomModal">${icon("plus", "h-4 w-4")}<span>Create Room</span></button>
           </div>
         </div>
         <div class="mt-5 hidden gap-3 lg:grid lg:grid-cols-3">
@@ -336,7 +336,7 @@ export function voiceVideoRoomsView({ state, appConfig, voiceVideoRooms = [], vo
         <details class="lg:hidden">
           <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-lg border border-brand-line/90 bg-white/65 px-4 py-2 text-sm font-semibold text-brand-charcoal transition hover:border-brand-orange/50 hover:bg-white">
             <span class="inline-flex items-center gap-2">${icon("search", "h-4 w-4")}Search rooms</span>
-            ${icon("filter", "h-4 w-4")}
+            ${icon("list-filter", "h-4 w-4")}
           </summary>
           <div class="mt-4">
             ${filtersForm}

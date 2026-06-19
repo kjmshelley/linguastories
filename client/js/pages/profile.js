@@ -67,8 +67,8 @@ function learningLanguageList({ state, appConfig }) {
           <span class="mt-1 block text-xs font-bold text-brand-graphite">${escapeHtml(languageSkillLevelLabel(item.currentLevel || "A1"))}</span>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(item.language)}">${icon("edit", "h-4 w-4")}<span>Edit</span></button>
-          <button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(item.language)}">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+          <button class="${ui.secondary}" data-action="openEditLanguageModal:${escapeHtml(item.language)}">${icon("pencil", "h-4 w-4")}<span>Edit</span></button>
+          <button class="${ui.danger}" data-action="removeLanguage:${escapeHtml(item.language)}">${icon("trash-2", "h-4 w-4")}<span>Remove</span></button>
         </div>
       </div>
     `)
@@ -106,7 +106,7 @@ export function profileInfoView({ state, appConfig }) {
           </div>
           <label class="${ui.label}">Bio<textarea class="${ui.input} min-h-32 resize-y" name="bio" placeholder="Tell the community what you are practicing.">${escapeHtml(user.bio || "")}</textarea></label>
           <div class="flex flex-wrap gap-2">
-            <button class="${ui.primary}">${icon("edit")}<span>Save Info</span></button>
+            <button class="${ui.primary}">${icon("pencil")}<span>Save Info</span></button>
           </div>
         </form>
         <form class="mt-6 border-t border-brand-line pt-5" data-form="avatarUpload">
@@ -128,7 +128,7 @@ export function profileInfoView({ state, appConfig }) {
           <div class="rounded-lg bg-brand-mist/70 px-4 py-3">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <span class="text-sm font-semibold text-brand-graphite">Languages I'm learning</span>
-              <button class="${ui.secondary} px-3 py-1.5 text-xs" data-action="openAddLanguageModal">${icon("add", "h-3.5 w-3.5")}<span>Add</span></button>
+              <button class="${ui.secondary} px-3 py-1.5 text-xs" data-action="openAddLanguageModal">${icon("plus", "h-3.5 w-3.5")}<span>Add</span></button>
             </div>
             <div class="mt-3 grid gap-2">${learningLanguageList({ state, appConfig })}</div>
           </div>
@@ -173,7 +173,7 @@ export function subscriptionsView({ state, accountBillingData = {} }) {
             <h2 class="text-3xl font-bold tracking-tight text-brand-ink">Subscriptions</h2>
             <p class="mt-2 ${ui.muted}">Review account status, membership access, trial state, and billing history.</p>
           </div>
-          <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrowLeft")}<span>My Account</span></a>
+          <a class="${ui.secondary}" href="/app/profile/my-info" data-app-link>${icon("arrow-left")}<span>My Account</span></a>
         </div>
 
         <div class="mt-5 grid gap-4">
@@ -232,13 +232,13 @@ export function deleteProfileConfirmModal({ state }) {
   return `
     <div>
       <span class="${ui.tagRed}">Delete Account</span>
-      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Delete your account?</span></h2>
+      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash-2", "h-5 w-5 text-brand-redDark")}<span>Delete your account?</span></h2>
       <p class="mt-2 ${ui.muted}">This permanently deletes ${escapeHtml(state.user.displayName)}'s account, profile picture, learning languages, community posts, comments, messages, and lesson activity. This cannot be undone.</p>
       <div class="mt-5 rounded-lg border border-brand-red/20 bg-brand-red/10 p-4">
         <p class="text-sm font-semibold leading-6 text-brand-redDark">Only continue if you are sure you no longer need this LinguaStories profile.</p>
       </div>
       <div class="mt-6 flex justify-end border-t border-brand-line pt-4">
-        <button class="${ui.danger}" data-action="confirmDeleteProfile">${icon("trash", "h-4 w-4")}<span>Delete Account</span></button>
+        <button class="${ui.danger}" data-action="confirmDeleteProfile">${icon("trash-2", "h-4 w-4")}<span>Delete Account</span></button>
       </div>
     </div>
   `;
@@ -266,7 +266,7 @@ export function addLanguageModal({ appConfig, state }) {
         <label class="${ui.label}">Skill Level<select class="${ui.input}" name="currentLevel">${levelOptions("A1")}</select></label>
       </div>
       <div class="flex justify-end border-t border-brand-line pt-4">
-        <button class="${availableLanguages.length ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}">${icon("add")}<span>Add Language</span></button>
+        <button class="${availableLanguages.length ? ui.primary : `${ui.secondary} opacity-60 pointer-events-none`}">${icon("plus")}<span>Add Language</span></button>
       </div>
     </form>
   `;
@@ -288,7 +288,7 @@ export function editLanguageModal({ state, appConfig }, language) {
         <label class="${ui.label}">Skill Level<select class="${ui.input}" name="currentLevel">${levelOptions(profile.currentLevel || "A1")}</select></label>
       </div>
       <div class="flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
-        <button class="${ui.primary}">${icon("edit")}<span>Save Language</span></button>
+        <button class="${ui.primary}">${icon("pencil")}<span>Save Language</span></button>
       </div>
     </form>
   `;

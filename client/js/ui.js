@@ -44,67 +44,33 @@ export function formatDate(value) {
   }).format(date);
 }
 
-const iconPaths = {
-  add: `<path d="M12 5v14"></path><path d="M5 12h14"></path>`,
-  alert: `<path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0Z"></path>`,
-  arrowLeft: `<path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path>`,
-  arrowRight: `<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>`,
-  bell: `<path d="M10 21h4"></path><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>`,
-  book: `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4v15.5"></path><path d="M20 22V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5"></path>`,
-  bookmark: `<path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"></path>`,
-  calendar: `<path d="M8 2v4"></path><path d="M16 2v4"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 10h18"></path>`,
-  check: `<path d="m20 6-11 11-5-5"></path>`,
-  chevronLeft: `<path d="m15 18-6-6 6-6"></path>`,
-  chevronRight: `<path d="m9 18 6-6-6-6"></path>`,
-  dashboard: `<rect x="3" y="3" width="7" height="8" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="15" width="7" height="6" rx="1"></rect>`,
-  edit: `<path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>`,
-  eye: `<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle>`,
-  filter: `<path d="M3 5h18"></path><path d="M6 12h12"></path><path d="M10 19h4"></path>`,
-  flag: `<path d="M5 22V4"></path><path d="M5 4h12l-1 5 1 5H5"></path>`,
-  globe: `<circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 0 20"></path><path d="M12 2a15.3 15.3 0 0 0 0 20"></path>`,
-  history: `<path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 3v6h6"></path><path d="M12 7v5l3 2"></path>`,
-  login: `<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path>`,
-  logout: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path>`,
-  menu: `<path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path>`,
-  message: `<path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"></path>`,
-  mic: `<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path>`,
-  play: `<path d="m8 5 11 7-11 7Z"></path>`,
-  save: `<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path>`,
-  search: `<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>`,
-  star: `<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"></path>`,
-  target: `<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle>`,
-  trash: `<path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="m19 6-1 14H6L5 6"></path>`,
-  trophy: `<path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0Z"></path><path d="M17 6h3a3 3 0 0 1-3 3"></path><path d="M7 6H4a3 3 0 0 0 3 3"></path>`,
-  upload: `<path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M5 21h14"></path>`,
-  user: `<circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path>`,
-  users: `<path d="M16 21a6 6 0 0 0-12 0"></path><circle cx="10" cy="8" r="4"></circle><path d="M22 21a5 5 0 0 0-5-5"></path><path d="M17 4a4 4 0 0 1 0 8"></path>`,
-  video: `<path d="M15 10.5 21 7v10l-6-3.5"></path><rect x="3" y="6" width="12" height="12" rx="2"></rect>`
-};
+const LUCIDE_SPRITE_HREF = "/assets/icons/lucide-sprite.svg";
+const LUCIDE_ICON_NAME_RE = /^[a-z0-9][a-z0-9-]*$/;
 
 export function icon(name, className = "h-4 w-4") {
-  const path = iconPaths[name];
-  if (!path) return "";
-  return `<svg class="${className} shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+  const iconName = String(name || "");
+  if (!LUCIDE_ICON_NAME_RE.test(iconName)) return "";
+  return `<svg class="${className} shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="${LUCIDE_SPRITE_HREF}#${iconName}"></use></svg>`;
 }
 
 export function iconForLabel(label = "") {
   const text = String(label).toLowerCase();
-  if (text.includes("add")) return "add";
-  if (text.includes("back")) return "arrowLeft";
+  if (text.includes("add")) return "plus";
+  if (text.includes("back")) return "arrow-left";
   if (text.includes("change") || text.includes("language")) return "globe";
   if (text.includes("complete")) return "check";
-  if (text.includes("create")) return "add";
+  if (text.includes("create")) return "plus";
   if (text.includes("detail") || text.includes("open")) return "search";
-  if (text.includes("edit") || text.includes("save profile") || text.includes("save info")) return "edit";
-  if (text.includes("encourage")) return "message";
+  if (text.includes("edit") || text.includes("save profile") || text.includes("save info")) return "pencil";
+  if (text.includes("encourage")) return "message-circle";
   if (text.includes("follow")) return "users";
-  if (text.includes("learn") || text.includes("review")) return "book";
-  if (text.includes("log in")) return "login";
-  if (text.includes("log out")) return "logout";
+  if (text.includes("learn") || text.includes("review")) return "book-open";
+  if (text.includes("log in")) return "log-in";
+  if (text.includes("log out")) return "log-out";
   if (text.includes("practice")) return "mic";
   if (text.includes("read")) return "play";
-  if (text.includes("remove")) return "trash";
-  if (text.includes("share")) return "message";
+  if (text.includes("remove")) return "trash-2";
+  if (text.includes("share")) return "message-circle";
   if (text.includes("support")) return "trophy";
   if (text.includes("upload")) return "upload";
   if (text.includes("save")) return "save";

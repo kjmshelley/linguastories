@@ -12,6 +12,7 @@ const MAX_ROOM_PARTICIPANTS = 4;
 const ROOM_LIMIT_MS = SESSION_LIMIT_SECONDS * 1000;
 const ABANDONED_ROOM_WARNING_SECONDS = 2 * 60;
 const ABANDONED_ROOM_LIMIT_SECONDS = 3 * 60;
+const LIVEKIT_EMPTY_TIMEOUT_SECONDS = 30;
 const USER_ROOM_CREATION_LIMIT_PER_HOUR = 3;
 const USER_ROOM_CREATION_LIMIT_PER_DAY = 6;
 const HOST_ONLY_ROOM_CREATION_PAUSE_THRESHOLD = 4;
@@ -352,10 +353,16 @@ function livekitSdk() {
 function buildToken({ room, user, session }) {
   requireLiveKitConfig();
   const { AccessToken, TrackSource } = livekitSdk();
+  const { RoomConfiguration } = require("@livekit/protocol");
   const token = new AccessToken(process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_API_SECRET, {
     identity: session.livekitIdentity,
     name: user.displayName || "Learner",
     ttl: TOKEN_TTL_SECONDS
+  });
+  token.roomConfig = new RoomConfiguration({
+    name: room.livekitRoomName,
+    emptyTimeout: LIVEKIT_EMPTY_TIMEOUT_SECONDS,
+    maxParticipants: Number(room.maxParticipants || MAX_ROOM_PARTICIPANTS)
   });
   const publishSources = room.roomType === "voice"
     ? [TrackSource.MICROPHONE]

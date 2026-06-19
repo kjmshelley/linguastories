@@ -286,6 +286,7 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
            coalesce(tags.tags, '[]'::json) as tags,
            coalesce(reviews.review_count, 0)::int as "reviewCount",
            coalesce(reviews.average_rating, 0)::float as "averageRating",
+           coalesce(students.student_count, 0)::int as "studentCount",
            tpa.stripe_account_id as "stripeAccountId",
            coalesce(tpa.onboarding_complete, false) as "payoutOnboardingComplete",
            coalesce(tpa.charges_enabled, false) as "payoutChargesEnabled",
@@ -313,6 +314,12 @@ function profileSelect(whereClause, orderClause = "tp.updated_at desc") {
           from teacher_reviews tr
          where tr.teacher_profile_id = tp.id
       ) reviews on true
+      left join lateral (
+        select count(distinct student_user_id) as student_count
+          from teacher_student_relationships tsr
+         where tsr.teacher_profile_id = tp.id
+           and tsr.total_lessons > 0
+      ) students on true
       left join teacher_payout_accounts tpa on tpa.teacher_user_id = tp.user_id
       left join teacher_subscriptions ts on ts.user_id = tp.user_id and ts.status in ('active', 'past_due')
       left join teacher_subscription_plans tsp on tsp.plan_key = ts.plan_key
@@ -333,6 +340,7 @@ function mapProfile(row) {
     speakingPracticeOnly: Boolean(row.speakingPracticeOnly),
     canCreateGroupLessons: Boolean(row.canCreateGroupLessons),
     averageRating: Number(row.averageRating || 0),
+    studentCount: Number(row.studentCount || 0),
     payoutAccount: mapPayoutAccount({
       stripeAccountId: row.stripeAccountId,
       onboardingComplete: row.payoutOnboardingComplete,

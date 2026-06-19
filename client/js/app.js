@@ -270,21 +270,21 @@ function appPath(id, params = {}) {
 
 function routeIcon(id) {
   const icons = {
-    dashboard: "dashboard",
+    dashboard: "layout-dashboard",
     communityConnect: "users",
     voiceVideoRooms: "video",
     findTeacher: "search",
-    myLessons: "book",
+    myLessons: "book-open",
     myTeachers: "users",
-    teacherDashboard: "dashboard",
+    teacherDashboard: "layout-dashboard",
     teacherAvailability: "calendar",
-    teacherBookings: "book",
+    teacherBookings: "book-open",
     teacherStudents: "users",
-    teacherLessonNotes: "book",
+    teacherLessonNotes: "book-open",
     teacherProfileCreate: "trophy",
     profileInfo: "user",
   };
-  return icon(icons[id] || "book");
+  return icon(icons[id] || "book-open");
 }
 
 function normalizeAppUrl() {
@@ -392,7 +392,7 @@ function classroomView() {
       </div>
       <div class="pointer-events-none absolute inset-x-0 top-0 z-20 bg-gradient-to-b from-black/70 to-transparent p-4">
         <div class="pointer-events-auto flex items-center justify-between gap-3">
-          <a class="grid h-11 w-11 place-items-center rounded-lg bg-white/12 text-white ring-1 ring-white/15 transition hover:bg-white/18" href="${appPath("myLessons")}" aria-label="Back to lessons">${icon("arrowLeft", "h-5 w-5")}</a>
+          <a class="grid h-11 w-11 place-items-center rounded-lg bg-white/12 text-white ring-1 ring-white/15 transition hover:bg-white/18" href="${appPath("myLessons")}" aria-label="Back to lessons">${icon("arrow-left", "h-5 w-5")}</a>
           <span class="rounded bg-black/45 px-3 py-1 text-xs font-bold uppercase tracking-[.12em] text-white/72">Classroom</span>
         </div>
       </div>
@@ -400,8 +400,8 @@ function classroomView() {
         <div class="grid w-full max-w-3xl grid-cols-2 gap-2 rounded-lg bg-black/55 p-2 ring-1 ring-white/15 backdrop-blur sm:flex sm:flex-wrap sm:items-center sm:justify-center">
           <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomAudio" data-skip-pending="true">${icon(livekitLocalAudioMuted ? "mic" : "mic", "h-4 w-4")}<span>${audioLabel}</span></button>
           <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomCamera" data-skip-pending="true">${icon("video", "h-4 w-4")}<span>${cameraLabel}</span></button>
-          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="moveClassroomSelfView">${icon("arrowRight", "h-4 w-4")}<span>Move preview</span></button>
-          <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="moveClassroomSelfView">${icon("arrow-right", "h-4 w-4")}<span>Move preview</span></button>
+          <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("log-out", "h-4 w-4")}<span>Leave</span></button>
         </div>
       </div>
     </section>
@@ -1586,7 +1586,7 @@ function removeLanguageConfirmModal(language) {
   return `
     <div>
       <span class="${ui.tagRed}">Remove Language</span>
-      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash", "h-5 w-5 text-brand-redDark")}<span>Remove ${escapeHtml(languageName(appConfig, language))}?</span></h2>
+      <h2 class="mt-3 flex items-center gap-2 text-2xl font-bold tracking-tight text-brand-ink">${icon("trash-2", "h-5 w-5 text-brand-redDark")}<span>Remove ${escapeHtml(languageName(appConfig, language))}?</span></h2>
       <p class="mt-2 ${ui.muted}">This will remove the language from your learning list. This cannot be undone.</p>
     </div>
     <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-brand-line pt-4">
@@ -1667,7 +1667,7 @@ function renderChatDrawer() {
     <aside class="fixed inset-x-0 bottom-0 z-40 ${drawerWidth} overflow-hidden rounded-t-lg border border-brand-line bg-brand-panel shadow-[0_24px_70px_rgba(29,41,63,.28)] sm:inset-x-auto sm:right-4">
       <header class="flex min-h-14 items-center justify-between gap-3 border-b border-brand-line bg-brand-sidebar px-4 text-white">
         <div class="flex items-center gap-2">
-          ${icon("message", "h-4 w-4")}
+          ${icon("message-circle", "h-4 w-4")}
           <div>
             <h2 class="text-sm font-bold">Messages</h2>
             <p class="text-xs font-semibold text-white/55">Community and lesson messages stay organized here.</p>
@@ -1722,7 +1722,7 @@ function renderChatDrawer() {
                 <div class="flex items-center justify-between gap-3 border-b border-brand-line bg-brand-panel px-4 py-3">
                   <div class="flex items-center gap-3">
                     <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white/70 text-brand-ink md:hidden" data-action="showChatContacts" aria-label="Back to contacts">
-                      ${icon("arrowLeft", "h-4 w-4")}
+                      ${icon("arrow-left", "h-4 w-4")}
                     </button>
                     ${chatAvatar(recipient, "h-10 w-10")}
                     <div class="min-w-0">
@@ -1761,12 +1761,12 @@ function renderChatDrawer() {
                     <textarea class="${ui.input} min-h-20 resize-none" name="body" maxlength="1000" required placeholder="Message ${escapeHtml(recipient.name)}..."></textarea>
                     <div class="flex flex-wrap items-center justify-between gap-3">
                       <span class="text-xs font-semibold text-brand-graphite">Teacher/Student and community context</span>
-                      <button class="${ui.primary}">${icon("message")}<span>Send Message</span></button>
+                      <button class="${ui.primary}">${icon("message-circle")}<span>Send Message</span></button>
                     </div>
                   </div>
                 </form>
               `
-              : `<div class="grid place-items-center p-8 text-center"><div><div class="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-brand-mist text-brand-redDark">${icon("message")}</div><h3 class="mt-4 text-lg font-bold text-brand-ink">No conversation selected</h3><p class="mt-2 ${ui.muted}">Choose a conversation or open a learner profile to start one.</p></div></div>`
+              : `<div class="grid place-items-center p-8 text-center"><div><div class="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-brand-mist text-brand-redDark">${icon("message-circle")}</div><h3 class="mt-4 text-lg font-bold text-brand-ink">No conversation selected</h3><p class="mt-2 ${ui.muted}">Choose a conversation or open a learner profile to start one.</p></div></div>`
           }
         </section>
       </div>
@@ -2015,7 +2015,7 @@ function teacherLanguageRowHtml(role) {
     <div class="grid gap-2 rounded-lg border border-brand-line/70 bg-white/65 p-3 sm:grid-cols-[minmax(0,1fr)_220px_auto] sm:items-end" data-teacher-language-row="${escapeHtml(role)}">
       <label class="${ui.label}">Language<select class="${ui.input}" name="${escapeHtml(role)}Language">${languageSelectOptions(appConfig, "")}</select></label>
       <label class="${ui.label}">Skill level<select class="${ui.input}" name="${escapeHtml(role)}Level">${languageSkillLevelOptions(role === "speaks" ? "Native" : "A1")}</select></label>
-      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash", "h-4 w-4")}<span>Remove</span></button>
+      <button class="${ui.secondary} min-h-11" type="button" data-action="removeTeacherLanguageRow">${icon("trash-2", "h-4 w-4")}<span>Remove</span></button>
     </div>
   `;
 }
@@ -2491,7 +2491,7 @@ function bindActions(root = document) {
             <input type="hidden" name="recipientId" value="${escapeHtml(id)}">
             <input type="hidden" name="teacherProfileId" value="${escapeHtml(value || "")}">
             <textarea class="${ui.input} min-h-24" name="body" required maxlength="1000" placeholder="Ask about lesson fit, availability, or practice needs."></textarea>
-            <div class="flex justify-end border-t border-brand-line pt-4"><button class="${ui.primary}">${icon("message", "h-4 w-4")}<span>Send Message</span></button></div>
+            <div class="flex justify-end border-t border-brand-line pt-4"><button class="${ui.primary}">${icon("message-circle", "h-4 w-4")}<span>Send Message</span></button></div>
           </form>
         `);
       }
@@ -2960,7 +2960,9 @@ function render() {
           ? "Create Teacher Profile"
           : route === "teacherProfileEdit"
             ? "Edit Teacher Profile"
-            : (route === "teacherProfileDetail" || route === "bookLesson") && teacherProfileForTitle
+            : route === "teacherProfileDetail"
+              ? "Teacher Profile"
+            : route === "bookLesson" && teacherProfileForTitle
               ? teacherProfileForTitle.displayName
               : match[1] || "LinguaStories";
   pageTitle.textContent = titleText;
