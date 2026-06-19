@@ -119,6 +119,7 @@ textarea {
 
 [data-modal-body] {
   min-width: 0;
+  padding-bottom: max(2rem, calc(var(--safe-bottom) + 2rem));
 }
 
 [data-modal-panel] {
@@ -222,6 +223,10 @@ textarea {
     max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 0.5rem);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+
+  [data-modal-body] {
+    padding-bottom: max(5.5rem, calc(var(--safe-bottom) + 5.5rem));
   }
 }
 

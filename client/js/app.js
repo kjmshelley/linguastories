@@ -125,6 +125,7 @@ let voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
 let voiceVideoRoomsLoaded = false;
 let voiceVideoShowHistory = false;
 let voiceVideoPollTimer = null;
+let voiceVideoListCountdownTimer = null;
 let voiceVideoPollRoute = "";
 let teacherStudentData = {};
 let accountBillingData = {};
@@ -397,8 +398,8 @@ function classroomView() {
       </div>
       <div class="absolute inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-t from-black/75 to-transparent px-3 pb-[max(0.75rem,var(--safe-bottom))] pt-8 sm:px-4">
         <div class="grid w-full max-w-3xl grid-cols-2 gap-2 rounded-lg bg-black/55 p-2 ring-1 ring-white/15 backdrop-blur sm:flex sm:flex-wrap sm:items-center sm:justify-center">
-          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomAudio">${icon(livekitLocalAudioMuted ? "mic" : "mic", "h-4 w-4")}<span>${audioLabel}</span></button>
-          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomCamera">${icon("video", "h-4 w-4")}<span>${cameraLabel}</span></button>
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomAudio" data-skip-pending="true">${icon(livekitLocalAudioMuted ? "mic" : "mic", "h-4 w-4")}<span>${audioLabel}</span></button>
+          <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="toggleClassroomCamera" data-skip-pending="true">${icon("video", "h-4 w-4")}<span>${cameraLabel}</span></button>
           <button class="${ui.secondary} border-white/15 bg-white/12 text-white hover:bg-white/18" data-action="moveClassroomSelfView">${icon("arrowRight", "h-4 w-4")}<span>Move preview</span></button>
           <button class="${ui.danger}" data-action="leaveTeacherClassroom:${escapeHtml(bookingId)}">${icon("logout", "h-4 w-4")}<span>Leave</span></button>
         </div>
@@ -530,6 +531,7 @@ function loadingSpinnerMarkup(className = "h-4 w-4") {
 
 function setButtonPending(button, pendingLabel = "Working") {
   if (!button?.matches?.("button, a, [role='button'], input[type='submit']")) return () => {};
+  if (button.dataset.skipPending === "true") return () => {};
   if (!button || button.dataset.pending === "true" || button.disabled) return () => {};
   const explicitLoadingLabel = button.dataset.pendingLabel;
   const loadingLabel = explicitLoadingLabel || pendingLabel;
@@ -869,6 +871,26 @@ function renderVoiceVideoRoomList() {
     voiceVideoShowHistory
   });
   bindActions(list);
+  updateVoiceVideoListCountdowns();
+}
+
+function remainingSecondsFromStartedAt(startedAt, fallback = 360) {
+  const started = new Date(startedAt || "").getTime();
+  if (!Number.isFinite(started)) return Math.max(0, Number(fallback || 0));
+  return Math.max(0, 360 - Math.min(360, Math.max(0, Math.ceil((Date.now() - started) / 1000))));
+}
+
+function formatVoiceVideoCountdown(seconds = 360) {
+  const remaining = Math.max(0, Number(seconds || 0));
+  const minutes = Math.floor(remaining / 60);
+  const secondsOnly = remaining % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(secondsOnly).padStart(2, "0")}`;
+}
+
+function updateVoiceVideoListCountdowns() {
+  document.querySelectorAll("[data-room-list-countdown]").forEach((element) => {
+    element.textContent = formatVoiceVideoCountdown(remainingSecondsFromStartedAt(element.dataset.roomListCountdown));
+  });
 }
 
 async function clearActiveVoiceVideoRoom({ quiet = false, message = "" } = {}) {
@@ -905,16 +927,14 @@ async function refreshActiveVoiceVideoRoom({ quiet = true } = {}) {
 
 function updateVoiceVideoCountdown() {
   if (!activeVoiceVideoSession) return;
-  const startedAt = new Date(activeVoiceVideoRoom?.startedAt || activeVoiceVideoSession.startedAt).getTime();
-  const elapsed = Math.min(360, Math.max(0, Math.ceil((Date.now() - startedAt) / 1000)));
-  const remaining = Math.max(0, 360 - elapsed);
+  const remaining = remainingSecondsFromStartedAt(activeVoiceVideoRoom?.startedAt || activeVoiceVideoSession.startedAt, activeVoiceVideoSession.secondsRemaining);
+  const elapsed = 360 - remaining;
   activeVoiceVideoSession = { ...activeVoiceVideoSession, elapsedSeconds: elapsed, secondsRemaining: remaining };
   const countdown = document.querySelector("[data-room-countdown]");
   if (countdown) {
-    const minutes = Math.floor(remaining / 60);
-    const seconds = remaining % 60;
-    countdown.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    countdown.textContent = formatVoiceVideoCountdown(remaining);
   }
+  updateVoiceVideoListCountdowns();
   const hostIsAlone = activeVoiceVideoRoom?.ownerUserId === state?.user?.id && Number(activeVoiceVideoRoom?.participantCount || activeVoiceVideoParticipants.length || 0) <= 1;
   if (hostIsAlone && elapsed >= 120 && elapsed < 180 && !livekitWarningFlags.abandoned) {
     livekitWarningFlags.abandoned = true;
@@ -942,7 +962,9 @@ function updateVoiceVideoCountdown() {
 function syncVoiceVideoPolling(route = activeRoute()) {
   if (route !== "voiceVideoRooms" && route !== "voiceVideoRoom") {
     if (voiceVideoPollTimer) window.clearInterval(voiceVideoPollTimer);
+    if (voiceVideoListCountdownTimer) window.clearInterval(voiceVideoListCountdownTimer);
     voiceVideoPollTimer = null;
+    voiceVideoListCountdownTimer = null;
     voiceVideoPollRoute = "";
     return;
   }
@@ -951,11 +973,19 @@ function syncVoiceVideoPolling(route = activeRoute()) {
     window.clearInterval(voiceVideoPollTimer);
     voiceVideoPollTimer = null;
   }
+  if (voiceVideoListCountdownTimer) {
+    window.clearInterval(voiceVideoListCountdownTimer);
+    voiceVideoListCountdownTimer = null;
+  }
   voiceVideoPollRoute = route;
   voiceVideoPollTimer = window.setInterval(() => {
     if (activeRoute() === "voiceVideoRooms") loadVoiceVideoRooms({ force: true, quiet: true });
     if (activeRoute() === "voiceVideoRoom") refreshActiveVoiceVideoRoom({ quiet: true });
   }, 10000);
+  if (route === "voiceVideoRooms") {
+    updateVoiceVideoListCountdowns();
+    voiceVideoListCountdownTimer = window.setInterval(updateVoiceVideoListCountdowns, 1000);
+  }
 }
 
 function stopVoiceVideoTimer() {
@@ -1060,7 +1090,7 @@ function ensureParticipantTile(identity, participantName = "Participant", isLoca
   if (livekitParticipantTiles.size === 0) stage.innerHTML = "";
   if (!livekitHiddenAudioLayer) {
     livekitHiddenAudioLayer = document.createElement("div");
-    livekitHiddenAudioLayer.className = "hidden";
+    livekitHiddenAudioLayer.className = "pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0";
     stage.append(livekitHiddenAudioLayer);
   }
   const key = identity || participantName;
@@ -1092,9 +1122,17 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
   const element = track.attach();
   if (track.kind === "audio") {
     ensureParticipantTile(identity, participantName, isLocal);
+    const audioKey = identity || participantName;
+    livekitHiddenAudioLayer?.querySelectorAll("[data-remote-audio]").forEach((audio) => {
+      if (audio.dataset.remoteAudio === audioKey) audio.remove();
+    });
     element.autoplay = true;
-    element.dataset.remoteAudio = identity || participantName;
+    element.playsInline = true;
+    element.dataset.remoteAudio = audioKey;
     livekitHiddenAudioLayer?.append(element);
+    element.play?.().catch(() => {
+      // Some browsers require the user's join gesture before remote audio can play.
+    });
     return;
   }
   const tile = ensureParticipantTile(identity, participantName, isLocal);
@@ -1106,6 +1144,13 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
   if (isLocal) element.muted = true;
   tile.append(element);
   applyLiveKitTileLayout();
+}
+
+function renderSubscribedRemoteTracks(participant) {
+  participant.trackPublications?.forEach((publication) => {
+    if (!publication.track || !publication.isSubscribed) return;
+    renderTrack(publication.track, participant.name || "Participant", participant.identity, false);
+  });
 }
 
 function stopLocalTracks(tracks = []) {
@@ -1168,6 +1213,11 @@ function setLocalTrackMuted(kind, muted) {
     });
 }
 
+function applyLiveKitLocalMediaState() {
+  setLocalTrackMuted("audio", livekitLocalAudioMuted);
+  setLocalTrackMuted("video", livekitLocalVideoMuted);
+}
+
 function toggleVoiceVideoAudio() {
   livekitLocalAudioMuted = !livekitLocalAudioMuted;
   setLocalTrackMuted("audio", livekitLocalAudioMuted);
@@ -1185,6 +1235,12 @@ function syncVoiceVideoControlLabels() {
   const cameraLabel = cameraButton?.querySelector("span");
   if (audioLabel) audioLabel.textContent = livekitLocalAudioMuted ? "Unmute myself" : "Mute myself";
   if (cameraLabel) cameraLabel.textContent = livekitLocalVideoMuted ? "Turn on camera" : "Turn off camera";
+  if (audioButton) audioButton.className = livekitLocalAudioMuted
+    ? `${ui.danger} ring-2 ring-brand-red/25`
+    : ui.secondary;
+  if (cameraButton) cameraButton.className = livekitLocalVideoMuted
+    ? `${ui.danger} ring-2 ring-brand-red/25`
+    : ui.secondary;
   audioButton?.setAttribute("aria-pressed", String(livekitLocalAudioMuted));
   cameraButton?.setAttribute("aria-pressed", String(livekitLocalVideoMuted));
 }
@@ -1234,25 +1290,35 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
     room.on(RoomEvent.ParticipantDisconnected, (participant) => {
       livekitParticipantTiles.get(participant.identity)?.remove();
       livekitParticipantTiles.delete(participant.identity);
+      livekitHiddenAudioLayer?.querySelectorAll("[data-remote-audio]").forEach((audio) => {
+        if (audio.dataset.remoteAudio === participant.identity) audio.remove();
+      });
       applyLiveKitTileLayout();
     });
+    room.on(RoomEvent.TrackPublished, (publication) => publication.setSubscribed?.(true));
     room.on(RoomEvent.TrackSubscribed, (track, _publication, participant) => renderTrack(track, participant.name || "Participant", participant.identity, false));
+    room.on(RoomEvent.TrackUnsubscribed, (track) => track.detach?.().forEach((element) => element.remove()));
     room.on(RoomEvent.Disconnected, () => {
       if (activeVoiceVideoSession && !endingVoiceVideoRoom) leaveVoiceVideoRoom({ silent: true });
     });
     await room.connect(payload.livekitUrl, payload.token);
     if (stage) stage.innerHTML = "";
     ensureParticipantTile(room.localParticipant.identity || "local", "You", true);
-    room.remoteParticipants?.forEach((participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
+    room.remoteParticipants?.forEach((participant) => {
+      ensureParticipantTile(participant.identity, participant.name || "Participant");
+      renderSubscribedRemoteTracks(participant);
+    });
     livekitLocalTracks = localTracks;
-    livekitLocalAudioMuted = false;
-    livekitLocalVideoMuted = false;
+    applyLiveKitLocalMediaState();
     syncVoiceVideoControlLabels();
     syncClassroomControlLabels();
     for (const track of localTracks) {
       await room.localParticipant.publishTrack(track);
       renderTrack(track, "You", room.localParticipant.identity || "local", true);
     }
+    applyLiveKitLocalMediaState();
+    syncVoiceVideoControlLabels();
+    syncClassroomControlLabels();
     if (stage && !stage.children.length) {
       stage.innerHTML = `<div class="grid min-h-[252px] place-items-center rounded-lg border border-white/10 bg-white/[.04] text-sm font-semibold text-white/72">Connected. Audio is active.</div>`;
     }
@@ -1275,6 +1341,8 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
 
 async function joinVoiceVideoRoom(roomId) {
   const room = voiceVideoRooms.find((item) => item.id === roomId) || activeVoiceVideoRoom;
+  livekitLocalAudioMuted = false;
+  livekitLocalVideoMuted = false;
   let localTracks = [];
   try {
     localTracks = await createVoiceVideoLocalTracks(room);
@@ -1374,6 +1442,8 @@ async function joinTeacherClassroom(bookingId) {
   if (classroomConnecting || classroomConnected) return;
   classroomConnecting = true;
   classroomBookingId = bookingId;
+  livekitLocalAudioMuted = false;
+  livekitLocalVideoMuted = false;
   if (livekitRoomConnection) await disconnectLiveKitTracks();
   let localTracks = [];
   try {

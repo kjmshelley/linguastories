@@ -113,15 +113,21 @@ function roomAction({ room, activeSession, state }) {
   return `<button class="${ui.primary}" data-action="joinVoiceVideoRoom:${escapeHtml(room.id)}">${icon("login", "h-4 w-4")}<span>Join</span></button>`;
 }
 
+function secondsRemainingFromStartedAt(startedAt, fallback = 360) {
+  const started = new Date(startedAt || "").getTime();
+  if (!Number.isFinite(started)) return Math.max(0, Number(fallback || 0));
+  return Math.max(0, 360 - Math.min(360, Math.max(0, Math.ceil((Date.now() - started) / 1000))));
+}
+
 function formatRemaining(seconds = 360) {
   const remaining = Math.max(0, Number(seconds || 0));
-  return `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
+  return `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(remaining % 60).padStart(2, "0")}`;
 }
 
 function roomCards({ appConfig, rooms, activeSession, state, showHistory }) {
   if (!rooms.length) {
     return `
-      <div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite">
+      <div class="rounded-lg border border-dashed border-brand-line bg-white/55 p-8 text-center text-sm font-semibold text-brand-graphite lg:col-span-2">
         No focused practice rooms match these filters.
       </div>
     `;
@@ -131,6 +137,8 @@ function roomCards({ appConfig, rooms, activeSession, state, showHistory }) {
     const historyMeta = showHistory ? `<p class="mt-1 text-xs text-brand-graphite">Joined: ${escapeHtml(room.joinedSummary || "No participants")}</p>` : "";
     const seatLimit = Math.min(4, Number(room.maxParticipants || 4));
     const seatCount = Math.min(Number(room.participantCount || 0), seatLimit);
+    const remaining = room.startedAt ? secondsRemainingFromStartedAt(room.startedAt, room.secondsRemaining) : room.secondsRemaining;
+    const countdown = room.startedAt ? ` · <span data-room-list-countdown="${escapeHtml(room.startedAt)}">${formatRemaining(remaining)}</span> left` : "";
     return `
       <article class="rounded-lg border border-brand-line/80 bg-brand-panel p-4 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
         <div class="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
@@ -156,7 +164,7 @@ function roomCards({ appConfig, rooms, activeSession, state, showHistory }) {
         </div>
         <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-brand-line/70 pt-4">
           <span class="${ui.tagRed}">Seats ${seatCount}/${seatLimit}</span>
-          <span class="text-xs font-semibold text-brand-graphite">${showHistory ? escapeHtml(room.status) : `${hostStatus} ${room.startedAt ? `· ${formatRemaining(room.secondsRemaining)} left` : ""}`}</span>
+          <span class="text-xs font-semibold text-brand-graphite">${showHistory ? escapeHtml(room.status) : `${hostStatus}${countdown}`}</span>
         </div>
         <div class="mt-4 flex justify-end">
           ${roomAction({ room, activeSession, state })}
@@ -209,8 +217,8 @@ function activeRoomPanel({ activeRoom, activeSession, activeParticipants, state 
           <p class="mt-2 ${ui.muted}">Use the time for sentence practice, pronunciation checks, or a focused language exchange prompt.</p>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button class="${ui.secondary}" data-action="toggleVoiceVideoAudio" aria-pressed="false">${icon("mic", "h-4 w-4")}<span>Mute myself</span></button>
-          ${activeRoom.roomType === "video" ? `<button class="${ui.secondary}" data-action="toggleVoiceVideoCamera" aria-pressed="false">${icon("video", "h-4 w-4")}<span>Turn off camera</span></button>` : ""}
+          <button class="${ui.secondary}" data-action="toggleVoiceVideoAudio" data-skip-pending="true" aria-pressed="false">${icon("mic", "h-4 w-4")}<span>Mute myself</span></button>
+          ${activeRoom.roomType === "video" ? `<button class="${ui.secondary}" data-action="toggleVoiceVideoCamera" data-skip-pending="true" aria-pressed="false">${icon("video", "h-4 w-4")}<span>Turn off camera</span></button>` : ""}
           <button class="${ui.danger}" data-action="leaveVoiceVideoRoom:${escapeHtml(activeRoom.id)}">${icon("logout", "h-4 w-4")}<span>Leave Room</span></button>
         </div>
       </div>
@@ -276,7 +284,7 @@ export function createVoiceVideoRoomModal({ appConfig, state }) {
           <label class="${ui.label}">Target language<select class="${ui.input}" name="targetLanguage" required>${languageOptionsWithPlaceholder(appConfig)}</select></label>
           <label class="${ui.label}">Source language<select class="${ui.input}" name="sourceLanguage">${languageOptions(appConfig, "en-US")}</select></label>
           <label class="${ui.label}">Max participants<input class="${ui.input}" name="maxParticipants" type="number" min="2" max="4" value="4"></label>
-          <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate">${optionPairs([["true", "Private"], ["false", "Public"]])}</select></label>
+          <label class="${ui.label}">Access<select class="${ui.input}" name="isPrivate">${optionPairs([["true", "Private"], ["false", "Public"]], "false")}</select></label>
         </div>
         <label class="${ui.label}">Image<input class="${ui.input}" name="roomImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
         <p class="text-xs font-semibold text-brand-graphite">JPG, PNG, and WebP images are supported.</p>
