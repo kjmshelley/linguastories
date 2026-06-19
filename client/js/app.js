@@ -1137,19 +1137,29 @@ function renderTrack(track, participantName = "Participant", identity = "", isLo
   }
   const tile = ensureParticipantTile(identity, participantName, isLocal);
   if (!tile) return;
+  const videoKey = identity || participantName;
+  tile.querySelectorAll("[data-livekit-video]").forEach((video) => {
+    if (video.dataset.livekitVideo === videoKey) video.remove();
+  });
   tile.innerHTML = `<div class="absolute bottom-2 left-2 z-10 rounded bg-black/45 px-2 py-1 text-xs font-semibold text-white">${escapeHtml(participantName)}</div>`;
   element.className = "absolute inset-0 h-full w-full bg-black object-cover";
   element.autoplay = true;
   element.playsInline = true;
   if (isLocal) element.muted = true;
+  element.dataset.livekitVideo = videoKey;
   tile.append(element);
+  element.play?.().catch(() => {
+    // The join click usually satisfies autoplay, but some browsers still defer video playback.
+  });
   applyLiveKitTileLayout();
 }
 
 function renderSubscribedRemoteTracks(participant) {
   participant.trackPublications?.forEach((publication) => {
-    if (!publication.track || !publication.isSubscribed) return;
-    renderTrack(publication.track, participant.name || "Participant", participant.identity, false);
+    publication.setSubscribed?.(true);
+    const track = publication.track || publication.videoTrack || publication.audioTrack;
+    if (!track || publication.isSubscribed === false) return;
+    renderTrack(track, participant.name || "Participant", participant.identity, false);
   });
 }
 
@@ -1282,11 +1292,14 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
   if (stage) stage.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[.04] p-4 text-sm font-semibold text-white/72">Connecting media...</div>`;
   try {
     const { Room, RoomEvent } = await import("/vendor/livekit/livekit-client.esm.mjs");
-    const room = new Room({ adaptiveStream: true, dynacast: true });
+    const room = new Room({ adaptiveStream: true, autoSubscribe: true, dynacast: true });
     livekitRoomConnection = room;
     livekitParticipantTiles = new Map();
     livekitHiddenAudioLayer = null;
-    room.on(RoomEvent.ParticipantConnected, (participant) => ensureParticipantTile(participant.identity, participant.name || "Participant"));
+    room.on(RoomEvent.ParticipantConnected, (participant) => {
+      ensureParticipantTile(participant.identity, participant.name || "Participant");
+      renderSubscribedRemoteTracks(participant);
+    });
     room.on(RoomEvent.ParticipantDisconnected, (participant) => {
       livekitParticipantTiles.get(participant.identity)?.remove();
       livekitParticipantTiles.delete(participant.identity);
@@ -1295,7 +1308,10 @@ async function connectLiveKitRoom(payload, localTracks = [], options = {}) {
       });
       applyLiveKitTileLayout();
     });
-    room.on(RoomEvent.TrackPublished, (publication) => publication.setSubscribed?.(true));
+    room.on(RoomEvent.TrackPublished, (publication, participant) => {
+      publication.setSubscribed?.(true);
+      if (participant) renderSubscribedRemoteTracks(participant);
+    });
     room.on(RoomEvent.TrackSubscribed, (track, _publication, participant) => renderTrack(track, participant.name || "Participant", participant.identity, false));
     room.on(RoomEvent.TrackUnsubscribed, (track) => track.detach?.().forEach((element) => element.remove()));
     room.on(RoomEvent.Disconnected, () => {
