@@ -372,8 +372,8 @@ function buildToken({ room, user, session }) {
     room: room.livekitRoomName,
     canPublish: true,
     canSubscribe: true,
-    canPublishData: false,
-    canUpdateOwnMetadata: false,
+    canPublishData: true,
+    canUpdateOwnMetadata: true,
     canPublishSources: publishSources
   });
   return token.toJwt();
