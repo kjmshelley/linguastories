@@ -164,6 +164,9 @@ let mobileMenuOpen = false;
 let selectedConversationId = "";
 let pendingChatRecipientId = "";
 let seenNotificationKeys = loadSeenNotificationKeys();
+let messageRefreshTimer = null;
+let messageRefreshInFlight = false;
+const MESSAGE_REFRESH_INTERVAL_MS = 4000;
 
 
 const appShell = document.querySelector("#appShell");
@@ -623,6 +626,45 @@ async function api(path, options = {}) {
   state = await response.json();
   render();
   return state;
+}
+
+function directChatSignature(directChat = {}) {
+  return JSON.stringify({
+    unreadCount: Number(directChat.unreadCount || 0),
+    conversations: (directChat.conversations || []).map((conversation) => ({
+      id: conversation.id,
+      unreadCount: Number(conversation.unreadCount || conversation.unread || 0),
+      updatedAt: conversation.updatedAt || "",
+      lastMessage: conversation.lastMessage || "",
+      messageIds: (conversation.messages || []).map((message) => `${message.id}:${message.readAt || ""}`)
+    }))
+  });
+}
+
+function selectedConversationUnread(directChat = {}) {
+  if (!chatOpen || !selectedConversationId) return false;
+  const conversation = (directChat.conversations || []).find((item) => item.id === selectedConversationId);
+  return Number(conversation?.unreadCount || conversation?.unread || 0) > 0;
+}
+
+function preserveChatDraft() {
+  const form = chatDrawer?.querySelector('[data-form="directMessage"]');
+  const body = form?.querySelector('textarea[name="body"]');
+  return {
+    active: Boolean(body && document.activeElement === body),
+    value: body?.value || ""
+  };
+}
+
+function restoreChatDraft(draft) {
+  if (!draft?.value && !draft?.active) return;
+  const body = chatDrawer?.querySelector('[data-form="directMessage"] textarea[name="body"]');
+  if (!body) return;
+  body.value = draft.value || "";
+  if (draft.active) {
+    body.focus({ preventScroll: true });
+    body.selectionStart = body.selectionEnd = body.value.length;
+  }
 }
 
 async function authRequest(path, data) {
@@ -1802,6 +1844,77 @@ function renderChatDrawer() {
   bindActions(chatDrawer);
 }
 
+function syncMessageBadges() {
+  const unread = Number(state?.directChat?.unreadCount || 0);
+  if (messageBadge) {
+    messageBadge.textContent = unread;
+    messageBadge.className = `absolute -right-1 -top-1 ${unread ? "inline-flex" : "hidden"} min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white`;
+  }
+  if (mobileMessageBadge) {
+    mobileMessageBadge.textContent = unread;
+    mobileMessageBadge.className = `absolute -right-1 -top-1 ${unread ? "inline-flex" : "hidden"} min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white`;
+  }
+}
+
+async function markSelectedConversationReadQuietly() {
+  if (!selectedConversationId) return null;
+  const response = await fetch(`/api/messages/${encodeURIComponent(selectedConversationId)}/read`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }
+  });
+  if (response.status === 401) {
+    state = null;
+    navigatePublic("/login");
+    return null;
+  }
+  if (!response.ok) return null;
+  return response.json().catch(() => null);
+}
+
+async function refreshMessagesQuietly({ force = false } = {}) {
+  if (!state || !window.location.pathname.startsWith("/app")) return;
+  if (document.hidden && !force) return;
+  if (messageRefreshInFlight) return;
+  messageRefreshInFlight = true;
+  try {
+    const previousSignature = directChatSignature(state.directChat);
+    let nextState = null;
+    const response = await fetch("/api/state", { headers: { "Content-Type": "application/json" }, cache: "no-store" });
+    if (response.status === 401) {
+      state = null;
+      navigatePublic("/login");
+      return;
+    }
+    if (!response.ok) return;
+    nextState = await response.json();
+    if (selectedConversationUnread(nextState.directChat)) {
+      nextState = await markSelectedConversationReadQuietly() || nextState;
+    }
+    const nextSignature = directChatSignature(nextState.directChat);
+    state = nextState;
+    syncMessageBadges();
+    syncNotificationBadge();
+    if (chatOpen && (force || previousSignature !== nextSignature)) {
+      const draft = preserveChatDraft();
+      renderChatDrawer();
+      restoreChatDraft(draft);
+      scrollChatToLatest();
+    }
+  } finally {
+    messageRefreshInFlight = false;
+  }
+}
+
+function syncMessageRefreshPolling() {
+  if (!state || !window.location.pathname.startsWith("/app")) {
+    if (messageRefreshTimer) window.clearInterval(messageRefreshTimer);
+    messageRefreshTimer = null;
+    return;
+  }
+  if (messageRefreshTimer) return;
+  messageRefreshTimer = window.setInterval(() => refreshMessagesQuietly(), MESSAGE_REFRESH_INTERVAL_MS);
+}
+
 function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -2312,6 +2425,7 @@ function bindActions(root = document) {
         pendingChatRecipientId = "";
         chatMobileScreen = "contacts";
         renderChatDrawer();
+        refreshMessagesQuietly({ force: true });
       }
       if (action === "closeChatPanel") {
         chatOpen = false;
@@ -2335,6 +2449,7 @@ function bindActions(root = document) {
         chatOpen = true;
         chatMobileScreen = "messages";
         renderChatDrawer();
+        refreshMessagesQuietly({ force: true });
       }
       if (action === "selectChatConversation") {
         selectedConversationId = id;
@@ -2919,6 +3034,7 @@ function navigatePublic(path) {
 
 function renderPublicPage() {
   setPublicShell();
+  syncMessageRefreshPolling();
   pageTitle.textContent = "LinguaStories";
   if (mobilePageTitle) mobilePageTitle.textContent = "LinguaStories";
   if (messageBadge) {
@@ -2955,6 +3071,7 @@ async function fetchJsonWithTimeout(url, fallback, timeoutMs = 4000) {
 
 function render() {
   if (!state) return;
+  syncMessageRefreshPolling();
   document.documentElement.lang = state.user.siteLanguage || "en-US";
   normalizeAppUrl();
   setAppShell();
@@ -2994,15 +3111,7 @@ function render() {
               : match[1] || "LinguaStories";
   pageTitle.textContent = titleText;
   if (mobilePageTitle) mobilePageTitle.textContent = titleText.replace(/\s+\([^)]*\)$/, "");
-  if (messageBadge) {
-    const unread = Number(state.directChat?.unreadCount || 0);
-    messageBadge.textContent = unread;
-    messageBadge.className = `absolute -right-1 -top-1 ${unread ? "inline-flex" : "hidden"} min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white`;
-    if (mobileMessageBadge) {
-      mobileMessageBadge.textContent = unread;
-      mobileMessageBadge.className = `absolute -right-1 -top-1 ${unread ? "inline-flex" : "hidden"} min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white`;
-    }
-  }
+  syncMessageBadges();
   syncNotificationBadge();
   document.querySelector("#miniAvatar").innerHTML = state.user.avatarUrl
     ? `<img class="h-10 w-10 rounded-full object-cover" src="${escapeHtml(state.user.avatarUrl)}" alt="">`
@@ -3103,6 +3212,10 @@ window.addEventListener("beforeunload", () => {
 });
 
 window.addEventListener("scroll", loadMoreCommunityListIfNeeded, { passive: true });
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) refreshMessagesQuietly({ force: true });
+});
 
 document.querySelector("#notifyButton").addEventListener("click", () => {
   if (!state) return;

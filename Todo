@@ -1,31 +1,22 @@
-Sentence mining setting, have an option to choose how long to wait before moving on to the next card if the Go to next card automatically is checked
-Play audio automatically is not working when reviewing a topic
-On the Sentence mining page, there should be a Sentence Mining MarketPlace or Library (you choose a good name). 
-This should allow us to see public decks. The user should be able to "save" the public deck to their profile. And this is what should be shown on the sentence mining page of each user.
-
-Add Topic modal popup should not have two closes buttons
-Add Sentence modal popup should not have two closes buttons
-
-
-The notification icon doesn't seem to be working. It always shows the number in the badge, even if I click on the button.
-
-The dashboard should show the next review sentence mining deck or the short story review
-
-
-
-Unlimited language profiles
-
 What is the logic for professional tutor toggle?
 Let's change the teacher card's badge "Speaking practice" to "Community Practice Tutor"
 
 When I change the site language and click save info, it should acutally chagne the site UI language. For Arabic, obviously, you need to use right to left.
 
-Classroom needs to be on it's own page. And we need to include mute, turn off/on camera features.
-When someone leaves the classroom, the booking should not disappear from the teacher page until after the class is past the time. 
 
+There should be a payment history for teachers to see each transaction.
 
+Teacher Workspace:
+Earnings UI card when clicked should go to the Payment History page
+On the Bookings section for each booking table item, there should be a button or link for Class Finish. This should opens a modal popup that does the following:
+1) Ask the teacher if the class is finished
+2) Did the student show up? There should be severeal options:
+   * Yes, student showed up
+   * No, student was a no-show
+   * No, student asked to reschedule
+3) Lesson notes
 
-
-
+The Bookings section, when Completed and paid button is clicked, it should toggle on and off depending on the state
+Change "Completed and paid" logic to just completed lessons. It should show any lessons whether paid or not paid.
 
 
