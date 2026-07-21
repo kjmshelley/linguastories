@@ -4,6 +4,10 @@ async function searchTeachers(req, res) {
   res.json(await teacherStudentService.searchTeachers(req.user, req.query));
 }
 
+async function searchPublicTeachers(req, res) {
+  res.json(await teacherStudentService.searchTeachers(null, req.query));
+}
+
 async function getProfile(req, res) {
   res.json(await teacherStudentService.getProfile(req.user, req.params.id));
 }
@@ -174,6 +178,7 @@ async function stripeConnectWebhook(req, res) {
 
 module.exports = {
   searchTeachers,
+  searchPublicTeachers,
   getProfile,
   myProfiles,
   createProfile,

@@ -627,8 +627,11 @@ async function teacherFilterOptions() {
 
 async function searchTeachers(user, filters = {}) {
   const params = [];
-  const clauses = ["tp.status = 'published'", "tp.user_id <> $1"];
-  params.push(user.id);
+  const clauses = ["tp.status = 'published'"];
+  if (user?.id) {
+    params.push(user.id);
+    clauses.push(`tp.user_id <> $${params.length}`);
+  }
   const q = text(filters.q, { max: 120 });
   if (q) {
     params.push(`%${q.toLowerCase()}%`);

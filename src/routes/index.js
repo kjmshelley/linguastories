@@ -5,11 +5,13 @@ const configRoutes = require("./config.routes");
 const healthRoutes = require("./health.routes");
 const learningRoutes = require("./learning.routes");
 const livekitRoutes = require("./livekit.routes");
+const publicRoutes = require("./public.routes");
 const teacherStudentRoutes = require("./teacher-student.routes");
 
 const router = express.Router();
 
 router.use(configRoutes);
+router.use(publicRoutes);
 router.use("/auth", authRoutes);
 router.use(accountRoutes);
 router.use("/livekit", livekitRoutes);

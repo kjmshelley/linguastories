@@ -381,6 +381,84 @@ export function findTeacherView({ appPath, appConfig, state, teacherStudentData 
   `;
 }
 
+export function publicFindTeacherView({ appConfig, teacherStudentData = {}, teacherStudentFilters = {} }) {
+  const teachers = teacherStudentData.teachers || [];
+  const filterOptions = teacherStudentData.filterOptions || {};
+  return `
+    <section class="min-h-screen bg-brand-snow text-brand-ink">
+      <form data-form="publicTeacherSearch">
+        <header class="relative border-b border-brand-line bg-brand-panel/95 px-4 py-4 backdrop-blur">
+          <a class="absolute left-4 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-lg text-brand-ink no-underline" href="/" data-link aria-label="LinguaStories home">
+              <img class="h-11 w-11 object-contain" src="/assets/img/linguastories.png" alt="" />
+          </a>
+          <div class="mx-auto flex w-[min(1180px,calc(100%_-_32px))] items-center gap-4 pl-16 sm:pl-0">
+            <label class="flex min-h-12 flex-1 items-center gap-2 rounded-full border border-brand-line bg-white px-4 shadow-sm transition focus-within:border-brand-orange/70 focus-within:shadow-md">
+              ${icon("search", "h-5 w-5 shrink-0 text-brand-muted")}
+              <input class="min-w-0 flex-1 border-0 bg-transparent text-base text-brand-ink outline-none" name="q" type="search" value="${escapeHtml(teacherStudentFilters.q || "")}" autocomplete="off" spellcheck="false" placeholder="Search for stories, sentences, vocabulary, etc..." aria-label="Search teachers">
+            </label>
+            <a class="hidden min-h-10 items-center justify-center rounded-md bg-brand-red px-4 text-sm font-black text-white no-underline shadow-sm transition hover:bg-brand-redDark sm:inline-flex" href="/login" data-link>Login</a>
+          </div>
+        </header>
+
+        <main class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] gap-5 px-4 py-6">
+          <section class="rounded-lg border border-brand-line bg-brand-panel p-5">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <span class="${ui.tagGold}">Teacher directory</span>
+                <h1 class="mt-3 text-3xl font-bold tracking-tight text-brand-ink">Find a Teacher</h1>
+                <p class="mt-2 ${ui.muted}">Browse professional teachers and community practice tutors before creating an account.</p>
+              </div>
+              <button class="${ui.primary}" type="submit">${icon("search", "h-4 w-4")}<span>Search</span></button>
+            </div>
+            <div class="mt-5 grid gap-3">
+              <div class="grid gap-3 xl:grid-cols-[repeat(4,minmax(150px,1fr))_120px]">
+                <select class="${ui.input}" name="language" aria-label="Language taught">${languageFilterOptions(appConfig, teacherStudentFilters.language || "", "Any taught language")}</select>
+                <select class="${ui.input}" name="countryOfBirth" aria-label="Country of birth">${countryFilterOptions(filterOptions.countries || [], teacherStudentFilters.countryOfBirth || "")}</select>
+                <select class="${ui.input}" name="speaksLanguage" aria-label="Also speaks">${languageFilterOptions(appConfig, teacherStudentFilters.speaksLanguage || "", "Also speaks")}</select>
+                <input class="${ui.input}" name="maxRate" type="number" min="1" step="1" value="${escapeHtml(teacherStudentFilters.maxRate || "")}" placeholder="Max $/hr">
+                <a class="${ui.secondary}" href="/signup" data-link>${icon("user", "h-4 w-4")}<span>Join</span></a>
+              </div>
+              <div class="grid gap-2 md:grid-cols-3">
+                ${toggleFilter({ name: "nativeSpeaker", label: "Native speaker", checked: teacherStudentFilters.nativeSpeaker === "true" })}
+                ${toggleFilter({ name: "professionalTutor", label: "Professional Tutor (Teacher)", checked: teacherStudentFilters.professionalTutor === "true" })}
+                ${toggleFilter({ name: "speakingPracticeOnly", label: "Only Practice Speaking Tutor", checked: teacherStudentFilters.speakingPracticeOnly === "true" })}
+              </div>
+            </div>
+          </section>
+
+          <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            ${
+              teachers.length
+                ? teachers.map((teacher) => `
+                  <article class="rounded-lg border border-brand-line bg-brand-panel p-5 shadow-sm">
+                    <div class="flex gap-4">
+                      ${profileImage(teacher, "h-16 w-16")}
+                      <div class="min-w-0 flex-1">
+                        <h2 class="truncate text-lg font-bold text-brand-ink">${escapeHtml(teacher.displayName)}</h2>
+                        <p class="mt-1 line-clamp-2 text-sm font-semibold text-brand-charcoal">${escapeHtml(teacher.headline)}</p>
+                        <p class="mt-2 text-xs font-bold text-brand-graphite">${teacher.averageRating ? `${teacher.averageRating.toFixed(1)} stars · ` : ""}${teacher.reviewCount} reviews</p>
+                      </div>
+                    </div>
+                    <p class="mt-4 line-clamp-3 text-sm leading-6 text-brand-graphite">${escapeHtml(teacher.bio)}</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      ${(teacher.languages || []).filter((item) => item.role === "teaches").slice(0, 3).map((item) => `<span class="${ui.tag}">${escapeHtml(languageName(appConfig, item.language))}</span>`).join("")}
+                      ${teacher.nativeLanguage ? `<span class="${ui.tag}">Native ${escapeHtml(languageName(appConfig, teacher.nativeLanguage))}</span>` : ""}
+                      ${teacher.country ? `<span class="${ui.tag}">${escapeHtml(teacher.country)}</span>` : ""}
+                      ${teacher.professionalTutor ? `<span class="${ui.tagGold}">Professional tutor</span>` : ""}
+                      ${teacher.speakingPracticeOnly ? `<span class="${ui.tag}">Speaking practice</span>` : ""}
+                      <span class="${ui.tagGold}">${money(teacher.hourlyRateUsd)}/hr</span>
+                    </div>
+                  </article>
+                `).join("")
+                : emptyState("No teachers yet", "Try a broader search.")
+            }
+          </section>
+        </main>
+      </form>
+    </section>
+  `;
+}
+
 export function teacherProfileDetailView({ activeTeacherProfileId, appConfig, appPath, teacherStudentData = {}, state }) {
   const profile = teacherStudentData.profile;
   if (!profile || profile.id !== activeTeacherProfileId) return emptyState("Loading teacher", "Teacher details will appear here.");

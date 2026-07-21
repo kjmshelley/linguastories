@@ -279,10 +279,37 @@ alter table if exists supported_languages
   alter column code set not null;
 
 alter table if exists users
+  add column if not exists display_name text;
+
+alter table if exists users
+  add column if not exists email text;
+
+alter table if exists users
+  add column if not exists password_hash text;
+
+alter table if exists users
+  add column if not exists avatar text;
+
+alter table if exists users
+  add column if not exists bio text;
+
+alter table if exists users
   add column if not exists avatar_url text;
 
 alter table if exists users
   add column if not exists avatar_box_file_id text;
+
+alter table if exists users
+  add column if not exists native_language text;
+
+alter table if exists users
+  add column if not exists target_language text;
+
+alter table if exists users
+  add column if not exists current_level text default 'A1';
+
+alter table if exists users
+  alter column current_level type text using current_level::text;
 
 alter table if exists users
   add column if not exists learner_subscription_tier text not null default 'free';
@@ -298,6 +325,56 @@ alter table if exists users
 
 alter table if exists users
   add column if not exists currency text not null default 'USD';
+
+alter table if exists users
+  add column if not exists current_streak integer default 0;
+
+alter table if exists users
+  add column if not exists longest_streak integer default 0;
+
+alter table if exists users
+  add column if not exists listening_time integer default 0;
+
+update users
+   set display_name = coalesce(nullif(display_name, ''), split_part(email, '@', 1), 'Learner'),
+       email = coalesce(nullif(email, ''), 'learner-' || id::text || '@example.local'),
+       password_hash = coalesce(nullif(password_hash, ''), 'legacy-password-hash-placeholder'),
+       avatar = coalesce(nullif(avatar, ''), upper(left(coalesce(nullif(display_name, ''), split_part(email, '@', 1), 'Learner'), 2))),
+       native_language = coalesce(nullif(native_language, ''), 'en-US'),
+       target_language = coalesce(nullif(target_language, ''), 'ja-JP'),
+       current_level = coalesce(nullif(current_level, ''), 'A1'),
+       current_streak = coalesce(current_streak, 0),
+       longest_streak = coalesce(longest_streak, 0),
+       listening_time = coalesce(listening_time, 0);
+
+alter table if exists users
+  alter column display_name set not null;
+
+alter table if exists users
+  alter column email set not null;
+
+alter table if exists users
+  alter column password_hash set not null;
+
+alter table if exists users
+  alter column target_language set not null;
+
+do $$
+begin
+  if exists (
+    select 1
+      from information_schema.columns
+     where table_schema = 'public'
+       and table_name = 'users'
+       and column_name = 'name'
+  ) then
+    execute $sql$
+      update users
+         set name = coalesce(nullif(name, ''), display_name)
+    $sql$;
+    execute 'alter table users alter column name drop not null';
+  end if;
+end $$;
 
 alter table if exists users
   drop column if exists shadowing_time;
@@ -333,10 +410,125 @@ create table if not exists user_languages (
 );
 
 alter table if exists user_languages
+  add column if not exists language text;
+
+alter table if exists user_languages
+  add column if not exists current_level text default 'A1';
+
+alter table if exists user_languages
+  alter column current_level type text using current_level::text;
+
+alter table if exists user_languages
+  add column if not exists current_streak integer default 0;
+
+alter table if exists user_languages
+  add column if not exists longest_streak integer default 0;
+
+alter table if exists user_languages
+  add column if not exists listening_time integer default 0;
+
+alter table if exists user_languages
   add column if not exists profile_visibility text default 'Private';
 
 alter table if exists user_languages
+  add column if not exists active boolean default true;
+
+alter table if exists user_languages
+  add column if not exists created_at timestamptz default now();
+
+alter table if exists user_languages
+  add column if not exists updated_at timestamptz default now();
+
+alter table if exists user_languages
   drop column if exists shadowing_time;
+
+do $$
+begin
+  if exists (
+    select 1
+      from information_schema.columns
+     where table_schema = 'public'
+       and table_name = 'user_languages'
+       and column_name = 'level'
+  ) then
+    execute $sql$
+      update user_languages
+         set current_level = coalesce(nullif(current_level::text, ''), nullif(level::text, ''), 'A1')
+    $sql$;
+  end if;
+end $$;
+
+alter table if exists user_languages
+  drop column if exists level cascade;
+
+do $$
+begin
+  if exists (
+    select 1
+      from information_schema.columns
+     where table_schema = 'public'
+       and table_name = 'user_languages'
+       and column_name = 'target_language'
+  ) then
+    execute $sql$
+      update user_languages
+         set language = target_language
+       where language is null
+         and target_language is not null
+    $sql$;
+  end if;
+end $$;
+
+do $$
+begin
+  if exists (
+    select 1
+      from information_schema.columns
+     where table_schema = 'public'
+       and table_name = 'user_languages'
+       and column_name = 'language_id'
+  ) and exists (
+    select 1
+      from information_schema.columns
+     where table_schema = 'public'
+       and table_name = 'supported_languages'
+       and column_name = 'id'
+  ) then
+    execute $sql$
+      update user_languages ul
+         set language = sl.code
+        from supported_languages sl
+       where ul.language is null
+         and ul.language_id = sl.id
+         and sl.code is not null
+    $sql$;
+  end if;
+end $$;
+
+alter table if exists user_languages
+  drop column if exists language_id cascade;
+
+update user_languages ul
+   set language = u.target_language
+  from users u
+ where ul.user_id = u.id
+   and ul.language is null
+   and u.target_language is not null;
+
+delete from user_languages
+ where language is null;
+
+delete from user_languages a
+ using user_languages b
+ where a.ctid < b.ctid
+   and a.user_id = b.user_id
+   and a.language = b.language;
+
+alter table if exists user_languages
+  alter column language set not null;
+
+create unique index if not exists user_languages_user_id_language_key
+  on user_languages (user_id, language);
 
 insert into user_languages (
   user_id,

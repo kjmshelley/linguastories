@@ -125,6 +125,30 @@ function pricingCard(tier, { selectable = false, selected = false } = {}) {
   `;
 }
 
+export function searchLandingView() {
+  return `
+    <section class="lingua-search-home min-h-screen bg-brand-snow text-brand-ink">
+      <header class="lingua-search-home__topbar">
+        <a class="lingua-search-home__login" href="/login" data-link>Login</a>
+      </header>
+      <main class="lingua-search-home__main" aria-label="LinguaStories search">
+        <img class="lingua-search-home__logo" src="/assets/img/linguastories.png" alt="LinguaStories" fetchpriority="high" />
+        <form class="lingua-search-home__form" action="/" role="search">
+          <label class="sr-only" for="landingSearch">Search LinguaStories</label>
+          <div class="lingua-search-home__searchbox">
+            ${icon("search", "h-5 w-5 shrink-0 text-brand-muted")}
+            <input id="landingSearch" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search for stories, sentences, vocabulary, etc..." aria-label="Search LinguaStories" />
+          </div>
+          <div class="lingua-search-home__actions" aria-label="Primary actions">
+            <a href="/find-teacher" data-link>Find a Teacher</a>
+            <a href="/app/community">Lingua World Community</a>
+          </div>
+        </form>
+      </main>
+    </section>
+  `;
+}
+
 export function landingView({ appConfig }) {
   const steps = [
     ["Find a verified teacher", "Browse professional teachers by language, availability, and lesson price.", "search"],

@@ -1,12 +1,13 @@
 import { dashboardView } from "./pages/dashboard.js";
 import { communityConnectView, communityLearnerView, communityPostView, createPostModal, postImageModal } from "./pages/community.js";
-import { landingView, loginView, signupView } from "./pages/public.js?v=auth-logo-copy-20260615";
+import { landingView, loginView, signupView } from "./pages/public.js?v=public-teacher-list-20260702";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
 import {
   bookLessonView,
   findTeacherView,
   learningNotesView,
   myLearningView,
+  publicFindTeacherView,
   teacherBookingRulesModal,
   teacherAvailabilityView,
   teacherBookingsView,
@@ -19,7 +20,7 @@ import {
   teacherStudentDetailView,
   teacherStudentsView,
   teacherTemplatesView
-} from "./pages/learning.js";
+} from "./pages/learning.js?v=public-teacher-list-20260702";
 import { createVoiceVideoRoomModal, voiceVideoRoomCardsView, voiceVideoRoomView, voiceVideoRoomsView, voiceVideoRulesModal } from "./pages/voice-video-rooms.js";
 import { languageName, languageSelectOptions } from "./languages.js";
 import { languageSkillLevelOptions } from "./levels.js";
@@ -128,9 +129,12 @@ let voiceVideoPollTimer = null;
 let voiceVideoListCountdownTimer = null;
 let voiceVideoPollRoute = "";
 let teacherStudentData = {};
+let publicTeacherData = {};
 let accountBillingData = {};
 let teacherStudentFilters = { q: "", language: "", countryOfBirth: "", speaksLanguage: "", nativeSpeaker: "", professionalTutor: "", speakingPracticeOnly: "", maxRate: "" };
+let publicTeacherFilters = { q: "", language: "", countryOfBirth: "", speaksLanguage: "", nativeSpeaker: "", professionalTutor: "", speakingPracticeOnly: "", maxRate: "" };
 let teacherStudentLoadedKeys = new Set();
+let publicTeacherLoadedKey = null;
 let teacherSearchDebounceTimer = null;
 let syncedStripeReturnBookings = new Set();
 let bookingSelection = { teacherProfileId: "", lessonType: "one_on_one", durationMinutes: "", date: "", startsAt: "" };
@@ -336,6 +340,8 @@ function context() {
       unavailableBlocksHref: appPath("teacherBookings"),
       currentUserId: state?.user?.id || ""
     },
+    publicTeacherData,
+    publicTeacherFilters,
     accountBillingData,
     teacherStudentFilters,
     bookingSelection,
@@ -747,6 +753,15 @@ function teacherStudentQuery() {
   return queryString ? `?${queryString}` : "";
 }
 
+function publicTeacherQuery() {
+  const params = new URLSearchParams();
+  Object.entries(publicTeacherFilters).forEach(([key, value]) => {
+    if (value) params.set(key, value);
+  });
+  const queryString = params.toString();
+  return queryString ? `?${queryString}` : "";
+}
+
 function teacherSearchFiltersFromForm(form) {
   const data = Object.fromEntries(new FormData(form).entries());
   return {
@@ -759,6 +774,21 @@ function teacherSearchFiltersFromForm(form) {
     speakingPracticeOnly: data.speakingPracticeOnly || "",
     maxRate: data.maxRate || ""
   };
+}
+
+async function loadPublicTeacherData({ force = false } = {}) {
+  const key = publicTeacherQuery();
+  if (!force && publicTeacherLoadedKey === key) return;
+  const body = await fetchJsonWithTimeout(`/api/public/teachers${key}`, { teachers: [], filterOptions: {} });
+  publicTeacherData = { teachers: body.teachers || [], filterOptions: body.filterOptions || {} };
+  publicTeacherLoadedKey = key;
+  if (window.location.pathname === "/find-teacher") renderPublicPage();
+}
+
+async function applyPublicTeacherSearchFilters(form) {
+  publicTeacherFilters = teacherSearchFiltersFromForm(form);
+  publicTeacherLoadedKey = "";
+  await loadPublicTeacherData({ force: true });
 }
 
 async function applyTeacherSearchFilters(form) {
@@ -2839,6 +2869,9 @@ function bindActions(root = document) {
         clearTimeout(teacherSearchDebounceTimer);
         await applyTeacherSearchFilters(form);
       }
+      if (form.dataset.form === "publicTeacherSearch") {
+        await applyPublicTeacherSearchFilters(form);
+      }
       if (form.dataset.form === "teacherProfile" || form.dataset.form === "teacherProfileEdit") {
         const creatingTeacherProfile = form.dataset.form === "teacherProfile";
         syncTeacherLanguageOptionGroups(form);
@@ -3050,9 +3083,15 @@ function renderPublicPage() {
     mobileMessageBadge.className = "absolute -right-1 -top-1 hidden min-w-5 rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white";
   }
   nav.innerHTML = "";
-  const publicViews = { "/": landingView, "/login": loginView, "/signup": signupView };
+  const publicViews = {
+    "/": landingView,
+    "/login": loginView,
+    "/signup": signupView,
+    "/find-teacher": (ctx) => publicFindTeacherView({ ...ctx, teacherStudentData: ctx.publicTeacherData, teacherStudentFilters: ctx.publicTeacherFilters })
+  };
   view.innerHTML = (publicViews[window.location.pathname] || landingView)(context());
   bindActions();
+  if (window.location.pathname === "/find-teacher") loadPublicTeacherData();
   scrollToPageTopOnRouteChange();
 }
 
@@ -3239,7 +3278,7 @@ async function init() {
       renderPublicPage();
       return;
     }
-    if (window.location.pathname === "/") {
+    if (["/", "/find-teacher"].includes(window.location.pathname)) {
       renderPublicPage();
       return;
     }

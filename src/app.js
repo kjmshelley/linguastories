@@ -69,7 +69,7 @@ if (process.env.NODE_ENV !== "production" && process.env.APP_ENV !== "PROD") {
 }
 
 app.get("/", (_req, res) => res.sendFile(indexPath));
-app.get(["/login", "/signup"], (_req, res) => res.sendFile(indexPath));
+app.get(["/login", "/signup", "/find-teacher"], (_req, res) => res.sendFile(indexPath));
 app.get(/^\/app(\/.*)?$/, (req, res, next) => {
   if (frontendAppRoutes.some((route) => route.test(req.path))) {
     return res.sendFile(indexPath);
