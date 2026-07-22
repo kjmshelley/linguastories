@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linguastories.app/schemas/curriculum-1.0.0.json",
+  "title": "LinguaStories versioned curriculum package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "curriculumVersion", "generatedAt", "targetLanguage", "sourceLanguage", "foundationalVocabulary", "categories", "lessons", "words", "dialogues", "stories", "exercises", "coverage", "statistics"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "curriculumVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "targetLanguage": { "$ref": "#/$defs/language" },
+    "sourceLanguage": { "$ref": "#/$defs/language" },
+    "foundationalVocabulary": { "type": "array", "items": { "$ref": "#/$defs/foundation" } },
+    "categories": { "type": "array", "items": { "$ref": "#/$defs/category" } },
+    "lessons": { "type": "array", "items": { "$ref": "#/$defs/lesson" } },
+    "words": { "type": "array", "items": { "$ref": "#/$defs/word" } },
+    "dialogues": { "type": "array", "items": { "$ref": "#/$defs/dialogue" } },
+    "stories": { "type": "array", "items": { "$ref": "#/$defs/story" } },
+    "exercises": { "type": "array", "items": { "$ref": "#/$defs/exercise" } },
+    "coverage": { "type": "array", "items": { "$ref": "#/$defs/coverage" } },
+    "statistics": { "type": "object" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+    "language": {
+      "type": "object",
+      "required": ["code", "language"],
+      "properties": { "code": { "type": "string" }, "language": { "type": "string" }, "script": { "type": "string" }, "region": { "type": "string" } }
+    },
+    "localizedLine": {
+      "type": "object",
+      "required": ["traditional", "pinyin", "english", "vocabularyReferences", "foundationalVocabularyReferences"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "traditional": { "type": "string", "minLength": 1 }, "pinyin": { "type": "string", "minLength": 1 }, "english": { "type": "string", "minLength": 1 },
+        "vocabularyReferences": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "foundationalVocabularyReferences": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "foundation": {
+      "type": "object", "required": ["id", "group", "traditional", "pinyin", "english"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "group": { "type": "string" }, "traditional": { "type": "string" }, "pinyin": { "type": "string" }, "english": { "type": "string" } }
+    },
+    "category": {
+      "type": "object", "required": ["id", "slug", "name", "order", "difficulty", "wordCount", "prerequisiteCategoryId", "required", "lessonIds"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "slug": { "type": "string" }, "name": { "type": "string" }, "description": { "type": "string" }, "order": { "type": "integer", "minimum": 1 }, "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 }, "wordCount": { "type": "integer", "minimum": 1 }, "rationale": { "type": "string" }, "prerequisiteCategoryId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] }, "required": { "type": "boolean" }, "lessonIds": { "type": "array", "items": { "$ref": "#/$defs/id" } } }
+    },
+    "lesson": {
+      "type": "object", "required": ["id", "categoryId", "order", "title", "difficulty", "prerequisiteLessonId", "required", "wordIds", "newWordIds", "reviewWordIds", "stages", "dialogueId", "storyId", "exerciseIds", "publicationStatus"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "categoryId": { "$ref": "#/$defs/id" }, "order": { "type": "integer", "minimum": 1 }, "title": { "type": "string" }, "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 }, "prerequisiteLessonId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] }, "required": { "type": "boolean" }, "wordIds": { "type": "array", "minItems": 4, "maxItems": 5, "items": { "$ref": "#/$defs/id" } }, "newWordIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "reviewWordIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "stages": { "type": "array", "items": { "enum": ["word", "collocation", "phrase", "sentence", "dialogue", "story"] } }, "dialogueId": { "$ref": "#/$defs/id" }, "storyId": { "$ref": "#/$defs/id" }, "exerciseIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "publicationStatus": { "enum": ["draft_pending_human_review", "publishable"] } }
+    },
+    "word": {
+      "type": "object", "required": ["id", "traditional", "pinyin", "englishMeaning", "partOfSpeech", "difficulty", "sourceRow", "imageUrl", "audioUrl", "collocations", "phrases", "sentences"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "traditional": { "type": "string" }, "pinyin": { "type": "string" }, "numberedPinyin": { "type": "string" }, "meanings": { "type": "array", "items": { "type": "string" } }, "englishMeaning": { "type": "string" }, "partOfSpeech": { "type": "string" }, "classifier": { "type": ["string", "null"] }, "usageNote": { "type": ["string", "null"] }, "taiwanUsageNote": { "type": ["string", "null"] }, "difficulty": { "type": "integer" }, "category": { "type": "string" }, "sourceRow": { "type": "integer" }, "sourceOrder": { "type": ["integer", "null"] }, "imageUrl": { "type": "null" }, "audioUrl": { "type": "null" }, "issues": { "type": "array", "items": { "type": "string" } }, "collocations": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/localizedLine" } }, "phrases": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/localizedLine" } }, "sentences": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/localizedLine" } } }
+    },
+    "dialogue": { "type": "object", "required": ["id", "lessonId", "title", "situation", "turns", "vocabularyReferences", "audioUrl"], "properties": { "id": { "$ref": "#/$defs/id" }, "lessonId": { "$ref": "#/$defs/id" }, "title": { "type": "string" }, "situation": { "type": "string" }, "turns": { "type": "array", "minItems": 4, "maxItems": 10, "items": { "$ref": "#/$defs/localizedLine" } }, "vocabularyReferences": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "audioUrl": { "type": "null" } } },
+    "story": { "type": "object", "required": ["id", "lessonId", "title", "lines", "vocabularyReferences", "comprehensionQuestions", "imageUrl", "audioUrl"], "properties": { "id": { "$ref": "#/$defs/id" }, "lessonId": { "$ref": "#/$defs/id" }, "title": { "type": "object", "required": ["traditional", "pinyin", "english"] }, "lines": { "type": "array", "minItems": 5, "maxItems": 8, "items": { "$ref": "#/$defs/localizedLine" } }, "vocabularyReferences": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "comprehensionQuestions": { "type": "array" }, "imageUrl": { "type": "null" }, "audioUrl": { "type": "null" } } },
+    "exercise": { "type": "object", "required": ["id", "type", "stage", "prompt", "correctAnswer", "acceptedAnswers", "distractors", "feedback", "targetContentReferences", "difficulty"], "properties": { "id": { "$ref": "#/$defs/id" }, "type": { "type": "string" }, "stage": { "type": "string" }, "prompt": { "type": "string" }, "correctAnswer": {}, "acceptedAnswers": { "type": "array" }, "distractors": { "type": "array" }, "feedback": { "type": "string" }, "explanation": { "type": ["string", "null"] }, "targetContentReferences": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "difficulty": { "type": "integer" }, "audioUrl": { "type": ["string", "null"] } } },
+    "coverage": { "type": "object", "required": ["lessonId", "categoryId", "publishable", "meaningfulTokenReferences", "coveredTokenReferences", "reusePercentage"], "properties": { "lessonId": { "$ref": "#/$defs/id" }, "categoryId": { "$ref": "#/$defs/id" }, "publishable": { "type": "boolean" }, "meaningfulTokenReferences": { "type": "integer" }, "coveredTokenReferences": { "type": "integer" }, "reusePercentage": { "type": "number", "minimum": 0, "maximum": 100 } } }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linguastories.app/schemas/normalized-vocabulary-1.0.0.json",
+  "title": "LinguaStories normalized source vocabulary",
+  "type": "object",
+  "required": ["schemaVersion", "source", "language", "categories", "words", "quality"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "source": { "type": "object", "required": ["file", "worksheetNames", "vocabularyWorksheet", "headerRow", "headers"] },
+    "language": { "type": "object", "required": ["targetLanguage", "script", "region", "sourceLanguage"] },
+    "categories": { "type": "array" },
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "traditional", "pinyin", "englishMeaning", "category", "sourceRow", "imageUrl", "audioUrl"],
+        "properties": {
+          "id": { "type": "string" }, "traditional": { "type": "string" }, "pinyin": { "type": "string" }, "englishMeaning": { "type": "string" },
+          "category": { "type": "string" }, "sourceRow": { "type": "integer", "minimum": 1 }, "imageUrl": { "type": "null" }, "audioUrl": { "type": "null" }
+        }
+      }
+    },
+    "quality": { "type": "object", "required": ["sourceRowCount", "acceptedRowCount", "rejectedRowCount", "warnings", "errors", "rejectedRows"] }
+  }
+}

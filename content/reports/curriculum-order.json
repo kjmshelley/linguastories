@@ -1,0 +1,1023 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "categories": [
+    {
+      "id": "category-grammar-pronouns-aee810bb3c",
+      "name": "Grammar — Pronouns",
+      "order": 1,
+      "difficulty": 1,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 1: foundational grammar supports later sentences, dialogues, and stories; common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-numbers-b0640f0fc4",
+      "name": "Numbers",
+      "order": 2,
+      "difficulty": 1,
+      "wordCount": 52,
+      "lessonCount": 11,
+      "rationale": "Position 2: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-people-7db2089705",
+      "name": "People",
+      "order": 3,
+      "difficulty": 1,
+      "wordCount": 49,
+      "lessonCount": 10,
+      "rationale": "Position 3: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-everyday-actions-fe879cb8a4",
+      "name": "Everyday Actions",
+      "order": 4,
+      "difficulty": 1,
+      "wordCount": 128,
+      "lessonCount": 26,
+      "rationale": "Position 4: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-everyday-objects-040c0349f9",
+      "name": "Everyday Objects",
+      "order": 5,
+      "difficulty": 1,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 5: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-time-33b93476cf",
+      "name": "Time",
+      "order": 6,
+      "difficulty": 1,
+      "wordCount": 53,
+      "lessonCount": 11,
+      "rationale": "Position 6: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-location-15b61974b2",
+      "name": "Location",
+      "order": 7,
+      "difficulty": 1,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 7: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-quantity-822bab8d41",
+      "name": "Quantity",
+      "order": 8,
+      "difficulty": 1,
+      "wordCount": 26,
+      "lessonCount": 6,
+      "rationale": "Position 8: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-grammar-measure-words-d22c70ea3a",
+      "name": "Grammar — Measure Words",
+      "order": 9,
+      "difficulty": 1,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 9: foundational grammar supports later sentences, dialogues, and stories; common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-grammar-sentence-patterns-a3f5e194b4",
+      "name": "Grammar — Sentence Patterns",
+      "order": 10,
+      "difficulty": 1,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 10: foundational grammar supports later sentences, dialogues, and stories; common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-grammar-connectors-4a50ddbd52",
+      "name": "Grammar — Connectors",
+      "order": 11,
+      "difficulty": 1,
+      "wordCount": 89,
+      "lessonCount": 18,
+      "rationale": "Position 11: foundational grammar supports later sentences, dialogues, and stories; common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-grammar-interjections-fd612fd177",
+      "name": "Grammar — Interjections",
+      "order": 12,
+      "difficulty": 1,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 12: foundational grammar supports later sentences, dialogues, and stories; common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-language-a4fe65264e",
+      "name": "Language",
+      "order": 13,
+      "difficulty": 2,
+      "wordCount": 22,
+      "lessonCount": 5,
+      "rationale": "Position 13: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-physical-actions-380007889c",
+      "name": "Physical Actions",
+      "order": 14,
+      "difficulty": 2,
+      "wordCount": 50,
+      "lessonCount": 10,
+      "rationale": "Position 14: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-physical-states-3b3b2cfce8",
+      "name": "Physical States",
+      "order": 15,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 15: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-physical-properties-da88a5d625",
+      "name": "Physical Properties",
+      "order": 16,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 16: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-sensory-qualities-781bea1727",
+      "name": "Sensory Qualities",
+      "order": 17,
+      "difficulty": 2,
+      "wordCount": 29,
+      "lessonCount": 6,
+      "rationale": "Position 17: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-position-6d031af10d",
+      "name": "Position",
+      "order": 18,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 18: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-direction-9c8a9579ab",
+      "name": "Direction",
+      "order": 19,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 19: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-comparison-571527339d",
+      "name": "Comparison",
+      "order": 20,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 20: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-home-3a78695388",
+      "name": "Home",
+      "order": 21,
+      "difficulty": 2,
+      "wordCount": 38,
+      "lessonCount": 8,
+      "rationale": "Position 21: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-rooms-bd32f6cedb",
+      "name": "Rooms",
+      "order": 22,
+      "difficulty": 2,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 22: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-furniture-c50440e0e4",
+      "name": "Furniture",
+      "order": 23,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 23: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-household-tools-7dd3d8d2c6",
+      "name": "Household Tools",
+      "order": 24,
+      "difficulty": 2,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 24: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-personal-items-f760e465c8",
+      "name": "Personal Items",
+      "order": 25,
+      "difficulty": 3,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 25: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-clothing-5bea3ab36d",
+      "name": "Clothing",
+      "order": 26,
+      "difficulty": 3,
+      "wordCount": 17,
+      "lessonCount": 4,
+      "rationale": "Position 26: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-body-parts-52126bad92",
+      "name": "Body Parts",
+      "order": 27,
+      "difficulty": 3,
+      "wordCount": 44,
+      "lessonCount": 9,
+      "rationale": "Position 27: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-appearance-3907fa7f80",
+      "name": "Appearance",
+      "order": 28,
+      "difficulty": 3,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 28: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-personality-95a295627e",
+      "name": "Personality",
+      "order": 29,
+      "difficulty": 3,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 29: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-food-e4eb18069d",
+      "name": "Food",
+      "order": 30,
+      "difficulty": 3,
+      "wordCount": 100,
+      "lessonCount": 20,
+      "rationale": "Position 30: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-drinks-ad4e3084c8",
+      "name": "Drinks",
+      "order": 31,
+      "difficulty": 3,
+      "wordCount": 19,
+      "lessonCount": 4,
+      "rationale": "Position 31: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-cooking-d3bdb65e5d",
+      "name": "Cooking",
+      "order": 32,
+      "difficulty": 3,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 32: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-dining-f9c9ea03b3",
+      "name": "Dining",
+      "order": 33,
+      "difficulty": 3,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 33: common everyday language precedes specialized situations; situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-shopping-b5b68f9d45",
+      "name": "Shopping",
+      "order": 34,
+      "difficulty": 3,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 34: common everyday language precedes specialized situations; situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-money-5ccc2e8715",
+      "name": "Money",
+      "order": 35,
+      "difficulty": 3,
+      "wordCount": 47,
+      "lessonCount": 10,
+      "rationale": "Position 35: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-relationships-85752a46aa",
+      "name": "Relationships",
+      "order": 36,
+      "difficulty": 3,
+      "wordCount": 26,
+      "lessonCount": 6,
+      "rationale": "Position 36: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-emotions-8a1f7f6d8f",
+      "name": "Emotions",
+      "order": 37,
+      "difficulty": 4,
+      "wordCount": 38,
+      "lessonCount": 8,
+      "rationale": "Position 37: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-needs-5f9bbdd124",
+      "name": "Needs",
+      "order": 38,
+      "difficulty": 4,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 38: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-interests-756aaea140",
+      "name": "Interests",
+      "order": 39,
+      "difficulty": 4,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 39: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-calendar-d5d0a30b51",
+      "name": "Calendar",
+      "order": 40,
+      "difficulty": 4,
+      "wordCount": 13,
+      "lessonCount": 3,
+      "rationale": "Position 40: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-seasons-c15527b19b",
+      "name": "Seasons",
+      "order": 41,
+      "difficulty": 4,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 41: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-weather-a0bba63812",
+      "name": "Weather",
+      "order": 42,
+      "difficulty": 4,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 42: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-nature-c71ce8ccf3",
+      "name": "Nature",
+      "order": 43,
+      "difficulty": 4,
+      "wordCount": 30,
+      "lessonCount": 6,
+      "rationale": "Position 43: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-animals-85c3f9fa6f",
+      "name": "Animals",
+      "order": 44,
+      "difficulty": 4,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 44: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-plants-b81ce6bddc",
+      "name": "Plants",
+      "order": 45,
+      "difficulty": 4,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 45: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-places-eb5cfb7367",
+      "name": "Places",
+      "order": 46,
+      "difficulty": 4,
+      "wordCount": 21,
+      "lessonCount": 5,
+      "rationale": "Position 46: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-transportation-e5ffd6e654",
+      "name": "Transportation",
+      "order": 47,
+      "difficulty": 4,
+      "wordCount": 12,
+      "lessonCount": 3,
+      "rationale": "Position 47: common everyday language precedes specialized situations; situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-travel-d2b98fb537",
+      "name": "Travel",
+      "order": 48,
+      "difficulty": 4,
+      "wordCount": 45,
+      "lessonCount": 9,
+      "rationale": "Position 48: common everyday language precedes specialized situations; situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-appointments-f2e4653120",
+      "name": "Appointments",
+      "order": 49,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 49: common everyday language precedes specialized situations; situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-education-512ab3c6b9",
+      "name": "Education",
+      "order": 50,
+      "difficulty": 5,
+      "wordCount": 57,
+      "lessonCount": 12,
+      "rationale": "Position 50: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-study-3ff5620b02",
+      "name": "Study",
+      "order": 51,
+      "difficulty": 5,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 51: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-work-104ab9213e",
+      "name": "Work",
+      "order": 52,
+      "difficulty": 5,
+      "wordCount": 31,
+      "lessonCount": 7,
+      "rationale": "Position 52: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-occupations-5095784516",
+      "name": "Occupations",
+      "order": 53,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 53: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-communication-3981a2b9c1",
+      "name": "Communication",
+      "order": 54,
+      "difficulty": 5,
+      "wordCount": 29,
+      "lessonCount": 6,
+      "rationale": "Position 54: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-social-events-32115c5688",
+      "name": "Social Events",
+      "order": 55,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 55: common everyday language precedes specialized situations."
+    },
+    {
+      "id": "category-entertainment-ceaa553e83",
+      "name": "Entertainment",
+      "order": 56,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 56: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-games-d9dae78103",
+      "name": "Games",
+      "order": 57,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 57: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-sports-9b1f5daf0a",
+      "name": "Sports",
+      "order": 58,
+      "difficulty": 5,
+      "wordCount": 19,
+      "lessonCount": 4,
+      "rationale": "Position 58: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-health-55898449eb",
+      "name": "Health",
+      "order": 59,
+      "difficulty": 5,
+      "wordCount": 49,
+      "lessonCount": 10,
+      "rationale": "Position 59: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-symptoms-98d6c66abf",
+      "name": "Symptoms",
+      "order": 60,
+      "difficulty": 5,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 60: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-illnesses-e4f18c6662",
+      "name": "Illnesses",
+      "order": 61,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 61: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-medicine-c4d3d42ed3",
+      "name": "Medicine",
+      "order": 62,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 62: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-healthcare-a64b892ff0",
+      "name": "Healthcare",
+      "order": 63,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 63: situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-exercise-9bc3516b78",
+      "name": "Exercise",
+      "order": 64,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 64: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-public-safety-6a127ac510",
+      "name": "Public Safety",
+      "order": 65,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 65: situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-electronics-7ae9c23d65",
+      "name": "Electronics",
+      "order": 66,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 66: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-technology-3169ce6442",
+      "name": "Technology",
+      "order": 67,
+      "difficulty": 6,
+      "wordCount": 26,
+      "lessonCount": 6,
+      "rationale": "Position 67: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-information-1cb0ba125f",
+      "name": "Information",
+      "order": 68,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 68: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-media-d357175cfe",
+      "name": "Media",
+      "order": 69,
+      "difficulty": 6,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 69: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-documents-b4e929d8bc",
+      "name": "Documents",
+      "order": 70,
+      "difficulty": 6,
+      "wordCount": 13,
+      "lessonCount": 3,
+      "rationale": "Position 70: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-meetings-bca705b63a",
+      "name": "Meetings",
+      "order": 71,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 71: situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-plans-dfe8b2f0de",
+      "name": "Plans",
+      "order": 72,
+      "difficulty": 6,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 72: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-decisions-cfa6a08af3",
+      "name": "Decisions",
+      "order": 73,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 73: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-reasons-72ed245d2c",
+      "name": "Reasons",
+      "order": 74,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 74: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-possibility-cf7630fc8e",
+      "name": "Possibility",
+      "order": 75,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 75: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-situations-177e70fe78",
+      "name": "Situations",
+      "order": 76,
+      "difficulty": 7,
+      "wordCount": 146,
+      "lessonCount": 30,
+      "rationale": "Position 76: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-movement-49ba63e89a",
+      "name": "Movement",
+      "order": 77,
+      "difficulty": 7,
+      "wordCount": 58,
+      "lessonCount": 12,
+      "rationale": "Position 77: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-change-c0bf75bd78",
+      "name": "Change",
+      "order": 78,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 78: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-states-2f6e9daec8",
+      "name": "States",
+      "order": 79,
+      "difficulty": 7,
+      "wordCount": 73,
+      "lessonCount": 15,
+      "rationale": "Position 79: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-processes-4a81a7ba53",
+      "name": "Processes",
+      "order": 80,
+      "difficulty": 7,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 80: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-methods-8696622f34",
+      "name": "Methods",
+      "order": 81,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 81: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-effects-358511c8c0",
+      "name": "Effects",
+      "order": 82,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 82: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-circumstances-6b9cb86500",
+      "name": "Circumstances",
+      "order": 83,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 83: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-evaluation-163e44b102",
+      "name": "Evaluation",
+      "order": 84,
+      "difficulty": 7,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 84: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-attitudes-7d2b2a38d4",
+      "name": "Attitudes",
+      "order": 85,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 85: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-ideas-1c403a939d",
+      "name": "Ideas",
+      "order": 86,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 86: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-thought-deb04a0d67",
+      "name": "Thought",
+      "order": 87,
+      "difficulty": 8,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 87: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-culture-51d7a2ae43",
+      "name": "Culture",
+      "order": 88,
+      "difficulty": 8,
+      "wordCount": 15,
+      "lessonCount": 3,
+      "rationale": "Position 88: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-music-6eb00b4b26",
+      "name": "Music",
+      "order": 89,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 89: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-visual-arts-4cf228a7c1",
+      "name": "Visual Arts",
+      "order": 90,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 90: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-performing-arts-df50a72805",
+      "name": "Performing Arts",
+      "order": 91,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 91: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-literature-51e49f593b",
+      "name": "Literature",
+      "order": 92,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 92: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-events-8d14f6e72d",
+      "name": "Events",
+      "order": 93,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 93: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-dating-21a6b5a12e",
+      "name": "Dating",
+      "order": 94,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 94: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-buildings-4e0445c4bd",
+      "name": "Buildings",
+      "order": 95,
+      "difficulty": 8,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 95: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-structures-b912533f7f",
+      "name": "Structures",
+      "order": 96,
+      "difficulty": 8,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 96: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-materials-fd10a146e9",
+      "name": "Materials",
+      "order": 97,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 97: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-shapes-75e8028a79",
+      "name": "Shapes",
+      "order": 98,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 98: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-measurement-385165e2ff",
+      "name": "Measurement",
+      "order": 99,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 99: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-space-20eac5aae2",
+      "name": "Space",
+      "order": 100,
+      "difficulty": 9,
+      "wordCount": 26,
+      "lessonCount": 6,
+      "rationale": "Position 100: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-geography-f3c73803df",
+      "name": "Geography",
+      "order": 101,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 101: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-regions-610c65d845",
+      "name": "Regions",
+      "order": 102,
+      "difficulty": 9,
+      "wordCount": 14,
+      "lessonCount": 3,
+      "rationale": "Position 102: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-environment-9e471951a1",
+      "name": "Environment",
+      "order": 103,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 103: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-business-76f68a75f0",
+      "name": "Business",
+      "order": 104,
+      "difficulty": 9,
+      "wordCount": 11,
+      "lessonCount": 3,
+      "rationale": "Position 104: placed after more common, concrete prerequisites and before more specialized dependents."
+    },
+    {
+      "id": "category-banking-d7a596cdc2",
+      "name": "Banking",
+      "order": 105,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 105: situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-administration-4b42c6690e",
+      "name": "Administration",
+      "order": 106,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 106: situational vocabulary follows reusable foundations."
+    },
+    {
+      "id": "category-systems-d9148b16c1",
+      "name": "Systems",
+      "order": 107,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 107: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-types-a5fc918683",
+      "name": "Types",
+      "order": 108,
+      "difficulty": 9,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 108: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-degree-719738a852",
+      "name": "Degree",
+      "order": 109,
+      "difficulty": 10,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 109: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-law-b78c1618fd",
+      "name": "Law",
+      "order": 110,
+      "difficulty": 10,
+      "wordCount": 12,
+      "lessonCount": 3,
+      "rationale": "Position 110: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-government-c71e90d2f4",
+      "name": "Government",
+      "order": 111,
+      "difficulty": 10,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 111: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-religion-f8a52d21e6",
+      "name": "Religion",
+      "order": 112,
+      "difficulty": 10,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 112: abstract or institution-specific language is deferred until concrete language is established."
+    },
+    {
+      "id": "category-perception-bd18e320a6",
+      "name": "Perception",
+      "order": 113,
+      "difficulty": 10,
+      "wordCount": 10,
+      "lessonCount": 2,
+      "rationale": "Position 113: placed after more common, concrete prerequisites and before more specialized dependents."
+    }
+  ]
+}

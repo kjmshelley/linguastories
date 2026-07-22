@@ -1,0 +1,1458 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "warningCount": 183,
+  "warnings": [
+    {
+      "code": "pinyin-review",
+      "sourceRow": 9,
+      "value": "行政",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 19,
+      "value": "騎",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 37,
+      "value": "行程",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 49,
+      "value": "尊重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 78,
+      "value": "腳",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 85,
+      "value": "鳥",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 92,
+      "value": "頭",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 107,
+      "value": "頁",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 141,
+      "value": "時代",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 148,
+      "value": "更",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 195,
+      "value": "說",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 236,
+      "value": "佛",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 239,
+      "value": "故事",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 273,
+      "value": "極了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 291,
+      "value": "東方",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 318,
+      "value": "喝",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 342,
+      "value": "讀",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 349,
+      "value": "教",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 352,
+      "value": "教授",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 433,
+      "value": "悶",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 455,
+      "value": "娛樂",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 456,
+      "value": "娛樂圈",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 470,
+      "value": "好",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 484,
+      "value": "音樂節",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 501,
+      "value": "稱",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 508,
+      "value": "擋",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 514,
+      "value": "蹲",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 517,
+      "value": "分",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 530,
+      "value": "回",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 535,
+      "value": "繫",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 539,
+      "value": "健行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 551,
+      "value": "量",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 553,
+      "value": "流行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 556,
+      "value": "哦",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 558,
+      "value": "跑",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 563,
+      "value": "搶",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 573,
+      "value": "省",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 581,
+      "value": "調",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 589,
+      "value": "系",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 598,
+      "value": "要",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 602,
+      "value": "約",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 604,
+      "value": "炸",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 639,
+      "value": "芭樂",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 693,
+      "value": "蘋果",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 709,
+      "value": "湯",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 753,
+      "value": "著",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 772,
+      "value": "市長",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 777,
+      "value": "部長",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 780,
+      "value": "吧",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 783,
+      "value": "比",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 791,
+      "value": "除了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 794,
+      "value": "當",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 795,
+      "value": "的",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 796,
+      "value": "得",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 800,
+      "value": "給",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 802,
+      "value": "還",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 803,
+      "value": "還是",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 804,
+      "value": "和",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 812,
+      "value": "了",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 816,
+      "value": "嗎",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 817,
+      "value": "嘛",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 818,
+      "value": "沒",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 821,
+      "value": "哪",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 822,
+      "value": "那",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 836,
+      "value": "為了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 860,
+      "value": "這",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 863,
+      "value": "正",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 865,
+      "value": "只好",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 866,
+      "value": "只要",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 867,
+      "value": "中",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 868,
+      "value": "啊",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 874,
+      "value": "糟了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 876,
+      "value": "對了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 898,
+      "value": "呢",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 928,
+      "value": "尿",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 929,
+      "value": "胖",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 941,
+      "value": "吐",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 972,
+      "value": "大門",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1055,
+      "value": "齣",
+      "numberedPinyin": "chu1"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1057,
+      "value": "噁心",
+      "numberedPinyin": "e3 xin1"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1059,
+      "value": "公佈",
+      "numberedPinyin": "gong1 bu4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1063,
+      "value": "計畫",
+      "numberedPinyin": "ji4 hua4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1064,
+      "value": "結帳",
+      "numberedPinyin": "jie2 zhang4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1066,
+      "value": "日圓",
+      "numberedPinyin": "ri4 yuan2"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1067,
+      "value": "體檢",
+      "numberedPinyin": "ti3 jian3"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1069,
+      "value": "陽台",
+      "numberedPinyin": "yang2 tai2"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1073,
+      "value": "帳單",
+      "numberedPinyin": "zhang4 dan1"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1074,
+      "value": "帳號",
+      "numberedPinyin": "zhang4 hao4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1075,
+      "value": "帳戶",
+      "numberedPinyin": "zhang4 hu4"
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1121,
+      "value": "乾",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1185,
+      "value": "貴",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1211,
+      "value": "元",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1219,
+      "value": "背",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1225,
+      "value": "倒",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1228,
+      "value": "度",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1230,
+      "value": "過",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1231,
+      "value": "降",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1259,
+      "value": "通",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1271,
+      "value": "漲",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1272,
+      "value": "轉",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1281,
+      "value": "音樂會",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1282,
+      "value": "樂器",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1288,
+      "value": "地",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1299,
+      "value": "空地",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1306,
+      "value": "水",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1329,
+      "value": "尺",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1332,
+      "value": "單行道",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1336,
+      "value": "多少",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1347,
+      "value": "片",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1356,
+      "value": "數",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1362,
+      "value": "所長",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1363,
+      "value": "台",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1374,
+      "value": "種",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1414,
+      "value": "女人",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1437,
+      "value": "見",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1438,
+      "value": "看",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1458,
+      "value": "美",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1471,
+      "value": "樂觀",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1477,
+      "value": "把",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1482,
+      "value": "保重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1494,
+      "value": "告訴",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1502,
+      "value": "切",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1546,
+      "value": "場",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1589,
+      "value": "起來",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1598,
+      "value": "會",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1611,
+      "value": "卡",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1636,
+      "value": "單子",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1638,
+      "value": "都",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1644,
+      "value": "少",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1654,
+      "value": "只",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1655,
+      "value": "只有",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1669,
+      "value": "地方",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1671,
+      "value": "東西",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1701,
+      "value": "屬",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1741,
+      "value": "薄",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1750,
+      "value": "咳",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1756,
+      "value": "淺",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1772,
+      "value": "長方形",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1788,
+      "value": "拜拜",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1790,
+      "value": "邊",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1798,
+      "value": "臭",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1802,
+      "value": "打",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1807,
+      "value": "大夫",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1810,
+      "value": "底",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1812,
+      "value": "釘",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1826,
+      "value": "行",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1830,
+      "value": "幾",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1831,
+      "value": "加",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1832,
+      "value": "假",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1833,
+      "value": "間",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1858,
+      "value": "弄",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1860,
+      "value": "喔",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1866,
+      "value": "泡",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1885,
+      "value": "彈",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1891,
+      "value": "哇",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1904,
+      "value": "呀",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1942,
+      "value": "徵",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1946,
+      "value": "還有",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1991,
+      "value": "白",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1993,
+      "value": "差",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1995,
+      "value": "長",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1998,
+      "value": "重",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2010,
+      "value": "好吃",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2012,
+      "value": "好玩",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2014,
+      "value": "黑",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2019,
+      "value": "累",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2022,
+      "value": "滿",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2025,
+      "value": "難",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2028,
+      "value": "便宜",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2033,
+      "value": "強",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2052,
+      "value": "嚴重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2053,
+      "value": "遠",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2060,
+      "value": "壯",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2073,
+      "value": "大學",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2123,
+      "value": "喂",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2133,
+      "value": "記得",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2200,
+      "value": "車",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2210,
+      "value": "自行車",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2213,
+      "value": "超重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2228,
+      "value": "郊區",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2238,
+      "value": "旅行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2253,
+      "value": "行李箱",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2304,
+      "value": "老闆",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    }
+  ]
+}

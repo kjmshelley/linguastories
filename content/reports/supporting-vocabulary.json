@@ -1,0 +1,414 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "items": [
+    {
+      "id": "foundation-wo",
+      "group": "pronouns",
+      "traditional": "我",
+      "pinyin": "wǒ",
+      "english": "I; me",
+      "generatedContentReferences": 12307
+    },
+    {
+      "id": "foundation-ni",
+      "group": "pronouns",
+      "traditional": "你",
+      "pinyin": "nǐ",
+      "english": "you",
+      "generatedContentReferences": 4592
+    },
+    {
+      "id": "foundation-ta",
+      "group": "pronouns",
+      "traditional": "他",
+      "pinyin": "tā",
+      "english": "he; him",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-women",
+      "group": "pronouns",
+      "traditional": "我們",
+      "pinyin": "wǒmen",
+      "english": "we; us",
+      "generatedContentReferences": 2708
+    },
+    {
+      "id": "foundation-de",
+      "group": "particles",
+      "traditional": "的",
+      "pinyin": "de",
+      "english": "possessive/attributive particle",
+      "generatedContentReferences": 2275
+    },
+    {
+      "id": "foundation-le",
+      "group": "particles",
+      "traditional": "了",
+      "pinyin": "le",
+      "english": "completed-action particle",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-ma",
+      "group": "particles",
+      "traditional": "嗎",
+      "pinyin": "ma",
+      "english": "question particle",
+      "generatedContentReferences": 4618
+    },
+    {
+      "id": "foundation-ye",
+      "group": "particles",
+      "traditional": "也",
+      "pinyin": "yě",
+      "english": "also",
+      "generatedContentReferences": 2530
+    },
+    {
+      "id": "foundation-yi",
+      "group": "numbers",
+      "traditional": "一",
+      "pinyin": "yī",
+      "english": "one",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-er",
+      "group": "numbers",
+      "traditional": "二",
+      "pinyin": "èr",
+      "english": "two",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-san",
+      "group": "numbers",
+      "traditional": "三",
+      "pinyin": "sān",
+      "english": "three",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-ge",
+      "group": "classifiers",
+      "traditional": "個",
+      "pinyin": "gè",
+      "english": "general classifier",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-ci",
+      "group": "classifiers",
+      "traditional": "次",
+      "pinyin": "cì",
+      "english": "occurrence classifier",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-he",
+      "group": "conjunctions",
+      "traditional": "和",
+      "pinyin": "hé",
+      "english": "and",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-danshi",
+      "group": "conjunctions",
+      "traditional": "但是",
+      "pinyin": "dànshì",
+      "english": "but",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-yinwei",
+      "group": "conjunctions",
+      "traditional": "因為",
+      "pinyin": "yīnwèi",
+      "english": "because",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-shemedongxi",
+      "group": "question-words",
+      "traditional": "什麼",
+      "pinyin": "shénme",
+      "english": "what",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-nali",
+      "group": "question-words",
+      "traditional": "哪裡",
+      "pinyin": "nǎlǐ",
+      "english": "where",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-zenme",
+      "group": "question-words",
+      "traditional": "怎麼",
+      "pinyin": "zěnme",
+      "english": "how",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-shi",
+      "group": "core-verbs",
+      "traditional": "是",
+      "pinyin": "shì",
+      "english": "to be",
+      "generatedContentReferences": 26
+    },
+    {
+      "id": "foundation-you",
+      "group": "core-verbs",
+      "traditional": "有",
+      "pinyin": "yǒu",
+      "english": "to have; there is",
+      "generatedContentReferences": 1791
+    },
+    {
+      "id": "foundation-xiang",
+      "group": "core-verbs",
+      "traditional": "想",
+      "pinyin": "xiǎng",
+      "english": "to want; to think",
+      "generatedContentReferences": 3721
+    },
+    {
+      "id": "foundation-xuyao",
+      "group": "core-verbs",
+      "traditional": "需要",
+      "pinyin": "xūyào",
+      "english": "to need",
+      "generatedContentReferences": 5373
+    },
+    {
+      "id": "foundation-xihuan",
+      "group": "core-verbs",
+      "traditional": "喜歡",
+      "pinyin": "xǐhuān",
+      "english": "to like",
+      "generatedContentReferences": 7176
+    },
+    {
+      "id": "foundation-zhidao",
+      "group": "core-verbs",
+      "traditional": "知道",
+      "pinyin": "zhīdào",
+      "english": "to know",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-kan",
+      "group": "core-verbs",
+      "traditional": "看",
+      "pinyin": "kàn",
+      "english": "to see; to look",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-shuo",
+      "group": "core-verbs",
+      "traditional": "說",
+      "pinyin": "shuō",
+      "english": "to say; speak",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-jintian",
+      "group": "time",
+      "traditional": "今天",
+      "pinyin": "jīntiān",
+      "english": "today",
+      "generatedContentReferences": 4282
+    },
+    {
+      "id": "foundation-zuotian",
+      "group": "time",
+      "traditional": "昨天",
+      "pinyin": "zuótiān",
+      "english": "yesterday",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-mingtian",
+      "group": "time",
+      "traditional": "明天",
+      "pinyin": "míngtiān",
+      "english": "tomorrow",
+      "generatedContentReferences": 228
+    },
+    {
+      "id": "foundation-xianzai",
+      "group": "time",
+      "traditional": "現在",
+      "pinyin": "xiànzài",
+      "english": "now",
+      "generatedContentReferences": 26
+    },
+    {
+      "id": "foundation-zheli",
+      "group": "location",
+      "traditional": "這裡",
+      "pinyin": "zhèlǐ",
+      "english": "here",
+      "generatedContentReferences": 6394
+    },
+    {
+      "id": "foundation-nali-location",
+      "group": "location",
+      "traditional": "那裡",
+      "pinyin": "nàlǐ",
+      "english": "there",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-zai",
+      "group": "location",
+      "traditional": "在",
+      "pinyin": "zài",
+      "english": "at; located at",
+      "generatedContentReferences": 4577
+    },
+    {
+      "id": "foundation-hen",
+      "group": "degree",
+      "traditional": "很",
+      "pinyin": "hěn",
+      "english": "very",
+      "generatedContentReferences": 4286
+    },
+    {
+      "id": "foundation-geng",
+      "group": "degree",
+      "traditional": "更",
+      "pinyin": "gèng",
+      "english": "even more",
+      "generatedContentReferences": 78
+    },
+    {
+      "id": "foundation-qing",
+      "group": "politeness",
+      "traditional": "請",
+      "pinyin": "qǐng",
+      "english": "please",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-xiexie",
+      "group": "politeness",
+      "traditional": "謝謝",
+      "pinyin": "xièxie",
+      "english": "thank you",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-keyi",
+      "group": "modal",
+      "traditional": "可以",
+      "pinyin": "kěyǐ",
+      "english": "can; may",
+      "generatedContentReferences": 2495
+    },
+    {
+      "id": "foundation-zhege",
+      "group": "demonstratives",
+      "traditional": "這個",
+      "pinyin": "zhège",
+      "english": "this one",
+      "generatedContentReferences": 104
+    },
+    {
+      "id": "foundation-kandao",
+      "group": "core-verbs",
+      "traditional": "看到",
+      "pinyin": "kàndào",
+      "english": "to see",
+      "generatedContentReferences": 5397
+    },
+    {
+      "id": "foundation-kandaole",
+      "group": "core-verbs",
+      "traditional": "看到了",
+      "pinyin": "kàndào le",
+      "english": "saw it",
+      "generatedContentReferences": 1803
+    },
+    {
+      "id": "foundation-yiqi",
+      "group": "core-adverbs",
+      "traditional": "一起",
+      "pinyin": "yìqǐ",
+      "english": "together",
+      "generatedContentReferences": 1996
+    },
+    {
+      "id": "foundation-zhende",
+      "group": "degree",
+      "traditional": "真的",
+      "pinyin": "zhēnde",
+      "english": "really",
+      "generatedContentReferences": 104
+    },
+    {
+      "id": "foundation-juede",
+      "group": "core-verbs",
+      "traditional": "覺得",
+      "pinyin": "juéde",
+      "english": "to feel; think",
+      "generatedContentReferences": 52
+    },
+    {
+      "id": "foundation-hao",
+      "group": "evaluation",
+      "traditional": "好",
+      "pinyin": "hǎo",
+      "english": "good",
+      "generatedContentReferences": 26
+    },
+    {
+      "id": "foundation-shiqing",
+      "group": "everyday-nouns",
+      "traditional": "事情",
+      "pinyin": "shìqing",
+      "english": "matter; thing",
+      "generatedContentReferences": 484
+    },
+    {
+      "id": "foundation-youyisi",
+      "group": "evaluation",
+      "traditional": "有意思",
+      "pinyin": "yǒuyìsi",
+      "english": "interesting",
+      "generatedContentReferences": 484
+    },
+    {
+      "id": "foundation-xuexi",
+      "group": "core-verbs",
+      "traditional": "學習",
+      "pinyin": "xuéxí",
+      "english": "to learn",
+      "generatedContentReferences": 228
+    },
+    {
+      "id": "foundation-ben",
+      "group": "classifiers",
+      "traditional": "本",
+      "pinyin": "běn",
+      "english": "classifier for books",
+      "generatedContentReferences": 0
+    },
+    {
+      "id": "foundation-wei",
+      "group": "classifiers",
+      "traditional": "位",
+      "pinyin": "wèi",
+      "english": "polite classifier for people",
+      "generatedContentReferences": 0
+    }
+  ]
+}

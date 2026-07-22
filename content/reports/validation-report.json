@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "valid": true,
+  "errorCount": 0,
+  "warningCount": 1,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "editorial-review-required-before-publication",
+      "count": 484
+    }
+  ]
+}

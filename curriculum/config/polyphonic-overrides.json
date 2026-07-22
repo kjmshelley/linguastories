@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Word-level Taiwan Mandarin pronunciation choices. Character-only ambiguity is warned unless a whole-word override exists.",
+  "reviewCharacters": ["行", "還", "長", "樂", "重", "得", "著", "了", "只"],
+  "words": {
+    "銀行": { "numberedPinyin": "yin2 hang2", "reason": "Financial institution uses háng." },
+    "行李": { "numberedPinyin": "xing2 li3", "reason": "Luggage uses xíng." },
+    "長相": { "numberedPinyin": "zhang3 xiang4", "reason": "Appearance noun uses zhǎng." },
+    "音樂": { "numberedPinyin": "yin1 yue4", "reason": "Music uses yuè." },
+    "快樂": { "numberedPinyin": "kuai4 le4", "reason": "Happy uses lè." },
+    "重要": { "numberedPinyin": "zhong4 yao4", "reason": "Important uses zhòng." },
+    "重新": { "numberedPinyin": "chong2 xin1", "reason": "Again uses chóng." },
+    "得到": { "numberedPinyin": "de2 dao4", "reason": "Obtain uses dé." },
+    "覺得": { "numberedPinyin": "jue2 de5", "reason": "Complement 得 is neutral." },
+    "看著": { "numberedPinyin": "kan4 zhe5", "reason": "Durative aspect 著 is neutral." },
+    "了解": { "numberedPinyin": "liao3 jie3", "reason": "Understand uses liǎo." },
+    "一隻": { "numberedPinyin": "yi4 zhi1", "reason": "Animal classifier uses zhī." },
+    "騎": { "numberedPinyin": "qi2", "reason": "Default learning sense is the verb ‘to ride’; Taiwan classifier jì remains a review warning in the source sense." },
+    "齣": { "numberedPinyin": "chu1", "reason": "Manual repair for a blank source-pinyin cell; classifier for plays." },
+    "噁心": { "numberedPinyin": "e3 xin1", "reason": "Manual repair for a blank source-pinyin cell using Taiwan Mandarin pronunciation." },
+    "公佈": { "numberedPinyin": "gong1 bu4", "reason": "Manual repair for a blank source-pinyin cell." },
+    "計畫": { "numberedPinyin": "ji4 hua4", "reason": "Manual repair for a blank source-pinyin cell using Taiwan Mandarin pronunciation." },
+    "結帳": { "numberedPinyin": "jie2 zhang4", "reason": "Manual repair for a blank source-pinyin cell." },
+    "日圓": { "numberedPinyin": "ri4 yuan2", "reason": "Manual repair for a blank source-pinyin cell." },
+    "體檢": { "numberedPinyin": "ti3 jian3", "reason": "Manual repair for a blank source-pinyin cell." },
+    "陽台": { "numberedPinyin": "yang2 tai2", "reason": "Manual repair for a blank source-pinyin cell." },
+    "帳單": { "numberedPinyin": "zhang4 dan1", "reason": "Manual repair for a blank source-pinyin cell." },
+    "帳號": { "numberedPinyin": "zhang4 hao4", "reason": "Manual repair for a blank source-pinyin cell." },
+    "帳戶": { "numberedPinyin": "zhang4 hu4", "reason": "Manual repair for a blank source-pinyin cell." }
+  }
+}

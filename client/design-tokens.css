@@ -1,0 +1,105 @@
+/*
+ * LinguaStories design tokens extracted from the current product UI.
+ * This file is intentionally additive in Phase 1: existing Tailwind classes and
+ * component markup remain authoritative so loading it does not change the UI.
+ */
+:root {
+  /* Brand and surfaces (client/index.html Tailwind configuration). */
+  --ls-color-ink: #1d293f;
+  --ls-color-charcoal: #2f353e;
+  --ls-color-graphite: #6c757d;
+  --ls-color-muted: #8a9099;
+  --ls-color-orange: #e07258;
+  --ls-color-amber: #f1b7a6;
+  --ls-color-red: #e07258;
+  --ls-color-red-dark: #bf5b45;
+  --ls-color-brown: #7c5548;
+  --ls-color-cream: #f3f0eb;
+  --ls-color-pink: #e8a6b6;
+  --ls-color-snow: #f8f6f2;
+  --ls-color-mist: #eee8df;
+  --ls-color-line: #ded6cc;
+  --ls-color-panel: #fffaf4;
+  --ls-color-sidebar: #211c1a;
+  --ls-color-slate: #485469;
+  --ls-color-teal: #2c7a7b;
+  --ls-color-blue: #3d7fa8;
+  --ls-color-white: #ffffff;
+  --ls-color-black: #000000;
+
+  /* Existing semantic assignments; aliases only, not new colors. */
+  --ls-color-text: var(--ls-color-ink);
+  --ls-color-text-subtle: var(--ls-color-graphite);
+  --ls-color-text-muted: var(--ls-color-muted);
+  --ls-color-page: var(--ls-color-cream);
+  --ls-color-surface: var(--ls-color-panel);
+  --ls-color-border: var(--ls-color-line);
+  --ls-color-action: var(--ls-color-ink);
+  --ls-color-action-hover: var(--ls-color-red-dark);
+  --ls-color-focus: var(--ls-color-orange);
+  --ls-color-success: var(--ls-color-teal);
+  --ls-color-warning: var(--ls-color-brown);
+  --ls-color-error: var(--ls-color-red-dark);
+
+  /* Typography currently supplied by Tailwind's default sans stack. */
+  --ls-font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ls-font-size-xs: 0.75rem;
+  --ls-font-size-sm: 0.875rem;
+  --ls-font-size-base: 1rem;
+  --ls-font-size-lg: 1.125rem;
+  --ls-font-size-xl: 1.25rem;
+  --ls-font-size-2xl: 1.5rem;
+  --ls-font-size-3xl: 1.875rem;
+  --ls-font-size-4xl: 2.25rem;
+  --ls-font-size-5xl: 3rem;
+  --ls-font-size-6xl: 3.75rem;
+  --ls-font-weight-medium: 500;
+  --ls-font-weight-semibold: 600;
+  --ls-font-weight-bold: 700;
+  --ls-font-weight-extrabold: 800;
+  --ls-font-weight-black: 900;
+  --ls-line-height-tight: 1.25;
+  --ls-line-height-normal: 1.5;
+  --ls-line-height-relaxed: 1.625;
+
+  /* Tailwind's quarter-rem spacing rhythm used throughout generated views. */
+  --ls-space-0: 0;
+  --ls-space-1: 0.25rem;
+  --ls-space-1-5: 0.375rem;
+  --ls-space-2: 0.5rem;
+  --ls-space-2-5: 0.625rem;
+  --ls-space-3: 0.75rem;
+  --ls-space-4: 1rem;
+  --ls-space-5: 1.25rem;
+  --ls-space-6: 1.5rem;
+  --ls-space-7: 1.75rem;
+  --ls-space-8: 2rem;
+  --ls-space-10: 2.5rem;
+  --ls-space-12: 3rem;
+  --ls-space-14: 3.5rem;
+  --ls-space-16: 4rem;
+  --ls-touch-target: 2.75rem;
+
+  --ls-radius-sm: 0.25rem;
+  --ls-radius-md: 0.375rem;
+  --ls-radius-lg: 0.5rem;
+  --ls-radius-full: 9999px;
+
+  --ls-shadow-xs: 0 1px 1px rgb(29 41 63 / 0.04);
+  --ls-shadow-sm: 0 1px 2px rgb(29 41 63 / 0.05);
+  --ls-shadow-action: 0 8px 18px rgb(29 41 63 / 0.16);
+  --ls-shadow-card-hover: 0 14px 28px rgb(29 41 63 / 0.08);
+  --ls-shadow-media: 0 18px 42px rgb(29 41 63 / 0.09);
+
+  --ls-motion-default: 150ms;
+  --ls-motion-explicit: 160ms;
+  --ls-motion-image-fade: 200ms;
+  --ls-ease-standard: ease;
+
+  /* Reference values for JS/layout documentation; CSS custom properties cannot drive media-query conditions. */
+  --ls-breakpoint-sm: 640px;
+  --ls-breakpoint-md: 768px;
+  --ls-breakpoint-lg: 1024px;
+  --ls-breakpoint-xl: 1280px;
+  --ls-breakpoint-2xl: 1536px;
+}

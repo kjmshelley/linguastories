@@ -6,6 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --env-file=.env.development server.js",
+    "preview:learning": "node scripts/preview-learning-ui.js",
+    "curriculum:parse": "node scripts/curriculum.js parse",
+    "curriculum:generate": "node scripts/curriculum.js generate",
+    "curriculum:resume": "node scripts/curriculum.js generate --resume",
+    "curriculum:validate": "node scripts/curriculum.js validate",
+    "curriculum:manifest": "node scripts/curriculum.js manifest",
     "start:prod": "node --env-file=.env.production server.js",
     "start:dev": "node --env-file=.env.development server.js",
     "test": "node --test",

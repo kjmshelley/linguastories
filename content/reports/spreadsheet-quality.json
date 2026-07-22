@@ -1,0 +1,8594 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "source": {
+    "file": "/Users/kinjiru/Documents/GitHub/lingua-stories/sent/chinese_words_categorized_expanded.xlsx",
+    "worksheetNames": [
+      "Summary",
+      "Categorized Words",
+      "Category Guide",
+      "Sources & Method"
+    ],
+    "vocabularyWorksheet": "Categorized Words",
+    "headerRow": 1,
+    "headers": [
+      "Source order",
+      "Chinese",
+      "Pinyin",
+      "English meanings",
+      "Category",
+      "Category basis",
+      "Translation source",
+      ""
+    ]
+  },
+  "sourceRowCount": 2316,
+  "acceptedRowCount": 2316,
+  "rejectedRowCount": 0,
+  "emptyRows": [],
+  "duplicateWordCount": 1,
+  "duplicateCategoryCount": 0,
+  "warningCount": 1054,
+  "errorCount": 0,
+  "warnings": [
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2,
+      "value": "部門",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 5,
+      "value": "章程",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "possible-simplified-chinese",
+      "sourceRow": 6,
+      "value": "批准",
+      "characters": [
+        "准"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 9,
+      "value": "行政",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 19,
+      "value": "騎",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 19,
+      "value": "騎",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 26,
+      "value": "表",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "punctuation-problem",
+      "sourceRow": 28,
+      "value": "顏色ᵃ",
+      "details": [
+        "headword-contains-superscript-annotation"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 28,
+      "value": "顏色ᵃ",
+      "details": [
+        "many-english-senses",
+        "annotated-headword"
+      ]
+    },
+    {
+      "code": "duplicate-word",
+      "sourceRow": 29,
+      "duplicateOf": 28,
+      "value": "顏色ᵇ"
+    },
+    {
+      "code": "punctuation-problem",
+      "sourceRow": 29,
+      "value": "顏色ᵇ",
+      "details": [
+        "headword-contains-superscript-annotation"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 29,
+      "value": "顏色ᵇ",
+      "details": [
+        "many-english-senses",
+        "annotated-headword"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 31,
+      "value": "長相",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 34,
+      "value": "打扮",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 35,
+      "value": "帥",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 36,
+      "value": "預約",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 37,
+      "value": "行程",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 37,
+      "value": "行程",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 40,
+      "value": "取消",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 46,
+      "value": "客氣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 49,
+      "value": "尊重",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 49,
+      "value": "尊重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 50,
+      "value": "認真",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 55,
+      "value": "支持",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 61,
+      "value": "銀行",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 77,
+      "value": "交",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 78,
+      "value": "腳",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 78,
+      "value": "腳",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 79,
+      "value": "繳",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 83,
+      "value": "領",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 84,
+      "value": "面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 85,
+      "value": "鳥",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 85,
+      "value": "鳥",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 89,
+      "value": "手",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 92,
+      "value": "頭",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 92,
+      "value": "頭",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 102,
+      "value": "胸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 106,
+      "value": "腰",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 107,
+      "value": "頁",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 107,
+      "value": "頁",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 108,
+      "value": "嘴",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 113,
+      "value": "館",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 117,
+      "value": "廟",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 118,
+      "value": "堂",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 119,
+      "value": "廳",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 127,
+      "value": "企業",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 139,
+      "value": "日期",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 141,
+      "value": "時代",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 141,
+      "value": "時代",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 145,
+      "value": "變",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 147,
+      "value": "改",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 148,
+      "value": "更",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 148,
+      "value": "更",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 151,
+      "value": "變化",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 157,
+      "value": "條件",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 158,
+      "value": "場合",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 159,
+      "value": "背景",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 162,
+      "value": "形勢",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 166,
+      "value": "戴",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 182,
+      "value": "大名",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 184,
+      "value": "話",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 185,
+      "value": "講",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 186,
+      "value": "介紹",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 188,
+      "value": "聯絡",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 189,
+      "value": "聊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 191,
+      "value": "龍",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 193,
+      "value": "念",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 194,
+      "value": "請",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 195,
+      "value": "說",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 195,
+      "value": "說",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 196,
+      "value": "說話",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 197,
+      "value": "思想",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 198,
+      "value": "談",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 199,
+      "value": "談話",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 201,
+      "value": "聽",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 202,
+      "value": "通知",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 204,
+      "value": "文章",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 206,
+      "value": "問題",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 210,
+      "value": "準備",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 211,
+      "value": "比較",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 212,
+      "value": "不同",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 213,
+      "value": "一樣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 214,
+      "value": "一起",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 218,
+      "value": "區別",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 219,
+      "value": "不如",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 225,
+      "value": "鍋",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 226,
+      "value": "鍋子",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 230,
+      "value": "烤",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 232,
+      "value": "調味料",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 235,
+      "value": "表演",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 236,
+      "value": "佛",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 236,
+      "value": "佛",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 239,
+      "value": "故事",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 239,
+      "value": "故事",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 250,
+      "value": "約會",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 253,
+      "value": "戀愛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 254,
+      "value": "交往",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 259,
+      "value": "告白",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 260,
+      "value": "決定",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 261,
+      "value": "選",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 262,
+      "value": "選擇",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 265,
+      "value": "決心",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 266,
+      "value": "決策",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 269,
+      "value": "決斷",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 271,
+      "value": "非常",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 273,
+      "value": "極了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 275,
+      "value": "糟糕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 278,
+      "value": "十分",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 279,
+      "value": "極",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 290,
+      "value": "北方",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 291,
+      "value": "東方",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 291,
+      "value": "東方",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 293,
+      "value": "南方",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 294,
+      "value": "西方",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 295,
+      "value": "右邊",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 296,
+      "value": "左邊",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 302,
+      "value": "程式",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 305,
+      "value": "記",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 306,
+      "value": "信",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 309,
+      "value": "證",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 310,
+      "value": "證件",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 312,
+      "value": "字",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 318,
+      "value": "喝",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 318,
+      "value": "喝",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 320,
+      "value": "酒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 321,
+      "value": "酒店",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 333,
+      "value": "筆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 342,
+      "value": "讀",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 342,
+      "value": "讀",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 349,
+      "value": "教",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 349,
+      "value": "教",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 352,
+      "value": "教授",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 352,
+      "value": "教授",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 355,
+      "value": "科學",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 363,
+      "value": "試",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 364,
+      "value": "書",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 369,
+      "value": "先生",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 378,
+      "value": "學院",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 385,
+      "value": "指導",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 388,
+      "value": "作業",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 390,
+      "value": "影響",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 394,
+      "value": "效果",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 395,
+      "value": "作用",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 398,
+      "value": "衝擊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 403,
+      "value": "節目",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 404,
+      "value": "平板",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 409,
+      "value": "愛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "punctuation-problem",
+      "sourceRow": 411,
+      "value": "別急！",
+      "details": [
+        "headword-contains-sentence-punctuation"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 412,
+      "value": "擔心",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 413,
+      "value": "感覺",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 415,
+      "value": "高興",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 419,
+      "value": "活潑",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 420,
+      "value": "積極",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 421,
+      "value": "急",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 422,
+      "value": "緊張",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 425,
+      "value": "可怕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 429,
+      "value": "冷靜",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 430,
+      "value": "禮貌",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 431,
+      "value": "麻煩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 433,
+      "value": "悶",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 433,
+      "value": "悶",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 434,
+      "value": "那麼",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 436,
+      "value": "怕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 437,
+      "value": "輕鬆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 439,
+      "value": "態度",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 446,
+      "value": "愉快",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 449,
+      "value": "戲劇",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 455,
+      "value": "娛樂",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 455,
+      "value": "娛樂",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 456,
+      "value": "娛樂圈",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 457,
+      "value": "環境",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 467,
+      "value": "標準",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 468,
+      "value": "不錯",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 469,
+      "value": "對",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 470,
+      "value": "好",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 470,
+      "value": "好",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 471,
+      "value": "好看",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 472,
+      "value": "壞",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 473,
+      "value": "優點",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 474,
+      "value": "缺點",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 477,
+      "value": "可能",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 480,
+      "value": "演出",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 482,
+      "value": "發表會",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 484,
+      "value": "音樂節",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 487,
+      "value": "安排",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 488,
+      "value": "拜",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 490,
+      "value": "幫",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 491,
+      "value": "幫忙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 492,
+      "value": "包括",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 493,
+      "value": "爆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 494,
+      "value": "報名",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 496,
+      "value": "擦",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 497,
+      "value": "裁判",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 500,
+      "value": "吵",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 501,
+      "value": "稱",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 501,
+      "value": "稱",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 502,
+      "value": "吃",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 503,
+      "value": "沖",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 504,
+      "value": "闖",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 505,
+      "value": "吹",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 506,
+      "value": "存",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 508,
+      "value": "擋",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 508,
+      "value": "擋",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 510,
+      "value": "等等",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 511,
+      "value": "滴",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 512,
+      "value": "訂",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 514,
+      "value": "蹲",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 514,
+      "value": "蹲",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 516,
+      "value": "防",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 517,
+      "value": "分",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 517,
+      "value": "分",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 518,
+      "value": "敷",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 519,
+      "value": "扶",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 521,
+      "value": "趕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 523,
+      "value": "掛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 527,
+      "value": "候補",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 529,
+      "value": "換",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 530,
+      "value": "回",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 530,
+      "value": "回",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 531,
+      "value": "回收",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 533,
+      "value": "活",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 534,
+      "value": "寄",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 535,
+      "value": "繫",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 535,
+      "value": "繫",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 536,
+      "value": "架",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 537,
+      "value": "減",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 538,
+      "value": "減少",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 539,
+      "value": "健行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 540,
+      "value": "交換",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 541,
+      "value": "攪",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 542,
+      "value": "叫",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 543,
+      "value": "借",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 546,
+      "value": "靠",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 548,
+      "value": "理髮",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 549,
+      "value": "利用",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 550,
+      "value": "連",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 551,
+      "value": "量",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 551,
+      "value": "量",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 552,
+      "value": "流",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 553,
+      "value": "流行",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 553,
+      "value": "流行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 554,
+      "value": "漏",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 556,
+      "value": "哦",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 556,
+      "value": "哦",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 557,
+      "value": "排",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 558,
+      "value": "跑",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 558,
+      "value": "跑",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 560,
+      "value": "騙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 561,
+      "value": "簽",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 563,
+      "value": "搶",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 563,
+      "value": "搶",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 564,
+      "value": "敲",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 568,
+      "value": "殺",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 569,
+      "value": "晒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 570,
+      "value": "燒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 572,
+      "value": "生",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 573,
+      "value": "省",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 573,
+      "value": "省",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 574,
+      "value": "升",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 576,
+      "value": "輸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 578,
+      "value": "算",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 579,
+      "value": "燙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 580,
+      "value": "替",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 581,
+      "value": "調",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 581,
+      "value": "調",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 582,
+      "value": "貼",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 584,
+      "value": "偷",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 585,
+      "value": "脫",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 586,
+      "value": "拖",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 587,
+      "value": "吸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 589,
+      "value": "系",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 589,
+      "value": "系",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 592,
+      "value": "修",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 595,
+      "value": "養",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 596,
+      "value": "搖",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 598,
+      "value": "要",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 598,
+      "value": "要",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 599,
+      "value": "印",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 602,
+      "value": "約",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 602,
+      "value": "約",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 604,
+      "value": "炸",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 604,
+      "value": "炸",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 605,
+      "value": "脹",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 606,
+      "value": "找",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 607,
+      "value": "照",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 610,
+      "value": "住",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 611,
+      "value": "走道",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 612,
+      "value": "租",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 613,
+      "value": "最",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 614,
+      "value": "做法",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 620,
+      "value": "燈",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 627,
+      "value": "箱子",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 629,
+      "value": "活動",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 631,
+      "value": "健身",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 637,
+      "value": "慢跑",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 639,
+      "value": "芭樂",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 640,
+      "value": "白飯",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 645,
+      "value": "菜",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 648,
+      "value": "炒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 652,
+      "value": "脆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 658,
+      "value": "飯",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 673,
+      "value": "辣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 683,
+      "value": "麵",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 688,
+      "value": "嫩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 690,
+      "value": "牛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 693,
+      "value": "蘋果",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 693,
+      "value": "蘋果",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 697,
+      "value": "肉",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 702,
+      "value": "涮",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 705,
+      "value": "素",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 709,
+      "value": "湯",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 709,
+      "value": "湯",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 715,
+      "value": "外帶",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 716,
+      "value": "味道",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 720,
+      "value": "鹹",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 721,
+      "value": "香草",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 723,
+      "value": "香料",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 724,
+      "value": "小菜",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 725,
+      "value": "醃",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 729,
+      "value": "油",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 730,
+      "value": "油膩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 735,
+      "value": "蒸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 739,
+      "value": "床",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 741,
+      "value": "架子",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "possible-simplified-chinese",
+      "sourceRow": 748,
+      "value": "茶几",
+      "characters": [
+        "几"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 750,
+      "value": "球",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 753,
+      "value": "著",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 753,
+      "value": "著",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 757,
+      "value": "棋",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 759,
+      "value": "關",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 760,
+      "value": "海邊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 762,
+      "value": "平原",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 767,
+      "value": "海",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 772,
+      "value": "市長",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 775,
+      "value": "國會",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 777,
+      "value": "部長",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 777,
+      "value": "部長",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 780,
+      "value": "吧",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 780,
+      "value": "吧",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 781,
+      "value": "被",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 782,
+      "value": "本來",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 783,
+      "value": "比",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 783,
+      "value": "比",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 784,
+      "value": "必須",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 787,
+      "value": "不",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 790,
+      "value": "不然",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 791,
+      "value": "除了",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 791,
+      "value": "除了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 792,
+      "value": "從",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 794,
+      "value": "當",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 794,
+      "value": "當",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 795,
+      "value": "的",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 795,
+      "value": "的",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 796,
+      "value": "得",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 796,
+      "value": "得",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 797,
+      "value": "等",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 798,
+      "value": "而且",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 799,
+      "value": "非",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 800,
+      "value": "給",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 800,
+      "value": "給",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 801,
+      "value": "跟",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 802,
+      "value": "還",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 802,
+      "value": "還",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 803,
+      "value": "還是",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 803,
+      "value": "還是",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 804,
+      "value": "和",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 804,
+      "value": "和",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 806,
+      "value": "儘管",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 807,
+      "value": "就",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 808,
+      "value": "就是",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 811,
+      "value": "可以",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 812,
+      "value": "了",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 812,
+      "value": "了",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 813,
+      "value": "裡",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 815,
+      "value": "另外",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 816,
+      "value": "嗎",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 816,
+      "value": "嗎",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 817,
+      "value": "嘛",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 817,
+      "value": "嘛",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 818,
+      "value": "沒",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 818,
+      "value": "沒",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 819,
+      "value": "沒有",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 821,
+      "value": "哪",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 821,
+      "value": "哪",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 822,
+      "value": "那",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 822,
+      "value": "那",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 824,
+      "value": "能",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 826,
+      "value": "前",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 827,
+      "value": "卻",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 829,
+      "value": "讓",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 831,
+      "value": "上",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 834,
+      "value": "所",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 835,
+      "value": "所以",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 836,
+      "value": "為了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 838,
+      "value": "下",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 839,
+      "value": "先",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 840,
+      "value": "向",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 841,
+      "value": "像",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 845,
+      "value": "也",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 846,
+      "value": "一定",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 847,
+      "value": "一直",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 849,
+      "value": "由",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 851,
+      "value": "又",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 852,
+      "value": "有",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 854,
+      "value": "原來",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 856,
+      "value": "再",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 857,
+      "value": "在",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 860,
+      "value": "這",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 860,
+      "value": "這",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 862,
+      "value": "這樣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 863,
+      "value": "正",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 863,
+      "value": "正",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 865,
+      "value": "只好",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 866,
+      "value": "只要",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 867,
+      "value": "中",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 867,
+      "value": "中",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 868,
+      "value": "啊",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 868,
+      "value": "啊",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 874,
+      "value": "糟了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 876,
+      "value": "對了",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 891,
+      "value": "本人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 892,
+      "value": "人家",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 894,
+      "value": "某人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 896,
+      "value": "其",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 898,
+      "value": "呢",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 898,
+      "value": "呢",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 899,
+      "value": "是",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 901,
+      "value": "一邊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 906,
+      "value": "不論",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 907,
+      "value": "於是",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 908,
+      "value": "保險",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 925,
+      "value": "毛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 926,
+      "value": "毛病",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 928,
+      "value": "尿",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 928,
+      "value": "尿",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 929,
+      "value": "胖",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 929,
+      "value": "胖",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 935,
+      "value": "手腕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 940,
+      "value": "死",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 941,
+      "value": "吐",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 941,
+      "value": "吐",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 943,
+      "value": "消化",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 970,
+      "value": "窗口",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 972,
+      "value": "大門",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 972,
+      "value": "大門",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 976,
+      "value": "頂樓",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 980,
+      "value": "房子",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 987,
+      "value": "家",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 989,
+      "value": "開關",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 994,
+      "value": "門",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 998,
+      "value": "宿舍",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1005,
+      "value": "刀",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1007,
+      "value": "工具",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1008,
+      "value": "剪",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1015,
+      "value": "課",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1017,
+      "value": "題目",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1018,
+      "value": "想法",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1019,
+      "value": "意見",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1021,
+      "value": "觀念",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1022,
+      "value": "主意",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1023,
+      "value": "建議",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1024,
+      "value": "看法",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1025,
+      "value": "病",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1028,
+      "value": "發燒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1036,
+      "value": "消息",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1037,
+      "value": "說明",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1045,
+      "value": "興趣",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1046,
+      "value": "愛好",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1047,
+      "value": "嗜好",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1050,
+      "value": "收藏",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1051,
+      "value": "釣魚",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1054,
+      "value": "休閒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1055,
+      "value": "齣",
+      "numberedPinyin": "chu1"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1057,
+      "value": "噁心",
+      "numberedPinyin": "e3 xin1"
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1058,
+      "value": "翻譯",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1059,
+      "value": "公佈",
+      "numberedPinyin": "gong1 bu4"
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1060,
+      "value": "國語",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1062,
+      "value": "會話",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1063,
+      "value": "計畫",
+      "numberedPinyin": "ji4 hua4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1064,
+      "value": "結帳",
+      "numberedPinyin": "jie2 zhang4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1066,
+      "value": "日圓",
+      "numberedPinyin": "ri4 yuan2"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1067,
+      "value": "體檢",
+      "numberedPinyin": "ti3 jian3"
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1068,
+      "value": "文",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1069,
+      "value": "陽台",
+      "numberedPinyin": "yang2 tai2"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1073,
+      "value": "帳單",
+      "numberedPinyin": "zhang4 dan1"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1074,
+      "value": "帳號",
+      "numberedPinyin": "zhang4 hao4"
+    },
+    {
+      "code": "missing-source-pinyin-repaired",
+      "sourceRow": 1075,
+      "value": "帳戶",
+      "numberedPinyin": "zhang4 hu4"
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1080,
+      "value": "規定",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1087,
+      "value": "證明",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1088,
+      "value": "治",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1091,
+      "value": "詩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1100,
+      "value": "對面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1101,
+      "value": "哪裡",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1102,
+      "value": "哪兒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1105,
+      "value": "原地",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1111,
+      "value": "論文",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1112,
+      "value": "資料",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1113,
+      "value": "木頭",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1117,
+      "value": "布",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1119,
+      "value": "尺寸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1121,
+      "value": "乾",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1121,
+      "value": "乾",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "possible-simplified-chinese",
+      "sourceRow": 1126,
+      "value": "公里",
+      "characters": [
+        "里"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1135,
+      "value": "廣播",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1140,
+      "value": "處方",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1141,
+      "value": "過敏",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1144,
+      "value": "藥",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1150,
+      "value": "開會",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1153,
+      "value": "主席",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1154,
+      "value": "發言",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1159,
+      "value": "提案",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1160,
+      "value": "辦法",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1161,
+      "value": "方法",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1162,
+      "value": "方式",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1163,
+      "value": "手段",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1166,
+      "value": "程序",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1167,
+      "value": "路徑",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1169,
+      "value": "秘訣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1171,
+      "value": "保費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1175,
+      "value": "單",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1176,
+      "value": "店",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1177,
+      "value": "電費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1180,
+      "value": "費",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1181,
+      "value": "費用",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1184,
+      "value": "管理費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1185,
+      "value": "貴",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1185,
+      "value": "貴",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1190,
+      "value": "繳費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1196,
+      "value": "市場",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1197,
+      "value": "收費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1199,
+      "value": "水費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1203,
+      "value": "退",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1208,
+      "value": "學費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1209,
+      "value": "郵費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1211,
+      "value": "元",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1211,
+      "value": "元",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1212,
+      "value": "運費",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1214,
+      "value": "找錢",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1215,
+      "value": "主管",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1217,
+      "value": "搬",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1219,
+      "value": "背",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1219,
+      "value": "背",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1220,
+      "value": "別",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1222,
+      "value": "出",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1225,
+      "value": "倒",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1225,
+      "value": "倒",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1226,
+      "value": "到",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1227,
+      "value": "動",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1228,
+      "value": "度",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1228,
+      "value": "度",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1229,
+      "value": "翻",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1230,
+      "value": "過",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1230,
+      "value": "過",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1231,
+      "value": "降",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1231,
+      "value": "降",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1232,
+      "value": "進",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1233,
+      "value": "進口",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1234,
+      "value": "經過",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1235,
+      "value": "舉",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1236,
+      "value": "來",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1237,
+      "value": "離",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1239,
+      "value": "留",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1243,
+      "value": "馬上",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1245,
+      "value": "起",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1246,
+      "value": "去",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1248,
+      "value": "上班",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1252,
+      "value": "上網",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1257,
+      "value": "提",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1258,
+      "value": "跳",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1259,
+      "value": "通",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1259,
+      "value": "通",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1260,
+      "value": "往",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1266,
+      "value": "移",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1267,
+      "value": "以上",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1269,
+      "value": "一下",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1270,
+      "value": "運動",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1271,
+      "value": "漲",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1271,
+      "value": "漲",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1272,
+      "value": "轉",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1272,
+      "value": "轉",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1273,
+      "value": "走",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1274,
+      "value": "走路",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1281,
+      "value": "音樂會",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1282,
+      "value": "樂器",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1286,
+      "value": "草地",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1288,
+      "value": "地",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1288,
+      "value": "地",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1292,
+      "value": "光",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1293,
+      "value": "光線",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1296,
+      "value": "河",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1297,
+      "value": "火",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1299,
+      "value": "空地",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1299,
+      "value": "空地",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1301,
+      "value": "氣流",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1306,
+      "value": "水",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1306,
+      "value": "水",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1308,
+      "value": "太陽",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1317,
+      "value": "該",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1318,
+      "value": "需要",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1321,
+      "value": "必要",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1322,
+      "value": "想要",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1323,
+      "value": "缺少",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1327,
+      "value": "部",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1328,
+      "value": "層",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1329,
+      "value": "尺",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1329,
+      "value": "尺",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1330,
+      "value": "次",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1332,
+      "value": "單行道",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1333,
+      "value": "第",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1334,
+      "value": "段",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1335,
+      "value": "堆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1336,
+      "value": "多少",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1336,
+      "value": "多少",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1342,
+      "value": "斤",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1344,
+      "value": "兩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1345,
+      "value": "零",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1347,
+      "value": "片",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1347,
+      "value": "片",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1356,
+      "value": "數",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1356,
+      "value": "數",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1357,
+      "value": "雙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1358,
+      "value": "雙人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1361,
+      "value": "隨便",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1362,
+      "value": "所長",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1362,
+      "value": "所長",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1363,
+      "value": "台",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1363,
+      "value": "台",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1364,
+      "value": "條",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1367,
+      "value": "項",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1368,
+      "value": "一",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1372,
+      "value": "兆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1374,
+      "value": "種",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1374,
+      "value": "種",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1375,
+      "value": "左右",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1376,
+      "value": "座",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1383,
+      "value": "職業",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1394,
+      "value": "個人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1403,
+      "value": "奶奶",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1414,
+      "value": "女人",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1414,
+      "value": "女人",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1419,
+      "value": "他",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1423,
+      "value": "太太",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1427,
+      "value": "我們",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1435,
+      "value": "祖先",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1436,
+      "value": "發現",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1437,
+      "value": "見",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1437,
+      "value": "見",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1438,
+      "value": "看",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1438,
+      "value": "看",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1440,
+      "value": "聞",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1442,
+      "value": "察覺",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1447,
+      "value": "開刀",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1449,
+      "value": "演",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1454,
+      "value": "戲",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1457,
+      "value": "穿",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1458,
+      "value": "美",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1458,
+      "value": "美",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1461,
+      "value": "展覽",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1465,
+      "value": "背包",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1468,
+      "value": "開朗",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1471,
+      "value": "樂觀",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1473,
+      "value": "熱情",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1476,
+      "value": "按",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1477,
+      "value": "把",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1477,
+      "value": "把",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1478,
+      "value": "辦",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1479,
+      "value": "包",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1480,
+      "value": "包裹",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1481,
+      "value": "保管",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1482,
+      "value": "保重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1484,
+      "value": "補",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1487,
+      "value": "插",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1488,
+      "value": "處理",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1489,
+      "value": "搭",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1490,
+      "value": "點",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1491,
+      "value": "放",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1493,
+      "value": "感冒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1494,
+      "value": "告訴",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1494,
+      "value": "告訴",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1496,
+      "value": "接",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1497,
+      "value": "開",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1500,
+      "value": "來回",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1501,
+      "value": "拿",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1502,
+      "value": "切",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1502,
+      "value": "切",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1507,
+      "value": "使",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1508,
+      "value": "使用",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1509,
+      "value": "收",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1511,
+      "value": "送",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1512,
+      "value": "碎",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1513,
+      "value": "套",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1515,
+      "value": "投",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1517,
+      "value": "洗",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1518,
+      "value": "修理",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1519,
+      "value": "壓",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1520,
+      "value": "用",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1521,
+      "value": "張",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1522,
+      "value": "招待",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1525,
+      "value": "做",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1526,
+      "value": "粉",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1527,
+      "value": "乾燥",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1528,
+      "value": "葷",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1530,
+      "value": "黏",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1531,
+      "value": "輕",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1533,
+      "value": "粗糙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1542,
+      "value": "昏迷",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1545,
+      "value": "精神",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1546,
+      "value": "場",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1546,
+      "value": "場",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1548,
+      "value": "出口",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1554,
+      "value": "櫃檯",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1557,
+      "value": "區",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1560,
+      "value": "市",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1567,
+      "value": "計劃",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1568,
+      "value": "願意",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1569,
+      "value": "打算",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1571,
+      "value": "目標",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1573,
+      "value": "未來",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1574,
+      "value": "方案",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1576,
+      "value": "策略",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1577,
+      "value": "花",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1580,
+      "value": "草",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1589,
+      "value": "起來",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1589,
+      "value": "起來",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1590,
+      "value": "坐",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1597,
+      "value": "才",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1598,
+      "value": "會",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1598,
+      "value": "會",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1599,
+      "value": "或",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1606,
+      "value": "恐怕",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1607,
+      "value": "發生",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1608,
+      "value": "發展",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1611,
+      "value": "卡",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1611,
+      "value": "卡",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1612,
+      "value": "開始",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1613,
+      "value": "開學",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1618,
+      "value": "完",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1620,
+      "value": "下課",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1622,
+      "value": "爆炸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1629,
+      "value": "警報",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1631,
+      "value": "半",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1632,
+      "value": "不過",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1636,
+      "value": "單子",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1636,
+      "value": "單子",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1637,
+      "value": "當然",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1638,
+      "value": "都",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1638,
+      "value": "都",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1639,
+      "value": "多",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1640,
+      "value": "夠",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1641,
+      "value": "某",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1644,
+      "value": "少",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1644,
+      "value": "少",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1646,
+      "value": "所有",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1650,
+      "value": "一些",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1652,
+      "value": "這麼",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1654,
+      "value": "只",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1654,
+      "value": "只",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1655,
+      "value": "只有",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1655,
+      "value": "只有",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1657,
+      "value": "原因",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1658,
+      "value": "理由",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1659,
+      "value": "由於",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1661,
+      "value": "目的",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1664,
+      "value": "根據",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1665,
+      "value": "解釋",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1669,
+      "value": "地方",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1669,
+      "value": "地方",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1671,
+      "value": "東西",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1671,
+      "value": "東西",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1674,
+      "value": "國",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1688,
+      "value": "關係",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1689,
+      "value": "家教",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1699,
+      "value": "社團",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1701,
+      "value": "屬",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1701,
+      "value": "屬",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1715,
+      "value": "牧師",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1717,
+      "value": "房間",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1720,
+      "value": "室",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1721,
+      "value": "套房",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1728,
+      "value": "春季",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1729,
+      "value": "春天",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1731,
+      "value": "冬季",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1732,
+      "value": "冬天",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1734,
+      "value": "秋季",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1735,
+      "value": "秋天",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1736,
+      "value": "四季",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1737,
+      "value": "夏季",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1738,
+      "value": "夏天",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1741,
+      "value": "薄",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1741,
+      "value": "薄",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1743,
+      "value": "剛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1745,
+      "value": "紅",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1747,
+      "value": "厚",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1749,
+      "value": "醬",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1750,
+      "value": "咳",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1750,
+      "value": "咳",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1751,
+      "value": "苦",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1753,
+      "value": "爛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1756,
+      "value": "淺",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1756,
+      "value": "淺",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1760,
+      "value": "瘦",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1761,
+      "value": "酸",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1763,
+      "value": "甜",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1764,
+      "value": "細",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1765,
+      "value": "香",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1766,
+      "value": "新鮮",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1767,
+      "value": "硬",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1768,
+      "value": "餅",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1772,
+      "value": "長方形",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1776,
+      "value": "曲線",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1777,
+      "value": "角",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1782,
+      "value": "賣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1788,
+      "value": "拜拜",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1788,
+      "value": "拜拜",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1789,
+      "value": "棒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1790,
+      "value": "邊",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1790,
+      "value": "邊",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1793,
+      "value": "冰",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1798,
+      "value": "臭",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1798,
+      "value": "臭",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1799,
+      "value": "初",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1801,
+      "value": "粗",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1802,
+      "value": "打",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1802,
+      "value": "打",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1803,
+      "value": "大概",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1804,
+      "value": "大號",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1805,
+      "value": "大小",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1806,
+      "value": "帶",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1807,
+      "value": "大夫",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1807,
+      "value": "大夫",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1808,
+      "value": "淡",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1810,
+      "value": "底",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1810,
+      "value": "底",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1812,
+      "value": "釘",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1812,
+      "value": "釘",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1813,
+      "value": "動作",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1819,
+      "value": "副",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1820,
+      "value": "蓋",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1821,
+      "value": "乾脆",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1824,
+      "value": "怪",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1825,
+      "value": "關於",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1826,
+      "value": "行",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1826,
+      "value": "行",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1828,
+      "value": "後",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1829,
+      "value": "後面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1830,
+      "value": "幾",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1830,
+      "value": "幾",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1831,
+      "value": "加",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1831,
+      "value": "加",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1832,
+      "value": "假",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1832,
+      "value": "假",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1833,
+      "value": "間",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1833,
+      "value": "間",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1835,
+      "value": "焦",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1836,
+      "value": "節",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1842,
+      "value": "客人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1843,
+      "value": "塊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1845,
+      "value": "垃圾",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1848,
+      "value": "麻",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1851,
+      "value": "密碼",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1858,
+      "value": "弄",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1858,
+      "value": "弄",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1860,
+      "value": "喔",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1860,
+      "value": "喔",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1861,
+      "value": "牌",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1863,
+      "value": "派",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1864,
+      "value": "盤",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1866,
+      "value": "泡",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1866,
+      "value": "泡",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1871,
+      "value": "確定",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1875,
+      "value": "事",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1876,
+      "value": "事情",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1877,
+      "value": "熟",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1883,
+      "value": "私人",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1885,
+      "value": "彈",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1885,
+      "value": "彈",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1886,
+      "value": "天線",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1887,
+      "value": "通風",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1891,
+      "value": "哇",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1891,
+      "value": "哇",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1894,
+      "value": "吸管",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1895,
+      "value": "習慣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1896,
+      "value": "線",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1900,
+      "value": "小號",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1903,
+      "value": "型",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1904,
+      "value": "呀",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1904,
+      "value": "呀",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1905,
+      "value": "樣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1908,
+      "value": "以外",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1916,
+      "value": "圓",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1917,
+      "value": "早",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1918,
+      "value": "真",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1921,
+      "value": "陣",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1924,
+      "value": "鐘",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1926,
+      "value": "裝",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1928,
+      "value": "自由",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1929,
+      "value": "綜合",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1931,
+      "value": "最後",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1932,
+      "value": "左",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1936,
+      "value": "聚會",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1942,
+      "value": "徵",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1942,
+      "value": "徵",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1945,
+      "value": "附近",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1946,
+      "value": "還有",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1947,
+      "value": "後頭",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1948,
+      "value": "空間",
+      "details": [
+        "many-english-senses",
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1954,
+      "value": "內",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1955,
+      "value": "外",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1956,
+      "value": "外面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1958,
+      "value": "位",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1960,
+      "value": "下面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1965,
+      "value": "中間",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1970,
+      "value": "班",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1973,
+      "value": "打敗",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1976,
+      "value": "教練",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1984,
+      "value": "玩",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1986,
+      "value": "游",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1988,
+      "value": "足球",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1989,
+      "value": "矮",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1990,
+      "value": "安全",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1991,
+      "value": "白",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1991,
+      "value": "白",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1993,
+      "value": "差",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1993,
+      "value": "差",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1994,
+      "value": "差不多",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1995,
+      "value": "長",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1995,
+      "value": "長",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1997,
+      "value": "成功",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1998,
+      "value": "重",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 1998,
+      "value": "重",
+      "details": [
+        "multiple-source-pronunciations",
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 1999,
+      "value": "錯",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2000,
+      "value": "錯誤",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2001,
+      "value": "大",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2002,
+      "value": "低",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2003,
+      "value": "短",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2005,
+      "value": "方便",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2006,
+      "value": "肥",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2008,
+      "value": "高",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2009,
+      "value": "高級",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2010,
+      "value": "好吃",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2010,
+      "value": "好吃",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2012,
+      "value": "好玩",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2012,
+      "value": "好玩",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2014,
+      "value": "黑",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2014,
+      "value": "黑",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2016,
+      "value": "舊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2017,
+      "value": "快",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2018,
+      "value": "老",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2019,
+      "value": "累",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2019,
+      "value": "累",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2022,
+      "value": "滿",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2022,
+      "value": "滿",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2024,
+      "value": "忙",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2025,
+      "value": "難",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2025,
+      "value": "難",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2028,
+      "value": "便宜",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2028,
+      "value": "便宜",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2030,
+      "value": "平安",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2031,
+      "value": "平常",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2032,
+      "value": "普通",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2033,
+      "value": "強",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2033,
+      "value": "強",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2034,
+      "value": "清楚",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2036,
+      "value": "熱",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2038,
+      "value": "容易",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2041,
+      "value": "實在",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2043,
+      "value": "太",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2044,
+      "value": "特別",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2046,
+      "value": "完全",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2047,
+      "value": "溫",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2049,
+      "value": "小",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2052,
+      "value": "嚴重",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2052,
+      "value": "嚴重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2053,
+      "value": "遠",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2053,
+      "value": "遠",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2060,
+      "value": "壯",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2060,
+      "value": "壯",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2066,
+      "value": "外部",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2068,
+      "value": "頂部",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2069,
+      "value": "結構",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2070,
+      "value": "表面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2071,
+      "value": "側面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2072,
+      "value": "查",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2073,
+      "value": "大學",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2073,
+      "value": "大學",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2074,
+      "value": "功課",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2076,
+      "value": "科",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2077,
+      "value": "練習",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2082,
+      "value": "學",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2084,
+      "value": "研究",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2091,
+      "value": "痛",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2096,
+      "value": "範圍",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2097,
+      "value": "方面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2102,
+      "value": "規則",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2103,
+      "value": "流程",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2104,
+      "value": "架構",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2105,
+      "value": "組織",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2107,
+      "value": "電",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2110,
+      "value": "機",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2111,
+      "value": "機械",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2115,
+      "value": "上演",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2123,
+      "value": "喂",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2123,
+      "value": "喂",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2128,
+      "value": "影片",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2133,
+      "value": "記得",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2137,
+      "value": "認識",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2138,
+      "value": "認為",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2142,
+      "value": "想",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2144,
+      "value": "意思",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2147,
+      "value": "不久",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2156,
+      "value": "後天",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2170,
+      "value": "時候",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2185,
+      "value": "以後",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2186,
+      "value": "以前",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2188,
+      "value": "一會兒",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2192,
+      "value": "早晚",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2193,
+      "value": "之後",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2199,
+      "value": "巴士",
+      "details": [
+        "source-disambiguation-rule"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2200,
+      "value": "車",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2200,
+      "value": "車",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2210,
+      "value": "自行車",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2213,
+      "value": "超重",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2215,
+      "value": "道",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2223,
+      "value": "機車",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2227,
+      "value": "交通",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2228,
+      "value": "郊區",
+      "details": [
+        "many-english-senses",
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2228,
+      "value": "郊區",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2233,
+      "value": "路",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2238,
+      "value": "旅行",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2239,
+      "value": "旅遊",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2245,
+      "value": "前面",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2247,
+      "value": "速度",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2250,
+      "value": "誤點",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2253,
+      "value": "行李箱",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2253,
+      "value": "行李箱",
+      "details": [
+        "polyphonic-character-without-word-override"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2255,
+      "value": "站",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2256,
+      "value": "式",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2257,
+      "value": "類型",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2258,
+      "value": "種類",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2263,
+      "value": "形式",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2266,
+      "value": "抽",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2267,
+      "value": "畫",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2271,
+      "value": "雕塑",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2274,
+      "value": "美術",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2277,
+      "value": "風",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2279,
+      "value": "龍捲風",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2289,
+      "value": "報告",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2301,
+      "value": "工作",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2302,
+      "value": "管理",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2304,
+      "value": "老闆",
+      "details": [
+        "multiple-pronunciations"
+      ]
+    },
+    {
+      "code": "pinyin-review",
+      "sourceRow": 2304,
+      "value": "老闆",
+      "details": [
+        "multiple-source-pronunciations"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2308,
+      "value": "商務",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2310,
+      "value": "設計",
+      "details": [
+        "many-english-senses"
+      ]
+    },
+    {
+      "code": "ambiguous-entry",
+      "sourceRow": 2316,
+      "value": "專業",
+      "details": [
+        "many-english-senses"
+      ]
+    }
+  ],
+  "errors": [],
+  "rejectedRows": []
+}

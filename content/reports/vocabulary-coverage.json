@@ -1,0 +1,3879 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-21T15:54:39.813Z",
+  "overallVocabularyReusePercentage": 100,
+  "lessons": [
+    {
+      "lessonId": "lesson-category-grammar-pronouns-aee810bb3c-1-8f777ae968",
+      "categoryId": "category-grammar-pronouns-aee810bb3c",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-pronouns-aee810bb3c-2-8238f9ce26",
+      "categoryId": "category-grammar-pronouns-aee810bb3c",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-1-33130ece88",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-2-14d09d3faf",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-3-418e650834",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-4-ea7be5ec09",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-5-f91856d81b",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-6-a0021acaa1",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-7-50e45f6d89",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-8-4727579125",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-9-32e9817c40",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-10-bad7af3268",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-numbers-b0640f0fc4-11-10277dc8f2",
+      "categoryId": "category-numbers-b0640f0fc4",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-1-5e12d4ba55",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-2-dcf7f5d63e",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-3-56119fe4f6",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-4-65b372eb0f",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-5-5355a57550",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-6-e5ebba195c",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-7-ac28cc2d11",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-8-73b359ea77",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-9-748ce54751",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-people-7db2089705-10-e2fe0bafd5",
+      "categoryId": "category-people-7db2089705",
+      "publishable": true,
+      "meaningfulTokenReferences": 188,
+      "coveredTokenReferences": 188,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-1-0ad00b2bae",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-2-263befb30b",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-3-9abbc71104",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-4-1047ed2246",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-5-bb6b933108",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-6-4b1d21a29c",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-7-0e17b1d755",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-8-41b284b4a9",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-9-be0530061f",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-10-bca76172d8",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-11-56595b2a0c",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-12-a96e3ddc81",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-13-aa31cc0330",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-14-e8a292b612",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-15-a393c8bebc",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-16-0ff8f1eef9",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-17-70badb96dc",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-18-5d208afd4b",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-19-df53acb6a3",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-20-90fa1db004",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-21-dea7fb7f95",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-22-c94e10e57c",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-23-8b80971f68",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-24-1db93357b4",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-25-050a488089",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 189,
+      "coveredTokenReferences": 189,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-actions-fe879cb8a4-26-3f590d6235",
+      "categoryId": "category-everyday-actions-fe879cb8a4",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-objects-040c0349f9-1-908334e930",
+      "categoryId": "category-everyday-objects-040c0349f9",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-objects-040c0349f9-2-023c9340a3",
+      "categoryId": "category-everyday-objects-040c0349f9",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-everyday-objects-040c0349f9-3-d6086b171d",
+      "categoryId": "category-everyday-objects-040c0349f9",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-1-82e15c8fd9",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-2-08bb4d35a7",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-3-3dda2b946e",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-4-ab2d186ed4",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-5-0c14701339",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-6-00d6deb95b",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-7-e70f5c334c",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-8-a3278bf1bf",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-9-b84e6cda66",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-10-8404daf28a",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-time-33b93476cf-11-f4aa126848",
+      "categoryId": "category-time-33b93476cf",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-location-15b61974b2-1-e72d845b17",
+      "categoryId": "category-location-15b61974b2",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-location-15b61974b2-2-dda86c7a1b",
+      "categoryId": "category-location-15b61974b2",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-1-6a4ca041d8",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-2-2c5abe2389",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-3-e0cbf4c9d8",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-4-06536e5e7e",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-5-33485fe6ac",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-quantity-822bab8d41-6-f17115d6f8",
+      "categoryId": "category-quantity-822bab8d41",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-measure-words-d22c70ea3a-1-e6647bcdf0",
+      "categoryId": "category-grammar-measure-words-d22c70ea3a",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-measure-words-d22c70ea3a-2-c0d6cd25b6",
+      "categoryId": "category-grammar-measure-words-d22c70ea3a",
+      "publishable": true,
+      "meaningfulTokenReferences": 226,
+      "coveredTokenReferences": 226,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-sentence-patterns-a3f5e194b4-1-e14928131d",
+      "categoryId": "category-grammar-sentence-patterns-a3f5e194b4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-sentence-patterns-a3f5e194b4-2-cce8100cfb",
+      "categoryId": "category-grammar-sentence-patterns-a3f5e194b4",
+      "publishable": true,
+      "meaningfulTokenReferences": 230,
+      "coveredTokenReferences": 230,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-1-5a50f3e7e2",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-2-65b3bce752",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-3-86a449a569",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-4-73282510b6",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-5-ea777ca08d",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-6-222fa4448c",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-7-d0d16410e2",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-8-2d3cbe3f89",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-9-edeb0e981b",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-10-f2490c55d7",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-11-a0ecfcf853",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-12-a6d7f8974a",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-13-a9c30a70fc",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-14-7729b0ace7",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-15-72b0f758b4",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-16-8d43e57103",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 232,
+      "coveredTokenReferences": 232,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-17-aac64f5636",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-connectors-4a50ddbd52-18-2b522bcd65",
+      "categoryId": "category-grammar-connectors-4a50ddbd52",
+      "publishable": true,
+      "meaningfulTokenReferences": 189,
+      "coveredTokenReferences": 189,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-interjections-fd612fd177-1-fd8c4b7521",
+      "categoryId": "category-grammar-interjections-fd612fd177",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-grammar-interjections-fd612fd177-2-9064afcac0",
+      "categoryId": "category-grammar-interjections-fd612fd177",
+      "publishable": true,
+      "meaningfulTokenReferences": 226,
+      "coveredTokenReferences": 226,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-language-a4fe65264e-1-0b18408704",
+      "categoryId": "category-language-a4fe65264e",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-language-a4fe65264e-2-d1cbc7b040",
+      "categoryId": "category-language-a4fe65264e",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-language-a4fe65264e-3-30b25c0e04",
+      "categoryId": "category-language-a4fe65264e",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-language-a4fe65264e-4-c933024dd7",
+      "categoryId": "category-language-a4fe65264e",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-language-a4fe65264e-5-3505f780f9",
+      "categoryId": "category-language-a4fe65264e",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-1-1de88ee2d5",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-2-37c31604c4",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-3-0978af0b85",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-4-9a3208455e",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-5-b042213997",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-6-3f16eafc31",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-7-5406bd06b6",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-8-c2dbca201d",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-9-629b4d80e1",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-actions-380007889c-10-a6c60bd6fe",
+      "categoryId": "category-physical-actions-380007889c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-states-3b3b2cfce8-1-b248039bfb",
+      "categoryId": "category-physical-states-3b3b2cfce8",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-states-3b3b2cfce8-2-64d19bcc03",
+      "categoryId": "category-physical-states-3b3b2cfce8",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-properties-da88a5d625-1-61476e4b1a",
+      "categoryId": "category-physical-properties-da88a5d625",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-physical-properties-da88a5d625-2-fdfa0724b5",
+      "categoryId": "category-physical-properties-da88a5d625",
+      "publishable": true,
+      "meaningfulTokenReferences": 230,
+      "coveredTokenReferences": 230,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-1-e16b59b99b",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-2-9af6c8a723",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-3-1d658152a0",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-4-b2490b447a",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-5-0a0f537074",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sensory-qualities-781bea1727-6-22d152244f",
+      "categoryId": "category-sensory-qualities-781bea1727",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-position-6d031af10d-1-5edb512d35",
+      "categoryId": "category-position-6d031af10d",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-position-6d031af10d-2-18d091aba7",
+      "categoryId": "category-position-6d031af10d",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-direction-9c8a9579ab-1-bbc681717d",
+      "categoryId": "category-direction-9c8a9579ab",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-direction-9c8a9579ab-2-c19c610ca7",
+      "categoryId": "category-direction-9c8a9579ab",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-comparison-571527339d-1-999b099740",
+      "categoryId": "category-comparison-571527339d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-comparison-571527339d-2-7ad986644f",
+      "categoryId": "category-comparison-571527339d",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-1-8dbb6f3429",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-2-1dd60d7b05",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-3-a5b8666600",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-4-7bc5d48da1",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-5-82c20d6498",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-6-cd8d44b280",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-7-126517c001",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-home-3a78695388-8-c27d12f453",
+      "categoryId": "category-home-3a78695388",
+      "publishable": true,
+      "meaningfulTokenReferences": 182,
+      "coveredTokenReferences": 182,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-rooms-bd32f6cedb-1-904074c6ff",
+      "categoryId": "category-rooms-bd32f6cedb",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-rooms-bd32f6cedb-2-8353e1df88",
+      "categoryId": "category-rooms-bd32f6cedb",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-rooms-bd32f6cedb-3-cf04965ffd",
+      "categoryId": "category-rooms-bd32f6cedb",
+      "publishable": true,
+      "meaningfulTokenReferences": 182,
+      "coveredTokenReferences": 182,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-furniture-c50440e0e4-1-878cab0b1f",
+      "categoryId": "category-furniture-c50440e0e4",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-furniture-c50440e0e4-2-573baa3dd1",
+      "categoryId": "category-furniture-c50440e0e4",
+      "publishable": true,
+      "meaningfulTokenReferences": 226,
+      "coveredTokenReferences": 226,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-household-tools-7dd3d8d2c6-1-074ce285fc",
+      "categoryId": "category-household-tools-7dd3d8d2c6",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-household-tools-7dd3d8d2c6-2-ba12c22959",
+      "categoryId": "category-household-tools-7dd3d8d2c6",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-personal-items-f760e465c8-1-9b1f448e3e",
+      "categoryId": "category-personal-items-f760e465c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-personal-items-f760e465c8-2-a0307d9b29",
+      "categoryId": "category-personal-items-f760e465c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-clothing-5bea3ab36d-1-77d42ffbb5",
+      "categoryId": "category-clothing-5bea3ab36d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-clothing-5bea3ab36d-2-02a63a9081",
+      "categoryId": "category-clothing-5bea3ab36d",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-clothing-5bea3ab36d-3-3aa4f1758a",
+      "categoryId": "category-clothing-5bea3ab36d",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-clothing-5bea3ab36d-4-31e80d315b",
+      "categoryId": "category-clothing-5bea3ab36d",
+      "publishable": true,
+      "meaningfulTokenReferences": 187,
+      "coveredTokenReferences": 187,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-1-ed14c7f74e",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-2-27424ed236",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-3-437c82cfde",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-4-dc369d7d1d",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-5-5870885ac0",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-6-75e436efb3",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-7-272cbe9a83",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-8-c3eacfc22d",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-body-parts-52126bad92-9-0a51fa1248",
+      "categoryId": "category-body-parts-52126bad92",
+      "publishable": true,
+      "meaningfulTokenReferences": 187,
+      "coveredTokenReferences": 187,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-appearance-3907fa7f80-1-73b59c785b",
+      "categoryId": "category-appearance-3907fa7f80",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-appearance-3907fa7f80-2-3a187d976c",
+      "categoryId": "category-appearance-3907fa7f80",
+      "publishable": true,
+      "meaningfulTokenReferences": 230,
+      "coveredTokenReferences": 230,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-personality-95a295627e-1-2a32643526",
+      "categoryId": "category-personality-95a295627e",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-personality-95a295627e-2-0a971e9409",
+      "categoryId": "category-personality-95a295627e",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-1-c283053641",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-2-a9552c8f32",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-3-21e422ddb8",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-4-5eab1790bf",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-5-d1b845de0e",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-6-b501481b29",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-7-df909f663a",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-8-f4e08c468d",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-9-786f6c0792",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-10-8f97d69127",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-11-88e83da9bc",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-12-8bec55ce9d",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-13-e3a0e35695",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-14-0c08c05aae",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-15-ca5a141259",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-16-4c884f74c2",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-17-38d6fcbacb",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-18-632c64e101",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-19-1eac25137d",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-food-e4eb18069d-20-7304ab2f76",
+      "categoryId": "category-food-e4eb18069d",
+      "publishable": true,
+      "meaningfulTokenReferences": 222,
+      "coveredTokenReferences": 222,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-drinks-ad4e3084c8-1-6f83a7bc38",
+      "categoryId": "category-drinks-ad4e3084c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-drinks-ad4e3084c8-2-03be31c93c",
+      "categoryId": "category-drinks-ad4e3084c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-drinks-ad4e3084c8-3-55f80abf49",
+      "categoryId": "category-drinks-ad4e3084c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-drinks-ad4e3084c8-4-a0fc20e833",
+      "categoryId": "category-drinks-ad4e3084c8",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-cooking-d3bdb65e5d-1-398f8f96e1",
+      "categoryId": "category-cooking-d3bdb65e5d",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-cooking-d3bdb65e5d-2-b3a697e28e",
+      "categoryId": "category-cooking-d3bdb65e5d",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-cooking-d3bdb65e5d-3-b2289074a2",
+      "categoryId": "category-cooking-d3bdb65e5d",
+      "publishable": true,
+      "meaningfulTokenReferences": 189,
+      "coveredTokenReferences": 189,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-dining-f9c9ea03b3-1-b991d17c78",
+      "categoryId": "category-dining-f9c9ea03b3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-dining-f9c9ea03b3-2-792647bf2f",
+      "categoryId": "category-dining-f9c9ea03b3",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-shopping-b5b68f9d45-1-42093e9284",
+      "categoryId": "category-shopping-b5b68f9d45",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-shopping-b5b68f9d45-2-cff4ffb30c",
+      "categoryId": "category-shopping-b5b68f9d45",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-1-7343f5e4d4",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-2-323b6ca941",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-3-e57032c46b",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-4-eb5ba29ad6",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-5-9f4a8ad577",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-6-c3a6e5bf23",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-7-72f265b75e",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-8-753978afa3",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 187,
+      "coveredTokenReferences": 187,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-9-9fc169b9e4",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 189,
+      "coveredTokenReferences": 189,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-money-5ccc2e8715-10-2ce834db18",
+      "categoryId": "category-money-5ccc2e8715",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-1-4f6c0b63a2",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-2-9ad0c97ee2",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-3-389bf6d24c",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-4-a698074f15",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-5-6d739e3e09",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-relationships-85752a46aa-6-e8d1cc6d81",
+      "categoryId": "category-relationships-85752a46aa",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-1-832b4874e9",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-2-ca6e0acbf8",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-3-577fb5f640",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-4-80d8b81feb",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-5-47a02483ac",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-6-a819b65d8b",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-7-3eef81a62b",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 189,
+      "coveredTokenReferences": 189,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-emotions-8a1f7f6d8f-8-9a3984b372",
+      "categoryId": "category-emotions-8a1f7f6d8f",
+      "publishable": true,
+      "meaningfulTokenReferences": 181,
+      "coveredTokenReferences": 181,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-needs-5f9bbdd124-1-e3d8ea6bd5",
+      "categoryId": "category-needs-5f9bbdd124",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-needs-5f9bbdd124-2-60e6929bdf",
+      "categoryId": "category-needs-5f9bbdd124",
+      "publishable": true,
+      "meaningfulTokenReferences": 232,
+      "coveredTokenReferences": 232,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-interests-756aaea140-1-e0ab834e13",
+      "categoryId": "category-interests-756aaea140",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-interests-756aaea140-2-dec9143b2b",
+      "categoryId": "category-interests-756aaea140",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-calendar-d5d0a30b51-1-ba0f8facd0",
+      "categoryId": "category-calendar-d5d0a30b51",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-calendar-d5d0a30b51-2-ee896bc653",
+      "categoryId": "category-calendar-d5d0a30b51",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-calendar-d5d0a30b51-3-b6e04970e3",
+      "categoryId": "category-calendar-d5d0a30b51",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-seasons-c15527b19b-1-ec4dbda656",
+      "categoryId": "category-seasons-c15527b19b",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-seasons-c15527b19b-2-0093d20c20",
+      "categoryId": "category-seasons-c15527b19b",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-seasons-c15527b19b-3-bc8683dc19",
+      "categoryId": "category-seasons-c15527b19b",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-weather-a0bba63812-1-fdcfb7b628",
+      "categoryId": "category-weather-a0bba63812",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-weather-a0bba63812-2-16d14d9246",
+      "categoryId": "category-weather-a0bba63812",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-weather-a0bba63812-3-45f4587366",
+      "categoryId": "category-weather-a0bba63812",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-1-06ae9e17b7",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-2-e1f58abc16",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-3-a0619af6af",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-4-3453f62cb6",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-5-b305be88d5",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-nature-c71ce8ccf3-6-44fdc0152c",
+      "categoryId": "category-nature-c71ce8ccf3",
+      "publishable": true,
+      "meaningfulTokenReferences": 220,
+      "coveredTokenReferences": 220,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-animals-85c3f9fa6f-1-0272d67ef2",
+      "categoryId": "category-animals-85c3f9fa6f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-animals-85c3f9fa6f-2-cd72c28a06",
+      "categoryId": "category-animals-85c3f9fa6f",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-animals-85c3f9fa6f-3-e6d8f26211",
+      "categoryId": "category-animals-85c3f9fa6f",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-plants-b81ce6bddc-1-fba88cddb3",
+      "categoryId": "category-plants-b81ce6bddc",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-plants-b81ce6bddc-2-b328a1e5de",
+      "categoryId": "category-plants-b81ce6bddc",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-places-eb5cfb7367-1-be8726db44",
+      "categoryId": "category-places-eb5cfb7367",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-places-eb5cfb7367-2-790cae3d5d",
+      "categoryId": "category-places-eb5cfb7367",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-places-eb5cfb7367-3-ecfad04b66",
+      "categoryId": "category-places-eb5cfb7367",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-places-eb5cfb7367-4-3abf3359c3",
+      "categoryId": "category-places-eb5cfb7367",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-places-eb5cfb7367-5-2865d64508",
+      "categoryId": "category-places-eb5cfb7367",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-transportation-e5ffd6e654-1-751f8f61b2",
+      "categoryId": "category-transportation-e5ffd6e654",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-transportation-e5ffd6e654-2-17439c7e93",
+      "categoryId": "category-transportation-e5ffd6e654",
+      "publishable": true,
+      "meaningfulTokenReferences": 185,
+      "coveredTokenReferences": 185,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-transportation-e5ffd6e654-3-aa9ba785db",
+      "categoryId": "category-transportation-e5ffd6e654",
+      "publishable": true,
+      "meaningfulTokenReferences": 186,
+      "coveredTokenReferences": 186,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-1-28bf0a8848",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-2-90b96d3394",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-3-d3346da258",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-4-41fe895af3",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-5-d4ea89527a",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-6-1a08810d98",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-7-4dc8fe8575",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 229,
+      "coveredTokenReferences": 229,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-8-e14f181d44",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 231,
+      "coveredTokenReferences": 231,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-travel-d2b98fb537-9-4e3f13bb29",
+      "categoryId": "category-travel-d2b98fb537",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-appointments-f2e4653120-1-7a5f1148c7",
+      "categoryId": "category-appointments-f2e4653120",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-appointments-f2e4653120-2-7d54d4b38a",
+      "categoryId": "category-appointments-f2e4653120",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-1-576a1681a1",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-2-4392eea195",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-3-31e4c19ab0",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-4-744d8a9617",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-5-74005c1835",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-6-e44fe4540f",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-7-e03da29e3b",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-8-05045a55d3",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-9-e6a451fa8b",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-10-6130bb0b99",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-11-9e80974027",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 193,
+      "coveredTokenReferences": 193,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-education-512ab3c6b9-12-8d17eac537",
+      "categoryId": "category-education-512ab3c6b9",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-study-3ff5620b02-1-7eeb365d02",
+      "categoryId": "category-study-3ff5620b02",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-study-3ff5620b02-2-f77f5c27e6",
+      "categoryId": "category-study-3ff5620b02",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-study-3ff5620b02-3-7b59014ac2",
+      "categoryId": "category-study-3ff5620b02",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-1-67afb14eb7",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-2-1a31a4a2b1",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-3-f6f96b1e2f",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-4-7b29b5e592",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-5-ea722955de",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 192,
+      "coveredTokenReferences": 192,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-6-f0c888031b",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-work-104ab9213e-7-261b271c3e",
+      "categoryId": "category-work-104ab9213e",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-occupations-5095784516-1-716ae613ca",
+      "categoryId": "category-occupations-5095784516",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-occupations-5095784516-2-5247683f5c",
+      "categoryId": "category-occupations-5095784516",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-1-2c973d3503",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-2-c9e349abe1",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-3-56674d57be",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-4-7b7a403483",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-5-b99381a13c",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-communication-3981a2b9c1-6-5bb9f21f2e",
+      "categoryId": "category-communication-3981a2b9c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-social-events-32115c5688-1-eb14746ac7",
+      "categoryId": "category-social-events-32115c5688",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-social-events-32115c5688-2-86db20c618",
+      "categoryId": "category-social-events-32115c5688",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-entertainment-ceaa553e83-1-f0fb75dce1",
+      "categoryId": "category-entertainment-ceaa553e83",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-entertainment-ceaa553e83-2-651acac20d",
+      "categoryId": "category-entertainment-ceaa553e83",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-games-d9dae78103-1-284d38b946",
+      "categoryId": "category-games-d9dae78103",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-games-d9dae78103-2-c006dfe31c",
+      "categoryId": "category-games-d9dae78103",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sports-9b1f5daf0a-1-114fa9740f",
+      "categoryId": "category-sports-9b1f5daf0a",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sports-9b1f5daf0a-2-9681c8a13a",
+      "categoryId": "category-sports-9b1f5daf0a",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sports-9b1f5daf0a-3-04bc5afd2c",
+      "categoryId": "category-sports-9b1f5daf0a",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-sports-9b1f5daf0a-4-af5a6a2696",
+      "categoryId": "category-sports-9b1f5daf0a",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-1-e73506892c",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-2-2745777681",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-3-bca85b5ebc",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-4-012298fb0f",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-5-3e1e3c2179",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-6-598e3e2484",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-7-6a7f738757",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-8-d330547f14",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-9-719f234fb0",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-health-55898449eb-10-f9b0c2bc3b",
+      "categoryId": "category-health-55898449eb",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-symptoms-98d6c66abf-1-d11d9aed95",
+      "categoryId": "category-symptoms-98d6c66abf",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-symptoms-98d6c66abf-2-1cb2ddbae5",
+      "categoryId": "category-symptoms-98d6c66abf",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-illnesses-e4f18c6662-1-fa62e48df5",
+      "categoryId": "category-illnesses-e4f18c6662",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-illnesses-e4f18c6662-2-dc5dc90ad3",
+      "categoryId": "category-illnesses-e4f18c6662",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-medicine-c4d3d42ed3-1-798b4b717a",
+      "categoryId": "category-medicine-c4d3d42ed3",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-medicine-c4d3d42ed3-2-ed78c939a4",
+      "categoryId": "category-medicine-c4d3d42ed3",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-healthcare-a64b892ff0-1-88d9d4f21f",
+      "categoryId": "category-healthcare-a64b892ff0",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-healthcare-a64b892ff0-2-e621ec9911",
+      "categoryId": "category-healthcare-a64b892ff0",
+      "publishable": true,
+      "meaningfulTokenReferences": 233,
+      "coveredTokenReferences": 233,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-exercise-9bc3516b78-1-470db8b64a",
+      "categoryId": "category-exercise-9bc3516b78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-exercise-9bc3516b78-2-826f3ae65e",
+      "categoryId": "category-exercise-9bc3516b78",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-public-safety-6a127ac510-1-d5757f6eae",
+      "categoryId": "category-public-safety-6a127ac510",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-public-safety-6a127ac510-2-8dea5bdc5b",
+      "categoryId": "category-public-safety-6a127ac510",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-electronics-7ae9c23d65-1-446f9f7fec",
+      "categoryId": "category-electronics-7ae9c23d65",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-electronics-7ae9c23d65-2-bef8f5bc85",
+      "categoryId": "category-electronics-7ae9c23d65",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-1-201246d3f5",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-2-832909331e",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-3-26b74e0d66",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-4-75ca24c552",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-5-f554179bc4",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-technology-3169ce6442-6-1f5f9ef93e",
+      "categoryId": "category-technology-3169ce6442",
+      "publishable": true,
+      "meaningfulTokenReferences": 192,
+      "coveredTokenReferences": 192,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-information-1cb0ba125f-1-e81609d54e",
+      "categoryId": "category-information-1cb0ba125f",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-information-1cb0ba125f-2-8216064c40",
+      "categoryId": "category-information-1cb0ba125f",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-media-d357175cfe-1-8310b757fe",
+      "categoryId": "category-media-d357175cfe",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-media-d357175cfe-2-e70bf5e4b9",
+      "categoryId": "category-media-d357175cfe",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-media-d357175cfe-3-ce5db919af",
+      "categoryId": "category-media-d357175cfe",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-documents-b4e929d8bc-1-8e31454f6a",
+      "categoryId": "category-documents-b4e929d8bc",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-documents-b4e929d8bc-2-212c61de07",
+      "categoryId": "category-documents-b4e929d8bc",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-documents-b4e929d8bc-3-a907d04352",
+      "categoryId": "category-documents-b4e929d8bc",
+      "publishable": true,
+      "meaningfulTokenReferences": 192,
+      "coveredTokenReferences": 192,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-meetings-bca705b63a-1-82697c56b5",
+      "categoryId": "category-meetings-bca705b63a",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-meetings-bca705b63a-2-c94e98c971",
+      "categoryId": "category-meetings-bca705b63a",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-plans-dfe8b2f0de-1-1dc796c6d3",
+      "categoryId": "category-plans-dfe8b2f0de",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-plans-dfe8b2f0de-2-e37bf3f8ee",
+      "categoryId": "category-plans-dfe8b2f0de",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-decisions-cfa6a08af3-1-2c67269cf4",
+      "categoryId": "category-decisions-cfa6a08af3",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-decisions-cfa6a08af3-2-a6db9647fd",
+      "categoryId": "category-decisions-cfa6a08af3",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-reasons-72ed245d2c-1-33eab66b9b",
+      "categoryId": "category-reasons-72ed245d2c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-reasons-72ed245d2c-2-8499ebb532",
+      "categoryId": "category-reasons-72ed245d2c",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-possibility-cf7630fc8e-1-36dc63a8f1",
+      "categoryId": "category-possibility-cf7630fc8e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-possibility-cf7630fc8e-2-0170874bb9",
+      "categoryId": "category-possibility-cf7630fc8e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-1-bc45ddba6e",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-2-f2b7f16740",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-3-d27908acca",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-4-6b0f2d40ef",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-5-7a34921339",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-6-73b368975c",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-7-e23a11c3aa",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-8-9adc24026e",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-9-dc2aec96bb",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-10-73048fbde2",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-11-5e2b0d2084",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-12-d0480aa267",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-13-3a01cae106",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-14-50e09819ad",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-15-2527706dc5",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-16-a8ac4450f3",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-17-e166cc1f80",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-18-f0025a6c33",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-19-374945a207",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-20-abe04c9434",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-21-e23ca1d384",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-22-3befe69d2a",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-23-6b5d7ceafc",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-24-64a79d4b64",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-25-abd054dd1e",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-26-c05fed2a01",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-27-f9815d319d",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-28-cb6c18da72",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-29-44285cd467",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-situations-177e70fe78-30-a26251c719",
+      "categoryId": "category-situations-177e70fe78",
+      "publishable": true,
+      "meaningfulTokenReferences": 188,
+      "coveredTokenReferences": 188,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-1-c9f83d0dd6",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-2-0eaea5cb54",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-3-34f7a6fc44",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-4-967a0c2d81",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-5-e997888480",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-6-f2f6c9f758",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-7-e4645ef417",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-8-7ac497f74f",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-9-fd387f15fe",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-10-51038bc98c",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-11-df25478834",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-movement-49ba63e89a-12-d77177fba8",
+      "categoryId": "category-movement-49ba63e89a",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-change-c0bf75bd78-1-7a4546a406",
+      "categoryId": "category-change-c0bf75bd78",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-change-c0bf75bd78-2-b6f3a9c088",
+      "categoryId": "category-change-c0bf75bd78",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-1-eb07194aa5",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-2-e5181f3c35",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-3-db5747ff45",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-4-3cdde23340",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-5-06ae4055b7",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-6-845043720e",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-7-ab0879e493",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-8-86f4788e6a",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-9-be10db34b1",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-10-52ac5bbcd6",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-11-93fd117a50",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-12-a3054b4fb0",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-13-4d8f23d553",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-14-3a3eaf1fd3",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-states-2f6e9daec8-15-bf0557f8dc",
+      "categoryId": "category-states-2f6e9daec8",
+      "publishable": true,
+      "meaningfulTokenReferences": 182,
+      "coveredTokenReferences": 182,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-processes-4a81a7ba53-1-322ada94ba",
+      "categoryId": "category-processes-4a81a7ba53",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-processes-4a81a7ba53-2-0f0e70d513",
+      "categoryId": "category-processes-4a81a7ba53",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-processes-4a81a7ba53-3-a431ca9adf",
+      "categoryId": "category-processes-4a81a7ba53",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-methods-8696622f34-1-deaa81e9a2",
+      "categoryId": "category-methods-8696622f34",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-methods-8696622f34-2-8517f6f096",
+      "categoryId": "category-methods-8696622f34",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-effects-358511c8c0-1-fc187ae02c",
+      "categoryId": "category-effects-358511c8c0",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-effects-358511c8c0-2-e52dcbaf80",
+      "categoryId": "category-effects-358511c8c0",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-circumstances-6b9cb86500-1-549f1e8a87",
+      "categoryId": "category-circumstances-6b9cb86500",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-circumstances-6b9cb86500-2-0d3d150ac1",
+      "categoryId": "category-circumstances-6b9cb86500",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-evaluation-163e44b102-1-71c95c9fa2",
+      "categoryId": "category-evaluation-163e44b102",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-evaluation-163e44b102-2-a05d22469b",
+      "categoryId": "category-evaluation-163e44b102",
+      "publishable": true,
+      "meaningfulTokenReferences": 226,
+      "coveredTokenReferences": 226,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-attitudes-7d2b2a38d4-1-1885177a02",
+      "categoryId": "category-attitudes-7d2b2a38d4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-attitudes-7d2b2a38d4-2-05e6119c0d",
+      "categoryId": "category-attitudes-7d2b2a38d4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-ideas-1c403a939d-1-1cee1fe21e",
+      "categoryId": "category-ideas-1c403a939d",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-ideas-1c403a939d-2-cce94cc855",
+      "categoryId": "category-ideas-1c403a939d",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-thought-deb04a0d67-1-2971faff86",
+      "categoryId": "category-thought-deb04a0d67",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-thought-deb04a0d67-2-615acf7031",
+      "categoryId": "category-thought-deb04a0d67",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-thought-deb04a0d67-3-31a0297112",
+      "categoryId": "category-thought-deb04a0d67",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-culture-51d7a2ae43-1-07a4f3dd87",
+      "categoryId": "category-culture-51d7a2ae43",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-culture-51d7a2ae43-2-1b26ddba24",
+      "categoryId": "category-culture-51d7a2ae43",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-culture-51d7a2ae43-3-24a580b01f",
+      "categoryId": "category-culture-51d7a2ae43",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-music-6eb00b4b26-1-30be5dd2c0",
+      "categoryId": "category-music-6eb00b4b26",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-music-6eb00b4b26-2-15aafe4816",
+      "categoryId": "category-music-6eb00b4b26",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-visual-arts-4cf228a7c1-1-30904a0d3e",
+      "categoryId": "category-visual-arts-4cf228a7c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-visual-arts-4cf228a7c1-2-1d8b569bcc",
+      "categoryId": "category-visual-arts-4cf228a7c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-performing-arts-df50a72805-1-01cae422bb",
+      "categoryId": "category-performing-arts-df50a72805",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-performing-arts-df50a72805-2-270407956f",
+      "categoryId": "category-performing-arts-df50a72805",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-literature-51e49f593b-1-c92a28df87",
+      "categoryId": "category-literature-51e49f593b",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-literature-51e49f593b-2-c2f00509ff",
+      "categoryId": "category-literature-51e49f593b",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-events-8d14f6e72d-1-acb8ab2d18",
+      "categoryId": "category-events-8d14f6e72d",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-events-8d14f6e72d-2-49568e1f87",
+      "categoryId": "category-events-8d14f6e72d",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-dating-21a6b5a12e-1-4df9740429",
+      "categoryId": "category-dating-21a6b5a12e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-dating-21a6b5a12e-2-7ae031a668",
+      "categoryId": "category-dating-21a6b5a12e",
+      "publishable": true,
+      "meaningfulTokenReferences": 237,
+      "coveredTokenReferences": 237,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-buildings-4e0445c4bd-1-4c07c49cf4",
+      "categoryId": "category-buildings-4e0445c4bd",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-buildings-4e0445c4bd-2-1fb1f2d39e",
+      "categoryId": "category-buildings-4e0445c4bd",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-buildings-4e0445c4bd-3-0a8f91430c",
+      "categoryId": "category-buildings-4e0445c4bd",
+      "publishable": true,
+      "meaningfulTokenReferences": 187,
+      "coveredTokenReferences": 187,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-structures-b912533f7f-1-ad382d25f3",
+      "categoryId": "category-structures-b912533f7f",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-structures-b912533f7f-2-8bd6963a7b",
+      "categoryId": "category-structures-b912533f7f",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-materials-fd10a146e9-1-af82eae16b",
+      "categoryId": "category-materials-fd10a146e9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-materials-fd10a146e9-2-da2ec3dc62",
+      "categoryId": "category-materials-fd10a146e9",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-shapes-75e8028a79-1-d9321c7fa5",
+      "categoryId": "category-shapes-75e8028a79",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-shapes-75e8028a79-2-defb45194e",
+      "categoryId": "category-shapes-75e8028a79",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-measurement-385165e2ff-1-743f1c4061",
+      "categoryId": "category-measurement-385165e2ff",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-measurement-385165e2ff-2-d00b7ee83c",
+      "categoryId": "category-measurement-385165e2ff",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-1-a0fd2a2cfc",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-2-54d01c492e",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-3-6e68782057",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-4-065ca038e6",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-5-ea7f2ccffb",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-space-20eac5aae2-6-7185981480",
+      "categoryId": "category-space-20eac5aae2",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-geography-f3c73803df-1-f35d83ca4d",
+      "categoryId": "category-geography-f3c73803df",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-geography-f3c73803df-2-2b44946a4e",
+      "categoryId": "category-geography-f3c73803df",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-regions-610c65d845-1-3181dc84d1",
+      "categoryId": "category-regions-610c65d845",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-regions-610c65d845-2-cac2615245",
+      "categoryId": "category-regions-610c65d845",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-regions-610c65d845-3-9ea14a9907",
+      "categoryId": "category-regions-610c65d845",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-environment-9e471951a1-1-07dbef98cd",
+      "categoryId": "category-environment-9e471951a1",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-environment-9e471951a1-2-3ff85ba1db",
+      "categoryId": "category-environment-9e471951a1",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-business-76f68a75f0-1-d03ad6938a",
+      "categoryId": "category-business-76f68a75f0",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-business-76f68a75f0-2-3c04931af1",
+      "categoryId": "category-business-76f68a75f0",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-business-76f68a75f0-3-2a55a4b8ef",
+      "categoryId": "category-business-76f68a75f0",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-banking-d7a596cdc2-1-cb05aefd8c",
+      "categoryId": "category-banking-d7a596cdc2",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-banking-d7a596cdc2-2-834b8cd16e",
+      "categoryId": "category-banking-d7a596cdc2",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-administration-4b42c6690e-1-f15f2a1ef4",
+      "categoryId": "category-administration-4b42c6690e",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-administration-4b42c6690e-2-4ff977b9d3",
+      "categoryId": "category-administration-4b42c6690e",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-systems-d9148b16c1-1-cd54d67fee",
+      "categoryId": "category-systems-d9148b16c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-systems-d9148b16c1-2-c018588d77",
+      "categoryId": "category-systems-d9148b16c1",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-types-a5fc918683-1-6c4ab09868",
+      "categoryId": "category-types-a5fc918683",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-types-a5fc918683-2-a759a8e69a",
+      "categoryId": "category-types-a5fc918683",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-degree-719738a852-1-8252b5e8b0",
+      "categoryId": "category-degree-719738a852",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-degree-719738a852-2-14792c705e",
+      "categoryId": "category-degree-719738a852",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-law-b78c1618fd-1-4849e2a025",
+      "categoryId": "category-law-b78c1618fd",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-law-b78c1618fd-2-031dbcf921",
+      "categoryId": "category-law-b78c1618fd",
+      "publishable": true,
+      "meaningfulTokenReferences": 190,
+      "coveredTokenReferences": 190,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-law-b78c1618fd-3-059f9b3682",
+      "categoryId": "category-law-b78c1618fd",
+      "publishable": true,
+      "meaningfulTokenReferences": 194,
+      "coveredTokenReferences": 194,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-government-c71e90d2f4-1-dbf38eb198",
+      "categoryId": "category-government-c71e90d2f4",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-government-c71e90d2f4-2-faeb5e5994",
+      "categoryId": "category-government-c71e90d2f4",
+      "publishable": true,
+      "meaningfulTokenReferences": 236,
+      "coveredTokenReferences": 236,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-religion-f8a52d21e6-1-97ec6ce487",
+      "categoryId": "category-religion-f8a52d21e6",
+      "publishable": true,
+      "meaningfulTokenReferences": 234,
+      "coveredTokenReferences": 234,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-religion-f8a52d21e6-2-cde397c75c",
+      "categoryId": "category-religion-f8a52d21e6",
+      "publishable": true,
+      "meaningfulTokenReferences": 235,
+      "coveredTokenReferences": 235,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-perception-bd18e320a6-1-0d82b70768",
+      "categoryId": "category-perception-bd18e320a6",
+      "publishable": true,
+      "meaningfulTokenReferences": 238,
+      "coveredTokenReferences": 238,
+      "reusePercentage": 100
+    },
+    {
+      "lessonId": "lesson-category-perception-bd18e320a6-2-a23741b8cb",
+      "categoryId": "category-perception-bd18e320a6",
+      "publishable": true,
+      "meaningfulTokenReferences": 239,
+      "coveredTokenReferences": 239,
+      "reusePercentage": 100
+    }
+  ]
+}

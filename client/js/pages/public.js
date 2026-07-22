@@ -10,6 +10,9 @@ export function publicNav(active = "", options = {}) {
     "inline-flex min-h-11 items-center justify-center rounded-lg border border-brand-line bg-white px-4 py-2 text-sm font-black text-brand-charcoal no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-brand-orange/60 hover:bg-brand-snow";
   const activeTopButton =
     "inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-red px-4 py-2 text-sm font-black text-white no-underline shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-redDark";
+  const learningLinks = options.learningOnly
+    ? [["#how-it-works", "How it works"], ["#learning-path", "Learning path"], ["#practice", "Practice"]]
+    : [["#teachers", "Teachers"], ["#teacher-first", "Teacher-first"], ["#how-it-works", "How it works"], ["#community", "Community"], ["#pricing", "Pricing"]];
   return `
     <nav class="mx-auto flex w-[min(1180px,calc(100%_-_32px))] items-center justify-between gap-4 px-0 py-4 sm:px-4 sm:py-5">
       <a class="flex items-center gap-3 text-brand-ink no-underline" href="/" data-link>
@@ -20,14 +23,11 @@ export function publicNav(active = "", options = {}) {
         options.hideActions
           ? ""
             : `<div class="hidden items-center gap-7 text-sm font-bold text-brand-graphite lg:flex">
-              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#teachers">Teachers</a>
-              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#teacher-first">Teacher-first</a>
-              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#how-it-works">How it works</a>
-              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#community">Community</a>
-              <a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="#pricing">Pricing</a>
+              ${learningLinks.map(([href, label]) => `<a class="inline-flex min-h-11 min-w-11 items-center transition hover:text-brand-red" href="${href}">${label}</a>`).join("")}
             </div>
             <div class="hidden items-center gap-2 lg:flex">
               <a class="${active === "login" ? activeTopButton : inactiveTopButton}" href="/login" data-link>Login</a>
+              ${options.learningOnly ? `<a class="${activeTopButton}" href="/signup" data-link>Start learning</a>` : ""}
             </div>
             <details class="relative lg:hidden" data-public-menu>
               <summary class="grid h-11 w-11 cursor-pointer list-none place-items-center rounded-lg border border-brand-line bg-white text-brand-ink shadow-sm [&::-webkit-details-marker]:hidden" aria-label="Open navigation">
@@ -39,12 +39,9 @@ export function publicNav(active = "", options = {}) {
                   <span class="text-xs font-black uppercase tracking-[.16em] text-brand-graphite">Menu</span>
                   <button class="grid h-11 w-11 place-items-center rounded-lg border border-brand-line bg-white text-brand-ink" type="button" data-action="closePublicMenu" aria-label="Close navigation">x</button>
                 </div>
-                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teachers" data-public-menu-link>Teachers</a>
-                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#teacher-first" data-public-menu-link>Teacher-first</a>
-                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#how-it-works" data-public-menu-link>How it works</a>
-                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#community" data-public-menu-link>Community</a>
-                <a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="#pricing" data-public-menu-link>Pricing</a>
+                ${learningLinks.map(([href, label]) => `<a class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm font-bold text-brand-charcoal no-underline hover:bg-brand-mist" href="${href}" data-public-menu-link>${label}</a>`).join("")}
                 <a class="${active === "login" ? activeTopButton : inactiveTopButton} mt-3 w-full" href="/login" data-link data-public-menu-link>Login</a>
+                ${options.learningOnly ? `<a class="${activeTopButton} mt-2 w-full" href="/signup" data-link data-public-menu-link>Start learning</a>` : ""}
               </div>
             </details>`
       }
@@ -149,49 +146,70 @@ export function searchLandingView() {
   `;
 }
 
-export function landingView({ appConfig }) {
+export function landingView() {
   const steps = [
-    ["Find a verified teacher", "Browse professional teachers by language, availability, and lesson price.", "search"],
-    ["Book a live lesson", "Choose a time, pay securely, and join your online classroom.", "calendar"],
-    ["Practice with the community", "Connect with learners and teachers between lessons.", "users"]
+    ["Choose your course", "Pick the language you want to learn and download the course for reliable access.", "book"],
+    ["Complete quick lessons", "Build useful vocabulary through reading, listening, matching, and sentence practice.", "play"],
+    ["Review at the right time", "Smart review brings back words and sentences before they fade.", "clock"]
   ];
-  const communityBullets = ["Meet learners and teachers", "Share community posts", "Find conversation partners", "Stay connected between lessons"];
-  const teacherFirstBenefits = [
-    ["Teachers Keep More of What They Earn", "Our platform is designed to support teachers, not take a large cut from every lesson.", "user"],
-    ["Better Teachers Stay Longer", "Fair compensation helps us attract and retain talented educators from around the world.", "star"],
-    ["More Value for Students", "More of your payment goes directly to the person teaching you.", "users"],
-    ["Simple Lesson Pricing", "See teacher lesson prices clearly before you book.", "check"],
-    ["Save with Bulk Lesson Packages", "Purchase multiple lessons at once and enjoy a lower cost per lesson.", "book"]
+  const practiceFeatures = [
+    ["Bite-sized lessons", "Make progress in a few focused minutes with one clear task at a time.", "play", "red"],
+    ["A guided path", "Lessons unlock in order so you always know what to learn next.", "check", "teal"],
+    ["Stories with context", "Meet new words inside practical dialogues and memorable short stories.", "book-open", "blue"],
+    ["Personal review", "Practice adapts to completed lessons, recent mistakes, and items due today.", "clock", "red"],
+    ["Visible progress", "Track lesson completion, study time, streaks, and areas that need attention.", "star", "teal"],
+    ["Learn offline", "Download your course once and keep lessons available when your connection is not.", "download", "blue"]
   ];
   return `
-    <section class="min-h-screen bg-brand-snow">
-      ${publicNav()}
+    <section class="min-h-screen bg-brand-snow text-brand-ink">
+      ${publicNav("", { learningOnly: true })}
       <main>
-        <section class="relative overflow-hidden bg-brand-ink text-white">
-          <div class="absolute inset-0">
-            <img class="h-full w-full object-cover object-center" src="/assets/img/landing-live-lesson.png" alt="" fetchpriority="high" />
-            <div class="absolute inset-0 bg-brand-ink/60"></div>
-            <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(29,41,63,.96)_0%,rgba(29,41,63,.82)_46%,rgba(29,41,63,.34)_100%)]"></div>
-          </div>
-          <div class="relative mx-auto grid min-h-[calc(100dvh-170px)] w-[min(1180px,calc(100%_-_32px))] content-center px-4 py-12 sm:min-h-[calc(100dvh-120px)] sm:py-16 lg:min-h-[76vh]">
-            <div class="max-w-3xl">
-              <span class="inline-flex min-h-6 items-center rounded-full bg-white/12 px-3 py-1 text-xs font-bold text-white ring-1 ring-white/20">Free membership for students and teachers</span>
-              <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">Learn languages with professional teachers and a supportive community.</h1>
-              <p class="mt-5 max-w-2xl text-base leading-7 text-white/84 sm:text-lg sm:leading-8">Book live online lessons, meet other learners, and keep practicing between sessions.</p>
-              <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-                <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-black text-brand-ink no-underline shadow-[0_14px_28px_rgba(0,0,0,.22)] transition hover:-translate-y-0.5 hover:bg-brand-snow" href="/signup" data-link>${icon("search")}<span>Find a Teacher</span></a>
-                <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-5 py-3 text-sm font-black text-white no-underline backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/16" href="/signup" data-link>${icon("plus")}<span>Join Free</span></a>
+        <section class="relative overflow-hidden border-y border-brand-line bg-[radial-gradient(circle_at_78%_28%,rgba(224,114,88,.17),transparent_32%),linear-gradient(180deg,#fffaf4_0%,#f8f6f2_100%)]">
+          <div class="mx-auto grid min-h-[72vh] w-[min(1180px,calc(100%_-_32px))] items-center gap-12 px-4 py-14 lg:grid-cols-[.9fr_1.1fr] lg:py-20">
+            <div class="max-w-xl">
+              <span class="inline-flex items-center gap-2 rounded-full bg-brand-teal/10 px-3 py-1.5 text-xs font-black text-brand-teal ring-1 ring-brand-teal/20">${icon("star", "h-4 w-4")} A clear path to everyday language</span>
+              <h1 class="mt-5 text-4xl font-black leading-[1.05] tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">Learn a little every day. Remember it for longer.</h1>
+              <p class="mt-5 max-w-lg text-base leading-7 text-brand-charcoal sm:text-lg sm:leading-8">Build real language skills with short interactive lessons, practical stories, and review that follows your progress.</p>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a class="${ui.primary} min-w-44" href="/signup" data-link>${icon("play", "h-4 w-4")}<span>Start learning free</span></a>
+                <a class="${ui.secondary} min-w-36" href="/login" data-link><span>I have an account</span></a>
+              </div>
+              <p class="mt-4 flex items-center gap-2 text-xs font-bold text-brand-graphite">${icon("check", "h-4 w-4 text-brand-teal")} Download once, then learn online or offline.</p>
+            </div>
+
+            <div class="relative mx-auto w-full max-w-[560px]">
+              <div class="absolute -left-4 top-16 hidden rounded-lg border border-brand-line bg-white px-4 py-3 shadow-lg sm:block">
+                <span class="block text-[11px] font-black uppercase text-brand-graphite">Current streak</span>
+                <strong class="mt-1 flex items-center gap-2 text-xl font-black text-brand-redDark">${icon("star", "h-5 w-5")} 7 days</strong>
+              </div>
+              <div class="overflow-hidden rounded-[1.5rem] border border-brand-line bg-brand-panel p-4 shadow-[0_28px_70px_rgba(29,41,63,.16)] sm:p-6">
+                <div class="flex items-center gap-3 border-b border-brand-line pb-4">
+                  <span class="grid h-10 w-10 place-items-center rounded-full bg-brand-red/10 text-brand-redDark">${icon("book-open", "h-5 w-5")}</span>
+                  <div class="min-w-0 flex-1"><span class="text-xs font-bold text-brand-graphite">Travel · Lesson 1</span><div class="mt-1 h-2 overflow-hidden rounded-full bg-brand-mist"><span class="block h-full w-[68%] rounded-full bg-brand-red"></span></div></div>
+                  <strong class="text-xs font-black text-brand-charcoal">4 of 6</strong>
+                </div>
+                <div class="px-1 py-8 text-center sm:px-8">
+                  <span class="text-xs font-black uppercase text-brand-redDark">Choose the meaning</span>
+                  <h2 class="mt-3 text-2xl font-black tracking-normal text-brand-ink">車站</h2>
+                  <p class="mt-1 text-sm font-bold text-brand-graphite">chē zhàn</p>
+                  <div class="mt-7 grid gap-3 text-left">
+                    <button class="flex min-h-14 items-center gap-3 rounded-lg border-2 border-brand-red bg-brand-red/10 px-4 font-black text-brand-ink" type="button"><kbd class="grid h-7 w-7 place-items-center rounded-md border border-brand-red/30 bg-white text-xs">1</kbd><span>train station</span>${icon("check", "ml-auto h-5 w-5 text-brand-teal")}</button>
+                    <button class="flex min-h-14 items-center gap-3 rounded-lg border border-brand-line bg-white px-4 font-bold text-brand-charcoal" type="button"><kbd class="grid h-7 w-7 place-items-center rounded-md border border-brand-line bg-brand-snow text-xs">2</kbd><span>airport</span></button>
+                    <button class="flex min-h-14 items-center gap-3 rounded-lg border border-brand-line bg-white px-4 font-bold text-brand-charcoal" type="button"><kbd class="grid h-7 w-7 place-items-center rounded-md border border-brand-line bg-brand-snow text-xs">3</kbd><span>hotel</span></button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between gap-4 rounded-lg bg-brand-teal/10 p-4 text-brand-teal ring-1 ring-brand-teal/15"><div><strong class="block font-black">Correct!</strong><span class="text-xs font-semibold">Nice work—keep going.</span></div><span class="rounded-lg bg-brand-teal px-5 py-3 text-sm font-black text-white">Continue</span></div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="how-it-works" class="bg-brand-panel py-14">
+        <section id="how-it-works" class="bg-brand-panel py-16">
           <div class="mx-auto w-[min(1180px,calc(100%_-_32px))] px-4">
             ${sectionIntro({
               eyebrow: "How it works",
-              title: "Start learning in three simple steps.",
-              body: "Find the right teacher, book a live lesson, then keep practicing with the community between sessions."
+              title: "Your next step is always clear.",
+              body: "Start with the essentials, finish focused lessons, and revisit what needs more practice."
             })}
             <div class="mt-8 grid gap-4 md:grid-cols-3">
               ${steps.map(([title, body, iconName], index) => featureCard({ title, body, iconName, tone: index === 1 ? "teal" : "red" })).join("")}
@@ -199,125 +217,39 @@ export function landingView({ appConfig }) {
           </div>
         </section>
 
-        <section id="teachers" class="bg-brand-mist py-16">
-          <div class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] gap-10 px-4 lg:grid-cols-[.85fr_1.15fr]">
+        <section id="learning-path" class="overflow-hidden bg-brand-mist py-16 sm:py-20">
+          <div class="mx-auto grid w-[min(1080px,calc(100%_-_32px))] items-center gap-12 px-4 lg:grid-cols-[.8fr_1.2fr]">
             <div>
-              ${sectionIntro({
-                eyebrow: "For teachers",
-                title: "Teach your language. Keep your lesson price.",
-                body: "Create a free teacher profile, set your availability, choose your rate, and meet students online. LinguaStories does not take a commission from your lesson price.",
-                align: "left"
-              })}
-              <a class="${ui.primary} mt-7" href="/signup" data-link>${icon("user")}<span>Become a Teacher</span></a>
-            </div>
-            <div class="overflow-hidden rounded-lg border border-brand-line bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
-              <img class="aspect-[16/10] w-full object-cover" src="/assets/img/landing-booking.png" alt="Teacher profile and booking calendar for a live language lesson" loading="lazy" />
-            </div>
-          </div>
-        </section>
-
-        <section id="teacher-first" class="bg-brand-snow py-16">
-          <div class="mx-auto w-[min(1180px,calc(100%_-_32px))] px-4">
-            <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
-              <div>
-                <span class="${ui.tagRed}">Teacher-first platform</span>
-                <h2 class="mt-4 text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-4xl">Why Great Teachers Choose LinguaStories</h2>
-                <div class="mt-5 grid gap-4 text-base leading-7 text-brand-charcoal">
-                  <p>Many online teaching platforms take a significant percentage of every lesson a teacher teaches. This means teachers often have to charge higher prices or earn less for the same amount of work.</p>
-                  <p class="text-xl font-black leading-snug text-brand-ink underline decoration-brand-red decoration-2 underline-offset-4">At LinguaStories, we do things differently.</p>
-                  <!--<p>Teachers keep their lesson earnings, allowing them to earn more from every lesson they teach. By creating a platform where teachers are rewarded fairly, we can attract and retain experienced, passionate, and highly qualified language teachers.</p>
-                  <p class="text-xl font-black leading-snug text-brand-ink">This benefits students too.</p>
-                  <p>Because teachers are not losing a large percentage of every lesson to platform commissions, students often receive better value and have access to talented teachers who might otherwise avoid traditional teaching marketplaces.</p>-->
-                </div>
-              </div>
-              <div class="overflow-hidden rounded-lg border border-brand-line bg-brand-panel shadow-[0_18px_42px_rgba(29,41,63,.09)]">
-                <img class="aspect-[16/10] w-full object-cover" src="/assets/img/teacher-first-lesson.png" alt="Teacher and students meeting for an online language lesson" loading="lazy" />
-              </div>
-            </div>
-
-            <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-              ${teacherFirstBenefits.map(([title, body, iconName]) => `
-                <article class="rounded-lg border border-brand-line/80 bg-brand-panel p-5 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
-                  <div class="grid h-10 w-10 place-items-center rounded-lg bg-brand-teal/10 text-brand-teal ring-1 ring-brand-line/50">${icon(iconName, "h-5 w-5")}</div>
-                  <h3 class="mt-4 text-base font-black leading-snug text-brand-ink">${escapeHtml(title)}</h3>
-                  <p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(body)}</p>
-                </article>
-              `).join("")}
-            </div>
-
-            <div class="mt-10 grid gap-4 md:grid-cols-2">
-              <article class="rounded-lg border border-brand-red/25 bg-brand-red/10 p-6">
-                <span class="${ui.tagRed}">For Teachers</span>
-                <h3 class="mt-4 text-2xl font-black leading-tight text-brand-ink">Earn more. Teach freely.</h3>
-                <p class="mt-3 text-base leading-7 text-brand-charcoal">Grow your student base without sacrificing a large portion of your income.</p>
-                <a class="${ui.primary} mt-5" href="/signup" data-link>${icon("user", "h-4 w-4")}<span>Become a Teacher</span></a>
-              </article>
-              <article class="rounded-lg border border-brand-line bg-brand-panel p-6">
-                <span class="${ui.tagGold}">For Students</span>
-                <h3 class="mt-4 text-2xl font-black leading-tight text-brand-ink">Learn at fair prices.</h3>
-                <p class="mt-3 text-base leading-7 text-brand-charcoal">Learn from passionate teachers at clear lesson prices.</p>
-                <a class="${ui.secondary} mt-5" href="/signup" data-link>${icon("search", "h-4 w-4")}<span>Find a Teacher</span></a>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section id="community" class="bg-brand-panel py-16">
-          <div class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-10 px-4 lg:grid-cols-[1.05fr_.95fr]">
-            <div class="overflow-hidden rounded-lg border border-brand-line bg-brand-snow shadow-[0_18px_42px_rgba(29,41,63,.08)]">
-              <img class="aspect-[16/10] w-full object-cover" src="/assets/img/landing-community.png" alt="Language learners practicing together in a supportive community" loading="lazy" />
-            </div>
-            <div>
-              ${sectionIntro({
-                eyebrow: "Community",
-                title: "Practice does not stop after class.",
-                body: "Join a language-learning community where students and teachers can connect, share progress, ask questions, and practice together.",
-                align: "left"
-              })}
-              <ul class="mt-7 grid gap-3">
-                ${communityBullets.map((item) => `<li class="flex gap-3 rounded-lg border border-brand-line/80 bg-white/70 p-3 text-sm font-bold text-brand-charcoal">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(item)}</span></li>`).join("")}
+              ${sectionIntro({ eyebrow: "Learning path", title: "Progress one lesson at a time.", body: "Each course is arranged into practical categories. Complete a lesson to open the next step and build toward confident comprehension.", align: "left" })}
+              <ul class="mt-7 grid gap-3 text-sm font-bold text-brand-charcoal">
+                ${["Clear prerequisites and sequential unlocking", "Vocabulary, dialogue, sentence, and story practice", "Progress saved automatically on your device"].map((item) => `<li class="flex items-center gap-3">${icon("check", "h-5 w-5 text-brand-teal")}<span>${item}</span></li>`).join("")}
               </ul>
-              <a class="${ui.secondary} mt-7" href="/signup" data-link>${icon("users")}<span>Join the Community</span></a>
+            </div>
+            <div class="relative mx-auto grid w-full max-w-xl justify-items-center gap-4 py-4">
+              ${[
+                ["1", "Introductions", "Complete", "bg-brand-teal text-white", "border-brand-teal/25 bg-white"],
+                ["2", "Getting around", "4 lessons", "bg-brand-red text-white", "border-brand-red/30 bg-brand-red/10"],
+                ["3", "Food and drink", "Locked", "bg-brand-mist text-brand-graphite", "border-brand-line bg-white/65"]
+              ].map(([number, title, status, numberClass, cardClass], index) => `<div class="relative flex w-[min(100%,440px)] items-center gap-4 rounded-xl border ${cardClass} p-4 shadow-sm ${index === 1 ? "sm:translate-x-12" : index === 2 ? "sm:-translate-x-5" : ""}"><span class="grid h-12 w-12 shrink-0 place-items-center rounded-full text-lg font-black ${numberClass}">${number}</span><span class="min-w-0 flex-1"><strong class="block text-base font-black text-brand-ink">${title}</strong><small class="font-bold text-brand-graphite">${status}</small></span>${icon(index === 2 ? "lock-keyhole" : "check", `h-5 w-5 ${index === 2 ? "text-brand-muted" : "text-brand-teal"}`)}</div>${index < 2 ? `<span class="h-7 w-0.5 bg-brand-line"></span>` : ""}`).join("")}
             </div>
           </div>
         </section>
 
-        <section id="pricing" class="bg-brand-snow py-16">
-          <div class="mx-auto w-[min(980px,calc(100%_-_32px))] px-4">
-            ${sectionIntro({
-              eyebrow: "Pricing",
-              title: "Simple, transparent pricing.",
-              body: "Membership is free. Students pay for lessons when they book, and teachers keep their listed lesson price."
-            })}
-            <div class="mt-8 grid gap-4 md:grid-cols-2">
-              <article class="rounded-lg border border-brand-line bg-brand-panel p-6 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
-                <h3 class="text-xl font-black text-brand-ink">Free Membership</h3>
-                <p class="mt-3 text-4xl font-black text-brand-ink">$0</p>
-                <ul class="mt-5 grid gap-3 text-sm font-semibold text-brand-graphite">
-                  ${["Create an account", "Browse teachers", "Join the community", "Book lessons anytime"].map((item) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(item)}</span></li>`).join("")}
-                </ul>
-              </article>
-              <article class="rounded-lg border border-brand-red/25 bg-brand-red/10 p-6 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
-                <h3 class="text-xl font-black text-brand-ink">Paid Lessons</h3>
-                <p class="mt-3 text-3xl font-black text-brand-ink">Teacher-set lesson prices</p>
-                <ul class="mt-5 grid gap-3 text-sm font-semibold text-brand-charcoal">
-                  ${["Verified professional teachers", "Teachers set their own prices", "Teachers keep 100%", "Book lessons when you are ready", "No monthly subscription required"].map((item) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(item)}</span></li>`).join("")}
-                </ul>
-              </article>
+        <section id="practice" class="bg-brand-snow py-16 sm:py-20">
+          <div class="mx-auto w-[min(1180px,calc(100%_-_32px))] px-4">
+            ${sectionIntro({ eyebrow: "Built for practice", title: "Everything supports consistent learning.", body: "A focused experience for learning, remembering, and seeing steady progress." })}
+            <div class="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              ${practiceFeatures.map(([title, body, iconName, tone]) => featureCard({ title, body, iconName, tone })).join("")}
             </div>
           </div>
         </section>
 
         <section class="bg-brand-ink py-16 text-white">
-          <div class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-6 px-4 lg:grid-cols-[minmax(0,1fr)_auto]">
-            <div>
-              <h2 class="text-3xl font-black leading-tight tracking-tight sm:text-4xl">Ready to learn with real people?</h2>
-              <p class="mt-3 max-w-2xl text-base leading-7 text-white/78">Join LinguaStories for free and start connecting with teachers and learners today.</p>
-            </div>
-            <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-black text-brand-ink no-underline shadow-[0_14px_28px_rgba(0,0,0,.22)] transition hover:-translate-y-0.5 hover:bg-brand-snow" href="/signup" data-link>${icon("search")}<span>Find a Teacher</span></a>
-              <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-5 py-3 text-sm font-black text-white no-underline transition hover:-translate-y-0.5 hover:bg-white/16" href="/signup" data-link>${icon("user")}<span>Become a Teacher</span></a>
-            </div>
+          <div class="mx-auto max-w-3xl px-6 text-center">
+            <span class="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/80 ring-1 ring-white/15">Start your first lesson today</span>
+            <h2 class="mt-5 text-3xl font-black leading-tight tracking-tight sm:text-4xl">Turn a few minutes into real progress.</h2>
+            <p class="mx-auto mt-3 max-w-2xl text-base leading-7 text-white/75">Choose your language, download the course, and begin with the first guided lesson.</p>
+            <a class="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-black text-brand-ink no-underline shadow-[0_14px_28px_rgba(0,0,0,.22)] transition hover:-translate-y-0.5 hover:bg-brand-snow" href="/signup" data-link>${icon("play", "h-4 w-4")}<span>Start learning free</span></a>
           </div>
         </section>
       </main>

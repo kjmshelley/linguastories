@@ -1,6 +1,6 @@
 import { dashboardView } from "./pages/dashboard.js";
 import { communityConnectView, communityLearnerView, communityPostView, createPostModal, postImageModal } from "./pages/community.js";
-import { landingView, loginView, signupView } from "./pages/public.js?v=public-teacher-list-20260702";
+import { landingView, loginView, signupView } from "./pages/public.js?v=learning-home-20260722";
 import { addLanguageModal, deleteProfileConfirmModal, editLanguageModal, profileInfoView, profileView, subscriptionsView } from "./pages/profile.js";
 import {
   bookLessonView,
@@ -22,9 +22,19 @@ import {
   teacherTemplatesView
 } from "./pages/learning.js?v=public-teacher-list-20260702";
 import { createVoiceVideoRoomModal, voiceVideoRoomCardsView, voiceVideoRoomView, voiceVideoRoomsView, voiceVideoRulesModal } from "./pages/voice-video-rooms.js";
+import {
+  bindLearningExperience,
+  learningExperienceView,
+  learningPath,
+  learningRouteFromPath,
+  learningRouteIds,
+  learningStateReducer
+} from "./pages/learn-experience.js";
 import { languageName, languageSelectOptions } from "./languages.js";
 import { languageSkillLevelOptions } from "./levels.js";
 import { escapeHtml, icon, ui } from "./ui.js";
+import { loadLearningUiState, saveLearningUiState } from "./learning/state.mjs";
+import { learningContentRuntime } from "./content/content-runtime.js";
 import { gsap } from "../vendor/gsap/gsap.esm.js";
 
 const routeGroups = [
@@ -65,6 +75,14 @@ const myLearningTabTitles = {
 };
 
 const hiddenRoutes = [
+  ["languageSelection", "Choose a Language"],
+  ["learn", "Learn"],
+  ["categoryDetail", "Category"],
+  ["lessonPreview", "Lesson Preview"],
+  ["lessonEngine", "Lesson"],
+  ["review", "Review"],
+  ["progress", "Progress"],
+  ["settings", "Settings"],
   ["communityLearner", "Learner Profile"],
   ["communityPost", "Post"],
   ["voiceVideoRoom", "Voice/Video Room"],
@@ -90,6 +108,11 @@ const hiddenRoutes = [
 
 const routes = [...routeGroups.flatMap((group) => group.routes), ...hiddenRoutes];
 const routeSlugs = {
+  languageSelection: "languages",
+  learn: "learn",
+  review: "review",
+  progress: "progress",
+  settings: "settings",
   dashboard: "dashboard",
   communityConnect: "community",
   voiceVideoRooms: "community/voice-video-rooms",
@@ -120,6 +143,8 @@ const teacherStudentRoutes = new Set(["dashboard", "findTeacher", "teacherProfil
 
 let appConfig = { supportedLanguages: [], accountTiers: [] };
 let state = null;
+let learningExperienceState = loadLearningUiState();
+let learningContentSubscriptionBound = false;
 let communityListLimits = { communityConnect: 10 };
 let voiceVideoRooms = [];
 let voiceVideoRoomFilters = { q: "", cefrLevel: "", roomType: "" };
@@ -196,6 +221,8 @@ function scrollToPageTopOnRouteChange() {
 }
 
 function activeRoute() {
+  const learningRoute = learningRouteFromPath();
+  if (learningRoute) return learningRoute.id;
   const hashRoute = location.hash.replace("#", "");
   if (hashRoute) return routes.some(([id]) => id === hashRoute) ? hashRoute : "dashboard";
   if (!location.pathname.startsWith("/app")) return "dashboard";
@@ -264,6 +291,7 @@ function activeTeacherProfileId() {
 }
 
 function appPath(id, params = {}) {
+  if (learningRouteIds.has(id)) return learningPath(id, params);
   if (id === "communityLearner") return `/app/community/connect/${encodeURIComponent(params.learnerId || "")}`;
   if (id === "communityPost") return `/app/community/posts/${encodeURIComponent(params.postId || "")}`;
   if (id === "voiceVideoRoom") return `/app/community/voice-video-rooms/${encodeURIComponent(params.roomId || "")}`;
@@ -296,6 +324,7 @@ function routeIcon(id) {
 
 function normalizeAppUrl() {
   if (!location.pathname.startsWith("/app")) return;
+  if (learningRouteFromPath()) return;
   const route = activeRoute();
   const cleanPath =
     route === "communityLearner"
@@ -685,7 +714,8 @@ async function authRequest(path, data) {
     return;
   }
   state = await response.json();
-  history.pushState({}, "", appPath("dashboard"));
+  await initializeLearningContent();
+  history.pushState({}, "", learningExperienceState.selectedLanguage ? appPath("learn") : appPath("languageSelection"));
   render();
 }
 
@@ -3060,6 +3090,50 @@ function setAppShell() {
   view.className = `${ui.page} ${ui.appView}`;
 }
 
+function setLearningShell() {
+  appShell.className = "min-h-screen";
+  sidebar.className = "hidden";
+  topbar.className = "hidden";
+  if (mobileTopbar) mobileTopbar.className = "hidden";
+  if (mobileMenuBackdrop) mobileMenuBackdrop.className = "hidden";
+  mobileMenuOpen = false;
+  document.body.classList.remove("overflow-hidden");
+  view.className = "min-h-screen";
+  if (chatDrawer) chatDrawer.innerHTML = "";
+}
+
+function dispatchLearningExperience(action) {
+  learningExperienceState = saveLearningUiState(learningStateReducer(learningExperienceState, action));
+  return learningExperienceState;
+}
+
+async function initializeLearningContent() {
+  await learningContentRuntime.init();
+  if (learningContentSubscriptionBound) return;
+  learningContentRuntime.subscribe(() => { if (state && learningRouteFromPath()) render(); });
+  learningContentSubscriptionBound = true;
+}
+
+function navigateLearningExperience(path) {
+  history.pushState({}, "", path);
+  render();
+}
+
+function bindLearningExperienceUi(root = document) {
+  bindLearningExperience(root, {
+    getState: () => ({ ...learningExperienceState, ...learningContentRuntime.snapshot() }),
+    dispatch: dispatchLearningExperience,
+    contentRuntime: learningContentRuntime,
+    render,
+    navigate: navigateLearningExperience,
+    showModal: (html) => {
+      showModal(html);
+      bindLearningExperienceUi(document.querySelector(".fixed.inset-0.z-50") || document);
+    },
+    closeModal
+  });
+}
+
 function navigatePublic(path) {
   history.pushState({}, "", path);
   renderPublicPage();
@@ -3112,6 +3186,21 @@ function render() {
   if (!state) return;
   syncMessageRefreshPolling();
   document.documentElement.lang = state.user.siteLanguage || "en-US";
+  const learningRoute = learningRouteFromPath();
+  if (learningRoute) {
+    const learningSettings = learningContentRuntime.snapshot().settingsState;
+    const interfaceLanguage = learningSettings?.global?.interfaceLanguage;
+    document.documentElement.lang = interfaceLanguage === "en" ? "en" : (navigator.language?.toLowerCase().startsWith("en") ? navigator.language : "en");
+    document.documentElement.dataset.learningMotion = learningSettings?.global?.reducedMotion || "system";
+    setLearningShell();
+    document.title = `${learningRoute.id === "languageSelection" ? "Choose a Language" : "Learn"} | LinguaStories`;
+    view.innerHTML = learningExperienceView({ route: learningRoute, user: state.user || {}, learningState: { ...learningExperienceState, ...learningContentRuntime.snapshot() } });
+    bindActions(view);
+    bindLearningExperienceUi(view);
+    syncVoiceVideoPolling(learningRoute.id);
+    scrollToPageTopOnRouteChange();
+    return;
+  }
   normalizeAppUrl();
   setAppShell();
   const route = activeRoute();
@@ -3253,7 +3342,10 @@ window.addEventListener("beforeunload", () => {
 window.addEventListener("scroll", loadMoreCommunityListIfNeeded, { passive: true });
 
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) refreshMessagesQuietly({ force: true });
+  if (!document.hidden) {
+    refreshMessagesQuietly({ force: true });
+    if (state && learningRouteFromPath()) void learningContentRuntime.checkForUpdates();
+  }
 });
 
 document.querySelector("#notifyButton").addEventListener("click", () => {
@@ -3282,13 +3374,25 @@ async function init() {
       renderPublicPage();
       return;
     }
-    if (["/login", "/signup"].includes(window.location.pathname)) history.replaceState({}, "", appPath("dashboard"));
+    if (["/login", "/signup"].includes(window.location.pathname)) {
+      await initializeLearningContent();
+      history.replaceState({}, "", learningContentRuntime.snapshot().installed ? appPath("learn") : appPath("languageSelection"));
+    }
     normalizeAppUrl();
+    await initializeLearningContent();
     await api("/api/state");
   } catch (_error) {
     state = null;
     renderPublicPage();
   }
 }
+
+window.addEventListener("online", () => {
+  if (state && learningRouteFromPath()) render();
+});
+
+window.addEventListener("offline", () => {
+  if (state && learningRouteFromPath()) render();
+});
 
 init();
