@@ -17,6 +17,7 @@ export function validateManifestDocument(manifest) {
       slugs.add(category.slug);
       if (!/^[a-f0-9]{64}$/.test(category.checksum || "")) errors.push("invalid_category_checksum");
       if (!Number.isInteger(category.bytes) || category.bytes < 1) errors.push("invalid_category_size");
+      if (category.imageUrl !== undefined && !/^\/assets\/img\/categories\/[1-9][0-9]*\.png$/.test(category.imageUrl)) errors.push("invalid_category_image_url");
       if (!category.name || !Number.isInteger(category.lessonCount) || typeof category.required !== "boolean") errors.push("invalid_category_progress_metadata");
     }
   }

@@ -2,7 +2,7 @@
 
 ## Scope and ownership
 
-Phase 6 stores learning progress locally in IndexedDB database `linguastories-learning`, schema version 3. Curriculum packages, settings, and account/community data remain separate from learning history. All records are scoped by `languagePairKey`; the initial key is `zh-Hant_zh-TW__en`.
+Learning progress is stored locally in IndexedDB database `linguastories-learning`, schema version 3. Curriculum packages, settings, and server authentication records remain separate from learning history. All records are scoped by `languagePairKey`; the initial key is `zh-Hant_zh-TW__en`.
 
 The browser runtime is a thin coordinator. Domain decisions live in `client/js/progress/`: repositories own persistence, `UnlockService` derives access, `CompletionService` owns the atomic completion boundary, `ProgressCalculator` produces screen metrics, and `ProgressRuntime` connects those services to the UI and cross-tab notifications.
 
@@ -43,4 +43,3 @@ Each browser tab keeps a stable ID in `sessionStorage`, so reloads retain their 
 ## Future sync boundary
 
 `ProgressSyncAdapter`, revision fields, sync state, device metadata, conflict metadata, and tombstone fields are placeholders only. Phase 6 performs no network sync and never treats the server as authoritative for progress.
-

@@ -17,56 +17,18 @@ function allowedOrigins() {
   return new Set(isProduction() ? configured : [...configured, ...TRUSTED_DEV_ORIGINS]);
 }
 
-function storageOrigins() {
-  return [
-    process.env.STORY_IMAGE_BASE_URL,
-    process.env.CLOUDFLARE_R2_PUBLIC_BASE_URL
-  ]
-    .map((value) => {
-      try {
-        return value ? new URL(value).origin : "";
-      } catch (_error) {
-        return "";
-      }
-    })
-    .filter(Boolean);
-}
-
-function livekitConnectOrigins() {
-  const origins = ["https://*.livekit.cloud", "wss://*.livekit.cloud"];
-  try {
-    if (process.env.LIVEKIT_URL) {
-      const url = new URL(process.env.LIVEKIT_URL);
-      const httpProtocol = url.protocol.startsWith("ws") ? url.protocol.replace("ws", "http") : url.protocol;
-      const wsProtocol = url.protocol.startsWith("http") ? url.protocol.replace("http", "ws") : url.protocol;
-      origins.push(`${httpProtocol}//${url.host}`, `${wsProtocol}//${url.host}`);
-    }
-  } catch (_error) {
-    // Ignore malformed optional LiveKit URLs here; route-level config validation handles them.
-  }
-  return origins;
-}
-
 function securityHeaders(req, res, next) {
   const scriptSrc = ["'self'", "https://cdn.tailwindcss.com", "'unsafe-inline'"];
   const styleSrc = ["'self'", "'unsafe-inline'"];
-  const mediaSrc = ["'self'", ...storageOrigins()];
-  const imgSrc = ["'self'", "data:", "blob:", "https://images.unsplash.com", ...storageOrigins()];
-  const connectSrc = ["'self'", ...allowedOrigins(), ...livekitConnectOrigins()];
-  const frameSrc = [
-    "'self'",
-    "https://www.youtube.com",
-    "https://www.youtube-nocookie.com",
-    "https://player.vimeo.com"
-  ];
+  const connectSrc = ["'self'", ...allowedOrigins()];
   const csp = [
     "default-src 'self'",
     `script-src ${scriptSrc.join(" ")}`,
     `style-src ${styleSrc.join(" ")}`,
-    `img-src ${imgSrc.join(" ")}`,
-    `media-src ${mediaSrc.join(" ")}`,
+    "img-src 'self' data: blob:",
+    "media-src 'self'",
     `connect-src ${connectSrc.join(" ")}`,
-    `frame-src ${frameSrc.join(" ")}`,
+    "frame-src 'none'",
     "font-src 'self' data:",
     "object-src 'none'",
     "base-uri 'self'",
@@ -78,7 +40,7 @@ function securityHeaders(req, res, next) {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("Permissions-Policy", "camera=(self), microphone=(self), geolocation=(), payment=()");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()");
   res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
   if (isProduction()) {
     res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");

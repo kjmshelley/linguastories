@@ -1,7 +1,7 @@
 {
   "name": "lingua-stories",
   "version": "1.0.0",
-  "description": "Fluency-first language learning MVP with sentence learning, stories, SRS, coins, goals, and community.",
+  "description": "Focused language learning with guided lessons, stories, offline courses, progress, and spaced review.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,12 +15,6 @@
     "start:prod": "node --env-file=.env.production server.js",
     "start:dev": "node --env-file=.env.development server.js",
     "test": "node --test",
-    "account:jobs": "node --env-file=.env.development scripts/account-jobs.js all",
-    "account:jobs:prod": "node --env-file=.env.production scripts/account-jobs.js all",
-    "teacher:approve": "node --env-file=.env.development scripts/approve-teacher-profile.js",
-    "teacher:approve:prod": "node --env-file=.env.production scripts/approve-teacher-profile.js",
-    "class:now": "node --env-file=.env.development scripts/schedule-class-now.js",
-    "class:now:prod": "node --env-file=.env.production scripts/schedule-class-now.js",
     "db:schema": "node --env-file=.env.development scripts/run-sql.js db/schema.sql",
     "db:seed": "node --env-file=.env.development scripts/run-sql.js db/seed.sql",
     "db:truncate": "node --env-file=.env.development scripts/run-sql.js db/truncate.sql",
@@ -34,8 +28,6 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "livekit-client": "^2.19.2",
-    "livekit-server-sdk": "^2.15.4",
     "pg": "^8.12.0"
   },
   "engines": {

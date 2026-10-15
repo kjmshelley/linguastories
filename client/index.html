@@ -20,25 +20,11 @@
           extend: {
             colors: {
               brand: {
-                ink: "#1d293f",
-                charcoal: "#2f353e",
-                graphite: "#6c757d",
-                muted: "#8a9099",
-                orange: "#e07258",
-                amber: "#f1b7a6",
-                red: "#e07258",
-                redDark: "#bf5b45",
-                brown: "#7c5548",
-                cream: "#f3f0eb",
-                pink: "#e8a6b6",
-                snow: "#f8f6f2",
-                mist: "#eee8df",
-                line: "#ded6cc",
-                panel: "#fffaf4",
-                sidebar: "#211c1a",
-                slate: "#485469",
-                teal: "#2c7a7b",
-                blue: "#3d7fa8"
+                ink: "#1d293f", charcoal: "#2f353e", graphite: "#6c757d", muted: "#8a9099",
+                orange: "#e07258", amber: "#f1b7a6", red: "#e07258", redDark: "#bf5b45",
+                brown: "#7c5548", cream: "#f3f0eb", pink: "#e8a6b6", snow: "#f8f6f2",
+                mist: "#eee8df", line: "#ded6cc", panel: "#fffaf4", sidebar: "#211c1a",
+                slate: "#485469", teal: "#2c7a7b", blue: "#3d7fa8"
               }
             }
           }
@@ -51,78 +37,13 @@
   </head>
   <body class="min-h-screen bg-brand-cream font-sans text-brand-ink antialiased">
     <div class="hidden bg-brand-red bg-brand-redDark bg-brand-snow bg-brand-mist bg-brand-cream bg-brand-line bg-brand-panel bg-brand-sidebar bg-brand-slate bg-brand-teal bg-brand-blue from-brand-blue from-brand-red from-brand-sidebar via-brand-amber via-brand-snow via-brand-slate to-brand-snow to-brand-panel text-brand-charcoal text-brand-graphite text-brand-muted border-brand-line hover:bg-brand-redDark hover:bg-brand-snow hover:border-brand-orange/60"></div>
-    <div id="appShell" class="min-h-screen">
-      <aside id="sidebar" class="hidden min-h-screen border-r border-black/10 bg-brand-sidebar px-4 py-5 text-white" aria-label="Main navigation">
-        <div class="mb-4 flex items-center justify-between lg:hidden">
-          <span class="text-xs font-bold uppercase tracking-[.16em] text-white/45">Menu</span>
-          <button class="grid h-11 w-11 place-items-center rounded-lg bg-white/10 text-white transition hover:bg-white/15" data-action="closeMobileMenu" aria-label="Close menu">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
-          </button>
+    <main id="appShell" class="min-h-screen">
+      <section id="view" class="min-h-screen">
+        <div class="grid min-h-screen place-items-center bg-brand-cream px-4 text-center">
+          <div><img class="mx-auto h-16 w-16 object-contain" src="/assets/img/linguastories.png" alt="" /><p class="mt-4 text-sm font-bold text-brand-graphite">Loading LinguaStories…</p></div>
         </div>
-        <a class="mb-6 flex min-h-14 items-center gap-3 rounded-lg px-2 text-white no-underline" href="/app/dashboard" data-app-link aria-label="LinguaStories dashboard">
-          <img class="h-12 w-12 object-contain" src="/assets/img/linguastories.png" alt="" />
-          <span>
-            <strong class="block text-[15px] font-bold leading-tight">LinguaStories</strong>
-            <small class="block text-xs font-medium text-white/55">Fluency through real practice</small>
-          </span>
-        </a>
-        <nav class="grid gap-5" id="nav"></nav>
-        <a class="mt-6 flex items-center gap-3 border-t border-white/10 pt-4 text-white no-underline transition hover:text-brand-amber" href="/app/profile" data-app-link>
-          <div class="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-sm font-bold text-white ring-1 ring-white/10" id="miniAvatar">LS</div>
-          <div>
-            <strong class="flex items-center gap-1.5 text-sm font-semibold" id="miniName">
-              <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>
-              <span>Learner</span>
-            </strong>
-            <small class="block text-xs font-medium text-white/50" id="miniTarget">Target language</small>
-          </div>
-        </a>
-        <button class="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[.06] px-3 py-2 text-sm font-semibold text-white/75 transition hover:bg-white/10 hover:text-white" data-action="logout">
-          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
-          <span>Log out</span>
-        </button>
-      </aside>
-      <div id="mobileMenuBackdrop" class="hidden fixed inset-0 z-40 bg-brand-ink/55 backdrop-blur-sm lg:hidden" data-action="closeMobileMenu" aria-hidden="true"></div>
-
-      <main class="min-w-0">
-        <header id="mobileTopbar" class="hidden min-h-16 items-center justify-between gap-3 border-b border-brand-line bg-brand-panel/95 px-4 py-3 backdrop-blur lg:hidden">
-          <button class="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-brand-line bg-white/75 text-brand-ink shadow-sm" data-action="openMobileMenu" aria-label="Open menu">
-            <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
-          </button>
-          <h1 class="min-w-0 flex-1 truncate text-base font-bold tracking-tight text-brand-ink" id="mobilePageTitle">Dashboard</h1>
-          <button class="relative grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-brand-line bg-white/75 text-brand-charcoal shadow-sm" data-action="openChatPanel" title="Messages" aria-label="Messages">
-            <svg class="h-4 w-4 shrink-0 text-brand-redDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"></path></svg>
-            <span class="absolute -right-1 -top-1 hidden min-w-5 rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white" id="mobileMessageBadge">0</span>
-          </button>
-        </header>
-        <header id="topbar" class="hidden min-h-20 items-center justify-between gap-4 border-b border-brand-line bg-brand-panel/90 px-7 py-4 backdrop-blur lg:flex">
-          <div class="min-w-0">
-            <h1 class="text-2xl font-bold tracking-tight text-brand-ink" id="pageTitle">Dashboard</h1>
-          </div>
-          <div class="flex flex-wrap items-center justify-end gap-2">
-            <button class="relative grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-brand-line bg-white/70 text-brand-charcoal shadow-sm transition hover:-translate-y-0.5 hover:border-brand-orange/60 hover:bg-white" data-action="openChatPanel" id="messageButton" title="Messages" aria-label="Messages">
-              <svg class="h-4 w-4 shrink-0 text-brand-redDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"></path></svg>
-              <span class="absolute -right-1 -top-1 hidden min-w-5 rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white" id="messageBadge">0</span>
-            </button>
-            <button class="relative grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-brand-ink text-sm font-bold text-white transition hover:bg-brand-redDark" id="notifyButton" title="Notifications" aria-label="Notifications">
-              <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 21h4"></path><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path></svg>
-              <span class="absolute -right-1 -top-1 hidden min-w-5 items-center justify-center rounded-full bg-brand-red px-1.5 py-0.5 text-[11px] font-bold leading-none text-white" id="notificationBadge">0</span>
-            </button>
-          </div>
-        </header>
-
-        <section id="view" class="min-h-screen">
-          <div class="grid min-h-screen place-items-center bg-brand-cream px-4 text-center">
-            <div>
-              <img class="mx-auto h-16 w-16 object-contain" src="/assets/img/linguastories.png" alt="" />
-              <p class="mt-4 text-sm font-bold text-brand-graphite">Loading LinguaStories...</p>
-            </div>
-          </div>
-        </section>
-      </main>
-      <div id="chatDrawer"></div>
-    </div>
-
+      </section>
+    </main>
     <template id="modalTemplate">
       <div class="fixed inset-0 z-50 grid place-items-center bg-brand-ink/70 p-4 backdrop-blur-sm">
         <div class="relative max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-auto rounded-lg border border-brand-line bg-brand-panel shadow-2xl" data-modal-panel role="dialog" aria-modal="true" tabindex="-1">
@@ -130,7 +51,6 @@
         </div>
       </div>
     </template>
-
-    <script type="module" src="/js/app.js?v=download-runtime-20260722"></script>
+    <script type="module" src="/js/app.js?v=focused-learning-20260722"></script>
   </body>
 </html>

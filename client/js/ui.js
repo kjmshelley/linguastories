@@ -33,17 +33,6 @@ export function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-export function formatDate(value) {
-  if (!value) return "";
-  const date = new Date(`${value}T00:00:00`);
-  if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric"
-  }).format(date);
-}
-
 const LUCIDE_SPRITE_HREF = "/assets/icons/lucide-sprite.svg";
 const LUCIDE_ICON_NAME_RE = /^[a-z0-9][a-z0-9-]*$/;
 
@@ -51,53 +40,4 @@ export function icon(name, className = "h-4 w-4") {
   const iconName = String(name || "");
   if (!LUCIDE_ICON_NAME_RE.test(iconName)) return "";
   return `<svg class="${className} shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="${LUCIDE_SPRITE_HREF}#${iconName}"></use></svg>`;
-}
-
-export function iconForLabel(label = "") {
-  const text = String(label).toLowerCase();
-  if (text.includes("add")) return "plus";
-  if (text.includes("back")) return "arrow-left";
-  if (text.includes("change") || text.includes("language")) return "globe";
-  if (text.includes("complete")) return "check";
-  if (text.includes("create")) return "plus";
-  if (text.includes("detail") || text.includes("open")) return "search";
-  if (text.includes("edit") || text.includes("save profile") || text.includes("save info")) return "pencil";
-  if (text.includes("encourage")) return "message-circle";
-  if (text.includes("follow")) return "users";
-  if (text.includes("learn") || text.includes("review")) return "book-open";
-  if (text.includes("log in")) return "log-in";
-  if (text.includes("log out")) return "log-out";
-  if (text.includes("practice")) return "mic";
-  if (text.includes("read")) return "play";
-  if (text.includes("remove")) return "trash-2";
-  if (text.includes("share")) return "message-circle";
-  if (text.includes("support")) return "trophy";
-  if (text.includes("upload")) return "upload";
-  if (text.includes("save")) return "save";
-  return "";
-}
-
-export function button(label, action, className = ui.primary, iconName = iconForLabel(label)) {
-  return `<button class="${className}" data-action="${action}">${icon(iconName)}<span>${label}</span></button>`;
-}
-
-export function stat(label, value) {
-  return `
-    <div class="${ui.stat}">
-      <div class="flex items-center justify-between gap-3">
-        <span class="block text-sm font-semibold text-brand-graphite">${label}</span>
-        <span class="grid h-9 w-9 place-items-center rounded-lg bg-white/70 text-brand-redDark ring-1 ring-brand-line/70">${icon(iconForLabel(label) || "star")}</span>
-      </div>
-      <strong class="mt-2 block text-3xl font-bold tracking-tight text-brand-ink">${value}</strong>
-    </div>
-  `;
-}
-
-export function groupItems(items, getKey) {
-  return items.reduce((groups, item) => {
-    const key = getKey(item) || "Recommended";
-    groups[key] = groups[key] || [];
-    groups[key].push(item);
-    return groups;
-  }, {});
 }

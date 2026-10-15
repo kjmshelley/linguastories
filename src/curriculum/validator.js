@@ -127,6 +127,7 @@ function validateManifest(manifest) {
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(category.slug || "")) errors.push({ code: "invalid-category-slug", value: category.slug });
       if (!/^[a-f0-9]{64}$/.test(category.checksum || "")) errors.push({ code: "invalid-category-checksum", value: category.checksum });
       if (!Number.isInteger(category.bytes) || category.bytes < 1) errors.push({ code: "invalid-category-bytes", value: category.bytes });
+      if (category.imageUrl !== undefined && !/^\/assets\/img\/categories\/[1-9][0-9]*\.png$/.test(category.imageUrl)) errors.push({ code: "invalid-category-image-url", value: category.imageUrl });
       if (!category.name || !Number.isInteger(category.lessonCount) || typeof category.required !== "boolean" || !("prerequisiteCategoryId" in category)) errors.push({ code: "invalid-category-progress-metadata", id: category.id });
     }
     validateChain(language.categories || [], "prerequisiteCategoryId", errors);

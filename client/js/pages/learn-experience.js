@@ -20,12 +20,14 @@ import {
   typedConfirmationModal
 } from "../learning/components.js";
 
-export const learningRouteIds = new Set(["languageSelection", "learn", "categoryDetail", "lessonPreview", "lessonEngine", "review", "progress", "categoryProgress", "storyReader", "settings", "curriculumInfo"]);
+export const learningRouteIds = new Set(["languageSelection", "learn", "categoryDetail", "categoryWords", "lessonPreview", "lessonEngine", "review", "progress", "categoryProgress", "storyReader", "settings", "curriculumInfo"]);
 
 export function learningRouteFromPath(pathname = window.location.pathname) {
   const path = String(pathname).replace(/\/$/, "") || "/";
   if (path === "/app/languages") return { id: "languageSelection" };
   if (path === "/app/learn") return { id: "learn" };
+  const categoryWordsMatch = path.match(/^\/app\/learn\/([^/]+)\/words$/);
+  if (categoryWordsMatch) return { id: "categoryWords", categorySlug: decodeURIComponent(categoryWordsMatch[1]) };
   const engineMatch = path.match(/^\/app\/learn\/([^/]+)\/([^/]+)$/);
   if (engineMatch) return { id: "lessonEngine", categorySlug: decodeURIComponent(engineMatch[1]), lessonId: decodeURIComponent(engineMatch[2]) };
   const categoryMatch = path.match(/^\/app\/learn\/([^/]+)$/);
@@ -46,6 +48,7 @@ export function learningRouteFromPath(pathname = window.location.pathname) {
 export function learningPath(id, params = {}) {
   if (id === "languageSelection") return "/app/languages";
   if (id === "categoryDetail") return `/app/learn/${encodeURIComponent(params.categoryId || "introduction")}`;
+  if (id === "categoryWords") return `/app/learn/${encodeURIComponent(params.categorySlug || "introduction")}/words`;
   if (id === "lessonPreview") return `/app/lesson/${encodeURIComponent(params.lessonId || "introduction-1")}`;
   if (id === "lessonEngine") return `/app/learn/${encodeURIComponent(params.categorySlug || "travel")}/${encodeURIComponent(params.lessonId || "")}`;
   return `/app/${id}`;
@@ -187,9 +190,24 @@ function generatedCategoryDetailView({ user, offline, bundle, learningState }) {
   }));
   const status = categoryRecord?.historicallyCompleted ? "completed" : categoryState?.accessStatus === "locked" ? "locked" : categoryRecord ? "in_progress" : "available";
   const body = `<a class="ls-back-link" href="/app/learn" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Back to Learn</span></a>
-    <section class="ls-category-hero" aria-labelledby="category-title"><div>${statusBadge(status)}<p>Category ${category.order}</p><h1 id="category-title" data-learning-page-title tabindex="-1">${escapeHtml(category.name)}</h1><p>${escapeHtml(category.description)}</p><div class="ls-category-hero__meta"><span>${icon("whole-word", "h-4 w-4")} ${category.wordCount} words</span><span>${icon("layers-3", "h-4 w-4")} ${lessons.length} lessons</span></div>${progressIndicator(categoryRecord?.completionPercentage || 0, `${category.name} progress`)}</div>${placeholderIllustration({ iconName: "map", accent: "blue", label: `${category.name} illustration`, index: category.order })}</section>
+    <section class="ls-category-hero" aria-labelledby="category-title"><div>${statusBadge(status)}<p>Category ${category.order}</p><h1 id="category-title" data-learning-page-title tabindex="-1">${escapeHtml(category.name)}</h1><p>${escapeHtml(category.description)}</p><div class="ls-category-hero__meta"><a class="ls-category-card__meta-link" href="/app/learn/${encodeURIComponent(category.slug)}/words" data-app-link>${icon("whole-word", "h-4 w-4")} ${category.wordCount} words</a><span>${icon("layers-3", "h-4 w-4")} ${lessons.length} lessons</span></div>${progressIndicator(categoryRecord?.completionPercentage || 0, `${category.name} progress`)}</div>${placeholderIllustration({ iconName: "map", accent: "blue", label: `${category.name} illustration`, index: category.order })}</section>
     <section class="ls-lessons" aria-labelledby="lessons-title"><div class="ls-section-heading"><div><span>Generated curriculum</span><h2 id="lessons-title">Learn in small, focused steps</h2></div><p>Four or five new words at a time</p></div><div class="ls-lessons__list">${lessons.map((lesson) => lessonCard(lesson, category.slug)).join("")}</div></section>`;
   return appShell({ active: "learn", title: category.name, user, body, offline, reviewDue: reviewBadge(learningState), settingsAttention: learningState.updateAvailable || learningState.contentHealth?.healthy === false });
+}
+
+function categoryWordsView({ user, offline, learningState, categorySlug }) {
+  const bundle = cachedCategory(categorySlug);
+  if (!bundle) return `<div class="ls-engine-loading" role="status"><span>${icon("loader-circle", "h-6 w-6")}</span><h1 data-learning-page-title tabindex="-1">Loading category words</h1><p>Opening the downloaded vocabulary list…</p></div>`;
+  const category = bundle.categories[0];
+  const words = bundle.words || [];
+  const body = `
+    <a class="ls-back-link" href="/app/learn/${encodeURIComponent(category.slug)}" data-app-link>${icon("arrow-left", "h-4 w-4")}<span>Back to ${escapeHtml(category.name)}</span></a>
+    ${pageHeading({ eyebrow: `Category ${category.order} vocabulary`, title: `${category.name} words`, body: `All ${words.length} words included in this category. Opening this list does not change lesson progress.` })}
+    <section aria-labelledby="category-word-list-title">
+      <div class="ls-section-heading"><div><span>Vocabulary list</span><h2 id="category-word-list-title">${words.length} words</h2></div><p>Traditional Chinese · Pinyin · English</p></div>
+      <ul class="ls-vocabulary-grid">${words.map((word) => `<li><strong lang="zh-Hant">${escapeHtml(word.traditional)}</strong><span>${escapeHtml(word.pinyin || "")}</span><small>${escapeHtml(word.englishMeaning || word.meanings?.[0] || "")}</small></li>`).join("")}</ul>
+    </section>`;
+  return appShell({ active: "learn", title: `${category.name} words`, user, body, offline, wide: true, reviewDue: reviewBadge(learningState), settingsAttention: learningState.updateAvailable || learningState.contentHealth?.healthy === false });
 }
 
 const routeLoadErrors = new Map();
@@ -375,11 +393,11 @@ function settingsView({ user, learningState, offline }) {
     <section class="ls-settings-section" aria-labelledby="accessibility-settings-title"><div class="ls-section-heading"><div><span>Accessibility</span><h2 id="accessibility-settings-title">Motion</h2></div></div><div class="ls-settings-controls">${select("global", "reducedMotion", "Reduced motion", "System default respects your browser or operating-system preference", [["system", "System default"], ["reduce", "Reduce motion"], ["no-preference", "Use standard motion"]], global.reducedMotion)}</div></section>
     <section class="ls-settings-section" aria-labelledby="progress-settings-title"><div class="ls-section-heading"><div><span>Progress and data</span><h2 id="progress-settings-title">Reset local learning data</h2></div></div><div class="ls-settings-list"><button type="button" data-learning-action="resetProgress"><span class="ls-settings-list__icon">${icon("rotate-ccw", "h-5 w-5")}</span><span><strong>Reset Traditional Chinese progress</strong><small>Deletes this pair’s attempts, completion, review, and sessions; keeps content and settings</small></span>${icon("chevron-right", "h-4 w-4")}</button><button type="button" data-learning-action="resetAllProgress"><span class="ls-settings-list__icon">${icon("eraser", "h-5 w-5")}</span><span><strong>Reset all language progress</strong><small>Available for future additional language pairs; all downloads and settings remain</small></span>${icon("chevron-right", "h-4 w-4")}</button><button type="button" data-learning-action="resetApplicationData"><span class="ls-settings-list__icon">${icon("triangle-alert", "h-5 w-5")}</span><span><strong>Reset application learning data</strong><small>Advanced: removes downloads, progress, review history, sessions, and learning settings</small></span>${icon("chevron-right", "h-4 w-4")}</button></div></section>
     <section class="ls-settings-section" aria-labelledby="account-settings-title">
-      <div class="ls-section-heading"><div><span>LinguaStories</span><h2 id="account-settings-title">Account and community</h2></div></div>
+      <div class="ls-section-heading"><div><span>LinguaStories</span><h2 id="account-settings-title">Account</h2></div></div>
       <div class="ls-settings-list">
-        <a href="/app/profile/my-info" data-app-link><span class="ls-settings-list__icon">${icon("user", "h-5 w-5")}</span><span><strong>${escapeHtml(user.displayName || "My account")}</strong><small>Profile, language details, and billing</small></span>${icon("chevron-right", "h-4 w-4")}</a>
-        <a href="/app/dashboard" data-app-link><span class="ls-settings-list__icon">${icon("layout-grid", "h-5 w-5")}</span><span><strong>Community and live lessons</strong><small>Return to the existing LinguaStories experience</small></span>${icon("chevron-right", "h-4 w-4")}</a>
+        <div><span class="ls-settings-list__icon">${icon("user", "h-5 w-5")}</span><span><strong>${escapeHtml(user.displayName || "Learner")}</strong><small>${escapeHtml(user.email || "Signed-in learning account")}</small></span></div>
         <a href="/app/settings/curriculum" data-app-link><span class="ls-settings-list__icon">${icon("info", "h-5 w-5")}</span><span><strong>Curriculum information</strong><small>Version, schema, offline state, metric definitions, and local-data privacy</small></span>${icon("chevron-right", "h-4 w-4")}</a>
+        <button type="button" data-auth-action="logout"><span class="ls-settings-list__icon">${icon("log-out", "h-5 w-5")}</span><span><strong>Log out</strong><small>Downloaded lessons and progress remain on this device</small></span>${icon("chevron-right", "h-4 w-4")}</button>
       </div>
     </section>
   `;
@@ -388,7 +406,7 @@ function settingsView({ user, learningState, offline }) {
 
 function curriculumInfoView({ user, learningState, offline }) {
   const health = learningState.contentHealth; const language = learningState.language || {}; const bytes = Number(language.bytes || language.categoryBytes || 0);
-  const body = `<a class="ls-back-link" href="/app/settings" data-app-link>${icon("arrow-left", "h-4 w-4")} Back to Settings</a>${pageHeading({ eyebrow: "About", title: "Curriculum information", body: "Technical details and plain-language definitions for this browser’s installed learning course." })}<section class="ls-category-progress-detail"><dl><div><dt>Language pair</dt><dd>Traditional Chinese (Taiwan) from English</dd></div><div><dt>Installed version</dt><dd>${escapeHtml(learningState.installedVersion || "Not installed")}</dd></div><div><dt>Available version</dt><dd>${escapeHtml(learningState.availableVersion || "Not checked")}</dd></div><div><dt>Schema</dt><dd>${escapeHtml(language.schemaVersion || "1.0.0")}</dd></div><div><dt>Download size</dt><dd>${bytes ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : "Not reported"}</dd></div><div><dt>Offline availability</dt><dd>${learningState.offlineAvailable ? "Available" : "Unavailable"}</dd></div><div><dt>Content health</dt><dd>${health?.healthy === false ? "Repair needed" : health?.healthy ? "Healthy" : "Not checked"}</dd></div></dl></section><section class="ls-settings-section"><div class="ls-section-heading"><div><span>Metric definitions</span><h2>What Progress means</h2></div></div><div class="ls-privacy-copy"><p><strong>Completed</strong> means every required scored exercise in a lesson was correct in one attempt. A replay cannot erase historical completion.</p><p><strong>Learned vocabulary</strong> comes from a perfect lesson pass. <strong>Mastered</strong> is stricter and requires durable scheduled recall, including production.</p><p><strong>Study time</strong> is active lesson time only. App opens and idle time are excluded. Learning streak days require a finished lesson attempt or completed review session.</p></div></section><section class="ls-settings-section"><div class="ls-section-heading"><div><span>Privacy and local data</span><h2>Stored in this browser</h2></div></div><div class="ls-privacy-copy"><p>Downloaded curriculum, settings, attempts, progress, review schedules, and lesson sessions are stored locally in IndexedDB. This learning system does not add cloud synchronization or a learning account.</p><p>Removing a course download preserves progress. Resetting current-language progress preserves downloads and settings. Reset application data removes all learning data on this browser.</p><p>Export and import are intentionally not exposed in this phase because a safe, fully validated interchange workflow is not implemented.</p></div></section>`;
+  const body = `<a class="ls-back-link" href="/app/settings" data-app-link>${icon("arrow-left", "h-4 w-4")} Back to Settings</a>${pageHeading({ eyebrow: "About", title: "Curriculum information", body: "Technical details and plain-language definitions for this browser’s installed learning course." })}<section class="ls-category-progress-detail"><dl><div><dt>Language pair</dt><dd>Traditional Chinese (Taiwan) from English</dd></div><div><dt>Installed version</dt><dd>${escapeHtml(learningState.installedVersion || "Not installed")}</dd></div><div><dt>Available version</dt><dd>${escapeHtml(learningState.availableVersion || "Not checked")}</dd></div><div><dt>Schema</dt><dd>${escapeHtml(language.schemaVersion || "1.0.0")}</dd></div><div><dt>Download size</dt><dd>${bytes ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : "Not reported"}</dd></div><div><dt>Offline availability</dt><dd>${learningState.offlineAvailable ? "Available" : "Unavailable"}</dd></div><div><dt>Content health</dt><dd>${health?.healthy === false ? "Repair needed" : health?.healthy ? "Healthy" : "Not checked"}</dd></div></dl></section><section class="ls-settings-section"><div class="ls-section-heading"><div><span>Metric definitions</span><h2>What Progress means</h2></div></div><div class="ls-privacy-copy"><p><strong>Completed</strong> means every required scored exercise in a lesson was correct in one attempt. A replay cannot erase historical completion.</p><p><strong>Learned vocabulary</strong> comes from a perfect lesson pass. <strong>Mastered</strong> is stricter and requires durable scheduled recall, including production.</p><p><strong>Study time</strong> is active lesson time only. App opens and idle time are excluded. Learning streak days require a finished lesson attempt or completed review session.</p></div></section><section class="ls-settings-section"><div class="ls-section-heading"><div><span>Privacy and local data</span><h2>Stored in this browser</h2></div></div><div class="ls-privacy-copy"><p>Downloaded curriculum, settings, attempts, progress, review schedules, and lesson sessions are stored locally in IndexedDB. Account authentication is stored separately on the server.</p><p>Removing a course download preserves progress. Resetting current-language progress preserves downloads and settings. Reset application data removes all learning data on this browser.</p><p>Export and import are intentionally not exposed because a safe, fully validated interchange workflow is not implemented.</p></div></section>`;
   return appShell({ active: "settings", title: "Curriculum information", user, offline, body, reviewDue: reviewBadge(learningState), settingsAttention: learningState.updateAvailable || health?.healthy === false });
 }
 
@@ -407,6 +425,7 @@ export function learningExperienceView({ route, user = {}, learningState }) {
   if (route.id === "languageSelection") return selectionView({ learningState: safeState });
   if (!safeState.installed) return selectionView({ learningState: safeState });
   if (route.id === "categoryDetail") return categoryDetailView({ user, learningState: safeState, offline, categoryId: route.categoryId });
+  if (route.id === "categoryWords") return categoryWordsView({ user, learningState: safeState, offline, categorySlug: route.categorySlug });
   if (route.id === "lessonPreview") return lessonPreviewView({ user, learningState: safeState, offline, lessonId: route.lessonId });
   if (route.id === "lessonEngine") return lessonEngineView({ route, learningState: safeState });
   if (route.id === "review") return reviewView({ user, offline, learningState: safeState });
@@ -426,7 +445,7 @@ let lessonMountToken = 0;
 export function bindLearningExperience(root, callbacks) {
   const route = learningRouteFromPath();
   if (route?.id !== "lessonEngine") routeLoadErrors.clear();
-  const requestedSlug = route?.id === "categoryDetail" ? (route.categoryId === "traveling" ? "travel" : route.categoryId) : ["lessonEngine", "categoryProgress"].includes(route?.id) ? route.categorySlug : route?.id === "storyReader" ? new URLSearchParams(window.location.search).get("category") || "" : "";
+  const requestedSlug = route?.id === "categoryDetail" ? (route.categoryId === "traveling" ? "travel" : route.categoryId) : ["lessonEngine", "categoryProgress", "categoryWords"].includes(route?.id) ? route.categorySlug : route?.id === "storyReader" ? new URLSearchParams(window.location.search).get("category") || "" : "";
   if (requestedSlug && !cachedCategory(requestedSlug) && !routeLoadErrors.has(`${route.categorySlug}:${route.lessonId}`)) {
     const loadRequestedCategory = async () => {
       if (route.id === "lessonEngine" && callbacks.contentRuntime?.sessions) {

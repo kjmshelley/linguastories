@@ -20,7 +20,6 @@ The reset runs as one transaction. Records belonging to another language pair ar
 - Downloaded curriculum packages and category data
 - Content manifest and download/update preferences
 - General settings
-- LinguaStories account, community, teacher, billing, and profile data
+- LinguaStories authentication account and server session data
 
 After reset, projections refresh immediately: the first category and first lesson are available, all successors are locked, metrics are zero, and Continue targets the first category. A `progress_reset` broadcast makes other tabs refresh and exits any active lesson after removing its cached session.
-

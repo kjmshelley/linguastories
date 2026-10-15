@@ -88,13 +88,14 @@ test("progress integrity reports serious historical inconsistencies without dele
 test("Phase 8 direct learning routes are recognized", async () => {
   const { learningRouteFromPath } = await import("../client/js/pages/learn-experience.js");
   assert.deepEqual(learningRouteFromPath("/app/progress/category/travel"), { id: "categoryProgress", categorySlug: "travel" });
+  assert.deepEqual(learningRouteFromPath("/app/learn/travel/words"), { id: "categoryWords", categorySlug: "travel" });
   assert.deepEqual(learningRouteFromPath("/app/settings/curriculum"), { id: "curriculumInfo" });
   assert.deepEqual(learningRouteFromPath("/app/story/story-1"), { id: "storyReader", storyId: "story-1" });
 });
 
-test("login initializes the curriculum runtime before opening the download screen", () => {
+test("authentication initializes the curriculum runtime before opening the download screen", () => {
   const appSource = fs.readFileSync(path.join(__dirname, "../client/js/app.js"), "utf8");
-  const authRequest = appSource.slice(appSource.indexOf("async function authRequest"), appSource.indexOf("async function livekitApi"));
-  assert.match(authRequest, /state = await response\.json\(\);\s+await initializeLearningContent\(\);\s+history\.pushState/);
-  assert.match(appSource, /learningContentSubscriptionBound = true/);
+  const authRequest = appSource.slice(appSource.indexOf("async function submitAuthForm"), appSource.indexOf("async function logout"));
+  assert.match(authRequest, /authState = \{ authenticated: true, user: body\.user \|\| body \};\s+await initializeLearningContent\(\);/);
+  assert.match(appSource, /contentListenerBound = true/);
 });

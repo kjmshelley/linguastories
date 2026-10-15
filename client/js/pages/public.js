@@ -10,9 +10,7 @@ export function publicNav(active = "", options = {}) {
     "inline-flex min-h-11 items-center justify-center rounded-lg border border-brand-line bg-white px-4 py-2 text-sm font-black text-brand-charcoal no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-brand-orange/60 hover:bg-brand-snow";
   const activeTopButton =
     "inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-red px-4 py-2 text-sm font-black text-white no-underline shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-redDark";
-  const learningLinks = options.learningOnly
-    ? [["#how-it-works", "How it works"], ["#learning-path", "Learning path"], ["#practice", "Practice"]]
-    : [["#teachers", "Teachers"], ["#teacher-first", "Teacher-first"], ["#how-it-works", "How it works"], ["#community", "Community"], ["#pricing", "Pricing"]];
+  const learningLinks = [["#how-it-works", "How it works"], ["#learning-path", "Learning path"], ["#practice", "Practice"]];
   return `
     <nav class="mx-auto flex w-[min(1180px,calc(100%_-_32px))] items-center justify-between gap-4 px-0 py-4 sm:px-4 sm:py-5">
       <a class="flex items-center gap-3 text-brand-ink no-underline" href="/" data-link>
@@ -68,81 +66,6 @@ function featureCard({ title, body, iconName = "star", tone = "red" }) {
       <h3 class="mt-4 text-lg font-black leading-snug text-brand-ink">${escapeHtml(title)}</h3>
       <p class="mt-2 text-sm leading-6 text-brand-graphite">${escapeHtml(body)}</p>
     </article>
-  `;
-}
-
-const fallbackTiers = [
-  ["free", "Free Membership", 0, 0, false, 0, "learner", ["voice_video_rooms", "connect", "community_posts", "find_teacher", "practice"]],
-  ["teacher", "Teacher", 0, 0, false, 0, "teacher", ["teacher_workspace", "teacher_profile", "voice_video_rooms"]]
-].map(([key, name, monthlyPriceUsd, yearlyPriceUsd, trialEligible, trialLengthDays, accountType, permissions]) => ({
-  key,
-  name,
-  monthlyPriceUsd,
-  yearlyPriceUsd,
-  trialEligible,
-  trialLengthDays,
-  accountType,
-  permissions
-}));
-
-function accountTiers(appConfig) {
-  return appConfig.accountTiers?.length ? appConfig.accountTiers : fallbackTiers;
-}
-
-function permissionLabel(value) {
-  return String(value || "")
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function tierSummary(tier) {
-  if (Number(tier.monthlyPriceUsd || 0) === 0) return "Free membership. Pay only when booking lessons.";
-  return `${tier.trialLengthDays || 7}-day free trial. No card required at signup.`;
-}
-
-function pricingCard(tier, { selectable = false, selected = false } = {}) {
-  const price = Number(tier.monthlyPriceUsd || 0) > 0 ? `$${Number(tier.monthlyPriceUsd).toFixed(2)}` : "$0";
-  return `
-    <article class="h-full rounded-lg border ${selected ? "border-brand-red/45 bg-brand-red/10" : "border-brand-line bg-brand-panel"} p-4 shadow-[0_1px_2px_rgba(29,41,63,.05)]">
-      <div class="flex items-start justify-between gap-3">
-        <div>
-          <h3 class="text-lg font-black text-brand-ink">${escapeHtml(tier.name)}</h3>
-          <p class="mt-1 text-xs font-bold uppercase text-brand-graphite">${escapeHtml(tier.accountType || "learner")}</p>
-        </div>
-        ${selectable ? `<input class="mt-1 h-5 w-5 accent-brand-red" type="radio" name="tierKey" value="${escapeHtml(tier.key)}" ${selected ? "checked" : ""} required aria-label="${escapeHtml(tier.name)}">` : ""}
-      </div>
-      <p class="mt-4 text-3xl font-black text-brand-ink">${escapeHtml(price)}<span class="text-sm font-bold text-brand-graphite">/month</span></p>
-      <p class="mt-1 text-sm font-semibold text-brand-graphite">${escapeHtml(Number(tier.yearlyPriceUsd || 0) > 0 ? `$${Number(tier.yearlyPriceUsd).toFixed(2)}/year` : "Free forever")}</p>
-      <p class="mt-3 rounded-lg bg-white/70 px-3 py-2 text-xs font-bold leading-5 text-brand-charcoal">${escapeHtml(tierSummary(tier))}</p>
-      <ul class="mt-4 grid gap-2 text-sm leading-5 text-brand-graphite">
-        ${(tier.permissions || []).slice(0, 5).map((permission) => `<li class="flex gap-2">${icon("check", "mt-0.5 h-4 w-4 text-brand-redDark")}<span>${escapeHtml(permissionLabel(permission))}</span></li>`).join("")}
-      </ul>
-    </article>
-  `;
-}
-
-export function searchLandingView() {
-  return `
-    <section class="lingua-search-home min-h-screen bg-brand-snow text-brand-ink">
-      <header class="lingua-search-home__topbar">
-        <a class="lingua-search-home__login" href="/login" data-link>Login</a>
-      </header>
-      <main class="lingua-search-home__main" aria-label="LinguaStories search">
-        <img class="lingua-search-home__logo" src="/assets/img/linguastories.png" alt="LinguaStories" fetchpriority="high" />
-        <form class="lingua-search-home__form" action="/" role="search">
-          <label class="sr-only" for="landingSearch">Search LinguaStories</label>
-          <div class="lingua-search-home__searchbox">
-            ${icon("search", "h-5 w-5 shrink-0 text-brand-muted")}
-            <input id="landingSearch" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search for stories, sentences, vocabulary, etc..." aria-label="Search LinguaStories" />
-          </div>
-          <div class="lingua-search-home__actions" aria-label="Primary actions">
-            <a href="/find-teacher" data-link>Find a Teacher</a>
-            <a href="/app/community">Lingua World Community</a>
-          </div>
-        </form>
-      </main>
-    </section>
   `;
 }
 
@@ -257,19 +180,18 @@ export function landingView() {
   `;
 }
 
-function authPage(mode, { appConfig }) {
+function authPage(mode, { appConfig = {} }) {
   const isLogin = mode === "login";
-  const tiers = accountTiers(appConfig);
   const authHighlights = isLogin
     ? [
-        ["Your lessons", "Return to booked lessons and teacher conversations."],
-        ["Your community", "Keep up with learners and teachers between sessions."],
-        ["Your teacher profile", "Manage teaching details from the same account."]
+        ["Continue your path", "Return to the next unlocked lesson."],
+        ["Review what is due", "Strengthen words before they fade."],
+        ["Keep your progress", "Your learning history stays on this device."]
       ]
     : [
-        ["Find teachers", "Browse professional teachers and book when you are ready."],
-        ["Join community", "Meet learners, ask questions, and practice between lessons."],
-        ["Teach online", "Create a teacher profile after signup and set your own lesson price."]
+        ["Short lessons", "Build a daily habit in a few focused minutes."],
+        ["Useful stories", "Learn vocabulary in practical context."],
+        ["Smart review", "Practice follows your results and timing."]
       ];
   return `
     <section class="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#fbfbfd_62%,#f4f4f9_100%)]">
@@ -277,8 +199,8 @@ function authPage(mode, { appConfig }) {
       <main class="mx-auto grid w-[min(1180px,calc(100%_-_32px))] items-center gap-6 px-4 py-8 ${isLogin ? "lg:grid-cols-[1fr_430px]" : "lg:grid-cols-[.8fr_1.2fr]"} sm:py-12 lg:gap-10 lg:py-20">
         <section class="order-1">
           <span class="${isLogin ? ui.tagGold : ui.tagRed} hidden lg:inline-flex">${isLogin ? "Welcome back" : "Join free"}</span>
-          <h1 class="mt-5 max-w-3xl text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${isLogin ? "Continue learning with your teachers and community." : "Create your free LinguaStories account."}</h1>
-          <p class="mt-5 max-w-xl text-base leading-7 text-brand-charcoal sm:text-lg sm:leading-8">${isLogin ? "Log in to manage lessons, connect with learners, and keep practicing between sessions." : "Find professional teachers, join the community, and book live lessons when you are ready."}</p>
+          <h1 class="mt-5 max-w-3xl text-3xl font-black leading-tight tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">${isLogin ? "Pick up where you left off." : "Start building lasting language skills."}</h1>
+          <p class="mt-5 max-w-xl text-base leading-7 text-brand-charcoal sm:text-lg sm:leading-8">${isLogin ? "Log in to continue lessons, review due material, and see your progress." : "Create an account, download your course, and begin the first guided lesson."}</p>
           <div class="mt-7 hidden max-w-2xl gap-3 lg:grid lg:grid-cols-3">
             ${authHighlights.map(([title, body]) => `<article class="rounded-lg border border-brand-line/80 bg-brand-panel/75 p-4 shadow-[0_1px_2px_rgba(29,41,63,.04)]"><h2 class="text-sm font-black text-brand-ink">${escapeHtml(title)}</h2><p class="mt-2 text-xs leading-5 text-brand-graphite">${escapeHtml(body)}</p></article>`).join("")}
           </div>
@@ -292,9 +214,9 @@ function authPage(mode, { appConfig }) {
             ${
               isLogin
                 ? ""
-                : `<div class="grid gap-4 sm:grid-cols-2"><label class="${ui.label}">Native Language<select class="${ui.input}" name="nativeLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label><label class="${ui.label}">Learning Language<select class="${ui.input}" name="targetLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label></div>
-                  <input type="hidden" name="tierKey" value="${escapeHtml(tiers.find((tier) => tier.key === "free")?.key || "free")}" />
-                  <p class="rounded-lg bg-brand-red/10 px-3 py-2 text-xs font-bold leading-5 text-brand-redDark ring-1 ring-brand-red/15">Membership is free. Students pay only when booking a lesson.</p>`
+                : `<label class="${ui.label}">Native language<select class="${ui.input}" name="nativeLanguage" required>${languageOptions(appConfig.supportedLanguages, "")}</select></label>
+                  <input type="hidden" name="targetLanguage" value="zh-TW" />
+                  <p class="rounded-lg bg-brand-red/10 px-3 py-2 text-xs font-bold leading-5 text-brand-redDark ring-1 ring-brand-red/15">Traditional Chinese from English is the first available course. More courses can use the same learning system later.</p>`
             }
             <button class="${ui.primary} w-full">${icon(isLogin ? "login" : "add")}<span>${isLogin ? "Log in" : "Create free account"}</span></button>
           </form>

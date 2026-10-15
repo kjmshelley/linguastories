@@ -2,7 +2,7 @@
 
 The Phase 3–8 learning system stores curriculum packages, settings, progress, attempts, item performance, lesson sessions, review items/responses/sessions, migrations, and short-lived ownership leases in the browser’s IndexedDB database `linguastories-learning`. The selected startup pair is a small local-storage key.
 
-This phase adds no account, PostgreSQL learning tables, cloud synchronization, analytics upload, social ranking, notification permission, or background notification system. Existing LinguaStories account/community links remain separate product flows.
+Account authentication and sessions use PostgreSQL. Curriculum downloads, settings, attempts, progress, and review data remain local to IndexedDB; there is no cloud learning-history synchronization, analytics upload, social ranking, notification permission, or background notification system.
 
 Local storage is private to the browser profile under normal browser isolation, but the UI does not claim encryption or immunity from device users, browser extensions, profile deletion, private-mode eviction, quota eviction, or cleared site data. Removing a download preserves history; clearing site data or using Reset Application Data does not.
 

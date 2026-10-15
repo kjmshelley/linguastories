@@ -75,6 +75,15 @@ test("JSON schemas and generated documents are valid JSON", () => {
   assert.equal(validateCurriculum(curriculum).valid, true);
 });
 
+test("every manifest category references a server-hosted image asset", () => {
+  const categories = manifest.languages[0].categories;
+  assert.equal(categories.length, 113);
+  for (const category of categories) {
+    assert.equal(category.imageUrl, `/assets/img/categories/${category.order}.png`);
+    assert.ok(fs.existsSync(path.join(__dirname, "..", "client", category.imageUrl)), `Missing ${category.imageUrl}`);
+  }
+});
+
 test("generated lessons meet vocabulary, dialogue, story, and exercise requirements", () => {
   assert.equal(curriculum.coverage.length, curriculum.lessons.length);
   assert.ok(curriculum.coverage.every((item) => item.reusePercentage >= 90 && item.publishable));

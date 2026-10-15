@@ -38,23 +38,7 @@ const authRateLimit = rateLimit({
   message: "Too many authentication attempts. Please try again later."
 });
 
-const uploadRateLimit = rateLimit({
-  keyPrefix: "upload",
-  windowMs: 60 * 60 * 1000,
-  max: 20,
-  message: "Too many upload attempts. Please try again later."
-});
-
-const expensiveActionRateLimit = rateLimit({
-  keyPrefix: "expensive",
-  windowMs: 15 * 60 * 1000,
-  max: 80
-});
-
 module.exports = {
   authRateLimit,
-  expensiveActionRateLimit,
-  globalApiRateLimit,
-  rateLimit,
-  uploadRateLimit
+  globalApiRateLimit
 };

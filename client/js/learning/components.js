@@ -122,7 +122,7 @@ export function desktopNavigation(active, user = {}, reviewDue = 0, settingsAtte
         <span class="ls-learning-sidebar__course-icon">繁</span>
         <span><small>Learning</small><strong>Traditional Chinese</strong></span>
       </div>
-      <a class="ls-learning-sidebar__back" href="/app/dashboard" data-app-link>${icon("layout-grid", "h-4 w-4")}<span>Community & lessons</span></a>
+      <button class="ls-learning-sidebar__back" type="button" data-auth-action="logout">${icon("log-out", "h-4 w-4")}<span>Log out</span></button>
       <div class="ls-learning-sidebar__user">
         <span>${escapeHtml(String(user.displayName || "Learner").slice(0, 1).toUpperCase())}</span>
         <strong>${escapeHtml(user.displayName || "Learner")}</strong>
@@ -230,6 +230,7 @@ export function downloadStatus(state, { compact = false } = {}) {
 export function categoryCard(category, index) {
   const locked = category.status === "locked";
   const href = `/app/learn/${encodeURIComponent(category.id)}`;
+  const wordsHref = `${href}/words`;
   return `
     <article class="ls-category-card ls-category-card--${escapeHtml(category.status)}">
       <div class="ls-journey-marker" aria-hidden="true"><span>${category.status === "completed" || category.status === "review_due" ? icon("check", "h-4 w-4") : index + 1}</span></div>
@@ -242,7 +243,7 @@ export function categoryCard(category, index) {
           </div>
           <p class="ls-category-card__description">${escapeHtml(category.description)}</p>
           <div class="ls-category-card__meta">
-            <span>${icon("whole-word", "h-4 w-4")} ${category.wordCount} words</span>
+            <a class="ls-category-card__meta-link" href="${wordsHref}" data-app-link aria-label="View all ${category.wordCount} words in ${escapeHtml(category.name)}">${icon("whole-word", "h-4 w-4")} ${category.wordCount} words</a>
             <span>${icon("layers-3", "h-4 w-4")} ${category.lessonCount} lessons</span>
           </div>
           ${progressIndicator(category.progress, `${category.name} progress`, { compact: true })}

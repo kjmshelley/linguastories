@@ -12,6 +12,6 @@ Reset scopes:
 - **All progress:** applies the same scoped deletion to every pair discovered in local learning records. Downloads and settings remain.
 - **Application learning data:** clears every learning IndexedDB store and learning startup keys. It is an advanced action, uses a typed confirmation, is blocked by active learning, and returns to first-launch language selection.
 
-Reset operations do not affect the existing community/account backend. Export and import were deferred: no control is exposed because a versioned, bounded, fully validated interchange format is not yet implemented.
+Reset operations do not affect the authentication account or server session records. Export and import are not exposed because a versioned, bounded, fully validated interchange format is not implemented.
 
 The update policy does not claim Wi-Fi detection; browsers do not expose that reliably. Automatic downloads mean any available connection unless the user selects manual-only updates.

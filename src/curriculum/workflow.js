@@ -109,7 +109,7 @@ function buildManifest(curriculumPath = CURRICULUM_PATH, generatedAt = new Date(
   const categories = curriculum.categories.map((category) => {
     const relativePath = `zh-TW/en/v${curriculum.curriculumVersion}/categories/${category.slug}.json`;
     const categoryBytes = fs.readFileSync(path.join(GENERATED_ROOT, relativePath));
-    return { id: category.id, slug: category.slug, name: category.name, description: category.description, order: category.order, difficulty: category.difficulty, wordCount: category.wordCount, lessonCount: category.lessonIds.length, prerequisiteCategoryId: category.prerequisiteCategoryId, required: category.required !== false, path: relativePath, checksum: sha256(categoryBytes), bytes: categoryBytes.length };
+    return { id: category.id, slug: category.slug, name: category.name, description: category.description, order: category.order, difficulty: category.difficulty, wordCount: category.wordCount, lessonCount: category.lessonIds.length, prerequisiteCategoryId: category.prerequisiteCategoryId, required: category.required !== false, imageUrl: `/assets/img/categories/${category.order}.png`, path: relativePath, checksum: sha256(categoryBytes), bytes: categoryBytes.length };
   });
   const manifest = {
     schemaVersion: "1.0.0",
