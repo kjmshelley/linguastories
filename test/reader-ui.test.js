@@ -117,3 +117,13 @@ test('library preference language options use the shared sorted native names', a
   assert.match(markup,/>العربية<\/option>/);
   assert.match(markup,/>Español \(México\)<\/option>/);
 });
+
+test('home header omits the library link and search control', async () => {
+  const root={innerHTML:'',addEventListener(){}};
+  const context={document:{querySelector:()=>root,documentElement:{dataset:{}}},location:{pathname:'/',search:''},URLSearchParams,localStorage:{getItem:()=>null},fetch:async()=>({ok:true,json:async()=>({genres:[],stories:[]})})};
+  const script=fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
+  const markup=await vm.runInNewContext(`(async()=>{${script}\nreturn header();})()`,context);
+  assert.doesNotMatch(markup,/Explore stories/);
+  assert.doesNotMatch(markup,/header-search/);
+  assert.match(markup,/id="site-language"/);
+});
