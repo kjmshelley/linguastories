@@ -1,27 +1,19 @@
-const app = require("./src/app");
-const { seedIfNeeded } = require("./src/services/seed.service");
-
-const PORT = process.env.PORT || 3000;
-const IS_PRODUCTION = process.env.NODE_ENV === "production" || process.env.APP_ENV === "PROD";
-
-function validateStartupEnvironment() {
-  const required = ["DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD", "SESSION_DAYS", "PASSWORD_ITERATIONS"];
-  if (IS_PRODUCTION) required.push("FRONTEND_ORIGINS");
-  const missing = required.filter((name) => !process.env[name]);
-  if (missing.length) {
-    throw new Error(`Missing required environment variables: ${missing.join(", ")}`);
-  }
+const express = require('express');
+const path = require('path');
+const { securityHeaders, cors, rejectInvalidContentType } = require('./src/middleware/security.middleware');
+const { rejectPrototypePollution } = require('./src/middleware/validation.middleware');
+const app = express();
+const client = path.join(__dirname, 'client');
+app.disable('x-powered-by');
+app.use(securityHeaders, cors, express.json({limit:'32kb'}), rejectPrototypePollution, rejectInvalidContentType);
+app.use('/api/reader', require('./src/reader'));
+app.use('/vendor/ubuntu', express.static(path.join(__dirname, 'node_modules', '@fontsource', 'ubuntu')));
+app.use('/assets', express.static(path.join(client, 'assets')));
+app.use('/reader', express.static(path.join(client, 'reader')));
+app.get(['/', '/library', '/library/genre/:slug', '/story/:id'], (_req,res) => res.sendFile(path.join(client,'reader','index.html')));
+app.use((req,res)=>{if(req.method==='GET' && !req.path.startsWith('/api/') && req.accepts('html')) return res.status(404).sendFile(path.join(client,'reader','index.html'));res.status(404).send('Page not found');});
+if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => console.log(`LinguaStories listening on http://localhost:${port}`));
 }
-
-Promise.resolve()
-  .then(validateStartupEnvironment)
-  .then(seedIfNeeded)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`LinguaStories listening on http://localhost:${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error("Unable to start LinguaStories:", error);
-    process.exit(1);
-  });
+module.exports = app;

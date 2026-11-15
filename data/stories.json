@@ -1,0 +1,3836 @@
+{
+  "genres": [
+    "Everyday Life",
+    "Friendship",
+    "Food & Cafés",
+    "Animals",
+    "Adventure",
+    "Mystery",
+    "Travel",
+    "Family",
+    "Nature",
+    "School & Work"
+  ],
+  "stories": [
+    {
+      "id": "01-01",
+      "title": "A Warm Morning",
+      "genre": "Everyday Life",
+      "description": "Mia wakes up early.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia wakes up early. Sunlight is on her bed. She can hear birds outside.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭很早就醒來了。陽光照在她的床上。她聽見外面的鳥叫聲。",
+              "romanization": "Mǐyà hěn zǎo jiù xǐnglái le. Yángguāng zhào zài tā de chuáng shàng. Tā tīngjiàn wàimiàn de niǎojiàoshēng."
+            },
+            "ar": {
+              "text": "تستيقظ ميا مبكرًا. يضيء ضوء الشمس سريرها. تسمع أصوات الطيور في الخارج."
+            },
+            "zh-Hans": {
+              "text": "米娅很早就醒来了。阳光照在她的床上。她听见外面的鸟叫声。"
+            },
+            "es-MX": {
+              "text": "Mia se despierta temprano. La luz del sol ilumina su cama. Puede oír los pájaros afuera."
+            },
+            "es-ES": {
+              "text": "Mia se despierta temprano. La luz del sol ilumina su cama. Puede oír los pájaros afuera."
+            },
+            "ja": {
+              "text": "ミアは早く目を覚まします。ベッドに日が差しています。外から鳥の声が聞こえます。"
+            },
+            "vi": {
+              "text": "Mia thức dậy sớm. Ánh nắng chiếu trên giường của cô. Cô nghe thấy tiếng chim bên ngoài."
+            },
+            "th": {
+              "text": "มีอาตื่นแต่เช้า แสงแดดส่องบนเตียงของเธอ เธอได้ยินเสียงนกข้างนอก"
+            },
+            "id": {
+              "text": "Mia bangun pagi. Sinar matahari menyinari tempat tidurnya. Dia mendengar suara burung di luar."
+            },
+            "fr": {
+              "text": "Mia se réveille tôt. Le soleil éclaire son lit. Elle entend les oiseaux dehors."
+            },
+            "de": {
+              "text": "Mia wacht früh auf. Sonnenlicht fällt auf ihr Bett. Sie hört draußen die Vögel."
+            },
+            "it": {
+              "text": "Mia si sveglia presto. La luce del sole illumina il suo letto. Sente gli uccelli fuori."
+            },
+            "nl": {
+              "text": "Mia wordt vroeg wakker. Het zonlicht valt op haar bed. Ze hoort buiten de vogels."
+            },
+            "ko": {
+              "text": "미아는 일찍 잠에서 깹니다. 햇빛이 침대 위를 비춥니다. 밖에서 새소리가 들립니다."
+            },
+            "ru": {
+              "text": "Мия просыпается рано. Солнечный свет падает на её кровать. Снаружи слышно пение птиц."
+            },
+            "tr": {
+              "text": "Mia erken uyanır. Güneş ışığı yatağına vurur. Dışarıdaki kuşların sesini duyar."
+            },
+            "my": {
+              "text": "မီယာ စောစောနိုးလာသည်။ သူမ၏ အိပ်ရာပေါ်သို့ နေရောင်ခြည် ကျနေသည်။ အပြင်ဘက်မှ ငှက်သံများကို သူမ ကြားရသည်။"
+            },
+            "pt": {
+              "text": "Mia acorda cedo. A luz do sol ilumina sua cama. Ela ouve os pássaros lá fora."
+            }
+          }
+        },
+        {
+          "target": "Mia goes to the kitchen. Her father is making tea. “Good morning,” he says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭走進廚房。爸爸正在泡茶。「早安。」他說。",
+              "romanization": "Mǐyà zǒu jìn chúfáng. Bàba zhèngzài pào chá. “Zǎo ān.” tā shuō."
+            },
+            "ar": {
+              "text": "تذهب ميا إلى المطبخ. يُعِدّ والدها الشاي. يقول: «صباح الخير»."
+            },
+            "zh-Hans": {
+              "text": "米娅走进厨房。爸爸正在泡茶。“早安。”他说。"
+            },
+            "es-MX": {
+              "text": "Mia va a la cocina. Su papá está preparando té. «Buenos días», dice él."
+            },
+            "es-ES": {
+              "text": "Mia va a la cocina. Su papá está preparando té. «Buenos días», dice él."
+            },
+            "ja": {
+              "text": "ミアは台所へ行きます。お父さんはお茶を入れています。「おはよう」とお父さんが言います。"
+            },
+            "vi": {
+              "text": "Mia đi vào bếp. Bố cô đang pha trà. “Chào buổi sáng,” bố nói."
+            },
+            "th": {
+              "text": "มีอาเดินไปที่ครัว พ่อของเธอกำลังชงชา “สวัสดีตอนเช้า” พ่อพูด"
+            },
+            "id": {
+              "text": "Mia pergi ke dapur. Ayahnya sedang membuat teh. “Selamat pagi,” kata ayahnya."
+            },
+            "fr": {
+              "text": "Mia va dans la cuisine. Son père prépare du thé. « Bonjour », dit-il."
+            },
+            "de": {
+              "text": "Mia geht in die Küche. Ihr Vater macht Tee. „Guten Morgen“, sagt er."
+            },
+            "it": {
+              "text": "Mia va in cucina. Suo padre sta preparando il tè. «Buongiorno», dice lui."
+            },
+            "nl": {
+              "text": "Mia gaat naar de keuken. Haar vader zet thee. ‘Goedemorgen,’ zegt hij."
+            },
+            "ko": {
+              "text": "미아는 부엌으로 갑니다. 아빠가 차를 끓이고 있습니다. “좋은 아침이야.” 아빠가 말합니다."
+            },
+            "ru": {
+              "text": "Мия идёт на кухню. Её папа заваривает чай. «Доброе утро», — говорит он."
+            },
+            "tr": {
+              "text": "Mia mutfağa gider. Babası çay hazırlıyordur. “Günaydın,” der babası."
+            },
+            "my": {
+              "text": "မီယာ မီးဖိုချောင်သို့ သွားသည်။ သူမ၏ဖေဖေ လက်ဖက်ရည်ဖျော်နေသည်။ “မင်္ဂလာနံနက်ခင်းပါ” ဟု ဖေဖေက ပြောသည်။"
+            },
+            "pt": {
+              "text": "Mia vai até a cozinha. Seu pai está preparando chá. “Bom dia”, diz ele."
+            }
+          }
+        },
+        {
+          "target": "They sit by the window and eat bread. There is no need to hurry today. Mia smiles. It is a warm, quiet morning.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們坐在窗邊吃麵包。今天不用著急。米婭笑了。這是一個溫暖、安靜的早晨。",
+              "romanization": "Tāmen zuò zài chuāngbiān chī miànbāo. Jīntiān búyòng zháojí. Mǐyà xiào le. Zhè shì yí ge wēnnuǎn, ānjìng de zǎochén."
+            },
+            "ar": {
+              "text": "يجلسان بجانب النافذة ويأكلان الخبز. لا حاجة إلى الاستعجال اليوم. تبتسم ميا. إنه صباح دافئ وهادئ."
+            },
+            "zh-Hans": {
+              "text": "他们坐在窗边吃面包。今天不用着急。米娅笑了。这是一个温暖、安静的早晨。"
+            },
+            "es-MX": {
+              "text": "Se sientan junto a la ventana y comen pan. Hoy no hay necesidad de apurarse. Mia sonríe. Es una mañana cálida y tranquila."
+            },
+            "es-ES": {
+              "text": "Se sientan junto a la ventana y comen pan. Hoy no hay necesidad de apurarse. Mia sonríe. Es una mañana cálida y tranquila."
+            },
+            "ja": {
+              "text": "二人は窓のそばに座ってパンを食べます。今日は急ぐ必要がありません。ミアはほほえみます。暖かくて静かな朝です。"
+            },
+            "vi": {
+              "text": "Hai bố con ngồi bên cửa sổ và ăn bánh mì. Hôm nay không cần phải vội. Mia mỉm cười. Đó là một buổi sáng ấm áp và yên bình."
+            },
+            "th": {
+              "text": "ทั้งสองนั่งกินขนมปังอยู่ข้างหน้าต่าง วันนี้ไม่จำเป็นต้องรีบร้อน มีอายิ้ม เป็นเช้าที่อบอุ่นและเงียบสงบ"
+            },
+            "id": {
+              "text": "Mereka duduk di dekat jendela dan makan roti. Hari ini mereka tidak perlu terburu-buru. Mia tersenyum. Ini pagi yang hangat dan tenang."
+            },
+            "fr": {
+              "text": "Ils s’assoient près de la fenêtre et mangent du pain. Aujourd’hui, il n’y a pas besoin de se presser. Mia sourit. C’est une matinée douce et tranquille."
+            },
+            "de": {
+              "text": "Sie sitzen am Fenster und essen Brot. Heute müssen sie sich nicht beeilen. Mia lächelt. Es ist ein warmer, ruhiger Morgen."
+            },
+            "it": {
+              "text": "Si siedono vicino alla finestra e mangiano il pane. Oggi non c’è bisogno di avere fretta. Mia sorride. È una mattina calda e tranquilla."
+            },
+            "nl": {
+              "text": "Ze zitten bij het raam en eten brood. Vandaag hoeven ze zich niet te haasten. Mia glimlacht. Het is een warme, rustige ochtend."
+            },
+            "ko": {
+              "text": "두 사람은 창가에 앉아 빵을 먹습니다. 오늘은 서두를 필요가 없습니다. 미아가 미소를 짓습니다. 따뜻하고 조용한 아침입니다."
+            },
+            "ru": {
+              "text": "Они сидят у окна и едят хлеб. Сегодня не нужно спешить. Мия улыбается. Это тёплое, тихое утро."
+            },
+            "tr": {
+              "text": "Pencerenin yanında oturup ekmek yerler. Bugün acele etmelerine gerek yoktur. Mia gülümser. Sıcak ve sakin bir sabahtır."
+            },
+            "my": {
+              "text": "သူတို့ ပြတင်းပေါက်နားတွင် ထိုင်ပြီး ပေါင်မုန့်စားကြသည်။ ဒီနေ့ အလျင်လိုစရာ မလိုပါ။ မီယာ ပြုံးလိုက်သည်။ နွေးထွေးပြီး တိတ်ဆိတ်သော နံနက်ခင်းတစ်ခု ဖြစ်သည်။"
+            },
+            "pt": {
+              "text": "Eles se sentam perto da janela e comem pão. Hoje não há necessidade de ter pressa. Mia sorri. É uma manhã quente e tranquila."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant",
+        "ar",
+        "zh-Hans",
+        "es-MX",
+        "es-ES",
+        "ja",
+        "vi",
+        "th",
+        "id",
+        "fr",
+        "de",
+        "it",
+        "nl",
+        "ko",
+        "ru",
+        "tr",
+        "my",
+        "pt"
+      ]
+    },
+    {
+      "id": "01-02",
+      "title": "A Quiet Evening",
+      "genre": "Everyday Life",
+      "description": "Sam comes home after a long day.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam comes home after a long day. Rain taps on the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆忙了一天後回到家。雨滴輕敲著窗戶。",
+              "romanization": "Shānmǔ máng le yì tiān hòu huídào jiā. Yǔdī qīng qiāozhe chuānghu."
+            }
+          }
+        },
+        {
+          "target": "He makes hot tea and finds his book. His cat sits next to him.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他泡了熱茶，拿出他的書。他的貓坐在他旁邊。",
+              "romanization": "Tā pào le rè chá, ná chū tā de shū. Tā de māo zuò zài tā pángbiān."
+            }
+          }
+        },
+        {
+          "target": "Sam reads one page, then two. The house is quiet, and he feels good.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆讀了一頁，又讀了一頁。屋子很安靜，他覺得很舒服。",
+              "romanization": "Shānmǔ dú le yí yè, yòu dú le yí yè. Wūzi hěn ānjìng, tā juéde hěn shūfu."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-03",
+      "title": "A Rainy Day",
+      "genre": "Everyday Life",
+      "description": "Ben wants to play outside, but it is raining.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben wants to play outside, but it is raining. He looks out of the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班想去外面玩，但正在下雨。他望向窗外。",
+              "romanization": "Bān xiǎng qù wàimiàn wán, dàn zhèngzài xiàyǔ. Tā wàng xiàng chuāng wài."
+            }
+          }
+        },
+        {
+          "target": "Mom gives him paper and colors. “Let’s draw the rain,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "媽媽給他紙和彩筆。「我們來畫雨吧。」她說。",
+              "romanization": "Māma gěi tā zhǐ hé cǎibǐ. “Wǒmen lái huà yǔ ba.” tā shuō."
+            }
+          }
+        },
+        {
+          "target": "Ben draws a blue sky and a big yellow sun, too. He puts the picture on the wall.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班還畫了藍天和一個大大的黃色太陽。他把畫貼在牆上。",
+              "romanization": "Bān hái huà le lán tiān hé yí ge dàdà de huángsè tàiyáng. Tā bǎ huà tiē zài qiáng shàng."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-04",
+      "title": "A Day at Home",
+      "genre": "Everyday Life",
+      "description": "Anna stays home today.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna stays home today. Her brother is at school, and the house is quiet.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜今天待在家。弟弟在學校，屋子很安靜。",
+              "romanization": "ān nà jīn tiān dài zài jiā。 dì di zài xué xiào， wū zi hěn ān jìng。"
+            }
+          }
+        },
+        {
+          "target": "She cleans her room and finds an old photo under her bed. In it, she and her brother are at the sea.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她打掃房間，在床下找到一張舊照片。照片裡，她和弟弟在海邊。",
+              "romanization": "tā dǎ sǎo fáng jiān， zài chuáng xià zhǎo dào yī zhāng jiù zhào piān。 zhào piān lǐ， tā hé dì di zài hǎi biān。"
+            }
+          }
+        },
+        {
+          "target": "When he comes home, she shows him the photo. They laugh and remember that day.",
+          "translations": {
+            "zh-Hant": {
+              "text": "弟弟回家後，她把照片給他看。他們笑著想起那一天。",
+              "romanization": "dì di huí jiā hòu， tā bǎ zhào piān gěi tā kàn。 tā men xiào zhù xiǎng qǐ nà yī tiān。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-05",
+      "title": "A New Week",
+      "genre": "Everyday Life",
+      "description": "It is Monday morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "It is Monday morning. Mia looks at the week on her calendar.",
+          "translations": {
+            "zh-Hant": {
+              "text": "星期一早上，米婭看著日曆上這一週的安排。",
+              "romanization": "xīng qī yī zǎo shàng， mǐ yà kàn zhù rì lì shàng zhè yī zhōu de ān pái。"
+            }
+          }
+        },
+        {
+          "target": "She has school, a visit with Grandma, and a day at the park. She draws a star on Saturday.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她要上學、去看奶奶，還要去公園玩一天。她在星期六畫了一顆星。",
+              "romanization": "tā yào shàng xué、 qù kàn nǎi nǎi， hái yào qù gōng yuán wán yī tiān。 tā zài xīng qī liù huà le yī kē xīng。"
+            }
+          }
+        },
+        {
+          "target": "Mia puts on her shoes and takes her bag. A new week is here.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭穿上鞋，拿起書包。新的一週開始了。",
+              "romanization": "mǐ yà chuān shàng xié， ná qǐ shū bāo。 xīn de yī zhōu kāi shǐ le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-06",
+      "title": "A Slow Sunday",
+      "genre": "Everyday Life",
+      "description": "On Sunday, Sam wakes up late.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "On Sunday, Sam wakes up late. He makes breakfast with his sister. They eat slowly and listen to music.",
+          "translations": {
+            "zh-Hant": {
+              "text": "星期天，山姆很晚才起床。他和姊姊一起做早餐。他們一邊慢慢吃，一邊聽音樂。",
+              "romanization": "xīng qī tiān， shān mǔ hěn wǎn cái qǐ chuáng。 tā hé zǐ zǐ yì qǐ zuò zǎo cān。 tā men yī biān màn màn chī， yī biān tīng yīn lè。"
+            }
+          }
+        },
+        {
+          "target": "After breakfast, they wash the dishes together. There is time to do nothing today.",
+          "translations": {
+            "zh-Hant": {
+              "text": "早餐後，他們一起洗碗。今天有時間什麼都不做。",
+              "romanization": "zǎo cān hòu， tā men yì qǐ xǐ wǎn。 jīn tiān yǒu shí jiān shén me dōu bù zuò。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-07",
+      "title": "A Busy Monday",
+      "genre": "Everyday Life",
+      "description": "Mia is late for school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia is late for school. She puts on her shoes and runs to the bus. Her friend saves a seat for her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭上學快遲到了。她穿上鞋，跑去搭公車。朋友幫她留了一個座位。",
+              "romanization": "mǐ yà shàng xué kuài chí dào le。 tā chuān shàng xié， pǎo qù dā gōng chē。 péng yǒu bāng tā liú le yī gè zuò wèi。"
+            }
+          }
+        },
+        {
+          "target": "Mia sits down and takes a deep breath. “I made it,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭坐下來，深深吸了一口氣。「我趕上了。」她說。",
+              "romanization": "mǐ yà zuò xià lái， shēn shēn xī le yī kǒu qì。「wǒ gǎn shàng le。」 tā shuō。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-08",
+      "title": "A Bright Afternoon",
+      "genre": "Everyday Life",
+      "description": "Anna sits outside with a book.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna sits outside with a book. The sun is bright, and a bird sings in the tree. She reads until it is time for dinner.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜坐在外面看書。陽光明亮，一隻鳥在樹上唱歌。她一直讀到晚餐時間。",
+              "romanization": "ān nà zuò zài wài miàn kàn shū。 yáng guāng míng liàng， yī zhī niǎo zài shù shàng chàng gē。 tā yì zhí dú dào wǎn cān shí jiān。"
+            }
+          }
+        },
+        {
+          "target": "Her favorite part is about a little dog. She tells her family about it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她最喜歡的部分是關於一隻小狗。她把這段故事告訴家人。",
+              "romanization": "tā zuì xǐ huān de bù fèn shì guān yú yī zhī xiǎo gǒu。 tā bǎ zhè duàn gù shì gào sù jiā rén。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-09",
+      "title": "A Cool Day",
+      "genre": "Everyday Life",
+      "description": "The air is cool this morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "The air is cool this morning. Ben puts on a jacket before he goes out. At the park, he finds red leaves on the ground.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天早上天氣涼涼的。班出門前穿上外套。他在公園裡發現地上有紅葉。",
+              "romanization": "jīn tiān zǎo shàng tiān qì liáng liáng de。 bān chū mén qián chuān shàng wài tào。 tā zài gōng yuán lǐ fā xiàn dì shàng yǒu hóng yè。"
+            }
+          }
+        },
+        {
+          "target": "Ben picks one leaf to show his dad. Its color is like an apple.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班撿起一片葉子給爸爸看。它的顏色像蘋果一樣。",
+              "romanization": "bān jiǎn qǐ yī piàn yè zi gěi bà bà kàn。 tā de yán sè xiàng píng guǒ yī yàng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "01-10",
+      "title": "A Good Day",
+      "genre": "Everyday Life",
+      "description": "Lee helps his mom make breakfast.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee helps his mom make breakfast. Later, he plays with his friends. At night, he tells Dad about his good day.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李幫媽媽做早餐。後來，他和朋友玩。晚上，他告訴爸爸今天過得很好。",
+              "romanization": "xiǎo lǐ bāng mā mā zuò zǎo cān。 hòu lái， tā hé péng yǒu wán。 wǎn shàng， tā gào sù bà bà jīn tiān guò dé hěn hǎo。"
+            }
+          }
+        },
+        {
+          "target": "Dad listens and smiles. “I’m glad you had fun,” he says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸聽著笑了。「你玩得開心，我很高興。」他說。",
+              "romanization": "bà bà tīng zhù xiào le。「nǐ wán dé kāi xīn， wǒ hěn gāo xìng。」 tā shuō。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-01",
+      "title": "A New Friend",
+      "genre": "Friendship",
+      "description": "A new girl sits next to Sam in class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A new girl sits next to Sam in class. Her name is May. She has a blue bag and a red pen.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班上有個新來的女孩坐在山姆旁邊。她叫小美。她有一個藍色的書包和一支紅筆。",
+              "romanization": "Bān shàng yǒu ge xīn lái de nǚhái zuò zài Shānmǔ pángbiān. Tā jiào Xiǎoměi. Tā yǒu yí ge lánsè de shūbāo hé yì zhī hóng bǐ."
+            }
+          }
+        },
+        {
+          "target": "At lunch, May sits alone. Sam takes his food and walks over. “Can I sit here?” he asks.",
+          "translations": {
+            "zh-Hant": {
+              "text": "午餐時，小美一個人坐著。山姆拿著食物走過去。「我可以坐這裡嗎？」他問。",
+              "romanization": "Wǔcān shí, Xiǎoměi yí ge rén zuòzhe. Shānmǔ názhe shíwù zǒu guòqù. “Wǒ kěyǐ zuò zhèlǐ ma?” tā wèn."
+            }
+          }
+        },
+        {
+          "target": "May smiles. They talk about their cats. After lunch, they walk back to class together.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美笑了。他們聊起自己的貓。午餐後，他們一起走回教室。",
+              "romanization": "Xiǎoměi xiào le. Tāmen liáo qǐ zìjǐ de māo. Wǔcān hòu, tāmen yìqǐ zǒu huí jiàoshì."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-02",
+      "title": "A Note for Sam",
+      "genre": "Friendship",
+      "description": "Mia sees that Sam is sad.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia sees that Sam is sad. His little dog is sick.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭發現山姆很難過。他的小狗生病了。",
+              "romanization": "Mǐyà fāxiàn Shānmǔ hěn nánguò. Tā de xiǎo gǒu shēngbìng le."
+            }
+          }
+        },
+        {
+          "target": "At home, she makes a card. She draws a dog and writes, “I hope you feel better.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "回家後，她做了一張卡片。她畫了一隻狗，寫著：「希望你早點好起來。」",
+              "romanization": "Huí jiā hòu, tā zuò le yì zhāng kǎpiàn. Tā huà le yì zhī gǒu, xiězhe: “Xīwàng nǐ zǎodiǎn hǎo qǐlái.”"
+            }
+          }
+        },
+        {
+          "target": "The next day she gives the card to Sam. He smiles. “Thank you, Mia.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "第二天，她把卡片給山姆。他笑了。「謝謝你，米婭。」",
+              "romanization": "Dì èr tiān, tā bǎ kǎpiàn gěi Shānmǔ. Tā xiào le. “Xièxie nǐ, Mǐyà.”"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-03",
+      "title": "The Long Walk",
+      "genre": "Friendship",
+      "description": "Anna and May walk home together.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna and May walk home together. Today, they take a new road.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜和小美一起走回家。今天她們走了一條新路。",
+              "romanization": "Ānnà hé Xiǎoměi yìqǐ zǒu huí jiā. Jīntiān tāmen zǒu le yì tiáo xīn lù."
+            }
+          }
+        },
+        {
+          "target": "They see a small park and a pond. Three ducks swim in the water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她們看到一座小公園和一個池塘。三隻鴨子在水裡游泳。",
+              "romanization": "Tāmen kàndào yí zuò xiǎo gōngyuán hé yí ge chítáng. Sān zhī yāzi zài shuǐ lǐ yóuyǒng."
+            }
+          }
+        },
+        {
+          "target": "The walk is long, but they do not mind. They have a lot to talk about.",
+          "translations": {
+            "zh-Hant": {
+              "text": "路很長，但她們不介意。她們有很多話要聊。",
+              "romanization": "Lù hěn cháng, dàn tāmen bú jièyì. Tāmen yǒu hěn duō huà yào liáo."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-04",
+      "title": "A Happy Hello",
+      "genre": "Friendship",
+      "description": "Ben sees his neighbor every morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben sees his neighbor every morning. She always says hello to him.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班每天早上都會見到鄰居。她總是向他問好。",
+              "romanization": "bān měi tiān zǎo shàng dōu huì jiàn dào lín jū。 tā zǒng shì xiàng tā wèn hǎo。"
+            }
+          }
+        },
+        {
+          "target": "One morning, she is carrying many bags. Ben opens the door for her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "一天早上，她拿著很多袋子。班幫她開門。",
+              "romanization": "yī tiān zǎo shàng， tā ná zhù hěn duō dài zi。 bān bāng tā kāi mén。"
+            }
+          }
+        },
+        {
+          "target": "“Thank you!” she says. Ben feels happy as he walks to school.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「謝謝你！」她說。班走去學校時覺得很開心。",
+              "romanization": "「xiè xiè nǐ！」 tā shuō。 bān zǒu qù xué xiào shí jué dé hěn kāi xīn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-05",
+      "title": "The Red Card",
+      "genre": "Friendship",
+      "description": "May makes a red card for her friend.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May makes a red card for her friend. She draws two cats on it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美為朋友做了一張紅色卡片。她在上面畫了兩隻貓。",
+              "romanization": "xiǎo měi wèi péng yǒu zuò le yī zhāng hóng sè kǎ piàn。 tā zài shàng miàn huà le liǎng zhī māo。"
+            }
+          }
+        },
+        {
+          "target": "At school, she puts the card on Anna’s desk. Anna opens it and laughs.",
+          "translations": {
+            "zh-Hant": {
+              "text": "到了學校，她把卡片放在安娜的桌上。安娜打開後笑了。",
+              "romanization": "dào le xué xiào， tā bǎ kǎ piàn fàng zài ān nà de zhuō shàng。 ān nà dǎ kāi hòu xiào le。"
+            }
+          }
+        },
+        {
+          "target": "“They look like our cats!” she says. May gives her a hug.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「牠們看起來像我們的貓！」她說。小美給了她一個擁抱。",
+              "romanization": "「tā men kàn qǐ lái xiàng wǒ men de māo！」 tā shuō。 xiǎo měi gěi le tā yī gè yōng bào。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-06",
+      "title": "A Good Idea",
+      "genre": "Friendship",
+      "description": "May and Anna want to play, but it is raining.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May and Anna want to play, but it is raining. May has an idea: they can make a story together. Anna writes while May draws.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美和安娜想玩，但外面正在下雨。小美有個主意：她們可以一起編故事。安娜寫字，小美畫畫。",
+              "romanization": "xiǎo měi hé ān nà xiǎng wán， dàn wài miàn zhèng zài xià yǔ。 xiǎo měi yǒu gè zhǔ yì： tā men kě yǐ yì qǐ biān gù shì。 ān nà xiě zì， xiǎo měi huà huà。"
+            }
+          }
+        },
+        {
+          "target": "Their story is about a cat on the moon. They laugh when they read it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她們的故事是一隻貓在月亮上。讀故事時，她們笑了。",
+              "romanization": "tā men de gù shì shì yī zhī māo zài yuè liàng shàng。 dú gù shì shí， tā men xiào le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-07",
+      "title": "The Blue Gift",
+      "genre": "Friendship",
+      "description": "Tom has a blue box for his friend Sam.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom has a blue box for his friend Sam. Inside is a little toy car. Sam opens it and says, “It is just like yours!”",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆有一個藍色盒子要送給朋友山姆。裡面是一輛小玩具車。山姆打開後說：「它跟你的一模一樣！」",
+              "romanization": "tāng mǔ yǒu yī gè lán sè hé zi yào sòng gěi péng yǒu shān mǔ。 lǐ miàn shì yī liàng xiǎo wán jù chē。 shān mǔ dǎ kāi hòu shuō：「tā gēn nǐ de yī mó yī yàng！」"
+            }
+          }
+        },
+        {
+          "target": "The boys put their cars on the floor. They play together after lunch.",
+          "translations": {
+            "zh-Hant": {
+              "text": "男孩們把車放在地板上。午餐後他們一起玩。",
+              "romanization": "nán hái men bǎ chē fàng zài dì bǎn shàng。 wǔ cān hòu tā men yì qǐ wán。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-08",
+      "title": "A Small Surprise",
+      "genre": "Friendship",
+      "description": "Lily comes home and sees flowers on the table.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily comes home and sees flowers on the table. Her friend Amy put them there for her. Lily calls Amy to say thank you.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉回家後看到桌上有花。是朋友艾米為她放的。莉莉打電話謝謝艾米。",
+              "romanization": "lì lì huí jiā hòu kàn dào zhuō shàng yǒu huā。 shì péng yǒu ài mǐ wèi tā fàng de。 lì lì dǎ diàn huà xiè xiè ài mǐ。"
+            }
+          }
+        },
+        {
+          "target": "“I saw them and thought of you,” Amy says. Lily puts the flowers by the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「我看到花就想起你。」艾米說。莉莉把花放在窗邊。",
+              "romanization": "「wǒ kàn dào huā jiù xiǎng qǐ nǐ。」 ài mǐ shuō。 lì lì bǎ huā fàng zài chuāng biān。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-09",
+      "title": "A Visit for May",
+      "genre": "Friendship",
+      "description": "May is at home with a cold.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May is at home with a cold. Her friend Lee comes to see her and brings a book. They read together for a little while.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美感冒待在家裡。朋友小李帶了一本書來看她。他們一起讀了一會兒。",
+              "romanization": "xiǎo měi gǎn mào dài zài jiā lǐ。 péng yǒu xiǎo lǐ dài le yī běn shū lái kàn tā。 tā men yì qǐ dú le yī huì ér。"
+            }
+          }
+        },
+        {
+          "target": "Lee leaves the book with May. She can finish it when she feels better.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李把書留給小美。等她舒服一點，就可以把書讀完。",
+              "romanization": "xiǎo lǐ bǎ shū liú gěi xiǎo měi。 děng tā shū fú yī diǎn， jiù kě yǐ bǎ shū dú wán。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "02-10",
+      "title": "Two Good Friends",
+      "genre": "Friendship",
+      "description": "Ben and Tom meet at the park every week.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben and Tom meet at the park every week. Today Tom brings a new ball. They play until the sun goes down.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班和湯姆每週都在公園見面。今天湯姆帶了一顆新球。他們一直玩到太陽下山。",
+              "romanization": "bān hé tāng mǔ měi zhōu dōu zài gōng yuán jiàn miàn。 jīn tiān tāng mǔ dài le yī kē xīn qiú。 tā men yì zhí wán dào tài yáng xià shān。"
+            }
+          }
+        },
+        {
+          "target": "They sit down for some water. “Same time next week?” Ben asks.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們坐下來喝水。「下週同一時間見？」班問。",
+              "romanization": "tā men zuò xià lái hē shuǐ。「xià zhōu tóng yī shí jiān jiàn？」 bān wèn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-01",
+      "title": "The Apple Cake",
+      "genre": "Food & Cafés",
+      "description": "Ben has three apples.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben has three apples. He wants to make a cake for his mom. But he does not know how.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班有三顆蘋果。他想為媽媽做一個蛋糕。但他不知道怎麼做。",
+              "romanization": "Bān yǒu sān kē píngguǒ. Tā xiǎng wèi māma zuò yí ge dàngāo. Dàn tā bù zhīdào zěnme zuò."
+            }
+          }
+        },
+        {
+          "target": "His sister Anna finds a recipe. Ben cuts the apples, and Anna makes the cake. Soon, the kitchen smells sweet.",
+          "translations": {
+            "zh-Hant": {
+              "text": "姊姊安娜找到一份食譜。班切蘋果，安娜做蛋糕。很快，廚房裡飄出甜甜的香味。",
+              "romanization": "Jiějie Ānnà zhǎodào yí fèn shípǔ. Bān qiē píngguǒ, Ānnà zuò dàngāo. Hěn kuài, chúfáng lǐ piāo chū tiántián de xiāngwèi."
+            }
+          }
+        },
+        {
+          "target": "Mom comes home. “Is that for me?” she asks. They all sit down and have a piece.",
+          "translations": {
+            "zh-Hant": {
+              "text": "媽媽回家了。「那是給我的嗎？」她問。他們一起坐下來，每人吃了一塊。",
+              "romanization": "Māma huí jiā le. “Nà shì gěi wǒ de ma?” tā wèn. Tāmen yìqǐ zuò xiàlái, měi rén chī le yí kuài."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-02",
+      "title": "A Cup of Tea",
+      "genre": "Food & Cafés",
+      "description": "It is cold outside.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "It is cold outside. Anna walks into a small café.",
+          "translations": {
+            "zh-Hant": {
+              "text": "外面很冷。安娜走進一家小咖啡館。",
+              "romanization": "Wàimiàn hěn lěng. Ānnà zǒu jìn yì jiā xiǎo kāfēiguǎn."
+            }
+          }
+        },
+        {
+          "target": "She asks for a cup of tea. The woman at the café brings it to her with a smile.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她點了一杯茶。咖啡館的女士微笑著把茶端給她。",
+              "romanization": "Tā diǎn le yì bēi chá. Kāfēiguǎn de nǚshì wēixiàozhe bǎ chá duān gěi tā."
+            }
+          }
+        },
+        {
+          "target": "Anna holds the warm cup in her hands. She watches the rain and takes her time.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜雙手捧著溫暖的杯子。她看著雨，慢慢享受時光。",
+              "romanization": "Ānnà shuāngshǒu pěngzhe wēnnuǎn de bēizi. Tā kànzhe yǔ, mànmàn xiǎngshòu shíguāng."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-03",
+      "title": "The Sweet Pear",
+      "genre": "Food & Cafés",
+      "description": "Lee has a pear in his lunch bag.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee has a pear in his lunch bag. His friend Tom has an apple.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李的午餐袋裡有一顆梨。他的朋友湯姆有一顆蘋果。",
+              "romanization": "Xiǎo Lǐ de wǔcān dài lǐ yǒu yì kē lí. Tā de péngyou Tāngmǔ yǒu yì kē píngguǒ."
+            }
+          }
+        },
+        {
+          "target": "“Let’s share,” Tom says. They cut the fruit into small pieces.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「我們一起分享吧。」湯姆說。他們把水果切成小塊。",
+              "romanization": "“Wǒmen yìqǐ fēnxiǎng ba.” Tāngmǔ shuō. Tāmen bǎ shuǐguǒ qiē chéng xiǎo kuài."
+            }
+          }
+        },
+        {
+          "target": "The pear is sweet. The apple is good, too. They eat everything.",
+          "translations": {
+            "zh-Hant": {
+              "text": "梨很甜。蘋果也很好吃。他們全都吃完了。",
+              "romanization": "Lí hěn tián. Píngguǒ yě hěn hǎochī. Tāmen quándōu chī wán le."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-04",
+      "title": "A Bowl of Rice",
+      "genre": "Food & Cafés",
+      "description": "May is hungry after school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May is hungry after school. Dad is making rice for dinner.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美放學後肚子餓了。爸爸正在煮飯準備晚餐。",
+              "romanization": "xiǎo měi fàng xué hòu dǔ zi è le。 bà bà zhèng zài zhǔ fàn zhǔn bèi wǎn cān。"
+            }
+          }
+        },
+        {
+          "target": "She helps him wash some vegetables. Dad puts them in a pan.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她幫爸爸洗一些菜。爸爸把菜放進鍋裡。",
+              "romanization": "tā bāng bà bà xǐ yī xiē cài。 bà bà bǎ cài fàng jìn guō lǐ。"
+            }
+          }
+        },
+        {
+          "target": "They eat the rice and vegetables together. May asks for another bowl.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們一起吃飯和菜。小美又要了一碗。",
+              "romanization": "tā men yì qǐ chī fàn hé cài。 xiǎo měi yòu yào le yī wǎn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-05",
+      "title": "The Little Café",
+      "genre": "Food & Cafés",
+      "description": "There is a little café near Sam’s home.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a little café near Sam’s home. He goes there with his dad.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆家附近有一家小咖啡館。他和爸爸一起去那裡。",
+              "romanization": "shān mǔ jiā fù jìn yǒu yī jiā xiǎo kā fēi guǎn。 tā hé bà bà yì qǐ qù nà lǐ。"
+            }
+          }
+        },
+        {
+          "target": "Dad orders tea, and Sam has milk and a small cake. They sit by the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸點了茶，山姆喝牛奶、吃小蛋糕。他們坐在窗邊。",
+              "romanization": "bà bà diǎn le chá， shān mǔ hē niú nǎi、 chī xiǎo dàn gāo。 tā men zuò zài chuāng biān。"
+            }
+          }
+        },
+        {
+          "target": "Outside, people walk past with umbrellas. Inside, it is warm and dry.",
+          "translations": {
+            "zh-Hant": {
+              "text": "外面的人們撐著傘走過。店裡則溫暖又乾燥。",
+              "romanization": "wài miàn de rén men chēng zhù sǎn zǒu guò。 diàn lǐ zé wēn nuǎn yòu qián zào。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-06",
+      "title": "The Red Apple",
+      "genre": "Food & Cafés",
+      "description": "Mia sees a red apple in the kitchen.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia sees a red apple in the kitchen. Mom cuts it into pieces for them to share. Mia takes a piece to her brother, too.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭在廚房看到一顆紅蘋果。媽媽把它切成小塊，讓大家一起吃。米婭也拿了一塊給弟弟。",
+              "romanization": "mǐ yà zài chú fáng kàn dào yī kē hóng píng guǒ。 mā mā bǎ tā qiè chéng xiǎo kuài， ràng dà jiā yì qǐ chī。 mǐ yà yě ná le yī kuài gěi dì di。"
+            }
+          }
+        },
+        {
+          "target": "Her brother says thank you. They eat the apple at the table.",
+          "translations": {
+            "zh-Hant": {
+              "text": "弟弟向她道謝。他們在桌邊吃蘋果。",
+              "romanization": "dì di xiàng tā dào xiè。 tā men zài zhuō biān chī píng guǒ。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-07",
+      "title": "Bread for Two",
+      "genre": "Food & Cafés",
+      "description": "Ben goes to the shop for bread.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben goes to the shop for bread. He buys a loaf for his family and one for Grandma. Grandma invites him in for tea.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班去商店買麵包。他買了一條給家人，另一條給奶奶。奶奶邀請他進屋喝茶。",
+              "romanization": "bān qù shāng diàn mǎi miàn bāo。 tā mǎi le yī tiáo gěi jiā rén， lìng yī tiáo gěi nǎi nǎi。 nǎi nǎi yāo qǐng tā jìn wū hē chá。"
+            }
+          }
+        },
+        {
+          "target": "They eat the bread while it is still warm. Ben tells Grandma about school.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們趁麵包還熱著的時候吃。班告訴奶奶學校的事。",
+              "romanization": "tā men chèn miàn bāo hái rè zhù de shí hòu chī。 bān gào sù nǎi nǎi xué xiào de shì。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-08",
+      "title": "A Warm Soup",
+      "genre": "Food & Cafés",
+      "description": "It is cold and rainy.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "It is cold and rainy. Dad makes a pot of soup with carrots and rice. The family sits together and eats it while it is warm.",
+          "translations": {
+            "zh-Hant": {
+              "text": "天氣又冷又下雨。爸爸用紅蘿蔔和米煮了一鍋湯。家人坐在一起，趁熱喝湯。",
+              "romanization": "tiān qì yòu lěng yòu xià yǔ。 bà bà yòng hóng luó bó hé mǐ zhǔ le yī guō tāng。 jiā rén zuò zài yì qǐ， chèn rè hē tāng。"
+            }
+          }
+        },
+        {
+          "target": "Sam asks Dad how to make it. Dad says he can help next time.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆問爸爸怎麼做湯。爸爸說下次他可以幫忙。",
+              "romanization": "shān mǔ wèn bà bà zěn me zuò tāng。 bà bà shuō xià cì tā kě yǐ bāng máng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-09",
+      "title": "The Orange Juice",
+      "genre": "Food & Cafés",
+      "description": "Anna has oranges at home.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna has oranges at home. She and Mom make orange juice for breakfast. Anna pours a glass for each person.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜家裡有柳橙。她和媽媽做柳橙汁當早餐飲料。安娜為每個人倒了一杯。",
+              "romanization": "ān nà jiā lǐ yǒu liǔ chéng。 tā hé mā mā zuò liǔ chéng zhī dāng zǎo cān yǐn liào。 ān nà wèi měi gè rén dào le yī bēi。"
+            }
+          }
+        },
+        {
+          "target": "Dad takes a drink and smiles. “This is good,” he says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸喝了一口，笑了。「真好喝。」他說。",
+              "romanization": "bà bà hē le yī kǒu， xiào le。「zhēn hǎo hē。」 tā shuō。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "03-10",
+      "title": "Milk and Cookies",
+      "genre": "Food & Cafés",
+      "description": "Sam and his dad make cookies.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam and his dad make cookies. They wait by the oven and smell the sweet cookies. When the cookies are ready, they have them with milk.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆和爸爸一起做餅乾。他們在烤箱旁等著，聞到餅乾的甜香。餅乾好了以後，他們配牛奶一起吃。",
+              "romanization": "shān mǔ hé bà bà yì qǐ zuò bǐng qián。 tā men zài kǎo xiāng páng děng zhù， wén dào bǐng qián de tián xiāng。 bǐng qián hǎo le yǐ hòu， tā men pèi niú nǎi yì qǐ chī。"
+            }
+          }
+        },
+        {
+          "target": "They put a few cookies on a plate for Mom. They leave a note next to the plate.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們放了幾塊餅乾在盤子裡給媽媽，還在盤子旁留了一張紙條。",
+              "romanization": "tā men fàng le jǐ kuài bǐng qián zài pán zi lǐ gěi mā mā， hái zài pán zi páng liú le yī zhāng zhǐ tiáo。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-01",
+      "title": "The Little Dog",
+      "genre": "Animals",
+      "description": "A little dog is outside Lee’s house.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A little dog is outside Lee’s house. It is wet and cold. Lee gives it some water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "一隻小狗在小李家外面。牠又濕又冷。小李給牠一些水。",
+              "romanization": "Yì zhī xiǎo gǒu zài Xiǎo Lǐ jiā wàimiàn. Tā yòu shī yòu lěng. Xiǎo Lǐ gěi tā yìxiē shuǐ."
+            }
+          }
+        },
+        {
+          "target": "The dog has a name on its collar: Coco. There is a phone number too. Lee calls the number.",
+          "translations": {
+            "zh-Hant": {
+              "text": "狗的項圈上有名字：可可。上面還有一個電話號碼。小李打了那個號碼。",
+              "romanization": "Gǒu de xiàngquān shàng yǒu míngzi: Kěkě. Shàngmiàn hái yǒu yí ge diànhuà hàomǎ. Xiǎo Lǐ dǎ le nà ge hàomǎ."
+            }
+          }
+        },
+        {
+          "target": "Soon, a woman comes to the house. “Coco! I am so happy to see you.” Coco runs to her, and Lee smiles.",
+          "translations": {
+            "zh-Hant": {
+              "text": "不久，一位女士來到屋前。「可可！看到你我真高興。」可可跑向她，小李也笑了。",
+              "romanization": "Bù jiǔ, yí wèi nǚshì láidào wū qián. “Kěkě! Kàndào nǐ wǒ zhēn gāoxìng.” Kěkě pǎo xiàng tā, Xiǎo Lǐ yě xiào le."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-02",
+      "title": "A Cat in the Garden",
+      "genre": "Animals",
+      "description": "Sam sees a cat in the garden.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam sees a cat in the garden. It is sitting under a flower.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆看見花園裡有一隻貓。牠坐在一朵花下面。",
+              "romanization": "Shānmǔ kànjiàn huāyuán lǐ yǒu yì zhī māo. Tā zuò zài yì duǒ huā xiàmiàn."
+            }
+          }
+        },
+        {
+          "target": "“Hello,” Sam says. The cat looks at him but does not move.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「你好。」山姆說。貓看著他，卻沒有動。",
+              "romanization": "“Nǐ hǎo.” Shānmǔ shuō. Māo kànzhe tā, què méiyǒu dòng."
+            }
+          }
+        },
+        {
+          "target": "Sam sits nearby. After a while, the cat walks over and sits by his feet.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆坐在附近。過了一會兒，貓走過來，坐在他腳邊。",
+              "romanization": "Shānmǔ zuò zài fùjìn. Guò le yíhuìr, māo zǒu guòlái, zuò zài tā jiǎobiān."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-03",
+      "title": "The White Bird",
+      "genre": "Animals",
+      "description": "A white bird comes to May’s window each morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A white bird comes to May’s window each morning. May likes to watch it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "每天早上，一隻白鳥都會來到小美的窗邊。小美喜歡看牠。",
+              "romanization": "Měitiān zǎoshang, yì zhī bái niǎo dōu huì láidào Xiǎoměi de chuāngbiān. Xiǎoměi xǐhuān kàn tā."
+            }
+          }
+        },
+        {
+          "target": "One day, the bird has a little leaf in its mouth. It flies into a tree.",
+          "translations": {
+            "zh-Hant": {
+              "text": "有一天，鳥嘴裡叼著一片小葉子。牠飛進一棵樹裡。",
+              "romanization": "Yǒu yì tiān, niǎo zuǐ lǐ diāozhe yí piàn xiǎo yèzi. Tā fēi jìn yì kē shù lǐ."
+            }
+          }
+        },
+        {
+          "target": "May can see a nest in the tree. “That is your home,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美看見樹上有一個鳥巢。「那是你的家。」她說。",
+              "romanization": "Xiǎoměi kànjiàn shù shàng yǒu yí ge niǎocháo. “Nà shì nǐ de jiā.” tā shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-04",
+      "title": "A Small Rabbit",
+      "genre": "Animals",
+      "description": "Lily sees a rabbit near the garden.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily sees a rabbit near the garden. Its ears are long and its nose is pink.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉在花園附近看到一隻兔子。牠的耳朵很長，鼻子是粉紅色的。",
+              "romanization": "lì lì zài huā yuán fù jìn kàn dào yī zhī tù zi。 tā de ěr duǒ hěn zhǎng， bí zi shì fěn hóng sè de。"
+            }
+          }
+        },
+        {
+          "target": "She stays very still. The rabbit eats a leaf and looks at her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她一動也不動。兔子吃了一片葉子，然後看著她。",
+              "romanization": "tā yī dòng yě bù dòng。 tù zi chī le yī piàn yè zi， rán hòu kàn zhù tā。"
+            }
+          }
+        },
+        {
+          "target": "Then it runs into the grass. Lily hopes to see it again.",
+          "translations": {
+            "zh-Hant": {
+              "text": "接著牠跑進草叢。莉莉希望能再見到牠。",
+              "romanization": "jiē zhù tā pǎo jìn cǎo cóng。 lì lì xī wàng néng zài jiàn dào tā。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-05",
+      "title": "The Brown Horse",
+      "genre": "Animals",
+      "description": "Tom visits a farm with his class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom visits a farm with his class. He sees a brown horse by the fence.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆和班上同學去農場。他看見圍欄旁有一匹棕馬。",
+              "romanization": "tāng mǔ hé bān shàng tóng xué qù nóng chǎng。 tā kàn jiàn wéi lán páng yǒu yì pǐ zōng mǎ。"
+            }
+          }
+        },
+        {
+          "target": "The farmer gives the horse an apple. It eats the apple very quickly.",
+          "translations": {
+            "zh-Hant": {
+              "text": "農夫給馬一顆蘋果。牠很快就把蘋果吃掉了。",
+              "romanization": "nóng fū gěi mǎ yī kē píng guǒ。 tā hěn kuài jiù bǎ píng guǒ chī diào le。"
+            }
+          }
+        },
+        {
+          "target": "Tom draws the horse when he gets home. He gives the picture to his teacher.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆回家後畫了那匹馬。他把畫送給老師。",
+              "romanization": "tāng mǔ huí jiā hòu huà le nà pǐ mǎ。 tā bǎ huà sòng gěi lǎo shī。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-06",
+      "title": "A Fish Named Blue",
+      "genre": "Animals",
+      "description": "May has a little blue fish.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May has a little blue fish. Every morning, she says hello and gives it food. Today it swims quickly around its home.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美有一條藍色的小魚。每天早上，她都向牠問好並餵食。今天牠在家裡游得很快。",
+              "romanization": "xiǎo měi yǒu yī tiáo lán sè de xiǎo yú。 měi tiān zǎo shàng， tā dōu xiàng tā wèn hǎo bìng wèi shí。 jīn tiān tā zài jiā lǐ yóu dé hěn kuài。"
+            }
+          }
+        },
+        {
+          "target": "May watches it for a while. Then she has to get ready for school.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美看了牠一會兒。然後她得準備去上學了。",
+              "romanization": "xiǎo měi kàn le tā yī huì ér。 rán hòu tā dé zhǔn bèi qù shàng xué le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-07",
+      "title": "The Sleepy Cat",
+      "genre": "Animals",
+      "description": "The cat sleeps in a sunny place on the floor.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "The cat sleeps in a sunny place on the floor. Lee puts a soft blanket next to it. The cat opens one eye and goes back to sleep.",
+          "translations": {
+            "zh-Hant": {
+              "text": "貓睡在地板上有陽光的地方。小李在牠旁邊放了一條柔軟的毯子。貓睜開一隻眼睛，又繼續睡了。",
+              "romanization": "māo shuì zài dì bǎn shàng yǒu yáng guāng de dì fāng。 xiǎo lǐ zài tā páng biān fàng le yī tiáo róu ruǎn de tǎn zi。 māo zhēng kāi yī zhī yǎn jīng， yòu jì xù shuì le。"
+            }
+          }
+        },
+        {
+          "target": "Lee sits down with a book. He reads quietly beside his sleeping cat.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李拿著書坐下來。他在睡覺的貓旁邊安靜地讀書。",
+              "romanization": "xiǎo lǐ ná zhù shū zuò xià lái。 tā zài shuì jué de māo páng biān ān jìng dì dú shū。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-08",
+      "title": "A Duck at the Lake",
+      "genre": "Animals",
+      "description": "At the lake, Amy sees a duck with three little ducks.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "At the lake, Amy sees a duck with three little ducks. They swim behind their mother. Amy watches them from the path.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米在湖邊看見一隻鴨子和三隻小鴨。牠們跟在媽媽後面游泳。艾米在小路上看著牠們。",
+              "romanization": "ài mǐ zài hú biān kàn jiàn yī zhī yā zi hé sān zhī xiǎo yā。 tā men gēn zài mā mā hòu miàn yóu yǒng。 ài mǐ zài xiǎo lù shàng kàn zhù tā men。"
+            }
+          }
+        },
+        {
+          "target": "The little ducks stay close to their mother. Soon, they swim behind a tree.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小鴨緊緊跟著媽媽。不久，牠們游到樹後面去了。",
+              "romanization": "xiǎo yā jǐn jǐn gēn zhù mā mā。 bù jiǔ， tā men yóu dào shù hòu miàn qù le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-09",
+      "title": "The Happy Dog",
+      "genre": "Animals",
+      "description": "Max takes his dog to the park.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Max takes his dog to the park. He throws a ball, and the dog runs after it. The dog brings it back, ready to play again.",
+          "translations": {
+            "zh-Hant": {
+              "text": "馬克斯帶狗去公園。他丟出一顆球，狗跑去追。狗把球帶回來，準備再玩一次。",
+              "romanization": "mǎ kè sī dài gǒu qù gōng yuán。 tā diū chū yī kē qiú， gǒu pǎo qù zhuī。 gǒu bǎ qiú dài huí lái， zhǔn bèi zài wán yī cì。"
+            }
+          }
+        },
+        {
+          "target": "Max laughs and throws the ball once more. Both are tired when they go home.",
+          "translations": {
+            "zh-Hant": {
+              "text": "馬克斯笑著再丟一次球。回家時，他們都累了。",
+              "romanization": "mǎ kè sī xiào zhù zài diū yī cì qiú。 huí jiā shí， tā men dōu lèi le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "04-10",
+      "title": "A Bird by the Window",
+      "genre": "Animals",
+      "description": "A bird sits by Lily’s window every morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A bird sits by Lily’s window every morning. Today Lily draws it in her book. Before it flies away, she shows her mom.",
+          "translations": {
+            "zh-Hant": {
+              "text": "每天早上都有一隻鳥停在莉莉的窗邊。今天莉莉把牠畫在書裡。鳥飛走之前，她把牠指給媽媽看。",
+              "romanization": "měi tiān zǎo shàng dōu yǒu yī zhī niǎo tíng zài lì lì de chuāng biān。 jīn tiān lì lì bǎ tā huà zài shū lǐ。 niǎo fēi zǒu zhī qián， tā bǎ tā zhǐ gěi mā mā kàn。"
+            }
+          }
+        },
+        {
+          "target": "Mom looks out, too. “Maybe it will come back tomorrow,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "媽媽也望向窗外。「也許牠明天會再來。」她說。",
+              "romanization": "mā mā yě wàng xiàng chuāng wài。「yě xǔ tā míng tiān huì zài lái。」 tā shuō。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-01",
+      "title": "The Green Hill",
+      "genre": "Adventure",
+      "description": "Tom and his sister see a green hill near their home.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom and his sister see a green hill near their home. “Let’s walk to the top,” Tom says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆和妹妹看見家附近有一座綠色的小山。「我們走到山頂吧。」湯姆說。",
+              "romanization": "Tāngmǔ hé mèimei kànjiàn jiā fùjìn yǒu yí zuò lǜsè de xiǎo shān. “Wǒmen zǒu dào shāndǐng ba.” Tāngmǔ shuō."
+            }
+          }
+        },
+        {
+          "target": "They take water and start walking. The path is long. At a big tree, they stop to rest.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們帶著水出發了。小路很長。他們在一棵大樹旁停下來休息。",
+              "romanization": "Tāmen dàizhe shuǐ chūfā le. Xiǎo lù hěn cháng. Tāmen zài yì kē dà shù páng tíng xiàlái xiūxi."
+            }
+          }
+        },
+        {
+          "target": "At the top, they can see their town. The houses look very small. “We did it!” says his sister.",
+          "translations": {
+            "zh-Hant": {
+              "text": "到了山頂，他們看得見自己的小鎮。房子看起來很小。「我們做到了！」妹妹說。",
+              "romanization": "Dào le shāndǐng, tāmen kàn de jiàn zìjǐ de xiǎo zhèn. Fángzi kàn qǐlái hěn xiǎo. “Wǒmen zuò dào le!” mèimei shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-02",
+      "title": "The Old Bridge",
+      "genre": "Adventure",
+      "description": "Lee and May walk by a river.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee and May walk by a river. They see an old bridge.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李和小美沿著河邊走。他們看見一座老橋。",
+              "romanization": "Xiǎo Lǐ hé Xiǎoměi yánzhe hébiān zǒu. Tāmen kànjiàn yí zuò lǎo qiáo."
+            }
+          }
+        },
+        {
+          "target": "“Where does it go?” May asks. They walk across and find a little garden.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「它通往哪裡？」小美問。他們走過橋，發現一座小花園。",
+              "romanization": "“Tā tōngwǎng nǎli?” Xiǎoměi wèn. Tāmen zǒu guò qiáo, fāxiàn yí zuò xiǎo huāyuán."
+            }
+          }
+        },
+        {
+          "target": "There are red and yellow flowers. They sit there and listen to the water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "花園裡有紅花和黃花。他們坐在那裡聽水聲。",
+              "romanization": "Huāyuán lǐ yǒu hóng huā hé huáng huā. Tāmen zuò zài nàli tīng shuǐshēng."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-03",
+      "title": "A Path in the Woods",
+      "genre": "Adventure",
+      "description": "Tom and Dad find a path in the woods.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom and Dad find a path in the woods. They want to see where it goes.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆和爸爸在樹林裡發現一條小路。他們想看看它通往哪裡。",
+              "romanization": "Tāngmǔ hé bàba zài shùlín lǐ fāxiàn yì tiáo xiǎo lù. Tāmen xiǎng kànkan tā tōngwǎng nǎli."
+            }
+          }
+        },
+        {
+          "target": "They walk past tall trees. Tom hears water and points ahead.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們走過高高的樹。湯姆聽見水聲，指向前方。",
+              "romanization": "Tāmen zǒu guò gāogāo de shù. Tāngmǔ tīngjiàn shuǐshēng, zhǐ xiàng qiánfāng."
+            }
+          }
+        },
+        {
+          "target": "At the end of the path is a little stream. They sit by it and have lunch.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小路的盡頭有一條小溪。他們坐在溪邊吃午餐。",
+              "romanization": "Xiǎo lù de jìntóu yǒu yì tiáo xiǎo xī. Tāmen zuò zài xībiān chī wǔcān."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-04",
+      "title": "The Blue Lake",
+      "genre": "Adventure",
+      "description": "Sam and his family walk to a lake.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam and his family walk to a lake. They bring lunch and a big blanket.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆和家人走到一座湖邊。他們帶了午餐和一條大毯子。",
+              "romanization": "shān mǔ hé jiā rén zǒu dào yī zuò hú biān。 tā men dài le wǔ cān hé yī tiáo dà tǎn zi。"
+            }
+          }
+        },
+        {
+          "target": "The water is blue. Sam sees fish near the side of the lake.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湖水是藍色的。山姆看到湖邊有魚。",
+              "romanization": "hú shuǐ shì lán sè de。 shān mǔ kàn dào hú biān yǒu yú。"
+            }
+          }
+        },
+        {
+          "target": "They eat under a tree and watch the boats. Sam wants to come back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們在樹下吃東西，看著船隻。山姆想再來。",
+              "romanization": "tā men zài shù xià chī dōng xī， kàn zhù chuán zhī。 shān mǔ xiǎng zài lái。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-05",
+      "title": "The Long Road",
+      "genre": "Adventure",
+      "description": "Mia and Dad are walking to a hill.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia and Dad are walking to a hill. The road is longer than Mia thought.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭和爸爸正走向一座小山。路比米婭想的還要長。",
+              "romanization": "mǐ yà hé bà bà zhèng zǒu xiàng yī zuò xiǎo shān。 lù bǐ mǐ yà xiǎng de hái yào zhǎng。"
+            }
+          }
+        },
+        {
+          "target": "They stop to drink water. Dad points to the top. “We are nearly there.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們停下來喝水。爸爸指著山頂說：「我們快到了。」",
+              "romanization": "tā men tíng xià lái hē shuǐ。 bà bà zhǐ zhù shān dǐng shuō：「wǒ men kuài dào le。」"
+            }
+          }
+        },
+        {
+          "target": "At the top, Mia sees fields and houses. The long walk was worth it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "到了山頂，米婭看見田野和房屋。這段長路走得很值得。",
+              "romanization": "dào le shān dǐng， mǐ yà kàn jiàn tián yě hé fáng wū。 zhè duàn zhǎng lù zǒu dé hěn zhí de。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-06",
+      "title": "A Map for Two",
+      "genre": "Adventure",
+      "description": "Sam finds a map of the park.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam finds a map of the park. He and May follow it to a small pond. They mark their favorite place with a star.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆找到一張公園地圖。他和小美跟著地圖走到一個小池塘。他們用星星標出最喜歡的地方。",
+              "romanization": "shān mǔ zhǎo dào yī zhāng gōng yuán dì tú。 tā hé xiǎo měi gēn zhù dì tú zǒu dào yī gè xiǎo chí táng。 tā men yòng xīng xīng biāo chū zuì xǐ huān de dì fāng。"
+            }
+          }
+        },
+        {
+          "target": "They sit by the water and eat an apple. Then they follow the map home.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們坐在水邊吃蘋果。然後跟著地圖回家。",
+              "romanization": "tā men zuò zài shuǐ biān chī píng guǒ。 rán hòu gēn zhù dì tú huí jiā。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-07",
+      "title": "The High Mountain",
+      "genre": "Adventure",
+      "description": "Anna and Dad visit a mountain.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna and Dad visit a mountain. They take a short path and stop to look at the view. From there, the town looks very small.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜和爸爸去一座山。他們走了一條短路，停下來看風景。從那裡看，小鎮顯得很小。",
+              "romanization": "ān nà hé bà bà qù yī zuò shān。 tā men zǒu le yī tiáo duǎn lù， tíng xià lái kàn fēng jǐng。 cóng nà lǐ kàn， xiǎo zhèn xiǎn dé hěn xiǎo。"
+            }
+          }
+        },
+        {
+          "target": "Dad takes a picture of Anna. They look at it on the way home.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸幫安娜拍了一張照片。他們在回家的路上看照片。",
+              "romanization": "bà bà bāng ān nà pāi le yī zhāng zhào piān。 tā men zài huí jiā de lù shàng kàn zhào piān。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-08",
+      "title": "The River Path",
+      "genre": "Adventure",
+      "description": "Lee walks along the river with his sister.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee walks along the river with his sister. They see a little boat and wave to the people on it. The people wave back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李和妹妹沿著河邊走。他們看見一艘小船，向船上的人揮手。船上的人也向他們揮手。",
+              "romanization": "xiǎo lǐ hé mèi mèi yán zhù hé biān zǒu。 tā men kàn jiàn yī sōu xiǎo chuán， xiàng chuán shàng de rén huī shǒu。 chuán shàng de rén yě xiàng tā men huī shǒu。"
+            }
+          }
+        },
+        {
+          "target": "A child on the boat has a red hat. Lee watches until the boat is out of sight.",
+          "translations": {
+            "zh-Hant": {
+              "text": "船上一個孩子戴著紅帽子。小李一直看到船消失在視線之外。",
+              "romanization": "chuán shàng yī gè hái zi dài zhù hóng mào zi。 xiǎo lǐ yì zhí kàn dào chuán xiāo shī zài shì xiàn zhī wài。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-09",
+      "title": "The Hidden Garden",
+      "genre": "Adventure",
+      "description": "Behind Grandma’s house, Mia finds a small gate.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Behind Grandma’s house, Mia finds a small gate. She opens it and sees a garden full of flowers. Grandma tells her she can visit any time.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭在奶奶家後面發現一扇小門。她打開門，看見一座開滿花的花園。奶奶告訴她隨時都可以來。",
+              "romanization": "mǐ yà zài nǎi nǎi jiā hòu miàn fā xiàn yī shàn xiǎo mén。 tā dǎ kāi mén， kàn jiàn yī zuò kāi mǎn huā de huā yuán。 nǎi nǎi gào sù tā suí shí dōu kě yǐ lái。"
+            }
+          }
+        },
+        {
+          "target": "Mia finds a chair under a tree. She plans to bring a book next time.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭在樹下找到一張椅子。她打算下次帶一本書來。",
+              "romanization": "mǐ yà zài shù xià zhǎo dào yī zhāng yǐ zi。 tā dǎ suàn xià cì dài yī běn shū lái。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "05-10",
+      "title": "A Walk to the Sea",
+      "genre": "Adventure",
+      "description": "Ben and Dad walk to the sea early in the morning.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben and Dad walk to the sea early in the morning. They find shells and listen to the waves. They get home in time for lunch.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班和爸爸一大早走去海邊。他們撿貝殼、聽海浪。回到家時正好趕上午餐。",
+              "romanization": "bān hé bà bà yī dà zǎo zǒu qù hǎi biān。 tā men jiǎn bèi ké、 tīng hǎi làng。 huí dào jiā shí zhèng hǎo gǎn shàng wǔ cān。"
+            }
+          }
+        },
+        {
+          "target": "Ben puts one shell by his bed. It reminds him of the sound of the sea.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班把一個貝殼放在床邊。它讓他想起海浪的聲音。",
+              "romanization": "bān bǎ yī gè bèi ké fàng zài chuáng biān。 tā ràng tā xiǎng qǐ hǎi làng de shēng yīn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-01",
+      "title": "The Lost Key",
+      "genre": "Mystery",
+      "description": "May cannot find her key.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May cannot find her key. She looks on the table and under the chair. It is not there.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美找不到鑰匙。她看看桌上，又看看椅子下面。鑰匙都不在那裡。",
+              "romanization": "Xiǎoměi zhǎo bú dào yàoshi. Tā kànkan zhuō shàng, yòu kànkan yǐzi xiàmiàn. Yàoshi dōu bú zài nàli."
+            }
+          }
+        },
+        {
+          "target": "Her brother asks, “Where did you go today?” May thinks. She went to the garden with her dog.",
+          "translations": {
+            "zh-Hant": {
+              "text": "弟弟問：「你今天去了哪裡？」小美想了想。她和狗去了花園。",
+              "romanization": "Dìdi wèn: “Nǐ jīntiān qù le nǎli?” Xiǎoměi xiǎng le xiǎng. Tā hé gǒu qù le huāyuán."
+            }
+          }
+        },
+        {
+          "target": "They look in the garden. There is the key, next to a red flower! May puts it in her bag.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們到花園裡找。鑰匙在那裡，就在一朵紅花旁邊！小美把鑰匙放進包包裡。",
+              "romanization": "Tāmen dào huāyuán lǐ zhǎo. Yàoshi zài nàli, jiù zài yì duǒ hóng huā pángbiān! Xiǎoměi bǎ yàoshi fàng jìn bāobao lǐ."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-02",
+      "title": "The Empty Box",
+      "genre": "Mystery",
+      "description": "Ben finds a small box at home.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben finds a small box at home. There is nothing in it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班在家裡找到一個小盒子。裡面什麼也沒有。",
+              "romanization": "Bān zài jiālǐ zhǎodào yí ge xiǎo hézi. Lǐmiàn shénme yě méiyǒu."
+            }
+          }
+        },
+        {
+          "target": "“Whose box is this?” he asks. His grandma looks at it and smiles.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「這是誰的盒子？」他問。奶奶看著盒子笑了。",
+              "romanization": "“Zhè shì shéi de hézi?” tā wèn. Nǎinai kànzhe hézi xiào le."
+            }
+          }
+        },
+        {
+          "target": "“It was mine,” she says. “I kept my letters in it.” She tells Ben about an old friend.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「那是我的。」她說。「我以前把信放在裡面。」她告訴班一位老朋友的故事。",
+              "romanization": "“Nà shì wǒ de.” tā shuō. “Wǒ yǐqián bǎ xìn fàng zài lǐmiàn.” Tā gàosu Bān yí wèi lǎo péngyou de gùshi."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-03",
+      "title": "The Red Door",
+      "genre": "Mystery",
+      "description": "There is a red door at the end of the hall.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a red door at the end of the hall. Amy has never opened it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "走廊盡頭有一扇紅門。艾米從來沒有打開過它。",
+              "romanization": "Zǒuláng jìntóu yǒu yí shàn hóng mén. Àimǐ cónglái méiyǒu dǎkāi guò tā."
+            }
+          }
+        },
+        {
+          "target": "She asks Grandpa about it. He takes a key and opens the door.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她問爺爺那扇門的事。他拿出鑰匙，打開了門。",
+              "romanization": "Tā wèn yéye nà shàn mén de shì. Tā ná chū yàoshi, dǎkāi le mén."
+            }
+          }
+        },
+        {
+          "target": "Inside are old books and a big chair. “This is my reading room,” he says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "裡面有舊書和一張大椅子。「這是我的閱讀室。」他說。",
+              "romanization": "Lǐmiàn yǒu jiù shū hé yì zhāng dà yǐzi. “Zhè shì wǒ de yuèdúshì.” tā shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-04",
+      "title": "The Missing Book",
+      "genre": "Mystery",
+      "description": "Anna cannot find her library book.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna cannot find her library book. She looks in her room and in her bag.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜找不到圖書館的書。她在房間和包包裡找。",
+              "romanization": "ān nà zhǎo bú dào tú shū guǎn de shū。 tā zài fáng jiān hé bāo bāo lǐ zhǎo。"
+            }
+          }
+        },
+        {
+          "target": "Her brother asks, “Did you read it on the bus?” Anna remembers. She did!",
+          "translations": {
+            "zh-Hant": {
+              "text": "弟弟問：「你在公車上讀過嗎？」安娜想起來了。她確實讀過！",
+              "romanization": "dì di wèn：「nǐ zài gōng chē shàng dú guò ma？」 ān nà xiǎng qǐ lái le。 tā què shí dú guò！"
+            }
+          }
+        },
+        {
+          "target": "They call the bus station. A driver has the book. Anna is glad to get it back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們打電話到公車站。一位司機拿著那本書。安娜很高興找回了它。",
+              "romanization": "tā men dǎ diàn huà dào gōng chē zhàn。 yī wèi sī jī ná zhù nà běn shū。 ān nà hěn gāo xìng zhǎo huí le tā。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-05",
+      "title": "A Note on the Table",
+      "genre": "Mystery",
+      "description": "A note is on the kitchen table.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A note is on the kitchen table. It says, “Look in the garden.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "廚房桌上有一張紙條。上面寫著：「到花園裡看看。」",
+              "romanization": "chú fáng zhuō shàng yǒu yī zhāng zhǐ tiáo。 shàng miàn xiě zhù：「dào huā yuán lǐ kàn kàn。」"
+            }
+          }
+        },
+        {
+          "target": "Ben goes outside and sees another note by a tree. This one says, “Look behind me.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "班走到外面，看見樹旁有另一張紙條。這張寫著：「看看我後面。」",
+              "romanization": "bān zǒu dào wài miàn， kàn jiàn shù páng yǒu lìng yī zhāng zhǐ tiáo。 zhè zhāng xiě zhù：「kàn kàn wǒ hòu miàn。」"
+            }
+          }
+        },
+        {
+          "target": "Behind the tree is a birthday gift from his sister. Ben runs to thank her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "樹後有妹妹送的生日禮物。班跑去謝謝她。",
+              "romanization": "shù hòu yǒu mèi mèi sòng de shēng rì lǐ wù。 bān pǎo qù xiè xiè tā。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-06",
+      "title": "The Yellow Bag",
+      "genre": "Mystery",
+      "description": "There is a yellow bag on the bus.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a yellow bag on the bus. Anna gives it to the driver. At the next stop, a man comes back for it and thanks them.",
+          "translations": {
+            "zh-Hant": {
+              "text": "公車上有一個黃色的包。安娜把它交給司機。下一站，一位男士回來找包，並向他們道謝。",
+              "romanization": "gōng chē shàng yǒu yī gè huáng sè de bāo。 ān nà bǎ tā jiāo gěi sī jī。 xià yī zhàn， yī wèi nán shì huí lái zhǎo bāo， bìng xiàng tā men dào xiè。"
+            }
+          }
+        },
+        {
+          "target": "The man looks inside and finds his book. He is happy to have it back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "男士往包裡看，找到了他的書。他很高興找回了包。",
+              "romanization": "nán shì wǎng bāo lǐ kàn， zhǎo dào le tā de shū。 tā hěn gāo xìng zhǎo huí le bāo。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-07",
+      "title": "The Little Bell",
+      "genre": "Mystery",
+      "description": "Tom hears a little bell in the garden.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom hears a little bell in the garden. He follows the sound and sees a cat. The bell is on the cat’s collar.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆聽見花園裡有小鈴鐺的聲音。他跟著聲音找到一隻貓。鈴鐺就在貓的項圈上。",
+              "romanization": "tāng mǔ tīng jiàn huā yuán lǐ yǒu xiǎo líng dāng de shēng yīn。 tā gēn zhù shēng yīn zhǎo dào yī zhī māo。 líng dāng jiù zài māo de xiàng quān shàng。"
+            }
+          }
+        },
+        {
+          "target": "The cat walks toward Tom. He gives it a little water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "貓走向湯姆。他給了牠一點水。",
+              "romanization": "māo zǒu xiàng tāng mǔ。 tā gěi le tā yī diǎn shuǐ。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-08",
+      "title": "The Blue Hat",
+      "genre": "Mystery",
+      "description": "May finds a blue hat on a chair.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May finds a blue hat on a chair. It is too big for her and too small for Dad. Mom tries it on; it is hers!",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美在椅子上找到一頂藍帽子。她戴太大，爸爸戴又太小。媽媽試戴後發現那是她的！",
+              "romanization": "xiǎo měi zài yǐ zi shàng zhǎo dào yī dǐng lán mào zi。 tā dài tài dà， bà bà dài yòu tài xiǎo。 mā mā shì dài hòu fā xiàn nà shì tā de！"
+            }
+          }
+        },
+        {
+          "target": "Mom laughs and puts the hat by the door. Now she will know where to find it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "媽媽笑著把帽子放在門邊。現在她知道該去哪裡找了。",
+              "romanization": "mā mā xiào zhù bǎ mào zi fàng zài mén biān。 xiàn zài tā zhī dào gāi qù nǎ lǐ zhǎo le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-09",
+      "title": "The Old Photo",
+      "genre": "Mystery",
+      "description": "Lee finds an old photo in a book.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee finds an old photo in a book. A boy in the photo is holding a dog. Grandpa smiles and says, “That boy is me.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李在書裡找到一張舊照片。照片中的男孩抱著一隻狗。爺爺笑著說：「那個男孩就是我。」",
+              "romanization": "xiǎo lǐ zài shū lǐ zhǎo dào yī zhāng jiù zhào piān。 zhào piān zhōng de nán hái bào zhù yī zhī gǒu。 yé yé xiào zhù shuō：「nà gè nán hái jiù shì wǒ。」"
+            }
+          }
+        },
+        {
+          "target": "Grandpa tells Lee the dog’s name was Coco. They look at more photos together.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爺爺告訴小李，那隻狗叫可可。他們一起看了更多照片。",
+              "romanization": "yé yé gào sù xiǎo lǐ， nà zhī gǒu jiào kě kě。 tā men yì qǐ kàn le gèng duō zhào piān。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "06-10",
+      "title": "A Letter for Lee",
+      "genre": "Mystery",
+      "description": "A letter arrives for Lee.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A letter arrives for Lee. He opens it and finds a drawing from his cousin. Lee makes a drawing to send back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李收到一封信。他打開信，發現是表親寄來的一幅畫。小李也畫了一幅畫準備寄回去。",
+              "romanization": "xiǎo lǐ shōu dào yī fēng xìn。 tā dǎ kāi xìn， fā xiàn shì biǎo qīn jì lái de yī fú huà。 xiǎo lǐ yě huà le yī fú huà zhǔn bèi jì huí qù。"
+            }
+          }
+        },
+        {
+          "target": "He draws their favorite park. Mom helps him put the drawing in an envelope.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他畫了他們最喜歡的公園。媽媽幫他把畫放進信封。",
+              "romanization": "tā huà le tā men zuì xǐ huān de gōng yuán。 mā mā bāng tā bǎ huà fàng jìn xìn fēng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-01",
+      "title": "The Train Ride",
+      "genre": "Travel",
+      "description": "Amy is on a train with her dad.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Amy is on a train with her dad. They are going to see Grandma. Amy sits by the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米和爸爸坐在火車上。他們要去看奶奶。艾米坐在窗邊。",
+              "romanization": "Àimǐ hé bàba zuò zài huǒchē shàng. Tāmen yào qù kàn nǎinai. Àimǐ zuò zài chuāngbiān."
+            }
+          }
+        },
+        {
+          "target": "She sees trees, fields, and a small river. A boy on the train waves at a cow. Amy laughs.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她看見樹、田野和一條小河。火車上的一個男孩向一頭牛揮手。艾米笑了。",
+              "romanization": "Tā kànjiàn shù, tiányě hé yì tiáo xiǎo hé. Huǒchē shàng de yí ge nánhái xiàng yì tóu niú huīshǒu. Àimǐ xiào le."
+            }
+          }
+        },
+        {
+          "target": "At the station, Grandma is waiting. She has a big smile and two apples. “Welcome!” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "到了車站，奶奶正在等他們。她笑得很開心，還帶了兩顆蘋果。「歡迎！」她說。",
+              "romanization": "Dào le chēzhàn, nǎinai zhèngzài děng tāmen. Tā xiào de hěn kāixīn, hái dài le liǎng kē píngguǒ. “Huānyíng!” tā shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-02",
+      "title": "A Day by the Sea",
+      "genre": "Travel",
+      "description": "Lily and her mom go to the sea.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily and her mom go to the sea. The water is blue and the sun is warm.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉和媽媽去海邊。海水很藍，太陽暖暖的。",
+              "romanization": "Lìlì hé māma qù hǎibiān. Hǎishuǐ hěn lán, tàiyáng nuǎnnuǎn de."
+            }
+          }
+        },
+        {
+          "target": "Lily finds a small shell. She shows it to Mom. “Look at this!”",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉找到一個小貝殼。她拿給媽媽看。「看看這個！」",
+              "romanization": "Lìlì zhǎodào yí ge xiǎo bèiké. Tā ná gěi māma kàn. “Kànkan zhège!”"
+            }
+          }
+        },
+        {
+          "target": "They walk by the water and eat lunch together. Lily puts the shell in her pocket.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她們沿著海邊散步，一起吃午餐。莉莉把貝殼放進口袋。",
+              "romanization": "Tāmen yánzhe hǎibiān sànbù, yìqǐ chī wǔcān. Lìlì bǎ bèiké fàng jìn kǒudài."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-03",
+      "title": "The Small Town",
+      "genre": "Travel",
+      "description": "May visits a small town with her family.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May visits a small town with her family. The streets are quiet.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美和家人去一個小鎮玩。街道很安靜。",
+              "romanization": "Xiǎoměi hé jiārén qù yí ge xiǎo zhèn wán. Jiēdào hěn ānjìng."
+            }
+          }
+        },
+        {
+          "target": "They find a shop with bread in the window. May picks a small loaf.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們發現一家店，櫥窗裡放著麵包。小美選了一個小麵包。",
+              "romanization": "Tāmen fāxiàn yì jiā diàn, chúchuāng lǐ fàngzhe miànbāo. Xiǎoměi xuǎn le yí ge xiǎo miànbāo."
+            }
+          }
+        },
+        {
+          "target": "They eat in the town square. A man plays music nearby.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們在鎮上的廣場吃東西。附近有一個人在演奏音樂。",
+              "romanization": "Tāmen zài zhèn shàng de guǎngchǎng chī dōngxi. Fùjìn yǒu yí ge rén zài yǎnzòu yīnyuè."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-04",
+      "title": "A Bus to Town",
+      "genre": "Travel",
+      "description": "Tom takes the bus to town with his mom.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom takes the bus to town with his mom. He sits by the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆和媽媽搭公車進城。他坐在窗邊。",
+              "romanization": "tāng mǔ hé mā mā dā gōng chē jìn chéng。 tā zuò zài chuāng biān。"
+            }
+          }
+        },
+        {
+          "target": "They pass a park, a school, and a tall red building. Tom counts the stops.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們經過一座公園、一所學校和一棟紅色高樓。湯姆數著站牌。",
+              "romanization": "tā men jīng guò yī zuò gōng yuán、 yī suǒ xué xiào hé yī dòng hóng sè gāo lóu。 tāng mǔ shù zhù zhàn pái。"
+            }
+          }
+        },
+        {
+          "target": "At the last stop, they get off and walk to the market.",
+          "translations": {
+            "zh-Hant": {
+              "text": "到了最後一站，他們下車走去市場。",
+              "romanization": "dào le zuì hòu yī zhàn， tā men xià chē zǒu qù shì chǎng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-05",
+      "title": "The Big City",
+      "genre": "Travel",
+      "description": "Lily visits a big city for the first time.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily visits a big city for the first time. There are tall buildings everywhere.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉第一次到大城市。到處都是高樓。",
+              "romanization": "lì lì dì yī cì dào dà chéng shì。 dào chù dōu shì gāo lóu。"
+            }
+          }
+        },
+        {
+          "target": "She and her mom take a train under the city. They get off near a museum.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她和媽媽搭地下鐵。她們在博物館附近下車。",
+              "romanization": "tā hé mā mā dā dì xià tiě。 tā men zài bó wù guǎn fù jìn xià chē。"
+            }
+          }
+        },
+        {
+          "target": "Lily sees paintings and a very big dinosaur. She tells Dad all about it later.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉看到畫作和一隻很大的恐龍。後來她把一切告訴爸爸。",
+              "romanization": "lì lì kàn dào huà zuò hé yī zhī hěn dà de kǒng lóng。 hòu lái tā bǎ yī qiè gào sù bà bà。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-06",
+      "title": "A New Street",
+      "genre": "Travel",
+      "description": "Anna walks down a street she does not know.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna walks down a street she does not know. She finds a bookshop with a green door. Inside, she chooses a story to read on the bus.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜走在一條陌生的街上。她發現一家有綠色門的書店。她在裡面選了一本書，打算在公車上讀。",
+              "romanization": "ān nà zǒu zài yī tiáo mò shēng de jiē shàng。 tā fā xiàn yī jiā yǒu lǜ sè mén de shū diàn。 tā zài lǐ miàn xuǎn le yī běn shū， dǎ suàn zài gōng chē shàng dú。"
+            }
+          }
+        },
+        {
+          "target": "The woman in the shop puts it in a bag. Anna thanks her and goes to the bus stop.",
+          "translations": {
+            "zh-Hant": {
+              "text": "店裡的女士把書放進袋子。安娜謝過她，走去公車站。",
+              "romanization": "diàn lǐ de nǚ shì bǎ shū fàng jìn dài zi。 ān nà xiè guò tā， zǒu qù gōng chē zhàn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-07",
+      "title": "The Morning Train",
+      "genre": "Travel",
+      "description": "Ben gets up early to take the train.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben gets up early to take the train. He watches the sun come up through the window. At the station, his aunt is waiting for him.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班早起搭火車。他透過窗戶看日出。到了車站，阿姨正在等他。",
+              "romanization": "bān zǎo qǐ dā huǒ chē。 tā tòu guò chuāng hù kàn rì chū。 dào le chē zhàn， ā yí zhèng zài děng tā。"
+            }
+          }
+        },
+        {
+          "target": "She takes his bag and asks about the ride. Ben says he saw a river from the train.",
+          "translations": {
+            "zh-Hant": {
+              "text": "阿姨接過他的袋子，問他旅途如何。班說他在火車上看到一條河。",
+              "romanization": "ā yí jiē guò tā de dài zi， wèn tā lǚ tú rú hé。 bān shuō tā zài huǒ chē shàng kàn dào yī tiáo hé。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-08",
+      "title": "A Day at the Lake",
+      "genre": "Travel",
+      "description": "May visits a lake with her family.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May visits a lake with her family. They eat lunch by the water and see a white bird. May takes a picture to show her friend.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美和家人去湖邊。他們在水邊吃午餐，看見一隻白鳥。小美拍了一張照片給朋友看。",
+              "romanization": "xiǎo měi hé jiā rén qù hú biān。 tā men zài shuǐ biān chī wǔ cān， kàn jiàn yī zhī bái niǎo。 xiǎo měi pāi le yī zhāng zhào piān gěi péng yǒu kàn。"
+            }
+          }
+        },
+        {
+          "target": "Her friend likes birds, too. May wants to come back with her next time.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她的朋友也喜歡鳥。小美想下次和朋友一起來。",
+              "romanization": "tā de péng yǒu yě xǐ huān niǎo。 xiǎo měi xiǎng xià cì hé péng yǒu yì qǐ lái。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-09",
+      "title": "The Old Station",
+      "genre": "Travel",
+      "description": "The old station has a big clock.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "The old station has a big clock. Tom and Dad wait under it for their train. When the train comes, Tom waves goodbye to the clock.",
+          "translations": {
+            "zh-Hant": {
+              "text": "老車站有一座大時鐘。湯姆和爸爸在時鐘下等火車。火車來時，湯姆向時鐘揮手說再見。",
+              "romanization": "lǎo chē zhàn yǒu yī zuò dà shí zhōng。 tāng mǔ hé bà bà zài shí zhōng xià děng huǒ chē。 huǒ chē lái shí， tāng mǔ xiàng shí zhōng huī shǒu shuō zài jiàn。"
+            }
+          }
+        },
+        {
+          "target": "Dad finds their seats by the window. Soon, the old station is far behind them.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸找到他們靠窗的座位。很快，老車站就被遠遠拋在後面。",
+              "romanization": "bà bà zhǎo dào tā men kào chuāng de zuò wèi。 hěn kuài， lǎo chē zhàn jiù bèi yuǎn yuǎn pāo zài hòu miàn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "07-10",
+      "title": "A Trip with Mom",
+      "genre": "Travel",
+      "description": "Amy and Mom take a bus to a new town.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Amy and Mom take a bus to a new town. They find a park and a shop with fresh bread. Before going home, they buy a loaf for Dad.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米和媽媽搭公車去一個新城鎮。她們找到一座公園和一家賣新鮮麵包的店。回家前，她們買了一條麵包給爸爸。",
+              "romanization": "ài mǐ hé mā mā dā gōng chē qù yī gè xīn chéng zhèn。 tā men zhǎo dào yī zuò gōng yuán hé yī jiā mài xīn xiān miàn bāo de diàn。 huí jiā qián， tā men mǎi le yī tiáo miàn bāo gěi bà bà。"
+            }
+          }
+        },
+        {
+          "target": "Dad cuts the bread when they get home. They tell him about the town.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她們回家後，爸爸切了麵包。她們向他說起那個城鎮。",
+              "romanization": "tā men huí jiā hòu， bà bà qiè le miàn bāo。 tā men xiàng tā shuō qǐ nà gè chéng zhèn。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-01",
+      "title": "A Day with Dad",
+      "genre": "Family",
+      "description": "Ben and Dad have a free day.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben and Dad have a free day. “What do you want to do?” Dad asks. Ben wants to go to the park.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班和爸爸今天都有空。「你想做什麼？」爸爸問。班想去公園。",
+              "romanization": "Bān hé bàba jīntiān dōu yǒu kòng. “Nǐ xiǎng zuò shénme?” bàba wèn. Bān xiǎng qù gōngyuán."
+            }
+          }
+        },
+        {
+          "target": "They take a ball and some sandwiches. At the park, they play until they are hungry.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們帶了一顆球和一些三明治。到了公園，他們一直玩到肚子餓。",
+              "romanization": "Tāmen dài le yì kē qiú hé yìxiē sānmíngzhì. Dào le gōngyuán, tāmen yìzhí wán dào dùzi è."
+            }
+          }
+        },
+        {
+          "target": "They sit under a tree to eat. “Can we come again?” Ben asks. Dad smiles. “Of course.”",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們坐在樹下吃東西。「我們可以再來嗎？」班問。爸爸笑了。「當然可以。」",
+              "romanization": "Tāmen zuò zài shù xià chī dōngxi. “Wǒmen kěyǐ zài lái ma?” Bān wèn. Bàba xiào le. “Dāngrán kěyǐ.”"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-02",
+      "title": "Mom’s Garden",
+      "genre": "Family",
+      "description": "Mom has a small garden behind the house.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mom has a small garden behind the house. Ben likes to help her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "媽媽在屋後有一座小花園。班喜歡幫她的忙。",
+              "romanization": "Māma zài wū hòu yǒu yí zuò xiǎo huāyuán. Bān xǐhuān bāng tā de máng."
+            }
+          }
+        },
+        {
+          "target": "Today they put new plants in the ground. Ben gives each plant water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天他們把新植物種進土裡。班給每株植物澆水。",
+              "romanization": "Jīntiān tāmen bǎ xīn zhíwù zhòng jìn tǔ lǐ. Bān gěi měi zhū zhíwù jiāo shuǐ."
+            }
+          }
+        },
+        {
+          "target": "“Now we wait,” Mom says. Ben looks at the garden and smiles.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「現在我們等一等。」媽媽說。班看著花園笑了。",
+              "romanization": "“Xiànzài wǒmen děng yì děng.” Māma shuō. Bān kànzhe huāyuán xiào le."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-03",
+      "title": "A Gift for Grandma",
+      "genre": "Family",
+      "description": "It is Grandma’s birthday tomorrow.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "It is Grandma’s birthday tomorrow. Mia wants to give her something special.",
+          "translations": {
+            "zh-Hant": {
+              "text": "明天是奶奶的生日。米婭想送她一件特別的禮物。",
+              "romanization": "Míngtiān shì nǎinai de shēngrì. Mǐyà xiǎng sòng tā yí jiàn tèbié de lǐwù."
+            }
+          }
+        },
+        {
+          "target": "She draws a picture of their family. Then she puts it in a blue frame.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她畫了一張全家人的圖。然後把畫放進藍色相框裡。",
+              "romanization": "Tā huà le yì zhāng quánjiārén de tú. Ránhòu bǎ huà fàng jìn lánsè xiàngkuàng lǐ."
+            }
+          }
+        },
+        {
+          "target": "Grandma opens the gift and gives Mia a big hug. “I love it,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "奶奶打開禮物，給米婭一個大大的擁抱。「我很喜歡。」她說。",
+              "romanization": "Nǎinai dǎkāi lǐwù, gěi Mǐyà yí ge dàdà de yǒngbào. “Wǒ hěn xǐhuān.” tā shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-04",
+      "title": "The Family Photo",
+      "genre": "Family",
+      "description": "Dad finds an old family photo.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Dad finds an old family photo. In it, Grandma is a little girl.",
+          "translations": {
+            "zh-Hant": {
+              "text": "爸爸找到一張舊的全家福。照片裡，奶奶還是個小女孩。",
+              "romanization": "bà bà zhǎo dào yī zhāng jiù de quán jiā fú。 zhào piān lǐ， nǎi nǎi hái shì gè xiǎo nǚ hái。"
+            }
+          }
+        },
+        {
+          "target": "Ben asks about the people in the picture. Dad tells him their names.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班問照片裡的人是誰。爸爸告訴他們的名字。",
+              "romanization": "bān wèn zhào piān lǐ de rén shì shuí。 bà bà gào sù tā men de míng zì。"
+            }
+          }
+        },
+        {
+          "target": "They put the photo on the table. Now everyone can see it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們把照片放在桌上。現在大家都能看到了。",
+              "romanization": "tā men bǎ zhào piān fàng zài zhuō shàng。 xiàn zài dà jiā dōu néng kàn dào le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-05",
+      "title": "A Walk with Ben",
+      "genre": "Family",
+      "description": "Ben asks his little sister to go for a walk.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Ben asks his little sister to go for a walk. She brings her favorite toy.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班邀請妹妹一起散步。她帶了最喜歡的玩具。",
+              "romanization": "bān yāo qǐng mèi mèi yì qǐ sàn bù。 tā dài le zuì xǐ huān de wán jù。"
+            }
+          }
+        },
+        {
+          "target": "They walk to the park and see a dog playing with a ball.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們走到公園，看見一隻狗在玩球。",
+              "romanization": "tā men zǒu dào gōng yuán， kàn jiàn yī zhī gǒu zài wán qiú。"
+            }
+          }
+        },
+        {
+          "target": "On the way home, Ben carries her toy. She holds his hand.",
+          "translations": {
+            "zh-Hant": {
+              "text": "回家路上，班幫她拿玩具。她牽著他的手。",
+              "romanization": "huí jiā lù shàng， bān bāng tā ná wán jù。 tā qiān zhù tā de shǒu。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-06",
+      "title": "Sunday with Grandpa",
+      "genre": "Family",
+      "description": "On Sunday, Lee visits Grandpa.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "On Sunday, Lee visits Grandpa. They look at old photos and make lunch together. Grandpa sends him home with two apples.",
+          "translations": {
+            "zh-Hant": {
+              "text": "星期天，小李去看爺爺。他們一起看舊照片、做午餐。爺爺給了他兩顆蘋果帶回家。",
+              "romanization": "xīng qī tiān， xiǎo lǐ qù kàn yé yé。 tā men yì qǐ kàn jiù zhào piān、 zuò wǔ cān。 yé yé gěi le tā liǎng kē píng guǒ dài huí jiā。"
+            }
+          }
+        },
+        {
+          "target": "At home, Lee shares an apple with his sister. He tells her about Grandpa’s photos.",
+          "translations": {
+            "zh-Hant": {
+              "text": "回家後，小李和妹妹分享一顆蘋果。他告訴她爺爺照片裡的事。",
+              "romanization": "huí jiā hòu， xiǎo lǐ hé mèi mèi fēn xiǎng yī kē píng guǒ。 tā gào sù tā yé yé zhào piān lǐ de shì。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-07",
+      "title": "A Song for Mom",
+      "genre": "Family",
+      "description": "Mia learns a song at school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Mia learns a song at school. At home, she sings it for Mom. Mom sings the last part with her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "米婭在學校學了一首歌。回家後，她唱給媽媽聽。媽媽和她一起唱了最後一段。",
+              "romanization": "mǐ yà zài xué xiào xué le yī shǒu gē。 huí jiā hòu， tā chàng gěi mā mā tīng。 mā mā hé tā yì qǐ chàng le zuì hòu yī duàn。"
+            }
+          }
+        },
+        {
+          "target": "They sing it again after dinner. Dad listens from the kitchen.",
+          "translations": {
+            "zh-Hant": {
+              "text": "晚餐後她們又唱了一次。爸爸在廚房裡聽著。",
+              "romanization": "wǎn cān hòu tā men yòu chàng le yī cì。 bà bà zài chú fáng lǐ tīng zhù。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-08",
+      "title": "The Big Table",
+      "genre": "Family",
+      "description": "The family sits around a big table.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "The family sits around a big table. There is rice, soup, and a bowl of fruit. Everyone talks about their day.",
+          "translations": {
+            "zh-Hant": {
+              "text": "家人圍坐在大桌子旁。桌上有飯、湯和一碗水果。大家聊著自己今天的事。",
+              "romanization": "jiā rén wéi zuò zài dà zhuō zi páng。 zhuō shàng yǒu fàn、 tāng hé yī wǎn shuǐ guǒ。 dà jiā liáo zhù zì jǐ jīn tiān de shì。"
+            }
+          }
+        },
+        {
+          "target": "Grandma tells a funny story. Everyone laughs, even the little baby.",
+          "translations": {
+            "zh-Hant": {
+              "text": "奶奶說了一個有趣的故事。大家都笑了，連小寶寶也笑了。",
+              "romanization": "nǎi nǎi shuō le yī gè yǒu qù de gù shì。 dà jiā dōu xiào le， lián xiǎo bǎo bǎo yě xiào le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-09",
+      "title": "A Visit Home",
+      "genre": "Family",
+      "description": "Anna visits her family after a long week.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Anna visits her family after a long week. Dad opens the door and gives her a hug. They drink tea and talk until evening.",
+          "translations": {
+            "zh-Hant": {
+              "text": "忙了一週後，安娜回家看家人。爸爸開門給她一個擁抱。他們喝茶聊天，直到傍晚。",
+              "romanization": "máng le yī zhōu hòu， ān nà huí jiā kān jiā rén。 bà bà kāi mén gěi tā yī gè yōng bào。 tā men hē chá liáo tiān， zhí dào bàng wǎn。"
+            }
+          }
+        },
+        {
+          "target": "Before she leaves, Dad gives her some fruit to take home. Anna promises to visit again soon.",
+          "translations": {
+            "zh-Hant": {
+              "text": "離開前，爸爸給她一些水果帶回家。安娜答應很快再來看他們。",
+              "romanization": "lí kāi qián， bà bà gěi tā yī xiē shuǐ guǒ dài huí jiā。 ān nà dá yīng hěn kuài zài lái kàn tā men。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "08-10",
+      "title": "A Happy Birthday",
+      "genre": "Family",
+      "description": "It is Ben’s birthday.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "It is Ben’s birthday. His family makes a cake and puts five candles on it. Ben closes his eyes, makes a wish, and blows them out.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天是班的生日。家人做了蛋糕，上面放了五根蠟燭。班閉上眼睛許願，然後吹熄蠟燭。",
+              "romanization": "jīn tiān shì bān de shēng rì。 jiā rén zuò le dàn gāo， shàng miàn fàng le wǔ gēn là zhú。 bān bì shàng yǎn jīng xǔ yuàn， rán hòu chuī xī là zhú。"
+            }
+          }
+        },
+        {
+          "target": "His sister gives him a card with a dog on it. Ben puts it next to his bed.",
+          "translations": {
+            "zh-Hant": {
+              "text": "姊姊送他一張畫著狗的卡片。班把卡片放在床邊。",
+              "romanization": "zǐ zǐ sòng tā yī zhāng huà zhù gǒu de kǎ piàn。 bān bǎ kǎ piàn fàng zài chuáng biān。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-01",
+      "title": "The First Flower",
+      "genre": "Nature",
+      "description": "Lily looks at the small garden every day.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily looks at the small garden every day. All winter, it is brown and quiet.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉每天都看著小花園。整個冬天，花園都是棕色的，很安靜。",
+              "romanization": "Lìlì měitiān dōu kànzhe xiǎo huāyuán. Zhěngge dōngtiān, huāyuán dōu shì zōngsè de, hěn ānjìng."
+            }
+          }
+        },
+        {
+          "target": "One morning, she sees something yellow. It is a little flower! She calls her mom to the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "一天早上，她看見一點黃色。那是一朵小花！她叫媽媽到窗邊來。",
+              "romanization": "Yì tiān zǎoshang, tā kànjiàn yìdiǎn huángsè. Nà shì yì duǒ xiǎo huā! Tā jiào māma dào chuāngbiān lái."
+            }
+          }
+        },
+        {
+          "target": "“Spring is here,” Mom says. Lily gives the flower some water. She hopes more flowers will come.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「春天到了。」媽媽說。莉莉給花澆了些水。她希望會有更多的花開出來。",
+              "romanization": "“Chūntiān dào le.” Māma shuō. Lìlì gěi huā jiāo le xiē shuǐ. Tā xīwàng huì yǒu gèng duō de huā kāi chūlái."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-02",
+      "title": "A Tree in the Park",
+      "genre": "Nature",
+      "description": "There is a big tree in the park.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a big tree in the park. Anna goes there after school.",
+          "translations": {
+            "zh-Hant": {
+              "text": "公園裡有一棵大樹。安娜放學後會去那裡。",
+              "romanization": "Gōngyuán lǐ yǒu yì kē dà shù. Ānnà fàngxué hòu huì qù nàli."
+            }
+          }
+        },
+        {
+          "target": "She sits under the tree and draws the birds. One bird comes very close.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她坐在樹下畫鳥。一隻鳥靠得很近。",
+              "romanization": "Tā zuò zài shù xià huà niǎo. Yì zhī niǎo kào de hěn jìn."
+            }
+          }
+        },
+        {
+          "target": "Anna sits still. The bird looks at her, then flies up into the tree.",
+          "translations": {
+            "zh-Hant": {
+              "text": "安娜靜靜坐著。鳥看了看她，然後飛到樹上。",
+              "romanization": "Ānnà jìngjìng zuòzhe. Niǎo kàn le kàn tā, ránhòu fēi dào shù shàng."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-03",
+      "title": "The Blue Sky",
+      "genre": "Nature",
+      "description": "After many rainy days, the sky is blue.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "After many rainy days, the sky is blue. Lee goes outside with his ball.",
+          "translations": {
+            "zh-Hant": {
+              "text": "下了好多天雨之後，天空變藍了。小李帶著球出門。",
+              "romanization": "Xià le hǎo duō tiān yǔ zhīhòu, tiānkōng biàn lán le. Xiǎo Lǐ dàizhe qiú chūmén."
+            }
+          }
+        },
+        {
+          "target": "His friend May is in the park. They play together in the sun.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他的朋友小美在公園裡。他們一起在陽光下玩。",
+              "romanization": "Tā de péngyou Xiǎoměi zài gōngyuán lǐ. Tāmen yìqǐ zài yángguāng xià wán."
+            }
+          }
+        },
+        {
+          "target": "When they are tired, they lie on the grass and watch the clouds.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們累了以後，躺在草地上看雲。",
+              "romanization": "Tāmen lèi le yǐhòu, tǎng zài cǎodì shàng kàn yún."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-04",
+      "title": "A Day in the Sun",
+      "genre": "Nature",
+      "description": "The sun is out, and May wants to play.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "The sun is out, and May wants to play. She puts on her hat and goes outside.",
+          "translations": {
+            "zh-Hant": {
+              "text": "太陽出來了，小美想出去玩。她戴上帽子走到外面。",
+              "romanization": "tài yáng chū lái le， xiǎo měi xiǎng chū qù wán。 tā dài shàng mào zi zǒu dào wài miàn。"
+            }
+          }
+        },
+        {
+          "target": "She and her friend play with a ball. Then they sit in the shade and drink water.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她和朋友一起玩球。接著她們坐在陰涼處喝水。",
+              "romanization": "tā hé péng yǒu yì qǐ wán qiú。 jiē zhù tā men zuò zài yīn liáng chù hē shuǐ。"
+            }
+          }
+        },
+        {
+          "target": "“What a nice day,” her friend says. May agrees.",
+          "translations": {
+            "zh-Hant": {
+              "text": "「多好的一天啊。」朋友說。小美也這麼覺得。",
+              "romanization": "「duō hǎo de yī tiān a。」 péng yǒu shuō。 xiǎo měi yě zhè me jué dé。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-05",
+      "title": "The Small Garden",
+      "genre": "Nature",
+      "description": "There is a small garden outside Amy’s school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a small garden outside Amy’s school. Her class takes care of it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米的學校外面有一座小花園。她的班級負責照顧它。",
+              "romanization": "ài mǐ de xué xiào wài miàn yǒu yī zuò xiǎo huā yuán。 tā de bān jí fù zé zhào gù tā。"
+            }
+          }
+        },
+        {
+          "target": "Today, Amy and Lee give water to the plants. They see a new green leaf.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天艾米和小李幫植物澆水。他們看到一片新的綠葉。",
+              "romanization": "jīn tiān ài mǐ hé xiǎo lǐ bāng zhí wù jiāo shuǐ。 tā men kàn dào yī piàn xīn de lǜ yè。"
+            }
+          }
+        },
+        {
+          "target": "The teacher smiles. “Our garden is growing,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "老師笑了。「我們的花園正在生長。」她說。",
+              "romanization": "lǎo shī xiào le。「wǒ men de huā yuán zhèng zài shēng zhǎng。」 tā shuō。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-06",
+      "title": "The Green Leaf",
+      "genre": "Nature",
+      "description": "Sam finds a green leaf on the path.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam finds a green leaf on the path. It has a little drop of water on it. He shows it to his friend before putting it back.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆在小路上找到一片綠葉。葉子上有一小滴水。他給朋友看過之後，把葉子放回原處。",
+              "romanization": "shān mǔ zài xiǎo lù shàng zhǎo dào yī piàn lǜ yè。 yè zi shàng yǒu yī xiǎo dī shuǐ。 tā gěi péng yǒu kàn guò zhī hòu， bǎ yè zi fàng huí yuán chù。"
+            }
+          }
+        },
+        {
+          "target": "They look for more leaves on their walk. Each one is a little different.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們散步時找更多葉子。每一片都有些不同。",
+              "romanization": "tā men sàn bù shí zhǎo gèng duō yè zi。 měi yī piàn dōu yǒu xiē bù tóng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-07",
+      "title": "Rain on the Window",
+      "genre": "Nature",
+      "description": "Rain runs down the window.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Rain runs down the window. Lily stays inside and draws the trees outside. When the rain stops, she goes out to see them.",
+          "translations": {
+            "zh-Hant": {
+              "text": "雨水沿著窗戶流下。莉莉待在屋裡畫外面的樹。雨停後，她出去看那些樹。",
+              "romanization": "yǔ shuǐ yán zhù chuāng hù liú xià。 lì lì dài zài wū lǐ huà wài miàn de shù。 yǔ tíng hòu， tā chū qù kàn nà xiē shù。"
+            }
+          }
+        },
+        {
+          "target": "The leaves are wet and green. Lily takes a deep breath of fresh air.",
+          "translations": {
+            "zh-Hant": {
+              "text": "葉子濕濕綠綠的。莉莉深吸了一口新鮮空氣。",
+              "romanization": "yè zi shī shī lǜ lǜ de。 lì lì shēn xī le yī kǒu xīn xiān kōng qì。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-08",
+      "title": "The Yellow Flower",
+      "genre": "Nature",
+      "description": "A yellow flower grows by the door.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "A yellow flower grows by the door. Ben gives it water every morning. One day, he sees a bee on it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "門邊長著一朵黃花。班每天早上都給它澆水。有一天，他看到一隻蜜蜂停在花上。",
+              "romanization": "mén biān zhǎng zhù yī duǒ huáng huā。 bān měi tiān zǎo shàng dōu gěi tā jiāo shuǐ。 yǒu yī tiān， tā kàn dào yī zhī mì fēng tíng zài huā shàng。"
+            }
+          }
+        },
+        {
+          "target": "Ben stands still and watches the bee. After a moment, it flies away.",
+          "translations": {
+            "zh-Hant": {
+              "text": "班站著不動，看著蜜蜂。過了一會兒，牠飛走了。",
+              "romanization": "bān zhàn zhù bù dòng， kàn zhù mì fēng。 guò le yī huì ér， tā fēi zǒu le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-09",
+      "title": "A Walk in the Park",
+      "genre": "Nature",
+      "description": "May and her dad walk in the park.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "May and her dad walk in the park. They see a bird carrying a small stick. Dad says it may be making a home.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小美和爸爸在公園散步。他們看見一隻鳥叼著小樹枝。爸爸說牠可能正在築巢。",
+              "romanization": "xiǎo měi hé bà bà zài gōng yuán sàn bù。 tā men kàn jiàn yī zhī niǎo diāo zhù xiǎo shù zhī。 bà bà shuō tā kě néng zhèng zài zhù cháo。"
+            }
+          }
+        },
+        {
+          "target": "They look up and see a nest in the tree. The bird flies toward it.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他們抬頭看見樹上有個鳥巢。鳥朝著鳥巢飛去。",
+              "romanization": "tā men tái tóu kàn jiàn shù shàng yǒu gè niǎo cháo。 niǎo cháo zhù niǎo cháo fēi qù。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "09-10",
+      "title": "The Tall Tree",
+      "genre": "Nature",
+      "description": "There is a tall tree near Tom’s home.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "There is a tall tree near Tom’s home. In summer, he sits under it with a book. Its leaves keep him cool.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆家附近有一棵高樹。夏天，他帶著書坐在樹下。樹葉讓他感到涼爽。",
+              "romanization": "tāng mǔ jiā fù jìn yǒu yī kē gāo shù。 xià tiān， tā dài zhù shū zuò zài shù xià。 shù yè ràng tā gǎn dào liáng shuǎng。"
+            }
+          }
+        },
+        {
+          "target": "One day, his friend joins him there. They read their books side by side.",
+          "translations": {
+            "zh-Hant": {
+              "text": "有一天，朋友也來了。他們並肩坐著讀書。",
+              "romanization": "yǒu yī tiān， péng yǒu yě lái le。 tā men bìng jiān zuò zhù dú shū。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-01",
+      "title": "The New Class",
+      "genre": "School & Work",
+      "description": "Max is new at school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Max is new at school. He stands at the door of his class. His hands feel cold.",
+          "translations": {
+            "zh-Hant": {
+              "text": "馬克斯剛到新學校。他站在教室門口，雙手覺得冷冷的。",
+              "romanization": "Mǎkèsī gāng dào xīn xuéxiào. Tā zhàn zài jiàoshì ménkǒu, shuāngshǒu juéde lěnglěng de."
+            }
+          }
+        },
+        {
+          "target": "The teacher says hello and shows him a seat. A girl next to him gives him a pencil. “I’m Anna,” she says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "老師向他問好，指給他一個座位。旁邊的女孩給他一支鉛筆。「我叫安娜。」她說。",
+              "romanization": "Lǎoshī xiàng tā wènhǎo, zhǐ gěi tā yí ge zuòwèi. Pángbiān de nǚhái gěi tā yì zhī qiānbǐ. “Wǒ jiào Ānnà.” tā shuō."
+            }
+          }
+        },
+        {
+          "target": "At the end of the day, Max tells his mom about Anna. He is ready to go back tomorrow.",
+          "translations": {
+            "zh-Hant": {
+              "text": "放學時，馬克斯告訴媽媽安娜的事。他明天願意再回學校了。",
+              "romanization": "Fàngxué shí, Mǎkèsī gàosu māma Ānnà de shì. Tā míngtiān yuànyì zài huí xuéxiào le."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-02",
+      "title": "A Book for Class",
+      "genre": "School & Work",
+      "description": "Sam needs a book for class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam needs a book for class. He goes to the library after school.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆上課需要一本書。放學後他去了圖書館。",
+              "romanization": "Shānmǔ shàngkè xūyào yì běn shū. Fàngxué hòu tā qù le túshūguǎn."
+            }
+          }
+        },
+        {
+          "target": "He cannot find the book. A woman at the desk helps him look.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他找不到那本書。櫃台的一位女士幫他找。",
+              "romanization": "Tā zhǎo bú dào nà běn shū. Guìtái de yí wèi nǚshì bāng tā zhǎo."
+            }
+          }
+        },
+        {
+          "target": "At last, Sam sees it on a high shelf. “Here it is!” he says.",
+          "translations": {
+            "zh-Hant": {
+              "text": "最後，山姆在高高的書架上看見了它。「在這裡！」他說。",
+              "romanization": "Zuìhòu, Shānmǔ zài gāogāo de shūjià shàng kànjiàn le tā. “Zài zhèlǐ!” tā shuō."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-03",
+      "title": "The First Day",
+      "genre": "School & Work",
+      "description": "Today is Amy’s first day at work.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Today is Amy’s first day at work. She takes the bus to a small shop.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天是艾米上班的第一天。她搭公車到一家小店。",
+              "romanization": "Jīntiān shì Àimǐ shàngbān de dì yī tiān. Tā dā gōngchē dào yì jiā xiǎo diàn."
+            }
+          }
+        },
+        {
+          "target": "Her new friend shows her where the books go. Amy puts them on the shelves.",
+          "translations": {
+            "zh-Hant": {
+              "text": "新同事告訴她書要放在哪裡。艾米把書放上書架。",
+              "romanization": "Xīn tóngshì gàosu tā shū yào fàng zài nǎli. Àimǐ bǎ shū fàng shàng shūjià."
+            }
+          }
+        },
+        {
+          "target": "At the end of the day, she is tired but happy. She likes the shop.",
+          "translations": {
+            "zh-Hant": {
+              "text": "一天結束時，她很累，但很開心。她喜歡這家店。",
+              "romanization": "Yì tiān jiéshù shí, tā hěn lèi, dàn hěn kāixīn. Tā xǐhuān zhè jiā diàn."
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-04",
+      "title": "A New Desk",
+      "genre": "School & Work",
+      "description": "Lee has a new desk in his room.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee has a new desk in his room. He puts it next to the window.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李的房間裡有一張新書桌。他把書桌放在窗邊。",
+              "romanization": "xiǎo lǐ de fáng jiān lǐ yǒu yī zhāng xīn shū zhuō。 tā bǎ shū zhuō fàng zài chuāng biān。"
+            }
+          }
+        },
+        {
+          "target": "He puts his books and a blue pen on top. There is room for a small plant, too.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他把書和一支藍筆放在桌上。桌上還有空間放一盆小植物。",
+              "romanization": "tā bǎ shū hé yī zhī lán bǐ fàng zài zhuō shàng。 zhuō shàng hái yǒu kòng jiān fàng yī pén xiǎo zhí wù。"
+            }
+          }
+        },
+        {
+          "target": "Lee sits down to draw. He likes his new place.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李坐下來畫畫。他喜歡這個新地方。",
+              "romanization": "xiǎo lǐ zuò xià lái huà huà。 tā xǐ huān zhè gè xīn dì fāng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-05",
+      "title": "The School Bag",
+      "genre": "School & Work",
+      "description": "Tom is ready for school, but he cannot find his bag.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Tom is ready for school, but he cannot find his bag. He looks behind the door.",
+          "translations": {
+            "zh-Hant": {
+              "text": "湯姆準備好上學了，卻找不到書包。他看看門後。",
+              "romanization": "tāng mǔ zhǔn bèi hǎo shàng xué le， què zhǎo bú dào shū bāo。 tā kàn kàn mén hòu。"
+            }
+          }
+        },
+        {
+          "target": "He looks under the table. Then his mom points to the chair.",
+          "translations": {
+            "zh-Hant": {
+              "text": "他看看桌下。接著媽媽指向椅子。",
+              "romanization": "tā kàn kàn zhuō xià。 jiē zhù mā mā zhǐ xiàng yǐ zi。"
+            }
+          }
+        },
+        {
+          "target": "The bag is on the chair, under his coat. Tom takes it and runs to the bus.",
+          "translations": {
+            "zh-Hant": {
+              "text": "書包就在椅子上，被他的外套蓋住了。湯姆拿起書包跑去搭公車。",
+              "romanization": "shū bāo jiù zài yǐ zi shàng， bèi tā de wài tào gài zhù le。 tāng mǔ ná qǐ shū bāo pǎo qù dā gōng chē。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-06",
+      "title": "A Nice Teacher",
+      "genre": "School & Work",
+      "description": "Lee is worried about his new class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lee is worried about his new class. His teacher shows him where to sit and introduces him to Sam. Soon, Lee has someone to talk to.",
+          "translations": {
+            "zh-Hant": {
+              "text": "小李對新班級感到擔心。老師指給他座位，並把他介紹給山姆。很快，小李就有人可以聊天了。",
+              "romanization": "xiǎo lǐ duì xīn bān jí gǎn dào dān xīn。 lǎo shī zhǐ gěi tā zuò wèi， bìng bǎ tā jiè shào gěi shān mǔ。 hěn kuài， xiǎo lǐ jiù yǒu rén kě yǐ liáo tiān le。"
+            }
+          }
+        },
+        {
+          "target": "At lunch, Sam asks Lee to sit with him. They talk about their favorite games.",
+          "translations": {
+            "zh-Hant": {
+              "text": "午餐時，山姆請小李和他一起坐。他們聊起最喜歡的遊戲。",
+              "romanization": "wǔ cān shí， shān mǔ qǐng xiǎo lǐ hé tā yì qǐ zuò。 tā men liáo qǐ zuì xǐ huān de yóu xì。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-07",
+      "title": "The Blue Pen",
+      "genre": "School & Work",
+      "description": "Amy finds a blue pen on her desk.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Amy finds a blue pen on her desk. She asks the class whose pen it is. Ben puts up his hand and thanks her.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米在桌上找到一支藍筆。她問班上這是誰的筆。班舉起手，並向她道謝。",
+              "romanization": "ài mǐ zài zhuō shàng zhǎo dào yī zhī lán bǐ。 tā wèn bān shàng zhè shì shuí de bǐ。 bān jǔ qǐ shǒu， bìng xiàng tā dào xiè。"
+            }
+          }
+        },
+        {
+          "target": "Amy gives the pen back. Ben puts his name on it so he will not lose it again.",
+          "translations": {
+            "zh-Hant": {
+              "text": "艾米把筆還給他。班在筆上寫了名字，這樣就不會再弄丟了。",
+              "romanization": "ài mǐ bǎ bǐ hái gěi tā。 bān zài bǐ shàng xiě le míng zì， zhè yàng jiù bù huì zài nòng diū le。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-08",
+      "title": "The Art Class",
+      "genre": "School & Work",
+      "description": "Today is art class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Today is art class. The teacher asks everyone to draw a place they love. Mia draws her garden and shows it to the class.",
+          "translations": {
+            "zh-Hant": {
+              "text": "今天是美術課。老師請大家畫一個自己喜歡的地方。米婭畫了她的花園，並展示給全班看。",
+              "romanization": "jīn tiān shì měi shù kè。 lǎo shī qǐng dà jiā huà yī gè zì jǐ xǐ huān de dì fāng。 mǐ yà huà le tā de huā yuán， bìng zhǎn shì gěi quán bān kàn。"
+            }
+          }
+        },
+        {
+          "target": "Her friend draws the sea. They put both pictures on the wall.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她的朋友畫了大海。他們把兩張畫都貼在牆上。",
+              "romanization": "tā de péng yǒu huà le dà hǎi。 tā men bǎ liǎng zhāng huà dōu tiē zài qiáng shàng。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-09",
+      "title": "A Good Question",
+      "genre": "School & Work",
+      "description": "Sam does not know the answer in class.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Sam does not know the answer in class. He puts up his hand and asks a question. The teacher explains it, and Sam understands.",
+          "translations": {
+            "zh-Hant": {
+              "text": "山姆不知道課堂上的答案。他舉手問了一個問題。老師解釋後，山姆明白了。",
+              "romanization": "shān mǔ bù zhī dào kè táng shàng de dá àn。 tā jǔ shǒu wèn le yī gè wèn tí。 lǎo shī jiě shì hòu， shān mǔ míng bái le。"
+            }
+          }
+        },
+        {
+          "target": "After class, his friend thanks him. She wanted to ask the same thing.",
+          "translations": {
+            "zh-Hant": {
+              "text": "下課後，朋友謝謝他。她也想問同一個問題。",
+              "romanization": "xià kè hòu， péng yǒu xiè xiè tā。 tā yě xiǎng wèn tóng yī gè wèn tí。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    },
+    {
+      "id": "10-10",
+      "title": "The Last Page",
+      "genre": "School & Work",
+      "description": "Lily reads a book for school.",
+      "level": "A1",
+      "image": "/assets/img/story-town.png",
+      "paragraphs": [
+        {
+          "target": "Lily reads a book for school. On the last page, the dog finds its way home. She closes the book with a smile.",
+          "translations": {
+            "zh-Hant": {
+              "text": "莉莉讀一本學校的書。到了最後一頁，狗找到了回家的路。她微笑著合上書。",
+              "romanization": "lì lì dú yī běn xué xiào de shū。 dào le zuì hòu yī yè， gǒu zhǎo dào le huí jiā de lù。 tā wēi xiào zhù hé shàng shū。"
+            }
+          }
+        },
+        {
+          "target": "She tells her friend about the ending. Her friend wants to read it, too.",
+          "translations": {
+            "zh-Hant": {
+              "text": "她把結局告訴朋友。朋友也想讀這本書。",
+              "romanization": "tā bǎ jié jú gào sù péng yǒu。 péng yǒu yě xiǎng dú zhè běn shū。"
+            }
+          }
+        }
+      ],
+      "targetLanguage": "en",
+      "sourceLanguages": [
+        "zh-Hant"
+      ]
+    }
+  ]
+}

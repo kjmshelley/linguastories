@@ -1,38 +1,21 @@
 {
   "name": "lingua-stories",
   "version": "1.0.0",
-  "description": "Fluency-first language learning MVP with sentence learning, stories, SRS, coins, goals, and community.",
+  "description": "A beginner-friendly English reader with Mandarin translations.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --env-file=.env.development server.js",
-    "start:prod": "node --env-file=.env.production server.js",
-    "start:dev": "node --env-file=.env.development server.js",
-    "test": "node --test",
-    "account:jobs": "node --env-file=.env.development scripts/account-jobs.js all",
-    "account:jobs:prod": "node --env-file=.env.production scripts/account-jobs.js all",
-    "teacher:approve": "node --env-file=.env.development scripts/approve-teacher-profile.js",
-    "teacher:approve:prod": "node --env-file=.env.production scripts/approve-teacher-profile.js",
-    "class:now": "node --env-file=.env.development scripts/schedule-class-now.js",
-    "class:now:prod": "node --env-file=.env.production scripts/schedule-class-now.js",
-    "db:schema": "node --env-file=.env.development scripts/run-sql.js db/schema.sql",
-    "db:seed": "node --env-file=.env.development scripts/run-sql.js db/seed.sql",
-    "db:truncate": "node --env-file=.env.development scripts/run-sql.js db/truncate.sql",
-    "db:destroy-all-objects": "node --env-file=.env.development scripts/run-sql.js db/destroy-all-data.sql",
-    "db:destroy-all-data": "node --env-file=.env.development scripts/run-sql.js db/destroy-all-data.sql",
-    "db:destroy-all-objects:prod": "node --env-file=.env.production scripts/run-sql.js db/destroy-all-data.sql",
-    "db:destroy-all-data:prod": "node --env-file=.env.production scripts/run-sql.js db/destroy-all-data.sql",
-    "db:schema:prod": "node --env-file=.env.production scripts/run-sql.js db/schema.sql",
-    "db:seed:prod": "node --env-file=.env.production scripts/run-sql.js db/seed.sql",
-    "db:truncate:prod": "node --env-file=.env.production scripts/run-sql.js db/truncate.sql"    
+    "dev": "node --watch server.js",
+    "test": "node --test"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "livekit-client": "^2.19.2",
-    "livekit-server-sdk": "^2.15.4",
-    "pg": "^8.12.0"
+    "@fontsource/ubuntu": "^5.3.0",
+    "express": "^4.19.2"
   },
   "engines": {
     "node": ">=20.6"
+  },
+  "overrides": {
+    "qs": "^6.17.1"
   }
 }

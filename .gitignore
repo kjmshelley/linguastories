@@ -6,3 +6,4 @@ creds
 sql_scripts
 generated
 .DS_Store
+data/reader-users.json
