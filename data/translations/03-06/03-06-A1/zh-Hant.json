@@ -1,0 +1,19 @@
+{
+  "storyId": "03-06",
+  "storyLevelId": "03-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭在廚房看到一顆紅蘋果。媽媽把它切成小塊，讓大家一起吃。米婭也拿了一塊給弟弟。",
+      "sentences": [],
+      "romanization": "mǐ yà zài chú fáng kàn dào yī kē hóng píng guǒ。 mā mā bǎ tā qiè chéng xiǎo kuài， ràng dà jiā yì qǐ chī。 mǐ yà yě ná le yī kuài gěi dì di。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "弟弟向她道謝。他們在桌邊吃蘋果。",
+      "sentences": [],
+      "romanization": "dì di xiàng tā dào xiè。 tā men zài zhuō biān chī píng guǒ。"
+    }
+  ]
+}

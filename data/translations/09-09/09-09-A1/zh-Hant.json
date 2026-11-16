@@ -1,0 +1,19 @@
+{
+  "storyId": "09-09",
+  "storyLevelId": "09-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美和爸爸在公園散步。他們看見一隻鳥叼著小樹枝。爸爸說牠可能正在築巢。",
+      "sentences": [],
+      "romanization": "xiǎo měi hé bà bà zài gōng yuán sàn bù。 tā men kàn jiàn yī zhī niǎo diāo zhù xiǎo shù zhī。 bà bà shuō tā kě néng zhèng zài zhù cháo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們抬頭看見樹上有個鳥巢。鳥朝著鳥巢飛去。",
+      "sentences": [],
+      "romanization": "tā men tái tóu kàn jiàn shù shàng yǒu gè niǎo cháo。 niǎo cháo zhù niǎo cháo fēi qù。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "06-09",
+  "storyLevelId": "06-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李在書裡找到一張舊照片。照片中的男孩抱著一隻狗。爺爺笑著說：「那個男孩就是我。」",
+      "sentences": [],
+      "romanization": "xiǎo lǐ zài shū lǐ zhǎo dào yī zhāng jiù zhào piān。 zhào piān zhōng de nán hái bào zhù yī zhī gǒu。 yé yé xiào zhù shuō：「nà gè nán hái jiù shì wǒ。」"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爺爺告訴小李，那隻狗叫可可。他們一起看了更多照片。",
+      "sentences": [],
+      "romanization": "yé yé gào sù xiǎo lǐ， nà zhī gǒu jiào kě kě。 tā men yì qǐ kàn le gèng duō zhào piān。"
+    }
+  ]
+}

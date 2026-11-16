@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "es-ES",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ben quiere jugar afuera, pero está lloviendo. Mira por la ventana.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mamá le da papel y colores. «Vamos a dibujar la lluvia», dice ella.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ben también dibuja un cielo azul y un gran sol amarillo. Pone el dibujo en la pared.",
+      "sentences": []
+    }
+  ]
+}

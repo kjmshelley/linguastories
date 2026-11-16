@@ -1,0 +1,252 @@
+{
+  "storyId": "04-05",
+  "versions": [
+    {
+      "storyLevelId": "04-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " visits"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " farm"
+                },
+                {
+                  "id": "t5",
+                  "text": " with"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " class"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " sees"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " brown"
+                },
+                {
+                  "id": "t5",
+                  "text": " horse"
+                },
+                {
+                  "id": "t6",
+                  "text": " by"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " fence"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " farmer"
+                },
+                {
+                  "id": "t3",
+                  "text": " gives"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " horse"
+                },
+                {
+                  "id": "t6",
+                  "text": " an"
+                },
+                {
+                  "id": "t7",
+                  "text": " apple"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " eats"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " apple"
+                },
+                {
+                  "id": "t5",
+                  "text": " very"
+                },
+                {
+                  "id": "t6",
+                  "text": " fast"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " draws"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " horse"
+                },
+                {
+                  "id": "t5",
+                  "text": " when"
+                },
+                {
+                  "id": "t6",
+                  "text": " he"
+                },
+                {
+                  "id": "t7",
+                  "text": " gets"
+                },
+                {
+                  "id": "t8",
+                  "text": " home"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " gives"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " picture"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " teacher"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "03-10",
+  "storyLevelId": "03-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆和爸爸一起做餅乾。他們在烤箱旁等著，聞到餅乾的甜香。餅乾好了以後，他們配牛奶一起吃。",
+      "sentences": [],
+      "romanization": "shān mǔ hé bà bà yì qǐ zuò bǐng qián。 tā men zài kǎo xiāng páng děng zhù， wén dào bǐng qián de tián xiāng。 bǐng qián hǎo le yǐ hòu， tā men pèi niú nǎi yì qǐ chī。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們放了幾塊餅乾在盤子裡給媽媽，還在盤子旁留了一張紙條。",
+      "sentences": [],
+      "romanization": "tā men fàng le jǐ kuài bǐng qián zài pán zi lǐ gěi mā mā， hái zài pán zi páng liú le yī zhāng zhǐ tiáo。"
+    }
+  ]
+}

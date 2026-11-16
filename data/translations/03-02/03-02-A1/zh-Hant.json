@@ -1,0 +1,25 @@
+{
+  "storyId": "03-02",
+  "storyLevelId": "03-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "外面很冷。安娜走進一家小咖啡館。",
+      "sentences": [],
+      "romanization": "Wàimiàn hěn lěng. Ānnà zǒu jìn yì jiā xiǎo kāfēiguǎn."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她點了一杯茶。咖啡館的女士微笑著把茶端給她。",
+      "sentences": [],
+      "romanization": "Tā diǎn le yì bēi chá. Kāfēiguǎn de nǚshì wēixiàozhe bǎ chá duān gěi tā."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "安娜雙手捧著溫暖的杯子。她看著雨，慢慢享受時光。",
+      "sentences": [],
+      "romanization": "Ānnà shuāngshǒu pěngzhe wēnnuǎn de bēizi. Tā kànzhe yǔ, mànmàn xiǎngshòu shíguāng."
+    }
+  ]
+}

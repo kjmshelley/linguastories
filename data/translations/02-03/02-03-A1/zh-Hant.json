@@ -1,0 +1,25 @@
+{
+  "storyId": "02-03",
+  "storyLevelId": "02-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜和小美一起走回家。今天她們走了一條新路。",
+      "sentences": [],
+      "romanization": "Ānnà hé Xiǎoměi yìqǐ zǒu huí jiā. Jīntiān tāmen zǒu le yì tiáo xīn lù."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她們看到一座小公園和一個池塘。三隻鴨子在水裡游泳。",
+      "sentences": [],
+      "romanization": "Tāmen kàndào yí zuò xiǎo gōngyuán hé yí ge chítáng. Sān zhī yāzi zài shuǐ lǐ yóuyǒng."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "路很長，但她們不介意。她們有很多話要聊。",
+      "sentences": [],
+      "romanization": "Lù hěn cháng, dàn tāmen bú jièyì. Tāmen yǒu hěn duō huà yào liáo."
+    }
+  ]
+}

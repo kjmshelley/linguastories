@@ -1,0 +1,264 @@
+{
+  "storyId": "06-03",
+  "versions": [
+    {
+      "storyLevelId": "06-03-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " red"
+                },
+                {
+                  "id": "t5",
+                  "text": " door"
+                },
+                {
+                  "id": "t6",
+                  "text": " at"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " end"
+                },
+                {
+                  "id": "t9",
+                  "text": " of"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " hall"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Amy"
+                },
+                {
+                  "id": "t2",
+                  "text": " never"
+                },
+                {
+                  "id": "t3",
+                  "text": " opened"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " before"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " Grandpa"
+                },
+                {
+                  "id": "t4",
+                  "text": " about"
+                },
+                {
+                  "id": "t5",
+                  "text": " it"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " key"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " opens"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " door"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Inside"
+                },
+                {
+                  "id": "t2",
+                  "text": " are"
+                },
+                {
+                  "id": "t3",
+                  "text": " old"
+                },
+                {
+                  "id": "t4",
+                  "text": " books"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " big"
+                },
+                {
+                  "id": "t8",
+                  "text": " chair"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "This"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " my"
+                },
+                {
+                  "id": "t5",
+                  "text": " reading"
+                },
+                {
+                  "id": "t6",
+                  "text": " room"
+                },
+                {
+                  "id": "t7",
+                  "text": ",”"
+                },
+                {
+                  "id": "t8",
+                  "text": " he"
+                },
+                {
+                  "id": "t9",
+                  "text": " says"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

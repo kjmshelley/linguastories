@@ -1,0 +1,235 @@
+{
+  "storyId": "08-05",
+  "versions": [
+    {
+      "storyLevelId": "08-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " little"
+                },
+                {
+                  "id": "t5",
+                  "text": " sister"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " go"
+                },
+                {
+                  "id": "t8",
+                  "text": " for"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " walk"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " brings"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " favorite"
+                },
+                {
+                  "id": "t5",
+                  "text": " toy"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " walk"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " park"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " see"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " dog"
+                },
+                {
+                  "id": "t10",
+                  "text": " playing"
+                },
+                {
+                  "id": "t11",
+                  "text": " with"
+                },
+                {
+                  "id": "t12",
+                  "text": " a"
+                },
+                {
+                  "id": "t13",
+                  "text": " ball"
+                },
+                {
+                  "id": "t14",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "On"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " way"
+                },
+                {
+                  "id": "t4",
+                  "text": " home"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t7",
+                  "text": " carries"
+                },
+                {
+                  "id": "t8",
+                  "text": " her"
+                },
+                {
+                  "id": "t9",
+                  "text": " toy"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " holds"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " hand"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

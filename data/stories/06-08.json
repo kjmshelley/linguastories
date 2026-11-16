@@ -1,0 +1,246 @@
+{
+  "storyId": "06-08",
+  "versions": [
+    {
+      "storyLevelId": "06-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "May"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " blue"
+                },
+                {
+                  "id": "t5",
+                  "text": " hat"
+                },
+                {
+                  "id": "t6",
+                  "text": " on"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " chair"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " too"
+                },
+                {
+                  "id": "t4",
+                  "text": " big"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " too"
+                },
+                {
+                  "id": "t9",
+                  "text": " small"
+                },
+                {
+                  "id": "t10",
+                  "text": " for"
+                },
+                {
+                  "id": "t11",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " tries"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": " is"
+                },
+                {
+                  "id": "t9",
+                  "text": " hers"
+                },
+                {
+                  "id": "t10",
+                  "text": "!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " laughs"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " puts"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " hat"
+                },
+                {
+                  "id": "t7",
+                  "text": " by"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " door"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Now"
+                },
+                {
+                  "id": "t2",
+                  "text": " she"
+                },
+                {
+                  "id": "t3",
+                  "text": " will"
+                },
+                {
+                  "id": "t4",
+                  "text": " know"
+                },
+                {
+                  "id": "t5",
+                  "text": " where"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " find"
+                },
+                {
+                  "id": "t8",
+                  "text": " it"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

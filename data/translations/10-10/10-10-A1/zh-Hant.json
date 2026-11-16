@@ -1,0 +1,19 @@
+{
+  "storyId": "10-10",
+  "storyLevelId": "10-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉讀一本學校的書。到了最後一頁，狗回到了家。她微笑著合上書。",
+      "sentences": [],
+      "romanization": "Lìlì dú yì běn xuéxiào de shū. Dào le zuìhòu yí yè, gǒu huí dào le jiā. Tā wēixiàozhe hé shàng shū."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她把結局告訴朋友。朋友也想讀這本書。",
+      "sentences": [],
+      "romanization": "tā bǎ jié jú gào sù péng yǒu。 péng yǒu yě xiǎng dú zhè běn shū。"
+    }
+  ]
+}

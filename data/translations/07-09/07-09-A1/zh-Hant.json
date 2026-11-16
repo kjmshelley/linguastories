@@ -1,0 +1,19 @@
+{
+  "storyId": "07-09",
+  "storyLevelId": "07-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "老車站有一座大時鐘。湯姆和爸爸在時鐘下等火車。火車來時，湯姆向時鐘揮手說再見。",
+      "sentences": [],
+      "romanization": "lǎo chē zhàn yǒu yī zuò dà shí zhōng。 tāng mǔ hé bà bà zài shí zhōng xià děng huǒ chē。 huǒ chē lái shí， tāng mǔ xiàng shí zhōng huī shǒu shuō zài jiàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爸爸找到他們靠窗的座位。很快，老車站就被遠遠拋在後面。",
+      "sentences": [],
+      "romanization": "bà bà zhǎo dào tā men kào chuāng de zuò wèi。 hěn kuài， lǎo chē zhàn jiù bèi yuǎn yuǎn pāo zài hòu miàn。"
+    }
+  ]
+}

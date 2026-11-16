@@ -1,0 +1,248 @@
+{
+  "storyId": "05-04",
+  "versions": [
+    {
+      "storyLevelId": "05-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " family"
+                },
+                {
+                  "id": "t5",
+                  "text": " walk"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " lake"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " bring"
+                },
+                {
+                  "id": "t3",
+                  "text": " lunch"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " big"
+                },
+                {
+                  "id": "t7",
+                  "text": " blanket"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " water"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " blue"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " sees"
+                },
+                {
+                  "id": "t3",
+                  "text": " fish"
+                },
+                {
+                  "id": "t4",
+                  "text": " near"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " side"
+                },
+                {
+                  "id": "t7",
+                  "text": " of"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " lake"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " under"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " tree"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " watch"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " boats"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " wants"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " come"
+                },
+                {
+                  "id": "t5",
+                  "text": " back"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

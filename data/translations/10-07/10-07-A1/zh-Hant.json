@@ -1,0 +1,19 @@
+{
+  "storyId": "10-07",
+  "storyLevelId": "10-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "艾米在桌上找到一支藍筆。她問班上這是誰的筆。班舉起手，並向她道謝。",
+      "sentences": [],
+      "romanization": "ài mǐ zài zhuō shàng zhǎo dào yī zhī lán bǐ。 tā wèn bān shàng zhè shì shuí de bǐ。 bān jǔ qǐ shǒu， bìng xiàng tā dào xiè。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "艾米把筆還給他。班在筆上寫了名字，這樣就不會再弄丟了。",
+      "sentences": [],
+      "romanization": "ài mǐ bǎ bǐ hái gěi tā。 bān zài bǐ shàng xiě le míng zì， zhè yàng jiù bù huì zài nòng diū le。"
+    }
+  ]
+}

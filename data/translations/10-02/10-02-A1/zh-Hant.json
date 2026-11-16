@@ -1,0 +1,25 @@
+{
+  "storyId": "10-02",
+  "storyLevelId": "10-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆上課需要一本書。放學後他去了圖書館。",
+      "sentences": [],
+      "romanization": "Shānmǔ shàngkè xūyào yì běn shū. Fàngxué hòu tā qù le túshūguǎn."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他找不到那本書。櫃台的一位女士幫他找。",
+      "sentences": [],
+      "romanization": "Tā zhǎo bú dào nà běn shū. Guìtái de yí wèi nǚshì bāng tā zhǎo."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "最後，山姆在高高的書架上看見了它。「在這裡！」他說。",
+      "sentences": [],
+      "romanization": "Zuìhòu, Shānmǔ zài gāogāo de shūjià shàng kànjiàn le tā. “Zài zhèlǐ!” tā shuō."
+    }
+  ]
+}

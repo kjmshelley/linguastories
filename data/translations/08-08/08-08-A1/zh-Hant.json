@@ -1,0 +1,19 @@
+{
+  "storyId": "08-08",
+  "storyLevelId": "08-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "家人圍坐在大桌子旁。桌上有飯、湯和一碗水果。大家聊著自己今天的事。",
+      "sentences": [],
+      "romanization": "jiā rén wéi zuò zài dà zhuō zi páng。 zhuō shàng yǒu fàn、 tāng hé yī wǎn shuǐ guǒ。 dà jiā liáo zhù zì jǐ jīn tiān de shì。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "奶奶說了一個有趣的故事。大家都笑了，連小寶寶也笑了。",
+      "sentences": [],
+      "romanization": "nǎi nǎi shuō le yī gè yǒu qù de gù shì。 dà jiā dōu xiào le， lián xiǎo bǎo bǎo yě xiào le。"
+    }
+  ]
+}

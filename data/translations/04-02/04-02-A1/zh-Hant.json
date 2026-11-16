@@ -1,0 +1,25 @@
+{
+  "storyId": "04-02",
+  "storyLevelId": "04-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆看見花園裡有一隻貓。牠坐在一朵花下面。",
+      "sentences": [],
+      "romanization": "Shānmǔ kànjiàn huāyuán lǐ yǒu yì zhī māo. Tā zuò zài yì duǒ huā xiàmiàn."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "「你好。」山姆說。貓看著他，卻沒有動。",
+      "sentences": [],
+      "romanization": "“Nǐ hǎo.” Shānmǔ shuō. Māo kànzhe tā, què méiyǒu dòng."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "山姆坐在附近。過了一會兒，貓走過來，坐在他腳邊。",
+      "sentences": [],
+      "romanization": "Shānmǔ zuò zài fùjìn. Guò le yíhuìr, māo zǒu guòlái, zuò zài tā jiǎobiān."
+    }
+  ]
+}

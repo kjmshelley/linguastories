@@ -1,0 +1,25 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班想去外面玩，但正在下雨。他望向窗外。",
+      "sentences": [],
+      "romanization": "Bān xiǎng qù wàimiàn wán, dàn zhèngzài xiàyǔ. Tā wàng xiàng chuāng wài."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "媽媽給他紙和彩筆。「我們來畫雨吧。」她說。",
+      "sentences": [],
+      "romanization": "Māma gěi tā zhǐ hé cǎibǐ. “Wǒmen lái huà yǔ ba.” tā shuō."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "班還畫了藍天和一個大大的黃色太陽。他把畫貼在牆上。",
+      "sentences": [],
+      "romanization": "Bān hái huà le lán tiān hé yí ge dàdà de huángsè tàiyáng. Tā bǎ huà tiē zài qiáng shàng."
+    }
+  ]
+}

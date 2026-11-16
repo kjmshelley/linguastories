@@ -1,0 +1,25 @@
+{
+  "storyId": "05-03",
+  "storyLevelId": "05-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆和爸爸在樹林裡發現一條小路。他們想看看它通往哪裡。",
+      "sentences": [],
+      "romanization": "Tāngmǔ hé bàba zài shùlín lǐ fāxiàn yì tiáo xiǎo lù. Tāmen xiǎng kànkan tā tōngwǎng nǎli."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們走過高高的樹。湯姆聽見水聲，指向前方。",
+      "sentences": [],
+      "romanization": "Tāmen zǒu guò gāogāo de shù. Tāngmǔ tīngjiàn shuǐshēng, zhǐ xiàng qiánfāng."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "小路的盡頭有一條小溪。他們坐在溪邊吃午餐。",
+      "sentences": [],
+      "romanization": "Xiǎo lù de jìntóu yǒu yì tiáo xiǎo xī. Tāmen zuò zài xībiān chī wǔcān."
+    }
+  ]
+}

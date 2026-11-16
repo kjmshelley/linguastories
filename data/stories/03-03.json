@@ -1,0 +1,249 @@
+{
+  "storyId": "03-03",
+  "versions": [
+    {
+      "storyLevelId": "03-03-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " has"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " pear"
+                },
+                {
+                  "id": "t5",
+                  "text": " in"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " lunch"
+                },
+                {
+                  "id": "t8",
+                  "text": " bag"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " His"
+                },
+                {
+                  "id": "t2",
+                  "text": " friend"
+                },
+                {
+                  "id": "t3",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t4",
+                  "text": " has"
+                },
+                {
+                  "id": "t5",
+                  "text": " an"
+                },
+                {
+                  "id": "t6",
+                  "text": " apple"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "Let’s"
+                },
+                {
+                  "id": "t3",
+                  "text": " share"
+                },
+                {
+                  "id": "t4",
+                  "text": ",”"
+                },
+                {
+                  "id": "t5",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t6",
+                  "text": " says"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " cut"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " fruit"
+                },
+                {
+                  "id": "t5",
+                  "text": " into"
+                },
+                {
+                  "id": "t6",
+                  "text": " small"
+                },
+                {
+                  "id": "t7",
+                  "text": " pieces"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " pear"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " sweet"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " apple"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " good"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " too"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " everything"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

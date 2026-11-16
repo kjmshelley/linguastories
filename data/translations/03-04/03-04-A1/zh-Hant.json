@@ -1,0 +1,25 @@
+{
+  "storyId": "03-04",
+  "storyLevelId": "03-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美放學後肚子餓了。爸爸正在煮飯準備晚餐。",
+      "sentences": [],
+      "romanization": "xiǎo měi fàng xué hòu dǔ zi è le。 bà bà zhèng zài zhǔ fàn zhǔn bèi wǎn cān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她幫爸爸洗一些菜。爸爸把菜放進鍋裡。",
+      "sentences": [],
+      "romanization": "tā bāng bà bà xǐ yī xiē cài。 bà bà bǎ cài fàng jìn guō lǐ。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們一起吃飯和菜。小美又要了一碗。",
+      "sentences": [],
+      "romanization": "tā men yì qǐ chī fàn hé cài。 xiǎo měi yòu yào le yī wǎn。"
+    }
+  ]
+}

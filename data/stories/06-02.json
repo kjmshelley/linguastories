@@ -1,0 +1,276 @@
+{
+  "storyId": "06-02",
+  "versions": [
+    {
+      "storyLevelId": "06-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " small"
+                },
+                {
+                  "id": "t5",
+                  "text": " box"
+                },
+                {
+                  "id": "t6",
+                  "text": " at"
+                },
+                {
+                  "id": "t7",
+                  "text": " home"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " nothing"
+                },
+                {
+                  "id": "t4",
+                  "text": " in"
+                },
+                {
+                  "id": "t5",
+                  "text": " it"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "Whose"
+                },
+                {
+                  "id": "t3",
+                  "text": " box"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " this"
+                },
+                {
+                  "id": "t6",
+                  "text": "?”"
+                },
+                {
+                  "id": "t7",
+                  "text": " he"
+                },
+                {
+                  "id": "t8",
+                  "text": " asks"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " His"
+                },
+                {
+                  "id": "t2",
+                  "text": " grandma"
+                },
+                {
+                  "id": "t3",
+                  "text": " looks"
+                },
+                {
+                  "id": "t4",
+                  "text": " at"
+                },
+                {
+                  "id": "t5",
+                  "text": " it"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "It"
+                },
+                {
+                  "id": "t3",
+                  "text": " was"
+                },
+                {
+                  "id": "t4",
+                  "text": " mine"
+                },
+                {
+                  "id": "t5",
+                  "text": ",”"
+                },
+                {
+                  "id": "t6",
+                  "text": " she"
+                },
+                {
+                  "id": "t7",
+                  "text": " says"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "I"
+                },
+                {
+                  "id": "t3",
+                  "text": " used"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " my"
+                },
+                {
+                  "id": "t7",
+                  "text": " letters"
+                },
+                {
+                  "id": "t8",
+                  "text": ".”"
+                },
+                {
+                  "id": "t9",
+                  "text": " She"
+                },
+                {
+                  "id": "t10",
+                  "text": " tells"
+                },
+                {
+                  "id": "t11",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t12",
+                  "text": " about"
+                },
+                {
+                  "id": "t13",
+                  "text": " an"
+                },
+                {
+                  "id": "t14",
+                  "text": " old"
+                },
+                {
+                  "id": "t15",
+                  "text": " friend"
+                },
+                {
+                  "id": "t16",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

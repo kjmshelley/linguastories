@@ -1,0 +1,19 @@
+{
+  "storyId": "06-07",
+  "storyLevelId": "06-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆聽見花園裡有小鈴鐺的聲音。他跟著聲音找到一隻貓。鈴鐺就在貓的項圈上。",
+      "sentences": [],
+      "romanization": "tāng mǔ tīng jiàn huā yuán lǐ yǒu xiǎo líng dāng de shēng yīn。 tā gēn zhù shēng yīn zhǎo dào yī zhī māo。 líng dāng jiù zài māo de xiàng quān shàng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "貓走向湯姆。他給了牠一點水。",
+      "sentences": [],
+      "romanization": "māo zǒu xiàng tāng mǔ。 tā gěi le tā yī diǎn shuǐ。"
+    }
+  ]
+}

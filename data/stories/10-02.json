@@ -1,0 +1,252 @@
+{
+  "storyId": "10-02",
+  "versions": [
+    {
+      "storyLevelId": "10-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " needs"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " book"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " class"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " goes"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " library"
+                },
+                {
+                  "id": "t6",
+                  "text": " after"
+                },
+                {
+                  "id": "t7",
+                  "text": " school"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "He"
+                },
+                {
+                  "id": "t2",
+                  "text": " cannot"
+                },
+                {
+                  "id": "t3",
+                  "text": " find"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " book"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " A"
+                },
+                {
+                  "id": "t2",
+                  "text": " woman"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " desk"
+                },
+                {
+                  "id": "t6",
+                  "text": " helps"
+                },
+                {
+                  "id": "t7",
+                  "text": " him"
+                },
+                {
+                  "id": "t8",
+                  "text": " look"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "At"
+                },
+                {
+                  "id": "t2",
+                  "text": " last"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t5",
+                  "text": " sees"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " on"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " high"
+                },
+                {
+                  "id": "t10",
+                  "text": " shelf"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Here"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": "!”"
+                },
+                {
+                  "id": "t6",
+                  "text": " he"
+                },
+                {
+                  "id": "t7",
+                  "text": " says"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

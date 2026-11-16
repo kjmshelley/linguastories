@@ -1,0 +1,22 @@
+{
+  "storyId": "01-02",
+  "storyLevelId": "01-02-A1",
+  "sourceLanguage": "pt",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "O Sam volta para casa depois de um longo dia. A chuva toca na janela.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Ele faz chá quente e encontra o seu livro. Seu gato está sentado ao lado dele.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "O Sam lê uma página, depois duas. A casa é tranquila, e ele se sente bem.",
+      "sentences": []
+    }
+  ]
+}

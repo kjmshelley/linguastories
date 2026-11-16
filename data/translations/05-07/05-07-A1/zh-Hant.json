@@ -1,0 +1,19 @@
+{
+  "storyId": "05-07",
+  "storyLevelId": "05-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜和爸爸去一座山。他們走了一條短路，停下來看風景。從那裡看，小鎮顯得很小。",
+      "sentences": [],
+      "romanization": "ān nà hé bà bà qù yī zuò shān。 tā men zǒu le yī tiáo duǎn lù， tíng xià lái kàn fēng jǐng。 cóng nà lǐ kàn， xiǎo zhèn xiǎn dé hěn xiǎo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爸爸幫安娜拍了一張照片。他們在回家的路上看照片。",
+      "sentences": [],
+      "romanization": "bà bà bāng ān nà pāi le yī zhāng zhào piān。 tā men zài huí jiā de lù shàng kàn zhào piān。"
+    }
+  ]
+}

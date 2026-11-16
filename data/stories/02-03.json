@@ -1,0 +1,252 @@
+{
+  "storyId": "02-03",
+  "versions": [
+    {
+      "storyLevelId": "02-03-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " May"
+                },
+                {
+                  "id": "t4",
+                  "text": " walk"
+                },
+                {
+                  "id": "t5",
+                  "text": " home"
+                },
+                {
+                  "id": "t6",
+                  "text": " together"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Today"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " they"
+                },
+                {
+                  "id": "t4",
+                  "text": " take"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " new"
+                },
+                {
+                  "id": "t7",
+                  "text": " road"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " see"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " small"
+                },
+                {
+                  "id": "t5",
+                  "text": " park"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " pond"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Three"
+                },
+                {
+                  "id": "t2",
+                  "text": " ducks"
+                },
+                {
+                  "id": "t3",
+                  "text": " swim"
+                },
+                {
+                  "id": "t4",
+                  "text": " in"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " water"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " walk"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " long"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " but"
+                },
+                {
+                  "id": "t7",
+                  "text": " that"
+                },
+                {
+                  "id": "t8",
+                  "text": " is"
+                },
+                {
+                  "id": "t9",
+                  "text": " OK"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " have"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " lot"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " talk"
+                },
+                {
+                  "id": "t7",
+                  "text": " about"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

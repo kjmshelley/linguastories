@@ -1,0 +1,25 @@
+{
+  "storyId": "05-05",
+  "storyLevelId": "05-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭和爸爸正走向一座小山。路比米婭想的還要長。",
+      "sentences": [],
+      "romanization": "mǐ yà hé bà bà zhèng zǒu xiàng yī zuò xiǎo shān。 lù bǐ mǐ yà xiǎng de hái yào zhǎng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們停下來喝水。爸爸指著山頂說：「我們快到了。」",
+      "sentences": [],
+      "romanization": "tā men tíng xià lái hē shuǐ。 bà bà zhǐ zhù shān dǐng shuō：「wǒ men kuài dào le。」"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "到了山頂，米婭看見田野和房屋。米婭很高興他們走了這麼遠。",
+      "sentences": [],
+      "romanization": "Dào le shān dǐng, Mǐyà kànjiàn tiányě hé fángwū. Mǐyà hěn gāoxìng tāmen zǒu le zhème yuǎn."
+    }
+  ]
+}

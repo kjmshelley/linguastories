@@ -1,0 +1,222 @@
+{
+  "storyId": "09-10",
+  "versions": [
+    {
+      "storyLevelId": "09-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " tall"
+                },
+                {
+                  "id": "t5",
+                  "text": " tree"
+                },
+                {
+                  "id": "t6",
+                  "text": " near"
+                },
+                {
+                  "id": "t7",
+                  "text": " Tom’s"
+                },
+                {
+                  "id": "t8",
+                  "text": " home"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " In"
+                },
+                {
+                  "id": "t2",
+                  "text": " summer"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " he"
+                },
+                {
+                  "id": "t5",
+                  "text": " sits"
+                },
+                {
+                  "id": "t6",
+                  "text": " under"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": " with"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " book"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " leaves"
+                },
+                {
+                  "id": "t3",
+                  "text": " help"
+                },
+                {
+                  "id": "t4",
+                  "text": " him"
+                },
+                {
+                  "id": "t5",
+                  "text": " stay"
+                },
+                {
+                  "id": "t6",
+                  "text": " cool"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "One"
+                },
+                {
+                  "id": "t2",
+                  "text": " day"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " his"
+                },
+                {
+                  "id": "t5",
+                  "text": " friend"
+                },
+                {
+                  "id": "t6",
+                  "text": " joins"
+                },
+                {
+                  "id": "t7",
+                  "text": " him"
+                },
+                {
+                  "id": "t8",
+                  "text": " there"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " read"
+                },
+                {
+                  "id": "t3",
+                  "text": " their"
+                },
+                {
+                  "id": "t4",
+                  "text": " books"
+                },
+                {
+                  "id": "t5",
+                  "text": " side"
+                },
+                {
+                  "id": "t6",
+                  "text": " by"
+                },
+                {
+                  "id": "t7",
+                  "text": " side"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

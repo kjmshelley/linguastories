@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "pt",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia acorda cedo. A luz do sol ilumina sua cama. Ela ouve os pássaros lá fora.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia vai até a cozinha. Seu pai está preparando chá. “Bom dia”, diz ele.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Eles se sentam perto da janela e comem pão. Hoje não há necessidade de ter pressa. Mia sorri. É uma manhã quente e tranquila.",
+      "sentences": []
+    }
+  ]
+}

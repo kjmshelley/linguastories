@@ -1,0 +1,25 @@
+{
+  "storyId": "07-02",
+  "storyLevelId": "07-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉和媽媽去海邊。海水很藍，太陽暖暖的。",
+      "sentences": [],
+      "romanization": "Lìlì hé māma qù hǎibiān. Hǎishuǐ hěn lán, tàiyáng nuǎnnuǎn de."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "莉莉找到一個小貝殼。她拿給媽媽看。「看看這個！」",
+      "sentences": [],
+      "romanization": "Lìlì zhǎodào yí ge xiǎo bèiké. Tā ná gěi māma kàn. “Kànkan zhège!”"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "她們沿著海邊散步，一起吃午餐。莉莉把貝殼放進口袋。",
+      "sentences": [],
+      "romanization": "Tāmen yánzhe hǎibiān sànbù, yìqǐ chī wǔcān. Lìlì bǎ bèiké fàng jìn kǒudài."
+    }
+  ]
+}

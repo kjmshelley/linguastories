@@ -1,0 +1,19 @@
+{
+  "storyId": "07-07",
+  "storyLevelId": "07-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班早起搭火車。他透過窗戶看日出。到了車站，阿姨正在等他。",
+      "sentences": [],
+      "romanization": "bān zǎo qǐ dā huǒ chē。 tā tòu guò chuāng hù kàn rì chū。 dào le chē zhàn， ā yí zhèng zài děng tā。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "阿姨接過他的袋子，問他旅途如何。班說他在火車上看到一條河。",
+      "sentences": [],
+      "romanization": "ā yí jiē guò tā de dài zi， wèn tā lǚ tú rú hé。 bān shuō tā zài huǒ chē shàng kàn dào yī tiáo hé。"
+    }
+  ]
+}

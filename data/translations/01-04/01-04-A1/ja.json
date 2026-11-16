@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "ja",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "アンナは今日、家にいます。弟は学校に行っていて、家は静かです。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "彼女は部屋を掃除し、ベッドの下で古い写真を見つけます。写真には、海辺にいるアンナと弟が写っています。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "弟が家に帰ると、アンナは写真を見せます。二人は笑いながら、その日を思い出します。",
+      "sentences": []
+    }
+  ]
+}

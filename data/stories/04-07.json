@@ -1,0 +1,234 @@
+{
+  "storyId": "04-07",
+  "versions": [
+    {
+      "storyLevelId": "04-07-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " cat"
+                },
+                {
+                  "id": "t3",
+                  "text": " sleeps"
+                },
+                {
+                  "id": "t4",
+                  "text": " in"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " sunny"
+                },
+                {
+                  "id": "t7",
+                  "text": " place"
+                },
+                {
+                  "id": "t8",
+                  "text": " on"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " floor"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " soft"
+                },
+                {
+                  "id": "t5",
+                  "text": " blanket"
+                },
+                {
+                  "id": "t6",
+                  "text": " next"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " it"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " cat"
+                },
+                {
+                  "id": "t3",
+                  "text": " opens"
+                },
+                {
+                  "id": "t4",
+                  "text": " one"
+                },
+                {
+                  "id": "t5",
+                  "text": " eye"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " goes"
+                },
+                {
+                  "id": "t8",
+                  "text": " back"
+                },
+                {
+                  "id": "t9",
+                  "text": " to"
+                },
+                {
+                  "id": "t10",
+                  "text": " sleep"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " sits"
+                },
+                {
+                  "id": "t3",
+                  "text": " down"
+                },
+                {
+                  "id": "t4",
+                  "text": " with"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " book"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " reads"
+                },
+                {
+                  "id": "t3",
+                  "text": " quietly"
+                },
+                {
+                  "id": "t4",
+                  "text": " next"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " sleeping"
+                },
+                {
+                  "id": "t8",
+                  "text": " cat"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

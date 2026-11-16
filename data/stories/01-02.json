@@ -1,0 +1,244 @@
+{
+  "storyId": "01-02",
+  "versions": [
+    {
+      "storyLevelId": "01-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " comes"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": " after"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " long"
+                },
+                {
+                  "id": "t7",
+                  "text": " day"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Rain"
+                },
+                {
+                  "id": "t2",
+                  "text": " hits"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " window"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "He"
+                },
+                {
+                  "id": "t2",
+                  "text": " makes"
+                },
+                {
+                  "id": "t3",
+                  "text": " hot"
+                },
+                {
+                  "id": "t4",
+                  "text": " tea"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " finds"
+                },
+                {
+                  "id": "t7",
+                  "text": " his"
+                },
+                {
+                  "id": "t8",
+                  "text": " book"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " His"
+                },
+                {
+                  "id": "t2",
+                  "text": " cat"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " next"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " him"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " reads"
+                },
+                {
+                  "id": "t3",
+                  "text": " one"
+                },
+                {
+                  "id": "t4",
+                  "text": " page"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " then"
+                },
+                {
+                  "id": "t7",
+                  "text": " two"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " house"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " quiet"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " he"
+                },
+                {
+                  "id": "t8",
+                  "text": " feels"
+                },
+                {
+                  "id": "t9",
+                  "text": " good"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "storyId": "04-04",
+  "versions": [
+    {
+      "storyLevelId": "04-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " sees"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " rabbit"
+                },
+                {
+                  "id": "t5",
+                  "text": " near"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " garden"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Its"
+                },
+                {
+                  "id": "t2",
+                  "text": " ears"
+                },
+                {
+                  "id": "t3",
+                  "text": " are"
+                },
+                {
+                  "id": "t4",
+                  "text": " long"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " its"
+                },
+                {
+                  "id": "t7",
+                  "text": " nose"
+                },
+                {
+                  "id": "t8",
+                  "text": " is"
+                },
+                {
+                  "id": "t9",
+                  "text": " pink"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " does"
+                },
+                {
+                  "id": "t3",
+                  "text": " not"
+                },
+                {
+                  "id": "t4",
+                  "text": " move"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " rabbit"
+                },
+                {
+                  "id": "t3",
+                  "text": " eats"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " leaf"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " looks"
+                },
+                {
+                  "id": "t8",
+                  "text": " at"
+                },
+                {
+                  "id": "t9",
+                  "text": " her"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Then"
+                },
+                {
+                  "id": "t2",
+                  "text": " it"
+                },
+                {
+                  "id": "t3",
+                  "text": " runs"
+                },
+                {
+                  "id": "t4",
+                  "text": " into"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " grass"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " hopes"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " see"
+                },
+                {
+                  "id": "t5",
+                  "text": " it"
+                },
+                {
+                  "id": "t6",
+                  "text": " again"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "storyId": "09-01",
+  "storyLevelId": "09-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉每天都看著小花園。整個冬天，花園都是棕色的，很安靜。",
+      "sentences": [],
+      "romanization": "Lìlì měitiān dōu kànzhe xiǎo huāyuán. Zhěngge dōngtiān, huāyuán dōu shì zōngsè de, hěn ānjìng."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "一天早上，她看見一點黃色。那是一朵小花！她叫媽媽到窗邊來。",
+      "sentences": [],
+      "romanization": "Yì tiān zǎoshang, tā kànjiàn yìdiǎn huángsè. Nà shì yì duǒ xiǎo huā! Tā jiào māma dào chuāngbiān lái."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「春天到了。」媽媽說。莉莉給花澆了些水。她希望會有更多的花開出來。",
+      "sentences": [],
+      "romanization": "“Chūntiān dào le.” Māma shuō. Lìlì gěi huā jiāo le xiē shuǐ. Tā xīwàng huì yǒu gèng duō de huā kāi chūlái."
+    }
+  ]
+}

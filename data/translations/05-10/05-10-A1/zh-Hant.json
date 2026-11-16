@@ -1,0 +1,19 @@
+{
+  "storyId": "05-10",
+  "storyLevelId": "05-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班和爸爸一大早走去海邊。他們撿貝殼、聽海浪。回到家時正好趕上午餐。",
+      "sentences": [],
+      "romanization": "bān hé bà bà yī dà zǎo zǒu qù hǎi biān。 tā men jiǎn bèi ké、 tīng hǎi làng。 huí dào jiā shí zhèng hǎo gǎn shàng wǔ cān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "班把一個貝殼放在床邊。它讓他想起海浪的聲音。",
+      "sentences": [],
+      "romanization": "bān bǎ yī gè bèi ké fàng zài chuáng biān。 tā ràng tā xiǎng qǐ hǎi làng de shēng yīn。"
+    }
+  ]
+}

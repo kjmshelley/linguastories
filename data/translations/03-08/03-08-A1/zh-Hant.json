@@ -1,0 +1,19 @@
+{
+  "storyId": "03-08",
+  "storyLevelId": "03-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "天氣又冷又下雨。爸爸用紅蘿蔔和米煮了一鍋湯。家人坐在一起，趁熱喝湯。",
+      "sentences": [],
+      "romanization": "tiān qì yòu lěng yòu xià yǔ。 bà bà yòng hóng luó bó hé mǐ zhǔ le yī guō tāng。 jiā rén zuò zài yì qǐ， chèn rè hē tāng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "山姆問爸爸怎麼做湯。爸爸說下次他可以幫忙。",
+      "sentences": [],
+      "romanization": "shān mǔ wèn bà bà zěn me zuò tāng。 bà bà shuō xià cì tā kě yǐ bāng máng。"
+    }
+  ]
+}

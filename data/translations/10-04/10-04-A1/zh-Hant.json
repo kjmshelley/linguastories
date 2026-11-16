@@ -1,0 +1,25 @@
+{
+  "storyId": "10-04",
+  "storyLevelId": "10-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李的房間裡有一張新書桌。他把書桌放在窗邊。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ de fáng jiān lǐ yǒu yī zhāng xīn shū zhuō。 tā bǎ shū zhuō fàng zài chuāng biān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他把書和一支藍筆放在桌上。桌上還有空間放一盆小植物。",
+      "sentences": [],
+      "romanization": "tā bǎ shū hé yī zhī lán bǐ fàng zài zhuō shàng。 zhuō shàng hái yǒu kòng jiān fàng yī pén xiǎo zhí wù。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "小李坐下來畫畫。他喜歡這個新地方。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ zuò xià lái huà huà。 tā xǐ huān zhè gè xīn dì fāng。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "de",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Es ist Montagmorgen. Mia schaut sich die Woche in ihrem Kalender an.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Sie hat Schule, einen Besuch bei Großmutter und einen Tag im Park. Sie zeichnet Samstag einen Stern.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mia zieht ihre Schuhe an und nimmt ihre Tasche. Eine neue Woche ist da.",
+      "sentences": []
+    }
+  ]
+}

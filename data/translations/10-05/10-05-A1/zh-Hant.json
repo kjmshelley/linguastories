@@ -1,0 +1,25 @@
+{
+  "storyId": "10-05",
+  "storyLevelId": "10-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆準備好上學了，卻找不到書包。他看看門後。",
+      "sentences": [],
+      "romanization": "tāng mǔ zhǔn bèi hǎo shàng xué le， què zhǎo bú dào shū bāo。 tā kàn kàn mén hòu。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他看看桌下。接著媽媽指向椅子。",
+      "sentences": [],
+      "romanization": "tā kàn kàn zhuō xià。 jiē zhù mā mā zhǐ xiàng yǐ zi。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "書包就在椅子上，被他的外套蓋住了。湯姆拿起書包跑去搭公車。",
+      "sentences": [],
+      "romanization": "shū bāo jiù zài yǐ zi shàng， bèi tā de wài tào gài zhù le。 tāng mǔ ná qǐ shū bāo pǎo qù dā gōng chē。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "02-07",
+  "storyLevelId": "02-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆有一個藍色盒子要送給朋友山姆。裡面是一輛小玩具車。山姆打開後說：「它跟你的一模一樣！」",
+      "sentences": [],
+      "romanization": "tāng mǔ yǒu yī gè lán sè hé zi yào sòng gěi péng yǒu shān mǔ。 lǐ miàn shì yī liàng xiǎo wán jù chē。 shān mǔ dǎ kāi hòu shuō：「tā gēn nǐ de yī mó yī yàng！」"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "男孩們把車放在地板上。午餐後他們一起玩。",
+      "sentences": [],
+      "romanization": "nán hái men bǎ chē fàng zài dì bǎn shàng。 wǔ cān hòu tā men yì qǐ wán。"
+    }
+  ]
+}

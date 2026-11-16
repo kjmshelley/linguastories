@@ -1,0 +1,19 @@
+{
+  "storyId": "09-06",
+  "storyLevelId": "09-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆在小路上找到一片綠葉。葉子上有一小滴水。他給朋友看過之後，把葉子放回原處。",
+      "sentences": [],
+      "romanization": "shān mǔ zài xiǎo lù shàng zhǎo dào yī piàn lǜ yè。 yè zi shàng yǒu yī xiǎo dī shuǐ。 tā gěi péng yǒu kàn guò zhī hòu， bǎ yè zi fàng huí yuán chù。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們散步時找更多葉子。每一片都有些不同。",
+      "sentences": [],
+      "romanization": "tā men sàn bù shí zhǎo gèng duō yè zi。 měi yī piàn dōu yǒu xiē bù tóng。"
+    }
+  ]
+}

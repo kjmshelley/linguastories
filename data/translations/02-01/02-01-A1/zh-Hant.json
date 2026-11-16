@@ -1,0 +1,25 @@
+{
+  "storyId": "02-01",
+  "storyLevelId": "02-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班上有個新來的女孩坐在山姆旁邊。她叫小美。她有一個藍色的書包和一支紅筆。",
+      "sentences": [],
+      "romanization": "Bān shàng yǒu ge xīn lái de nǚhái zuò zài Shānmǔ pángbiān. Tā jiào Xiǎoměi. Tā yǒu yí ge lánsè de shūbāo hé yì zhī hóng bǐ."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "午餐時，小美一個人坐著。山姆拿著食物走過去。「我可以坐這裡嗎？」他問。",
+      "sentences": [],
+      "romanization": "Wǔcān shí, Xiǎoměi yí ge rén zuòzhe. Shānmǔ názhe shíwù zǒu guòqù. “Wǒ kěyǐ zuò zhèlǐ ma?” tā wèn."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "小美笑了。他們聊起自己的貓。午餐後，他們一起走回教室。",
+      "sentences": [],
+      "romanization": "Xiǎoměi xiào le. Tāmen liáo qǐ zìjǐ de māo. Wǔcān hòu, tāmen yìqǐ zǒu huí jiàoshì."
+    }
+  ]
+}

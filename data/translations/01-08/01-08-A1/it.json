@@ -1,0 +1,17 @@
+{
+  "storyId": "01-08",
+  "storyLevelId": "01-08-A1",
+  "sourceLanguage": "it",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna è seduta fuori con un libro. Il sole splende e un uccellino canta sull’albero. Lei legge fino all’ora di cena.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "La sua parte preferita parla di un cagnolino. Ne parla alla sua famiglia.",
+      "sentences": []
+    }
+  ]
+}

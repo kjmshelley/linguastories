@@ -1,0 +1,238 @@
+{
+  "storyId": "05-06",
+  "versions": [
+    {
+      "storyLevelId": "05-06-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " map"
+                },
+                {
+                  "id": "t5",
+                  "text": " of"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " park"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " May"
+                },
+                {
+                  "id": "t4",
+                  "text": " follow"
+                },
+                {
+                  "id": "t5",
+                  "text": " it"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " small"
+                },
+                {
+                  "id": "t9",
+                  "text": " pond"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " draw"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " star"
+                },
+                {
+                  "id": "t5",
+                  "text": " on"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " map"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " show"
+                },
+                {
+                  "id": "t10",
+                  "text": " their"
+                },
+                {
+                  "id": "t11",
+                  "text": " favorite"
+                },
+                {
+                  "id": "t12",
+                  "text": " place"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " sit"
+                },
+                {
+                  "id": "t3",
+                  "text": " by"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " water"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " eat"
+                },
+                {
+                  "id": "t8",
+                  "text": " an"
+                },
+                {
+                  "id": "t9",
+                  "text": " apple"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Then"
+                },
+                {
+                  "id": "t2",
+                  "text": " they"
+                },
+                {
+                  "id": "t3",
+                  "text": " follow"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " map"
+                },
+                {
+                  "id": "t6",
+                  "text": " home"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

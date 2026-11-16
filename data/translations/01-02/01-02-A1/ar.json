@@ -1,0 +1,22 @@
+{
+  "storyId": "01-02",
+  "storyLevelId": "01-02-A1",
+  "sourceLanguage": "ar",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "يعود سام إلى البيت بعد يوم طويل. تنقر قطرات المطر على النافذة.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "يعدّ شايًا ساخنًا ويجد كتابه. تجلس قطته بجانبه.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "يقرأ سام صفحة، ثم صفحتين. البيت هادئ، وهو يشعر بالراحة.",
+      "sentences": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "storyId": "01-02",
+  "storyLevelId": "01-02-A1",
+  "sourceLanguage": "ja",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "サムは長い一日を終えて家に帰ります。雨が窓をたたいています。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "彼は熱いお茶を入れ、本を見つけます。猫が彼の隣に座っています。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "サムは一ページ、そして二ページと読みます。家は静かで、彼はいい気分です。",
+      "sentences": []
+    }
+  ]
+}

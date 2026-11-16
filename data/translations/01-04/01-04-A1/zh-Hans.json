@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "zh-Hans",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜今天待在家。弟弟在学校，屋子很安静。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她打扫房间，在床下找到一张旧照片。照片里，她和弟弟在海边。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "弟弟回家后，她把照片给他看。他们笑着想起那一天。",
+      "sentences": []
+    }
+  ]
+}

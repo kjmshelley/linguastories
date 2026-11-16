@@ -1,0 +1,260 @@
+{
+  "storyId": "07-05",
+  "versions": [
+    {
+      "storyLevelId": "07-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " visits"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " big"
+                },
+                {
+                  "id": "t5",
+                  "text": " city"
+                },
+                {
+                  "id": "t6",
+                  "text": " for"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " first"
+                },
+                {
+                  "id": "t9",
+                  "text": " time"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " There"
+                },
+                {
+                  "id": "t2",
+                  "text": " are"
+                },
+                {
+                  "id": "t3",
+                  "text": " tall"
+                },
+                {
+                  "id": "t4",
+                  "text": " buildings"
+                },
+                {
+                  "id": "t5",
+                  "text": " everywhere"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " mom"
+                },
+                {
+                  "id": "t5",
+                  "text": " take"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " train"
+                },
+                {
+                  "id": "t8",
+                  "text": " under"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " city"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " get"
+                },
+                {
+                  "id": "t3",
+                  "text": " off"
+                },
+                {
+                  "id": "t4",
+                  "text": " near"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " museum"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " sees"
+                },
+                {
+                  "id": "t3",
+                  "text": " paintings"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " very"
+                },
+                {
+                  "id": "t7",
+                  "text": " big"
+                },
+                {
+                  "id": "t8",
+                  "text": " dinosaur"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " tells"
+                },
+                {
+                  "id": "t3",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t4",
+                  "text": " all"
+                },
+                {
+                  "id": "t5",
+                  "text": " about"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " later"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

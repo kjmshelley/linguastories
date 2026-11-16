@@ -1,0 +1,17 @@
+{
+  "storyId": "01-08",
+  "storyLevelId": "01-08-A1",
+  "sourceLanguage": "fr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna est assise dehors avec un livre. Le soleil brille et un oiseau chante dans l’arbre. Elle lit jusqu’à l’heure du dîner.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Son passage préféré parle d’un petit chien. Elle le raconte à sa famille.",
+      "sentences": []
+    }
+  ]
+}

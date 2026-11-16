@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "fr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna reste à la maison aujourd'hui. Son frère est à l'école, et la maison est calme.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Elle nettoie sa chambre et trouve une vieille photo sous son lit. Elle et son frère sont à la mer.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Quand il rentre, elle lui montre la photo. Ils rient et se souviennent de ce jour.",
+      "sentences": []
+    }
+  ]
+}

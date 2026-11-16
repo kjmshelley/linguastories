@@ -1,0 +1,19 @@
+{
+  "storyId": "01-07",
+  "storyLevelId": "01-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭上學快遲到了。她穿上鞋，跑去搭公車。朋友幫她留了一個座位。",
+      "sentences": [],
+      "romanization": "mǐ yà shàng xué kuài chí dào le。 tā chuān shàng xié， pǎo qù dā gōng chē。 péng yǒu bāng tā liú le yī gè zuò wèi。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "米婭坐下來，深深吸了一口氣。「我趕上了。」她說。",
+      "sentences": [],
+      "romanization": "mǐ yà zuò xià lái， shēn shēn xī le yī kǒu qì。「wǒ gǎn shàng le。」 tā shuō。"
+    }
+  ]
+}

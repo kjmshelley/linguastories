@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "vi",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Hôm nay Anna ở nhà. Em trai cô đang ở trường và ngôi nhà rất yên tĩnh.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Cô dọn phòng và tìm thấy một bức ảnh cũ dưới gầm giường. Trong ảnh, cô và em trai đang ở bên bờ biển.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Khi em trai về nhà, cô cho em xem bức ảnh. Hai người bật cười và nhớ lại ngày hôm đó.",
+      "sentences": []
+    }
+  ]
+}

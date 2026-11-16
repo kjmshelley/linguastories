@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "tr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Pazartesi sabahıdır. Mia takvimindeki haftaya bakar.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Okul, büyükannesini ziyaret ve parkta geçireceği bir gün vardır. Cumartesiye bir yıldız çizer.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mia ayakkabılarını giyer ve çantasını alır. Yeni bir hafta başlamıştır.",
+      "sentences": []
+    }
+  ]
+}

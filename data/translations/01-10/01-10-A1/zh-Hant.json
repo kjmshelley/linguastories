@@ -1,0 +1,19 @@
+{
+  "storyId": "01-10",
+  "storyLevelId": "01-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李幫媽媽做早餐。後來，他和朋友玩。晚上，他告訴爸爸今天過得很好。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ bāng mā mā zuò zǎo cān。 hòu lái， tā hé péng yǒu wán。 wǎn shàng， tā gào sù bà bà jīn tiān guò dé hěn hǎo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爸爸聽著笑了。「你玩得開心，我很高興。」他說。",
+      "sentences": [],
+      "romanization": "bà bà tīng zhù xiào le。「nǐ wán dé kāi xīn， wǒ hěn gāo xìng。」 tā shuō。"
+    }
+  ]
+}

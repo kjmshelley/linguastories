@@ -1,0 +1,248 @@
+{
+  "storyId": "05-02",
+  "versions": [
+    {
+      "storyLevelId": "05-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " May"
+                },
+                {
+                  "id": "t4",
+                  "text": " walk"
+                },
+                {
+                  "id": "t5",
+                  "text": " by"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " river"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " see"
+                },
+                {
+                  "id": "t3",
+                  "text": " an"
+                },
+                {
+                  "id": "t4",
+                  "text": " old"
+                },
+                {
+                  "id": "t5",
+                  "text": " bridge"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "Where"
+                },
+                {
+                  "id": "t3",
+                  "text": " does"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " go"
+                },
+                {
+                  "id": "t6",
+                  "text": "?”"
+                },
+                {
+                  "id": "t7",
+                  "text": " May"
+                },
+                {
+                  "id": "t8",
+                  "text": " asks"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " walk"
+                },
+                {
+                  "id": "t3",
+                  "text": " across"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " find"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " little"
+                },
+                {
+                  "id": "t8",
+                  "text": " garden"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "There"
+                },
+                {
+                  "id": "t2",
+                  "text": " are"
+                },
+                {
+                  "id": "t3",
+                  "text": " red"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " yellow"
+                },
+                {
+                  "id": "t6",
+                  "text": " flowers"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " sit"
+                },
+                {
+                  "id": "t3",
+                  "text": " there"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " listen"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " water"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "storyId": "01-05",
+  "versions": [
+    {
+      "storyLevelId": "01-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " Monday"
+                },
+                {
+                  "id": "t4",
+                  "text": " morning"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " week"
+                },
+                {
+                  "id": "t6",
+                  "text": " on"
+                },
+                {
+                  "id": "t7",
+                  "text": " her"
+                },
+                {
+                  "id": "t8",
+                  "text": " calendar"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " will"
+                },
+                {
+                  "id": "t3",
+                  "text": " go"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " school"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " visit"
+                },
+                {
+                  "id": "t8",
+                  "text": " Grandma"
+                },
+                {
+                  "id": "t9",
+                  "text": ","
+                },
+                {
+                  "id": "t10",
+                  "text": " and"
+                },
+                {
+                  "id": "t11",
+                  "text": " go"
+                },
+                {
+                  "id": "t12",
+                  "text": " to"
+                },
+                {
+                  "id": "t13",
+                  "text": " the"
+                },
+                {
+                  "id": "t14",
+                  "text": " park"
+                },
+                {
+                  "id": "t15",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " draws"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " star"
+                },
+                {
+                  "id": "t5",
+                  "text": " on"
+                },
+                {
+                  "id": "t6",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " on"
+                },
+                {
+                  "id": "t4",
+                  "text": " her"
+                },
+                {
+                  "id": "t5",
+                  "text": " shoes"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " takes"
+                },
+                {
+                  "id": "t8",
+                  "text": " her"
+                },
+                {
+                  "id": "t9",
+                  "text": " bag"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " A"
+                },
+                {
+                  "id": "t2",
+                  "text": " new"
+                },
+                {
+                  "id": "t3",
+                  "text": " week"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " here"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

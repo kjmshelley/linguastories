@@ -1,0 +1,17 @@
+{
+  "storyId": "01-06",
+  "storyLevelId": "01-06-A1",
+  "sourceLanguage": "ko",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "일요일에 샘은 늦게 일어납니다. 누나와 함께 아침을 만듭니다. 두 사람은 천천히 먹으며 음악을 듣습니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "아침 식사 후 두 사람은 함께 설거지를 합니다. 오늘은 아무것도 하지 않고 쉴 시간이 있습니다.",
+      "sentences": []
+    }
+  ]
+}

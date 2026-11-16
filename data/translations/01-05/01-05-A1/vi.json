@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "vi",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Hôm nay là sáng thứ Hai. Mia nhìn vào tuần trên lịch của mình.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Cô ấy đi học, đến thăm bà ngoại và đi công viên một ngày. Cô ấy vẽ một ngôi sao vào thứ Bảy.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mia mặc giày và mang túi. Một tuần mới đã đến.",
+      "sentences": []
+    }
+  ]
+}

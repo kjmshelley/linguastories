@@ -1,0 +1,19 @@
+{
+  "storyId": "07-10",
+  "storyLevelId": "07-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "艾米和媽媽搭公車去一個新城鎮。她們找到一座公園和一家賣新鮮麵包的店。回家前，她們買了一條麵包給爸爸。",
+      "sentences": [],
+      "romanization": "ài mǐ hé mā mā dā gōng chē qù yī gè xīn chéng zhèn。 tā men zhǎo dào yī zuò gōng yuán hé yī jiā mài xīn xiān miàn bāo de diàn。 huí jiā qián， tā men mǎi le yī tiáo miàn bāo gěi bà bà。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她們回家後，爸爸切了麵包。她們向他說起那個城鎮。",
+      "sentences": [],
+      "romanization": "tā men huí jiā hòu， bà bà qiè le miàn bāo。 tā men xiàng tā shuō qǐ nà gè chéng zhèn。"
+    }
+  ]
+}

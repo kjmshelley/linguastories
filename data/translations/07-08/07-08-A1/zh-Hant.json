@@ -1,0 +1,19 @@
+{
+  "storyId": "07-08",
+  "storyLevelId": "07-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美和家人去湖邊。他們在水邊吃午餐，看見一隻白鳥。小美拍了一張照片給朋友看。",
+      "sentences": [],
+      "romanization": "xiǎo měi hé jiā rén qù hú biān。 tā men zài shuǐ biān chī wǔ cān， kàn jiàn yī zhī bái niǎo。 xiǎo měi pāi le yī zhāng zhào piān gěi péng yǒu kàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她的朋友也喜歡鳥。小美想下次和朋友一起來。",
+      "sentences": [],
+      "romanization": "tā de péng yǒu yě xǐ huān niǎo。 xiǎo měi xiǎng xià cì hé péng yǒu yì qǐ lái。"
+    }
+  ]
+}

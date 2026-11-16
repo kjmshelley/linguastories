@@ -1,0 +1,19 @@
+{
+  "storyId": "03-09",
+  "storyLevelId": "03-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜家裡有柳橙。她和媽媽做柳橙汁當早餐飲料。安娜為每個人倒了一杯。",
+      "sentences": [],
+      "romanization": "ān nà jiā lǐ yǒu liǔ chéng。 tā hé mā mā zuò liǔ chéng zhī dāng zǎo cān yǐn liào。 ān nà wèi měi gè rén dào le yī bēi。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爸爸喝了一口，笑了。「真好喝。」他說。",
+      "sentences": [],
+      "romanization": "bà bà hē le yī kǒu， xiào le。「zhēn hǎo hē。」 tā shuō。"
+    }
+  ]
+}

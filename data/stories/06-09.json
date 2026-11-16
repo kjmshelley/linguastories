@@ -1,0 +1,230 @@
+{
+  "storyId": "06-09",
+  "versions": [
+    {
+      "storyLevelId": "06-09-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " an"
+                },
+                {
+                  "id": "t4",
+                  "text": " old"
+                },
+                {
+                  "id": "t5",
+                  "text": " photo"
+                },
+                {
+                  "id": "t6",
+                  "text": " in"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " book"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " A"
+                },
+                {
+                  "id": "t2",
+                  "text": " boy"
+                },
+                {
+                  "id": "t3",
+                  "text": " in"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " photo"
+                },
+                {
+                  "id": "t6",
+                  "text": " is"
+                },
+                {
+                  "id": "t7",
+                  "text": " holding"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " dog"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Grandpa"
+                },
+                {
+                  "id": "t2",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " says"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " “"
+                },
+                {
+                  "id": "t7",
+                  "text": "That"
+                },
+                {
+                  "id": "t8",
+                  "text": " boy"
+                },
+                {
+                  "id": "t9",
+                  "text": " is"
+                },
+                {
+                  "id": "t10",
+                  "text": " me"
+                },
+                {
+                  "id": "t11",
+                  "text": ".”"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Grandpa"
+                },
+                {
+                  "id": "t2",
+                  "text": " tells"
+                },
+                {
+                  "id": "t3",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " dog’s"
+                },
+                {
+                  "id": "t6",
+                  "text": " name"
+                },
+                {
+                  "id": "t7",
+                  "text": " was"
+                },
+                {
+                  "id": "t8",
+                  "text": " Coco"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " look"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " more"
+                },
+                {
+                  "id": "t5",
+                  "text": " photos"
+                },
+                {
+                  "id": "t6",
+                  "text": " together"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

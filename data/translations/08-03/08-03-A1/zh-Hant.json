@@ -1,0 +1,25 @@
+{
+  "storyId": "08-03",
+  "storyLevelId": "08-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "明天是奶奶的生日。米婭想送她一件特別的禮物。",
+      "sentences": [],
+      "romanization": "Míngtiān shì nǎinai de shēngrì. Mǐyà xiǎng sòng tā yí jiàn tèbié de lǐwù."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她畫了一張全家人的圖。然後把畫放進藍色相框裡。",
+      "sentences": [],
+      "romanization": "Tā huà le yì zhāng quánjiārén de tú. Ránhòu bǎ huà fàng jìn lánsè xiàngkuàng lǐ."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "奶奶打開禮物，給米婭一個大大的擁抱。「我很喜歡。」她說。",
+      "sentences": [],
+      "romanization": "Nǎinai dǎkāi lǐwù, gěi Mǐyà yí ge dàdà de yǒngbào. “Wǒ hěn xǐhuān.” tā shuō."
+    }
+  ]
+}

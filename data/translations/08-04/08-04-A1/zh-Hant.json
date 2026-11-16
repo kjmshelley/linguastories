@@ -1,0 +1,25 @@
+{
+  "storyId": "08-04",
+  "storyLevelId": "08-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "爸爸找到一張舊的全家福。照片裡，奶奶還是個小女孩。",
+      "sentences": [],
+      "romanization": "bà bà zhǎo dào yī zhāng jiù de quán jiā fú。 zhào piān lǐ， nǎi nǎi hái shì gè xiǎo nǚ hái。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "班問照片裡的人是誰。爸爸告訴他們的名字。",
+      "sentences": [],
+      "romanization": "bān wèn zhào piān lǐ de rén shì shuí。 bà bà gào sù tā men de míng zì。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們把照片放在桌上。現在大家都能看到了。",
+      "sentences": [],
+      "romanization": "tā men bǎ zhào piān fàng zài zhuō shàng。 xiàn zài dà jiā dōu néng kàn dào le。"
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "storyId": "01-04",
+  "versions": [
+    {
+      "storyLevelId": "01-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " stays"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": " today"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " brother"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " at"
+                },
+                {
+                  "id": "t5",
+                  "text": " school"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " house"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " quiet"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " cleans"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " room"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " finds"
+                },
+                {
+                  "id": "t7",
+                  "text": " an"
+                },
+                {
+                  "id": "t8",
+                  "text": " old"
+                },
+                {
+                  "id": "t9",
+                  "text": " photo"
+                },
+                {
+                  "id": "t10",
+                  "text": " under"
+                },
+                {
+                  "id": "t11",
+                  "text": " her"
+                },
+                {
+                  "id": "t12",
+                  "text": " bed"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " In"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " photo"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " she"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " her"
+                },
+                {
+                  "id": "t8",
+                  "text": " brother"
+                },
+                {
+                  "id": "t9",
+                  "text": " are"
+                },
+                {
+                  "id": "t10",
+                  "text": " by"
+                },
+                {
+                  "id": "t11",
+                  "text": " the"
+                },
+                {
+                  "id": "t12",
+                  "text": " sea"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "When"
+                },
+                {
+                  "id": "t2",
+                  "text": " he"
+                },
+                {
+                  "id": "t3",
+                  "text": " comes"
+                },
+                {
+                  "id": "t4",
+                  "text": " home"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " she"
+                },
+                {
+                  "id": "t7",
+                  "text": " shows"
+                },
+                {
+                  "id": "t8",
+                  "text": " him"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " photo"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " laugh"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " remember"
+                },
+                {
+                  "id": "t5",
+                  "text": " that"
+                },
+                {
+                  "id": "t6",
+                  "text": " day"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "storyId": "06-04",
+  "versions": [
+    {
+      "storyLevelId": "06-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " cannot"
+                },
+                {
+                  "id": "t3",
+                  "text": " find"
+                },
+                {
+                  "id": "t4",
+                  "text": " her"
+                },
+                {
+                  "id": "t5",
+                  "text": " library"
+                },
+                {
+                  "id": "t6",
+                  "text": " book"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " in"
+                },
+                {
+                  "id": "t4",
+                  "text": " her"
+                },
+                {
+                  "id": "t5",
+                  "text": " room"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " in"
+                },
+                {
+                  "id": "t8",
+                  "text": " her"
+                },
+                {
+                  "id": "t9",
+                  "text": " bag"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " brother"
+                },
+                {
+                  "id": "t3",
+                  "text": " asks"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " “"
+                },
+                {
+                  "id": "t6",
+                  "text": "Did"
+                },
+                {
+                  "id": "t7",
+                  "text": " you"
+                },
+                {
+                  "id": "t8",
+                  "text": " read"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " on"
+                },
+                {
+                  "id": "t11",
+                  "text": " the"
+                },
+                {
+                  "id": "t12",
+                  "text": " bus"
+                },
+                {
+                  "id": "t13",
+                  "text": "?”"
+                },
+                {
+                  "id": "t14",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t15",
+                  "text": " remembers"
+                },
+                {
+                  "id": "t16",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " read"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " bus"
+                },
+                {
+                  "id": "t7",
+                  "text": "!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " call"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " bus"
+                },
+                {
+                  "id": "t5",
+                  "text": " station"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " A"
+                },
+                {
+                  "id": "t2",
+                  "text": " driver"
+                },
+                {
+                  "id": "t3",
+                  "text": " has"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " book"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " glad"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " get"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " back"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

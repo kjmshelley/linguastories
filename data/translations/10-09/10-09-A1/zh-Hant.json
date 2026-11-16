@@ -1,0 +1,19 @@
+{
+  "storyId": "10-09",
+  "storyLevelId": "10-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆不知道課堂上的答案。他舉手問了一個問題。老師解釋後，山姆明白了。",
+      "sentences": [],
+      "romanization": "shān mǔ bù zhī dào kè táng shàng de dá àn。 tā jǔ shǒu wèn le yī gè wèn tí。 lǎo shī jiě shì hòu， shān mǔ míng bái le。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "下課後，朋友謝謝他。她也想問同一個問題。",
+      "sentences": [],
+      "romanization": "xià kè hòu， péng yǒu xiè xiè tā。 tā yě xiǎng wèn tóng yī gè wèn tí。"
+    }
+  ]
+}

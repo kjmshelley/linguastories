@@ -1,0 +1,248 @@
+{
+  "storyId": "09-02",
+  "versions": [
+    {
+      "storyLevelId": "09-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " big"
+                },
+                {
+                  "id": "t5",
+                  "text": " tree"
+                },
+                {
+                  "id": "t6",
+                  "text": " in"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " park"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " goes"
+                },
+                {
+                  "id": "t3",
+                  "text": " there"
+                },
+                {
+                  "id": "t4",
+                  "text": " after"
+                },
+                {
+                  "id": "t5",
+                  "text": " school"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " sits"
+                },
+                {
+                  "id": "t3",
+                  "text": " under"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " tree"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " draws"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " birds"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " One"
+                },
+                {
+                  "id": "t2",
+                  "text": " bird"
+                },
+                {
+                  "id": "t3",
+                  "text": " comes"
+                },
+                {
+                  "id": "t4",
+                  "text": " very"
+                },
+                {
+                  "id": "t5",
+                  "text": " close"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " sits"
+                },
+                {
+                  "id": "t3",
+                  "text": " still"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " bird"
+                },
+                {
+                  "id": "t3",
+                  "text": " looks"
+                },
+                {
+                  "id": "t4",
+                  "text": " at"
+                },
+                {
+                  "id": "t5",
+                  "text": " her"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " then"
+                },
+                {
+                  "id": "t8",
+                  "text": " flies"
+                },
+                {
+                  "id": "t9",
+                  "text": " up"
+                },
+                {
+                  "id": "t10",
+                  "text": " into"
+                },
+                {
+                  "id": "t11",
+                  "text": " the"
+                },
+                {
+                  "id": "t12",
+                  "text": " tree"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

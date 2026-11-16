@@ -1,0 +1,254 @@
+{
+  "storyId": "07-07",
+  "versions": [
+    {
+      "storyLevelId": "07-07-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " gets"
+                },
+                {
+                  "id": "t3",
+                  "text": " up"
+                },
+                {
+                  "id": "t4",
+                  "text": " early"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " take"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " train"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " out"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " window"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " watches"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " sun"
+                },
+                {
+                  "id": "t10",
+                  "text": " come"
+                },
+                {
+                  "id": "t11",
+                  "text": " up"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " station"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " his"
+                },
+                {
+                  "id": "t6",
+                  "text": " aunt"
+                },
+                {
+                  "id": "t7",
+                  "text": " is"
+                },
+                {
+                  "id": "t8",
+                  "text": " waiting"
+                },
+                {
+                  "id": "t9",
+                  "text": " for"
+                },
+                {
+                  "id": "t10",
+                  "text": " him"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " bag"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " asks"
+                },
+                {
+                  "id": "t7",
+                  "text": " about"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " ride"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " says"
+                },
+                {
+                  "id": "t3",
+                  "text": " he"
+                },
+                {
+                  "id": "t4",
+                  "text": " saw"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " river"
+                },
+                {
+                  "id": "t7",
+                  "text": " from"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " train"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

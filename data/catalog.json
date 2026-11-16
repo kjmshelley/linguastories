@@ -1,0 +1,2828 @@
+{
+  "genres": [
+    "Everyday Life",
+    "Friendship",
+    "Food & Cafés",
+    "Animals",
+    "Adventure",
+    "Mystery",
+    "Travel",
+    "Family",
+    "Nature",
+    "School & Work"
+  ],
+  "stories": [
+    {
+      "id": "01-01",
+      "orderId": 1,
+      "title": "A Warm Morning",
+      "description": "Mia wakes up early.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-01-A1",
+          "level": "A1",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-01/01-01-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-01/01-01-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-01/01-01-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-01/01-01-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-01/01-01-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-01/01-01-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-01/01-01-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-01/01-01-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-01/01-01-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-01/01-01-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-01/01-01-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-01/01-01-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-01/01-01-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-01/01-01-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-01/01-01-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-01/01-01-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-01/01-01-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-01/01-01-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-02",
+      "orderId": 2,
+      "title": "A Quiet Evening",
+      "description": "Sam comes home after a long day.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-02-A1",
+          "level": "A1",
+          "url": "/content/stories/01-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-02/01-02-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-02/01-02-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-02/01-02-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-02/01-02-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-02/01-02-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-02/01-02-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-02/01-02-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-02/01-02-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-02/01-02-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-02/01-02-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-02/01-02-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-02/01-02-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-02/01-02-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-02/01-02-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-02/01-02-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-02/01-02-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-02/01-02-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-02/01-02-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-03",
+      "orderId": 3,
+      "title": "A Rainy Day",
+      "description": "Ben wants to play outside, but it is raining.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-03-A1",
+          "level": "A1",
+          "url": "/content/stories/01-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-03/01-03-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-03/01-03-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-03/01-03-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-03/01-03-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-03/01-03-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-03/01-03-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-03/01-03-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-03/01-03-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-03/01-03-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-03/01-03-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-03/01-03-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-03/01-03-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-03/01-03-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-03/01-03-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-03/01-03-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-03/01-03-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-03/01-03-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-03/01-03-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-04",
+      "orderId": 4,
+      "title": "A Day at Home",
+      "description": "Anna stays home today.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-04-A1",
+          "level": "A1",
+          "url": "/content/stories/01-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-04/01-04-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-04/01-04-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-04/01-04-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-04/01-04-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-04/01-04-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-04/01-04-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-04/01-04-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-04/01-04-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-04/01-04-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-04/01-04-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-04/01-04-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-04/01-04-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-04/01-04-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-04/01-04-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-04/01-04-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-04/01-04-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-04/01-04-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-04/01-04-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-05",
+      "orderId": 5,
+      "title": "A New Week",
+      "description": "It is Monday morning.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-05-A1",
+          "level": "A1",
+          "url": "/content/stories/01-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-05/01-05-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-05/01-05-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-05/01-05-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-05/01-05-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-05/01-05-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-05/01-05-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-05/01-05-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-05/01-05-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-05/01-05-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-05/01-05-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-05/01-05-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-05/01-05-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-05/01-05-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-05/01-05-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-05/01-05-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-05/01-05-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-05/01-05-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-05/01-05-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-06",
+      "orderId": 6,
+      "title": "A Slow Sunday",
+      "description": "On Sunday, Sam wakes up late.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-06-A1",
+          "level": "A1",
+          "url": "/content/stories/01-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-06/01-06-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-06/01-06-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-06/01-06-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-06/01-06-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-06/01-06-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-06/01-06-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-06/01-06-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-06/01-06-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-06/01-06-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-06/01-06-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-06/01-06-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-06/01-06-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-06/01-06-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-06/01-06-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-06/01-06-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-06/01-06-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-06/01-06-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-06/01-06-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-07",
+      "orderId": 7,
+      "title": "A Busy Monday",
+      "description": "Mia is late for school.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-07-A1",
+          "level": "A1",
+          "url": "/content/stories/01-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-07/01-07-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-07/01-07-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-07/01-07-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-07/01-07-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-07/01-07-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-07/01-07-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-07/01-07-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-07/01-07-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-07/01-07-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-07/01-07-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-07/01-07-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-07/01-07-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-07/01-07-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-07/01-07-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-07/01-07-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-07/01-07-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-07/01-07-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-07/01-07-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-08",
+      "orderId": 8,
+      "title": "A Bright Afternoon",
+      "description": "Anna sits outside with a book.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-08-A1",
+          "level": "A1",
+          "url": "/content/stories/01-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-08/01-08-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-08/01-08-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-08/01-08-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-08/01-08-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-08/01-08-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-08/01-08-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-08/01-08-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-08/01-08-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-08/01-08-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-08/01-08-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-08/01-08-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-08/01-08-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-08/01-08-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-08/01-08-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-08/01-08-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-08/01-08-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-08/01-08-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-08/01-08-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-09",
+      "orderId": 9,
+      "title": "A Cool Day",
+      "description": "The air is cool this morning.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-09-A1",
+          "level": "A1",
+          "url": "/content/stories/01-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-09/01-09-A1/zh-Hant.json"
+            },
+            {
+              "language": "ar",
+              "url": "/content/translations/01-09/01-09-A1/ar.json"
+            },
+            {
+              "language": "zh-Hans",
+              "url": "/content/translations/01-09/01-09-A1/zh-Hans.json"
+            },
+            {
+              "language": "es-MX",
+              "url": "/content/translations/01-09/01-09-A1/es-MX.json"
+            },
+            {
+              "language": "es-ES",
+              "url": "/content/translations/01-09/01-09-A1/es-ES.json"
+            },
+            {
+              "language": "ja",
+              "url": "/content/translations/01-09/01-09-A1/ja.json"
+            },
+            {
+              "language": "vi",
+              "url": "/content/translations/01-09/01-09-A1/vi.json"
+            },
+            {
+              "language": "th",
+              "url": "/content/translations/01-09/01-09-A1/th.json"
+            },
+            {
+              "language": "id",
+              "url": "/content/translations/01-09/01-09-A1/id.json"
+            },
+            {
+              "language": "fr",
+              "url": "/content/translations/01-09/01-09-A1/fr.json"
+            },
+            {
+              "language": "de",
+              "url": "/content/translations/01-09/01-09-A1/de.json"
+            },
+            {
+              "language": "it",
+              "url": "/content/translations/01-09/01-09-A1/it.json"
+            },
+            {
+              "language": "nl",
+              "url": "/content/translations/01-09/01-09-A1/nl.json"
+            },
+            {
+              "language": "ko",
+              "url": "/content/translations/01-09/01-09-A1/ko.json"
+            },
+            {
+              "language": "ru",
+              "url": "/content/translations/01-09/01-09-A1/ru.json"
+            },
+            {
+              "language": "tr",
+              "url": "/content/translations/01-09/01-09-A1/tr.json"
+            },
+            {
+              "language": "my",
+              "url": "/content/translations/01-09/01-09-A1/my.json"
+            },
+            {
+              "language": "pt",
+              "url": "/content/translations/01-09/01-09-A1/pt.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-10",
+      "orderId": 10,
+      "title": "A Good Day",
+      "description": "Lee helps his mom make breakfast.",
+      "genre": "Everyday Life",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "01-10-A1",
+          "level": "A1",
+          "url": "/content/stories/01-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/01-10/01-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-01",
+      "orderId": 11,
+      "title": "A New Friend",
+      "description": "A new girl sits next to Sam in class.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-01-A1",
+          "level": "A1",
+          "url": "/content/stories/02-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-01/02-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-02",
+      "orderId": 12,
+      "title": "A Note for Sam",
+      "description": "Mia sees that Sam is sad.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-02-A1",
+          "level": "A1",
+          "url": "/content/stories/02-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-02/02-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-03",
+      "orderId": 13,
+      "title": "The Long Walk",
+      "description": "Anna and May walk home together.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-03-A1",
+          "level": "A1",
+          "url": "/content/stories/02-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-03/02-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-04",
+      "orderId": 14,
+      "title": "A Happy Hello",
+      "description": "Ben sees his neighbor every morning.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-04-A1",
+          "level": "A1",
+          "url": "/content/stories/02-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-04/02-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-05",
+      "orderId": 15,
+      "title": "The Red Card",
+      "description": "May makes a red card for her friend.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-05-A1",
+          "level": "A1",
+          "url": "/content/stories/02-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-05/02-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-06",
+      "orderId": 16,
+      "title": "A Good Idea",
+      "description": "May and Anna want to play, but it is raining.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-06-A1",
+          "level": "A1",
+          "url": "/content/stories/02-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-06/02-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-07",
+      "orderId": 17,
+      "title": "The Blue Gift",
+      "description": "Tom has a blue box for his friend Sam.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-07-A1",
+          "level": "A1",
+          "url": "/content/stories/02-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-07/02-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-08",
+      "orderId": 18,
+      "title": "A Small Surprise",
+      "description": "Lily comes home and sees flowers on the table.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-08-A1",
+          "level": "A1",
+          "url": "/content/stories/02-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-08/02-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-09",
+      "orderId": 19,
+      "title": "A Visit for May",
+      "description": "May is at home with a cold.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-09-A1",
+          "level": "A1",
+          "url": "/content/stories/02-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-09/02-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-10",
+      "orderId": 20,
+      "title": "Two Good Friends",
+      "description": "Ben and Tom meet at the park every week.",
+      "genre": "Friendship",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "02-10-A1",
+          "level": "A1",
+          "url": "/content/stories/02-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/02-10/02-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-01",
+      "orderId": 21,
+      "title": "The Apple Cake",
+      "description": "Ben has three apples.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-01-A1",
+          "level": "A1",
+          "url": "/content/stories/03-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-01/03-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-02",
+      "orderId": 22,
+      "title": "A Cup of Tea",
+      "description": "It is cold outside.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-02-A1",
+          "level": "A1",
+          "url": "/content/stories/03-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-02/03-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-03",
+      "orderId": 23,
+      "title": "The Sweet Pear",
+      "description": "Lee has a pear in his lunch bag.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-03-A1",
+          "level": "A1",
+          "url": "/content/stories/03-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-03/03-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-04",
+      "orderId": 24,
+      "title": "A Bowl of Rice",
+      "description": "May is hungry after school.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-04-A1",
+          "level": "A1",
+          "url": "/content/stories/03-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-04/03-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-05",
+      "orderId": 25,
+      "title": "The Little Café",
+      "description": "There is a little café near Sam’s home.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-05-A1",
+          "level": "A1",
+          "url": "/content/stories/03-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-05/03-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-06",
+      "orderId": 26,
+      "title": "The Red Apple",
+      "description": "Mia sees a red apple in the kitchen.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-06-A1",
+          "level": "A1",
+          "url": "/content/stories/03-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-06/03-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-07",
+      "orderId": 27,
+      "title": "Bread for Two",
+      "description": "Ben goes to the shop for bread.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-07-A1",
+          "level": "A1",
+          "url": "/content/stories/03-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-07/03-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-08",
+      "orderId": 28,
+      "title": "A Warm Soup",
+      "description": "It is cold and rainy.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-08-A1",
+          "level": "A1",
+          "url": "/content/stories/03-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-08/03-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-09",
+      "orderId": 29,
+      "title": "The Orange Juice",
+      "description": "Anna has oranges at home.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-09-A1",
+          "level": "A1",
+          "url": "/content/stories/03-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-09/03-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-10",
+      "orderId": 30,
+      "title": "Milk and Cookies",
+      "description": "Sam and his dad make cookies.",
+      "genre": "Food & Cafés",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "03-10-A1",
+          "level": "A1",
+          "url": "/content/stories/03-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/03-10/03-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-01",
+      "orderId": 31,
+      "title": "The Little Dog",
+      "description": "A little dog is outside Lee’s house.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-01-A1",
+          "level": "A1",
+          "url": "/content/stories/04-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-01/04-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-02",
+      "orderId": 32,
+      "title": "A Cat in the Garden",
+      "description": "Sam sees a cat in the garden.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-02-A1",
+          "level": "A1",
+          "url": "/content/stories/04-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-02/04-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-03",
+      "orderId": 33,
+      "title": "The White Bird",
+      "description": "A white bird comes to May’s window each morning.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-03-A1",
+          "level": "A1",
+          "url": "/content/stories/04-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-03/04-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-04",
+      "orderId": 34,
+      "title": "A Small Rabbit",
+      "description": "Lily sees a rabbit near the garden.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-04-A1",
+          "level": "A1",
+          "url": "/content/stories/04-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-04/04-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-05",
+      "orderId": 35,
+      "title": "The Brown Horse",
+      "description": "Tom visits a farm with his class.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-05-A1",
+          "level": "A1",
+          "url": "/content/stories/04-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-05/04-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-06",
+      "orderId": 36,
+      "title": "A Fish Named Blue",
+      "description": "May has a little blue fish.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-06-A1",
+          "level": "A1",
+          "url": "/content/stories/04-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-06/04-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-07",
+      "orderId": 37,
+      "title": "The Sleepy Cat",
+      "description": "The cat sleeps in a sunny place on the floor.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-07-A1",
+          "level": "A1",
+          "url": "/content/stories/04-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-07/04-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-08",
+      "orderId": 38,
+      "title": "A Duck at the Lake",
+      "description": "At the lake, Amy sees a duck with three little ducks.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-08-A1",
+          "level": "A1",
+          "url": "/content/stories/04-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-08/04-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-09",
+      "orderId": 39,
+      "title": "The Happy Dog",
+      "description": "Max takes his dog to the park.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-09-A1",
+          "level": "A1",
+          "url": "/content/stories/04-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-09/04-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-10",
+      "orderId": 40,
+      "title": "A Bird by the Window",
+      "description": "A bird sits by Lily’s window every morning.",
+      "genre": "Animals",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "04-10-A1",
+          "level": "A1",
+          "url": "/content/stories/04-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/04-10/04-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-01",
+      "orderId": 41,
+      "title": "The Green Hill",
+      "description": "Tom and his sister see a green hill near their home.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-01-A1",
+          "level": "A1",
+          "url": "/content/stories/05-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-01/05-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-02",
+      "orderId": 42,
+      "title": "The Old Bridge",
+      "description": "Lee and May walk by a river.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-02-A1",
+          "level": "A1",
+          "url": "/content/stories/05-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-02/05-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-03",
+      "orderId": 43,
+      "title": "A Path in the Woods",
+      "description": "Tom and Dad find a path in the woods.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-03-A1",
+          "level": "A1",
+          "url": "/content/stories/05-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-03/05-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-04",
+      "orderId": 44,
+      "title": "The Blue Lake",
+      "description": "Sam and his family walk to a lake.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-04-A1",
+          "level": "A1",
+          "url": "/content/stories/05-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-04/05-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-05",
+      "orderId": 45,
+      "title": "The Long Road",
+      "description": "Mia and Dad are walking to a hill.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-05-A1",
+          "level": "A1",
+          "url": "/content/stories/05-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-05/05-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-06",
+      "orderId": 46,
+      "title": "A Map for Two",
+      "description": "Sam finds a map of the park.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-06-A1",
+          "level": "A1",
+          "url": "/content/stories/05-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-06/05-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-07",
+      "orderId": 47,
+      "title": "The High Mountain",
+      "description": "Anna and Dad visit a mountain.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-07-A1",
+          "level": "A1",
+          "url": "/content/stories/05-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-07/05-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-08",
+      "orderId": 48,
+      "title": "The River Path",
+      "description": "Lee walks along the river with his sister.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-08-A1",
+          "level": "A1",
+          "url": "/content/stories/05-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-08/05-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-09",
+      "orderId": 49,
+      "title": "The Hidden Garden",
+      "description": "Behind Grandma’s house, Mia finds a small gate.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-09-A1",
+          "level": "A1",
+          "url": "/content/stories/05-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-09/05-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-10",
+      "orderId": 50,
+      "title": "A Walk to the Sea",
+      "description": "Ben and Dad walk to the sea early in the morning.",
+      "genre": "Adventure",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "05-10-A1",
+          "level": "A1",
+          "url": "/content/stories/05-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/05-10/05-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-01",
+      "orderId": 51,
+      "title": "The Lost Key",
+      "description": "May cannot find her key.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-01-A1",
+          "level": "A1",
+          "url": "/content/stories/06-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-01/06-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-02",
+      "orderId": 52,
+      "title": "The Empty Box",
+      "description": "Ben finds a small box at home.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-02-A1",
+          "level": "A1",
+          "url": "/content/stories/06-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-02/06-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-03",
+      "orderId": 53,
+      "title": "The Red Door",
+      "description": "There is a red door at the end of the hall.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-03-A1",
+          "level": "A1",
+          "url": "/content/stories/06-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-03/06-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-04",
+      "orderId": 54,
+      "title": "The Missing Book",
+      "description": "Anna cannot find her library book.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-04-A1",
+          "level": "A1",
+          "url": "/content/stories/06-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-04/06-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-05",
+      "orderId": 55,
+      "title": "A Note on the Table",
+      "description": "A note is on the kitchen table.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-05-A1",
+          "level": "A1",
+          "url": "/content/stories/06-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-05/06-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-06",
+      "orderId": 56,
+      "title": "The Yellow Bag",
+      "description": "There is a yellow bag on the bus.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-06-A1",
+          "level": "A1",
+          "url": "/content/stories/06-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-06/06-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-07",
+      "orderId": 57,
+      "title": "The Little Bell",
+      "description": "Tom hears a little bell in the garden.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-07-A1",
+          "level": "A1",
+          "url": "/content/stories/06-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-07/06-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-08",
+      "orderId": 58,
+      "title": "The Blue Hat",
+      "description": "May finds a blue hat on a chair.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-08-A1",
+          "level": "A1",
+          "url": "/content/stories/06-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-08/06-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-09",
+      "orderId": 59,
+      "title": "The Old Photo",
+      "description": "Lee finds an old photo in a book.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-09-A1",
+          "level": "A1",
+          "url": "/content/stories/06-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-09/06-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-10",
+      "orderId": 60,
+      "title": "A Letter for Lee",
+      "description": "Lee gets a letter.",
+      "genre": "Mystery",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "06-10-A1",
+          "level": "A1",
+          "url": "/content/stories/06-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/06-10/06-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-01",
+      "orderId": 61,
+      "title": "The Train Ride",
+      "description": "Amy is on a train with her dad.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-01-A1",
+          "level": "A1",
+          "url": "/content/stories/07-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-01/07-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-02",
+      "orderId": 62,
+      "title": "A Day by the Sea",
+      "description": "Lily and her mom go to the sea.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-02-A1",
+          "level": "A1",
+          "url": "/content/stories/07-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-02/07-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-03",
+      "orderId": 63,
+      "title": "The Small Town",
+      "description": "May visits a small town with her family.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-03-A1",
+          "level": "A1",
+          "url": "/content/stories/07-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-03/07-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-04",
+      "orderId": 64,
+      "title": "A Bus to Town",
+      "description": "Tom takes the bus to town with his mom.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-04-A1",
+          "level": "A1",
+          "url": "/content/stories/07-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-04/07-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-05",
+      "orderId": 65,
+      "title": "The Big City",
+      "description": "Lily visits a big city for the first time.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-05-A1",
+          "level": "A1",
+          "url": "/content/stories/07-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-05/07-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-06",
+      "orderId": 66,
+      "title": "A New Street",
+      "description": "Anna walks down a street she does not know.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-06-A1",
+          "level": "A1",
+          "url": "/content/stories/07-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-06/07-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-07",
+      "orderId": 67,
+      "title": "The Morning Train",
+      "description": "Ben gets up early to take the train.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-07-A1",
+          "level": "A1",
+          "url": "/content/stories/07-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-07/07-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-08",
+      "orderId": 68,
+      "title": "A Day at the Lake",
+      "description": "May visits a lake with her family.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-08-A1",
+          "level": "A1",
+          "url": "/content/stories/07-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-08/07-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-09",
+      "orderId": 69,
+      "title": "The Old Station",
+      "description": "The old station has a big clock.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-09-A1",
+          "level": "A1",
+          "url": "/content/stories/07-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-09/07-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-10",
+      "orderId": 70,
+      "title": "A Trip with Mom",
+      "description": "Amy and Mom take a bus to a new town.",
+      "genre": "Travel",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "07-10-A1",
+          "level": "A1",
+          "url": "/content/stories/07-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/07-10/07-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-01",
+      "orderId": 71,
+      "title": "A Day with Dad",
+      "description": "Ben and Dad have a free day.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-01-A1",
+          "level": "A1",
+          "url": "/content/stories/08-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-01/08-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-02",
+      "orderId": 72,
+      "title": "Mom’s Garden",
+      "description": "Mom has a small garden behind the house.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-02-A1",
+          "level": "A1",
+          "url": "/content/stories/08-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-02/08-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-03",
+      "orderId": 73,
+      "title": "A Gift for Grandma",
+      "description": "It is Grandma’s birthday tomorrow.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-03-A1",
+          "level": "A1",
+          "url": "/content/stories/08-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-03/08-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-04",
+      "orderId": 74,
+      "title": "The Family Photo",
+      "description": "Dad finds an old family photo.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-04-A1",
+          "level": "A1",
+          "url": "/content/stories/08-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-04/08-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-05",
+      "orderId": 75,
+      "title": "A Walk with Ben",
+      "description": "Ben asks his little sister to go for a walk.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-05-A1",
+          "level": "A1",
+          "url": "/content/stories/08-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-05/08-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-06",
+      "orderId": 76,
+      "title": "Sunday with Grandpa",
+      "description": "On Sunday, Lee visits Grandpa.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-06-A1",
+          "level": "A1",
+          "url": "/content/stories/08-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-06/08-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-07",
+      "orderId": 77,
+      "title": "A Song for Mom",
+      "description": "Mia learns a song at school.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-07-A1",
+          "level": "A1",
+          "url": "/content/stories/08-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-07/08-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-08",
+      "orderId": 78,
+      "title": "The Big Table",
+      "description": "The family sits around a big table.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-08-A1",
+          "level": "A1",
+          "url": "/content/stories/08-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-08/08-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-09",
+      "orderId": 79,
+      "title": "A Visit Home",
+      "description": "Anna visits her family after a long week.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-09-A1",
+          "level": "A1",
+          "url": "/content/stories/08-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-09/08-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-10",
+      "orderId": 80,
+      "title": "A Happy Birthday",
+      "description": "It is Ben’s birthday.",
+      "genre": "Family",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "08-10-A1",
+          "level": "A1",
+          "url": "/content/stories/08-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/08-10/08-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-01",
+      "orderId": 81,
+      "title": "The First Flower",
+      "description": "Lily looks at the small garden every day.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-01-A1",
+          "level": "A1",
+          "url": "/content/stories/09-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-01/09-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-02",
+      "orderId": 82,
+      "title": "A Tree in the Park",
+      "description": "There is a big tree in the park.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-02-A1",
+          "level": "A1",
+          "url": "/content/stories/09-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-02/09-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-03",
+      "orderId": 83,
+      "title": "The Blue Sky",
+      "description": "After many rainy days, the sky is blue.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-03-A1",
+          "level": "A1",
+          "url": "/content/stories/09-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-03/09-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-04",
+      "orderId": 84,
+      "title": "A Day in the Sun",
+      "description": "The sun is out, and May wants to play.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-04-A1",
+          "level": "A1",
+          "url": "/content/stories/09-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-04/09-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-05",
+      "orderId": 85,
+      "title": "The Small Garden",
+      "description": "There is a small garden outside Amy’s school.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-05-A1",
+          "level": "A1",
+          "url": "/content/stories/09-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-05/09-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-06",
+      "orderId": 86,
+      "title": "The Green Leaf",
+      "description": "Sam finds a green leaf on the path.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-06-A1",
+          "level": "A1",
+          "url": "/content/stories/09-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-06/09-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-07",
+      "orderId": 87,
+      "title": "Rain on the Window",
+      "description": "Rain runs down the window.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-07-A1",
+          "level": "A1",
+          "url": "/content/stories/09-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-07/09-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-08",
+      "orderId": 88,
+      "title": "The Yellow Flower",
+      "description": "A yellow flower grows by the door.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-08-A1",
+          "level": "A1",
+          "url": "/content/stories/09-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-08/09-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-09",
+      "orderId": 89,
+      "title": "A Walk in the Park",
+      "description": "May and her dad walk in the park.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-09-A1",
+          "level": "A1",
+          "url": "/content/stories/09-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-09/09-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-10",
+      "orderId": 90,
+      "title": "The Tall Tree",
+      "description": "There is a tall tree near Tom’s home.",
+      "genre": "Nature",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "09-10-A1",
+          "level": "A1",
+          "url": "/content/stories/09-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/09-10/09-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-01",
+      "orderId": 91,
+      "title": "The New Class",
+      "description": "Max is new at school.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-01-A1",
+          "level": "A1",
+          "url": "/content/stories/10-01.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-01/10-01-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-02",
+      "orderId": 92,
+      "title": "A Book for Class",
+      "description": "Sam needs a book for class.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-02-A1",
+          "level": "A1",
+          "url": "/content/stories/10-02.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-02/10-02-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-03",
+      "orderId": 93,
+      "title": "The First Day",
+      "description": "Today is Amy’s first day at work.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-03-A1",
+          "level": "A1",
+          "url": "/content/stories/10-03.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-03/10-03-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-04",
+      "orderId": 94,
+      "title": "A New Desk",
+      "description": "Lee has a new desk in his room.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-04-A1",
+          "level": "A1",
+          "url": "/content/stories/10-04.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-04/10-04-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-05",
+      "orderId": 95,
+      "title": "The School Bag",
+      "description": "Tom is ready for school, but he cannot find his bag.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-05-A1",
+          "level": "A1",
+          "url": "/content/stories/10-05.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-05/10-05-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-06",
+      "orderId": 96,
+      "title": "A Nice Teacher",
+      "description": "Lee is worried about his new class.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-06-A1",
+          "level": "A1",
+          "url": "/content/stories/10-06.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-06/10-06-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-07",
+      "orderId": 97,
+      "title": "The Blue Pen",
+      "description": "Amy finds a blue pen on her desk.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-07-A1",
+          "level": "A1",
+          "url": "/content/stories/10-07.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-07/10-07-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-08",
+      "orderId": 98,
+      "title": "The Art Class",
+      "description": "Today is art class.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-08-A1",
+          "level": "A1",
+          "url": "/content/stories/10-08.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-08/10-08-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-09",
+      "orderId": 99,
+      "title": "A Good Question",
+      "description": "Sam does not know the answer in class.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-09-A1",
+          "level": "A1",
+          "url": "/content/stories/10-09.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-09/10-09-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10-10",
+      "orderId": 100,
+      "title": "The Last Page",
+      "description": "Lily reads a book for school.",
+      "genre": "School & Work",
+      "targetLanguage": "en",
+      "image": "/assets/img/story-town.png",
+      "levels": [
+        {
+          "storyLevelId": "10-10-A1",
+          "level": "A1",
+          "url": "/content/stories/10-10.json",
+          "availableLanguages": [
+            {
+              "language": "zh-Hant",
+              "url": "/content/translations/10-10/10-10-A1/zh-Hant.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

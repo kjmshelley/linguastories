@@ -1,0 +1,359 @@
+{
+  "storyId": "04-01",
+  "versions": [
+    {
+      "storyLevelId": "04-01-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " little"
+                },
+                {
+                  "id": "t3",
+                  "text": " dog"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " outside"
+                },
+                {
+                  "id": "t6",
+                  "text": " Lee’s"
+                },
+                {
+                  "id": "t7",
+                  "text": " house"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " wet"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " cold"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " gives"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " some"
+                },
+                {
+                  "id": "t5",
+                  "text": " water"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " has"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " name"
+                },
+                {
+                  "id": "t6",
+                  "text": " on"
+                },
+                {
+                  "id": "t7",
+                  "text": " its"
+                },
+                {
+                  "id": "t8",
+                  "text": " collar"
+                },
+                {
+                  "id": "t9",
+                  "text": ":"
+                },
+                {
+                  "id": "t10",
+                  "text": " Coco"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " phone"
+                },
+                {
+                  "id": "t5",
+                  "text": " number"
+                },
+                {
+                  "id": "t6",
+                  "text": " too"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " calls"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " number"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Soon"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " woman"
+                },
+                {
+                  "id": "t5",
+                  "text": " comes"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " house"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Coco"
+                },
+                {
+                  "id": "t3",
+                  "text": "!"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " I"
+                },
+                {
+                  "id": "t2",
+                  "text": " am"
+                },
+                {
+                  "id": "t3",
+                  "text": " so"
+                },
+                {
+                  "id": "t4",
+                  "text": " happy"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " see"
+                },
+                {
+                  "id": "t7",
+                  "text": " you"
+                },
+                {
+                  "id": "t8",
+                  "text": ".”"
+                },
+                {
+                  "id": "t9",
+                  "text": " Coco"
+                },
+                {
+                  "id": "t10",
+                  "text": " runs"
+                },
+                {
+                  "id": "t11",
+                  "text": " to"
+                },
+                {
+                  "id": "t12",
+                  "text": " her"
+                },
+                {
+                  "id": "t13",
+                  "text": ","
+                },
+                {
+                  "id": "t14",
+                  "text": " and"
+                },
+                {
+                  "id": "t15",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t16",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t17",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

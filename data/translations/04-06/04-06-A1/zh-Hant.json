@@ -1,0 +1,19 @@
+{
+  "storyId": "04-06",
+  "storyLevelId": "04-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美有一條藍色的小魚。每天早上，她都向牠問好並餵食。今天牠在家裡游得很快。",
+      "sentences": [],
+      "romanization": "xiǎo měi yǒu yī tiáo lán sè de xiǎo yú。 měi tiān zǎo shàng， tā dōu xiàng tā wèn hǎo bìng wèi shí。 jīn tiān tā zài jiā lǐ yóu dé hěn kuài。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "小美看了牠一會兒。然後她得準備去上學了。",
+      "sentences": [],
+      "romanization": "xiǎo měi kàn le tā yī huì ér。 rán hòu tā dé zhǔn bèi qù shàng xué le。"
+    }
+  ]
+}

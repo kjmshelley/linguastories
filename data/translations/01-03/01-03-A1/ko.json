@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "ko",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "벤은 밖에서 놀고 싶지만 비가 오고 있습니다. 그는 창밖을 바라봅니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "엄마가 종이와 색연필을 줍니다. “비를 그려 보자.” 엄마가 말합니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "벤은 파란 하늘과 커다란 노란 해도 그립니다. 그는 그림을 벽에 붙입니다.",
+      "sentences": []
+    }
+  ]
+}

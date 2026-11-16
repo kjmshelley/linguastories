@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "ja",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "ベンは外で遊びたいのですが、雨が降っています。彼は窓の外を見ます。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "お母さんは彼に紙と色鉛筆を渡します。「雨を描きましょう」と言います。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "ベンは青い空と大きな黄色い太陽も描きます。そして、その絵を壁に貼ります。",
+      "sentences": []
+    }
+  ]
+}

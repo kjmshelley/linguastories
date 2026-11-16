@@ -1,0 +1,239 @@
+{
+  "storyId": "09-03",
+  "versions": [
+    {
+      "storyLevelId": "09-03-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "After"
+                },
+                {
+                  "id": "t2",
+                  "text": " many"
+                },
+                {
+                  "id": "t3",
+                  "text": " rainy"
+                },
+                {
+                  "id": "t4",
+                  "text": " days"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " sky"
+                },
+                {
+                  "id": "t8",
+                  "text": " is"
+                },
+                {
+                  "id": "t9",
+                  "text": " blue"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " goes"
+                },
+                {
+                  "id": "t3",
+                  "text": " outside"
+                },
+                {
+                  "id": "t4",
+                  "text": " with"
+                },
+                {
+                  "id": "t5",
+                  "text": " his"
+                },
+                {
+                  "id": "t6",
+                  "text": " ball"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "His"
+                },
+                {
+                  "id": "t2",
+                  "text": " friend"
+                },
+                {
+                  "id": "t3",
+                  "text": " May"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " in"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " park"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " play"
+                },
+                {
+                  "id": "t3",
+                  "text": " together"
+                },
+                {
+                  "id": "t4",
+                  "text": " in"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " sun"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "When"
+                },
+                {
+                  "id": "t2",
+                  "text": " they"
+                },
+                {
+                  "id": "t3",
+                  "text": " are"
+                },
+                {
+                  "id": "t4",
+                  "text": " tired"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " they"
+                },
+                {
+                  "id": "t7",
+                  "text": " lie"
+                },
+                {
+                  "id": "t8",
+                  "text": " on"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " grass"
+                },
+                {
+                  "id": "t11",
+                  "text": " and"
+                },
+                {
+                  "id": "t12",
+                  "text": " watch"
+                },
+                {
+                  "id": "t13",
+                  "text": " the"
+                },
+                {
+                  "id": "t14",
+                  "text": " clouds"
+                },
+                {
+                  "id": "t15",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

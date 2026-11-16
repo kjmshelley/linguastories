@@ -1,0 +1,234 @@
+{
+  "storyId": "05-08",
+  "versions": [
+    {
+      "storyLevelId": "05-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " walks"
+                },
+                {
+                  "id": "t3",
+                  "text": " along"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " river"
+                },
+                {
+                  "id": "t6",
+                  "text": " with"
+                },
+                {
+                  "id": "t7",
+                  "text": " his"
+                },
+                {
+                  "id": "t8",
+                  "text": " sister"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " see"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " little"
+                },
+                {
+                  "id": "t5",
+                  "text": " boat"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " wave"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " people"
+                },
+                {
+                  "id": "t11",
+                  "text": " on"
+                },
+                {
+                  "id": "t12",
+                  "text": " it"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " people"
+                },
+                {
+                  "id": "t3",
+                  "text": " wave"
+                },
+                {
+                  "id": "t4",
+                  "text": " back"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " child"
+                },
+                {
+                  "id": "t3",
+                  "text": " on"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " boat"
+                },
+                {
+                  "id": "t6",
+                  "text": " has"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " red"
+                },
+                {
+                  "id": "t9",
+                  "text": " hat"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " watches"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " boat"
+                },
+                {
+                  "id": "t5",
+                  "text": " until"
+                },
+                {
+                  "id": "t6",
+                  "text": " he"
+                },
+                {
+                  "id": "t7",
+                  "text": " cannot"
+                },
+                {
+                  "id": "t8",
+                  "text": " see"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "storyId": "02-08",
+  "versions": [
+    {
+      "storyLevelId": "02-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " comes"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " sees"
+                },
+                {
+                  "id": "t6",
+                  "text": " flowers"
+                },
+                {
+                  "id": "t7",
+                  "text": " on"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " table"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " friend"
+                },
+                {
+                  "id": "t3",
+                  "text": " Amy"
+                },
+                {
+                  "id": "t4",
+                  "text": " put"
+                },
+                {
+                  "id": "t5",
+                  "text": " them"
+                },
+                {
+                  "id": "t6",
+                  "text": " there"
+                },
+                {
+                  "id": "t7",
+                  "text": " for"
+                },
+                {
+                  "id": "t8",
+                  "text": " her"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " calls"
+                },
+                {
+                  "id": "t3",
+                  "text": " Amy"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " say"
+                },
+                {
+                  "id": "t6",
+                  "text": " thank"
+                },
+                {
+                  "id": "t7",
+                  "text": " you"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "I"
+                },
+                {
+                  "id": "t3",
+                  "text": " saw"
+                },
+                {
+                  "id": "t4",
+                  "text": " them"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " thought"
+                },
+                {
+                  "id": "t7",
+                  "text": " of"
+                },
+                {
+                  "id": "t8",
+                  "text": " you"
+                },
+                {
+                  "id": "t9",
+                  "text": ",”"
+                },
+                {
+                  "id": "t10",
+                  "text": " Amy"
+                },
+                {
+                  "id": "t11",
+                  "text": " says"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " flowers"
+                },
+                {
+                  "id": "t5",
+                  "text": " by"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " window"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

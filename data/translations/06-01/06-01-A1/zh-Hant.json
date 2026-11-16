@@ -1,0 +1,25 @@
+{
+  "storyId": "06-01",
+  "storyLevelId": "06-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美找不到鑰匙。她看看桌上，又看看椅子下面。鑰匙都不在那裡。",
+      "sentences": [],
+      "romanization": "Xiǎoměi zhǎo bú dào yàoshi. Tā kànkan zhuō shàng, yòu kànkan yǐzi xiàmiàn. Yàoshi dōu bú zài nàli."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "弟弟問：「你今天去了哪裡？」小美想了想。她和狗去了花園。",
+      "sentences": [],
+      "romanization": "Dìdi wèn: “Nǐ jīntiān qù le nǎli?” Xiǎoměi xiǎng le xiǎng. Tā hé gǒu qù le huāyuán."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們到花園裡找。鑰匙在那裡，就在一朵紅花旁邊！小美把鑰匙放進包包裡。",
+      "sentences": [],
+      "romanization": "Tāmen dào huāyuán lǐ zhǎo. Yàoshi zài nàli, jiù zài yì duǒ hóng huā pángbiān! Xiǎoměi bǎ yàoshi fàng jìn bāobao lǐ."
+    }
+  ]
+}

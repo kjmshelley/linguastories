@@ -1,0 +1,250 @@
+{
+  "storyId": "08-10",
+  "versions": [
+    {
+      "storyLevelId": "08-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " Ben’s"
+                },
+                {
+                  "id": "t4",
+                  "text": " birthday"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " His"
+                },
+                {
+                  "id": "t2",
+                  "text": " family"
+                },
+                {
+                  "id": "t3",
+                  "text": " makes"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " cake"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " puts"
+                },
+                {
+                  "id": "t8",
+                  "text": " five"
+                },
+                {
+                  "id": "t9",
+                  "text": " candles"
+                },
+                {
+                  "id": "t10",
+                  "text": " on"
+                },
+                {
+                  "id": "t11",
+                  "text": " it"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " closes"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " eyes"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " makes"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " wish"
+                },
+                {
+                  "id": "t9",
+                  "text": ","
+                },
+                {
+                  "id": "t10",
+                  "text": " and"
+                },
+                {
+                  "id": "t11",
+                  "text": " blows"
+                },
+                {
+                  "id": "t12",
+                  "text": " them"
+                },
+                {
+                  "id": "t13",
+                  "text": " out"
+                },
+                {
+                  "id": "t14",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "His"
+                },
+                {
+                  "id": "t2",
+                  "text": " sister"
+                },
+                {
+                  "id": "t3",
+                  "text": " gives"
+                },
+                {
+                  "id": "t4",
+                  "text": " him"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " card"
+                },
+                {
+                  "id": "t7",
+                  "text": " with"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " dog"
+                },
+                {
+                  "id": "t10",
+                  "text": " on"
+                },
+                {
+                  "id": "t11",
+                  "text": " it"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " next"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " bed"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

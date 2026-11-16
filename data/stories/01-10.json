@@ -1,0 +1,214 @@
+{
+  "storyId": "01-10",
+  "versions": [
+    {
+      "storyLevelId": "01-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " helps"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " mom"
+                },
+                {
+                  "id": "t5",
+                  "text": " make"
+                },
+                {
+                  "id": "t6",
+                  "text": " breakfast"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Later"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " he"
+                },
+                {
+                  "id": "t4",
+                  "text": " plays"
+                },
+                {
+                  "id": "t5",
+                  "text": " with"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " friends"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " At"
+                },
+                {
+                  "id": "t2",
+                  "text": " night"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " he"
+                },
+                {
+                  "id": "t5",
+                  "text": " tells"
+                },
+                {
+                  "id": "t6",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t7",
+                  "text": " about"
+                },
+                {
+                  "id": "t8",
+                  "text": " his"
+                },
+                {
+                  "id": "t9",
+                  "text": " good"
+                },
+                {
+                  "id": "t10",
+                  "text": " day"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " listens"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "I"
+                },
+                {
+                  "id": "t3",
+                  "text": " am"
+                },
+                {
+                  "id": "t4",
+                  "text": " happy"
+                },
+                {
+                  "id": "t5",
+                  "text": " you"
+                },
+                {
+                  "id": "t6",
+                  "text": " had"
+                },
+                {
+                  "id": "t7",
+                  "text": " fun"
+                },
+                {
+                  "id": "t8",
+                  "text": ",”"
+                },
+                {
+                  "id": "t9",
+                  "text": " he"
+                },
+                {
+                  "id": "t10",
+                  "text": " says"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

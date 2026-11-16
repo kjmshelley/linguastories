@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "fr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia se réveille tôt. Le soleil éclaire son lit. Elle entend les oiseaux dehors.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia va dans la cuisine. Son père prépare du thé. « Bonjour », dit-il.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ils s’assoient près de la fenêtre et mangent du pain. Aujourd’hui, il n’y a pas besoin de se presser. Mia sourit. C’est une matinée douce et tranquille.",
+      "sentences": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "storyId": "02-04",
+  "storyLevelId": "02-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班每天早上都會見到鄰居。她總是向他問好。",
+      "sentences": [],
+      "romanization": "bān měi tiān zǎo shàng dōu huì jiàn dào lín jū。 tā zǒng shì xiàng tā wèn hǎo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "一天早上，她拿著很多袋子。班幫她開門。",
+      "sentences": [],
+      "romanization": "yī tiān zǎo shàng， tā ná zhù hěn duō dài zi。 bān bāng tā kāi mén。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「謝謝你！」她說。班走去學校時覺得很開心。",
+      "sentences": [],
+      "romanization": "「xiè xiè nǐ！」 tā shuō。 bān zǒu qù xué xiào shí jué dé hěn kāi xīn。"
+    }
+  ]
+}

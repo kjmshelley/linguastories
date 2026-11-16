@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "id",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ini Senin pagi. Mia melihat minggu di kalendernya.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Dia punya sekolah, kunjungan dengan nenek, dan hari di taman. Dia menggambar bintang pada hari Sabtu.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mia mengenakan sepatunya dan mengambil tasnya. Minggu baru sudah tiba.",
+      "sentences": []
+    }
+  ]
+}

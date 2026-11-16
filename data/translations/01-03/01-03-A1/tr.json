@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "tr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ben dışarıda oynamak istiyor, ama yağmur yağıyor. Pencereden bakıyor.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Annesi ona kâğıt ve boyalar verir. “Haydi yağmuru çizelim,” der.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ben mavi bir gökyüzü ve büyük sarı bir güneş de çizdi. Resimi duvara koyuyor.",
+      "sentences": []
+    }
+  ]
+}

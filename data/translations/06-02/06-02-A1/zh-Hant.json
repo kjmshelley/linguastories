@@ -1,0 +1,25 @@
+{
+  "storyId": "06-02",
+  "storyLevelId": "06-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班在家裡找到一個小盒子。裡面什麼也沒有。",
+      "sentences": [],
+      "romanization": "Bān zài jiālǐ zhǎodào yí ge xiǎo hézi. Lǐmiàn shénme yě méiyǒu."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "「這是誰的盒子？」他問。奶奶看著盒子笑了。",
+      "sentences": [],
+      "romanization": "“Zhè shì shéi de hézi?” tā wèn. Nǎinai kànzhe hézi xiào le."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「那是我的。」她說。「我以前把信放在裡面。」她告訴班一位老朋友的故事。",
+      "sentences": [],
+      "romanization": "“Nà shì wǒ de.” tā shuō. “Wǒ yǐqián bǎ xìn fàng zài lǐmiàn.” Tā gàosu Bān yí wèi lǎo péngyou de gùshi."
+    }
+  ]
+}

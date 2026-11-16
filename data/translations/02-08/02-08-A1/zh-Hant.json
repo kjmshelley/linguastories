@@ -1,0 +1,19 @@
+{
+  "storyId": "02-08",
+  "storyLevelId": "02-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉回家後看到桌上有花。是朋友艾米為她放的。莉莉打電話謝謝艾米。",
+      "sentences": [],
+      "romanization": "lì lì huí jiā hòu kàn dào zhuō shàng yǒu huā。 shì péng yǒu ài mǐ wèi tā fàng de。 lì lì dǎ diàn huà xiè xiè ài mǐ。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "「我看到花就想起你。」艾米說。莉莉把花放在窗邊。",
+      "sentences": [],
+      "romanization": "「wǒ kàn dào huā jiù xiǎng qǐ nǐ。」 ài mǐ shuō。 lì lì bǎ huā fàng zài chuāng biān。"
+    }
+  ]
+}

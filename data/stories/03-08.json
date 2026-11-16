@@ -1,0 +1,226 @@
+{
+  "storyId": "03-08",
+  "versions": [
+    {
+      "storyLevelId": "03-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " cold"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " rainy"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " makes"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " pot"
+                },
+                {
+                  "id": "t5",
+                  "text": " of"
+                },
+                {
+                  "id": "t6",
+                  "text": " soup"
+                },
+                {
+                  "id": "t7",
+                  "text": " with"
+                },
+                {
+                  "id": "t8",
+                  "text": " carrots"
+                },
+                {
+                  "id": "t9",
+                  "text": " and"
+                },
+                {
+                  "id": "t10",
+                  "text": " rice"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " family"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " together"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " eats"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": " while"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " warm"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t4",
+                  "text": " how"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " make"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " says"
+                },
+                {
+                  "id": "t3",
+                  "text": " he"
+                },
+                {
+                  "id": "t4",
+                  "text": " can"
+                },
+                {
+                  "id": "t5",
+                  "text": " help"
+                },
+                {
+                  "id": "t6",
+                  "text": " next"
+                },
+                {
+                  "id": "t7",
+                  "text": " time"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "ar",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "إنه صباح الاثنين. تنظر ميا إلى أسبوعها في التقويم.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "لديها مدرسة وزيارة لجدتها ويوم في الحديقة. ترسم نجمة على يوم السبت.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "ترتدي ميا حذاءها وتأخذ حقيبتها. لقد بدأ أسبوع جديد.",
+      "sentences": []
+    }
+  ]
+}

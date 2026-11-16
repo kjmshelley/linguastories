@@ -1,0 +1,25 @@
+{
+  "storyId": "09-04",
+  "storyLevelId": "09-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "太陽出來了，小美想出去玩。她戴上帽子走到外面。",
+      "sentences": [],
+      "romanization": "tài yáng chū lái le， xiǎo měi xiǎng chū qù wán。 tā dài shàng mào zi zǒu dào wài miàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她和朋友一起玩球。接著她們坐在陰涼處喝水。",
+      "sentences": [],
+      "romanization": "tā hé péng yǒu yì qǐ wán qiú。 jiē zhù tā men zuò zài yīn liáng chù hē shuǐ。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「多好的一天啊。」朋友說。小美說：「是啊。」",
+      "sentences": [],
+      "romanization": "“Duō hǎo de yì tiān a,” péngyǒu shuō. Xiǎoměi shuō: “Shì a.”"
+    }
+  ]
+}

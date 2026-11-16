@@ -1,0 +1,206 @@
+{
+  "storyId": "06-10",
+  "versions": [
+    {
+      "storyLevelId": "06-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " gets"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " letter"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " finds"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " drawing"
+                },
+                {
+                  "id": "t8",
+                  "text": " from"
+                },
+                {
+                  "id": "t9",
+                  "text": " his"
+                },
+                {
+                  "id": "t10",
+                  "text": " cousin"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " makes"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " drawing"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " send"
+                },
+                {
+                  "id": "t7",
+                  "text": " back"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "He"
+                },
+                {
+                  "id": "t2",
+                  "text": " draws"
+                },
+                {
+                  "id": "t3",
+                  "text": " their"
+                },
+                {
+                  "id": "t4",
+                  "text": " favorite"
+                },
+                {
+                  "id": "t5",
+                  "text": " park"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " helps"
+                },
+                {
+                  "id": "t3",
+                  "text": " him"
+                },
+                {
+                  "id": "t4",
+                  "text": " put"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " drawing"
+                },
+                {
+                  "id": "t7",
+                  "text": " in"
+                },
+                {
+                  "id": "t8",
+                  "text": " an"
+                },
+                {
+                  "id": "t9",
+                  "text": " envelope"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

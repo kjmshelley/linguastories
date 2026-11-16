@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "id",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia bangun pagi. Sinar matahari menyinari tempat tidurnya. Dia mendengar suara burung di luar.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia pergi ke dapur. Ayahnya sedang membuat teh. “Selamat pagi,” kata ayahnya.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mereka duduk di dekat jendela dan makan roti. Hari ini mereka tidak perlu terburu-buru. Mia tersenyum. Ini pagi yang hangat dan tenang.",
+      "sentences": []
+    }
+  ]
+}

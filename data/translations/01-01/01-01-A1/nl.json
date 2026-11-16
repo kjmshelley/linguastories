@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "nl",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia wordt vroeg wakker. Het zonlicht valt op haar bed. Ze hoort buiten de vogels.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia gaat naar de keuken. Haar vader zet thee. ‘Goedemorgen,’ zegt hij.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ze zitten bij het raam en eten brood. Vandaag hoeven ze zich niet te haasten. Mia glimlacht. Het is een warme, rustige ochtend.",
+      "sentences": []
+    }
+  ]
+}

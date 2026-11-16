@@ -1,0 +1,25 @@
+{
+  "storyId": "06-03",
+  "storyLevelId": "06-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "走廊盡頭有一扇紅門。艾米從來沒有打開過它。",
+      "sentences": [],
+      "romanization": "Zǒuláng jìntóu yǒu yí shàn hóng mén. Àimǐ cónglái méiyǒu dǎkāi guò tā."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她問爺爺那扇門的事。他拿出鑰匙，打開了門。",
+      "sentences": [],
+      "romanization": "Tā wèn yéye nà shàn mén de shì. Tā ná chū yàoshi, dǎkāi le mén."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "裡面有舊書和一張大椅子。「這是我的閱讀室。」他說。",
+      "sentences": [],
+      "romanization": "Lǐmiàn yǒu jiù shū hé yì zhāng dà yǐzi. “Zhè shì wǒ de yuèdúshì.” tā shuō."
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "storyId": "07-10",
+  "versions": [
+    {
+      "storyLevelId": "07-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Amy"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " Mom"
+                },
+                {
+                  "id": "t4",
+                  "text": " take"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " bus"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " new"
+                },
+                {
+                  "id": "t10",
+                  "text": " town"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " find"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " park"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " shop"
+                },
+                {
+                  "id": "t8",
+                  "text": " with"
+                },
+                {
+                  "id": "t9",
+                  "text": " fresh"
+                },
+                {
+                  "id": "t10",
+                  "text": " bread"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Before"
+                },
+                {
+                  "id": "t2",
+                  "text": " going"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " they"
+                },
+                {
+                  "id": "t6",
+                  "text": " buy"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " loaf"
+                },
+                {
+                  "id": "t9",
+                  "text": " for"
+                },
+                {
+                  "id": "t10",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " cuts"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " bread"
+                },
+                {
+                  "id": "t5",
+                  "text": " when"
+                },
+                {
+                  "id": "t6",
+                  "text": " they"
+                },
+                {
+                  "id": "t7",
+                  "text": " get"
+                },
+                {
+                  "id": "t8",
+                  "text": " home"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " tell"
+                },
+                {
+                  "id": "t3",
+                  "text": " him"
+                },
+                {
+                  "id": "t4",
+                  "text": " about"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " town"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

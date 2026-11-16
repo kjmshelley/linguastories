@@ -1,0 +1,19 @@
+{
+  "storyId": "02-06",
+  "storyLevelId": "02-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美和安娜想玩，但外面正在下雨。小美有個主意：她們可以一起編故事。安娜寫字，小美畫畫。",
+      "sentences": [],
+      "romanization": "xiǎo měi hé ān nà xiǎng wán， dàn wài miàn zhèng zài xià yǔ。 xiǎo měi yǒu gè zhǔ yì： tā men kě yǐ yì qǐ biān gù shì。 ān nà xiě zì， xiǎo měi huà huà。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她們的故事是一隻貓在月亮上。讀故事時，她們笑了。",
+      "sentences": [],
+      "romanization": "tā men de gù shì shì yī zhī māo zài yuè liàng shàng。 dú gù shì shí， tā men xiào le。"
+    }
+  ]
+}

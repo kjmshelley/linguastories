@@ -1,0 +1,19 @@
+{
+  "storyId": "02-09",
+  "storyLevelId": "02-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美感冒待在家裡。朋友小李帶了一本書來看她。他們一起讀了一會兒。",
+      "sentences": [],
+      "romanization": "xiǎo měi gǎn mào dài zài jiā lǐ。 péng yǒu xiǎo lǐ dài le yī běn shū lái kàn tā。 tā men yì qǐ dú le yī huì ér。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "小李把書留給小美。等她舒服一點，就可以把書讀完。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ bǎ shū liú gěi xiǎo měi。 děng tā shū fú yī diǎn， jiù kě yǐ bǎ shū dú wán。"
+    }
+  ]
+}

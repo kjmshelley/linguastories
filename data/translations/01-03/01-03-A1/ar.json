@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "ar",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "يريد بن اللعب في الخارج، لكن المطر يهطل. ينظر من النافذة.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "تعطيه أمه ورقًا وألوانًا. تقول: «هيا نرسم المطر».",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "يرسم بن سماء زرقاء وشمسًا صفراء كبيرة أيضًا. يعلّق الرسم على الحائط.",
+      "sentences": []
+    }
+  ]
+}

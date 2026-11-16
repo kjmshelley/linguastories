@@ -1,0 +1,25 @@
+{
+  "storyId": "08-02",
+  "storyLevelId": "08-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "媽媽在屋後有一座小花園。班喜歡幫她的忙。",
+      "sentences": [],
+      "romanization": "Māma zài wū hòu yǒu yí zuò xiǎo huāyuán. Bān xǐhuān bāng tā de máng."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "今天他們把新植物種進土裡。班給每株植物澆水。",
+      "sentences": [],
+      "romanization": "Jīntiān tāmen bǎ xīn zhíwù zhòng jìn tǔ lǐ. Bān gěi měi zhū zhíwù jiāo shuǐ."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「現在我們等一等。」媽媽說。班看著花園笑了。",
+      "sentences": [],
+      "romanization": "“Xiànzài wǒmen děng yì děng.” Māma shuō. Bān kànzhe huāyuán xiào le."
+    }
+  ]
+}

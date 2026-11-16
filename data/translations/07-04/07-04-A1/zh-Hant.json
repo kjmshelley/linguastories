@@ -1,0 +1,25 @@
+{
+  "storyId": "07-04",
+  "storyLevelId": "07-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆和媽媽搭公車進城。他坐在窗邊。",
+      "sentences": [],
+      "romanization": "tāng mǔ hé mā mā dā gōng chē jìn chéng。 tā zuò zài chuāng biān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們經過一座公園、一所學校和一棟紅色高樓。湯姆數著站牌。",
+      "sentences": [],
+      "romanization": "tā men jīng guò yī zuò gōng yuán、 yī suǒ xué xiào hé yī dòng hóng sè gāo lóu。 tāng mǔ shù zhù zhàn pái。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "到了最後一站，他們下車走去市場。",
+      "sentences": [],
+      "romanization": "dào le zuì hòu yī zhàn， tā men xià chē zǒu qù shì chǎng。"
+    }
+  ]
+}

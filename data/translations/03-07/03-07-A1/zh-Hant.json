@@ -1,0 +1,19 @@
+{
+  "storyId": "03-07",
+  "storyLevelId": "03-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班去商店買麵包。他買了一條給家人，另一條給奶奶。奶奶邀請他進屋喝茶。",
+      "sentences": [],
+      "romanization": "bān qù shāng diàn mǎi miàn bāo。 tā mǎi le yī tiáo gěi jiā rén， lìng yī tiáo gěi nǎi nǎi。 nǎi nǎi yāo qǐng tā jìn wū hē chá。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們趁麵包還熱著的時候吃。班告訴奶奶學校的事。",
+      "sentences": [],
+      "romanization": "tā men chèn miàn bāo hái rè zhù de shí hòu chī。 bān gào sù nǎi nǎi xué xiào de shì。"
+    }
+  ]
+}

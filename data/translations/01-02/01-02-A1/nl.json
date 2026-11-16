@@ -1,0 +1,22 @@
+{
+  "storyId": "01-02",
+  "storyLevelId": "01-02-A1",
+  "sourceLanguage": "nl",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Sam komt thuis na een lange dag. De regen tikt tegen het raam.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Hij maakt hete thee en vindt zijn boek. Zijn kat zit naast hem.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Sam leest één pagina, dan twee. Het huis is rustig en hij voelt zich goed.",
+      "sentences": []
+    }
+  ]
+}

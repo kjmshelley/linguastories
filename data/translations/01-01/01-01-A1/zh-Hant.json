@@ -1,0 +1,53 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭很早就醒來了。陽光照在她的床上。她聽見外面的鳥叫聲。",
+      "sentences": [
+        {
+          "sentenceId": "s1",
+          "glosses": [
+            {
+              "tokenIds": [
+                "t1"
+              ],
+              "translation": "米婭",
+              "romanization": "Mǐyà"
+            },
+            {
+              "tokenIds": [
+                "t2",
+                "t3"
+              ],
+              "translation": "醒來",
+              "romanization": "xǐnglái"
+            },
+            {
+              "tokenIds": [
+                "t4"
+              ],
+              "translation": "很早",
+              "romanization": "hěn zǎo"
+            }
+          ]
+        }
+      ],
+      "romanization": "Mǐyà hěn zǎo jiù xǐnglái le. Yángguāng zhào zài tā de chuáng shàng. Tā tīngjiàn wàimiàn de niǎojiàoshēng."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "米婭走進廚房。爸爸正在泡茶。「早安。」他說。",
+      "sentences": [],
+      "romanization": "Mǐyà zǒu jìn chúfáng. Bàba zhèngzài pào chá. “Zǎo ān.” tā shuō."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們坐在窗邊吃麵包。今天不用著急。米婭笑了。這是一個溫暖、安靜的早晨。",
+      "sentences": [],
+      "romanization": "Tāmen zuò zài chuāngbiān chī miànbāo. Jīntiān búyòng zháojí. Mǐyà xiào le. Zhè shì yí ge wēnnuǎn, ānjìng de zǎochén."
+    }
+  ]
+}

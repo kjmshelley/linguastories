@@ -1,0 +1,17 @@
+{
+  "storyId": "01-09",
+  "storyLevelId": "01-09-A1",
+  "sourceLanguage": "es-ES",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "El aire está fresco esta mañana. Ben se pone una chaqueta antes de salir. En el parque encuentra hojas rojas en el suelo.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Ben recoge una hoja para enseñársela a su papá. Su color es como el de una manzana.",
+      "sentences": []
+    }
+  ]
+}

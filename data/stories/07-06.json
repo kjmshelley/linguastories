@@ -1,0 +1,254 @@
+{
+  "storyId": "07-06",
+  "versions": [
+    {
+      "storyLevelId": "07-06-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " walks"
+                },
+                {
+                  "id": "t3",
+                  "text": " down"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " street"
+                },
+                {
+                  "id": "t6",
+                  "text": " she"
+                },
+                {
+                  "id": "t7",
+                  "text": " does"
+                },
+                {
+                  "id": "t8",
+                  "text": " not"
+                },
+                {
+                  "id": "t9",
+                  "text": " know"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " bookshop"
+                },
+                {
+                  "id": "t5",
+                  "text": " with"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " green"
+                },
+                {
+                  "id": "t8",
+                  "text": " door"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Inside"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " she"
+                },
+                {
+                  "id": "t4",
+                  "text": " chooses"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " story"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " read"
+                },
+                {
+                  "id": "t9",
+                  "text": " on"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " bus"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " woman"
+                },
+                {
+                  "id": "t3",
+                  "text": " in"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " shop"
+                },
+                {
+                  "id": "t6",
+                  "text": " puts"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": " in"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " bag"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " thanks"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " goes"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " bus"
+                },
+                {
+                  "id": "t9",
+                  "text": " stop"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

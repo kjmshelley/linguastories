@@ -1,0 +1,19 @@
+{
+  "storyId": "04-09",
+  "storyLevelId": "04-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "馬克斯帶狗去公園。他丟出一顆球，狗跑去追。狗把球帶回來，準備再玩一次。",
+      "sentences": [],
+      "romanization": "mǎ kè sī dài gǒu qù gōng yuán。 tā diū chū yī kē qiú， gǒu pǎo qù zhuī。 gǒu bǎ qiú dài huí lái， zhǔn bèi zài wán yī cì。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "馬克斯笑著再丟一次球。回家時，他們都累了。",
+      "sentences": [],
+      "romanization": "mǎ kè sī xiào zhù zài diū yī cì qiú。 huí jiā shí， tā men dōu lèi le。"
+    }
+  ]
+}

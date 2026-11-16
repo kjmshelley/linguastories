@@ -1,0 +1,25 @@
+{
+  "storyId": "03-05",
+  "storyLevelId": "03-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆家附近有一家小咖啡館。他和爸爸一起去那裡。",
+      "sentences": [],
+      "romanization": "shān mǔ jiā fù jìn yǒu yī jiā xiǎo kā fēi guǎn。 tā hé bà bà yì qǐ qù nà lǐ。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "爸爸點了茶，山姆喝牛奶、吃小蛋糕。他們坐在窗邊。",
+      "sentences": [],
+      "romanization": "bà bà diǎn le chá， shān mǔ hē niú nǎi、 chī xiǎo dàn gāo。 tā men zuò zài chuāng biān。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "外面的人們撐著傘走過。店裡則溫暖又乾燥。",
+      "sentences": [],
+      "romanization": "wài miàn de rén men chēng zhù sǎn zǒu guò。 diàn lǐ zé wēn nuǎn yòu qián zào。"
+    }
+  ]
+}

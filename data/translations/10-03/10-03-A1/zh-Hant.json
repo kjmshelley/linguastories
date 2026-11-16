@@ -1,0 +1,25 @@
+{
+  "storyId": "10-03",
+  "storyLevelId": "10-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "今天是艾米上班的第一天。她搭公車到一家小店。",
+      "sentences": [],
+      "romanization": "Jīntiān shì Àimǐ shàngbān de dì yī tiān. Tā dā gōngchē dào yì jiā xiǎo diàn."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "新同事告訴她書要放在哪裡。艾米把書放上書架。",
+      "sentences": [],
+      "romanization": "Xīn tóngshì gàosu tā shū yào fàng zài nǎli. Àimǐ bǎ shū fàng shàng shūjià."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "一天結束時，她很累，但很開心。她喜歡這家店。",
+      "sentences": [],
+      "romanization": "Yì tiān jiéshù shí, tā hěn lèi, dàn hěn kāixīn. Tā xǐhuān zhè jiā diàn."
+    }
+  ]
+}

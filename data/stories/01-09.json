@@ -1,0 +1,226 @@
+{
+  "storyId": "01-09",
+  "versions": [
+    {
+      "storyLevelId": "01-09-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " air"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " cool"
+                },
+                {
+                  "id": "t5",
+                  "text": " this"
+                },
+                {
+                  "id": "t6",
+                  "text": " morning"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " on"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " jacket"
+                },
+                {
+                  "id": "t6",
+                  "text": " before"
+                },
+                {
+                  "id": "t7",
+                  "text": " he"
+                },
+                {
+                  "id": "t8",
+                  "text": " goes"
+                },
+                {
+                  "id": "t9",
+                  "text": " out"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " park"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " he"
+                },
+                {
+                  "id": "t6",
+                  "text": " finds"
+                },
+                {
+                  "id": "t7",
+                  "text": " red"
+                },
+                {
+                  "id": "t8",
+                  "text": " leaves"
+                },
+                {
+                  "id": "t9",
+                  "text": " on"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " ground"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " picks"
+                },
+                {
+                  "id": "t3",
+                  "text": " one"
+                },
+                {
+                  "id": "t4",
+                  "text": " leaf"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " show"
+                },
+                {
+                  "id": "t7",
+                  "text": " his"
+                },
+                {
+                  "id": "t8",
+                  "text": " dad"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " red"
+                },
+                {
+                  "id": "t4",
+                  "text": " like"
+                },
+                {
+                  "id": "t5",
+                  "text": " an"
+                },
+                {
+                  "id": "t6",
+                  "text": " apple"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

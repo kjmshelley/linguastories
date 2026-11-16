@@ -1,0 +1,25 @@
+{
+  "storyId": "04-03",
+  "storyLevelId": "04-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "每天早上，一隻白鳥都會來到小美的窗邊。小美喜歡看牠。",
+      "sentences": [],
+      "romanization": "Měitiān zǎoshang, yì zhī bái niǎo dōu huì láidào Xiǎoměi de chuāngbiān. Xiǎoměi xǐhuān kàn tā."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "有一天，鳥嘴裡叼著一片小葉子。牠飛進一棵樹裡。",
+      "sentences": [],
+      "romanization": "Yǒu yì tiān, niǎo zuǐ lǐ diāozhe yí piàn xiǎo yèzi. Tā fēi jìn yì kē shù lǐ."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "小美看見樹上有一個鳥巢。「那是你的家。」她說。",
+      "sentences": [],
+      "romanization": "Xiǎoměi kànjiàn shù shàng yǒu yí ge niǎocháo. “Nà shì nǐ de jiā.” tā shuō."
+    }
+  ]
+}

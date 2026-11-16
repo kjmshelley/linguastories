@@ -1,0 +1,19 @@
+{
+  "storyId": "05-06",
+  "storyLevelId": "05-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆找到一張公園地圖。他和小美跟著地圖走到一個小池塘。他們用星星標出最喜歡的地方。",
+      "sentences": [],
+      "romanization": "shān mǔ zhǎo dào yī zhāng gōng yuán dì tú。 tā hé xiǎo měi gēn zhù dì tú zǒu dào yī gè xiǎo chí táng。 tā men yòng xīng xīng biāo chū zuì xǐ huān de dì fāng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們坐在水邊吃蘋果。然後跟著地圖回家。",
+      "sentences": [],
+      "romanization": "tā men zuò zài shuǐ biān chī píng guǒ。 rán hòu gēn zhù dì tú huí jiā。"
+    }
+  ]
+}

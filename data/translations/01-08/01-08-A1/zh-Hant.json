@@ -1,0 +1,19 @@
+{
+  "storyId": "01-08",
+  "storyLevelId": "01-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜坐在外面看書。陽光明亮，一隻鳥在樹上唱歌。她一直讀到晚餐時間。",
+      "sentences": [],
+      "romanization": "ān nà zuò zài wài miàn kàn shū。 yáng guāng míng liàng， yī zhī niǎo zài shù shàng chàng gē。 tā yì zhí dú dào wǎn cān shí jiān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她最喜歡的部分是關於一隻小狗。她把這段故事告訴家人。",
+      "sentences": [],
+      "romanization": "tā zuì xǐ huān de bù fèn shì guān yú yī zhī xiǎo gǒu。 tā bǎ zhè duàn gù shì gào sù jiā rén。"
+    }
+  ]
+}

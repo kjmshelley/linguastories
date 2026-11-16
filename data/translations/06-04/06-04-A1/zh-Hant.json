@@ -1,0 +1,25 @@
+{
+  "storyId": "06-04",
+  "storyLevelId": "06-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜找不到圖書館的書。她在房間和包包裡找。",
+      "sentences": [],
+      "romanization": "ān nà zhǎo bú dào tú shū guǎn de shū。 tā zài fáng jiān hé bāo bāo lǐ zhǎo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "弟弟問：「你在公車上讀過嗎？」安娜想起來了。她確實讀過！",
+      "sentences": [],
+      "romanization": "dì di wèn：「nǐ zài gōng chē shàng dú guò ma？」 ān nà xiǎng qǐ lái le。 tā què shí dú guò！"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們打電話到公車站。一位司機拿著那本書。安娜很高興找回了它。",
+      "sentences": [],
+      "romanization": "tā men dǎ diàn huà dào gōng chē zhàn。 yī wèi sī jī ná zhù nà běn shū。 ān nà hěn gāo xìng zhǎo huí le tā。"
+    }
+  ]
+}

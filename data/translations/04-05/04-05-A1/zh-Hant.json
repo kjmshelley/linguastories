@@ -1,0 +1,25 @@
+{
+  "storyId": "04-05",
+  "storyLevelId": "04-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆和班上同學去農場。他看見圍欄旁有一匹棕馬。",
+      "sentences": [],
+      "romanization": "tāng mǔ hé bān shàng tóng xué qù nóng chǎng。 tā kàn jiàn wéi lán páng yǒu yì pǐ zōng mǎ。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "農夫給馬一顆蘋果。牠很快就把蘋果吃掉了。",
+      "sentences": [],
+      "romanization": "nóng fū gěi mǎ yī kē píng guǒ。 tā hěn kuài jiù bǎ píng guǒ chī diào le。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "湯姆回家後畫了那匹馬。他把畫送給老師。",
+      "sentences": [],
+      "romanization": "tāng mǔ huí jiā hòu huà le nà pǐ mǎ。 tā bǎ huà sòng gěi lǎo shī。"
+    }
+  ]
+}

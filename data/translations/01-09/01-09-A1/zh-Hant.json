@@ -1,0 +1,19 @@
+{
+  "storyId": "01-09",
+  "storyLevelId": "01-09-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "今天早上天氣涼涼的。班出門前穿上外套。他在公園裡發現地上有紅葉。",
+      "sentences": [],
+      "romanization": "jīn tiān zǎo shàng tiān qì liáng liáng de。 bān chū mén qián chuān shàng wài tào。 tā zài gōng yuán lǐ fā xiàn dì shàng yǒu hóng yè。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "班撿起一片葉子給爸爸看。它的顏色像蘋果一樣。",
+      "sentences": [],
+      "romanization": "bān jiǎn qǐ yī piàn yè zi gěi bà bà kàn。 tā de yán sè xiàng píng guǒ yī yàng。"
+    }
+  ]
+}

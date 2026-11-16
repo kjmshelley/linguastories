@@ -1,0 +1,234 @@
+{
+  "storyId": "04-10",
+  "versions": [
+    {
+      "storyLevelId": "04-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " bird"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " by"
+                },
+                {
+                  "id": "t5",
+                  "text": " Lily’s"
+                },
+                {
+                  "id": "t6",
+                  "text": " window"
+                },
+                {
+                  "id": "t7",
+                  "text": " every"
+                },
+                {
+                  "id": "t8",
+                  "text": " morning"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Today"
+                },
+                {
+                  "id": "t2",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t3",
+                  "text": " draws"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " in"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": " book"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Before"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " bird"
+                },
+                {
+                  "id": "t4",
+                  "text": " flies"
+                },
+                {
+                  "id": "t5",
+                  "text": " away"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " shows"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " to"
+                },
+                {
+                  "id": "t11",
+                  "text": " her"
+                },
+                {
+                  "id": "t12",
+                  "text": " mom"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " out"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " too"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Maybe"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " will"
+                },
+                {
+                  "id": "t5",
+                  "text": " come"
+                },
+                {
+                  "id": "t6",
+                  "text": " back"
+                },
+                {
+                  "id": "t7",
+                  "text": " tomorrow"
+                },
+                {
+                  "id": "t8",
+                  "text": ",”"
+                },
+                {
+                  "id": "t9",
+                  "text": " she"
+                },
+                {
+                  "id": "t10",
+                  "text": " says"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

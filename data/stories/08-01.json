@@ -1,0 +1,351 @@
+{
+  "storyId": "08-01",
+  "versions": [
+    {
+      "storyLevelId": "08-01-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t4",
+                  "text": " have"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " free"
+                },
+                {
+                  "id": "t7",
+                  "text": " day"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "What"
+                },
+                {
+                  "id": "t3",
+                  "text": " do"
+                },
+                {
+                  "id": "t4",
+                  "text": " you"
+                },
+                {
+                  "id": "t5",
+                  "text": " want"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " do"
+                },
+                {
+                  "id": "t8",
+                  "text": "?”"
+                },
+                {
+                  "id": "t9",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t10",
+                  "text": " asks"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " wants"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " go"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " park"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " take"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " ball"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " some"
+                },
+                {
+                  "id": "t7",
+                  "text": " sandwiches"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " park"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " they"
+                },
+                {
+                  "id": "t6",
+                  "text": " play"
+                },
+                {
+                  "id": "t7",
+                  "text": " until"
+                },
+                {
+                  "id": "t8",
+                  "text": " they"
+                },
+                {
+                  "id": "t9",
+                  "text": " are"
+                },
+                {
+                  "id": "t10",
+                  "text": " hungry"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " sit"
+                },
+                {
+                  "id": "t3",
+                  "text": " under"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " tree"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " eat"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Can"
+                },
+                {
+                  "id": "t3",
+                  "text": " we"
+                },
+                {
+                  "id": "t4",
+                  "text": " come"
+                },
+                {
+                  "id": "t5",
+                  "text": " again"
+                },
+                {
+                  "id": "t6",
+                  "text": "?”"
+                },
+                {
+                  "id": "t7",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t8",
+                  "text": " asks"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t3",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Of"
+                },
+                {
+                  "id": "t3",
+                  "text": " course"
+                },
+                {
+                  "id": "t4",
+                  "text": ".”"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

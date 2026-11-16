@@ -1,0 +1,25 @@
+{
+  "storyId": "09-03",
+  "storyLevelId": "09-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "下了好多天雨之後，天空變藍了。小李帶著球出門。",
+      "sentences": [],
+      "romanization": "Xià le hǎo duō tiān yǔ zhīhòu, tiānkōng biàn lán le. Xiǎo Lǐ dàizhe qiú chūmén."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他的朋友小美在公園裡。他們一起在陽光下玩。",
+      "sentences": [],
+      "romanization": "Tā de péngyou Xiǎoměi zài gōngyuán lǐ. Tāmen yìqǐ zài yángguāng xià wán."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們累了以後，躺在草地上看雲。",
+      "sentences": [],
+      "romanization": "Tāmen lèi le yǐhòu, tǎng zài cǎodì shàng kàn yún."
+    }
+  ]
+}

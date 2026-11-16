@@ -1,0 +1,19 @@
+{
+  "storyId": "04-10",
+  "storyLevelId": "04-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "每天早上都有一隻鳥停在莉莉的窗邊。今天莉莉把牠畫在書裡。鳥飛走之前，她把牠指給媽媽看。",
+      "sentences": [],
+      "romanization": "měi tiān zǎo shàng dōu yǒu yī zhī niǎo tíng zài lì lì de chuāng biān。 jīn tiān lì lì bǎ tā huà zài shū lǐ。 niǎo fēi zǒu zhī qián， tā bǎ tā zhǐ gěi mā mā kàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "媽媽也望向窗外。「也許牠明天會再來。」她說。",
+      "sentences": [],
+      "romanization": "mā mā yě wàng xiàng chuāng wài。「yě xǔ tā míng tiān huì zài lái。」 tā shuō。"
+    }
+  ]
+}

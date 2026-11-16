@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "zh-Hans",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班想去外面玩，但正在下雨。他望向窗外。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "妈妈给他纸和彩笔。“我们来画雨吧。”她说。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "班还画了蓝天和一个大大的黄色太阳。他把画贴在墙上。",
+      "sentences": []
+    }
+  ]
+}

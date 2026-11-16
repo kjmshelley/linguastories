@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "vi",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ben muốn chơi bên ngoài, nhưng trời đang mưa. Anh ta nhìn ra ngoài cửa sổ.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mẹ đưa cho Ben giấy và bút màu. “Mình cùng vẽ cơn mưa nhé,” mẹ nói.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ben cũng vẽ bầu trời xanh và một mặt trời vàng thật lớn. Cậu dán bức tranh lên tường.",
+      "sentences": []
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "storyId": "10-10",
+  "versions": [
+    {
+      "storyLevelId": "10-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " reads"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " book"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " school"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " On"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " last"
+                },
+                {
+                  "id": "t4",
+                  "text": " page"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " dog"
+                },
+                {
+                  "id": "t8",
+                  "text": " gets"
+                },
+                {
+                  "id": "t9",
+                  "text": " home"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " closes"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " book"
+                },
+                {
+                  "id": "t5",
+                  "text": " with"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " smile"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " tells"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " friend"
+                },
+                {
+                  "id": "t5",
+                  "text": " about"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " ending"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " friend"
+                },
+                {
+                  "id": "t3",
+                  "text": " wants"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " read"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": ","
+                },
+                {
+                  "id": "t8",
+                  "text": " too"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

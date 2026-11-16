@@ -1,0 +1,19 @@
+{
+  "storyId": "05-08",
+  "storyLevelId": "05-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李和妹妹沿著河邊走。他們看見一艘小船，向船上的人揮手。船上的人也向他們揮手。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ hé mèi mèi yán zhù hé biān zǒu。 tā men kàn jiàn yī sōu xiǎo chuán， xiàng chuán shàng de rén huī shǒu。 chuán shàng de rén yě xiàng tā men huī shǒu。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "船上一個孩子戴著紅帽子。小李一直看到船消失在視線之外。",
+      "sentences": [],
+      "romanization": "chuán shàng yī gè hái zi dài zhù hóng mào zi。 xiǎo lǐ yì zhí kàn dào chuán xiāo shī zài shì xiàn zhī wài。"
+    }
+  ]
+}

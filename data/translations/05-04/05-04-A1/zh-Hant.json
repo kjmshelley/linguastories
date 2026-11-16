@@ -1,0 +1,25 @@
+{
+  "storyId": "05-04",
+  "storyLevelId": "05-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "山姆和家人走到一座湖邊。他們帶了午餐和一條大毯子。",
+      "sentences": [],
+      "romanization": "shān mǔ hé jiā rén zǒu dào yī zuò hú biān。 tā men dài le wǔ cān hé yī tiáo dà tǎn zi。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "湖水是藍色的。山姆看到湖邊有魚。",
+      "sentences": [],
+      "romanization": "hú shuǐ shì lán sè de。 shān mǔ kàn dào hú biān yǒu yú。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們在樹下吃東西，看著船隻。山姆想再來。",
+      "sentences": [],
+      "romanization": "tā men zài shù xià chī dōng xī， kàn zhù chuán zhī。 shān mǔ xiǎng zài lái。"
+    }
+  ]
+}

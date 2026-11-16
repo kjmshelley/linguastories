@@ -1,0 +1,234 @@
+{
+  "storyId": "04-09",
+  "versions": [
+    {
+      "storyLevelId": "04-09-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Max"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " dog"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " park"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " throws"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " ball"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " dog"
+                },
+                {
+                  "id": "t9",
+                  "text": " runs"
+                },
+                {
+                  "id": "t10",
+                  "text": " after"
+                },
+                {
+                  "id": "t11",
+                  "text": " it"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " brings"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " back"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " ready"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " play"
+                },
+                {
+                  "id": "t10",
+                  "text": " again"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Max"
+                },
+                {
+                  "id": "t2",
+                  "text": " laughs"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " throws"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " ball"
+                },
+                {
+                  "id": "t7",
+                  "text": " again"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Both"
+                },
+                {
+                  "id": "t2",
+                  "text": " are"
+                },
+                {
+                  "id": "t3",
+                  "text": " tired"
+                },
+                {
+                  "id": "t4",
+                  "text": " when"
+                },
+                {
+                  "id": "t5",
+                  "text": " they"
+                },
+                {
+                  "id": "t6",
+                  "text": " go"
+                },
+                {
+                  "id": "t7",
+                  "text": " home"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "tr",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna bugün evde kalıyor. Kardeşi okulda ve ev sessiz.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Odasını temizler ve yatağının altında eski bir fotoğraf bulur. O ve kardeşi denizde.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Eve geldiğinde, ona fotoğrafı gösterir. Gülüyorlar ve o günü hatırlıyorlar.",
+      "sentences": []
+    }
+  ]
+}

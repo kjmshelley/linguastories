@@ -1,0 +1,222 @@
+{
+  "storyId": "04-06",
+  "versions": [
+    {
+      "storyLevelId": "04-06-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "May"
+                },
+                {
+                  "id": "t2",
+                  "text": " has"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " little"
+                },
+                {
+                  "id": "t5",
+                  "text": " blue"
+                },
+                {
+                  "id": "t6",
+                  "text": " fish"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Every"
+                },
+                {
+                  "id": "t2",
+                  "text": " morning"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " she"
+                },
+                {
+                  "id": "t5",
+                  "text": " says"
+                },
+                {
+                  "id": "t6",
+                  "text": " hello"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " gives"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " food"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Today"
+                },
+                {
+                  "id": "t2",
+                  "text": " it"
+                },
+                {
+                  "id": "t3",
+                  "text": " swims"
+                },
+                {
+                  "id": "t4",
+                  "text": " fast"
+                },
+                {
+                  "id": "t5",
+                  "text": " around"
+                },
+                {
+                  "id": "t6",
+                  "text": " its"
+                },
+                {
+                  "id": "t7",
+                  "text": " home"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "May"
+                },
+                {
+                  "id": "t2",
+                  "text": " watches"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " fish"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " short"
+                },
+                {
+                  "id": "t8",
+                  "text": " time"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Then"
+                },
+                {
+                  "id": "t2",
+                  "text": " she"
+                },
+                {
+                  "id": "t3",
+                  "text": " has"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " get"
+                },
+                {
+                  "id": "t6",
+                  "text": " ready"
+                },
+                {
+                  "id": "t7",
+                  "text": " for"
+                },
+                {
+                  "id": "t8",
+                  "text": " school"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

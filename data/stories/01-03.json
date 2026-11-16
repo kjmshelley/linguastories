@@ -1,0 +1,276 @@
+{
+  "storyId": "01-03",
+  "versions": [
+    {
+      "storyLevelId": "01-03-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " wants"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " play"
+                },
+                {
+                  "id": "t5",
+                  "text": " outside"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " but"
+                },
+                {
+                  "id": "t8",
+                  "text": " it"
+                },
+                {
+                  "id": "t9",
+                  "text": " is"
+                },
+                {
+                  "id": "t10",
+                  "text": " raining"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " out"
+                },
+                {
+                  "id": "t4",
+                  "text": " of"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " window"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " gives"
+                },
+                {
+                  "id": "t3",
+                  "text": " him"
+                },
+                {
+                  "id": "t4",
+                  "text": " paper"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " colors"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Let’s"
+                },
+                {
+                  "id": "t3",
+                  "text": " draw"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " rain"
+                },
+                {
+                  "id": "t6",
+                  "text": ",”"
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " says"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " draws"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " blue"
+                },
+                {
+                  "id": "t5",
+                  "text": " sky"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " big"
+                },
+                {
+                  "id": "t9",
+                  "text": " yellow"
+                },
+                {
+                  "id": "t10",
+                  "text": " sun"
+                },
+                {
+                  "id": "t11",
+                  "text": ","
+                },
+                {
+                  "id": "t12",
+                  "text": " too"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " picture"
+                },
+                {
+                  "id": "t5",
+                  "text": " on"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " wall"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

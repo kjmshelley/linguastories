@@ -1,0 +1,19 @@
+{
+  "storyId": "04-07",
+  "storyLevelId": "04-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "貓睡在地板上有陽光的地方。小李在牠旁邊放了一條柔軟的毯子。貓睜開一隻眼睛，又繼續睡了。",
+      "sentences": [],
+      "romanization": "māo shuì zài dì bǎn shàng yǒu yáng guāng de dì fāng。 xiǎo lǐ zài tā páng biān fàng le yī tiáo róu ruǎn de tǎn zi。 māo zhēng kāi yī zhī yǎn jīng， yòu jì xù shuì le。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "小李拿著書坐下來。他在睡覺的貓旁邊安靜地讀書。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ ná zhù shū zuò xià lái。 tā zài shuì jué de māo páng biān ān jìng dì dú shū。"
+    }
+  ]
+}

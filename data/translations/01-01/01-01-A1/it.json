@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "it",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia si sveglia presto. La luce del sole illumina il suo letto. Sente gli uccelli fuori.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia va in cucina. Suo padre sta preparando il tè. «Buongiorno», dice lui.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Si siedono vicino alla finestra e mangiano il pane. Oggi non c’è bisogno di avere fretta. Mia sorride. È una mattina calda e tranquilla.",
+      "sentences": []
+    }
+  ]
+}

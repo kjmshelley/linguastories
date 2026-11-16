@@ -1,0 +1,244 @@
+{
+  "storyId": "09-05",
+  "versions": [
+    {
+      "storyLevelId": "09-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " small"
+                },
+                {
+                  "id": "t5",
+                  "text": " garden"
+                },
+                {
+                  "id": "t6",
+                  "text": " outside"
+                },
+                {
+                  "id": "t7",
+                  "text": " Amy’s"
+                },
+                {
+                  "id": "t8",
+                  "text": " school"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " class"
+                },
+                {
+                  "id": "t3",
+                  "text": " takes"
+                },
+                {
+                  "id": "t4",
+                  "text": " care"
+                },
+                {
+                  "id": "t5",
+                  "text": " of"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Today"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " Amy"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t6",
+                  "text": " give"
+                },
+                {
+                  "id": "t7",
+                  "text": " water"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " plants"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " see"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " new"
+                },
+                {
+                  "id": "t5",
+                  "text": " green"
+                },
+                {
+                  "id": "t6",
+                  "text": " leaf"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " teacher"
+                },
+                {
+                  "id": "t3",
+                  "text": " smiles"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Our"
+                },
+                {
+                  "id": "t3",
+                  "text": " garden"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " growing"
+                },
+                {
+                  "id": "t6",
+                  "text": ",”"
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " says"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

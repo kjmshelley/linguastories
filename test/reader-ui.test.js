@@ -10,7 +10,7 @@ test('reader selects translations independently and displays target romanization
   const location = {pathname:'/story/01-01', search:'?source=en', href:'http://localhost/story/01-01?source=en'};
   const document = {querySelector:()=>root,documentElement:{dataset:{}}};
   const history = {replaceState(_state,_title,url){location.href=String(url); location.search=new URL(location.href).search;}};
-  const context = {document,location,history,URL,URLSearchParams,localStorage:{getItem:()=>null,setItem(){}},fetch:async()=>({ok:true,json:async()=>({genres:['Adventure'],stories:[story]})})};
+  const context = {document,location,history,URL,URLSearchParams,localStorage:{getItem:()=>null,setItem(){}},fetch:async url=>({ok:true,json:async()=>url.includes('/story/')?story:{genres:['Adventure'],stories:[story]}})};
   const script = fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
   await vm.runInNewContext(`(async()=>{${script}\n})()`, context);
   assert.match(root.innerHTML,/TARGET/);
@@ -126,4 +126,44 @@ test('home header omits the library link and search control', async () => {
   assert.doesNotMatch(markup,/Explore stories/);
   assert.doesNotMatch(markup,/header-search/);
   assert.match(markup,/id="site-language"/);
+});
+
+test('word and phrase glosses render as clickable units without changing the sentence', async () => {
+  const root={innerHTML:'',addEventListener(){}};
+  const context={document:{querySelector:()=>root,documentElement:{dataset:{}}},location:{pathname:'/',search:''},URLSearchParams,localStorage:{getItem:()=>null},fetch:async()=>({ok:true,json:async()=>({genres:[],stories:[]})})};
+  const script=fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
+  const html=await vm.runInNewContext(`(async()=>{${script}\nreturn renderTargetParagraph({target:'Mia wakes up.',sentences:[{sentenceId:'s1',tokens:[{id:'t1',text:'Mia'},{id:'t2',text:' wakes'},{id:'t3',text:' up'},{id:'t4',text:'.'}]}],translations:{'zh-Hant':{sentences:[{sentenceId:'s1',glosses:[{tokenIds:['t2','t3'],translation:'醒來',romanization:'xǐnglái'}]}]}}},'zh-Hant');})()`,context);
+  assert.match(html,/Mia /);
+  assert.match(html,/>wakes up<\/button>/);
+  assert.match(html,/醒來/);
+  assert.match(html,/xǐnglái/);
+  assert.match(html,/hidden/);
+  assert.match(html,/<\/span>\./);
+});
+
+test('gloss button toggles its popup and Escape closes it', async () => {
+  const handlers={};
+  const popup={hidden:true};
+  const button={nextElementSibling:popup,attributes:{'aria-expanded':'false'},setAttribute(key,value){this.attributes[key]=value;},getAttribute(key){return this.attributes[key];}};
+  const root={innerHTML:'',addEventListener:(type,handler)=>handlers[type]=handler,querySelectorAll:()=>button.attributes['aria-expanded']==='true'?[button]:[]};
+  const context={document:{querySelector:()=>root,documentElement:{dataset:{}}},location:{pathname:'/',search:''},URLSearchParams,localStorage:{getItem:()=>null},fetch:async()=>({ok:true,json:async()=>({genres:[],stories:[]})})};
+  const script=fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
+  await vm.runInNewContext(`(async()=>{${script}\n})()`,context);
+  const target={closest:selector=>selector==='[data-action="gloss"]'?button:null};
+  handlers.click({target});
+  assert.equal(popup.hidden,false);
+  assert.equal(button.attributes['aria-expanded'],'true');
+  handlers.keydown({key:'Escape',target});
+  assert.equal(popup.hidden,true);
+  assert.equal(button.attributes['aria-expanded'],'false');
+});
+
+test('library filters source languages within the selected story level', async () => {
+  const root={innerHTML:'',addEventListener(){}};
+  const story={id:'01',title:'Test',description:'Text',genre:'Adventure',level:'A1',targetLanguage:'en',sourceLanguages:['zh-Hant'],image:'/x',levels:[{level:'A1',availableLanguages:[{language:'zh-Hant'}]},{level:'A2',availableLanguages:[{language:'es-MX'}]}]};
+  const context={document:{querySelector:()=>root,documentElement:{dataset:{}}},location:{pathname:'/',search:'?level=A2&searchBy=source&source=es-MX'},URLSearchParams,localStorage:{getItem:()=>null},fetch:async()=>({ok:true,json:async()=>({genres:['Adventure'],stories:[story]})})};
+  const script=fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
+  const result=await vm.runInNewContext(`(async()=>{${script}\nreturn {ids:filteredStories().map(s=>s.id),markup:card(catalog.stories[0])};})()`,context);
+  assert.equal(result.ids.join(','),'01');
+  assert.match(result.markup,/A2/);
 });

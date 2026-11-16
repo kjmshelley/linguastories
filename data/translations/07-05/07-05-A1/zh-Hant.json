@@ -1,0 +1,25 @@
+{
+  "storyId": "07-05",
+  "storyLevelId": "07-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉第一次到大城市。到處都是高樓。",
+      "sentences": [],
+      "romanization": "lì lì dì yī cì dào dà chéng shì。 dào chù dōu shì gāo lóu。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她和媽媽搭地下鐵。她們在博物館附近下車。",
+      "sentences": [],
+      "romanization": "tā hé mā mā dā dì xià tiě。 tā men zài bó wù guǎn fù jìn xià chē。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "莉莉看到畫作和一隻很大的恐龍。後來她把一切告訴爸爸。",
+      "sentences": [],
+      "romanization": "lì lì kàn dào huà zuò hé yī zhī hěn dà de kǒng lóng。 hòu lái tā bǎ yī qiè gào sù bà bà。"
+    }
+  ]
+}

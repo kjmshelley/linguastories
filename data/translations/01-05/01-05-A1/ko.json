@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "ko",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "월요일 아침입니다. 미아는 달력에서 한 주의 일정을 봅니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "학교에 가고, 할머니를 만나고, 공원에서 하루를 보낼 예정입니다. 미아는 토요일에 별을 그립니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "미아는 신발을 신고 가방을 듭니다. 새로운 한 주가 시작되었습니다.",
+      "sentences": []
+    }
+  ]
+}

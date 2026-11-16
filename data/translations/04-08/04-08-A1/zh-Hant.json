@@ -1,0 +1,19 @@
+{
+  "storyId": "04-08",
+  "storyLevelId": "04-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "艾米在湖邊看見一隻鴨子和三隻小鴨。牠們跟在媽媽後面游泳。艾米在小路上看著牠們。",
+      "sentences": [],
+      "romanization": "ài mǐ zài hú biān kàn jiàn yī zhī yā zi hé sān zhī xiǎo yā。 tā men gēn zài mā mā hòu miàn yóu yǒng。 ài mǐ zài xiǎo lù shàng kàn zhù tā men。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "小鴨緊緊跟著媽媽。不久，牠們游到樹後面去了。",
+      "sentences": [],
+      "romanization": "xiǎo yā jǐn jǐn gēn zhù mā mā。 bù jiǔ， tā men yóu dào shù hòu miàn qù le。"
+    }
+  ]
+}

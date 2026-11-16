@@ -1,0 +1,19 @@
+{
+  "storyId": "06-06",
+  "storyLevelId": "06-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "公車上有一個黃色的包。安娜把它交給司機。下一站，一位男士回來找包，並向他們道謝。",
+      "sentences": [],
+      "romanization": "gōng chē shàng yǒu yī gè huáng sè de bāo。 ān nà bǎ tā jiāo gěi sī jī。 xià yī zhàn， yī wèi nán shì huí lái zhǎo bāo， bìng xiàng tā men dào xiè。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "男士往包裡看，找到了他的書。他很高興找回了包。",
+      "sentences": [],
+      "romanization": "nán shì wǎng bāo lǐ kàn， zhǎo dào le tā de shū。 tā hěn gāo xìng zhǎo huí le bāo。"
+    }
+  ]
+}

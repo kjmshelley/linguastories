@@ -1,0 +1,268 @@
+{
+  "storyId": "03-02",
+  "versions": [
+    {
+      "storyLevelId": "03-02-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " cold"
+                },
+                {
+                  "id": "t4",
+                  "text": " outside"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " walks"
+                },
+                {
+                  "id": "t3",
+                  "text": " into"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " small"
+                },
+                {
+                  "id": "t6",
+                  "text": " café"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "She"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " for"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " cup"
+                },
+                {
+                  "id": "t6",
+                  "text": " of"
+                },
+                {
+                  "id": "t7",
+                  "text": " tea"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " woman"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " café"
+                },
+                {
+                  "id": "t6",
+                  "text": " brings"
+                },
+                {
+                  "id": "t7",
+                  "text": " it"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " her"
+                },
+                {
+                  "id": "t10",
+                  "text": " with"
+                },
+                {
+                  "id": "t11",
+                  "text": " a"
+                },
+                {
+                  "id": "t12",
+                  "text": " smile"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " holds"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " warm"
+                },
+                {
+                  "id": "t5",
+                  "text": " cup"
+                },
+                {
+                  "id": "t6",
+                  "text": " in"
+                },
+                {
+                  "id": "t7",
+                  "text": " her"
+                },
+                {
+                  "id": "t8",
+                  "text": " hands"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " watches"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " rain"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " is"
+                },
+                {
+                  "id": "t7",
+                  "text": " not"
+                },
+                {
+                  "id": "t8",
+                  "text": " in"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " hurry"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

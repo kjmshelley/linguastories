@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "id",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna tinggal di rumah hari ini. Adiknya di sekolah, dan rumah itu sepi.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Dia membersihkan kamarnya dan menemukan foto lama di bawah ranjangnya. Di dalamnya, dia dan saudaranya berada di laut.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ketika dia pulang, dia menunjukkan fotonya kepadanya. Mereka tertawa dan mengingat hari itu.",
+      "sentences": []
+    }
+  ]
+}

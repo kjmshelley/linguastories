@@ -1,0 +1,25 @@
+{
+  "storyId": "03-03",
+  "storyLevelId": "03-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李的午餐袋裡有一顆梨。他的朋友湯姆有一顆蘋果。",
+      "sentences": [],
+      "romanization": "Xiǎo Lǐ de wǔcān dài lǐ yǒu yì kē lí. Tā de péngyou Tāngmǔ yǒu yì kē píngguǒ."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "「我們一起分享吧。」湯姆說。他們把水果切成小塊。",
+      "sentences": [],
+      "romanization": "“Wǒmen yìqǐ fēnxiǎng ba.” Tāngmǔ shuō. Tāmen bǎ shuǐguǒ qiē chéng xiǎo kuài."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "梨很甜。蘋果也很好吃。他們全都吃完了。",
+      "sentences": [],
+      "romanization": "Lí hěn tián. Píngguǒ yě hěn hǎochī. Tāmen quándōu chī wán le."
+    }
+  ]
+}

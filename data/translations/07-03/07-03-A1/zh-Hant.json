@@ -1,0 +1,25 @@
+{
+  "storyId": "07-03",
+  "storyLevelId": "07-03-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美和家人去一個小鎮玩。街道很安靜。",
+      "sentences": [],
+      "romanization": "Xiǎoměi hé jiārén qù yí ge xiǎo zhèn wán. Jiēdào hěn ānjìng."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們發現一家店，櫥窗裡放著麵包。小美選了一個小麵包。",
+      "sentences": [],
+      "romanization": "Tāmen fāxiàn yì jiā diàn, chúchuāng lǐ fàngzhe miànbāo. Xiǎoměi xuǎn le yí ge xiǎo miànbāo."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們在鎮上的廣場吃東西。附近有一個人在演奏音樂。",
+      "sentences": [],
+      "romanization": "Tāmen zài zhèn shàng de guǎngchǎng chī dōngxi. Fùjìn yǒu yí ge rén zài yǎnzòu yīnyuè."
+    }
+  ]
+}

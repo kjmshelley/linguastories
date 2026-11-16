@@ -1,0 +1,218 @@
+{
+  "storyId": "09-07",
+  "versions": [
+    {
+      "storyLevelId": "09-07-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Rain"
+                },
+                {
+                  "id": "t2",
+                  "text": " runs"
+                },
+                {
+                  "id": "t3",
+                  "text": " down"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " window"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " stays"
+                },
+                {
+                  "id": "t3",
+                  "text": " inside"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " draws"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " trees"
+                },
+                {
+                  "id": "t8",
+                  "text": " outside"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " When"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " rain"
+                },
+                {
+                  "id": "t4",
+                  "text": " stops"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " she"
+                },
+                {
+                  "id": "t7",
+                  "text": " goes"
+                },
+                {
+                  "id": "t8",
+                  "text": " out"
+                },
+                {
+                  "id": "t9",
+                  "text": " to"
+                },
+                {
+                  "id": "t10",
+                  "text": " see"
+                },
+                {
+                  "id": "t11",
+                  "text": " them"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " leaves"
+                },
+                {
+                  "id": "t3",
+                  "text": " are"
+                },
+                {
+                  "id": "t4",
+                  "text": " wet"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " green"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lily"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " deep"
+                },
+                {
+                  "id": "t5",
+                  "text": " breath"
+                },
+                {
+                  "id": "t6",
+                  "text": " of"
+                },
+                {
+                  "id": "t7",
+                  "text": " fresh"
+                },
+                {
+                  "id": "t8",
+                  "text": " air"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

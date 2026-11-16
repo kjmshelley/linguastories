@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "zh-Hans",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "星期一早上，米娅看着日历上这一周的安排。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她要上学、去看奶奶，还要去公园玩一天。她在星期六画了一颗星。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "米娅穿上鞋，拿起书包。新的一周开始了。",
+      "sentences": []
+    }
+  ]
+}

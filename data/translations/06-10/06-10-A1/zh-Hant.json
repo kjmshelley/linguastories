@@ -1,0 +1,19 @@
+{
+  "storyId": "06-10",
+  "storyLevelId": "06-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李收到一封信。他打開信，發現是表親寄來的一幅畫。小李也畫了一幅畫準備寄回去。",
+      "sentences": [],
+      "romanization": "xiǎo lǐ shōu dào yī fēng xìn。 tā dǎ kāi xìn， fā xiàn shì biǎo qīn jì lái de yī fú huà。 xiǎo lǐ yě huà le yī fú huà zhǔn bèi jì huí qù。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他畫了他們最喜歡的公園。媽媽幫他把畫放進信封。",
+      "sentences": [],
+      "romanization": "tā huà le tā men zuì xǐ huān de gōng yuán。 mā mā bāng tā bǎ huà fàng jìn xìn fēng。"
+    }
+  ]
+}

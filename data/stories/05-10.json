@@ -1,0 +1,234 @@
+{
+  "storyId": "05-10",
+  "versions": [
+    {
+      "storyLevelId": "05-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t4",
+                  "text": " walk"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " sea"
+                },
+                {
+                  "id": "t8",
+                  "text": " early"
+                },
+                {
+                  "id": "t9",
+                  "text": " in"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " morning"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " find"
+                },
+                {
+                  "id": "t3",
+                  "text": " shells"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " listen"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " waves"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " get"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": " in"
+                },
+                {
+                  "id": "t5",
+                  "text": " time"
+                },
+                {
+                  "id": "t6",
+                  "text": " for"
+                },
+                {
+                  "id": "t7",
+                  "text": " lunch"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " puts"
+                },
+                {
+                  "id": "t3",
+                  "text": " one"
+                },
+                {
+                  "id": "t4",
+                  "text": " shell"
+                },
+                {
+                  "id": "t5",
+                  "text": " by"
+                },
+                {
+                  "id": "t6",
+                  "text": " his"
+                },
+                {
+                  "id": "t7",
+                  "text": " bed"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " helps"
+                },
+                {
+                  "id": "t3",
+                  "text": " him"
+                },
+                {
+                  "id": "t4",
+                  "text": " remember"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " sound"
+                },
+                {
+                  "id": "t7",
+                  "text": " of"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " sea"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

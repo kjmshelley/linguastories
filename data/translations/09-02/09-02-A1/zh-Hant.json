@@ -1,0 +1,25 @@
+{
+  "storyId": "09-02",
+  "storyLevelId": "09-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "公園裡有一棵大樹。安娜放學後會去那裡。",
+      "sentences": [],
+      "romanization": "Gōngyuán lǐ yǒu yì kē dà shù. Ānnà fàngxué hòu huì qù nàli."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她坐在樹下畫鳥。一隻鳥靠得很近。",
+      "sentences": [],
+      "romanization": "Tā zuò zài shù xià huà niǎo. Yì zhī niǎo kào de hěn jìn."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "安娜靜靜坐著。鳥看了看她，然後飛到樹上。",
+      "sentences": [],
+      "romanization": "Ānnà jìngjìng zuòzhe. Niǎo kàn le kàn tā, ránhòu fēi dào shù shàng."
+    }
+  ]
+}

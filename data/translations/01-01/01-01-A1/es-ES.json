@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "es-ES",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia se despierta temprano. La luz del sol ilumina su cama. Puede oír los pájaros afuera.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia va a la cocina. Su papá está preparando té. «Buenos días», dice él.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Se sientan junto a la ventana y comen pan. Hoy no hay necesidad de apurarse. Mia sonríe. Es una mañana cálida y tranquila.",
+      "sentences": []
+    }
+  ]
+}

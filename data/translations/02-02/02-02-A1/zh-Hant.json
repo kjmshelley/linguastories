@@ -1,0 +1,25 @@
+{
+  "storyId": "02-02",
+  "storyLevelId": "02-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭發現山姆很難過。他的小狗生病了。",
+      "sentences": [],
+      "romanization": "Mǐyà fāxiàn Shānmǔ hěn nánguò. Tā de xiǎo gǒu shēngbìng le."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "回家後，她做了一張卡片。她畫了一隻狗，寫著：「希望你早點好起來。」",
+      "sentences": [],
+      "romanization": "Huí jiā hòu, tā zuò le yì zhāng kǎpiàn. Tā huà le yì zhī gǒu, xiězhe: “Xīwàng nǐ zǎodiǎn hǎo qǐlái.”"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "第二天，她把卡片給山姆。他笑了。「謝謝你，米婭。」",
+      "sentences": [],
+      "romanization": "Dì èr tiān, tā bǎ kǎpiàn gěi Shānmǔ. Tā xiào le. “Xièxie nǐ, Mǐyà.”"
+    }
+  ]
+}

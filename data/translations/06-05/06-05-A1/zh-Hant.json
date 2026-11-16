@@ -1,0 +1,25 @@
+{
+  "storyId": "06-05",
+  "storyLevelId": "06-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "廚房桌上有一張紙條。上面寫著：「到花園裡看看。」",
+      "sentences": [],
+      "romanization": "chú fáng zhuō shàng yǒu yī zhāng zhǐ tiáo。 shàng miàn xiě zhù：「dào huā yuán lǐ kàn kàn。」"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "班走到外面，看見樹旁有另一張紙條。這張寫著：「看看我後面。」",
+      "sentences": [],
+      "romanization": "bān zǒu dào wài miàn， kàn jiàn shù páng yǒu lìng yī zhāng zhǐ tiáo。 zhè zhāng xiě zhù：「kàn kàn wǒ hòu miàn。」"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "樹後有妹妹送的生日禮物。班跑去謝謝她。",
+      "sentences": [],
+      "romanization": "shù hòu yǒu mèi mèi sòng de shēng rì lǐ wù。 bān pǎo qù xiè xiè tā。"
+    }
+  ]
+}

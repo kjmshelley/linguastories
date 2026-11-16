@@ -1,0 +1,25 @@
+{
+  "storyId": "05-01",
+  "storyLevelId": "05-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆和妹妹看見家附近有一座綠色的小山。「我們走到山頂吧。」湯姆說。",
+      "sentences": [],
+      "romanization": "Tāngmǔ hé mèimei kànjiàn jiā fùjìn yǒu yí zuò lǜsè de xiǎo shān. “Wǒmen zǒu dào shāndǐng ba.” Tāngmǔ shuō."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們帶著水出發了。小路很長。他們在一棵大樹旁停下來休息。",
+      "sentences": [],
+      "romanization": "Tāmen dàizhe shuǐ chūfā le. Xiǎo lù hěn cháng. Tāmen zài yì kē dà shù páng tíng xiàlái xiūxi."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "到了山頂，他們看得見自己的小鎮。房子看起來很小。「我們做到了！」妹妹說。",
+      "sentences": [],
+      "romanization": "Dào le shāndǐng, tāmen kàn de jiàn zìjǐ de xiǎo zhèn. Fángzi kàn qǐlái hěn xiǎo. “Wǒmen zuò dào le!” mèimei shuō."
+    }
+  ]
+}

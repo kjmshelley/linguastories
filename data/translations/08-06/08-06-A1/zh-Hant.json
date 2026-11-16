@@ -1,0 +1,19 @@
+{
+  "storyId": "08-06",
+  "storyLevelId": "08-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "星期天，小李去看爺爺。他們一起看舊照片、做午餐。爺爺給了他兩顆蘋果帶回家。",
+      "sentences": [],
+      "romanization": "xīng qī tiān， xiǎo lǐ qù kàn yé yé。 tā men yì qǐ kàn jiù zhào piān、 zuò wǔ cān。 yé yé gěi le tā liǎng kē píng guǒ dài huí jiā。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "回家後，小李和妹妹分享一顆蘋果。他告訴她爺爺照片裡的事。",
+      "sentences": [],
+      "romanization": "huí jiā hòu， xiǎo lǐ hé mèi mèi fēn xiǎng yī kē píng guǒ。 tā gào sù tā yé yé zhào piān lǐ de shì。"
+    }
+  ]
+}

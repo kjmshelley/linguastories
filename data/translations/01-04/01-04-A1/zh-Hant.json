@@ -1,0 +1,25 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "安娜今天待在家。弟弟在學校，屋子很安靜。",
+      "sentences": [],
+      "romanization": "ān nà jīn tiān dài zài jiā。 dì di zài xué xiào， wū zi hěn ān jìng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她打掃房間，在床下找到一張舊照片。照片裡，她和弟弟在海邊。",
+      "sentences": [],
+      "romanization": "tā dǎ sǎo fáng jiān， zài chuáng xià zhǎo dào yī zhāng jiù zhào piān。 zhào piān lǐ， tā hé dì di zài hǎi biān。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "弟弟回家後，她把照片給他看。他們笑著想起那一天。",
+      "sentences": [],
+      "romanization": "dì di huí jiā hòu， tā bǎ zhào piān gěi tā kàn。 tā men xiào zhù xiǎng qǐ nà yī tiān。"
+    }
+  ]
+}

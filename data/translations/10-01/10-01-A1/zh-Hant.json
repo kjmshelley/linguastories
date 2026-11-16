@@ -1,0 +1,25 @@
+{
+  "storyId": "10-01",
+  "storyLevelId": "10-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "馬克斯剛到新學校。他站在教室門口，雙手覺得冷冷的。",
+      "sentences": [],
+      "romanization": "Mǎkèsī gāng dào xīn xuéxiào. Tā zhàn zài jiàoshì ménkǒu, shuāngshǒu juéde lěnglěng de."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "老師向他問好，指給他一個座位。旁邊的女孩給他一支鉛筆。「我叫安娜。」她說。",
+      "sentences": [],
+      "romanization": "Lǎoshī xiàng tā wènhǎo, zhǐ gěi tā yí ge zuòwèi. Pángbiān de nǚhái gěi tā yì zhī qiānbǐ. “Wǒ jiào Ānnà.” tā shuō."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "放學時，馬克斯告訴媽媽安娜的事。他明天願意再回學校了。",
+      "sentences": [],
+      "romanization": "Fàngxué shí, Mǎkèsī gàosu māma Ānnà de shì. Tā míngtiān yuànyì zài huí xuéxiào le."
+    }
+  ]
+}

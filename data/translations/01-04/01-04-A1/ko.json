@@ -1,0 +1,22 @@
+{
+  "storyId": "01-04",
+  "storyLevelId": "01-04-A1",
+  "sourceLanguage": "ko",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "안나는 오늘 집에 있습니다. 남동생은 학교에 가고 집은 조용합니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "안나는 방을 청소하다가 침대 밑에서 오래된 사진을 찾습니다. 사진 속에서 안나와 남동생은 바닷가에 있습니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "남동생이 집에 돌아오자 안나는 사진을 보여 줍니다. 두 사람은 웃으며 그날을 떠올립니다.",
+      "sentences": []
+    }
+  ]
+}

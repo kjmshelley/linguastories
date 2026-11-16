@@ -1,0 +1,25 @@
+{
+  "storyId": "02-05",
+  "storyLevelId": "02-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美為朋友做了一張紅色卡片。她在上面畫了兩隻貓。",
+      "sentences": [],
+      "romanization": "xiǎo měi wèi péng yǒu zuò le yī zhāng hóng sè kǎ piàn。 tā zài shàng miàn huà le liǎng zhī māo。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "到了學校，她把卡片放在安娜的桌上。安娜打開後笑了。",
+      "sentences": [],
+      "romanization": "dào le xué xiào， tā bǎ kǎ piàn fàng zài ān nà de zhuō shàng。 ān nà dǎ kāi hòu xiào le。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "「牠們看起來像我們的貓！」她說。小美給了她一個擁抱。",
+      "sentences": [],
+      "romanization": "「tā men kàn qǐ lái xiàng wǒ men de māo！」 tā shuō。 xiǎo měi gěi le tā yī gè yōng bào。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "10-06",
+  "storyLevelId": "10-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李對新班級感到擔心。老師指給他座位，然後說：「山姆，這是小李。」很快，小李就有人可以聊天了。",
+      "sentences": [],
+      "romanization": "Xiǎo Lǐ duì xīn bānjí gǎndào dānxīn. Lǎoshī zhǐ gěi tā zuòwèi, ránhòu shuō: “Shānmǔ, zhè shì Xiǎo Lǐ.” Hěn kuài, Xiǎo Lǐ jiù yǒu rén kěyǐ liáotiān le."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "午餐時，山姆請小李和他一起坐。他們聊起最喜歡的遊戲。",
+      "sentences": [],
+      "romanization": "wǔ cān shí， shān mǔ qǐng xiǎo lǐ hé tā yì qǐ zuò。 tā men liáo qǐ zuì xǐ huān de yóu xì。"
+    }
+  ]
+}

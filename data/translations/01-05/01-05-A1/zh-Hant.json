@@ -1,0 +1,25 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "星期一早上，米婭看著日曆上這一週的安排。",
+      "sentences": [],
+      "romanization": "xīng qī yī zǎo shàng， mǐ yà kàn zhù rì lì shàng zhè yī zhōu de ān pái。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她要上學、去看奶奶，還要去公園玩一天。她在星期六畫了一顆星。",
+      "sentences": [],
+      "romanization": "tā yào shàng xué、 qù kàn nǎi nǎi， hái yào qù gōng yuán wán yī tiān。 tā zài xīng qī liù huà le yī kē xīng。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "米婭穿上鞋，拿起書包。新的一週開始了。",
+      "sentences": [],
+      "romanization": "mǐ yà chuān shàng xié， ná qǐ shū bāo。 xīn de yī zhōu kāi shǐ le。"
+    }
+  ]
+}

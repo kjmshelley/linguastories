@@ -1,0 +1,19 @@
+{
+  "storyId": "08-10",
+  "storyLevelId": "08-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "今天是班的生日。家人做了蛋糕，上面放了五根蠟燭。班閉上眼睛許願，然後吹熄蠟燭。",
+      "sentences": [],
+      "romanization": "jīn tiān shì bān de shēng rì。 jiā rén zuò le dàn gāo， shàng miàn fàng le wǔ gēn là zhú。 bān bì shàng yǎn jīng xǔ yuàn， rán hòu chuī xī là zhú。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "姊姊送他一張畫著狗的卡片。班把卡片放在床邊。",
+      "sentences": [],
+      "romanization": "zǐ zǐ sòng tā yī zhāng huà zhù gǒu de kǎ piàn。 bān bǎ kǎ piàn fàng zài chuáng biān。"
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "storyId": "05-01",
+  "versions": [
+    {
+      "storyLevelId": "05-01-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " sister"
+                },
+                {
+                  "id": "t5",
+                  "text": " see"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " green"
+                },
+                {
+                  "id": "t8",
+                  "text": " hill"
+                },
+                {
+                  "id": "t9",
+                  "text": " near"
+                },
+                {
+                  "id": "t10",
+                  "text": " their"
+                },
+                {
+                  "id": "t11",
+                  "text": " home"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Let’s"
+                },
+                {
+                  "id": "t3",
+                  "text": " walk"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " top"
+                },
+                {
+                  "id": "t7",
+                  "text": ",”"
+                },
+                {
+                  "id": "t8",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t9",
+                  "text": " says"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " take"
+                },
+                {
+                  "id": "t3",
+                  "text": " water"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " start"
+                },
+                {
+                  "id": "t6",
+                  "text": " walking"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " path"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " long"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " At"
+                },
+                {
+                  "id": "t2",
+                  "text": " a"
+                },
+                {
+                  "id": "t3",
+                  "text": " big"
+                },
+                {
+                  "id": "t4",
+                  "text": " tree"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " they"
+                },
+                {
+                  "id": "t7",
+                  "text": " stop"
+                },
+                {
+                  "id": "t8",
+                  "text": " to"
+                },
+                {
+                  "id": "t9",
+                  "text": " rest"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " top"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " they"
+                },
+                {
+                  "id": "t6",
+                  "text": " can"
+                },
+                {
+                  "id": "t7",
+                  "text": " see"
+                },
+                {
+                  "id": "t8",
+                  "text": " their"
+                },
+                {
+                  "id": "t9",
+                  "text": " town"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " houses"
+                },
+                {
+                  "id": "t3",
+                  "text": " look"
+                },
+                {
+                  "id": "t4",
+                  "text": " very"
+                },
+                {
+                  "id": "t5",
+                  "text": " small"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "We"
+                },
+                {
+                  "id": "t3",
+                  "text": " did"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": "!”"
+                },
+                {
+                  "id": "t6",
+                  "text": " says"
+                },
+                {
+                  "id": "t7",
+                  "text": " his"
+                },
+                {
+                  "id": "t8",
+                  "text": " sister"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

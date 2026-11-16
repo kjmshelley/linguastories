@@ -1,0 +1,17 @@
+{
+  "storyId": "01-08",
+  "storyLevelId": "01-08-A1",
+  "sourceLanguage": "es-ES",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Anna se sienta afuera con un libro. El sol brilla y un pájaro canta en el árbol. Lee hasta la hora de cenar.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Su parte favorita es la de un perrito. Se la cuenta a su familia.",
+      "sentences": []
+    }
+  ]
+}

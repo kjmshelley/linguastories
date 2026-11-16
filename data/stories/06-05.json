@@ -1,0 +1,272 @@
+{
+  "storyId": "06-05",
+  "versions": [
+    {
+      "storyLevelId": "06-05-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " note"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " kitchen"
+                },
+                {
+                  "id": "t7",
+                  "text": " table"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " says"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " “"
+                },
+                {
+                  "id": "t5",
+                  "text": "Look"
+                },
+                {
+                  "id": "t6",
+                  "text": " in"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " garden"
+                },
+                {
+                  "id": "t9",
+                  "text": ".”"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " goes"
+                },
+                {
+                  "id": "t3",
+                  "text": " outside"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " sees"
+                },
+                {
+                  "id": "t6",
+                  "text": " another"
+                },
+                {
+                  "id": "t7",
+                  "text": " note"
+                },
+                {
+                  "id": "t8",
+                  "text": " by"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " tree"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " This"
+                },
+                {
+                  "id": "t2",
+                  "text": " one"
+                },
+                {
+                  "id": "t3",
+                  "text": " says"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " “"
+                },
+                {
+                  "id": "t6",
+                  "text": "Look"
+                },
+                {
+                  "id": "t7",
+                  "text": " behind"
+                },
+                {
+                  "id": "t8",
+                  "text": " me"
+                },
+                {
+                  "id": "t9",
+                  "text": ".”"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Behind"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " tree"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " birthday"
+                },
+                {
+                  "id": "t7",
+                  "text": " gift"
+                },
+                {
+                  "id": "t8",
+                  "text": " from"
+                },
+                {
+                  "id": "t9",
+                  "text": " his"
+                },
+                {
+                  "id": "t10",
+                  "text": " sister"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " runs"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " thank"
+                },
+                {
+                  "id": "t5",
+                  "text": " her"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "storyId": "07-08",
+  "versions": [
+    {
+      "storyLevelId": "07-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "May"
+                },
+                {
+                  "id": "t2",
+                  "text": " visits"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " lake"
+                },
+                {
+                  "id": "t5",
+                  "text": " with"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": " family"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " lunch"
+                },
+                {
+                  "id": "t4",
+                  "text": " by"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " water"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " see"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " white"
+                },
+                {
+                  "id": "t11",
+                  "text": " bird"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " May"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " picture"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " show"
+                },
+                {
+                  "id": "t7",
+                  "text": " her"
+                },
+                {
+                  "id": "t8",
+                  "text": " friend"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Her"
+                },
+                {
+                  "id": "t2",
+                  "text": " friend"
+                },
+                {
+                  "id": "t3",
+                  "text": " likes"
+                },
+                {
+                  "id": "t4",
+                  "text": " birds"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " too"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " May"
+                },
+                {
+                  "id": "t2",
+                  "text": " wants"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " come"
+                },
+                {
+                  "id": "t5",
+                  "text": " back"
+                },
+                {
+                  "id": "t6",
+                  "text": " with"
+                },
+                {
+                  "id": "t7",
+                  "text": " her"
+                },
+                {
+                  "id": "t8",
+                  "text": " next"
+                },
+                {
+                  "id": "t9",
+                  "text": " time"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

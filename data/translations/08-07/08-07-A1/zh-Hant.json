@@ -1,0 +1,19 @@
+{
+  "storyId": "08-07",
+  "storyLevelId": "08-07-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "米婭在學校學了一首歌。回家後，她唱給媽媽聽。媽媽和她一起唱了最後一段。",
+      "sentences": [],
+      "romanization": "mǐ yà zài xué xiào xué le yī shǒu gē。 huí jiā hòu， tā chàng gěi mā mā tīng。 mā mā hé tā yì qǐ chàng le zuì hòu yī duàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "晚餐後她們又唱了一次。爸爸在廚房裡聽著。",
+      "sentences": [],
+      "romanization": "wǎn cān hòu tā men yòu chàng le yī cì。 bà bà zài chú fáng lǐ tīng zhù。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "09-08",
+  "storyLevelId": "09-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "門邊長著一朵黃花。班每天早上都給它澆水。有一天，他看到一隻蜜蜂停在花上。",
+      "sentences": [],
+      "romanization": "mén biān zhǎng zhù yī duǒ huáng huā。 bān měi tiān zǎo shàng dōu gěi tā jiāo shuǐ。 yǒu yī tiān， tā kàn dào yī zhī mì fēng tíng zài huā shàng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "班站著不動，看著蜜蜂。過了一會兒，牠飛走了。",
+      "sentences": [],
+      "romanization": "bān zhàn zhù bù dòng， kàn zhù mì fēng。 guò le yī huì ér， tā fēi zǒu le。"
+    }
+  ]
+}

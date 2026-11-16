@@ -1,0 +1,19 @@
+{
+  "storyId": "01-06",
+  "storyLevelId": "01-06-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "星期天，山姆很晚才起床。他和姊姊一起做早餐。他們一邊慢慢吃，一邊聽音樂。",
+      "sentences": [],
+      "romanization": "xīng qī tiān， shān mǔ hěn wǎn cái qǐ chuáng。 tā hé zǐ zǐ yì qǐ zuò zǎo cān。 tā men yī biān màn màn chī， yī biān tīng yīn lè。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "早餐後，他們一起洗碗。今天有時間什麼都不做。",
+      "sentences": [],
+      "romanization": "zǎo cān hòu， tā men yì qǐ xǐ wǎn。 jīn tiān yǒu shí jiān shén me dōu bù zuò。"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "storyId": "08-01",
+  "storyLevelId": "08-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班和爸爸今天都有空。「你想做什麼？」爸爸問。班想去公園。",
+      "sentences": [],
+      "romanization": "Bān hé bàba jīntiān dōu yǒu kòng. “Nǐ xiǎng zuò shénme?” bàba wèn. Bān xiǎng qù gōngyuán."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們帶了一顆球和一些三明治。到了公園，他們一直玩到肚子餓。",
+      "sentences": [],
+      "romanization": "Tāmen dài le yì kē qiú hé yìxiē sānmíngzhì. Dào le gōngyuán, tāmen yìzhí wán dào dùzi è."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "他們坐在樹下吃東西。「我們可以再來嗎？」班問。爸爸笑了。「當然可以。」",
+      "sentences": [],
+      "romanization": "Tāmen zuò zài shù xià chī dōngxi. “Wǒmen kěyǐ zài lái ma?” Bān wèn. Bàba xiào le. “Dāngrán kěyǐ.”"
+    }
+  ]
+}

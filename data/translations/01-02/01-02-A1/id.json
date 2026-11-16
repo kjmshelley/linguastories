@@ -1,0 +1,22 @@
+{
+  "storyId": "01-02",
+  "storyLevelId": "01-02-A1",
+  "sourceLanguage": "id",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Sam pulang setelah hari yang panjang. Hujan menetes di jendela.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Dia membuat teh panas dan menemukan bukunya. Kucingnya duduk di sampingnya.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Sam membaca satu halaman, kemudian dua. Rumahnya sepi, dan dia merasa baik.",
+      "sentences": []
+    }
+  ]
+}

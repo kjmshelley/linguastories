@@ -1,0 +1,19 @@
+{
+  "storyId": "06-08",
+  "storyLevelId": "06-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小美在椅子上找到一頂藍帽子。她戴太大，爸爸戴又太小。媽媽試戴後發現那是她的！",
+      "sentences": [],
+      "romanization": "xiǎo měi zài yǐ zi shàng zhǎo dào yī dǐng lán mào zi。 tā dài tài dà， bà bà dài yòu tài xiǎo。 mā mā shì dài hòu fā xiàn nà shì tā de！"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "媽媽笑著把帽子放在門邊。現在她知道該去哪裡找了。",
+      "sentences": [],
+      "romanization": "mā mā xiào zhù bǎ mào zi fàng zài mén biān。 xiàn zài tā zhī dào gāi qù nǎ lǐ zhǎo le。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "pt",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ben quer brincar lá fora, mas está a chover. Ele olha pela janela.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "A mãe dá-lhe papel e lápis de cor. «Vamos desenhar a chuva», diz ela.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ben desenha um céu azul e um grande sol amarelo também. Ele põe a imagem na parede.",
+      "sentences": []
+    }
+  ]
+}

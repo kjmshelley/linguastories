@@ -1,0 +1,25 @@
+{
+  "storyId": "05-02",
+  "storyLevelId": "05-02-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "小李和小美沿著河邊走。他們看見一座老橋。",
+      "sentences": [],
+      "romanization": "Xiǎo Lǐ hé Xiǎoměi yánzhe hébiān zǒu. Tāmen kànjiàn yí zuò lǎo qiáo."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "「它通往哪裡？」小美問。他們走過橋，發現一座小花園。",
+      "sentences": [],
+      "romanization": "“Tā tōngwǎng nǎli?” Xiǎoměi wèn. Tāmen zǒu guò qiáo, fāxiàn yí zuò xiǎo huāyuán."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "花園裡有紅花和黃花。他們坐在那裡聽水聲。",
+      "sentences": [],
+      "romanization": "Huāyuán lǐ yǒu hóng huā hé huáng huā. Tāmen zuò zài nàli tīng shuǐshēng."
+    }
+  ]
+}

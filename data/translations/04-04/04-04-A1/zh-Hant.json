@@ -1,0 +1,25 @@
+{
+  "storyId": "04-04",
+  "storyLevelId": "04-04-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "莉莉在花園附近看到一隻兔子。牠的耳朵很長，鼻子是粉紅色的。",
+      "sentences": [],
+      "romanization": "lì lì zài huā yuán fù jìn kàn dào yī zhī tù zi。 tā de ěr duǒ hěn zhǎng， bí zi shì fěn hóng sè de。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她一動也不動。兔子吃了一片葉子，然後看著她。",
+      "sentences": [],
+      "romanization": "tā yī dòng yě bù dòng。 tù zi chī le yī piàn yè zi， rán hòu kàn zhù tā。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "接著牠跑進草叢。莉莉希望能再見到牠。",
+      "sentences": [],
+      "romanization": "jiē zhù tā pǎo jìn cǎo cóng。 lì lì xī wàng néng zài jiàn dào tā。"
+    }
+  ]
+}

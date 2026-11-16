@@ -1,0 +1,359 @@
+{
+  "storyId": "03-01",
+  "versions": [
+    {
+      "storyLevelId": "03-01-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " has"
+                },
+                {
+                  "id": "t3",
+                  "text": " three"
+                },
+                {
+                  "id": "t4",
+                  "text": " apples"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " wants"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " make"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " cake"
+                },
+                {
+                  "id": "t7",
+                  "text": " for"
+                },
+                {
+                  "id": "t8",
+                  "text": " his"
+                },
+                {
+                  "id": "t9",
+                  "text": " mom"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " But"
+                },
+                {
+                  "id": "t2",
+                  "text": " he"
+                },
+                {
+                  "id": "t3",
+                  "text": " does"
+                },
+                {
+                  "id": "t4",
+                  "text": " not"
+                },
+                {
+                  "id": "t5",
+                  "text": " know"
+                },
+                {
+                  "id": "t6",
+                  "text": " how"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " make"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "His"
+                },
+                {
+                  "id": "t2",
+                  "text": " sister"
+                },
+                {
+                  "id": "t3",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t4",
+                  "text": " finds"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " recipe"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " cuts"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " apples"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t8",
+                  "text": " makes"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " cake"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Soon"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " kitchen"
+                },
+                {
+                  "id": "t5",
+                  "text": " smells"
+                },
+                {
+                  "id": "t6",
+                  "text": " sweet"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mom"
+                },
+                {
+                  "id": "t2",
+                  "text": " comes"
+                },
+                {
+                  "id": "t3",
+                  "text": " home"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "Is"
+                },
+                {
+                  "id": "t3",
+                  "text": " that"
+                },
+                {
+                  "id": "t4",
+                  "text": " for"
+                },
+                {
+                  "id": "t5",
+                  "text": " me"
+                },
+                {
+                  "id": "t6",
+                  "text": "?”"
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " asks"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " all"
+                },
+                {
+                  "id": "t3",
+                  "text": " sit"
+                },
+                {
+                  "id": "t4",
+                  "text": " down"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " have"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " piece"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

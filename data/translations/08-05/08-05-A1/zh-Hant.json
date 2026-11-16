@@ -1,0 +1,25 @@
+{
+  "storyId": "08-05",
+  "storyLevelId": "08-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班邀請妹妹一起散步。她帶了最喜歡的玩具。",
+      "sentences": [],
+      "romanization": "bān yāo qǐng mèi mèi yì qǐ sàn bù。 tā dài le zuì xǐ huān de wán jù。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們走到公園，看見一隻狗在玩球。",
+      "sentences": [],
+      "romanization": "tā men zǒu dào gōng yuán， kàn jiàn yī zhī gǒu zài wán qiú。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "回家路上，班幫她拿玩具。她牽著他的手。",
+      "sentences": [],
+      "romanization": "huí jiā lù shàng， bān bāng tā ná wán jù。 tā qiān zhù tā de shǒu。"
+    }
+  ]
+}

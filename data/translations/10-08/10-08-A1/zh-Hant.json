@@ -1,0 +1,19 @@
+{
+  "storyId": "10-08",
+  "storyLevelId": "10-08-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "今天是美術課。老師請大家畫一個自己喜歡的地方。米婭畫了她的花園，並展示給全班看。",
+      "sentences": [],
+      "romanization": "jīn tiān shì měi shù kè。 lǎo shī qǐng dà jiā huà yī gè zì jǐ xǐ huān de dì fāng。 mǐ yà huà le tā de huā yuán， bìng zhǎn shì gěi quán bān kàn。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她的朋友畫了大海。他們把兩張畫都貼在牆上。",
+      "sentences": [],
+      "romanization": "tā de péng yǒu huà le dà hǎi。 tā men bǎ liǎng zhāng huà dōu tiē zài qiáng shàng。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "09-10",
+  "storyLevelId": "09-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "湯姆家附近有一棵高樹。夏天，他帶著書坐在樹下。樹葉讓他感到涼爽。",
+      "sentences": [],
+      "romanization": "tāng mǔ jiā fù jìn yǒu yī kē gāo shù。 xià tiān， tā dài zhù shū zuò zài shù xià。 shù yè ràng tā gǎn dào liáng shuǎng。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "有一天，朋友也來了。他們並肩坐著讀書。",
+      "sentences": [],
+      "romanization": "yǒu yī tiān， péng yǒu yě lái le。 tā men bìng jiān zuò zhù dú shū。"
+    }
+  ]
+}

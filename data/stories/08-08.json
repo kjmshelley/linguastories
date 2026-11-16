@@ -1,0 +1,206 @@
+{
+  "storyId": "08-08",
+  "versions": [
+    {
+      "storyLevelId": "08-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " family"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " around"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " big"
+                },
+                {
+                  "id": "t7",
+                  "text": " table"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " There"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " rice"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " soup"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " bowl"
+                },
+                {
+                  "id": "t10",
+                  "text": " of"
+                },
+                {
+                  "id": "t11",
+                  "text": " fruit"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Everyone"
+                },
+                {
+                  "id": "t2",
+                  "text": " talks"
+                },
+                {
+                  "id": "t3",
+                  "text": " about"
+                },
+                {
+                  "id": "t4",
+                  "text": " their"
+                },
+                {
+                  "id": "t5",
+                  "text": " day"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Grandma"
+                },
+                {
+                  "id": "t2",
+                  "text": " tells"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " funny"
+                },
+                {
+                  "id": "t5",
+                  "text": " story"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Everyone"
+                },
+                {
+                  "id": "t2",
+                  "text": " laughs"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " even"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " little"
+                },
+                {
+                  "id": "t7",
+                  "text": " baby"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

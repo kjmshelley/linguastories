@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "ko",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "미아는 일찍 잠에서 깹니다. 햇빛이 침대 위를 비춥니다. 밖에서 새소리가 들립니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "미아는 부엌으로 갑니다. 아빠가 차를 끓이고 있습니다. “좋은 아침이야.” 아빠가 말합니다.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "두 사람은 창가에 앉아 빵을 먹습니다. 오늘은 서두를 필요가 없습니다. 미아가 미소를 짓습니다. 따뜻하고 조용한 아침입니다.",
+      "sentences": []
+    }
+  ]
+}

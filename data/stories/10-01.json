@@ -1,0 +1,342 @@
+{
+  "storyId": "10-01",
+  "versions": [
+    {
+      "storyLevelId": "10-01-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Max"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " new"
+                },
+                {
+                  "id": "t4",
+                  "text": " at"
+                },
+                {
+                  "id": "t5",
+                  "text": " school"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " stands"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " door"
+                },
+                {
+                  "id": "t6",
+                  "text": " of"
+                },
+                {
+                  "id": "t7",
+                  "text": " his"
+                },
+                {
+                  "id": "t8",
+                  "text": " class"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " His"
+                },
+                {
+                  "id": "t2",
+                  "text": " hands"
+                },
+                {
+                  "id": "t3",
+                  "text": " feel"
+                },
+                {
+                  "id": "t4",
+                  "text": " cold"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " teacher"
+                },
+                {
+                  "id": "t3",
+                  "text": " says"
+                },
+                {
+                  "id": "t4",
+                  "text": " hello"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " shows"
+                },
+                {
+                  "id": "t7",
+                  "text": " him"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " seat"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " A"
+                },
+                {
+                  "id": "t2",
+                  "text": " girl"
+                },
+                {
+                  "id": "t3",
+                  "text": " next"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " him"
+                },
+                {
+                  "id": "t6",
+                  "text": " gives"
+                },
+                {
+                  "id": "t7",
+                  "text": " him"
+                },
+                {
+                  "id": "t8",
+                  "text": " a"
+                },
+                {
+                  "id": "t9",
+                  "text": " pencil"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " “"
+                },
+                {
+                  "id": "t2",
+                  "text": "I’m"
+                },
+                {
+                  "id": "t3",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t4",
+                  "text": ",”"
+                },
+                {
+                  "id": "t5",
+                  "text": " she"
+                },
+                {
+                  "id": "t6",
+                  "text": " says"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " end"
+                },
+                {
+                  "id": "t4",
+                  "text": " of"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " day"
+                },
+                {
+                  "id": "t7",
+                  "text": ","
+                },
+                {
+                  "id": "t8",
+                  "text": " Max"
+                },
+                {
+                  "id": "t9",
+                  "text": " tells"
+                },
+                {
+                  "id": "t10",
+                  "text": " his"
+                },
+                {
+                  "id": "t11",
+                  "text": " mom"
+                },
+                {
+                  "id": "t12",
+                  "text": " about"
+                },
+                {
+                  "id": "t13",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t14",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " ready"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " go"
+                },
+                {
+                  "id": "t6",
+                  "text": " back"
+                },
+                {
+                  "id": "t7",
+                  "text": " tomorrow"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "storyId": "02-06",
+  "versions": [
+    {
+      "storyLevelId": "02-06-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "May"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t4",
+                  "text": " want"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " play"
+                },
+                {
+                  "id": "t7",
+                  "text": ","
+                },
+                {
+                  "id": "t8",
+                  "text": " but"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " raining"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " May"
+                },
+                {
+                  "id": "t2",
+                  "text": " has"
+                },
+                {
+                  "id": "t3",
+                  "text": " an"
+                },
+                {
+                  "id": "t4",
+                  "text": " idea"
+                },
+                {
+                  "id": "t5",
+                  "text": ":"
+                },
+                {
+                  "id": "t6",
+                  "text": " they"
+                },
+                {
+                  "id": "t7",
+                  "text": " can"
+                },
+                {
+                  "id": "t8",
+                  "text": " make"
+                },
+                {
+                  "id": "t9",
+                  "text": " a"
+                },
+                {
+                  "id": "t10",
+                  "text": " story"
+                },
+                {
+                  "id": "t11",
+                  "text": " together"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " writes"
+                },
+                {
+                  "id": "t3",
+                  "text": " and"
+                },
+                {
+                  "id": "t4",
+                  "text": " May"
+                },
+                {
+                  "id": "t5",
+                  "text": " draws"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Their"
+                },
+                {
+                  "id": "t2",
+                  "text": " story"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " about"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " cat"
+                },
+                {
+                  "id": "t7",
+                  "text": " on"
+                },
+                {
+                  "id": "t8",
+                  "text": " the"
+                },
+                {
+                  "id": "t9",
+                  "text": " moon"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " laugh"
+                },
+                {
+                  "id": "t3",
+                  "text": " when"
+                },
+                {
+                  "id": "t4",
+                  "text": " they"
+                },
+                {
+                  "id": "t5",
+                  "text": " read"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "storyId": "07-09",
+  "versions": [
+    {
+      "storyLevelId": "07-09-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " old"
+                },
+                {
+                  "id": "t3",
+                  "text": " station"
+                },
+                {
+                  "id": "t4",
+                  "text": " has"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " big"
+                },
+                {
+                  "id": "t7",
+                  "text": " clock"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " and"
+                },
+                {
+                  "id": "t3",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t4",
+                  "text": " wait"
+                },
+                {
+                  "id": "t5",
+                  "text": " under"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " for"
+                },
+                {
+                  "id": "t8",
+                  "text": " their"
+                },
+                {
+                  "id": "t9",
+                  "text": " train"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " When"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " train"
+                },
+                {
+                  "id": "t4",
+                  "text": " comes"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t7",
+                  "text": " waves"
+                },
+                {
+                  "id": "t8",
+                  "text": " goodbye"
+                },
+                {
+                  "id": "t9",
+                  "text": " to"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " clock"
+                },
+                {
+                  "id": "t12",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Dad"
+                },
+                {
+                  "id": "t2",
+                  "text": " finds"
+                },
+                {
+                  "id": "t3",
+                  "text": " their"
+                },
+                {
+                  "id": "t4",
+                  "text": " seats"
+                },
+                {
+                  "id": "t5",
+                  "text": " by"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " window"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Soon"
+                },
+                {
+                  "id": "t2",
+                  "text": ","
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " old"
+                },
+                {
+                  "id": "t5",
+                  "text": " station"
+                },
+                {
+                  "id": "t6",
+                  "text": " is"
+                },
+                {
+                  "id": "t7",
+                  "text": " far"
+                },
+                {
+                  "id": "t8",
+                  "text": " away"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

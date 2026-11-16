@@ -1,0 +1,25 @@
+{
+  "storyId": "07-01",
+  "storyLevelId": "07-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "艾米和爸爸坐在火車上。他們要去看奶奶。艾米坐在窗邊。",
+      "sentences": [],
+      "romanization": "Àimǐ hé bàba zuò zài huǒchē shàng. Tāmen yào qù kàn nǎinai. Àimǐ zuò zài chuāngbiān."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "她看見樹、田野和一條小河。火車上的一個男孩向一頭牛揮手。艾米笑了。",
+      "sentences": [],
+      "romanization": "Tā kànjiàn shù, tiányě hé yì tiáo xiǎo hé. Huǒchē shàng de yí ge nánhái xiàng yì tóu niú huīshǒu. Àimǐ xiào le."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "到了車站，奶奶正在等他們。她笑得很開心，還帶了兩顆蘋果。「歡迎！」她說。",
+      "sentences": [],
+      "romanization": "Dào le chēzhàn, nǎinai zhèngzài děng tāmen. Tā xiào de hěn kāixīn, hái dài le liǎng kē píngguǒ. “Huānyíng!” tā shuō."
+    }
+  ]
+}

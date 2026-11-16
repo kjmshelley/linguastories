@@ -1,0 +1,25 @@
+{
+  "storyId": "04-01",
+  "storyLevelId": "04-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "一隻小狗在小李家外面。牠又濕又冷。小李給牠一些水。",
+      "sentences": [],
+      "romanization": "Yì zhī xiǎo gǒu zài Xiǎo Lǐ jiā wàimiàn. Tā yòu shī yòu lěng. Xiǎo Lǐ gěi tā yìxiē shuǐ."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "狗的項圈上有名字：可可。上面還有一個電話號碼。小李打了那個號碼。",
+      "sentences": [],
+      "romanization": "Gǒu de xiàngquān shàng yǒu míngzi: Kěkě. Shàngmiàn hái yǒu yí ge diànhuà hàomǎ. Xiǎo Lǐ dǎ le nà ge hàomǎ."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "不久，一位女士來到屋前。「可可！看到你我真高興。」可可跑向她，小李也笑了。",
+      "sentences": [],
+      "romanization": "Bù jiǔ, yí wèi nǚshì láidào wū qián. “Kěkě! Kàndào nǐ wǒ zhēn gāoxìng.” Kěkě pǎo xiàng tā, Xiǎo Lǐ yě xiào le."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "storyId": "02-10",
+  "storyLevelId": "02-10-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班和湯姆每週都在公園見面。今天湯姆帶了一顆新球。他們一直玩到太陽下山。",
+      "sentences": [],
+      "romanization": "bān hé tāng mǔ měi zhōu dōu zài gōng yuán jiàn miàn。 jīn tiān tāng mǔ dài le yī kē xīn qiú。 tā men yì zhí wán dào tài yáng xià shān。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "他們坐下來喝水。「下週同一時間見？」班問。",
+      "sentences": [],
+      "romanization": "tā men zuò xià lái hē shuǐ。「xià zhōu tóng yī shí jiān jiàn？」 bān wèn。"
+    }
+  ]
+}

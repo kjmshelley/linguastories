@@ -1,0 +1,240 @@
+{
+  "storyId": "02-04",
+  "versions": [
+    {
+      "storyLevelId": "02-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " sees"
+                },
+                {
+                  "id": "t3",
+                  "text": " his"
+                },
+                {
+                  "id": "t4",
+                  "text": " neighbor"
+                },
+                {
+                  "id": "t5",
+                  "text": " every"
+                },
+                {
+                  "id": "t6",
+                  "text": " morning"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " always"
+                },
+                {
+                  "id": "t3",
+                  "text": " says"
+                },
+                {
+                  "id": "t4",
+                  "text": " hello"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " him"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "One"
+                },
+                {
+                  "id": "t2",
+                  "text": " morning"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " she"
+                },
+                {
+                  "id": "t5",
+                  "text": " is"
+                },
+                {
+                  "id": "t6",
+                  "text": " carrying"
+                },
+                {
+                  "id": "t7",
+                  "text": " many"
+                },
+                {
+                  "id": "t8",
+                  "text": " bags"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " door"
+                },
+                {
+                  "id": "t5",
+                  "text": " for"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "“"
+                },
+                {
+                  "id": "t2",
+                  "text": "Thank"
+                },
+                {
+                  "id": "t3",
+                  "text": " you"
+                },
+                {
+                  "id": "t4",
+                  "text": "!”"
+                },
+                {
+                  "id": "t5",
+                  "text": " she"
+                },
+                {
+                  "id": "t6",
+                  "text": " says"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Ben"
+                },
+                {
+                  "id": "t2",
+                  "text": " feels"
+                },
+                {
+                  "id": "t3",
+                  "text": " happy"
+                },
+                {
+                  "id": "t4",
+                  "text": " as"
+                },
+                {
+                  "id": "t5",
+                  "text": " he"
+                },
+                {
+                  "id": "t6",
+                  "text": " walks"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " school"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

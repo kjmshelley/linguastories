@@ -1,0 +1,22 @@
+{
+  "storyId": "01-03",
+  "storyLevelId": "01-03-A1",
+  "sourceLanguage": "de",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Ben will draußen spielen, aber es regnet. Er schaut aus dem Fenster.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mama gibt ihm Papier und Buntstifte. „Lass uns den Regen malen“, sagt sie.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Ben malt auch einen blauen Himmel und eine große gelbe Sonne. Er hängt das Bild an die Wand.",
+      "sentences": []
+    }
+  ]
+}

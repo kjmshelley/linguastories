@@ -1,0 +1,25 @@
+{
+  "storyId": "09-05",
+  "storyLevelId": "09-05-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "艾米的學校外面有一座小花園。她的班級負責照顧它。",
+      "sentences": [],
+      "romanization": "ài mǐ de xué xiào wài miàn yǒu yī zuò xiǎo huā yuán。 tā de bān jí fù zé zhào gù tā。"
+    },
+    {
+      "paragraphId": "p2",
+      "text": "今天艾米和小李幫植物澆水。他們看到一片新的綠葉。",
+      "sentences": [],
+      "romanization": "jīn tiān ài mǐ hé xiǎo lǐ bāng zhí wù jiāo shuǐ。 tā men kàn dào yī piàn xīn de lǜ yè。"
+    },
+    {
+      "paragraphId": "p3",
+      "text": "老師笑了。「我們的花園正在生長。」她說。",
+      "sentences": [],
+      "romanization": "lǎo shī xiào le。「wǒ men de huā yuán zhèng zài shēng zhǎng。」 tā shuō。"
+    }
+  ]
+}

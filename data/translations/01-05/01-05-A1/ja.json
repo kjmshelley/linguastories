@@ -1,0 +1,22 @@
+{
+  "storyId": "01-05",
+  "storyLevelId": "01-05-A1",
+  "sourceLanguage": "ja",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "月曜日の朝です。ミアはカレンダーで一週間の予定を見ます。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "学校に行く日、おばあちゃんを訪ねる日、公園で過ごす日があります。彼女は土曜日に星を描きます。",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "ミアは靴を履いて、かばんを持ちます。新しい一週間の始まりです。",
+      "sentences": []
+    }
+  ]
+}

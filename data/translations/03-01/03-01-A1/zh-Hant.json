@@ -1,0 +1,25 @@
+{
+  "storyId": "03-01",
+  "storyLevelId": "03-01-A1",
+  "sourceLanguage": "zh-Hant",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "班有三顆蘋果。他想為媽媽做一個蛋糕。但他不知道怎麼做。",
+      "sentences": [],
+      "romanization": "Bān yǒu sān kē píngguǒ. Tā xiǎng wèi māma zuò yí ge dàngāo. Dàn tā bù zhīdào zěnme zuò."
+    },
+    {
+      "paragraphId": "p2",
+      "text": "姊姊安娜找到一份食譜。班切蘋果，安娜做蛋糕。很快，廚房裡飄出甜甜的香味。",
+      "sentences": [],
+      "romanization": "Jiějie Ānnà zhǎodào yí fèn shípǔ. Bān qiē píngguǒ, Ānnà zuò dàngāo. Hěn kuài, chúfáng lǐ piāo chū tiántián de xiāngwèi."
+    },
+    {
+      "paragraphId": "p3",
+      "text": "媽媽回家了。「那是給我的嗎？」她問。他們一起坐下來，每人吃了一塊。",
+      "sentences": [],
+      "romanization": "Māma huí jiā le. “Nà shì gěi wǒ de ma?” tā wèn. Tāmen yìqǐ zuò xiàlái, měi rén chī le yí kuài."
+    }
+  ]
+}

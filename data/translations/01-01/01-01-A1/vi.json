@@ -1,0 +1,22 @@
+{
+  "storyId": "01-01",
+  "storyLevelId": "01-01-A1",
+  "sourceLanguage": "vi",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia thức dậy sớm. Ánh nắng chiếu trên giường của cô. Cô nghe thấy tiếng chim bên ngoài.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Mia đi vào bếp. Bố cô đang pha trà. “Chào buổi sáng,” bố nói.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Hai bố con ngồi bên cửa sổ và ăn bánh mì. Hôm nay không cần phải vội. Mia mỉm cười. Đó là một buổi sáng ấm áp và yên bình.",
+      "sentences": []
+    }
+  ]
+}

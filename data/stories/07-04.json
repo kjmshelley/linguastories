@@ -1,0 +1,247 @@
+{
+  "storyId": "07-04",
+  "versions": [
+    {
+      "storyLevelId": "07-04-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " takes"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " bus"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " town"
+                },
+                {
+                  "id": "t7",
+                  "text": " with"
+                },
+                {
+                  "id": "t8",
+                  "text": " his"
+                },
+                {
+                  "id": "t9",
+                  "text": " mom"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " sits"
+                },
+                {
+                  "id": "t3",
+                  "text": " by"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " window"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "They"
+                },
+                {
+                  "id": "t2",
+                  "text": " pass"
+                },
+                {
+                  "id": "t3",
+                  "text": " a"
+                },
+                {
+                  "id": "t4",
+                  "text": " park"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " school"
+                },
+                {
+                  "id": "t8",
+                  "text": ","
+                },
+                {
+                  "id": "t9",
+                  "text": " and"
+                },
+                {
+                  "id": "t10",
+                  "text": " a"
+                },
+                {
+                  "id": "t11",
+                  "text": " tall"
+                },
+                {
+                  "id": "t12",
+                  "text": " red"
+                },
+                {
+                  "id": "t13",
+                  "text": " building"
+                },
+                {
+                  "id": "t14",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Tom"
+                },
+                {
+                  "id": "t2",
+                  "text": " counts"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " stops"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "At"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " last"
+                },
+                {
+                  "id": "t4",
+                  "text": " stop"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " they"
+                },
+                {
+                  "id": "t7",
+                  "text": " get"
+                },
+                {
+                  "id": "t8",
+                  "text": " off"
+                },
+                {
+                  "id": "t9",
+                  "text": " and"
+                },
+                {
+                  "id": "t10",
+                  "text": " walk"
+                },
+                {
+                  "id": "t11",
+                  "text": " to"
+                },
+                {
+                  "id": "t12",
+                  "text": " the"
+                },
+                {
+                  "id": "t13",
+                  "text": " market"
+                },
+                {
+                  "id": "t14",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
