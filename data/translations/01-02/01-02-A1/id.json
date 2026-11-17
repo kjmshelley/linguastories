@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Sam pulang setelah hari yang panjang. Hujan menetes di jendela.",
+      "text": "Sam pulang setelah hari yang panjang. Hujan sedang turun.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Dia membuat teh panas dan menemukan bukunya. Kucingnya duduk di sampingnya.",
+      "text": "Dia membuat teh panas. Dia mengambil bukunya. Kucingnya duduk di sampingnya.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Sam membaca satu halaman, kemudian dua. Rumahnya sepi, dan dia merasa baik.",
+      "text": "Sam membaca bukunya. Rumah itu tenang. Dia senang.",
       "sentences": []
     }
   ]

@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Sam uzun bir günden sonra eve gelir. Yağmur pencereye dokunuyor.",
+      "text": "Sam uzun bir günden sonra eve gelir. Yağmur yağıyor.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Sıcak çay yapıp kitabını buldu. Kedisi yanında oturuyor.",
+      "text": "Sıcak çay yapar. Kitabını alır. Kedisi yanına oturur.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Sam bir sayfa okuyor, sonra iki. Ev sessiz ve kendini iyi hissediyor.",
+      "text": "Sam kitabını okur. Ev sessizdir. O mutludur.",
       "sentences": []
     }
   ]

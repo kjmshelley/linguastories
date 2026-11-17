@@ -5,21 +5,21 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "山姆忙了一天後回到家。雨滴輕敲著窗戶。",
+      "text": "山姆忙了一天後回到家。正在下雨。",
       "sentences": [],
-      "romanization": "Shānmǔ máng le yì tiān hòu huídào jiā. Yǔdī qīng qiāozhe chuānghu."
+      "romanization": "Shānmǔ máng le yì tiān hòu huídào jiā. Zhèngzài xiàyǔ."
     },
     {
       "paragraphId": "p2",
-      "text": "他泡了熱茶，拿出他的書。他的貓坐在他旁邊。",
+      "text": "他泡了熱茶。他拿出他的書。他的貓坐在他旁邊。",
       "sentences": [],
-      "romanization": "Tā pào le rè chá, ná chū tā de shū. Tā de māo zuò zài tā pángbiān."
+      "romanization": "Tā pào le rè chá. Tā ná chū tā de shū. Tā de māo zuò zài tā pángbiān."
     },
     {
       "paragraphId": "p3",
-      "text": "山姆讀了一頁，又讀了一頁。屋子很安靜，他覺得很舒服。",
+      "text": "山姆讀他的書。屋子很安靜。他很開心。",
       "sentences": [],
-      "romanization": "Shānmǔ dú le yí yè, yòu dú le yí yè. Wūzi hěn ānjìng, tā juéde hěn shūfu."
+      "romanization": "Shānmǔ dú tā de shū. Wūzi hěn ānjìng. Tā hěn kāixīn."
     }
   ]
 }

@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Ben dışarıda oynamak istiyor, ama yağmur yağıyor. Pencereden bakıyor.",
+      "text": "Ben dışarıda oynamak istiyor ama yağmurlu bir gün. Pencereden dışarı bakıyor.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Annesi ona kâğıt ve boyalar verir. “Haydi yağmuru çizelim,” der.",
+      "text": "Annesi ona biraz kâğıt ve pastel boya veriyor. “Haydi resim yapalım,” diyor.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Ben mavi bir gökyüzü ve büyük sarı bir güneş de çizdi. Resimi duvara koyuyor.",
+      "text": "Ben yağmur çiziyor. Mavi bir gökyüzü ve büyük sarı bir güneş de çiziyor. Resmini duvara asıyor.",
       "sentences": []
     }
   ]

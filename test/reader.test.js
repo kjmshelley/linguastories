@@ -20,6 +20,10 @@ test('catalog, story versions and translations are linked and readable', async t
   assert.equal(catalog.genres.length, 10);
   assert.equal(catalog.stories.length, 100);
   assert.equal(new Set(catalog.stories.map(s => s.id)).size, 100);
+  const series = catalog.stories.filter(s => s.seriesId === 'everyday-life-01');
+  assert.deepEqual(series.map(s => s.seriesOrder), [1,2,3,4,5,6,7,8,9,10]);
+  assert.deepEqual(series.map(s => s.id), Array.from({length:10}, (_,i) => `01-${String(i+1).padStart(2,'0')}`));
+
   const expectedSources = ['ar','zh-Hant','zh-Hans','es-MX','es-ES','ja','vi','th','id','fr','de','it','nl','ko','ru','tr','my','pt'];
   for (const [index, story] of catalog.stories.entries()) {
     assert.equal(story.orderId, index + 1);
@@ -44,7 +48,8 @@ test('catalog, story versions and translations are linked and readable', async t
         }
       }
       assert.equal(new Set(level.availableLanguages.map(l => l.language)).size, level.availableLanguages.length, story.id);
-      if (index < 9) assert.deepEqual(level.availableLanguages.map(x => x.language).sort(), [...expectedSources].sort());
+      if (index < 9 && level.level === 'A1') assert.deepEqual(level.availableLanguages.map(x => x.language).sort(), [...expectedSources].sort());
+      if (level.level !== 'A1') assert.deepEqual(level.availableLanguages, []);
       for (const entry of level.availableLanguages) {
         const translation = content(entry.url);
         assert.equal(translation.storyId, story.id);
@@ -87,10 +92,37 @@ test('catalog, story versions and translations are linked and readable', async t
   assert.equal((await fetch(base + first.levels[0].url)).status, 200);
   assert.equal((await fetch(base + first.levels[0].availableLanguages[0].url)).status, 200);
   const story = await (await fetch(`${base}/api/reader/story/01-01`)).json();
-  assert.match(story.paragraphs[0].target, /^Mia wakes up early\./);
+  assert.deepEqual(story.paragraphs.map(p => p.target), [
+  "Mia wakes up early. Birds sing outside her window. She goes to the kitchen. Her brother Sam is there with Dad. They eat together. Today is Saturday, and there is no school.",
+  "A little dog is outside the window. It is brown and white. It looks at Mia. Mia opens the door, and the dog comes in. Sam gives it water. The dog drinks it all.",
+  "The dog has a red collar, but there is no name on it. Mia looks at Sam. ‘Where is its family?’ she asks. Sam does not know. The dog sits near them. It waits."
+]);
   assert.equal((await fetch(`${base}/api/reader/story/01-01?level=A1`)).status, 200);
-  assert.equal((await fetch(`${base}/api/reader/story/01-01?level=C2`)).status, 404);
+  for (const level of ['A2','B1','B2','C1','C2']) {
+    const version = await (await fetch(`${base}/api/reader/story/01-01?level=${level}`)).json();
+    assert.equal(version.level, level);
+    assert.deepEqual(version.sourceLanguages, []);
+    assert.ok(version.paragraphs.every(p => Object.keys(p.translations).length === 0));
+  }
   assert.equal(story.paragraphs[0].translations['zh-Hant'].sentences[0].glosses[1].translation, '醒來');
+  const second = await (await fetch(`${base}/api/reader/story/01-02`)).json();
+  assert.deepEqual(second.paragraphs.map(p => p.target), [
+  "In the evening, the little dog sleeps by the door. Mia sits next to it. Sam brings a bowl of food. The dog wakes up and eats. Dad looks at the sky.",
+  "‘The dog needs its family,’ Dad says. Mia knows he is right. She wants to help, but she also wants the dog to stay. Sam gets some paper. ‘We can make a picture of the dog,’ he says.",
+  "Mia draws the dog and its red collar. Sam writes their number under it. Tomorrow they can ask people in town. Mia says good night to the dog. They wait."
+]);
+  assert.equal(second.sourceLanguages.length, 18);
+  assert.equal(second.paragraphs[0].translations['zh-Hant'].text, '山姆忙了一天後回到家。正在下雨。');
+  const third = await (await fetch(`${base}/api/reader/story/01-03`)).json();
+  assert.deepEqual(third.paragraphs.map(p => p.target), [
+  "On Sunday morning, rain falls outside. The street is wet. The dog stands by the door. It wants to go out, but Mia is worried.",
+  "Sam has an idea. He puts the picture in a bag. Mia puts on her coat, and Dad gets an umbrella. The dog stays at home. ‘We can go to the shop,’ Dad says.",
+  "At the shop, a woman looks at their picture. ‘I see this dog in the park,’ she says. ‘A girl is with it.’ Who is the girl? The woman does not know the name. The children thank her and go home."
+]);
+  assert.equal(third.sourceLanguages.length, 18);
+  assert.match(third.paragraphs[1].translations['zh-Hant'].text, /蠟筆/);
+
+
   assert.ok((await (await fetch(`${base}/api/reader/search?q=birds&searchBy=target`)).json()).ids.includes('01-01'));
   assert.ok((await (await fetch(`${base}/api/reader/search?q=鳥&searchBy=source&source=zh-Hant`)).json()).ids.includes('01-01'));
   for (const route of ['/', '/library', '/library/genre/food-cafes', '/story/01-01']) assert.equal((await fetch(`${base}${route}`)).status, 200);

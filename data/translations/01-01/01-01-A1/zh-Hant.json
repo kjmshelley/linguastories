@@ -5,7 +5,7 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "米婭很早就醒來了。陽光照在她的床上。她聽見外面的鳥叫聲。",
+      "text": "米婭很早就醒來了。太陽出來了。她聽見外面的鳥叫聲。",
       "sentences": [
         {
           "sentenceId": "s1",
@@ -35,7 +35,7 @@
           ]
         }
       ],
-      "romanization": "Mǐyà hěn zǎo jiù xǐnglái le. Yángguāng zhào zài tā de chuáng shàng. Tā tīngjiàn wàimiàn de niǎojiàoshēng."
+      "romanization": "Mǐyà hěn zǎo jiù xǐnglái le. Tàiyáng chūlái le. Tā tīngjiàn wàimiàn de niǎojiàoshēng."
     },
     {
       "paragraphId": "p2",
@@ -45,9 +45,9 @@
     },
     {
       "paragraphId": "p3",
-      "text": "他們坐在窗邊吃麵包。今天不用著急。米婭笑了。這是一個溫暖、安靜的早晨。",
+      "text": "他們坐在窗邊吃麵包。今天他們有很多時間。米婭笑了。這是一個溫暖的早晨。",
       "sentences": [],
-      "romanization": "Tāmen zuò zài chuāngbiān chī miànbāo. Jīntiān búyòng zháojí. Mǐyà xiào le. Zhè shì yí ge wēnnuǎn, ānjìng de zǎochén."
+      "romanization": "Tāmen zuò zài chuāngbiān chī miànbāo. Jīntiān tāmen yǒu hěn duō shíjiān. Mǐyà xiào le. Zhè shì yí ge wēnnuǎn de zǎochén."
     }
   ]
 }

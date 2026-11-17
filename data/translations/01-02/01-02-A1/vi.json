@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Sam về nhà sau một ngày dài. Mưa đập vào cửa sổ.",
+      "text": "Sam về nhà sau một ngày dài. Trời đang mưa.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Anh ta làm trà nóng và tìm thấy cuốn sách của mình. Con mèo của anh ấy ngồi bên cạnh anh ấy.",
+      "text": "Cậu pha trà nóng. Cậu lấy cuốn sách của mình. Con mèo ngồi bên cạnh cậu.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Sam đọc một trang, sau đó là hai. Ngôi nhà yên tĩnh, và anh ấy cảm thấy tốt.",
+      "text": "Sam đọc sách. Ngôi nhà yên tĩnh. Cậu thấy vui.",
       "sentences": []
     }
   ]

@@ -5,7 +5,7 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Mia si sveglia presto. La luce del sole illumina il suo letto. Sente gli uccelli fuori.",
+      "text": "Mia si sveglia presto. Il sole splende. Sente gli uccelli fuori.",
       "sentences": []
     },
     {
@@ -15,7 +15,7 @@
     },
     {
       "paragraphId": "p3",
-      "text": "Si siedono vicino alla finestra e mangiano il pane. Oggi non c’è bisogno di avere fretta. Mia sorride. È una mattina calda e tranquilla.",
+      "text": "Si siedono vicino alla finestra e mangiano il pane. Oggi hanno tanto tempo. Mia sorride. È una mattina calda.",
       "sentences": []
     }
   ]

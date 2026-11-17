@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Sam kommt nach einem langen Tag nach Hause. Es regnet an dem Fenster.",
+      "text": "Sam kommt nach einem langen Tag nach Hause. Es regnet.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Er macht heißen Tee und findet sein Buch. Seine Katze sitzt neben ihm.",
+      "text": "Er macht heißen Tee. Er holt sein Buch. Seine Katze sitzt neben ihm.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Sam liest eine Seite, dann zwei. Das Haus ist ruhig und er fühlt sich gut.",
+      "text": "Sam liest sein Buch. Das Haus ist ruhig. Er ist glücklich.",
       "sentences": []
     }
   ]

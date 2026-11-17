@@ -15,7 +15,7 @@ Open http://localhost:3000. No database is needed for the reader. Run `npm test`
 
 ## Content
 
-`data/catalog.json` is the metadata index. Each story has an ordered ID, title, genre, target language, and a `levels` array. Every level identifies its story version, the story file URL, and the available source languages with their translation file URLs. The raw index is served at `/content/catalog.json`.
+`data/catalog.json` is the metadata index. Each story has an ordered ID, title, genre, target language, and a `levels` array. Stories that form a series also have a shared `seriesId` and a numeric `seriesOrder`; standalone stories omit them. Every level identifies its story version, the story file URL, and the available source languages with their translation file URLs. The raw index is served at `/content/catalog.json`.
 
 `data/stories/<story-id>.json` contains the story's versions. Each version contains paragraphs, sentences, and ordered tokens; concatenating a sentence's token text preserves the original text and spacing. A target-language paragraph may also contain `romanization`.
 

@@ -15,8 +15,8 @@
     {
       "id": "01-01",
       "orderId": 1,
-      "title": "A Warm Morning",
-      "description": "Mia wakes up early.",
+      "title": "Chapter 1: A Warm Morning",
+      "description": "Mia and Sam find a small dog outside.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -99,14 +99,46 @@
               "url": "/content/translations/01-01/01-01-A1/pt.json"
             }
           ]
+        },
+        {
+          "storyLevelId": "01-01-A2",
+          "level": "A2",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": []
+        },
+        {
+          "storyLevelId": "01-01-B1",
+          "level": "B1",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": []
+        },
+        {
+          "storyLevelId": "01-01-B2",
+          "level": "B2",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": []
+        },
+        {
+          "storyLevelId": "01-01-C1",
+          "level": "C1",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": []
+        },
+        {
+          "storyLevelId": "01-01-C2",
+          "level": "C2",
+          "url": "/content/stories/01-01.json",
+          "availableLanguages": []
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 1
     },
     {
       "id": "01-02",
       "orderId": 2,
-      "title": "A Quiet Evening",
-      "description": "Sam comes home after a long day.",
+      "title": "Chapter 2: A Quiet Evening",
+      "description": "Mia and Sam make a plan for the dog.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -190,13 +222,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 2
     },
     {
       "id": "01-03",
       "orderId": 3,
-      "title": "A Rainy Day",
-      "description": "Ben wants to play outside, but it is raining.",
+      "title": "Chapter 3: A Rainy Day",
+      "description": "Rain makes the search more difficult.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -280,13 +314,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 3
     },
     {
       "id": "01-04",
       "orderId": 4,
-      "title": "A Day at Home",
-      "description": "Anna stays home today.",
+      "title": "Chapter 4: The Old Photo",
+      "description": "A photo gives Mia and Sam a clue.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -370,13 +406,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 4
     },
     {
       "id": "01-05",
       "orderId": 5,
-      "title": "A New Week",
-      "description": "It is Monday morning.",
+      "title": "Chapter 5: A New Week",
+      "description": "The children look for Anna at school.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -460,13 +498,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 5
     },
     {
       "id": "01-06",
       "orderId": 6,
-      "title": "A Slow Sunday",
-      "description": "On Sunday, Sam wakes up late.",
+      "title": "Chapter 6: A Message for Anna",
+      "description": "The friends try to reach Anna.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -550,13 +590,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 6
     },
     {
       "id": "01-07",
       "orderId": 7,
-      "title": "A Busy Monday",
-      "description": "Mia is late for school.",
+      "title": "Chapter 7: The Bus Ride",
+      "description": "A late bus puts their plan at risk.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -640,13 +682,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 7
     },
     {
       "id": "01-08",
       "orderId": 8,
-      "title": "A Bright Afternoon",
-      "description": "Anna sits outside with a book.",
+      "title": "Chapter 8: The Phone Call",
+      "description": "Anna calls, but the dog is missing.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -730,13 +774,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 8
     },
     {
       "id": "01-09",
       "orderId": 9,
-      "title": "A Cool Day",
-      "description": "The air is cool this morning.",
+      "title": "Chapter 9: The Red Leaf",
+      "description": "Mia and her friends search the park for Max.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -820,13 +866,15 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 9
     },
     {
       "id": "01-10",
       "orderId": 10,
-      "title": "A Good Day",
-      "description": "Lee helps his mom make breakfast.",
+      "title": "Chapter 10: A Good Day",
+      "description": "Max and a new friend find their families.",
       "genre": "Everyday Life",
       "targetLanguage": "en",
       "image": "/assets/img/story-town.png",
@@ -842,7 +890,9 @@
             }
           ]
         }
-      ]
+      ],
+      "seriesId": "everyday-life-01",
+      "seriesOrder": 10
     },
     {
       "id": "02-01",

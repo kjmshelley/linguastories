@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Ben veut jouer dehors, mais il pleut. Il regarde par la fenêtre.",
+      "text": "Ben veut jouer dehors, mais c’est un jour de pluie. Il regarde par la fenêtre.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Maman lui donne du papier et des crayons de couleur. « Dessinons la pluie », dit-elle.",
+      "text": "Maman lui donne du papier et des crayons de cire. « Dessinons », dit-elle.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Ben dessine aussi un ciel bleu et un grand soleil jaune. Il accroche le dessin au mur.",
+      "text": "Ben dessine la pluie. Il dessine aussi un ciel bleu et un grand soleil jaune. Il accroche son dessin au mur.",
       "sentences": []
     }
   ]

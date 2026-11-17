@@ -12,6 +12,11 @@
       "paragraphId": "p2",
       "text": "Son passage préféré parle d’un petit chien. Elle le raconte à sa famille.",
       "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Après le dîner, Anna pose son livre près de son lit. Elle veut le relire demain.",
+      "sentences": []
     }
   ]
 }

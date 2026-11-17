@@ -5,17 +5,17 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Sam komt thuis na een lange dag. De regen tikt tegen het raam.",
+      "text": "Sam komt thuis na een lange dag. Het regent.",
       "sentences": []
     },
     {
       "paragraphId": "p2",
-      "text": "Hij maakt hete thee en vindt zijn boek. Zijn kat zit naast hem.",
+      "text": "Hij zet warme thee. Hij pakt zijn boek. Zijn kat zit naast hem.",
       "sentences": []
     },
     {
       "paragraphId": "p3",
-      "text": "Sam leest één pagina, dan twee. Het huis is rustig en hij voelt zich goed.",
+      "text": "Sam leest zijn boek. Het huis is rustig. Hij is blij.",
       "sentences": []
     }
   ]

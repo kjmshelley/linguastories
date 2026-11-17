@@ -5,7 +5,7 @@
   "paragraphs": [
     {
       "paragraphId": "p1",
-      "text": "Mia acorda cedo. A luz do sol ilumina sua cama. Ela ouve os pássaros lá fora.",
+      "text": "Mia acorda cedo. O sol está brilhando. Ela ouve os pássaros lá fora.",
       "sentences": []
     },
     {
@@ -15,7 +15,7 @@
     },
     {
       "paragraphId": "p3",
-      "text": "Eles se sentam perto da janela e comem pão. Hoje não há necessidade de ter pressa. Mia sorri. É uma manhã quente e tranquila.",
+      "text": "Eles se sentam perto da janela e comem pão. Hoje eles têm bastante tempo. Mia sorri. É uma manhã quente.",
       "sentences": []
     }
   ]

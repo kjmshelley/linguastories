@@ -38,30 +38,26 @@
               "tokens": [
                 {
                   "id": "t1",
-                  "text": " Her"
+                  "text": " Birds"
                 },
                 {
                   "id": "t2",
-                  "text": " bed"
+                  "text": " sing"
                 },
                 {
                   "id": "t3",
-                  "text": " is"
+                  "text": " outside"
                 },
                 {
                   "id": "t4",
-                  "text": " in"
+                  "text": " her"
                 },
                 {
                   "id": "t5",
-                  "text": " the"
+                  "text": " window"
                 },
                 {
                   "id": "t6",
-                  "text": " sun"
-                },
-                {
-                  "id": "t7",
                   "text": "."
                 }
               ]
@@ -72,40 +68,6 @@
                 {
                   "id": "t1",
                   "text": " She"
-                },
-                {
-                  "id": "t2",
-                  "text": " can"
-                },
-                {
-                  "id": "t3",
-                  "text": " hear"
-                },
-                {
-                  "id": "t4",
-                  "text": " birds"
-                },
-                {
-                  "id": "t5",
-                  "text": " outside"
-                },
-                {
-                  "id": "t6",
-                  "text": "."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "paragraphId": "p2",
-          "sentences": [
-            {
-              "sentenceId": "s1",
-              "tokens": [
-                {
-                  "id": "t1",
-                  "text": "Mia"
                 },
                 {
                   "id": "t2",
@@ -130,7 +92,7 @@
               ]
             },
             {
-              "sentenceId": "s2",
+              "sentenceId": "s4",
               "tokens": [
                 {
                   "id": "t1",
@@ -138,19 +100,164 @@
                 },
                 {
                   "id": "t2",
-                  "text": " father"
+                  "text": " brother"
                 },
                 {
                   "id": "t3",
-                  "text": " is"
+                  "text": " Sam"
                 },
                 {
                   "id": "t4",
-                  "text": " making"
+                  "text": " is"
                 },
                 {
                   "id": "t5",
-                  "text": " tea"
+                  "text": " there"
+                },
+                {
+                  "id": "t6",
+                  "text": " with"
+                },
+                {
+                  "id": "t7",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " together"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Today"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " there"
+                },
+                {
+                  "id": "t7",
+                  "text": " is"
+                },
+                {
+                  "id": "t8",
+                  "text": " no"
+                },
+                {
+                  "id": "t9",
+                  "text": " school"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " little"
+                },
+                {
+                  "id": "t3",
+                  "text": " dog"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " outside"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " window"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " brown"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " white"
                 },
                 {
                   "id": "t6",
@@ -163,30 +270,125 @@
               "tokens": [
                 {
                   "id": "t1",
-                  "text": " “"
+                  "text": " It"
                 },
                 {
                   "id": "t2",
-                  "text": "Good"
+                  "text": " looks"
                 },
                 {
                   "id": "t3",
-                  "text": " morning"
+                  "text": " at"
                 },
                 {
                   "id": "t4",
-                  "text": ",”"
+                  "text": " Mia"
                 },
                 {
                   "id": "t5",
-                  "text": " he"
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " door"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
                 },
                 {
                   "id": "t6",
-                  "text": " says"
+                  "text": " and"
                 },
                 {
                   "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " dog"
+                },
+                {
+                  "id": "t9",
+                  "text": " comes"
+                },
+                {
+                  "id": "t10",
+                  "text": " in"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " gives"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " water"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " all"
+                },
+                {
+                  "id": "t6",
                   "text": "."
                 }
               ]
@@ -201,38 +403,62 @@
               "tokens": [
                 {
                   "id": "t1",
-                  "text": "They"
+                  "text": "The"
                 },
                 {
                   "id": "t2",
-                  "text": " sit"
+                  "text": " dog"
                 },
                 {
                   "id": "t3",
-                  "text": " by"
+                  "text": " has"
                 },
                 {
                   "id": "t4",
-                  "text": " the"
+                  "text": " a"
                 },
                 {
                   "id": "t5",
-                  "text": " window"
+                  "text": " red"
                 },
                 {
                   "id": "t6",
-                  "text": " and"
+                  "text": " collar"
                 },
                 {
                   "id": "t7",
-                  "text": " eat"
+                  "text": ","
                 },
                 {
                   "id": "t8",
-                  "text": " bread"
+                  "text": " but"
                 },
                 {
                   "id": "t9",
+                  "text": " there"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " no"
+                },
+                {
+                  "id": "t12",
+                  "text": " name"
+                },
+                {
+                  "id": "t13",
+                  "text": " on"
+                },
+                {
+                  "id": "t14",
+                  "text": " it"
+                },
+                {
+                  "id": "t15",
                   "text": "."
                 }
               ]
@@ -242,11 +468,86 @@
               "tokens": [
                 {
                   "id": "t1",
-                  "text": " They"
+                  "text": " Mia"
                 },
                 {
                   "id": "t2",
-                  "text": " do"
+                  "text": " looks"
+                },
+                {
+                  "id": "t3",
+                  "text": " at"
+                },
+                {
+                  "id": "t4",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Where"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " its"
+                },
+                {
+                  "id": "t5",
+                  "text": " family"
+                },
+                {
+                  "id": "t6",
+                  "text": "?"
+                },
+                {
+                  "id": "t7",
+                  "text": "’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " she"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " does"
                 },
                 {
                   "id": "t3",
@@ -254,7 +555,1206 @@
                 },
                 {
                   "id": "t4",
-                  "text": " have"
+                  "text": " know"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " near"
+                },
+                {
+                  "id": "t5",
+                  "text": " them"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s7",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " waits"
+                },
+                {
+                  "id": "t3",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "storyLevelId": "01-01-A2",
+      "level": "A2",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " wakes"
+                },
+                {
+                  "id": "t3",
+                  "text": " up"
+                },
+                {
+                  "id": "t4",
+                  "text": " early"
+                },
+                {
+                  "id": "t5",
+                  "text": " on"
+                },
+                {
+                  "id": "t6",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t7",
+                  "text": " morning."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " hears"
+                },
+                {
+                  "id": "t3",
+                  "text": " birds"
+                },
+                {
+                  "id": "t4",
+                  "text": " singing"
+                },
+                {
+                  "id": "t5",
+                  "text": " outside"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " When"
+                },
+                {
+                  "id": "t2",
+                  "text": " she"
+                },
+                {
+                  "id": "t3",
+                  "text": " goes"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " kitchen,"
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " finds"
+                },
+                {
+                  "id": "t9",
+                  "text": " her"
+                },
+                {
+                  "id": "t10",
+                  "text": " brother"
+                },
+                {
+                  "id": "t11",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t12",
+                  "text": " and"
+                },
+                {
+                  "id": "t13",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t14",
+                  "text": " there."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " breakfast"
+                },
+                {
+                  "id": "t4",
+                  "text": " together."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " happy"
+                },
+                {
+                  "id": "t4",
+                  "text": " that"
+                },
+                {
+                  "id": "t5",
+                  "text": " there"
+                },
+                {
+                  "id": "t6",
+                  "text": " is"
+                },
+                {
+                  "id": "t7",
+                  "text": " no"
+                },
+                {
+                  "id": "t8",
+                  "text": " school"
+                },
+                {
+                  "id": "t9",
+                  "text": " today."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Then"
+                },
+                {
+                  "id": "t2",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t3",
+                  "text": " sees"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " small"
+                },
+                {
+                  "id": "t6",
+                  "text": " brown"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " white"
+                },
+                {
+                  "id": "t9",
+                  "text": " dog"
+                },
+                {
+                  "id": "t10",
+                  "text": " outside"
+                },
+                {
+                  "id": "t11",
+                  "text": " the"
+                },
+                {
+                  "id": "t12",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " looks"
+                },
+                {
+                  "id": "t4",
+                  "text": " at"
+                },
+                {
+                  "id": "t5",
+                  "text": " her,"
+                },
+                {
+                  "id": "t6",
+                  "text": " so"
+                },
+                {
+                  "id": "t7",
+                  "text": " she"
+                },
+                {
+                  "id": "t8",
+                  "text": " opens"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " door."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " It"
+                },
+                {
+                  "id": "t2",
+                  "text": " comes"
+                },
+                {
+                  "id": "t3",
+                  "text": " inside."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " gives"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " dog"
+                },
+                {
+                  "id": "t5",
+                  "text": " some"
+                },
+                {
+                  "id": "t6",
+                  "text": " water,"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " it"
+                },
+                {
+                  "id": "t9",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t10",
+                  "text": " all"
+                },
+                {
+                  "id": "t11",
+                  "text": " of"
+                },
+                {
+                  "id": "t12",
+                  "text": " it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " is"
+                },
+                {
+                  "id": "t4",
+                  "text": " wearing"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " red"
+                },
+                {
+                  "id": "t7",
+                  "text": " collar,"
+                },
+                {
+                  "id": "t8",
+                  "text": " but"
+                },
+                {
+                  "id": "t9",
+                  "text": " there"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " no"
+                },
+                {
+                  "id": "t12",
+                  "text": " name"
+                },
+                {
+                  "id": "t13",
+                  "text": " on"
+                },
+                {
+                  "id": "t14",
+                  "text": " it."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " Sam,"
+                },
+                {
+                  "id": "t4",
+                  "text": " ‘Where"
+                },
+                {
+                  "id": "t5",
+                  "text": " is"
+                },
+                {
+                  "id": "t6",
+                  "text": " its"
+                },
+                {
+                  "id": "t7",
+                  "text": " family?’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " does"
+                },
+                {
+                  "id": "t3",
+                  "text": " not"
+                },
+                {
+                  "id": "t4",
+                  "text": " know."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " little"
+                },
+                {
+                  "id": "t3",
+                  "text": " dog"
+                },
+                {
+                  "id": "t4",
+                  "text": " sits"
+                },
+                {
+                  "id": "t5",
+                  "text": " near"
+                },
+                {
+                  "id": "t6",
+                  "text": " them"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " waits."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "storyLevelId": "01-01-B1",
+      "level": "B1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " wakes"
+                },
+                {
+                  "id": "t3",
+                  "text": " early"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " the"
+                },
+                {
+                  "id": "t8",
+                  "text": " sound"
+                },
+                {
+                  "id": "t9",
+                  "text": " of"
+                },
+                {
+                  "id": "t10",
+                  "text": " birds"
+                },
+                {
+                  "id": "t11",
+                  "text": " singing"
+                },
+                {
+                  "id": "t12",
+                  "text": " outside"
+                },
+                {
+                  "id": "t13",
+                  "text": " her"
+                },
+                {
+                  "id": "t14",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " goes"
+                },
+                {
+                  "id": "t3",
+                  "text": " downstairs"
+                },
+                {
+                  "id": "t4",
+                  "text": " to"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " kitchen,"
+                },
+                {
+                  "id": "t7",
+                  "text": " where"
+                },
+                {
+                  "id": "t8",
+                  "text": " her"
+                },
+                {
+                  "id": "t9",
+                  "text": " brother"
+                },
+                {
+                  "id": "t10",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t11",
+                  "text": " is"
+                },
+                {
+                  "id": "t12",
+                  "text": " already"
+                },
+                {
+                  "id": "t13",
+                  "text": " sitting"
+                },
+                {
+                  "id": "t14",
+                  "text": " with"
+                },
+                {
+                  "id": "t15",
+                  "text": " Dad."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " family"
+                },
+                {
+                  "id": "t3",
+                  "text": " eats"
+                },
+                {
+                  "id": "t4",
+                  "text": " together,"
+                },
+                {
+                  "id": "t5",
+                  "text": " enjoying"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " morning"
+                },
+                {
+                  "id": "t8",
+                  "text": " without"
+                },
+                {
+                  "id": "t9",
+                  "text": " school."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "As"
+                },
+                {
+                  "id": "t2",
+                  "text": " they"
+                },
+                {
+                  "id": "t3",
+                  "text": " sit"
+                },
+                {
+                  "id": "t4",
+                  "text": " there,"
+                },
+                {
+                  "id": "t5",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t6",
+                  "text": " notices"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " small"
+                },
+                {
+                  "id": "t9",
+                  "text": " brown"
+                },
+                {
+                  "id": "t10",
+                  "text": " and"
+                },
+                {
+                  "id": "t11",
+                  "text": " white"
+                },
+                {
+                  "id": "t12",
+                  "text": " dog"
+                },
+                {
+                  "id": "t13",
+                  "text": " looking"
+                },
+                {
+                  "id": "t14",
+                  "text": " in"
+                },
+                {
+                  "id": "t15",
+                  "text": " through"
+                },
+                {
+                  "id": "t16",
+                  "text": " the"
+                },
+                {
+                  "id": "t17",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " door,"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " dog"
+                },
+                {
+                  "id": "t8",
+                  "text": " comes"
+                },
+                {
+                  "id": "t9",
+                  "text": " inside."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " brings"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " some"
+                },
+                {
+                  "id": "t5",
+                  "text": " water."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t4",
+                  "text": " every"
+                },
+                {
+                  "id": "t5",
+                  "text": " drop."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Although"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " dog"
+                },
+                {
+                  "id": "t4",
+                  "text": " is"
+                },
+                {
+                  "id": "t5",
+                  "text": " wearing"
+                },
+                {
+                  "id": "t6",
+                  "text": " a"
+                },
+                {
+                  "id": "t7",
+                  "text": " red"
+                },
+                {
+                  "id": "t8",
+                  "text": " collar,"
+                },
+                {
+                  "id": "t9",
+                  "text": " there"
+                },
+                {
+                  "id": "t10",
+                  "text": " is"
+                },
+                {
+                  "id": "t11",
+                  "text": " no"
+                },
+                {
+                  "id": "t12",
+                  "text": " name"
+                },
+                {
+                  "id": "t13",
+                  "text": " on"
+                },
+                {
+                  "id": "t14",
+                  "text": " it."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " turns"
+                },
+                {
+                  "id": "t3",
+                  "text": " to"
+                },
+                {
+                  "id": "t4",
+                  "text": " Sam."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘Where"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " its"
+                },
+                {
+                  "id": "t4",
+                  "text": " family?’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " she"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " has"
+                },
+                {
+                  "id": "t3",
+                  "text": " no"
+                },
+                {
+                  "id": "t4",
+                  "text": " answer."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " settles"
+                },
+                {
+                  "id": "t4",
+                  "text": " down"
+                },
+                {
+                  "id": "t5",
+                  "text": " near"
+                },
+                {
+                  "id": "t6",
+                  "text": " them"
+                },
+                {
+                  "id": "t7",
+                  "text": " and"
+                },
+                {
+                  "id": "t8",
+                  "text": " waits."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "storyLevelId": "01-01-B2",
+      "level": "B2",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " wakes"
+                },
+                {
+                  "id": "t3",
+                  "text": " early"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t6",
+                  "text": " morning,"
+                },
+                {
+                  "id": "t7",
+                  "text": " with"
+                },
+                {
+                  "id": "t8",
+                  "text": " birdsong"
+                },
+                {
+                  "id": "t9",
+                  "text": " drifting"
+                },
+                {
+                  "id": "t10",
+                  "text": " in"
+                },
+                {
+                  "id": "t11",
+                  "text": " from"
+                },
+                {
+                  "id": "t12",
+                  "text": " outside"
+                },
+                {
+                  "id": "t13",
+                  "text": " her"
+                },
+                {
+                  "id": "t14",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " makes"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " way"
                 },
                 {
                   "id": "t5",
@@ -262,15 +1762,343 @@
                 },
                 {
                   "id": "t6",
-                  "text": " hurry"
+                  "text": " the"
                 },
                 {
                   "id": "t7",
-                  "text": " today"
+                  "text": " kitchen,"
                 },
                 {
                   "id": "t8",
-                  "text": "."
+                  "text": " where"
+                },
+                {
+                  "id": "t9",
+                  "text": " Sam,"
+                },
+                {
+                  "id": "t10",
+                  "text": " her"
+                },
+                {
+                  "id": "t11",
+                  "text": " brother,"
+                },
+                {
+                  "id": "t12",
+                  "text": " is"
+                },
+                {
+                  "id": "t13",
+                  "text": " with"
+                },
+                {
+                  "id": "t14",
+                  "text": " Dad."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " They"
+                },
+                {
+                  "id": "t2",
+                  "text": " eat"
+                },
+                {
+                  "id": "t3",
+                  "text": " together,"
+                },
+                {
+                  "id": "t4",
+                  "text": " with"
+                },
+                {
+                  "id": "t5",
+                  "text": " no"
+                },
+                {
+                  "id": "t6",
+                  "text": " school"
+                },
+                {
+                  "id": "t7",
+                  "text": " to"
+                },
+                {
+                  "id": "t8",
+                  "text": " hurry"
+                },
+                {
+                  "id": "t9",
+                  "text": " them"
+                },
+                {
+                  "id": "t10",
+                  "text": " away"
+                },
+                {
+                  "id": "t11",
+                  "text": " from"
+                },
+                {
+                  "id": "t12",
+                  "text": " the"
+                },
+                {
+                  "id": "t13",
+                  "text": " table."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " small"
+                },
+                {
+                  "id": "t3",
+                  "text": " brown"
+                },
+                {
+                  "id": "t4",
+                  "text": " and"
+                },
+                {
+                  "id": "t5",
+                  "text": " white"
+                },
+                {
+                  "id": "t6",
+                  "text": " dog"
+                },
+                {
+                  "id": "t7",
+                  "text": " catches"
+                },
+                {
+                  "id": "t8",
+                  "text": " Mia’s"
+                },
+                {
+                  "id": "t9",
+                  "text": " attention"
+                },
+                {
+                  "id": "t10",
+                  "text": " as"
+                },
+                {
+                  "id": "t11",
+                  "text": " it"
+                },
+                {
+                  "id": "t12",
+                  "text": " looks"
+                },
+                {
+                  "id": "t13",
+                  "text": " in"
+                },
+                {
+                  "id": "t14",
+                  "text": " through"
+                },
+                {
+                  "id": "t15",
+                  "text": " the"
+                },
+                {
+                  "id": "t16",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " When"
+                },
+                {
+                  "id": "t2",
+                  "text": " she"
+                },
+                {
+                  "id": "t3",
+                  "text": " opens"
+                },
+                {
+                  "id": "t4",
+                  "text": " the"
+                },
+                {
+                  "id": "t5",
+                  "text": " door,"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " comes"
+                },
+                {
+                  "id": "t8",
+                  "text": " inside."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " offers"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " water,"
+                },
+                {
+                  "id": "t5",
+                  "text": " which"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " dog"
+                },
+                {
+                  "id": "t8",
+                  "text": " promptly"
+                },
+                {
+                  "id": "t9",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t10",
+                  "text": " to"
+                },
+                {
+                  "id": "t11",
+                  "text": " the"
+                },
+                {
+                  "id": "t12",
+                  "text": " last"
+                },
+                {
+                  "id": "t13",
+                  "text": " drop."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "A"
+                },
+                {
+                  "id": "t2",
+                  "text": " red"
+                },
+                {
+                  "id": "t3",
+                  "text": " collar"
+                },
+                {
+                  "id": "t4",
+                  "text": " circles"
+                },
+                {
+                  "id": "t5",
+                  "text": " the"
+                },
+                {
+                  "id": "t6",
+                  "text": " dog’s"
+                },
+                {
+                  "id": "t7",
+                  "text": " neck,"
+                },
+                {
+                  "id": "t8",
+                  "text": " but"
+                },
+                {
+                  "id": "t9",
+                  "text": " it"
+                },
+                {
+                  "id": "t10",
+                  "text": " bears"
+                },
+                {
+                  "id": "t11",
+                  "text": " no"
+                },
+                {
+                  "id": "t12",
+                  "text": " name."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘Where"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " its"
+                },
+                {
+                  "id": "t4",
+                  "text": " family?’"
                 }
               ]
             },
@@ -283,11 +2111,11 @@
                 },
                 {
                   "id": "t2",
-                  "text": " smiles"
+                  "text": " asks"
                 },
                 {
                   "id": "t3",
-                  "text": "."
+                  "text": " Sam."
                 }
               ]
             },
@@ -296,7 +2124,496 @@
               "tokens": [
                 {
                   "id": "t1",
-                  "text": " It"
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " cannot"
+                },
+                {
+                  "id": "t3",
+                  "text": " tell"
+                },
+                {
+                  "id": "t4",
+                  "text": " her."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " For"
+                },
+                {
+                  "id": "t2",
+                  "text": " now,"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " dog"
+                },
+                {
+                  "id": "t5",
+                  "text": " sits"
+                },
+                {
+                  "id": "t6",
+                  "text": " close"
+                },
+                {
+                  "id": "t7",
+                  "text": " by,"
+                },
+                {
+                  "id": "t8",
+                  "text": " waiting"
+                },
+                {
+                  "id": "t9",
+                  "text": " with"
+                },
+                {
+                  "id": "t10",
+                  "text": " them."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "storyLevelId": "01-01-C1",
+      "level": "C1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " wakes"
+                },
+                {
+                  "id": "t3",
+                  "text": " early"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " Saturday"
+                },
+                {
+                  "id": "t6",
+                  "text": " to"
+                },
+                {
+                  "id": "t7",
+                  "text": " birdsong"
+                },
+                {
+                  "id": "t8",
+                  "text": " outside"
+                },
+                {
+                  "id": "t9",
+                  "text": " her"
+                },
+                {
+                  "id": "t10",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " In"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " kitchen"
+                },
+                {
+                  "id": "t4",
+                  "text": " she"
+                },
+                {
+                  "id": "t5",
+                  "text": " finds"
+                },
+                {
+                  "id": "t6",
+                  "text": " her"
+                },
+                {
+                  "id": "t7",
+                  "text": " brother"
+                },
+                {
+                  "id": "t8",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t9",
+                  "text": " with"
+                },
+                {
+                  "id": "t10",
+                  "text": " Dad,"
+                },
+                {
+                  "id": "t11",
+                  "text": " and"
+                },
+                {
+                  "id": "t12",
+                  "text": " the"
+                },
+                {
+                  "id": "t13",
+                  "text": " three"
+                },
+                {
+                  "id": "t14",
+                  "text": " of"
+                },
+                {
+                  "id": "t15",
+                  "text": " them"
+                },
+                {
+                  "id": "t16",
+                  "text": " eat"
+                },
+                {
+                  "id": "t17",
+                  "text": " together,"
+                },
+                {
+                  "id": "t18",
+                  "text": " unhurried"
+                },
+                {
+                  "id": "t19",
+                  "text": " by"
+                },
+                {
+                  "id": "t20",
+                  "text": " the"
+                },
+                {
+                  "id": "t21",
+                  "text": " demands"
+                },
+                {
+                  "id": "t22",
+                  "text": " of"
+                },
+                {
+                  "id": "t23",
+                  "text": " a"
+                },
+                {
+                  "id": "t24",
+                  "text": " school"
+                },
+                {
+                  "id": "t25",
+                  "text": " day."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Their"
+                },
+                {
+                  "id": "t2",
+                  "text": " quiet"
+                },
+                {
+                  "id": "t3",
+                  "text": " morning"
+                },
+                {
+                  "id": "t4",
+                  "text": " takes"
+                },
+                {
+                  "id": "t5",
+                  "text": " an"
+                },
+                {
+                  "id": "t6",
+                  "text": " unexpected"
+                },
+                {
+                  "id": "t7",
+                  "text": " turn"
+                },
+                {
+                  "id": "t8",
+                  "text": " when"
+                },
+                {
+                  "id": "t9",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t10",
+                  "text": " notices"
+                },
+                {
+                  "id": "t11",
+                  "text": " a"
+                },
+                {
+                  "id": "t12",
+                  "text": " small"
+                },
+                {
+                  "id": "t13",
+                  "text": " brown"
+                },
+                {
+                  "id": "t14",
+                  "text": " and"
+                },
+                {
+                  "id": "t15",
+                  "text": " white"
+                },
+                {
+                  "id": "t16",
+                  "text": " dog"
+                },
+                {
+                  "id": "t17",
+                  "text": " peering"
+                },
+                {
+                  "id": "t18",
+                  "text": " in"
+                },
+                {
+                  "id": "t19",
+                  "text": " through"
+                },
+                {
+                  "id": "t20",
+                  "text": " the"
+                },
+                {
+                  "id": "t21",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " door"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " comes"
+                },
+                {
+                  "id": "t8",
+                  "text": " inside."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " offers"
+                },
+                {
+                  "id": "t3",
+                  "text": " it"
+                },
+                {
+                  "id": "t4",
+                  "text": " water,"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " dog"
+                },
+                {
+                  "id": "t8",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t9",
+                  "text": " every"
+                },
+                {
+                  "id": "t10",
+                  "text": " last"
+                },
+                {
+                  "id": "t11",
+                  "text": " drop."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " red"
+                },
+                {
+                  "id": "t3",
+                  "text": " collar"
+                },
+                {
+                  "id": "t4",
+                  "text": " around"
+                },
+                {
+                  "id": "t5",
+                  "text": " its"
+                },
+                {
+                  "id": "t6",
+                  "text": " neck"
+                },
+                {
+                  "id": "t7",
+                  "text": " suggests"
+                },
+                {
+                  "id": "t8",
+                  "text": " it"
+                },
+                {
+                  "id": "t9",
+                  "text": " belongs"
+                },
+                {
+                  "id": "t10",
+                  "text": " to"
+                },
+                {
+                  "id": "t11",
+                  "text": " someone,"
+                },
+                {
+                  "id": "t12",
+                  "text": " yet"
+                },
+                {
+                  "id": "t13",
+                  "text": " there"
+                },
+                {
+                  "id": "t14",
+                  "text": " is"
+                },
+                {
+                  "id": "t15",
+                  "text": " no"
+                },
+                {
+                  "id": "t16",
+                  "text": " name"
+                },
+                {
+                  "id": "t17",
+                  "text": " on"
+                },
+                {
+                  "id": "t18",
+                  "text": " it."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘Where"
                 },
                 {
                   "id": "t2",
@@ -304,27 +2621,597 @@
                 },
                 {
                   "id": "t3",
-                  "text": " a"
+                  "text": " its"
                 },
                 {
                   "id": "t4",
-                  "text": " warm"
+                  "text": " family?’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " as"
+                },
+                {
+                  "id": "t4",
+                  "text": " uncertain"
                 },
                 {
                   "id": "t5",
-                  "text": ","
+                  "text": " as"
                 },
                 {
                   "id": "t6",
-                  "text": " quiet"
+                  "text": " she"
                 },
                 {
                   "id": "t7",
-                  "text": " morning"
+                  "text": " is."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Nearby,"
+                },
+                {
+                  "id": "t2",
+                  "text": " the"
+                },
+                {
+                  "id": "t3",
+                  "text": " dog"
+                },
+                {
+                  "id": "t4",
+                  "text": " sits"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " waits."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "storyLevelId": "01-01-C2",
+      "level": "C2",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " wakes"
+                },
+                {
+                  "id": "t3",
+                  "text": " early"
+                },
+                {
+                  "id": "t4",
+                  "text": " on"
+                },
+                {
+                  "id": "t5",
+                  "text": " Saturday,"
+                },
+                {
+                  "id": "t6",
+                  "text": " birdsong"
+                },
+                {
+                  "id": "t7",
+                  "text": " carrying"
                 },
                 {
                   "id": "t8",
-                  "text": "."
+                  "text": " in"
+                },
+                {
+                  "id": "t9",
+                  "text": " from"
+                },
+                {
+                  "id": "t10",
+                  "text": " beyond"
+                },
+                {
+                  "id": "t11",
+                  "text": " her"
+                },
+                {
+                  "id": "t12",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " She"
+                },
+                {
+                  "id": "t2",
+                  "text": " joins"
+                },
+                {
+                  "id": "t3",
+                  "text": " her"
+                },
+                {
+                  "id": "t4",
+                  "text": " brother"
+                },
+                {
+                  "id": "t5",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t6",
+                  "text": " and"
+                },
+                {
+                  "id": "t7",
+                  "text": " Dad"
+                },
+                {
+                  "id": "t8",
+                  "text": " in"
+                },
+                {
+                  "id": "t9",
+                  "text": " the"
+                },
+                {
+                  "id": "t10",
+                  "text": " kitchen,"
+                },
+                {
+                  "id": "t11",
+                  "text": " where"
+                },
+                {
+                  "id": "t12",
+                  "text": " they"
+                },
+                {
+                  "id": "t13",
+                  "text": " eat"
+                },
+                {
+                  "id": "t14",
+                  "text": " together"
+                },
+                {
+                  "id": "t15",
+                  "text": " at"
+                },
+                {
+                  "id": "t16",
+                  "text": " the"
+                },
+                {
+                  "id": "t17",
+                  "text": " unhurried"
+                },
+                {
+                  "id": "t18",
+                  "text": " pace"
+                },
+                {
+                  "id": "t19",
+                  "text": " a"
+                },
+                {
+                  "id": "t20",
+                  "text": " morning"
+                },
+                {
+                  "id": "t21",
+                  "text": " without"
+                },
+                {
+                  "id": "t22",
+                  "text": " school"
+                },
+                {
+                  "id": "t23",
+                  "text": " allows."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "The"
+                },
+                {
+                  "id": "t2",
+                  "text": " morning"
+                },
+                {
+                  "id": "t3",
+                  "text": " acquires"
+                },
+                {
+                  "id": "t4",
+                  "text": " an"
+                },
+                {
+                  "id": "t5",
+                  "text": " unexpected"
+                },
+                {
+                  "id": "t6",
+                  "text": " visitor:"
+                },
+                {
+                  "id": "t7",
+                  "text": " a"
+                },
+                {
+                  "id": "t8",
+                  "text": " small"
+                },
+                {
+                  "id": "t9",
+                  "text": " brown"
+                },
+                {
+                  "id": "t10",
+                  "text": " and"
+                },
+                {
+                  "id": "t11",
+                  "text": " white"
+                },
+                {
+                  "id": "t12",
+                  "text": " dog,"
+                },
+                {
+                  "id": "t13",
+                  "text": " looking"
+                },
+                {
+                  "id": "t14",
+                  "text": " in"
+                },
+                {
+                  "id": "t15",
+                  "text": " through"
+                },
+                {
+                  "id": "t16",
+                  "text": " the"
+                },
+                {
+                  "id": "t17",
+                  "text": " window."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " opens"
+                },
+                {
+                  "id": "t3",
+                  "text": " the"
+                },
+                {
+                  "id": "t4",
+                  "text": " door,"
+                },
+                {
+                  "id": "t5",
+                  "text": " and"
+                },
+                {
+                  "id": "t6",
+                  "text": " it"
+                },
+                {
+                  "id": "t7",
+                  "text": " comes"
+                },
+                {
+                  "id": "t8",
+                  "text": " inside."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " When"
+                },
+                {
+                  "id": "t2",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t3",
+                  "text": " gives"
+                },
+                {
+                  "id": "t4",
+                  "text": " it"
+                },
+                {
+                  "id": "t5",
+                  "text": " water,"
+                },
+                {
+                  "id": "t6",
+                  "text": " the"
+                },
+                {
+                  "id": "t7",
+                  "text": " dog"
+                },
+                {
+                  "id": "t8",
+                  "text": " drinks"
+                },
+                {
+                  "id": "t9",
+                  "text": " every"
+                },
+                {
+                  "id": "t10",
+                  "text": " last"
+                },
+                {
+                  "id": "t11",
+                  "text": " drop."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Its"
+                },
+                {
+                  "id": "t2",
+                  "text": " red"
+                },
+                {
+                  "id": "t3",
+                  "text": " collar"
+                },
+                {
+                  "id": "t4",
+                  "text": " seems"
+                },
+                {
+                  "id": "t5",
+                  "text": " to"
+                },
+                {
+                  "id": "t6",
+                  "text": " promise"
+                },
+                {
+                  "id": "t7",
+                  "text": " an"
+                },
+                {
+                  "id": "t8",
+                  "text": " answer"
+                },
+                {
+                  "id": "t9",
+                  "text": " to"
+                },
+                {
+                  "id": "t10",
+                  "text": " the"
+                },
+                {
+                  "id": "t11",
+                  "text": " obvious"
+                },
+                {
+                  "id": "t12",
+                  "text": " question,"
+                },
+                {
+                  "id": "t13",
+                  "text": " but"
+                },
+                {
+                  "id": "t14",
+                  "text": " there"
+                },
+                {
+                  "id": "t15",
+                  "text": " is"
+                },
+                {
+                  "id": "t16",
+                  "text": " no"
+                },
+                {
+                  "id": "t17",
+                  "text": " name"
+                },
+                {
+                  "id": "t18",
+                  "text": " on"
+                },
+                {
+                  "id": "t19",
+                  "text": " it."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘Where"
+                },
+                {
+                  "id": "t2",
+                  "text": " is"
+                },
+                {
+                  "id": "t3",
+                  "text": " its"
+                },
+                {
+                  "id": "t4",
+                  "text": " family?’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " asks"
+                },
+                {
+                  "id": "t3",
+                  "text": " Sam."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " He"
+                },
+                {
+                  "id": "t2",
+                  "text": " knows"
+                },
+                {
+                  "id": "t3",
+                  "text": " no"
+                },
+                {
+                  "id": "t4",
+                  "text": " more"
+                },
+                {
+                  "id": "t5",
+                  "text": " than"
+                },
+                {
+                  "id": "t6",
+                  "text": " she"
+                },
+                {
+                  "id": "t7",
+                  "text": " does."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " The"
+                },
+                {
+                  "id": "t2",
+                  "text": " dog"
+                },
+                {
+                  "id": "t3",
+                  "text": " sits"
+                },
+                {
+                  "id": "t4",
+                  "text": " near"
+                },
+                {
+                  "id": "t5",
+                  "text": " them,"
+                },
+                {
+                  "id": "t6",
+                  "text": " waiting."
                 }
               ]
             }
