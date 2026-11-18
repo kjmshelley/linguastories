@@ -1,0 +1,662 @@
+{
+  "storyId": "es-mx-01-08",
+  "versions": [
+    {
+      "storyLevelId": "es-mx-01-08-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Después"
+                },
+                {
+                  "id": "t2",
+                  "text": " de"
+                },
+                {
+                  "id": "t3",
+                  "text": " clases"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t6",
+                  "text": " lee"
+                },
+                {
+                  "id": "t7",
+                  "text": " un"
+                },
+                {
+                  "id": "t8",
+                  "text": " libro"
+                },
+                {
+                  "id": "t9",
+                  "text": " afuera"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " y"
+                },
+                {
+                  "id": "t3",
+                  "text": " el"
+                },
+                {
+                  "id": "t4",
+                  "text": " perro"
+                },
+                {
+                  "id": "t5",
+                  "text": " juegan"
+                },
+                {
+                  "id": "t6",
+                  "text": " con"
+                },
+                {
+                  "id": "t7",
+                  "text": " una"
+                },
+                {
+                  "id": "t8",
+                  "text": " pelota"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Papá"
+                },
+                {
+                  "id": "t2",
+                  "text": " abre"
+                },
+                {
+                  "id": "t3",
+                  "text": " la"
+                },
+                {
+                  "id": "t4",
+                  "text": " puerta"
+                },
+                {
+                  "id": "t5",
+                  "text": " de"
+                },
+                {
+                  "id": "t6",
+                  "text": " la"
+                },
+                {
+                  "id": "t7",
+                  "text": " casa"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " tienes"
+                },
+                {
+                  "id": "t5",
+                  "text": " una"
+                },
+                {
+                  "id": "t6",
+                  "text": " llamada"
+                },
+                {
+                  "id": "t7",
+                  "text": "»"
+                },
+                {
+                  "id": "t8",
+                  "text": ","
+                },
+                {
+                  "id": "t9",
+                  "text": " dice"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " corre"
+                },
+                {
+                  "id": "t3",
+                  "text": " adentro"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Es"
+                },
+                {
+                  "id": "t2",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t3",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "Tengo"
+                },
+                {
+                  "id": "t3",
+                  "text": " un"
+                },
+                {
+                  "id": "t4",
+                  "text": " perro"
+                },
+                {
+                  "id": "t5",
+                  "text": "»"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " dice"
+                },
+                {
+                  "id": "t8",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "Se"
+                },
+                {
+                  "id": "t3",
+                  "text": " llama"
+                },
+                {
+                  "id": "t4",
+                  "text": " Max"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Tiene"
+                },
+                {
+                  "id": "t2",
+                  "text": " un"
+                },
+                {
+                  "id": "t3",
+                  "text": " collar"
+                },
+                {
+                  "id": "t4",
+                  "text": " rojo"
+                },
+                {
+                  "id": "t5",
+                  "text": " con"
+                },
+                {
+                  "id": "t6",
+                  "text": " una"
+                },
+                {
+                  "id": "t7",
+                  "text": " estrella"
+                },
+                {
+                  "id": "t8",
+                  "text": " azul"
+                },
+                {
+                  "id": "t9",
+                  "text": "»"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "Max"
+                },
+                {
+                  "id": "t3",
+                  "text": " está"
+                },
+                {
+                  "id": "t4",
+                  "text": " aquí"
+                },
+                {
+                  "id": "t5",
+                  "text": "»"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " dice"
+                },
+                {
+                  "id": "t8",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "¿"
+                },
+                {
+                  "id": "t3",
+                  "text": "Puedes"
+                },
+                {
+                  "id": "t4",
+                  "text": " venir"
+                },
+                {
+                  "id": "t5",
+                  "text": " a"
+                },
+                {
+                  "id": "t6",
+                  "text": " nuestra"
+                },
+                {
+                  "id": "t7",
+                  "text": " casa"
+                },
+                {
+                  "id": "t8",
+                  "text": "?"
+                },
+                {
+                  "id": "t9",
+                  "text": "»"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s7",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t2",
+                  "text": " dice"
+                },
+                {
+                  "id": "t3",
+                  "text": " que"
+                },
+                {
+                  "id": "t4",
+                  "text": " sí"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " le"
+                },
+                {
+                  "id": "t3",
+                  "text": " cuenta"
+                },
+                {
+                  "id": "t4",
+                  "text": " a"
+                },
+                {
+                  "id": "t5",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " La"
+                },
+                {
+                  "id": "t2",
+                  "text": " pelota"
+                },
+                {
+                  "id": "t3",
+                  "text": " está"
+                },
+                {
+                  "id": "t4",
+                  "text": " en"
+                },
+                {
+                  "id": "t5",
+                  "text": " el"
+                },
+                {
+                  "id": "t6",
+                  "text": " pasto"
+                },
+                {
+                  "id": "t7",
+                  "text": ","
+                },
+                {
+                  "id": "t8",
+                  "text": " pero"
+                },
+                {
+                  "id": "t9",
+                  "text": " el"
+                },
+                {
+                  "id": "t10",
+                  "text": " perro"
+                },
+                {
+                  "id": "t11",
+                  "text": " no"
+                },
+                {
+                  "id": "t12",
+                  "text": " está"
+                },
+                {
+                  "id": "t13",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " El"
+                },
+                {
+                  "id": "t2",
+                  "text": " portón"
+                },
+                {
+                  "id": "t3",
+                  "text": " está"
+                },
+                {
+                  "id": "t4",
+                  "text": " abierto"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " mira"
+                },
+                {
+                  "id": "t3",
+                  "text": " alrededor"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " «"
+                },
+                {
+                  "id": "t2",
+                  "text": "¡"
+                },
+                {
+                  "id": "t3",
+                  "text": "Max"
+                },
+                {
+                  "id": "t4",
+                  "text": "!"
+                },
+                {
+                  "id": "t5",
+                  "text": "»"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " llama"
+                },
+                {
+                  "id": "t2",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s7",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Nadie"
+                },
+                {
+                  "id": "t2",
+                  "text": " responde"
+                },
+                {
+                  "id": "t3",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s8",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " tiene"
+                },
+                {
+                  "id": "t3",
+                  "text": " miedo"
+                },
+                {
+                  "id": "t4",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

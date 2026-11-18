@@ -2873,6 +2873,246 @@
           ]
         }
       ]
+    },
+    {
+      "id": "es-mx-01-01",
+      "orderId": 101,
+      "title": "Capítulo 1: Una mañana cálida",
+      "description": "Mia y Sam encuentran un perrito afuera.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-01.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-01-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-01.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-01/es-mx-01-01-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 1
+    },
+    {
+      "id": "es-mx-01-02",
+      "orderId": 102,
+      "title": "Capítulo 2: Una tarde tranquila",
+      "description": "Mia y Sam hacen un plan para el perro.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-02.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-02-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-02.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-02/es-mx-01-02-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 2
+    },
+    {
+      "id": "es-mx-01-03",
+      "orderId": 103,
+      "title": "Capítulo 3: Un día de lluvia",
+      "description": "La lluvia hace más difícil la búsqueda.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-03.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-03-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-03.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-03/es-mx-01-03-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 3
+    },
+    {
+      "id": "es-mx-01-04",
+      "orderId": 104,
+      "title": "Capítulo 4: La foto vieja",
+      "description": "Una foto les da una pista a Mia y Sam.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-04.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-04-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-04.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-04/es-mx-01-04-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 4
+    },
+    {
+      "id": "es-mx-01-05",
+      "orderId": 105,
+      "title": "Capítulo 5: Una nueva semana",
+      "description": "Los niños buscan a Anna en la escuela.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-05.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-05-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-05.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-05/es-mx-01-05-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 5
+    },
+    {
+      "id": "es-mx-01-06",
+      "orderId": 106,
+      "title": "Capítulo 6: Un mensaje para Anna",
+      "description": "Los amigos intentan comunicarse con Anna.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-06.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-06-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-06.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-06/es-mx-01-06-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 6
+    },
+    {
+      "id": "es-mx-01-07",
+      "orderId": 107,
+      "title": "Capítulo 7: El viaje en camión",
+      "description": "Un camión retrasado pone en peligro su plan.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-07.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-07-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-07.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-07/es-mx-01-07-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 7
+    },
+    {
+      "id": "es-mx-01-08",
+      "orderId": 108,
+      "title": "Capítulo 8: La llamada",
+      "description": "Anna llama, pero el perro desaparece.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-08.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-08-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-08.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-08/es-mx-01-08-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 8
+    },
+    {
+      "id": "es-mx-01-09",
+      "orderId": 109,
+      "title": "Capítulo 9: La hoja roja",
+      "description": "Mia y sus amigos buscan a Max en el parque.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-09.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-09-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-09.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-09/es-mx-01-09-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 9
+    },
+    {
+      "id": "es-mx-01-10",
+      "orderId": 110,
+      "title": "Capítulo 10: Un buen día",
+      "description": "Max y una nueva amiga encuentran a sus familias.",
+      "genre": "Everyday Life",
+      "targetLanguage": "es-MX",
+      "image": "/assets/img/story-01-10.webp",
+      "levels": [
+        {
+          "storyLevelId": "es-mx-01-10-A1",
+          "level": "A1",
+          "url": "/content/stories/es-mx-01-10.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/es-mx-01-10/es-mx-01-10-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-es-mx",
+      "seriesOrder": 10
     }
   ]
 }
