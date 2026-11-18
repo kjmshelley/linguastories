@@ -18,8 +18,8 @@ test('catalog, story versions and translations are linked and readable', async t
   const base = `http://127.0.0.1:${server.address().port}`;
   const catalog = await (await fetch(`${base}/api/reader/catalog`)).json();
   assert.equal(catalog.genres.length, 10);
-  assert.equal(catalog.stories.length, 110);
-  assert.equal(new Set(catalog.stories.map(s => s.id)).size, 110);
+  assert.equal(catalog.stories.length, 120);
+  assert.equal(new Set(catalog.stories.map(s => s.id)).size, 120);
   const series = catalog.stories.filter(s => s.seriesId === 'everyday-life-01');
   assert.deepEqual(series.map(s => s.seriesOrder), [1,2,3,4,5,6,7,8,9,10]);
   assert.deepEqual(series.map(s => s.id), Array.from({length:10}, (_,i) => `01-${String(i+1).padStart(2,'0')}`));
@@ -27,7 +27,7 @@ test('catalog, story versions and translations are linked and readable', async t
   const expectedSources = ['ar','zh-Hant','zh-Hans','es-MX','es-ES','ja','vi','th','id','fr','de','it','nl','ko','ru','tr','my','pt'];
   for (const [index, story] of catalog.stories.entries()) {
     assert.equal(story.orderId, index + 1);
-    assert.equal(story.targetLanguage, index < 100 ? 'en' : 'es-MX');
+    assert.equal(story.targetLanguage, index < 100 ? 'en' : index < 110 ? 'es-MX' : 'id');
     assert.equal(story.paragraphs, undefined);
     assert.ok(story.levels.length);
     for (const level of story.levels) {
@@ -88,6 +88,19 @@ test('catalog, story versions and translations are linked and readable', async t
   }
   assert.ok((await (await fetch(`${base}/api/reader/search?q=perrito&searchBy=target`)).json()).ids.includes('es-mx-01-01'));
   assert.ok((await (await fetch(`${base}/api/reader/search?q=birds&searchBy=source&source=en`)).json()).ids.includes('es-mx-01-01'));
+  const indonesianSeries = catalog.stories.filter(s => s.seriesId === 'everyday-life-01-id');
+  assert.deepEqual(indonesianSeries.map(s => s.seriesOrder), [1,2,3,4,5,6,7,8,9,10]);
+  for (const [i, entry] of indonesianSeries.entries()) {
+    assert.equal(entry.targetLanguage, 'id');
+    assert.deepEqual(entry.sourceLanguages, ['en']);
+    const indonesian = await (await fetch(`${base}/api/reader/story/${entry.id}`)).json();
+    const english = await (await fetch(`${base}/api/reader/story/01-${String(i+1).padStart(2,'0')}`)).json();
+    assert.equal(indonesian.level, 'A1');
+    assert.deepEqual(indonesian.paragraphs.map(p => p.translations.en.text), english.paragraphs.map(p => p.target));
+    assert.ok(indonesian.paragraphs.every(p => p.target.trim()));
+  }
+  assert.ok((await (await fetch(`${base}/api/reader/search?q=anjing&searchBy=target`)).json()).ids.includes('id-01-01'));
+  assert.ok((await (await fetch(`${base}/api/reader/search?q=birds&searchBy=source&source=en`)).json()).ids.includes('id-01-01'));
   for (const entry of catalog.stories) {
     const response = await fetch(`${base}/api/reader/story/${encodeURIComponent(entry.id)}`);
     assert.equal(response.status, 200, entry.id);

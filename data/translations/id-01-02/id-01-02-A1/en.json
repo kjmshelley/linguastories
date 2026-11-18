@@ -1,0 +1,22 @@
+{
+  "storyId": "id-01-02",
+  "storyLevelId": "id-01-02-A1",
+  "sourceLanguage": "en",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "In the evening, the little dog sleeps by the door. Mia sits next to it. Sam brings a bowl of food. The dog wakes up and eats. Dad looks at the sky.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "‘The dog needs its family,’ Dad says. Mia knows he is right. She wants to help, but she also wants the dog to stay. Sam gets some paper. ‘We can make a picture of the dog,’ he says.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "Mia draws the dog and its red collar. Sam writes their number under it. Tomorrow they can ask people in town. Mia says good night to the dog. They wait.",
+      "sentences": []
+    }
+  ]
+}

@@ -281,3 +281,15 @@ test('Spanish chapters are discoverable and navigate within their series', async
   assert.equal(result.next,'es-mx-01-02');
   assert.equal(result.url,'/story/es-mx-01-02?target=es-MX&source=en');
 });
+
+test('Indonesian chapters are discoverable and navigate within their series', async () => {
+  const catalog=require('../data/catalog.json');
+  const root={innerHTML:'',addEventListener(){}};
+  const context={document:{querySelector:()=>root,documentElement:{dataset:{}}},location:{pathname:'/',search:'?target=id&source=en'},URLSearchParams,localStorage:{getItem:()=>null},fetch:async()=>({ok:true,json:async()=>catalog})};
+  const script=fs.readFileSync(require.resolve('../client/reader/reader.js'),'utf8');
+  const result=await vm.runInNewContext(`(async()=>{${script}\nconst first=catalog.stories.find(s=>s.id==='id-01-01');return {ids:filteredStories().map(s=>s.id),next:nextStoryInSeries(first)?.id,url:nextStoryUrl(nextStoryInSeries(first))};})()`,context);
+  assert.equal(result.ids.length,10);
+  assert.ok(result.ids.includes('id-01-01'));
+  assert.equal(result.next,'id-01-02');
+  assert.equal(result.url,'/story/id-01-02?target=id&source=en');
+});

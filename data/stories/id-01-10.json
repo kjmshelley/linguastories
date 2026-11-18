@@ -1,0 +1,642 @@
+{
+  "storyId": "id-01-10",
+  "versions": [
+    {
+      "storyLevelId": "id-01-10-A1",
+      "level": "A1",
+      "paragraphs": [
+        {
+          "paragraphId": "p1",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " duduk"
+                },
+                {
+                  "id": "t3",
+                  "text": " di"
+                },
+                {
+                  "id": "t4",
+                  "text": " samping"
+                },
+                {
+                  "id": "t5",
+                  "text": " anak"
+                },
+                {
+                  "id": "t6",
+                  "text": " perempuan"
+                },
+                {
+                  "id": "t7",
+                  "text": " itu"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Siapa"
+                },
+                {
+                  "id": "t3",
+                  "text": " namamu"
+                },
+                {
+                  "id": "t4",
+                  "text": "?"
+                },
+                {
+                  "id": "t5",
+                  "text": "’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " tanyanya"
+                },
+                {
+                  "id": "t2",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": "’"
+                },
+                {
+                  "id": "t5",
+                  "text": " jawab"
+                },
+                {
+                  "id": "t6",
+                  "text": " anak"
+                },
+                {
+                  "id": "t7",
+                  "text": " itu"
+                },
+                {
+                  "id": "t8",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Aku"
+                },
+                {
+                  "id": "t3",
+                  "text": " mau"
+                },
+                {
+                  "id": "t4",
+                  "text": " ayahku"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                },
+                {
+                  "id": "t6",
+                  "text": "’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Max"
+                },
+                {
+                  "id": "t2",
+                  "text": " tetap"
+                },
+                {
+                  "id": "t3",
+                  "text": " berada"
+                },
+                {
+                  "id": "t4",
+                  "text": " di"
+                },
+                {
+                  "id": "t5",
+                  "text": " dekat"
+                },
+                {
+                  "id": "t6",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t7",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s7",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Sam"
+                },
+                {
+                  "id": "t2",
+                  "text": " memeluk"
+                },
+                {
+                  "id": "t3",
+                  "text": " Max"
+                },
+                {
+                  "id": "t4",
+                  "text": ","
+                },
+                {
+                  "id": "t5",
+                  "text": " tetapi"
+                },
+                {
+                  "id": "t6",
+                  "text": " Max"
+                },
+                {
+                  "id": "t7",
+                  "text": " tetap"
+                },
+                {
+                  "id": "t8",
+                  "text": " bersama"
+                },
+                {
+                  "id": "t9",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p2",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Ayah"
+                },
+                {
+                  "id": "t2",
+                  "text": " menelepon"
+                },
+                {
+                  "id": "t3",
+                  "text": " kantor"
+                },
+                {
+                  "id": "t4",
+                  "text": " taman"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Seorang"
+                },
+                {
+                  "id": "t2",
+                  "text": " laki-laki"
+                },
+                {
+                  "id": "t3",
+                  "text": " datang"
+                },
+                {
+                  "id": "t4",
+                  "text": " melewati"
+                },
+                {
+                  "id": "t5",
+                  "text": " rumput"
+                },
+                {
+                  "id": "t6",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Lee"
+                },
+                {
+                  "id": "t3",
+                  "text": "!"
+                },
+                {
+                  "id": "t4",
+                  "text": "’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " panggilnya"
+                },
+                {
+                  "id": "t2",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t2",
+                  "text": " berlari"
+                },
+                {
+                  "id": "t3",
+                  "text": " ke"
+                },
+                {
+                  "id": "t4",
+                  "text": " arah"
+                },
+                {
+                  "id": "t5",
+                  "text": " ayahnya"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": " dan"
+                },
+                {
+                  "id": "t8",
+                  "text": " ayahnya"
+                },
+                {
+                  "id": "t9",
+                  "text": " memeluk"
+                },
+                {
+                  "id": "t10",
+                  "text": " Lee"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Terima"
+                },
+                {
+                  "id": "t3",
+                  "text": " kasih"
+                },
+                {
+                  "id": "t4",
+                  "text": " sudah"
+                },
+                {
+                  "id": "t5",
+                  "text": " membantunya"
+                },
+                {
+                  "id": "t6",
+                  "text": ","
+                },
+                {
+                  "id": "t7",
+                  "text": "’"
+                },
+                {
+                  "id": "t8",
+                  "text": " katanya"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s7",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " memberi"
+                },
+                {
+                  "id": "t3",
+                  "text": " Max"
+                },
+                {
+                  "id": "t4",
+                  "text": " air"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphId": "p3",
+          "sentences": [
+            {
+              "sentenceId": "s1",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": "Di"
+                },
+                {
+                  "id": "t2",
+                  "text": " rumah"
+                },
+                {
+                  "id": "t3",
+                  "text": ","
+                },
+                {
+                  "id": "t4",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t5",
+                  "text": " menunggu"
+                },
+                {
+                  "id": "t6",
+                  "text": " di"
+                },
+                {
+                  "id": "t7",
+                  "text": " dekat"
+                },
+                {
+                  "id": "t8",
+                  "text": " pagar"
+                },
+                {
+                  "id": "t9",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s2",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Max"
+                },
+                {
+                  "id": "t3",
+                  "text": "!"
+                },
+                {
+                  "id": "t4",
+                  "text": "’"
+                }
+              ]
+            },
+            {
+              "sentenceId": "s3",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " katanya"
+                },
+                {
+                  "id": "t2",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s4",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Max"
+                },
+                {
+                  "id": "t2",
+                  "text": " berlari"
+                },
+                {
+                  "id": "t3",
+                  "text": " ke"
+                },
+                {
+                  "id": "t4",
+                  "text": " arahnya"
+                },
+                {
+                  "id": "t5",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s5",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " Mia"
+                },
+                {
+                  "id": "t2",
+                  "text": " sedih"
+                },
+                {
+                  "id": "t3",
+                  "text": " harus"
+                },
+                {
+                  "id": "t4",
+                  "text": " berpisah"
+                },
+                {
+                  "id": "t5",
+                  "text": ","
+                },
+                {
+                  "id": "t6",
+                  "text": " tetapi"
+                },
+                {
+                  "id": "t7",
+                  "text": " Anna"
+                },
+                {
+                  "id": "t8",
+                  "text": " punya"
+                },
+                {
+                  "id": "t9",
+                  "text": " ide"
+                },
+                {
+                  "id": "t10",
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "sentenceId": "s6",
+              "tokens": [
+                {
+                  "id": "t1",
+                  "text": " ‘"
+                },
+                {
+                  "id": "t2",
+                  "text": "Datanglah"
+                },
+                {
+                  "id": "t3",
+                  "text": " ke"
+                },
+                {
+                  "id": "t4",
+                  "text": " taman"
+                },
+                {
+                  "id": "t5",
+                  "text": " bersama"
+                },
+                {
+                  "id": "t6",
+                  "text": " kami"
+                },
+                {
+                  "id": "t7",
+                  "text": " besok"
+                },
+                {
+                  "id": "t8",
+                  "text": ","
+                },
+                {
+                  "id": "t9",
+                  "text": "’"
+                },
+                {
+                  "id": "t10",
+                  "text": " katanya"
+                },
+                {
+                  "id": "t11",
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

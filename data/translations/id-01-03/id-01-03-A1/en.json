@@ -1,0 +1,22 @@
+{
+  "storyId": "id-01-03",
+  "storyLevelId": "id-01-03-A1",
+  "sourceLanguage": "en",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "On Sunday morning, rain falls outside. The street is wet. The dog stands by the door. It wants to go out, but Mia is worried.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Sam has an idea. He puts the picture in a bag. Mia puts on her coat, and Dad gets an umbrella. The dog stays at home. ‘We can go to the shop,’ Dad says.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "At the shop, a woman looks at their picture. ‘I see this dog in the park,’ she says. ‘A girl is with it.’ Who is the girl? The woman does not know the name. The children thank her and go home.",
+      "sentences": []
+    }
+  ]
+}

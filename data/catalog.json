@@ -3113,6 +3113,246 @@
       ],
       "seriesId": "everyday-life-01-es-mx",
       "seriesOrder": 10
+    },
+    {
+      "id": "id-01-01",
+      "orderId": 111,
+      "title": "Bab 1: Pagi yang Hangat",
+      "description": "Mia dan Sam menemukan seekor anjing kecil di luar rumah.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-01.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-01-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-01.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-01/id-01-01-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 1
+    },
+    {
+      "id": "id-01-02",
+      "orderId": 112,
+      "title": "Bab 2: Malam yang Tenang",
+      "description": "Mia dan Sam membuat rencana untuk anjing itu.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-02.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-02-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-02.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-02/id-01-02-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 2
+    },
+    {
+      "id": "id-01-03",
+      "orderId": 113,
+      "title": "Bab 3: Hari Hujan",
+      "description": "Hujan membuat pencarian menjadi lebih sulit.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-03.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-03-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-03.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-03/id-01-03-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 3
+    },
+    {
+      "id": "id-01-04",
+      "orderId": 114,
+      "title": "Bab 4: Foto Lama",
+      "description": "Sebuah foto memberi petunjuk kepada Mia dan Sam.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-04.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-04-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-04.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-04/id-01-04-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 4
+    },
+    {
+      "id": "id-01-05",
+      "orderId": 115,
+      "title": "Bab 5: Minggu Baru",
+      "description": "Anak-anak mencari Anna di sekolah.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-05.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-05-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-05.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-05/id-01-05-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 5
+    },
+    {
+      "id": "id-01-06",
+      "orderId": 116,
+      "title": "Bab 6: Pesan untuk Anna",
+      "description": "Ketiga teman itu mencoba menghubungi Anna.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-06.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-06-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-06.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-06/id-01-06-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 6
+    },
+    {
+      "id": "id-01-07",
+      "orderId": 117,
+      "title": "Bab 7: Perjalanan Naik Bus",
+      "description": "Bus yang terlambat membuat rencana mereka terancam.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-07.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-07-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-07.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-07/id-01-07-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 7
+    },
+    {
+      "id": "id-01-08",
+      "orderId": 118,
+      "title": "Bab 8: Panggilan Telepon",
+      "description": "Anna menelepon, tetapi anjing itu hilang.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-08.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-08-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-08.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-08/id-01-08-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 8
+    },
+    {
+      "id": "id-01-09",
+      "orderId": 119,
+      "title": "Bab 9: Daun Merah",
+      "description": "Mia dan teman-temannya mencari Max di taman.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-09.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-09-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-09.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-09/id-01-09-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 9
+    },
+    {
+      "id": "id-01-10",
+      "orderId": 120,
+      "title": "Bab 10: Hari yang Menyenangkan",
+      "description": "Max dan seorang teman baru menemukan keluarga mereka.",
+      "genre": "Everyday Life",
+      "targetLanguage": "id",
+      "image": "/assets/img/story-01-10.webp",
+      "levels": [
+        {
+          "storyLevelId": "id-01-10-A1",
+          "level": "A1",
+          "url": "/content/stories/id-01-10.json",
+          "availableLanguages": [
+            {
+              "language": "en",
+              "url": "/content/translations/id-01-10/id-01-10-A1/en.json"
+            }
+          ]
+        }
+      ],
+      "seriesId": "everyday-life-01-id",
+      "seriesOrder": 10
     }
   ]
 }

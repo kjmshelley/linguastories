@@ -1,0 +1,22 @@
+{
+  "storyId": "id-01-10",
+  "storyLevelId": "id-01-10-A1",
+  "sourceLanguage": "en",
+  "paragraphs": [
+    {
+      "paragraphId": "p1",
+      "text": "Mia sits next to the girl. ‘What is your name?’ she asks. ‘Lee,’ the girl says. ‘I want my dad.’ Max stays close to Lee. Sam hugs Max, but Max stays with Lee.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p2",
+      "text": "Dad calls the park office. A man comes across grass. ‘Lee!’ he calls. Lee runs to her dad, and he hugs her. ‘Thank you for helping her,’ he says. Mia gives Max water.",
+      "sentences": []
+    },
+    {
+      "paragraphId": "p3",
+      "text": "At home, Anna waits by the gate. ‘Max!’ she says. He runs to her. Mia is sad to say goodbye, but Anna has an idea. ‘Come to the park with us tomorrow,’ she says.",
+      "sentences": []
+    }
+  ]
+}
